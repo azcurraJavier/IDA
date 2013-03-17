@@ -8,6 +8,9 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.text.BadLocationException;
@@ -17,12 +20,20 @@ import javax.swing.text.JTextComponent;
 
 public class CodigoPanel extends javax.swing.JPanel {
 
+    Set<String> setReserv = new HashSet<String>(Arrays.asList("abstract", "assert", "boolean", "break", "byte", "case", "catch", "char", "class", 
+                                                   "const", "continue", "default", "do", "double", "else", "enum", "extends", "false", "final", "finally",
+                                                   "float", "for", "goto", "if", "implements", "import", "instanceof", "int", "interface", "long", "native",
+                                                   "new", "null", "package", "private", "protected", "public", "return", "short", "static", "strictfp", "super",
+                                                   "switch", "synchronized", "this", "throw", "throws", "transient", "true", "try", "void", "volatile", "while"));
+    
     private Clase claseAsociada = null;
 
     public CodigoPanel(Clase unaClass) {
         initComponents();
         
-        jTextAreaCod.setFont(new Font("Monospaced", Font.PLAIN, 12));  
+        //jTextAreaCod.setFont(new Font("Monospaced", Font.PLAIN, 12));
+        jEditorPaneCod.setFont(new Font("Monospaced", Font.PLAIN, 13));
+        jEditorPaneCod.setContentType("text/html"); 
 
         claseAsociada = unaClass;
 
@@ -37,9 +48,10 @@ public class CodigoPanel extends javax.swing.JPanel {
             int num = 1;
 
             while ((line = reader.readLine()) != null) {
-
-                line = line.replaceAll("\t", "    ");
-
+                
+                
+                line = reservWordsH(line);
+          
                 if (num < 10) {
                     buffer.append("0").append(num).append(". ").append(line);
                 } else {
@@ -48,14 +60,16 @@ public class CodigoPanel extends javax.swing.JPanel {
 
                 num++;
 
-                buffer.append('\n');
+                buffer.append("<br>");
             }
 
             reader.close();
 
-            jTextAreaCod.setText(buffer.toString());
+            //jTextAreaCod.setText(buffer.toString());
+            jEditorPaneCod.setText("<html><pre>"+buffer.toString()+"</pre></html>");
 
-            jTextAreaCod.setCaretPosition(6);
+            //jTextAreaCod.setCaretPosition(6);
+            jEditorPaneCod.setCaretPosition(6);
 
             TablaBuscador tBi = new TablaBuscador(0, claseAsociada, this);
 
@@ -164,8 +178,8 @@ public class CodigoPanel extends javax.swing.JPanel {
     }
 
     public void setHighlight(String text) {
-        highlight(jTextAreaCod, text);
-
+        //highlight(jTextAreaCod, text);
+        highlight(jEditorPaneCod,text);
     }
 
     public JPanel emptyPanel(String name) {
@@ -179,31 +193,49 @@ public class CodigoPanel extends javax.swing.JPanel {
 
         jPane.add(label, 0);
 
-
-
         return jPane;
 
-
     }
+    
+    private String reservWordsH(String linea){
+        
+        String newLin="";
+        
+        if(linea.isEmpty()){
+            return newLin;
+        }
+        
+        String words []=linea.split(" ");
+        
+        for(String w:words){
+            
+            if(setReserv.contains(w)){
+                w="<b>"+w+"</b>";
+            }
+        
+            newLin +=w+ " ";
+        }
+
+        newLin = newLin.substring(0, newLin.length()-1);//retira espacio al final
+        
+        return newLin;
+    }
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jTabbedPaneProp = new javax.swing.JTabbedPane();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTextAreaCod = new javax.swing.JTextArea();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jEditorPaneCod = new javax.swing.JEditorPane();
 
         setFocusable(false);
 
         jTabbedPaneProp.setBorder(javax.swing.BorderFactory.createTitledBorder("Propiedades"));
         jTabbedPaneProp.setFocusable(false);
 
-        jTextAreaCod.setEditable(false);
-        jTextAreaCod.setColumns(20);
-        jTextAreaCod.setRows(5);
-        jTextAreaCod.setFocusable(false);
-        jScrollPane2.setViewportView(jTextAreaCod);
+        jScrollPane1.setViewportView(jEditorPaneCod);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -212,25 +244,23 @@ public class CodigoPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTabbedPaneProp, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                    .addComponent(jTabbedPaneProp)
+                    .addComponent(jScrollPane1))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jTabbedPaneProp, javax.swing.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JEditorPane jEditorPaneCod;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPaneProp;
-    private javax.swing.JTextArea jTextAreaCod;
     // End of variables declaration//GEN-END:variables
 }
