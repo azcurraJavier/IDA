@@ -201,7 +201,7 @@ public class CodigoPanel extends javax.swing.JPanel {
         
         String newLin="";
         
-        if(linea.isEmpty()){
+        if(linea.trim().isEmpty()){
             return newLin;
         }
         
