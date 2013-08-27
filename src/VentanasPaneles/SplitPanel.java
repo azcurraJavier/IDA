@@ -4,8 +4,10 @@
  */
 package VentanasPaneles;
 
+import Listas.Clase;
 import Listas.MostrarTabla;
 import SplitID.Greedy;
+import SplitID.SamuraiPaper;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -31,7 +33,7 @@ public class SplitPanel extends javax.swing.JDialog {
     private JTable tablaElem;
     
     
-    public SplitPanel(java.awt.Frame parent, boolean modal,ArrayList<MostrarTabla> listId) {
+    public SplitPanel(java.awt.Frame parent, boolean modal,ArrayList<MostrarTabla> listId,ArrayList<Clase> lisClases) {
         super(parent, modal);
         initComponents();
         
@@ -46,18 +48,26 @@ public class SplitPanel extends javax.swing.JDialog {
         Object[] filaTabla = new Object[3];
         String nomIde;
         String splitIde;
+        SamuraiPaper samurai;
+        
         
         if(listId!=null){
-        for(MostrarTabla ide: listId){
-            nomIde = ide.getNomId();
-            filaTabla[0]= nomIde;
-            splitIde = Greedy.ejecutar(nomIde,true);//true=caso 1 de upperlower false=caso 2
-            filaTabla[1]= splitIde.replaceAll(" ", "   ");//para que se destaque la separación
-            
-            //splitIde = Samurai.ejecutar(nomIde,.........);
-            //filaTabla[2]= splitIde.replaceAll(" ", "   ");//para que se destaque la separación
-            modeloTabla.addRow(filaTabla);
-        }
+            for(MostrarTabla ide: listId){
+                nomIde = ide.getNomId();
+                filaTabla[0]= nomIde;
+                splitIde = Greedy.ejecutar(nomIde,true);//true=caso 1 de upperlower false=caso 2
+                filaTabla[1]= splitIde.replaceAll(" ", "   ");//para que se destaque la separación
+
+                
+                
+                samurai = new SamuraiPaper(lisClases.get(0),"strDomicilio");
+                
+                samurai.mixedCaseSplit();
+                
+                //splitIde = Samurai.ejecutar(nomIde);
+                //filaTabla[2]= splitIde.replaceAll(" ", "   ");//para que se destaque la separación
+                modeloTabla.addRow(filaTabla);
+            }
         }
 
         // Close the dialog when Esc is pressed

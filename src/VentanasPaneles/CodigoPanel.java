@@ -1,6 +1,7 @@
 package VentanasPaneles;
 
 import Listas.Clase;
+import SplitID.SamuraiPaper;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Rectangle;
@@ -36,7 +37,7 @@ public class CodigoPanel extends javax.swing.JPanel {
         jEditorPaneCod.setContentType("text/html"); 
 
         claseAsociada = unaClass;
-
+        
         try {
 
             FileInputStream fr = new FileInputStream(claseAsociada.getPunteroArchivo());

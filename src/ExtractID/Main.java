@@ -297,10 +297,13 @@ public class Main extends javax.swing.JFrame {
         ArrayList<MostrarTabla> lisMt = new ArrayList<MostrarTabla>();
         for(Clase c: ListaClase.getLisClases()){
             lisMt.addAll(c.getIdTablaClase());
+            
+            
+            
         }
         
         SplitPanel tb;
-        tb = new SplitPanel(new javax.swing.JFrame(), true, lisMt);
+        tb = new SplitPanel(new javax.swing.JFrame(), true, lisMt, ListaClase.getLisClases());
         
         tb.setVisible(true);
     }//GEN-LAST:event_jMenuItemAlgGreedyActionPerformed

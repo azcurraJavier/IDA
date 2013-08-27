@@ -98,11 +98,15 @@ public class SamuraiPaper {
         StringBuilder newStr = new StringBuilder();
 
         for (int i = 0; i < token.length() - 1; i++) {//-1 sino puede dar excepción en i+1
+            
+            newStr.append(token.charAt(i));
             if (Character.isLowerCase(token.charAt(i)) && Character.isUpperCase(token.charAt(i + 1))) {
                 newStr.append(" ");
             }
-            newStr.append(token.charAt(i));
+            
         }
+        
+        newStr.append(token.charAt(token.length()- 1));
 
         token = newStr.toString();
 
@@ -126,7 +130,7 @@ public class SamuraiPaper {
 
     }
 
-    private String mixedCaseSplit() {
+    public String mixedCaseSplit() {
         String sToken = "";
         String token = this.identificador;
 
