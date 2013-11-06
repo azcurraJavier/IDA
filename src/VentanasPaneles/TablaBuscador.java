@@ -290,6 +290,10 @@ public class TablaBuscador extends javax.swing.JPanel {
         }
 
         String text = modeloTabla.getValueAt(row, column).toString();
+        
+        text = text.trim().replaceAll("\n", "");
+        
+        text = text.replaceAll("\t", "");
 
         codigoPanel.setHighlight(text);        
         
