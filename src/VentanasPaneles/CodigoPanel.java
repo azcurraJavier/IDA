@@ -41,7 +41,7 @@ public class CodigoPanel extends javax.swing.JPanel {
         try {
 
             FileInputStream fr = new FileInputStream(claseAsociada.getPunteroArchivo());
-            InputStreamReader isr = new InputStreamReader(fr, "UTF-8");
+            InputStreamReader isr = new InputStreamReader(fr);
             BufferedReader reader = new BufferedReader(isr);
             StringBuilder buffer = new StringBuilder();
 
@@ -236,6 +236,7 @@ public class CodigoPanel extends javax.swing.JPanel {
         jTabbedPaneProp.setBorder(javax.swing.BorderFactory.createTitledBorder("Propiedades"));
         jTabbedPaneProp.setFocusable(false);
 
+        jEditorPaneCod.setEditable(false);
         jScrollPane1.setViewportView(jEditorPaneCod);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
