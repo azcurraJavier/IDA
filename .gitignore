@@ -1,11 +1,12 @@
 *.class
 .~lock*
-# Package Files #
-*.jar
 *.war
 *.ear
 
 # Folders #
+
+# Maven build folders
+target/
 
 # NetBeans user configuration files
 nbactions*.xml
