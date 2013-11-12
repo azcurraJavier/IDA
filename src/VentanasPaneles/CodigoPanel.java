@@ -10,7 +10,9 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -26,6 +28,19 @@ public class CodigoPanel extends javax.swing.JPanel {
                                                    "float", "for", "goto", "if", "implements", "import", "instanceof", "int", "interface", "long", "native",
                                                    "new", "null", "package", "private", "protected", "public", "return", "short", "static", "strictfp", "super",
                                                    "switch", "synchronized", "this", "throw", "throws", "transient", "true", "try", "void", "volatile", "while"));
+    
+    Set<String> setSimbol = new HashSet<String>(Arrays.asList(",","{","}","(",")",";","+","+=","-","-=","*","*=","/","/=","%","%=","++","--",">",">=","<","<=","!","!=",
+                                                                "&&","||","==","=","~","?:","|","|=","^","^=","&","&=",">>",">>=","<<","<<=",">>>",">>>="));
+    
+    Map<String,String> mapReservSimbol = new HashMap<String,String>(){{
+        put("\"","&quot");
+        put(">","&lt");
+        put("<","&gt");
+        put("&","&amp");
+        put("'","&#039");
+        put("''","&#034");
+    }};
+    
     
     private Clase claseAsociada = null;
 
@@ -208,10 +223,19 @@ public class CodigoPanel extends javax.swing.JPanel {
         
         String words []=linea.split(" ");
         
+        if(linea.startsWith("//")){
+            return "<span style=\"color: #006400;\">"+linea+"</span>";
+        }
+        
         for(String w:words){
-            
+           
             if(setReserv.contains(w)){
-                w="<b>"+w+"</b>";
+                //Palabras reservadas
+                w="<b><span style=\"color: #00008B;\">"+w+"</span></b>";
+                
+            }else{           
+        
+                w = checkCar(w);
             }
         
             newLin +=w+ " ";
@@ -220,6 +244,34 @@ public class CodigoPanel extends javax.swing.JPanel {
         newLin = newLin.substring(0, newLin.length()-1);//retira espacio al final
         
         return newLin;
+    }
+    
+    private String checkCar(String word){
+        
+        String newWord = "";
+        
+         char[] charArray = word.toCharArray();
+         
+         for(Character c:charArray){
+
+            if(setSimbol.contains(c.toString())){
+                //simbolos
+                String cast = mapReservSimbol.get(c.toString());
+                cast = cast!=null?cast:c.toString();
+                newWord +="<b><span style=\"color: #00008B;\">"+cast+"</span></b>";
+                continue;
+            }
+            
+            if(c.toString().matches("[0-9]+(.[0-9]+)?")){
+                //numeros
+                newWord +="<span style=\"color: red;\">"+c+"</span>";                
+                continue;
+            }
+         
+            newWord += c.toString();
+         }        
+         
+         return newWord;
     }
     
 
