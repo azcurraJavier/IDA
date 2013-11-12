@@ -4,11 +4,31 @@
 *.jar
 *.war
 *.ear
-*/nbproject/private
-dist
-*.jar
-build
-*.class
+
+# Folders #
+
+# NetBeans user configuration files
+nbactions*.xml
+nbproject/private
+
+
+# Ant build folders
+build/
+dist/
+lib/
+user.build.properties
+
+# Profiler results
+*.hprof
+
+# Playground
+/tool/playground/
+
+# IntelliJ projects
+*.iml
+*.ipr
+*.iws
+.idea/
 
 # OS generated files #
 ######################

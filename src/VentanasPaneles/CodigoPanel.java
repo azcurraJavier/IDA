@@ -1,7 +1,6 @@
 package VentanasPaneles;
 
 import Listas.Clase;
-import SplitID.SamuraiPaper;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Rectangle;
@@ -34,8 +33,8 @@ public class CodigoPanel extends javax.swing.JPanel {
     
     Map<String,String> mapReservSimbol = new HashMap<String,String>(){{
         put("\"","&quot");
-        put(">","&lt");
-        put("<","&gt");
+        put(">","&gt");
+        put("<","&lt");
         put("&","&amp");
         put("'","&#039");
         put("''","&#034");

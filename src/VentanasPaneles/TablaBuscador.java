@@ -78,7 +78,7 @@ public class TablaBuscador extends javax.swing.JPanel {
             case 1://Strings
                 modeloTabla.addColumn("IDENTIFICADOR");
                 modeloTabla.addColumn("String Asignado");
-
+                buscarColumna = 2;
 
                 fila = new Object[3];
 
