@@ -11,10 +11,15 @@ import Listas.MostrarTabla;
 import VentanasPaneles.AcercaDe;
 import VentanasPaneles.ClosableTabbedPane;
 import VentanasPaneles.CodigoPanel;
+import VentanasPaneles.DiccionaryPanel;
+import VentanasPaneles.ExpandPanel;
 import VentanasPaneles.SplitPanel;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
@@ -33,8 +38,15 @@ public class Main extends javax.swing.JFrame {
 
     private static File[] archivosAnalisisId = null;
     
-    private ClosableTabbedPane jTabbedEsp;
+    private final ClosableTabbedPane jTabbedEsp;
+    
+    public static Set<String> setReserv = new HashSet<String>(Arrays.asList("abstract", "assert", "boolean", "break", "byte", "case", "catch", "char", "class", 
+                                                   "const", "continue", "default", "do", "double", "else", "enum", "extends", "false", "final", "finally",
+                                                   "float", "for", "goto", "if", "implements", "import", "instanceof", "int", "interface", "long", "native",
+                                                   "new", "null", "package", "private", "protected", "public", "return", "short", "static", "strictfp", "super",
+                                                   "switch", "synchronized", "this", "throw", "throws", "transient", "true", "try", "void", "volatile", "while"));
 
+    private Set<String> lisIdsSplited = new HashSet<String>();
 
     /**
      * Creates new form NewJFrame
@@ -86,6 +98,8 @@ public class Main extends javax.swing.JFrame {
         jMenuItemAlgGreedy = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem6 = new javax.swing.JMenuItem();
 
@@ -141,7 +155,26 @@ public class Main extends javax.swing.JFrame {
         jMenuBar1.add(jMenu2);
 
         jMenu3.setText("Expandir Id");
-        jMenu3.setEnabled(false);
+
+        jMenuItem2.setText("Diccionarios ...");
+        jMenuItem2.setEnabled(false);
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem2);
+
+        jMenuItem4.setText("Expandir ids encontrados ..");
+        jMenuItem4.setToolTipText("");
+        jMenuItem4.setEnabled(false);
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem4);
+
         jMenuBar1.add(jMenu3);
 
         jMenu4.setText("Ayuda");
@@ -175,8 +208,8 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-847)/2, (screenSize.height-517)/2, 847, 517);
+        setSize(new java.awt.Dimension(847, 517));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
@@ -270,6 +303,10 @@ public class Main extends javax.swing.JFrame {
                 //jTabbedPaneCodigo.setVisible(true);
                 jTabbedEsp.setVisible(true);
                 jMenuItem3.setEnabled(true);
+                jMenuItem2.setEnabled(true);
+                 jMenuItem2.setEnabled(true);
+                 jMenuItem4.setEnabled(true);
+                
                 //jMenuItem4.setEnabled(true);
 
             } else {
@@ -306,7 +343,66 @@ public class Main extends javax.swing.JFrame {
         tb = new SplitPanel(new javax.swing.JFrame(), true, lisMt, ListaClase.getLisClases());
         
         tb.setVisible(true);
+        
+        lisIdsSplited = tb.getLisIdsSplited();
     }//GEN-LAST:event_jMenuItemAlgGreedyActionPerformed
+
+    
+    private ArrayList<String> getListPhrase(){
+        
+       ArrayList<String> lisCom = new ArrayList<String>();
+       //ArrayList<String> lisWords = new ArrayList<String>();
+       
+       
+        for(Clase c: ListaClase.getLisClases()){
+            for(Comentario com :c.getLisComentario()){
+                lisCom.add(com.getCom());
+            }
+           lisCom.add("==================="); 
+           lisCom.addAll(c.getLisLiterales());
+        } 
+    
+        return lisCom;
+    
+    }
+    
+    
+    
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+              
+        DiccionaryPanel ep;
+        ep = new DiccionaryPanel(new javax.swing.JFrame(),true,null, getListPhrase(),setReserv);
+        ep.setVisible(true);
+        
+        
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+
+        ArrayList<String> lisPhr = getListPhrase();
+        
+        //palabras extraidas de las frases - comentarios y literales
+        Set<String> lisCleaned = new HashSet<String>();
+        
+        for (String phrase : lisPhr) {
+
+            String words[] = phrase.split(" ");
+
+            for (String w : words) {
+                w = w.replace("\n", "");
+                if (w.length() > 2 && w.matches("[A-Za-z]+")) {
+                    //todas las palablas lower case
+                    lisCleaned.add(w.toLowerCase().trim());
+                }
+            }
+        }
+       
+   
+        ExpandPanel ep;
+        ep = new ExpandPanel(new javax.swing.JFrame(),true,lisCleaned,lisIdsSplited);
+        ep.setVisible(true);
+
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jTabbedEspStateChanged(javax.swing.event.ChangeEvent evt) {
         
@@ -365,7 +461,9 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItemAlgGreedy;

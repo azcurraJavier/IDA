@@ -1,25 +1,29 @@
 /*
- * To change this template, choose Tools | Templates
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package VentanasPaneles;
 
-import Listas.Clase;
-import Listas.MostrarTabla;
-import SplitID.Greedy;
-import SplitID.SamuraiPaper;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import javax.swing.AbstractAction;
+import javax.swing.ActionMap;
+import javax.swing.InputMap;
+import javax.swing.JComponent;
+import javax.swing.KeyStroke;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Set;
-import javax.swing.*;
+import javax.swing.JTable;
+import org.jdesktop.swingx.JXTable;
+
 
 /**
  *
  * @author javier
  */
-public class SplitPanel extends javax.swing.JDialog {
+public class DiccionaryPanel extends javax.swing.JDialog {
 
     /**
      * A return status code - returned if Cancel button has been pressed
@@ -29,50 +33,47 @@ public class SplitPanel extends javax.swing.JDialog {
      * A return status code - returned if OK button has been pressed
      */
     public static final int RET_OK = 1;
-
-    
+ 
     private MiModelo modeloTabla;
-    private JTable tablaElem;
+    private JTable tablaElem;   
     
-    private Set<String> lisIdsSplited = new HashSet<String>();
-    
-    
-    public SplitPanel(java.awt.Frame parent, boolean modal,ArrayList<MostrarTabla> listId,ArrayList<Clase> lisClases) {
+    /**
+     * Creates new form ExpandPanel
+     */
+    public DiccionaryPanel(java.awt.Frame parent, boolean modal, ArrayList<String> listWords, ArrayList<String> listPhrases, Set<String> stopList) {
         super(parent, modal);
         initComponents();
-        
+    
         modeloTabla = new MiModelo();
         tablaElem = new JTable(modeloTabla);
-        jScrollSplit.setViewportView(tablaElem);
+        jScrollPhrase.setViewportView(tablaElem);
 
-        modeloTabla.addColumn("IDENTIFICADOR");
-        modeloTabla.addColumn("DIVISIÓN GREEDY");
-        modeloTabla.addColumn("DIVISIÓN SAMURAI");
+        modeloTabla.addColumn("Lista de Frases");
         
-        Object[] filaTabla = new Object[3];
-        String nomIde;
-        String splitIde;
-        SamuraiPaper samurai;
+        Object[] filaTabla = new Object[1];
         
-        
-        if(listId!=null){
-            for(MostrarTabla ide: listId){
-                nomIde = ide.getNomId();
-                filaTabla[0]= nomIde;
-                splitIde = Greedy.ejecutar(nomIde,true);//true=caso 1 de upperlower false=caso 2
-                filaTabla[1]= splitIde.replaceAll(" ", "-");//para que se destaque la separación
-
-                lisIdsSplited.add(filaTabla[1].toString().toLowerCase());
-                
-                samurai = new SamuraiPaper(lisClases.get(0),"strDomicilio");
-                
-                samurai.mixedCaseSplit();
-                
-                //splitIde = Samurai.ejecutar(nomIde);
-                //filaTabla[2]= splitIde.replaceAll(" ", "   ");//para que se destaque la separación
-                modeloTabla.addRow(filaTabla);
-            }
+        for(String word:listPhrases){            
+            
+            filaTabla[0]= word.replaceAll("\"", "").trim();
+            modeloTabla.addRow(filaTabla);            
         }
+        
+        ///////////////////////////
+        
+        modeloTabla = new MiModelo();
+        tablaElem = new JXTable(modeloTabla);
+        jScrollStop.setViewportView(tablaElem);
+
+        modeloTabla.addColumn("Lista Palabras excluidas");
+        
+        filaTabla = new Object[1];
+        
+        for(String word:stopList){                        
+            
+            filaTabla[0]= "<html><b>"+word.trim()+"</b></html>";//<html>Math,<br>Class1</html>
+            modeloTabla.addRow(filaTabla);            
+        }
+        
 
         // Close the dialog when Esc is pressed
         String cancelName = "cancel";
@@ -80,7 +81,6 @@ public class SplitPanel extends javax.swing.JDialog {
         inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), cancelName);
         ActionMap actionMap = getRootPane().getActionMap();
         actionMap.put(cancelName, new AbstractAction() {
-
             public void actionPerformed(ActionEvent e) {
                 doClose(RET_CANCEL);
             }
@@ -94,11 +94,6 @@ public class SplitPanel extends javax.swing.JDialog {
         return returnStatus;
     }
 
-    public Set<String> getLisIdsSplited() {
-        return lisIdsSplited;
-    } 
-    
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -109,9 +104,10 @@ public class SplitPanel extends javax.swing.JDialog {
     private void initComponents() {
 
         cancelButton = new javax.swing.JButton();
-        jScrollSplit = new javax.swing.JScrollPane();
+        jScrollPhrase = new javax.swing.JScrollPane();
+        jScrollStop = new javax.swing.JScrollPane();
 
-        setTitle("Técnicas de División");
+        setTitle("Diccionarios");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 closeDialog(evt);
@@ -130,47 +126,54 @@ public class SplitPanel extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(113, 113, 113)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 625, Short.MAX_VALUE)
-                        .addComponent(cancelButton))
-                    .addComponent(jScrollSplit))
-                .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPhrase, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(33, 33, 33)
+                        .addComponent(jScrollStop, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(56, 56, 56))
+                    .addComponent(cancelButton, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollSplit, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(41, 41, 41)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPhrase, javax.swing.GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE)
+                    .addComponent(jScrollStop))
+                .addGap(9, 9, 9)
                 .addComponent(cancelButton)
                 .addContainerGap())
         );
 
-        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-722)/2, (screenSize.height-547)/2, 722, 547);
+        setSize(new java.awt.Dimension(789, 481));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-    
+
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+        doClose(RET_CANCEL);
+    }//GEN-LAST:event_cancelButtonActionPerformed
+
     /**
      * Closes the dialog
      */
     private void closeDialog(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_closeDialog
         doClose(RET_CANCEL);
     }//GEN-LAST:event_closeDialog
-
-    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
-        doClose(RET_CANCEL);
-    }//GEN-LAST:event_cancelButtonActionPerformed
     
     private void doClose(int retStatus) {
         returnStatus = retStatus;
         setVisible(false);
         dispose();
-    }
+    }    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
-    private javax.swing.JScrollPane jScrollSplit;
+    private javax.swing.JScrollPane jScrollPhrase;
+    private javax.swing.JScrollPane jScrollStop;
     // End of variables declaration//GEN-END:variables
+
     private int returnStatus = RET_CANCEL;
 }

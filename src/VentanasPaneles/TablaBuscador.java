@@ -4,8 +4,6 @@ import Listas.Clase;
 import Listas.Comentario;
 import Listas.MostrarTabla;
 import Listas.PalabraHash;
-import java.util.Iterator;
-import javax.swing.JScrollPane;
 import javax.swing.RowFilter;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
@@ -87,7 +85,7 @@ public class TablaBuscador extends javax.swing.JPanel {
                     if ("String".equals(m.getTipo()) && !m.getStrAsignado().isEmpty()) {
                         fila[0] = m.getAmbiente();
                         fila[1] = m.getNomId();
-                        fila[2] = m.getStrAsignado();
+                        fila[2] = m.getStrAsignado().trim();
                         modeloTabla.addRow(fila);
                     }
                 }
@@ -95,8 +93,8 @@ public class TablaBuscador extends javax.swing.JPanel {
                 for (String s : unaClase.getLisLiterales()) {
 
                     if (validString(s)) {
-                        fila[0] = "CONSTANTE";
-                        fila[1] = "CONSTANTE";
+                        fila[0] = "@"+unaClase.getIde().getNomID();
+                        fila[1] = "-";
                         fila[2] = s;
                         modeloTabla.addRow(fila);
                     }
@@ -112,15 +110,14 @@ public class TablaBuscador extends javax.swing.JPanel {
                 modeloTabla.addColumn("Comentario");
 
                 fila = new Object[3];
-                for (Iterator<Comentario> it2 = unaClase.getLisComentario().iterator(); it2.hasNext();) {
-                    Comentario com = it2.next();
+                
+                for (Comentario com : unaClase.getLisComentario()) {
                     fila[0] = com.getAmbiente();
                     fila[1] = com.getLinea();
-                    fila[2] = com.getCom();
+                    fila[2] = com.getCom().trim();
                     modeloTabla.addRow(fila);
 
                     addLineaCom(com.getCom());
-
                 }
 
                 break;
@@ -335,7 +332,7 @@ public class TablaBuscador extends javax.swing.JPanel {
    public boolean hasElem(){
        return this.hasElemets;
    }
-    
+   
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonTagCloud;
