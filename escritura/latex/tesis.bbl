@@ -5,9 +5,22 @@ Mario~M. Berón, Daniel Riesco, and Germán Montejano.
 \newblock Estrategias para facilitar la comprensión de programas.
 \newblock San Luis, Argentina, April 2010.
 
-\bibitem{vonmayrhauser1995pcd}
+\bibitem{BROOK82}
+R.~Brook.
+\newblock A theoretical analysis of the role of documentation in the
+  comprehension of computer programs.
+\newblock {\em Proceedings of the 1982 conference on Human factors in computing
+  systems}, pages 125--129, 1982.
+
+\bibitem{STOREY99}
+M.~A. Storey, F.~D. Fracchia, and H.~A. M{\"u}ller.
+\newblock Cognitive design elements to support the construction of a mental
+  model during software exploration.
+\newblock {\em The Journal of Systems \& Software}, 44(3):171--185, 1999.
+
+\bibitem{VMAVA95}
 A.~Von~Mayrhauser and A.~M. Vans.
-\newblock {Program comprehension during software maintenance and evolution}.
+\newblock Program comprehension during software maintenance and evolution.
 \newblock {\em Computer}, 28(8):44--55, 1995.
 
 \end{thebibliography}

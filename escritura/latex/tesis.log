@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.9.17)  18 NOV 2013 20:26
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.9.17)  19 NOV 2013 02:45
 entering extended mode
  %&-line parsing enabled.
 **tesis.tex
@@ -324,28 +324,36 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <7> on input line 12.
  [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [1]
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 17.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 17.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 17.
+ [1]
 Cap\'{\i }tulo 1.
-(./tesis.bbl [1
+[1
 
-]) [2
+] (./tesis.bbl [2]) [3
 
 ] (./tesis.aux) ) 
 Here is how much of TeX's memory you used:
- 1738 strings out of 495061
- 20625 string characters out of 1182621
- 75264 words of memory out of 3000000
- 4942 multiletter control sequences out of 15000+50000
- 7016 words of font info for 25 fonts, out of 3000000 for 9000
+ 1762 strings out of 495061
+ 20884 string characters out of 1182621
+ 77272 words of memory out of 3000000
+ 4960 multiletter control sequences out of 15000+50000
+ 9454 words of font info for 33 fonts, out of 3000000 for 9000
  28 hyphenation exceptions out of 8191
- 25i,7n,27p,251b,197s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 25i,7n,27p,481b,197s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx1
 2.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/
 share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texmf-
-texlive/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on tesis.pdf (4 pages, 58558 bytes).
+texlive/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf-texlive/fonts
+/type1/public/amsfonts/cm/cmti12.pfb>
+Output written on tesis.pdf (5 pages, 76475 bytes).
 PDF statistics:
- 31 PDF objects out of 1000 (max. 8388607)
+ 38 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

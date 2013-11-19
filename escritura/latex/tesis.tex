@@ -13,13 +13,19 @@
 %\tableofcontents %Genera el indice
 
 \begin{abstract}
+Las demandas actuales en el desarrollo del software implican una evolución y mantenimiento constante del mismo con el menor costo de tiempo y de recursos. Pensar en estrategias que faciliten las tediosas tareas que diariamente conllevan al crecimiento de los sistemas nos da incapie a iniciarnos en la investigación de herramientas automatizadas que reemplacen el esfuerzo manual que realizan los ingenieros de softwares a la hora de interpretar un programa. 
+El correspondiente trabajo habla de técnicas basadas en el análisis de identificadores en códigos escritos en JAVA\texttrademark 
+
+logrando así un aporte a nuestro principal objetivo que es comprender mejor los programas.
+
+
+
 \end{abstract}
 
 \chapter{Introducción}
 \section{Problema}
 
-Uno de los principales problemas al que se ven enfrentados los desarrolladores de 
-software es mantener los sistemas en buen funcionamiento \cite{vonmayrhauser1995pcd}. 
+Todos los problemas a los que se enfrentan los desarrolladores de software el primordial es el de mantener los sistemas en buen funcionamiento \cite{VMAVA95}. 
 Esta tarea es imposible de llevar a cabo de forma manual debido a que consume 
 muchos costos y esfuerzo humano. 
 Por esta razón, existe una subárea de la Ingeniería de Software que se encuentra 
@@ -27,12 +33,44 @@ dedicada al desarrollo de técnicas de inspección y comprensión de software.
 Esta área tiene como principal objetivo que el desarrollador logre un entendimiento 
 acabado del software de estudio de forma tal de poder modificarlo disminuyendo en 
 lo posible la gran mayoría de costos \cite{BRM10}. 
-Esta área se conoce en la jerga de la Ingeniería de Software como: 
+El área mencionada se conoce en la jerga de la Ingeniería de Software como: 
 \textit{Comprensión de Programas (CP)}.
 
+Uno de los principales desafíos en CP consiste en relacionar 
+dos dominios muy importantes. 
+El primero, el Dominio del Problema, hace referencia a la salida producida por el sistema de estudio. El segundo, el Dominio del Programa, se refiere a las componentes de software utilizadas para producir dicha salida.
+
+Los caminos que conducen a facilitar la comprensión de software el mas apropiado consiste 
+en el uso/creación de Herramientas de Comprensión. 
+Una Herramienta de Compresión presenta diferentes perspectivas del software que 
+posibilitan que el ingeniero pueda percibir el funcionamiento del sistema. 
+Para construir herramientas de comprensión, se deben tener en cuenta tres pilares 
+importantes, ellos son: \textit{Interconexión de Dominios}, 
+\textit{Visualización de Software} y 
+\textit{Extracción de la Información} \cite{STOREY99,BROOK82}.
+
+La \textit{visualización del software} es una característica importante en la comprensión de programas, básicamente provee una o varias representaciones visuales de algún sistema particular \cite{BRM10}.
+Dichas vistas, cuando están bien elaboradas, permiten analizar y percibir la información extraída desde un programa con mayor facilidad.
+
+Por \textit{Extracción de la Información} se entiende el uso/desarrollo de técnicas que 
+permitan extraer información desde el sistema de estudio. 
+Esta información puede ser: Estática o Dinámica, dependiendo de las necesidades del 
+ingeniero de software o del equipo de trabajo.
+
+Para la extracción de la información estática se utilizan técnicas de compilación tradicionales, que se encargan de recuperar información de cada componente del sistema. Todas las actividades que forman parte de esta tarea se realizan desde el código fuente sin ejecutar el sistema. Generalmente, en este tipo de trabajos se construye un analizador sintáctico con las acciones semánticas necesarias para extraer la información requerida.
+Por otro lado la extracción dinámica de información del sistema se obtiene  
+aplicando técnicas de instrumentación de código, estas técnicas consisten en insertar sentencias dentro del código fuente del sistema con el fin de recuperar las partes del programa que se utilizaron para 
+producir la salida. 
+La principal diferencia que radica entre ambas técnicas es que las dinámicas requieren que el sistema se ejecute, mientras que las estáticas esto no es necesario.
 
 
-\section{Solucion}
+Una de las vías mas sencillas de comprender grandes sistemas es relacionar el Dominio del Problema con el Dominio del Programa es por ello la necesidad de utilizar los conceptos basados en la \textit{Interconexión de Dominios} \cite{BRM10}.
+Esta relación entre ambos dominios es compleja y se puede aproximar primero construyendo una representación de ambos dominios y luego llevar a cabo una estrategia de vinculación entre ambas representaciones.
+
+\section{Solución}
+
+El correspondiente trabajo
+
 \begin{itemize}
 \item Lograr una mejor comprensión de programas escritos en java a través del análisis de los identificadores encontrados en el código fuente de programas escritos con java.
 \end{itemize}
