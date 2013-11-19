@@ -1,0 +1,17 @@
+@inproceedings{BRM10,
+    author = {Mario M. Berón and Daniel Riesco and Germán Montejano},
+    title= {Estrategias para Facilitar la Comprensión de Programas},    
+    address = {San Luis, Argentina},    
+    month = {April},
+    year = {2010},
+}
+
+@article{vonmayrhauser1995pcd,
+  title={Program comprehension during software maintenance and evolution},
+  author={Von Mayrhauser, A. and Vans, A. M.},
+  journal={Computer},
+  volume={28},
+  number={8},
+  pages={44--55},
+  year={1995}
+}

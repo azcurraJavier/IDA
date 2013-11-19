@@ -231,7 +231,7 @@ public class Main extends javax.swing.JFrame {
         }
         
         
-        File file = new File(canonicalPath);
+        File file = new File(canonicalPath+"/examples");
 
 
         JFileChooser fileChooser = new JFileChooser();

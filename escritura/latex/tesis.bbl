@@ -1,0 +1,13 @@
+\begin{thebibliography}{1}
+
+\bibitem{BRM10}
+Mario~M. Berón, Daniel Riesco, and Germán Montejano.
+\newblock Estrategias para facilitar la comprensión de programas.
+\newblock San Luis, Argentina, April 2010.
+
+\bibitem{vonmayrhauser1995pcd}
+A.~Von~Mayrhauser and A.~M. Vans.
+\newblock {Program comprehension during software maintenance and evolution}.
+\newblock {\em Computer}, 28(8):44--55, 1995.
+
+\end{thebibliography}
