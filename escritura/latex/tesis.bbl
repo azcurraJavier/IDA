@@ -12,11 +12,33 @@ R.~Brook.
 \newblock {\em Proceedings of the 1982 conference on Human factors in computing
   systems}, pages 125--129, 1982.
 
+\bibitem{WHAFVR11}
+Wilhelm Hasselbring, Andreas Fuhr, and Volker Riediger.
+\newblock First international workshop on model-driven software migration.
+\newblock Marzo 2011.
+
+\bibitem{RSPMGH02}
+Roger~S. Pressman.
+\newblock {\em Ingeniería del Software un enfoque práctico}.
+\newblock 2002.
+
 \bibitem{STOREY99}
 M.~A. Storey, F.~D. Fracchia, and H.~A. M{\"u}ller.
 \newblock Cognitive design elements to support the construction of a mental
   model during software exploration.
 \newblock {\em The Journal of Systems \& Software}, 44(3):171--185, 1999.
+
+\bibitem{PFT02}
+Pierre~F. Tiako.
+\newblock Maintenance in joint software development.
+\newblock {\em Annual International Computer Software and Applications
+  Conference}, 2002.
+
+\bibitem{MMFAF07}
+Marco Torchiano and Massimiliano~Di Penta.
+\newblock Software migration projects in italian industry: Preliminary results
+  from a state of the practice survey.
+\newblock 2007.
 
 \bibitem{VMAVA95}
 A.~Von~Mayrhauser and A.~M. Vans.

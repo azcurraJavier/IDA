@@ -10,7 +10,61 @@
   file = {BRM10.pdf:BRM10.pdf:PDF}
 }
 
-@ARTICLE{vonmayrhauser1995pcd,
+@ARTICLE{BROOK82,
+  author = {Brook, R.},
+  title = {A theoretical analysis of the role of documentation in the comprehension
+	of computer programs},
+  journal = {Proceedings of the 1982 conference on Human factors in computing
+	systems},
+  year = {1982},
+  pages = {125--129},
+  publisher = {ACM Press New York, NY, USA}
+}
+
+@ARTICLE{WHAFVR11,
+  author = {Wilhelm Hasselbring and Andreas Fuhr and Volker Riediger},
+  title = {First International Workshop on Model-Driven Software Migration},
+  file = {WHAFVR11.pdf:WHAFVR11.pdf:PDF}
+}
+
+@BOOK{RSPMGH02,
+  title = {Ingeniería del Software un enfoque práctico},
+  year = {2002},
+  author = {Roger S. Pressman},
+  file = {RSPMGH02.pdf:RSPMGH02.pdf:PDF}
+}
+
+@ARTICLE{STOREY99,
+  author = {Storey, M. A. and Fracchia, F. D. and M{\"u}ller, H. A. },
+  title = {Cognitive design elements to support the construction of a mental
+	model during software exploration},
+  journal = {The Journal of Systems \& Software},
+  year = {1999},
+  volume = {44},
+  pages = {171--185},
+  number = {3},
+  publisher = {Elsevier}
+}
+
+@ARTICLE{PFT02,
+  author = {Pierre F. Tiako},
+  title = {Maintenance in joint Software Development},
+  journal = {Annual International Computer Software and Applications Conference},
+  year = {2002},
+  file = {PFT02.pdf:PFT02.pdf:PDF}
+}
+
+@ARTICLE{MMFAF07,
+  author = {Marco Torchiano and Massimiliano Di Penta},
+  title = {Software Migration Projects in Italian Industry: Preliminary Results
+	from a
+	
+	State of the Practice Survey},
+  year = {2007},
+  file = {MMFAF07.pdf:MMFAF07.pdf:PDF}
+}
+
+@ARTICLE{VMAVA95,
   author = {Von Mayrhauser, A. and Vans, A. M.},
   title = {Program comprehension during software maintenance and evolution},
   journal = {Computer},
@@ -18,26 +72,6 @@
   volume = {28},
   pages = {44--55},
   number = {8},
-  file = {vonmayrhauser1995pcd.pdf:vonmayrhauser1995pcd.pdf:PDF}
-}
-
-@article{storey1999cde,
-  title={Cognitive design elements to support the construction of a mental model during software exploration},
-  author={Storey, M. A.  and Fracchia, F. D. and M{\"u}ller, H. A. },
-  journal={The Journal of Systems \& Software},
-  volume={44},
-  number={3},
-  pages={171--185},
-  year={1999},
-  publisher={Elsevier}
-}
-
-@article{brooks1982tar,
-  title={A theoretical analysis of the role of documentation in the comprehension of computer programs},
-  author={Brook, R.},
-  journal={Proceedings of the 1982 conference on Human factors in computing systems},
-  pages={125--129},
-  year={1982},
-  publisher={ACM Press New York, NY, USA}
+  file = {VMAVA95.pdf:VMAVA95.pdf:PDF}
 }
 
