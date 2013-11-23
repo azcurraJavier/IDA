@@ -25,7 +25,7 @@ Las demandas actuales en el desarrollo del software implican una evolución y ma
 
 Estudios indican que los identificadores abundan en los códigos de programas y poseen información relevante detrás de sus abreviaturas por lo tanto no debe ser pasados por alto su análisis a la hora de elaborar herramientas automatizadas de interpretación de códigos.
 El correspondiente trabajo habla de técnicas basadas en el análisis de identificadores en códigos escritos en lenguaje JAVA\texttrademark .
-Las técnicas de análisis constan de dos etapas la primera consiste en la división de las distintas abreviaturas que componen un identificador y la segunda etapa se encarga en la expansión ``semántica'' de cada abreviatura capturada en la etapa previa, es decir, expandir las abreviaciones en palabras completas. Para lograr esta expansión se utilizan distintas fuentes semánticas comentarios, literales y documentación o bien fuera del sistema basándose en diccionarios. Algunas estrategias de análisis de identificadores se implementaron en la herramienta \textit{Identifier Analyzer} (IDA) donde se emplearon técnicas de compilación para extraer la información estática y analizar los identificadores con el objeto de poder comparar el desempeño de las estrategias y arribar a conclusiones.
+Las técnicas de análisis constan de dos etapas la primera consiste en la división de las distintas abreviaturas que componen un identificador y la segunda etapa se encarga en la expansión “semántica” de cada abreviatura capturada en la etapa previa, es decir, expandir las abreviaciones en palabras completas. Para lograr esta expansión se utilizan distintas fuentes semánticas comentarios, literales y documentación o bien fuera del sistema basándose en diccionarios. Algunas estrategias de análisis de identificadores se implementaron en la herramienta \textit{Identifier Analyzer} (IDA) donde se emplearon técnicas de compilación para extraer la información estática y analizar los identificadores con el objeto de poder comparar el desempeño de las estrategias y arribar a conclusiones.
 
 
 \end{abstract}
@@ -35,7 +35,7 @@ Las técnicas de análisis constan de dos etapas la primera consiste en la divis
 
 La ingeniería de software contiene tres ítems muy importantes en desarrollo de los sistemas: el \textit{mantenimiento del software}, \textit{la evolución del software} y la \textit{migración del software}. Para que puedan llevar a cabo sus iniciativas los tres necesitan interpretar previamente el sistema que se esta desarrollando.
 
-La etapa de mantenimiento es importante en el desarrollo de un software porque los mismos están sujetos a cambios y a una permanente evolución\cite{PFT02}.
+La etapa de mantenimiento es importante en el desarrollo de un software ya que este esta sujeto a cambio y a una permanente evolución\cite{PFT02}.
 Es común también que por la constate actualización de los sistemas operativos, los motores de base de datos y demás sistemas externos que interactúan con el software desarrollado entren en conflicto, por eso en la fase de mantenimiento también se debe ir actualizando los distintos componentes del producto para una mejor compatibilidad.\cite{RSPMGH02}. Por lo antedicho entre otras diversas razones indican que el mantenimiento del software consume mucho esfuerzo y dinero. Es necesario pensar en estrategias de automatización que puedan ser aplicadas en fases del mantenimiento del software que ayuden a reducir estos costos, para lograrlo se requiere una comprensión del objeto que se va a modificar antes de realizar algún cambio que sea de utilidad.
 
 
@@ -71,7 +71,7 @@ con las partes del programa utilizadas para generar la salida del sistema.
 
 \section{Solución}
 
-\textbf{Una solución posible al desafío previamente mencionado consiste en construir una representación para el dominio dominio del problema y otra para el dominio del programa luego unir ambas representaciones utilizando una estrategia de vinculación} 
+\textbf{Una solución posible al desafío previamente mencionado consiste en construir una representación para el dominio del problema y otra para el dominio del programa luego unir ambas representaciones utilizando una estrategia de vinculación} 
 Los caminos que conducen a facilitar la vinculación de las dos representaciones consiste en el uso/creación de Herramientas de Comprensión. 
 Una Herramienta de Compresión presenta diferentes perspectivas del software que posibilitan que el ingeniero pueda percibir el funcionamiento del sistema. 
 Para construir herramientas de comprensión, se deben tener en cuenta tres pilares importantes, ellos son: \textit{Interconexión de Dominios}, 
@@ -81,11 +81,15 @@ Para construir herramientas de comprensión, se deben tener en cuenta tres pilar
 La \textit{visualización del software} es una característica importante en la comprensión de programas, básicamente provee una o varias representaciones visuales de algún sistema particular \cite{BRM10}.
 Dichas vistas, cuando están bien elaboradas, permiten analizar y percibir la información extraída desde un programa con mayor facilidad.
 
+La \textit{Interconexión de Dominios} \cite{BRM10} tiene como principal objeto de estudio la transformación y vinculación de un dominio específico en otro dominio. 
+Este último dominio puede estar en un alto o bajo nivel de abstracción. 
+El punto importante es que cada componente de un dominio se vea reflejado en una o más componentes del otro y viceversa. 
+A modo de ejemplo, se puede mencionar la transformación de un código fuente Dominio del Programa) en un Grafo de Llamadas a Funciones (Dominio de Grafos). En este contexto existe una amplia gama de transformaciones siendo la más escasa y difícil de conseguir aquella que relaciona el Dominio del Problema con el Dominio del Programa.
+
 Por \textit{Extracción de la Información} se entiende el uso/desarrollo de técnicas que 
 permitan extraer información desde el sistema de estudio. 
 Esta información puede ser: Estática o Dinámica, dependiendo de las necesidades del 
 ingeniero de software o del equipo de trabajo.
-
 Para la extracción de la información estática se utilizan técnicas de compilación tradicionales, que se encargan de recuperar información de cada componente del sistema. Todas las actividades que forman parte de esta tarea se realizan desde el código fuente sin ejecutar el sistema. Generalmente, en este tipo de trabajos se construye un analizador sintáctico con las acciones semánticas necesarias para extraer la información requerida.
 Por otro lado la extracción dinámica de información del sistema se obtiene  
 aplicando técnicas de instrumentación de código, estas técnicas consisten en insertar sentencias dentro del código fuente del sistema con el fin de recuperar las partes del programa que se utilizaron para 
@@ -105,24 +109,31 @@ Finalmente, es importante mencionar que la información dinámica es tan importa
 
 
 Actualmente, existen muchas herramientas de comprensión que basan sus análisis en componentes que están presentes en la información estática de los códigos de programas, alguno de ellos son nombres de variables, tipos de las variables,los métodos de un programa orientado a objeto, las variables locales a un método, etc. Estos son elementos que componen la información formal. Sin embargo, a través del estudio del estado del arte, se pudo detectar que son pocas las estrategias de análisis estático que analizan la información informal que se encuentra disponible en el código fuente, por información informal se entiende aquella contenida en 
-los: \textit{palabras contenidas en comentarios}, \textit{comentarios de los módulos}, \textit{comentarios de las funciones}, \textit{literales strings}, \textit{documentación} etc.
+los: \textit{comentarios de los módulos}, \textit{comentarios de las funciones}, \textit{literales strings}, \textit{documentación} etc.
 Esto se debe a que dicha información se encuentra expresada en lenguaje natural y por lo tanto su interpretación escapa del análisis estático y requiere de la aplicación de \textit{Técnicas de Procesamiento de Lenguaje Natural} 
-\cite{CHP09,EKS01}.%FALTANNN!!
-Este trabajo se centra en los \textit{identificadores} ids como fuente principal de información. Detrás de los ids se encuentra oculta información que es relevante para el objetivo de estudio. Generalmente los ids están compuestos por más de una palabra en forma de abreviatura, una posibilidad para exponer la información oculta consiste en traducir estas abreviaturas en sus correspondientes palabras expresadas en lenguaje natural. La dificultad que presenta esta técnica es que normalmente los nombres de los ids se basan en función de la idiosincrasia del 
-programador \cite{LFBEX, EHPV09}%FALTANNN!!
+\cite{DCPHJP09,TERD01}.
+Este trabajo se centra en los \textit{identificadores} ids como fuente principal de información. Detrás de los ids se encuentra oculta información que es propia del dominio del problema. Generalmente los ids están compuestos por más de una palabra en forma de abreviatura, una posibilidad para exponer la información oculta consiste en traducir estas abreviaturas en las correspondientes palabras expresadas en lenguaje natural.
+
+Una aproximación a la solución de este problema es tomar los ids, 
+aplicarles técnicas de división o separación y luego técnicas de expansión a las 
+abreviaturas para transformar las mismas en palabras completas. 
+Para lograr esto, primero se descompone al identificador en las distintas palabras 
+abreviadas que lo componen, luego se toma cada abreviatura y se expande a la palabra completa.
+
+La dificultad que presenta esta técnica es que normalmente los nombres de los ids se basan en función de la idiosincrasia del 
+programador \cite{LFBEX07, EHPV09}
 y esto representa un problema para el traductor. Otro problema a tener en cuenta es que las abreviaturas representan palabras en lenguaje natural, el cual es ambiguo y puede generar controversia en la conversión.
 
-Por lo tanto es necesario la ayuda de las otras fuentes de información informal presentes en el código que ayuden a la interpretación de los ids como ya mencionados previamente los comentarios y los literales string son de gran utilidad.
+Por lo tanto es necesario la ayuda de fuentes que contengan información informal presentes en el código que ayuden a la interpretación de los ids. Los candidatos serios a lograr este cometido son comentarios y los literales string.
 Sin duda, los comentarios tienen como principal finalidad ayudar a 
 entender un segmento de código \cite{JDPH08}.
 Dicho de otra manera, son una fuente importante de información de 
 los conceptos del Dominio del Problema. 
 Por esta razón, se puede ver a los comentarios como una herramienta 
-natural para entender el significado de los identificadores de un código,
+natural para entender el significado de los ids de un código,
 como así también el funcionamiento del sistema en sí.
 
-Otra manera de entender la semántica de un identificador es analizando los 
-literales o constantes strings.
+Por otro lado para poder entender la semántica de un identificador es analizando los literales o constantes strings.
 Estos representan un valor constante formado por  secuencias de caracteres. 
 Ellos son generalmente utilizados en la muestra de carteles por pantalla, y 
 comúnmente se almacenan en variables de tipo \textit{string} (como es el caso de 
@@ -132,16 +143,27 @@ Detrás de la información informal se oculta información relevante del
 Dominio del Problema.
 Esta información es muy importante porque facilita  la reconstrucción de la relación del  
 Dominio del Problema con el Dominio del Programa 
-\cite{LF94,embley2004tsu}.%FALTAN!!!
+\cite{DWE04}.
 
-
-\begin{itemize}
-\item Lograr una mejor comprensión de programas escritos en java a través del análisis de los identificadores encontrados en el código fuente de programas escritos con java.
-\end{itemize}
+En este trabajo se buscan estrategias basadas en el análisis de los ids que faciliten la comprensión de programas haciendo así un pequeño aporte en la solución a la problemática de vincular ambos dominios mencionados: 
 
 \begin{itemize}
-\item Aplicar distintas técnicas de análisis de identificadores para facilitar la comprensión de programas.
+
+\item Se investigaron herramientas de construcción de Analizadores Léxicos y Analizadores Sintácticos que emplean la teoría asociada a las gramáticas de atributos. 
+De la investigación mencionada previamente,  
+se determinó que la herramienta \textit{ANTLR}\footnote[1]{http://www.antlr.org/} es la más adecuada para extraer eficazmente los ids y toda la información relevante asociada a ellos que facilite su análisis.
+
+\item Se construyó un analizador sintáctico del lenguaje Java que permite extraer los ids, comentarios y literales encontrados en el código fuente del sistema de estudio.
+
+\item  Se estudiaron y se implementaron las técnicas de división de ids Greedy, Random \cite{HDD06,FBL06} que se encargan de separar a los ids en partes, donde cada parte representa una palabra abreviada.
+
+\item Se investigaron y se implementaron técnicas de expansión de ids, donde las abreviaturas previamente divididas se expanden en palabras completas.  
+Dichas técnicas llevan a disponer de listas de palabras formadas de los comentarios y literales capturados, (como así también una lista de palabras del diccionario en español).
+
+\item Se implementó una herramienta \textit{Identifier Analyzer} (IDA) que permite visualizar los atributos (ambiente, tipo de identificador, número de línea,etc) de cada objeto mostrando la parte del código donde se encuentra ubicados. Se incorporó en la implementación ademas las técnicas mencionadas en los ítems anteriores usando \textit{ANTLR} como herramienta soporte para la extracción de información.
+
 \end{itemize}
+
 
 %======================================================================
 
@@ -157,7 +179,7 @@ diferentes proyectos de investigación de gran éxito a nivel nacional e interna
 También se forma parte del proyecto bilateral entre la Universidade do Minho (Portugal)
  y la Universidad Nacional de San Luis (Argentina) denominado \textit{Quixote: Desarrollo de 
 Modelos del Dominio del Problema para Inter-relacionar las Vistas Comportamental y 
-Operacional de Sistemas de Software}. Quixote\footnote[1]{http://www3.di.uminho.pt/~gepl/} fue aprobado por el 
+Operacional de Sistemas de Software}. Quixote\footnote[2]{http://www3.di.uminho.pt/~gepl/} fue aprobado por el 
 Ministerio de Ciencia, Tecnología e Innovación Productiva de la Nación 
 (MINCyT) y la Fundação para a Ciência e Tecnología (FCT) de Portugal. 
 Ambos entes soportan económicamente la realización de diferentes misiones de investigación desde Argentina a Portugal y viceversa.

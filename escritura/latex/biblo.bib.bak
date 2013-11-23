@@ -21,12 +21,87 @@
   publisher = {ACM Press New York, NY, USA}
 }
 
-@ARTICLE{WHAFVR11,
+@ARTICLE{DCPHJP09,
+  author = {Daniela da Cruz and Pedro Rangel Henriques and Jorge Sousa Pinto},
+  title = {Code Analysis: Past and Present},
+  journal = {Proceeding of the Third International Workshop on Foundations and
+	Techniques for Open Source Software Certification},
+  year = {2009},
+  address = {Los Alamitos, CA, USA},
+  file = {DCPHJP09.pdf:DCPHJP09.pdf:PDF},
+  issn = {1863-2122},
+  publisher = {Luis Barbosa, Antonio Cerone and Siraj Shaikh}
+}
+
+@INPROCEEDINGS{TERD01,
+  author = {Thomas Eisenbarth and Rainer Koschke and Daniel Simon},
+  title = {Aiding Program Comprehension by Static and Dynamic Feature Analysis},
+  year = {2001},
+  pages = {602},
+  file = {TERD01.pdf:TERD01.pdf:PDF},
+  optpublisher = {IEEE Computer Society}
+}
+
+@INPROCEEDINGS{DWE04,
+  author = {David W. Embley},
+  title = {Toward semantic understanding: an approach based on information extraction
+	ontologies},
+  year = {2004},
+  publisher = {Australian Computer Society, Inc. Darlinghurst, Australia, Australia},
+  file = {DWE04.pdf:DWE04.pdf:PDF},
+  journal = {Proceedings of the fifteenth conference on Australasian database-Volume
+	27}
+}
+
+@INPROCEEDINGS{EHPV09,
+  author = {Eric Enslen and Emily Hill and Lori Pollock and K. Vijay-Shanker},
+  title = {Mining Source Code to Automatically Split Identifiers for Software
+	Analysis},
+  year = {2009},
+  file = {EHPV09.pdf:EHPV09.pdf:PDF},
+  isbn = {978-1-4244-3493-0}
+}
+
+@INPROCEEDINGS{FBL06,
+  author = {Henry Feild and David Binkley and Dawn Lawrie},
+  title = {An empirical comparison of techniques for extracting concept abbreviations
+	from identifiers},
+  booktitle = {In Proceedings of IASTED International Conference on Software Engineering
+	and Applications (SEA 2006},
+  year = {2006}
+}
+
+@INPROCEEDINGS{HDD06,
+  author = {Henry Feild and David Binkley and Dawn Lawrie},
+  title = {Identifier Splitting: A Study of Two Techniques},
+  year = {2006},
+  month = {Abril},
+  file = {HDD06.pdf:HDD06.pdf:PDF},
+  journal = {Mid-Atlantic Student Workshop on Programming Languages and Systems
+	Rutgers University}
+}
+
+@INPROCEEDINGS{JDPH08,
+  author = {José Luís Freitas and Daniela da Cruz and Pedro Rangel Henriques},
+  title = {The role of comments on Program Comprehension},
+  year = {2008},
+  file = {JDPH08.pdf:JDPH08.pdf:PDF}
+}
+
+@INPROCEEDINGS{WHAFVR11,
   author = {Wilhelm Hasselbring and Andreas Fuhr and Volker Riediger},
   title = {First International Workshop on Model-Driven Software Migration},
   year = {2011},
   month = {Marzo},
   file = {WHAFVR11.pdf:WHAFVR11.pdf:PDF}
+}
+
+@INPROCEEDINGS{LFBEX07,
+  author = {Dawn Lawrie and Henry Feild and David Binkley},
+  title = {Extracting Meaning from Abbreviated Identifier},
+  year = {2007},
+  file = {LFBEX07.pdf:LFBEX07.pdf:PDF},
+  isbn = {978-0-7695-2880-9}
 }
 
 @BOOK{RSPMGH02,
@@ -48,15 +123,15 @@
   publisher = {Elsevier}
 }
 
-@ARTICLE{PFT02,
+@INPROCEEDINGS{PFT02,
   author = {Pierre F. Tiako},
   title = {Maintenance in joint Software Development},
-  journal = {Annual International Computer Software and Applications Conference},
   year = {2002},
-  file = {PFT02.pdf:PFT02.pdf:PDF}
+  file = {PFT02.pdf:PFT02.pdf:PDF},
+  journal = {Annual International Computer Software and Applications Conference}
 }
 
-@ARTICLE{MMFAF07,
+@INPROCEEDINGS{MMFAF07,
   author = {Marco Torchiano and Massimiliano Di Penta},
   title = {Software Migration Projects in Italian Industry: Preliminary Results
 	from a
