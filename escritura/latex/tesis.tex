@@ -33,7 +33,7 @@ Las técnicas de análisis constan de dos etapas la primera consiste en la divis
 \chapter{Introducción}
 \section{Problema}
 
-La ingeniería de software contiene tres ítems muy importantes en desarrollo de los sistemas: el \textit{mantenimiento del software}, \textit{la evolución del software} y la \textit{migración del software}. Para que puedan llevar a cabo sus iniciativas los tres necesitan interpretar previamente el sistema que se esta desarrollando.
+La ingeniería de software contiene tres temáticas muy importantes en desarrollo de los sistemas: el \textit{mantenimiento del software}, \textit{la evolución del software} y la \textit{migración del software}. Para que puedan llevar a cabo sus iniciativas los tres necesitan interpretar previamente el sistema que se esta desarrollando.
 
 La etapa de mantenimiento es importante en el desarrollo de un software ya que este esta sujeto a cambio y a una permanente evolución\cite{PFT02}.
 Es común también que por la constate actualización de los sistemas operativos, los motores de base de datos y demás sistemas externos que interactúan con el software desarrollado entren en conflicto, por eso en la fase de mantenimiento también se debe ir actualizando los distintos componentes del producto para una mejor compatibilidad.\cite{RSPMGH02}. Por lo antedicho entre otras diversas razones indican que el mantenimiento del software consume mucho esfuerzo y dinero. Es necesario pensar en estrategias de automatización que puedan ser aplicadas en fases del mantenimiento del software que ayuden a reducir estos costos, para lograrlo se requiere una comprensión del objeto que se va a modificar antes de realizar algún cambio que sea de utilidad.
@@ -157,7 +157,7 @@ se determinó que la herramienta \textit{ANTLR}\footnote[1]{http://www.antlr.org
 
 \item  Se estudiaron y se implementaron las técnicas de división de ids Greedy, Random \cite{HDD06,FBL06} que se encargan de separar a los ids en partes, donde cada parte representa una palabra abreviada.
 
-\item Se investigaron y se implementaron técnicas de expansión de ids, donde las abreviaturas previamente divididas se expanden en palabras completas.  
+\item Se investigaron y se implementaron técnicas de expansión de ids en donde las abreviaturas previamente divididas se expanden en palabras completas.  
 Dichas técnicas llevan a disponer de listas de palabras formadas de los comentarios y literales capturados, (como así también una lista de palabras del diccionario en español).
 
 \item Se implementó una herramienta \textit{Identifier Analyzer} (IDA) que permite visualizar los atributos (ambiente, tipo de identificador, número de línea,etc) de cada objeto mostrando la parte del código donde se encuentra ubicados. Se incorporó en la implementación ademas las técnicas mencionadas en los ítems anteriores usando \textit{ANTLR} como herramienta soporte para la extracción de información.
@@ -192,6 +192,55 @@ Esta información puede ser estrictamente relacionada con el código del program
 o bien con la información informal provista por los programadores a través de 
 comentarios, literales y documentación. El trabajo esta organizado de la siguiente manera. El capítulo 2 define conceptos teóricos relacionados a la comprensión de programas, cuales son las necesidades que implica su estudio y que soluciones presenta en la vida del desarrollo del software. El capítulo 3 habla de técnicas de análisis de identificadores y que fuentes semánticas son utilizadas para su interpretación. El capítulo 4 trata sobre la herramienta \textit{Identifier Analyzer} (IDA) que implementa algunas técnicas de análisis de identificadores sobre códigos escritos en JAVA\texttrademark ademas de algunos casos de estudio. El capítulo 5 menciona las conclusiones elaboradas y posibles trabajos futuros.
 
+\chapter{Comprensión de Programas}
+\section{Introducción}
+La CP es un área de la Ingeniería de Software que tiene como meta primordial desarrollar métodos, técnicas y herramientas que ayuden al programador a comprender en profundidad los sistemas de software. La principal ventaja es que la CP reduce el esfuerzo y los costos en la etapas de mantenimiento y la evolución del software esto se logra abstrayendo la información contenida en el código a un nivel mas alto y de esta manera esclarecer mas su interpretación.\cite{MPMR07}
+%NECESITO HABLAR DE INGENIERIA INVERSA???
+%BUSCAR MAS MATERIAL CON DATOS ESTADISTICOS???
+Diversos estudios e investigaciones demuestran que el principal desafío esta enmarcado en vincular el dominio del problema y el dominio del programa. El primero se refiere al resultado de la ejecución del sistema, mientras que el segundo indica todos los componentes involucrados que causaron dicho resultado. En la figura 2.1 se muestra gráficamente el principal objetivo que es vincular ambos dominios. El inconveniente es que esta relación real es compleja de llevar a cabo y para facilitar la tarea se reconstruye utilizando aproximaciones nombradas como representación del problema y representación del programa correspondiente a cada dominio mas una estrategia de vinculación que simula ser la relación real.
+
+\begin{figure}[h] %[h] para here [b] para bottom [t] para top
+\centering
+\includegraphics[scale= 0.25]{./dom.png}
+\caption{Gráfico de Comprensión de Programas}
+\end{figure} \label{captura1}
+
+El procedimiento que se lleva cabo para armar la estrategia de vinculación implica primero tener ambas representaciones de los dominios. 
+Al elaborar estas representaciones se deben tener en cuenta conceptos muy importantes que son cimientos sobre los cuales esta sustentada la CP: la visualización de software, la extracción de información y la interconexión de dominios.
+
+\section{Visualización de Software}
+
+La visualización de software es un área de la ingeniería de software dedicada a la construcción de representaciones visuales de los sistemas. 
+
+Esta representaciones conocidas con el nombre de vistas se encargan de brindar información del sistema de estudio para ayudar la comprensión. Existen distintos tipos de vistas, en si mismo, la primer vista de un sistema es el código donde la información no esta tan clara para un desarrollador ajeno sobre todo si el software es grande y complicado. Es por eso que se necesita recurrir a otras vistas o perspectivas del sistema.
+Los sistemas de visualización (SV) de software son herramientas útiles que se encargan de analizar los distintos módulos de un programa y generar vistas, dependiendo de la información que se desea visualizar existe una vista especifica\cite{MPMR07}. Cabe recordar que la información concebida en un sistema puede ser estática o dinámica.
+
+Para la construcción de vistas se requieren un conjunto de librerías gráficas. Las librerías gráficas son programas que simplifican la elaboración de las vistas. Cada librería posee distintas características y el programador tiene la tarea de elegir cual es la librería mas adecuada para la vista que desea construir.
+
+
+Después de investigar distintos SV que actualmente existen: Myers, Price, Roman and Kenneth, Storey\cite{MBPHRU10} %tesis del mario falta!!!
+en donde se concluye que la mayoría apuntan a capturar conceptos situados solo en el dominio del programa restando importancia al dominio del problema y a la relación entre ambos dominios. Debido a esta falencia Berón propone\cite{MBPHRU10} %tesis del mario falta!!!
+SV orientados a la CP ampliando aun mas los sistemas que hoy por hoy ya existen.
+
+\section{Extracción de Información}
+
+Siguiendo con el objetivo principal que es aproximarse en la construcción de relación del dominio del problema con el dominio programa a través de representaciones esta requiere la extracción de información de ambos dominios. En la ingeniería del software existe una temática que se encarga de desarrollar técnicas y métodos para la extracción de la información en códigos de los sistemas, estas técnicas están catalogadas según el tipo de información que extraen.
+
+La información estática esta contenida en el código fuente del sistema 
+tipos, identificadores, procedimientos, y demás componentes visibles forman parte de ella. Una estrategia utilizada para extraer esta información es elaborar un analizador sintáctico que posea acciones semánticas especificas para extraer los datos deseados del código sin necesidad de ejecutar el programa. 
+
+La información dinámica se basa en elementos del programa presentes durante la ejecución del sistema. Para la extracción de este tipo de información se procede a bosquejar una técnica de instrumentación de código la cual consiste en aplicar sentencias en el código sin modificar su semántica así cuando el sistema sea ejecutado las sentencias que se insertaron retornen los elementos que se emplearon para generar la salida de la ejecución.
+
+
+requiere que el sistema sea modificado sin cambiar su semántica y luego ejecutado.
+
+
+%\section{Interconexión de dominios}
+%\section{Comentarios}
+
+
+
+%========================================================================
 \bibliographystyle{plain}%{alpha}
 \bibliography{biblo.bib}
 

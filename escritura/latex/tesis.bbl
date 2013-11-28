@@ -1,5 +1,17 @@
 \begin{thebibliography}{10}
 
+\bibitem{MBPHRU10}
+M.~Beron, P.~Henriques, and R.~Uzal.
+\newblock {\em Program Inspection to interconnect Behavioral and Operational
+  Views for Program Comprehension}.
+\newblock PhD thesis, Universidade do Minho, Braga. Portugal, 2010.
+
+\bibitem{MPMR07}
+Mario Beron, Pedro~R. Henriques, Maria~J. Varanda, and RobertoUzal.
+\newblock Program inspection to inter-connect the operational and behavioral
+  views for program comprehension.
+\newblock 2007.
+
 \bibitem{BRM10}
 Mario~M. Berón, Daniel Riesco, and Germán Montejano.
 \newblock Estrategias para facilitar la comprensión de programas.

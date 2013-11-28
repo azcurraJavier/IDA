@@ -2,6 +2,7 @@ This is BibTeX, Version 0.99c (TeX Live 2009/Debian)
 The top-level auxiliary file: tesis.aux
 The style file: plain.bst
 Database file #1: biblo.bib.bib
+Warning--empty booktitle in MPMR07
 Warning--empty booktitle in BRM10
 Warning--empty booktitle in TERD01
 Warning--empty booktitle in DWE04
@@ -13,45 +14,45 @@ Warning--empty booktitle in LFBEX07
 Warning--empty publisher in RSPMGH02
 Warning--empty booktitle in PFT02
 Warning--empty booktitle in MMFAF07
-You've used 16 entries,
+You've used 18 entries,
             2118 wiz_defined-function locations,
-            595 strings with 6712 characters,
-and the built_in function-call counts, 4796 in all, are:
-= -- 427
-> -- 239
+            605 strings with 7075 characters,
+and the built_in function-call counts, 5390 in all, are:
+= -- 480
+> -- 280
 < -- 2
-+ -- 97
-- -- 78
-* -- 283
-:= -- 804
-add.period$ -- 48
-call.type$ -- 16
-change.case$ -- 86
++ -- 113
+- -- 92
+* -- 323
+:= -- 913
+add.period$ -- 54
+call.type$ -- 18
+change.case$ -- 98
 chr.to.int$ -- 0
-cite$ -- 27
-duplicate$ -- 215
-empty$ -- 414
-format.name$ -- 78
-if$ -- 1003
+cite$ -- 30
+duplicate$ -- 237
+empty$ -- 454
+format.name$ -- 92
+if$ -- 1120
 int.to.chr$ -- 0
-int.to.str$ -- 16
-missing$ -- 17
-newline$ -- 83
-num.names$ -- 32
-pop$ -- 141
+int.to.str$ -- 18
+missing$ -- 18
+newline$ -- 93
+num.names$ -- 36
+pop$ -- 157
 preamble$ -- 1
-purify$ -- 71
+purify$ -- 82
 quote$ -- 0
-skip$ -- 131
+skip$ -- 144
 stack$ -- 0
-substring$ -- 165
-swap$ -- 32
+substring$ -- 175
+swap$ -- 34
 text.length$ -- 2
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 62
-warning$ -- 11
-while$ -- 40
-width$ -- 18
-write$ -- 157
-(There were 11 warnings)
+type$ -- 70
+warning$ -- 12
+while$ -- 44
+width$ -- 20
+write$ -- 178
+(There were 12 warnings)

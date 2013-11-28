@@ -1,6 +1,14 @@
 % This file was created with JabRef 2.7b.
 % Encoding: UTF-8
 
+@INPROCEEDINGS{MPMR07,
+  author = {Mario Beron and Pedro R. Henriques and Maria J. Varanda and RobertoUzal},
+  title = {Program Inspection to inter-connect the Operational and Behavioral
+	Views for Program Comprehension},
+  year = {2007},
+  file = {MPMR07.pdf:MPMR07.pdf:PDF}
+}
+
 @INPROCEEDINGS{BRM10,
   author = {Mario M. Berón and Daniel Riesco and Germán Montejano},
   title = {Estrategias para Facilitar la Comprensión de Programas},
@@ -68,7 +76,8 @@
 	from identifiers},
   booktitle = {In Proceedings of IASTED International Conference on Software Engineering
 	and Applications (SEA 2006},
-  year = {2006}
+  year = {2006},
+  file = {FBL06.pdf:FBL06.pdf:PDF}
 }
 
 @INPROCEEDINGS{HDD06,
