@@ -1,6 +1,15 @@
 % This file was created with JabRef 2.7b.
 % Encoding: UTF-8
 
+@PHDTHESIS{MBPHRU10,
+  author = {M. Beron and P. Henriques and R. Uzal},
+  title = {Program Inspection to interconnect Behavioral and Operational Views
+	for Program Comprehension},
+  school = {Universidade do Minho},
+  year = {2010},
+  address = {Braga. Portugal}
+}
+
 @INPROCEEDINGS{MPMR07,
   author = {Mario Beron and Pedro R. Henriques and Maria J. Varanda and RobertoUzal},
   title = {Program Inspection to inter-connect the Operational and Behavioral
@@ -26,6 +35,7 @@
 	systems},
   year = {1982},
   pages = {125--129},
+  file = {BROOK82.pdf:BROOK82.pdf:PDF},
   publisher = {ACM Press New York, NY, USA}
 }
 
@@ -121,7 +131,7 @@
 }
 
 @ARTICLE{STOREY99,
-  author = {Storey, M. A. and Fracchia, F. D. and M{\"u}ller, H. A. },
+  author = {Storey, M. A. and Fracchia, F. D. and M{\"u}ller, H. A.},
   title = {Cognitive design elements to support the construction of a mental
 	model during software exploration},
   journal = {The Journal of Systems \& Software},
@@ -129,6 +139,7 @@
   volume = {44},
   pages = {171--185},
   number = {3},
+  file = {STOREY99.pdf:STOREY99.pdf:PDF},
   publisher = {Elsevier}
 }
 
@@ -138,6 +149,13 @@
   year = {2002},
   file = {PFT02.pdf:PFT02.pdf:PDF},
   journal = {Annual International Computer Software and Applications Conference}
+}
+
+@INPROCEEDINGS{TIE89,
+  author = {Tim Tiemens},
+  title = {Cognitive Models of Program Comprehension},
+  year = {1989},
+  file = {TIE89.ps:TIE89.ps:PostScript}
 }
 
 @INPROCEEDINGS{MMFAF07,

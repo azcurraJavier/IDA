@@ -75,6 +75,11 @@ Dawn Lawrie, Henry Feild, and David Binkley.
 \newblock Extracting meaning from abbreviated identifier.
 \newblock 2007.
 
+\bibitem{MPOB03}
+Michael~P. O’Brien.
+\newblock Software comprehension – a review and research direction.
+\newblock 2003.
+
 \bibitem{RSPMGH02}
 Roger~S. Pressman.
 \newblock {\em Ingeniería del Software un enfoque práctico}.
@@ -90,6 +95,11 @@ M.~A. Storey, F.~D. Fracchia, and H.~A. M{\"u}ller.
 Pierre~F. Tiako.
 \newblock Maintenance in joint software development.
 \newblock 2002.
+
+\bibitem{TIE89}
+Tim Tiemens.
+\newblock Cognitive models of program comprehension.
+\newblock 1989.
 
 \bibitem{MMFAF07}
 Marco Torchiano and Massimiliano~Di Penta.
