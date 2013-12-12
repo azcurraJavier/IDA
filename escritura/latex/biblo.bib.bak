@@ -123,11 +123,26 @@
   isbn = {978-0-7695-2880-9}
 }
 
+@INPROCEEDINGS{MPOB03,
+  author = {Michael P. O’Brien},
+  title = {Software Comprehension – A Review and Research Direction},
+  year = {2003},
+  file = {MPOB03.pdf:MPOB03.pdf:PDF}
+}
+
 @BOOK{RSPMGH02,
   title = {Ingeniería del Software un enfoque práctico},
   year = {2002},
   author = {Roger S. Pressman},
   file = {RSPMGH02.pdf:RSPMGH02.pdf:PDF}
+}
+
+@INPROCEEDINGS{MAS05,
+  author = {Margaret Anne Storey},
+  title = {Theories, Methods and Tools in Program Comprehension: Past, Present
+	and Future.},
+  year = {2005},
+  file = {MAS05.pdf:MAS05.pdf:PDF}
 }
 
 @ARTICLE{STOREY99,

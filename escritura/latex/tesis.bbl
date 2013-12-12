@@ -91,6 +91,12 @@ M.~A. Storey, F.~D. Fracchia, and H.~A. M{\"u}ller.
   model during software exploration.
 \newblock {\em The Journal of Systems \& Software}, 44(3):171--185, 1999.
 
+\bibitem{MAS05}
+Margaret~Anne Storey.
+\newblock Theories, methods and tools in program comprehension: Past, present
+  and future.
+\newblock 2005.
+
 \bibitem{PFT02}
 Pierre~F. Tiako.
 \newblock Maintenance in joint software development.

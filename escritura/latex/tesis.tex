@@ -9,8 +9,11 @@
 \title{Análisis de Identificadores para Abstraer conceptos del Dominio del Problema}
 \author{Javier Azcurra\\\\Trabajo Final de Licenciatura en Cs. de la Computación\\\\\\Facultad de Ciencias Físico Matemáticas y Naturales\\Universidad Nacional de San Luis}
 
+%\begin{figure}[h] %[h] para here [b] para bottom [t] para top
 %\centering
 %\includegraphics[scale= 0.18]{./unsl_logo.JPG}
+%\caption{Gráfico de Comprensión de Programas}
+%\end{figure} \label{captura1}
 
 \begin{document}
 \maketitle
@@ -193,19 +196,74 @@ Esta información puede ser estrictamente relacionada con el código del program
 
 \chapter{Comprensión de Programas}
 \section{Introducción}
-La CP es un área de la Ingeniería de Software que tiene como meta primordial desarrollar métodos, técnicas y herramientas que ayuden al programador a comprender en profundidad los sistemas de software. La principal ventaja es que la CP reduce el esfuerzo y los costos en la etapas de mantenimiento y la evolución del software esto se logra abstrayendo la información contenida en el código a un nivel mas alto y de esta manera esclarecer mas su interpretación.\cite{MPMR07}
+
+En el capítulo 1 se explicaron conceptos generales sobre la problemática que posee la comprensión de programas (CP) y a que solución aproximada se puede arribar. A continuación se da una breve introducción sobre el contenido de este capítulo.
+
+La CP es un área de la Ingeniería de Software que tiene como meta primordial desarrollar métodos, técnicas y herramientas que ayuden al programador a comprender en profundidad los sistemas de software. La principal ventaja es que la CP reduce el esfuerzo y los costos en la etapas de mantenimiento y la evolución del software esto se logra abstrayendo la información contenida en el código a un nivel mas alto y de esta manera esclarecer mas su interpretación \cite{MPMR07}.
 %NECESITO HABLAR DE INGENIERIA INVERSA???
 %BUSCAR MAS MATERIAL CON DATOS ESTADISTICOS???
-Diversos estudios e investigaciones demuestran que el principal desafío esta enmarcado en vincular el dominio del problema y el dominio del programa. El primero se refiere al resultado de la ejecución del sistema, mientras que el segundo indica todos los componentes involucrados que causaron dicho resultado. En la figura 2.1 se muestra gráficamente el principal objetivo que es vincular ambos dominios. El inconveniente es que esta relación real es compleja de llevar a cabo y para facilitar la tarea se reconstruye utilizando aproximaciones nombradas como representación del problema y representación del programa correspondiente a cada dominio mas una estrategia de vinculación que simula ser la relación real.
+Diversos estudios e investigaciones demuestran que el principal desafío esta enmarcado en vincular el dominio del problema y el dominio del programa. El primero se refiere al resultado de la ejecución del sistema, mientras que el segundo indica todos los componentes involucrados que causaron dicho resultado. En la figura 2.1 se muestra gráficamente el principal objetivo que es vincular ambos dominios. El inconveniente es que esta relación real es compleja de llevar a cabo y para facilitar la tarea se reconstruye utilizando aproximaciones nombradas como representación del problema y representación del programa correspondiente a cada dominio ademas de una estrategia de vinculación que simula ser la relación real.
 
 \begin{figure}[h] %[h] para here [b] para bottom [t] para top
 \centering
-\includegraphics[scale= 0.25]{./dom.png}
+\includegraphics[scale= 0.50]{./dom.png}
 \caption{Gráfico de Comprensión de Programas}
 \end{figure} \label{captura1}
 
-El procedimiento que se lleva cabo para armar la estrategia de vinculación implica primero tener ambas representaciones de los dominios. 
-Al elaborar estas representaciones se deben tener en cuenta conceptos muy importantes que son cimientos sobre los cuales esta sustentada la CP: la visualización de software, la extracción de información y la interconexión de dominios.
+El procedimiento que se lleva cabo para armar la estrategia de vinculación implica primero tener ambas representaciones de los dominios.
+ 
+Al elaborar estas representaciones se deben tener en cuenta conceptos muy importantes que son cimientos sobre los cuales esta sustentada la CP: los modelos cognitivos, la extracción de información, la interconexión de dominios y la visualización de software. 
+Estos 4 pilares ya fueron definidos en el capitulo 1. En este capítulo se amplían mas estos conceptos y como interaccionan entre si para facilitar la CP. Al final se redacta una breve conclusión.
+
+\section{Modelos Cognitivos}
+
+
+El desarrollador de software a la hora de comprender un programa realiza un modelo mental en base a la información provista por el sistema. Luego esa información la intenta vincular con los conceptos que el propio programador posee. Si el vinculo es efectivo se logra un entendimiento acabado del sistema como así también incrementar los conocimientos del programador. 
+Lo descripto con anterioridad hace referencia a los modelos cognitivos. Estos modelos son importantes porque indican de que forma el programador comprende los sistemas y como incorpora el nuevo conocimiento (aprende nuevos conceptos). 
+
+En definitiva los modelos cognitivos facilitan la construcción de herramientas de comprensión de programas las cuales ayudan al desarrollador en el proceso de entendimiento de los sistemas.
+Los modelos cognitivos abarcan tres conceptos relevantes: \textit{Conocimiento}, \textit{modelo mental} y \textit{proceso de asimilación} (proceso de aprendizaje) \cite{MAS05}.
+
+Para empezar existen dos tipos de conocimientos:
+El conocimiento externo se entiende como un soporte externo de información que ayuda a al programador a comprender el código. Los casos mas comunes son la documentación del sistema, otros desarrolladores que conocen el dominio del problema, códigos de otros sistemas con similares características.
+Por otro lado el conocimiento interno se refiere al adquirido por el programador al momento de analizar el código del sistema de estudio.
+
+Siguiendo con los conceptos mencionados los modelos mentales son representaciones mentales que el programador elabora las cuales mapean a distintas componentes del sistema. Estas representaciones pueden ser explayadas en diagramas conocidos en el ámbito de la ingeniería del software como UML o ER.
+
+
+Actualmente los estudios indican que el desarrollador al momento de interpretar un sistema utiliza los procesos de asimilación. Estos procesos son estrategias de aprendizaje que el programador usa para llevar adelante la comprensión de un programa. Los procesos de asimilación se pueden clasificar en tres grupos: Botton-up, Top-Down y distintas combinaciones de las anteriores(híbrida)\cite{MPOB03}.
+El modelo de comprensión Botton-up indica que el código del sistema se lee en primera instancia por el desarrollador para que después mentalmente esas sentencias se simplifiquen en un modelo de alto nivel, en pocas palabras el código se abstrae.
+Por otro lado el modelo de comprensión top-down menciona que el programador use el conocimiento adquirido del dominio del problema para luego construir distintas perspectivas que mas tarde se puedan vincular con fragmentos del código fuente del sistema.
+Por ultimo el modelo híbrido que combina los dos conceptos mencionados top-down - bottom-up. Este modelo es una estrategia flexible que se adapta a los conocimientos que el programador posea.
+
+
+\section{Extracción de Información}
+
+Siguiendo con el objetivo principal que es aproximarse en la construcción de relación del dominio del problema con el dominio programa a través de representaciones esta requiere la extracción de información de ambos dominios. En la ingeniería del software existe una temática que se encarga de desarrollar técnicas y métodos para la extracción de la información en códigos de los sistemas, estas técnicas están catalogadas según el tipo de información que extraen.
+
+La extracción de información del dominio del programa es una metodología sencilla de llevar a cabo por el hecho de que su extracción esta claramente marcada. El inconveniente radica en la extracción de la información perteneciente al dominio del problema, porque esta información es sensible a las características propias de la aplicación. Para encarar este inconveniente la ingeniería del software propone tomar las fuentes de información informal las cuales pueden estar presentes en el código por ejemplo: comentarios, literales string; o fuera del mismo: documentación, entrevistas con el cliente etc. Un vez que se extraen estos componentes se les puede aplicar alguna técnica de análisis de información informal para interpretar algunas las funcionalidades de los componentes del sistema.
+
+La información estática esta contenida en el código fuente del sistema 
+tipos, identificadores, procedimientos, y demás componentes visibles forman parte del código. 
+
+Una estrategia utilizada para extraer la información estática es elaborar un analizador sintáctico que posea acciones semánticas especificas para extraer los datos deseados del código sin necesidad de ejecutar el programa. Para lograrlo se suele utilizar una herramienta automatizada que inserta estas acciones directamente en una gramática asociada a un lenguaje particular. Luego la herramienta procede a generar el parser enriquecido.
+
+Otra forma es usando grafo de funciones en donde las aristas son funciones del programa de estudio y los arcos representan la llamadas entre dos funciones. A nivel conceptual es fácil de entender pero a veces la complejidad de los sistemas impiden una ágil realización sobre todo si los bloques de código tienen una complejidad temporal y espacial con cotas elevadas.
+
+La información dinámica se basa en elementos del programa presentes durante la ejecución del sistema. Para la extracción de este tipo de información se procede a bosquejar una técnica de instrumentación de código la cual consiste en insertar sentencias en el código sin modificar su semántica, así cuando el sistema se ejecute estas sentencias que contienen acciones se van a encargar de extraer los componentes empleados que generaron la salida de la ejecución.
+La incorporación de estas sentencias debe realizarse con sumo cuidado para no alterar el flujo normal de ejecución.
+
+Hasta aquí solo se ha cumplido una parte del objetivo principal porque solo se hablo de extraer información de los dominios del problema y del programa y el mapeo de relacionar la salida del sistema con los componentes que la integran queda a manos del programador y no abundan herramientas automatizadas que logren reemplazar el esfuerzo manual que implica este paso dentro del proceso normal del desarrollo del software.
+
+\section{Estrategias de Interconexión de \\Dominios}
+
+Cuando se dice que relacionar el dominio del problema con el dominio del programa es importante ya que permite al desarrollador encontrar de forma  mas ágil componentes del software para una operación especifica. Esto impacta directamente en los tiempos dedicados a la evolución y al mantenimiento del software por el simple hecho de que se reduce la ardua tarea que tiene el programador de comprender el código.
+Sin embargo solo se podrá destacar este impacto si el software de estudio es muy amplio y complejo.
+
+Los conceptos mencionados en los puntos anteriores como la visualización de software y la instrumentación de código forman la base para armar estrategias de interrelación de dominios.
+Actualmente existen dos técnicas conocidas una de ellas es \textit{Simultaneous Visualization Strategy} SVS, se encarga de mostrar los distintos componentes de un programa en plena ejecución, mediante distintas vistas, usando un inspector de sentencias, de esta manera se obtiene una visualización cuando el sistema se está ejecutando.
+La otra estrategia se denomina \textit{Behavioral-Operational Relation Strategy} BORS, que a diferencia del SVS, espera a que termine la ejecución del sistema y luego la información recopilada por el instrumentador de código es procesada por BORS, entonces una abstracción gráfica del código ejecutado es devuelta por ejemplo como Árbol de Ejecución de Funciones. Sobre estas estructuras generadas se pueden observar de manera mas sencilla información del dominio del problema.
+Existe también a nivel conceptual una técnica que combina ambas estrategias llamada \textit{Simultaneous Visualization Strategy Improved} SVSI para lograr un mejor desempeño y solucionar problemas que manifiestan las dos primeras.\cite{BRM10,MPMR07}
 
 \section{Visualización de Software}
 
@@ -220,30 +278,6 @@ Para la construcción de vistas se requieren un conjunto de librerías gráficas
 Después de investigar distintos SV que actualmente existen: Myers, Price, Roman and Kenneth, Storey\cite{MBPHRU10} %tesis del mario falta!!!
 en donde se concluye que la mayoría apuntan a capturar conceptos situados solo en el dominio del programa restando importancia al dominio del problema y a la relación entre ambos dominios. Debido a esta falencia Berón propone\cite{MBPHRU10} %tesis del mario falta!!!
 SV orientados a la CP ampliando aun mas los sistemas que hoy por hoy ya existen.
-
-\section{Extracción de Información}
-
-%ESCRIBIR SOBRE GRAMATICA DE ATRIBUTOS
-
-Siguiendo con el objetivo principal que es aproximarse en la construcción de relación del dominio del problema con el dominio programa a través de representaciones esta requiere la extracción de información de ambos dominios. En la ingeniería del software existe una temática que se encarga de desarrollar técnicas y métodos para la extracción de la información en códigos de los sistemas, estas técnicas están catalogadas según el tipo de información que extraen.
-
-
-La información estática esta contenida en el código fuente del sistema 
-tipos, identificadores, procedimientos, y demás componentes visibles forman parte de ella. Una estrategia utilizada para extraer esta información es elaborar un analizador sintáctico que posea acciones semánticas especificas para extraer los datos deseados del código sin necesidad de ejecutar el programa. 
-
-
-La información dinámica se basa en elementos del programa presentes durante la ejecución del sistema. Para la extracción de este tipo de información se procede a bosquejar una técnica de instrumentación de código la cual consiste en insertar sentencias en el código sin modificar su semántica así cuando el sistema se ejecute estas sentencias que contienen acciones se van a encargar de extraer los componentes empleados que generaron la salida de la ejecución.
-La agregación de estas sentencias debe realizarse con sumo cuidado para no alterar el flujo normal de ejecución.
-
-\section{Estrategias de Interconexión de \\Dominios}
-
-Cuando se dice que relacionar el dominio del problema con el dominio del programa es importante ya que permite al desarrollador encontrar de forma  mas ágil componentes del software para una operación especifica. Esto impacta directamente en los tiempos dedicados a la evolución y al mantenimiento del software por el simple hecho de que se reduce la ardua tarea que tiene el programador de comprender el código.
-Sin embargo solo se podrá destacar este impacto si el software de estudio es muy amplio y complejo.
-
-Los conceptos mencionados en los puntos anteriores como la visualización de software y la instrumentación de código forman la base para armar estrategias de interrelación de dominios.
-Actualmente existen dos técnicas conocidas una de ellas es \textit{Simultaneous Visualization Strategy} SVS, se encarga de mostrar los distintos componentes de un programa en plena ejecución, mediante distintas vistas, usando un inspector de sentencias, de esta manera se obtiene una visualización cuando el sistema se está ejecutando.
-La otra estrategia se denomina \textit{Behavioral-Operational Relation Strategy} BORS, que a diferencia del SVS, espera a que termine la ejecución del sistema y luego la información recopilada por el instrumentador de código es procesada por BORS, entonces una abstracción gráfica del código ejecutado es devuelta por ejemplo como Árbol de Ejecución de Funciones. Sobre estas estructuras generadas se pueden observar de manera mas sencilla información del dominio del problema.
-Existe también a nivel conceptual una técnica que combina ambas estrategias llamada \textit{Simultaneous Visualization Strategy Improved} SVSI para lograr un mejor desempeño y solucionar problemas que manifiestan las dos primeras.\cite{BRM10,MPMR07}
  
 
 %\section{Comentarios}
