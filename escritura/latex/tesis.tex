@@ -228,7 +228,7 @@ Para empezar existen dos tipos de conocimientos:
 El conocimiento externo se entiende como un soporte externo de información que ayuda a al programador a comprender el código. Los casos mas comunes son la documentación del sistema, otros desarrolladores que conocen el dominio del problema, códigos de otros sistemas con similares características.
 Por otro lado el conocimiento interno se refiere al adquirido por el programador al momento de analizar el código del sistema de estudio.
 
-Siguiendo con los conceptos mencionados los modelos mentales son representaciones mentales que el programador elabora las cuales mapean a distintas componentes del sistema. Estas representaciones pueden ser explayadas en diagramas conocidos en el ámbito de la ingeniería del software como UML o ER.
+Siguiendo con los conceptos mencionados los modelos mentales son representaciones mentales que el programador elabora las cuales mapean a distintas componentes del sistema. Estas representaciones pueden ser explayadas en diagramas conocidos en el ámbito de la ingeniería del software como \textit{Unified Modeling Language} UML, \textit{Entity Relationship} ER entre otros.
 
 
 Actualmente los estudios indican que el desarrollador al momento de interpretar un sistema utiliza los procesos de asimilación. Estos procesos son estrategias de aprendizaje que el programador usa para llevar adelante la comprensión de un programa. Los procesos de asimilación se pueden clasificar en tres grupos: Botton-up, Top-Down y distintas combinaciones de las anteriores(híbrida)\cite{MPOB03}.
@@ -246,24 +246,31 @@ La extracción de información del dominio del programa es una metodología senc
 La información estática esta contenida en el código fuente del sistema 
 tipos, identificadores, procedimientos, y demás componentes visibles forman parte del código. 
 
-Una estrategia utilizada para extraer la información estática es elaborar un analizador sintáctico que posea acciones semánticas especificas para extraer los datos deseados del código sin necesidad de ejecutar el programa. Para lograrlo se suele utilizar una herramienta automatizada que inserta estas acciones directamente en una gramática asociada a un lenguaje particular. Luego la herramienta procede a generar el parser enriquecido.
+Una estrategia utilizada para extraer la información estática es elaborar un analizador sintáctico que posea acciones semánticas especificas para extraer los datos deseados del código sin necesidad de ejecutar el programa. Para lograrlo se suele utilizar una herramienta automatizada que lee una gramática y después genera el parser. En esta gramática asociada a un lenguaje particular se insertan acciones semánticas que formarán parte del parser generado.
 
 Otra forma es usando grafo de funciones en donde las aristas son funciones del programa de estudio y los arcos representan la llamadas entre dos funciones. A nivel conceptual es fácil de entender pero a veces la complejidad de los sistemas impiden una ágil realización sobre todo si los bloques de código tienen una complejidad temporal y espacial con cotas elevadas.
 
-La información dinámica se basa en elementos del programa presentes durante la ejecución del sistema. Para la extracción de este tipo de información se procede a bosquejar una técnica de instrumentación de código la cual consiste en insertar sentencias en el código sin modificar su semántica, así cuando el sistema se ejecute estas sentencias que contienen acciones se van a encargar de extraer los componentes empleados que generaron la salida de la ejecución.
-La incorporación de estas sentencias debe realizarse con sumo cuidado para no alterar el flujo normal de ejecución.
+La información dinámica se basa en elementos del programa presentes durante la ejecución del sistema. Para la extracción de este tipo de información se procede a bosquejar una técnica de instrumentación de código la cual consiste en insertar sentencias en el código sin modificar su semántica, así cuando el sistema se ejecute estas sentencias que contienen acciones se van a encargar de indicar que operaciones internas se llevaron a cabo para una determinada salida del programa.
+La incorporación de estas sentencias debe realizarse con sumo cuidado y de forma estratégica para no alterar el flujo normal de ejecución.
 
-Hasta aquí solo se ha cumplido una parte del objetivo principal porque solo se hablo de extraer información de los dominios del problema y del programa y el mapeo de relacionar la salida del sistema con los componentes que la integran queda a manos del programador y no abundan herramientas automatizadas que logren reemplazar el esfuerzo manual que implica este paso dentro del proceso normal del desarrollo del software.
+Hasta aquí solo se ha cumplido una parte del objetivo principal porque solo se hablo de extraer información de los dominios del problema y del programa. Desafortunadamente el mapeo que relaciona la salida del sistema con los componentes que la integran queda a manos del programador y no abundan herramientas automatizadas que simplifiquen esta tarea.
 
 \section{Estrategias de Interconexión de \\Dominios}
 
-Cuando se dice que relacionar el dominio del problema con el dominio del programa es importante ya que permite al desarrollador encontrar de forma  mas ágil componentes del software para una operación especifica. Esto impacta directamente en los tiempos dedicados a la evolución y al mantenimiento del software por el simple hecho de que se reduce la ardua tarea que tiene el programador de comprender el código.
+Cuando se dice que relacionar el dominio del problema con el dominio del programa es importante ya que permite al desarrollador encontrar de forma mas ágil componentes del software para una operación especifica. Esto impacta directamente en los tiempos dedicados a la evolución y al mantenimiento del software por el simple hecho de que se reduce la ardua tarea que tiene el programador de comprender el código.
 Sin embargo solo se podrá destacar este impacto si el software de estudio es muy amplio y complejo.
 
-Los conceptos mencionados en los puntos anteriores como la visualización de software y la instrumentación de código forman la base para armar estrategias de interrelación de dominios.
-Actualmente existen dos técnicas conocidas una de ellas es \textit{Simultaneous Visualization Strategy} SVS, se encarga de mostrar los distintos componentes de un programa en plena ejecución, mediante distintas vistas, usando un inspector de sentencias, de esta manera se obtiene una visualización cuando el sistema se está ejecutando.
-La otra estrategia se denomina \textit{Behavioral-Operational Relation Strategy} BORS, que a diferencia del SVS, espera a que termine la ejecución del sistema y luego la información recopilada por el instrumentador de código es procesada por BORS, entonces una abstracción gráfica del código ejecutado es devuelta por ejemplo como Árbol de Ejecución de Funciones. Sobre estas estructuras generadas se pueden observar de manera mas sencilla información del dominio del problema.
-Existe también a nivel conceptual una técnica que combina ambas estrategias llamada \textit{Simultaneous Visualization Strategy Improved} SVSI para lograr un mejor desempeño y solucionar problemas que manifiestan las dos primeras.\cite{BRM10,MPMR07}
+%Los conceptos mencionados en los puntos anteriores como la visualización de software y la instrumentación de código forman la base para armar estrategias de interrelación de dominios.
+
+
+Actualmente existen técnicas que conectan visualmente el dominio del problema y el dominio del programa usando la información estática y dinámica que se extrajo del sistema de estudio.
+
+Una de las técnicas conocidas es \textit{Simultaneous Visualization Strategy} SVS, se encarga de mostrar los distintos componentes de un programa en plena ejecución, mediante distintas vistas, usando un inspector de sentencias, de esta manera se obtiene una visualización cuando el sistema se está ejecutando.
+La idea es usar un esquema de instrumentación de código descripto en la sección anterior, donde las acciones semánticas le van indicando a un visualizador la traza de invocaciones a funciones durante la ejecución del sistema.
+
+La otra estrategia se denomina \textit{Behavioral-Operational Relation Strategy} BORS, que a diferencia del SVS, espera a que termine la ejecución del sistema y luego la información recopilada por el instrumentador de código es procesada por BORS, entonces una abstracción gráfica del código ejecutado es devuelta por ejemplo como Árbol de Ejecución de Funciones. De esta forma se puede vincular mas claramente los conceptos del código capturados en tiempo de ejecución con la información asociada al dominio del problema.
+
+Existe también a nivel conceptual una técnica que combina ambas estrategias mencionadas llamada \textit{Simultaneous Visualization Strategy Improved} SVSI. Esta técnica disminuye los problemas que manifiestan tanto SVS como BORS y con ello se logra un mejor desempeño en cuanto a los resultados esperados \cite{BRM10,MPMR07}.
 
 \section{Visualización de Software}
 
@@ -272,8 +279,7 @@ La visualización de software es un área de la ingeniería de software dedicada
 Esta representaciones conocidas con el nombre de vistas se encargan de brindar información del sistema de estudio para ayudar la comprensión. Existen distintos tipos de vistas, en si mismo, la primer vista de un sistema es el código donde la información no esta tan clara para un desarrollador ajeno sobre todo si el software es grande y complicado. Es por eso que se necesita recurrir a otras vistas o perspectivas del sistema.
 Los sistemas de visualización (SV) de software son herramientas útiles que se encargan de analizar los distintos módulos de un programa y generar vistas, dependiendo de la información que se desea visualizar existe una vista especifica\cite{MPMR07}. Cabe recordar que la información concebida en un sistema puede ser estática o dinámica.
 
-Para la construcción de vistas se requieren un conjunto de librerías gráficas. Las librerías gráficas son programas que simplifican la elaboración de las vistas. Cada librería posee distintas características y el programador tiene la tarea de elegir cual es la librería mas adecuada para la vista que desea construir.
-
+Para la construcción de vistas se requieren un conjunto de librerías gráficas. Dichas librerías son programas que simplifican la elaboración de las vistas las cuales poseen distintas características y el programador tiene la tarea de elegir que librería es la mas adecuada para la vista que desea construir.
 
 Después de investigar distintos SV que actualmente existen: Myers, Price, Roman and Kenneth, Storey\cite{MBPHRU10} %tesis del mario falta!!!
 en donde se concluye que la mayoría apuntan a capturar conceptos situados solo en el dominio del programa restando importancia al dominio del problema y a la relación entre ambos dominios. Debido a esta falencia Berón propone\cite{MBPHRU10} %tesis del mario falta!!!
@@ -285,15 +291,32 @@ SV orientados a la CP ampliando aun mas los sistemas que hoy por hoy ya existen.
 %CAPITULO3=============================================================
 
 
-\chapter{Análisis de Identificadores}
-\section{Identificadores: fuente semántica \\de información}
+\chapter{Análisis de Identificadores: Estado del arte}
 
-Un Identificador es una secuencia de caracteres alfanuméricos de cualquier longitud que sirve para identificar las entidades del programa (clases, funciones, variables, tipos estructurados, etc.). 
+\section{Introducción}
+
+En el capítulo anterior se introdujo en el ámbito de comprensión de programas con la definición de los conceptos mas importantes. Este capitulo se va a centrar en el estado del arte actual sobre técnicas conocidas en el análisis de ids para hacer un aporte al estudio encargado de facilitar la extracción de información estática en los códigos de los sistemas. 
+
+Un Identificador (id) es una secuencia de caracteres alfanuméricos de cualquier longitud que sirve para identificar las entidades del programa (clases, funciones, variables, tipos estructurados, etc.). 
 Cada lenguaje tiene sus propias reglas que definen como pueden estar construidos. Por lo general lenguajes como C y JAVA son inválidos los identificadores declarados que coincidan con palabras reservadas o que contengan símbolos especiales (\$,\&,\#, etc).
+
+Varios autores Feild, Binkley, Lawrie [ref] distinguen 2 formas de nombramiento de los identificadores conocidas como \textit{hardwords} y \textit{softwords}, las primeras destacan la separación de cada palabra que compone el identificador a través de una marca específica. Por ejemplo los ids: fileSystem, file\_system, fileSYSTEM marcan bien la separación de cada palabra con el uso de mayúscula, minúscula o con el guion bajo. Las segundas no poseen ningún tipo de separador por ejemplo: textinput compuesta por text-input.
+
 Los identificadores generalmente están compuestos por mas de una palabra en forma abreviada, esto se lo conoce con el nombre de acrónimos.
 
+En el área de Ingeniería del Software, existen herramientas automatizadas que permiten hacer análisis de los identificadores utilizados en los códigos de programación. Estas herramientas extraen parcialmente conceptos representados en los identificadores del código fuente para intentar interpretar lo que el programador quiso desarrollar.
 
-Tanto los nombres como las abreviaturas utilizadas dependen mucho de la idiosincrasia del programador
+Los identificadores que generalmente son abreviaciones, ocultan información relevante del domino del problema. Una manera de desplegar esta información oculta es intentar convertir las abreviaturas en palabras completas del lenguaje natural. 
+
+Se puede decir que el foco del análisis de los identificadores se basa en la traducción de palabras abreviadas a palabras completas.
+
+Tanto los nombres de los identificadores como las abreviaturas utilizadas dependen mucho de la idiosincrasia del programador y esto representa un problema para traducir su significado.
+
+La técnicas encargadas de realizar la conversión de los ids a palabras completas se dividen en dos etapas: la división de los ids y expansión de los ids [ref].
+
+%\section{Técnicas de División de Identificadores}
+%\section{Técnicas de Expansión de Identificadores}
+
 
 %========================================================================
 \bibliographystyle{plain}%{alpha}
