@@ -5,6 +5,7 @@
 \usepackage[utf8]{inputenc} % Este paquete permite poner acentos y eñes usando codificación utf-8
 \usepackage{setspace}
 \onehalfspace %para espacio y medio
+
 % Title Page
 \title{Análisis de Identificadores para Abstraer conceptos del Dominio del Problema}
 \author{Javier Azcurra\\\\Trabajo Final de Licenciatura en Cs. de la Computación\\\\\\Facultad de Ciencias Físico Matemáticas y Naturales\\Universidad Nacional de San Luis}
@@ -309,28 +310,24 @@ Las Herramientas de Comprensión son apropiadas para facilitar la comprensión d
 
 \section{Introducción}
 
-En el capítulo anterior se introdujo en el ámbito de comprensión de programas con la definición de los conceptos mas importantes. Este capitulo se va a centrar en el estado del arte actual sobre técnicas conocidas en el análisis de ids para hacer un aporte al estudio encargado de facilitar la extracción de información estática en los códigos de los sistemas. 
+En el capítulo anterior se introdujo en el ámbito de comprensión de programas con la definición de los conceptos mas importantes. Este capítulo se va a centrar en el estado del arte de técnicas sobre el análisis de identificadores (ids) las cuales carecen de implementación. Estas técnicas exhiben información estática oculta detrás de los ids, esta información es importante porque da indicios de lo que un sistema realiza en su ejecución por lo cual es un aporte en el área de Comprensión de Programas.  
 
-Un Identificador (id) es una secuencia de caracteres alfanuméricos de cualquier longitud que sirve para identificar las entidades del programa (clases, funciones, variables, tipos estructurados, etc.). 
-Cada lenguaje tiene sus propias reglas que definen como pueden estar construidos. Por lo general lenguajes como C y JAVA son inválidos los identificadores declarados que coincidan con palabras reservadas o que contengan símbolos especiales (\$,\&,\#, etc).
+Un Identificador (id) se define como una secuencia de caracteres alfanuméricos de cualquier longitud que sirve para identificar las entidades del programa (clases, funciones, variables, tipos estructurados, etc.). 
+Cada lenguaje tiene sus propias reglas que definen como pueden estar construidos. Por lo general lenguajes como C y JAVA son inválidos los ids declarados que coincidan con palabras reservadas o que contengan símbolos especiales (\$,\&,\#, etc).
 
-Varios autores Feild, Binkley, Lawrie [ref] distinguen 2 formas de nombramiento de los identificadores conocidas como \textit{hardwords} y \textit{softwords}, las primeras destacan la separación de cada palabra que compone el identificador a través de una marca específica. Por ejemplo los ids: fileSystem, file\_system, fileSYSTEM marcan bien la separación de cada palabra con el uso de mayúscula, minúscula o con el guion bajo. Las segundas no poseen ningún tipo de separador por ejemplo: textinput compuesta por text-input.
+Los autores Feild, Binkley, Lawrie [ref] distinguen 2 formas de nombramiento en los ids conocidas como \textit{hardwords} y \textit{softwords}. Los hardwords destacan la separación de cada palabra que compone el identificador a través de una marca específica; algunos ejemplos son: \textsf{fileSystem} marca bien la separación de cada palabra con el uso de mayúscula entre las minúsculas\footnote[1]{Algunos autores lo llaman camel-case a este nombramiento} o \textsf{fileSYSTEM} así también como utilizar un símbolo especial como es el caso del guion bajo \textsf{file\_system}. En cambio los softwords no poseen ningún tipo de separador o marca que de indicios de las palabras que lo componen; por ejemplo: \textsf{textinput} esta compuesta por \textsf{text} y por \textsf{input} sin tener una marca que destaque la separación.
 
-Los identificadores generalmente están compuestos por mas de una palabra en forma abreviada, esto se lo conoce con el nombre de acrónimos.
+Si bien en el párrafo anterior se dio una taxonomía de como se clasifican los ids, en los ejemplos no se refleja como normalmente se nombra un id. Generalmente los ids escritos por los programadores en los códigos están compuestos por mas de una palabra pero en forma abreviada, esto se lo conoce con el nombre de acrónimos. Para dar un ejemplo sobre esto: el id \textsf{fileSystem} normalmente los programadores lo nombran como \textsf{flSys}, \textsf{fiStm} u otras tantas posibles representaciones abreviadas.
 
-En el área de Ingeniería del Software, existen herramientas automatizadas que permiten hacer análisis de los identificadores utilizados en los códigos de programación. Estas herramientas extraen parcialmente conceptos representados en los identificadores del código fuente para intentar interpretar lo que el programador quiso desarrollar.
+La literatura que contiene sobre las estrategias de análisis de ids indican que los ids ocultan información relevante del domino del problema detrás de sus abreviaturas \cite{EHPV09,LFBEX07}. Una manera de desplegar esta información oculta es intentar convertir estas abreviaturas en palabras completas del lenguaje natural. Se puede decir entonces que el foco del análisis de los identificadores se basa en la traducción de palabras abreviadas a palabras completas.
+El proceso que se lleva a cabo para realizar la traducción consiste de dos pasos I) Dividir el id en las palabras que lo componen y II) expandir las abreviaciones que resultaron como producto del paso anterior.
 
-Los identificadores que generalmente son abreviaciones, ocultan información relevante del domino del problema. Una manera de desplegar esta información oculta es intentar convertir las abreviaturas en palabras completas del lenguaje natural. 
-
-Se puede decir que el foco del análisis de los identificadores se basa en la traducción de palabras abreviadas a palabras completas.
-
-Tanto los nombres de los identificadores como las abreviaturas utilizadas dependen mucho de la idiosincrasia del programador y esto representa un problema para traducir su significado.
-
-La técnicas encargadas de realizar la conversión de los ids a palabras completas se dividen en dos etapas: la división de los ids y expansión de los ids [ref].
-
-%\section{Técnicas de División de Identificadores}
+\section{Técnicas de División de Identificadores}
 %\section{Técnicas de Expansión de Identificadores}
 
+%Tanto los nombres de los identificadores como las abreviaturas utilizadas dependen mucho de la idiosincrasia del programador y esto representa un problema para traducir su significado.  implica un verdadero desafío para las estrategias de análisis de ids.
+
+%En el área de Ingeniería del Software, existen herramientas automatizadas que permiten hacer análisis de los identificadores utilizados en los códigos de programación. Estas herramientas extraen parcialmente conceptos representados en los identificadores del código fuente para intentar interpretar lo que el programador quiso desarrollar.
 
 %========================================================================
 \bibliographystyle{plain}%{alpha}

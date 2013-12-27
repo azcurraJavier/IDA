@@ -13,3 +13,4 @@
 \contentsline {section}{\numberline {2.6}Comentarios}{17}
 \contentsline {chapter}{\numberline {3}An\IeC {\'a}lisis de Identificadores: Estado del arte}{19}
 \contentsline {section}{\numberline {3.1}Introducci\IeC {\'o}n}{19}
+\contentsline {section}{\numberline {3.2}T\IeC {\'e}cnicas de Divisi\IeC {\'o}n de Identificadores}{20}
