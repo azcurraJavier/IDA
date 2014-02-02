@@ -3,7 +3,8 @@
 
 @PHDTHESIS{MBPHRU10,
   author = {M. Beron and P. Henriques and R. Uzal},
-  title = {kljsdhfkjsdfk},
+  title = {Inspección de Programas para Interconectar las Vistas Comportamental
+	y Operacional para la Comprensión de Programas.},
   school = {Universidade do Minho},
   year = {2010},
   address = {Braga. Portugal},
@@ -128,6 +129,15 @@
   title = {Software Comprehension – A Review and Research Direction},
   year = {2003},
   file = {MPOB03.pdf:MPOB03.pdf:PDF}
+}
+
+@INPROCEEDINGS{DFPM05,
+  author = {Pizka M, DeiBenbock F},
+  title = {Concise and consistent naming},
+  year = {2005},
+  organization = {Institut fur Informatik},
+  publisher = {Technische Universitat Munchen Boltzmannstr},
+  file = {DFPM05.pdf:DFPM05.pdf:PDF}
 }
 
 @BOOK{RSPMGH02,

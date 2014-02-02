@@ -330,34 +330,173 @@ Las Herramientas de Comprensión son apropiadas para facilitar la comprensión d
 
 \lhead[]{CAPÍTULO 3. ANÁLISIS DE IDS: ESTADO DEL ARTE}
 
-En el capítulo anterior se introdujo en el ámbito de comprensión de programas con la definición de los conceptos mas importantes. Este capítulo se va a centrar en el estado del arte de técnicas que basan su análisis en los identificadores (ids) presentes en los códigos de los programas y también de algunas herramientas que implementan estas técnicas.
+En el capítulo anterior se introdujo en el ámbito de comprensión de programas con las definiciones de los conceptos mas importantes. Este capítulo se centra en el estado del arte de técnicas que basan su análisis en los identificadores (ids) presentes en los códigos de los programas y también de algunas herramientas que implementan dichas técnicas.
 
 \section{Introducción}
 
-Los equipos de desarrollos de software frecuentemente enfocan todo su esfuerzo en el análisis, diseño, implementación y mantenimiento de los sistemas, restandole importancia a la documentación. Por lo tanto es común encontrar softwares carentes de documentación lo cual indica que la lectura de los códigos de los sistemas es la única manera de interpretarlos.
+Los equipos de desarrollos de software frecuentemente enfocan todo su esfuerzo en el análisis, diseño, implementación y mantenimiento de los sistemas, restandole importancia a la documentación. Por lo tanto es común encontrar paquetes softwares carentes de documentación lo cual indica que la lectura de los códigos de los sistemas es la única manera de interpretarlos. Es necesaria la interpretación del sistema sobre todo en grandes equipos de desarrollo por el simple hecho de que un integrante del equipo puede tomar código ajeno para continuar con su desarrollo o realizar algún tipo de mantenimiento.
 
 Los códigos de los sistemas crecen a partir de los nuevos requerimientos y el frecuente mantenimiento. Esto implica que cada vez mas los sistemas se hacen mas complejos y difíciles de entenderlos. He aquí la importancia del uso de las herramientas de comprensión, con ellas se puede lograr un entendimiento ágil y facilitar las arduas tareas de interpretación de códigos.
 
-La CP desarrolla métodos, técnicas y herramientas que facilitan al programador entender los programas.
+Como se mencionó en el capítulo anterior la CP desarrolla métodos, técnicas y herramientas que facilitan al programador entender los programas. 
 
-Una herramienta de comprensión interesante es la que se basa en el análisis de los ids. Estudios indican que aproximadamente el 70\% de los códigos de software están cargados con ids por eso su análisis no debe ser pasado por alto a la hora de interpretar un sistema.
+Las herramientas de CP interesantes de elaborar son las que basan su análisis en los ids. A continuación se describen conceptos asociados a los ids y porque su análisis es importante para comprender programas.
 
-%Estas técnicas exhiben información estática oculta detrás de los ids, esta información es importante porque da indicios de lo que un sistema realiza en su ejecución por ende es un aporte en el ámbito de Comprensión de Programas. --colocar abajo
+%merjorar enaganche
+\section{Conceptos claves}
+
+Un Identificador (id) básicamente se define como una secuencia de letras, dígitos o caracteres especiales de cualquier longitud que sirve para identificar las entidades del programa (clases, funciones, variables, tipos estructurados, etc.). 
+Cada lenguaje tiene sus propias reglas que definen como pueden estar construidos. Por lo general lenguajes como C y JAVA no esta permitido declarar ids que coincidan con palabras reservadas o que contengan símbolos especiales (\$,\&,\#, etc).
+
+Un id en un programa esta asociado a un concepto del programa. 
+
+\begin{center}
+\textsf{Identificador $\Leftrightarrow$ Concepto}
+\end{center}
+
+Se puede decir entonces que un id es un representante de un concepto ubicado en el dominio del problema \cite{DFPM05}.
+
+El la siguiente tabla se muestra un análisis léxico que se realizó sobre 2.7 millones de lineas de códigos escritos en lenguaje JAVA\texttrademark \cite{DFPM05}.\\%colocar biblo de law
+
+\begin{center}
+   \begin{tabular}{| l | c | c | c | c | }
+     \hline
+     \textsf{Tipo} & \textsf{Cantidad} & \textsf{\%} & \textsf{Caracteres} & \textsf{\%} \\ \hline
+     Palabras claves & 1321005 & 11.2 & 6367677 & 12.7 \\ \hline
+     Delimitadores & 5477822 & 46.6 & 5477822 & 11.0 \\ \hline
+     Operadores & 701607 & 6.0 & 889370 & 1.8 \\ \hline
+     Literales & 378057 & 3.2 & 1520366 & 3.0 \\ \hline          
+     \textbf{Identificadores} & 3886684 & 33.0 & \textbf{35723272} & \textbf{71.5} \\ \hline
+     \textbf{Total} & \textbf{11765175} & \textbf{100.0} & \textbf{49978507} & \textbf{100.0} \\ \hline          
+   \end{tabular}
+\end{center}
+
+Se ve claramente que mas de las dos terceras partes (71.5\%) de los caracteres en el código fuente forman parte de un id. 
+
+Por lo tanto entender el significado de los ids cumple un rol fundamental para lograr entender un programa. 
+
+Mas aun si los ids están bien nombrados se pueden descubrir los conceptos que representan en el dominio del programa mas fácilmente y de esta manera agiliza la comprensión del código, aumenta la productividad, mejora la calidad durante la etapa de mantenimiento \cite{DFPM05}. 
+
+%La buena calidad en el nombramiento de los ids abre la posibilidad de construir herramientas que ejecuten técnicas de regresión para traducir los ids a palabras conocidas
+
+%Un id en un programa esta asociado a un concepto del programa. 
+
+%\begin{center}
+%\textsf{Identificador $\Leftrightarrow$ Concepto}
+%\end{center}
+
+%Por ende la calidad en el nombramiento de los ids juega un papel importante en la CP.
+
+\section{Nombramiento de Identificadores}
+
+%Deißenbock and Pizka DFPM05
+%Intro
+%Estudios realizados indican que el buen nombramiento de los ids es importante porque ayuda a comprender los programas con mayor facilidad \cite{DFPM05}.
+Durante los desarrollos de los sistemas las reglas de nombramiento de ids se enfocan mas en el formato del código y en la documentación en lugar de enfocarse en el concepto que el id representa. Luego durante la etapa de mantenimiento del software la forma en la que los ids están nombrados no es muy tenida en cuenta para comprender el sistema.
+
+En la actualidad existen innumerables convenciones de codificación en distintos lenguajes, alguna de ellas son:
+
+\begin{itemize}
+\itemsep0em%reduce espacio
+\item En el caso de JAVA\texttrademark los nombres de los paquetes deben ser con minúscula (main.system) y las clases con mayúscula en la primer letra de cada palabra que compone el nombre (MainClass).
+
+\item En el caso de C\#\texttrademark las clases se nombran igual que JAVA\texttrademark pero los paquetes en cada nivel de nombre debe comenzar con mayúscula y resto minúscula (Main.System), etc.
+\end{itemize}
+
+Esto indica que se concentra mas en los aspectos sintácticos del id y no tanto en los aspectos semánticos en lo que respecta al nombramiento. 
+
+%Parte formal - entederla bien y escribirla
+Las investigaciones realizadas por Deissenboeck y Pizka \cite{DFPM05} a este problema parte de que cada nombre de id esta asociado a un concepto y viceversa. 
+%Mas formalmente se puede ver como una función biyectiva:
+
+\begin{center}
+\textsf{Nombre $\Leftrightarrow$ Concepto}
+\end{center} 
+
+%En este contexto se dice que se logra un nombramiento conciso y consistente de ids. 
+
+%Problema: de porque no existe un correcto nombramiento
+Otra evidencia fehaciente de la importancia en el buen nombramiento son las técnicas que se aplican para protección de código, algunas de ellas se encargan de reemplazar los nombres originales de los ids por secuencias de caracteres aleatorios 
+para reducir la comprensión, esta se conocen con el nombre de ofuscación de código \cite{DFPM05}. La ofuscación es común en los sistemas de índole comercial, en la figura \ref{captura2} se puede observar un ejemplo tomado de un caso real en donde la función \textsf{mr\_mr\_1} no parece complicada pero se desconoce la finalidad de su ejecución \cite{DFPM05}.
+
+\begin{figure}[h] %[h] para here [b] para bottom [t] para top
+\centering
+\includegraphics[scale= 0.50]{./idd_1.png}
+\caption{Trozo de Código de un Sistema Comercial}
+\label{captura2}
+\end{figure} 
 
 
-\section{Conceptos}
+Intuitivamente se concluye 	que mientras mejor nombrado estén los ids con respecto al concepto que representa, mayor es el impacto que tendrá en la interpretación del sistema \cite{DFPM05}. 
 
-Un Identificador (id) se define como una secuencia de letras, dígitos o caracteres especiales de cualquier longitud que sirve para identificar las entidades del programa (clases, funciones, variables, tipos estructurados, etc.). 
-Cada lenguaje tiene sus propias reglas que definen como pueden estar construidos. Por lo general lenguajes como C y JAVA son inválidos los ids declarados que coincidan con palabras reservadas o que contengan símbolos especiales (\$,\&,\#, etc).
+Existen tres razones destacadas que derivan al mal nombramiento de los ids:
+
+\begin{enumerate}
+\itemsep0em%reduce espacio
+\item Los ids son escogidos por los desarrolladores y eluden el análisis automático.
+
+\item Los desarrolladores tienen poco conocimiento de los nombres usados en los ids ubicados en otros sectores del código fuente.
+
+\item Durante la evolución del sistema los nombres de los ids se mantienen y no adaptan sus nombres a las nuevas funcionalidades que pueden tener.
+\end{enumerate}
+
+En este sentido el mal nombramiento de los ids se combate con la programación “menos egoísta” que consiste en hacer programas mas claros y entendibles para el futuro lector que no esta familiarizado con el mismo.
+
+En la practica es muy difícil mantener una consistencia global de nombres en los ids durante las etapas de desarrollo y mantenimiento del software, sobre todo si este es muy grande. Cada vez que un concepto se modifica el nombre del id asociado debe cambiar y adaptarse a la modificación pero esto no ocurre frecuentemente en la practica.
+
+%solucion propuesta
+
+Los autores \cite{DFPM05} proponen utilizar una herramienta que solucione los problemas de mal nombramiento planteados anteriormente, dado la dificultad que conlleva a la construcción de una herramienta totalmente automática que se encargue de nombrar los ids siguiendo la semántica del código se elaboró una solución semi-automática. La misma consiste en el uso de un diccionario junto con la interacción del programador.
+
+\begin{verse}
+\textbf{Diccionarios de Datos:} Este concepto conocido también como glosario de proyecto es recomendado por los textos orientados a la administración de proyectos de software. Con los diccionarios se describe de forma clara todos los términos usados en los grandes sistemas de software ademas proveen una referencia completa a todos los participantes de un proyecto durante todo el ciclo de vida del producto.
+\end{verse}
+\pagebreak 
+\textbf{Identifier Dictionary\\}
+
+La herramienta conocida con el nombre de identifier dictionary (IDD)\footnote[1]{http://www4.informatik.tu-muenchen.de/\~{}ccsm/idd/index.html} básicamente es un diccionario de datos que ayuda al desarrollador a mantener la consistencia de nombres de ids en un proyecto JAVA. Es una base de datos que almacena información de los ids y es de fácil interacción.
+
+\begin{figure}[h] %[h] para here [b] para bottom [t] para top
+\centering
+\includegraphics[scale= 0.50]{./idd_2.png}
+\caption{Visualización de Identifier Dictionary}
+\label{captura3}
+\end{figure} 
+
+Se implementó como extensión de la IDE Eclipse 3.1\footnote[2]{http://www.eclipse.org/jdt} consiste de tres secciones (Figura \ref{captura3}):
+
+\begin{itemize}
+\itemsep0em%reduce espacio
+\item Información de los ids en el proyecto: nombre, tipo, descripción (Indentifier pane).
+\item Ids declarados en el proyecto (Ocurrence pane).
+\item Referencias de los ids en el proyecto (Ocurrence pane).
+\end{itemize}
+
+Durante el desarrollo del proyecto la herramienta ayuda al programador a llevar un buen nombramiento en los ids: 
+
+\begin{itemize}
+\itemsep0em%reduce espacio
+\item Posee una función de refactorización que permite un renombramiento global de todas las declaraciones y ocurrencias de un id.
+\item Permite auto-completar nombres de ids sin importar el contexto de edición en el que se encuentra.
+\item Se puede visualizar la información posicionando el cursor sobre el id.
+\item Incluye advertencias (warnings) cuando se esta violando el buen nombramiento de los ids: nombres cortos, nombres ya utilizados, etc.
+\end{itemize}
+
+Internamente trabaja con un colector de ids que esta acoplado al proceso de compilación del proyecto(build proyect). Durante la compilación del proyecto se va recaudando información de los ids y al finalizar el proceso es almacenada en un archivo XML. Cabe aclarar que la descripción code los 
+
+ 
+
+%%=========Lawrie
 
 Los autores Feild, Binkley, Lawrie \cite{FBL06,HDD06} distinguen 2 formas de nombramiento en los ids conocidas como \textit{hardwords} y \textit{softwords}. Los hardwords destacan la separación de cada palabra que compone el identificador a través de una marca específica; algunos ejemplos son: \textsf{fileSystem} marca bien la separación de cada palabra con el uso de mayúscula entre las minúsculas\footnote[1]{Algunos autores lo llaman camel-case a este nombramiento} o \textsf{fileSYSTEM} así también como utilizar un símbolo especial como es el caso del guion bajo \textsf{file\_system}. En cambio los softwords no poseen ningún tipo de separador o marca que de indicios de las palabras que lo componen; por ejemplo: \textsf{textinput} esta compuesta por \textsf{text} y por \textsf{input} sin tener una marca que destaque la separación.
 
 Si bien en el párrafo anterior se dio una taxonomía de como se clasifican los ids, en los ejemplos no se refleja como normalmente se nombra un id.
 Generalmente los programadores para reducir el esfuerzo de tipeo escriben los ids en forma abreviada compuestos por mas de una palabra, esto se lo conoce con el nombre de acrónimos. Para dar un ejemplo sobre esto: el id \textsf{fileSystem} los programadores lo suelen nombran como \textsf{flSys}, \textsf{fiStm}, \textsf{fl\_sys} u otras tantas posibles representaciones abreviadas.
 
+
+%%=====================================
+
 \section{Análisis de Identificadores}
-
-
 
 La literatura que contiene sobre estrategias de análisis de ids indican que los ids ocultan información relevante del domino del problema detrás de sus abreviaturas \cite{EHPV09,LFBEX07}. Una manera de desplegar esta información oculta es intentar convertir estas abreviaturas en palabras completas del lenguaje natural. Por ende el foco del análisis de los ids se basa en la traducción de palabras abreviadas a palabras completas.
 
@@ -365,13 +504,16 @@ El proceso que se lleva a cabo para realizar la traducción consiste de dos paso
 
 II) Expandir las abreviaciones que resultaron como producto del paso anterior (Ejemplo: \textsf{fl-sys} $\Rightarrow$ \textsf{file system}).
 
-Tanto los nombres de los ids como las abreviaturas utilizadas dependen mucho de la idiosincrasia del programador y esto representa un verdadero desafío para las estrategias de análisis de ids.
+Tanto los nombres de los ids como las abreviaturas utilizadas en ellos dependen mucho de la idiosincrasia del programador y esto representa un verdadero desafío para las estrategias de análisis de ids.
 
+Con este estudio se puede observar que los ids son una fuente importante de información, por eso elaborar técnicas que analicen ids es un aporte destacado para la CP.
 
 %\section{Técnicas de División de Identificadores}
 %\section{Técnicas de Expansión de Identificadores}
 
 %En el área de Ingeniería del Software, existen herramientas automatizadas que permiten hacer análisis de los identificadores utilizados en los códigos de programación. Estas herramientas extraen parcialmente conceptos representados en los identificadores del código fuente para intentar interpretar lo que el programador quiso desarrollar.
+
+%Estas técnicas exhiben información estática oculta detrás de los ids, esta información es importante porque da indicios de lo que un sistema realiza en su ejecución por ende es un aporte en el ámbito de Comprensión de Programas. --colocar abajo
 
 %========================================================================
 \bibliographystyle{plain}%{alpha}
