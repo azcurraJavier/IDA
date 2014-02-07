@@ -444,9 +444,14 @@ En este sentido el mal nombramiento de los ids se combate con la programación �
 
 En la practica es muy difícil mantener una consistencia global de nombres en los ids durante las etapas de desarrollo y mantenimiento del software, sobre todo si este es muy grande. Cada vez que un concepto se modifica el nombre del id asociado debe cambiar y adaptarse a la modificación pero esto no ocurre frecuentemente en la practica.
 
+%sinonimos y homonimos
+
+Otra amenaza que atenta contra las “buenas constumbres” de nombramiento en los ids son conocidas en el lenguaje natural con el nombre de sinónimos y homónimos. Cabe recordar que para mantener una consistencia de nombres en los ids, para cada id debe existir si y solo si un concepto. Los homónimos son palabras que pueden tener mas de un significado por ende el concepto al que esta asociado no esta muy claro (Ej: un id con el nombre `file' generalmente se asocia al concepto de archivo pero puede que se refiera a una estructura o a una fila de una tabla). Por otro lado los sinónimos indican que para un mismo concepto pueden tener asociados diferentes nombres (Ej: un id con el nombre `accountNumber' y otro `account' hacen referencia al mismo concepto numero de cuenta bancaria). Esta demostrado que los códigos con mucha presencia de estos casos mencionados hacen que se dificulte identificar con claridad los conceptos en el código y por ende aumenta los esfuerzos de comprensión.
+
+
 %solucion propuesta
 
-Los autores \cite{DFPM05} proponen utilizar una herramienta que solucione los problemas de mal nombramiento planteados anteriormente, dado la dificultad que conlleva a la construcción de una herramienta totalmente automática que se encargue de nombrar los ids siguiendo la semántica del código se elaboró una solución semi-automática. La misma consiste en el uso de un diccionario junto con la interacción del programador.
+Los autores \cite{DFPM05} proponen utilizar una herramienta que solucione los problemas de mal nombramiento planteados anteriormente, dado la dificultad que conlleva a la construcción de una herramienta totalmente automática que se encargue de nombrar correctamente los ids se elaboró una solución semi-automática. La misma consiste en el uso de un diccionario junto con la interacción del programador.
 
 \begin{verse}
 \textbf{Diccionarios de Datos:} Este concepto conocido también como glosario de proyecto es recomendado por los textos orientados a la administración de proyectos de software. Con los diccionarios se describe de forma clara todos los términos usados en los grandes sistemas de software ademas proveen una referencia completa a todos los participantes de un proyecto durante todo el ciclo de vida del producto.
@@ -454,7 +459,9 @@ Los autores \cite{DFPM05} proponen utilizar una herramienta que solucione los pr
 \pagebreak 
 \textbf{Identifier Dictionary\\}
 
-La herramienta conocida con el nombre de identifier dictionary (IDD)\footnote[1]{http://www4.informatik.tu-muenchen.de/\~{}ccsm/idd/index.html} básicamente es un diccionario de datos que ayuda al desarrollador a mantener la consistencia de nombres de ids en un proyecto JAVA. Es una base de datos que almacena información de los ids y es de fácil interacción.
+La herramienta conocida con el nombre de identifier dictionary (IDD)\footnote[1]{http://www4.informatik.tu-muenchen.de/\~{}ccsm/idd/index.html} básicamente actúa como un diccionario de datos que ayuda al desarrollador a mantener la consistencia de nombres en los ids de un proyecto JAVA. Es una base de datos que almacena información de los ids tales como el nombre, el tipo del objeto que identifica y una descripción comprensiva.
+
+Ayuda a reducir la creación de nombres sinónimos y ayuda a escoger un nombre adecuado para los ids siguiendo el patrón de nombres existentes. Aumenta la velocidad de comprensión del código en base a las descripciones de cada id. El equipo encargado de tareas de mantenimiento localiza un componente del domino del problema y luego su correspondiente id de manera ágil. Otro aporte que hace la herramienta es asegurar la calidad de los nombres de los ids con un esfuerzo moderado usando como ayuda la descripción comprensiva.
 
 \begin{figure}[h] %[h] para here [b] para bottom [t] para top
 \centering
@@ -463,37 +470,92 @@ La herramienta conocida con el nombre de identifier dictionary (IDD)\footnote[1]
 \label{captura3}
 \end{figure} 
 
-Se implementó como extensión de la IDE Eclipse 3.1\footnote[2]{http://www.eclipse.org/jdt} consiste de tres secciones (Figura \ref{captura3}):
+Se implementó como extensión de la IDE Eclipse 3.1\footnote[2]{http://www.eclipse.org/jdt}. Se visualiza en el panel de las vistas de la IDE y consiste de tres secciones (Figura \ref{captura3}):
 
 \begin{itemize}
 \itemsep0em%reduce espacio
-\item Información de los ids en el proyecto: nombre, tipo, descripción (Indentifier pane).
-\item Ids declarados en el proyecto (Ocurrence pane).
-\item Referencias de los ids en el proyecto (Ocurrence pane).
+\item Tabla con información de los ids en el proyecto: nombre, tipo, descripción, cantidad de declaraciones y cantidad de referencias. (Indentifier pane).
+\item Lista de Ids declarados en el proyecto (Ocurrence pane).
+\item Lista de referencias de los ids en el proyecto (Ocurrence pane).
 \end{itemize}
 
-Durante el desarrollo del proyecto la herramienta ayuda al programador a llevar un buen nombramiento en los ids: 
+Mientras se realiza el desarrollo del código la herramienta ayuda al programador a llevar un buen nombramiento en los ids a través de las siguientes características: 
 
-\begin{itemize}
-\itemsep0em%reduce espacio
-\item Posee una función de refactorización que permite un renombramiento global de todas las declaraciones y ocurrencias de un id.
-\item Permite auto-completar nombres de ids sin importar el contexto de edición en el que se encuentra.
-\item Se puede visualizar la información posicionando el cursor sobre el id.
-\item Incluye advertencias (warnings) cuando se esta violando el buen nombramiento de los ids: nombres cortos, nombres ya utilizados, etc.
-\end{itemize}
+\begin{figure}[h] %[h] para here [b] para bottom [t] para top
+\centering
+\includegraphics[scale= 0.46]{./idd_3.png}
+\caption{Visualización de Identifier Dictionary}
+\label{captura4}
+\end{figure} 
 
-Internamente trabaja con un colector de ids que esta acoplado al proceso de compilación del proyecto(build proyect). Durante la compilación del proyecto se va recaudando información de los ids y al finalizar el proceso es almacenada en un archivo XML. Cabe aclarar que la descripción code los 
 
- 
+\textbf{Navegación en el código fuente:} Si se selecciona un id en la tabla de ids (izquierda), la parte derecha mostrará las declaraciones y las referencias de ese id mostrando en las columnas de la derecha la ubicación exacta en donde se encuentra cada declaración y referencia.(Figura \ref{captura4}).
+
+
+%\begin{figure}[h] %[h] para here [b] para bottom [t] para top
+%\centering
+%\includegraphics[scale= 0.55]{./idd_4.png}
+%\caption{Visualización de Identifier Dictionary}
+%\label{captura5}
+%\end{figure}
+%
+%\textbf{Guardar descripción:} Botón derecho en el panel de ids y luego en edit. Permite agregar una descripción comprensiva (Figura \ref{captura5}).
+
+%\begin{figure}[h] %[h] para here [b] para bottom [t] para top
+%\centering
+%\includegraphics[scale= 0.55]{./idd_5.png}
+%\caption{Visualización de Identifier Dictionary}
+%\label{captura6}
+%\end{figure}
+
+\textbf{Advertencias (warnings):} Mientras se realiza la colecta de ids los iconos de advertencia indican potenciales problemas en el nombramiento.  Los dos tipos de mensajes que se muestran son: dos ids con el mismo nombre pero distinto tipos y el id es declarado pero no referenciado.
+
+
+%\begin{figure}[h] %[h] para here [b] para bottom [t] para top
+%\centering
+%\includegraphics[scale= 0.55]{./idd_6.png}
+%\caption{Visualización de Identifier Dictionary}
+%\label{captura7}
+%\end{figure}
+
+\begin{figure}[h] %[h] para here [b] para bottom [t] para top
+\centering
+\includegraphics[scale= 0.70]{./idd_7.png}
+\caption{Visualización de Identifier Dictionary}
+\label{captura8}
+\end{figure}
+
+\textbf{Mensajes pop-up:} Se puede visualizar la información posicionando el cursor sobre el id en el código fuente mientra se esta programando (Figura \ref{captura8}).
+
+\textbf{Auto-completar nombres:} Las IDE actuales proveen la función de auto-completar. Sin embargo esta funcionalidad falla cuando los nombres de los ids no están declarados dentro del alcance actual de edición. Idd no tiene en cuenta el alcance desde el lugar que se esta editando, ademas de considerar el nombre del id también considera el tipo al momento de auto-completar.
+
+%\begin{figure}[h] %[h] para here [b] para bottom [t] para top
+%\centering
+%\includegraphics[scale= 0.55]{./idd_8.png}
+%\caption{Visualización de Identifier Dictionary}
+%\label{captura9}
+%\end{figure}
+
+\textbf{Renombre global de ids:} Esta función permite renombrar cualquier id generando una vista previa y validando el nombre de los ids a medida que sistema va evolucionando. De esta forma se preserva la consistencia de nombres.
+
+La herramienta idd trabaja internamente con un colector de ids que esta acoplado al proceso de compilación del proyecto(build proyect) de Eclipse. Los ids se van recaudando a medida que el programa se va compilando. Los nombres, el tipo, la descripción se van guardando en un archivo XML. También con la herramienta idd puede exportar un archivo en formato HTML. Este formato permite una lectura clara de los ids con toda información asociada \cite{DFPM05}. 
+
+
 
 %%=========Lawrie
-
+\pagebreak 
 Los autores Feild, Binkley, Lawrie \cite{FBL06,HDD06} distinguen 2 formas de nombramiento en los ids conocidas como \textit{hardwords} y \textit{softwords}. Los hardwords destacan la separación de cada palabra que compone el identificador a través de una marca específica; algunos ejemplos son: \textsf{fileSystem} marca bien la separación de cada palabra con el uso de mayúscula entre las minúsculas\footnote[1]{Algunos autores lo llaman camel-case a este nombramiento} o \textsf{fileSYSTEM} así también como utilizar un símbolo especial como es el caso del guion bajo \textsf{file\_system}. En cambio los softwords no poseen ningún tipo de separador o marca que de indicios de las palabras que lo componen; por ejemplo: \textsf{textinput} esta compuesta por \textsf{text} y por \textsf{input} sin tener una marca que destaque la separación.
 
 Si bien en el párrafo anterior se dio una taxonomía de como se clasifican los ids, en los ejemplos no se refleja como normalmente se nombra un id.
 Generalmente los programadores para reducir el esfuerzo de tipeo escriben los ids en forma abreviada compuestos por mas de una palabra, esto se lo conoce con el nombre de acrónimos. Para dar un ejemplo sobre esto: el id \textsf{fileSystem} los programadores lo suelen nombran como \textsf{flSys}, \textsf{fiStm}, \textsf{fl\_sys} u otras tantas posibles representaciones abreviadas.
 
 
+
+
+
+
+
+ 
 %%=====================================
 
 \section{Análisis de Identificadores}
@@ -504,9 +566,41 @@ El proceso que se lleva a cabo para realizar la traducción consiste de dos paso
 
 II) Expandir las abreviaciones que resultaron como producto del paso anterior (Ejemplo: \textsf{fl-sys} $\Rightarrow$ \textsf{file system}).
 
-Tanto los nombres de los ids como las abreviaturas utilizadas en ellos dependen mucho de la idiosincrasia del programador y esto representa un verdadero desafío para las estrategias de análisis de ids.
+Tanto los nombres de los ids como las abreviaturas utilizadas en ellos dependen mucho de la idiosincrasia del programador y esto representa un verdadero desafío para las herramientas de análisis de ids.
 
-Con este estudio se puede observar que los ids son una fuente importante de información, por eso elaborar técnicas que analicen ids es un aporte destacado para la CP.
+
+\pagebreak 
+\textbf{Identifier Restructuring tool\\}
+
+\begin{figure}[h] %[h] para here [b] para bottom [t] para top
+\centering
+\includegraphics[scale= 0.80]{./ire_1.png}
+\caption{Etapas de Restructuring tool}
+\label{ire1}
+\end{figure}
+
+La herramienta restructuring tool se encarga de recibir como entrada un código fuente escrito en lenguaje C y luego a través de un proceso de transformación cada nombramiento de los id se expande a palabras completas, retornando de esta manera el mismo código pero con los ids reestructurados.
+El código fuente se convierte de esta manera en un código mas entendible y mejora la comprensión. El proceso consta de tres etapas (Figura \ref{ire1}): 
+
+\begin{itemize}
+\itemsep0em%reduce espacio
+\item \textbf{Identifier Extractor:} Recupera una lista con los nombres de los ids presentes en el código. Este modulo se programó con un parser modificado de C que reconoce los ids y los extrae.
+\item \textbf{Identifier Restructurer:} Genera una asociación entre el nombramiento actual del id y un nombramiento estándar mas claro. El primer paso consiste en segmentar el id en las palabras que lo constituyen, después cada palabra debe pertenecer a un diccionario de palabras estándar (estándar léxico) finalmente la secuencia de palabras en los ids deben coincidir con reglas predefinidas por una gramática (estándar sintáctico).
+\item \textbf{Identifier Replacer:} Transforma el código original en el nuevo código usando las asociaciones que se construyeron en la etapa anterior. Se usa un scanner léxico para evitar reemplazar posibles nombres de ids contenidos en literales y en comentarios.
+\end{itemize}
+
+Los pasos 1 y 3 están totalmente automatizados. Sin embargo no sucede lo mismo con el paso 2 porque se necesita la intervención del programador para lograr una expansión adecuada de nombres. A continuación se detalla el paso 2 que es el mas importante de esta herramienta.
+
+\begin{figure}[h] %[h] para here [b] para bottom [t] para top
+\centering
+\includegraphics[scale= 0.73]{./ire_2.png}
+\caption{Visualización de Restructuring tool}
+\label{ire2}
+\end{figure}
+
+
+
+%Con este estudio se puede observar que los ids son una fuente importante de información, por eso elaborar técnicas que analicen ids es un aporte destacado para la CP.
 
 %\section{Técnicas de División de Identificadores}
 %\section{Técnicas de Expansión de Identificadores}
