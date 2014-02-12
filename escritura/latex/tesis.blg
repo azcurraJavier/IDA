@@ -4,6 +4,8 @@ The style file: plain.bst
 Database file #1: biblo.bib.bib
 Warning--empty booktitle in MPMR07
 Warning--empty booktitle in BRM10
+Warning--empty booktitle in BCPT99
+Warning--empty booktitle in BCPT00
 Warning--empty booktitle in TERD01
 Warning--empty booktitle in DWE04
 Warning--empty booktitle in EHPV09
@@ -18,45 +20,45 @@ Warning--empty booktitle in MAS05
 Warning--empty booktitle in PFT02
 Warning--empty booktitle in TIE89
 Warning--empty booktitle in MMFAF07
-You've used 22 entries,
+You've used 24 entries,
             2118 wiz_defined-function locations,
-            626 strings with 7501 characters,
-and the built_in function-call counts, 6312 in all, are:
-= -- 559
-> -- 308
+            635 strings with 7681 characters,
+and the built_in function-call counts, 6852 in all, are:
+= -- 607
+> -- 334
 < -- 2
-+ -- 125
-- -- 100
-* -- 357
-:= -- 1067
-add.period$ -- 66
-call.type$ -- 22
-change.case$ -- 114
++ -- 135
+- -- 108
+* -- 383
+:= -- 1157
+add.period$ -- 72
+call.type$ -- 24
+change.case$ -- 124
 chr.to.int$ -- 0
-cite$ -- 38
-duplicate$ -- 289
-empty$ -- 558
-format.name$ -- 100
-if$ -- 1319
+cite$ -- 42
+duplicate$ -- 315
+empty$ -- 610
+format.name$ -- 108
+if$ -- 1435
 int.to.chr$ -- 0
-int.to.str$ -- 22
-missing$ -- 22
-newline$ -- 113
-num.names$ -- 44
-pop$ -- 192
+int.to.str$ -- 24
+missing$ -- 24
+newline$ -- 123
+num.names$ -- 48
+pop$ -- 212
 preamble$ -- 1
-purify$ -- 94
+purify$ -- 102
 quote$ -- 0
-skip$ -- 171
+skip$ -- 185
 stack$ -- 0
-substring$ -- 195
-swap$ -- 38
+substring$ -- 205
+swap$ -- 40
 text.length$ -- 2
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 86
-warning$ -- 16
-while$ -- 52
-width$ -- 24
-write$ -- 216
-(There were 16 warnings)
+type$ -- 94
+warning$ -- 18
+while$ -- 56
+width$ -- 26
+write$ -- 236
+(There were 18 warnings)
