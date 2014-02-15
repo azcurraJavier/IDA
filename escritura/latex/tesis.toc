@@ -14,7 +14,7 @@
 \contentsline {chapter}{\numberline {3}An\IeC {\'a}lisis de Identificadores: Estado del Arte}{20}
 \contentsline {section}{\numberline {3.1}Introducci\IeC {\'o}n}{20}
 \contentsline {section}{\numberline {3.2}Conceptos claves}{22}
-\contentsline {section}{\numberline {3.3}Nombramiento de Identificadores}{22}
+\contentsline {section}{\numberline {3.3}Nombramiento de Identificadores}{23}
 \contentsline {subsection}{\numberline {3.3.1}Identifier Dictionary}{27}
-\contentsline {section}{\numberline {3.4}An\IeC {\'a}lisis de Identificadores}{29}
+\contentsline {section}{\numberline {3.4}An\IeC {\'a}lisis de Identificadores}{30}
 \contentsline {subsection}{\numberline {3.4.1}Identifier Restructuring Tool}{31}

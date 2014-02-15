@@ -452,7 +452,8 @@ Los autores Deissenboeck y Pizka\cite{DFPM05} proponen utilizar una herramienta 
 \textbf{Diccionarios de Datos:} Este concepto conocido también como `glosario de proyecto' se recomienda en los textos orientados a la administración de proyectos de software. Con los diccionarios se describe en forma clara todos los términos utilizados en los grandes sistemas de software y con esto se brinda una referencia completa a todos los participantes de un proyecto durante todo el ciclo de vida del producto.
 \end{verse}
 
-A continuación se describe una herramienta que ayuda al buen nombramiento de ids y mantiene la consistencia de nombres.
+A continuación se da a conocer una herramienta
+
 
 \begin{figure}[h] %[h] para here [b] para bottom [t] para top
 \centering
