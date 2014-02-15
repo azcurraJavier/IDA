@@ -7,7 +7,7 @@
 \onehalfspace %para espacio y medio
 
 \usepackage{fancyhdr} %encabezado y pie de pag
-
+\usepackage{framed} %recuadros de texto
 % Title Page
 \title{Análisis de Identificadores para Abstraer conceptos del Dominio del Problema}
 \author{Javier Azcurra\\\\Trabajo Final de Licenciatura en Cs. de la Computación\\\\\\Facultad de Ciencias Físico Matemáticas y Naturales\\Universidad Nacional de San Luis}
@@ -336,13 +336,12 @@ En el capítulo anterior se introdujo en el ámbito de comprensión de programas
 
 Los equipos de desarrollos de software frecuentemente enfocan todo su esfuerzo en el análisis, diseño, implementación y mantenimiento de los sistemas, restandole importancia a la documentación. Por lo tanto es común encontrar paquetes softwares carentes de documentación lo cual indica que la lectura de los códigos de los sistemas es la única manera de interpretarlos. Es necesaria la interpretación del sistema sobre todo en grandes equipos de desarrollo por el simple hecho de que un integrante del equipo puede tomar código ajeno para continuar con su desarrollo o realizar algún tipo de mantenimiento (Ver capítulo 2).
 
-Por lo tanto los códigos de los sistemas crecen a partir de los nuevos requerimientos y el frecuente mantenimiento. Esto implica que cada vez mas los sistemas se hacen mas complejos y difíciles de entenderlos. He aquí la importancia del uso de las herramientas de comprensión, con ellas se puede lograr un entendimiento ágil y facilitar las arduas tareas de interpretación de códigos.
+Como los códigos de los sistemas crecen a partir de los nuevos requerimientos y el frecuente mantenimiento, esto implica que cada vez mas los sistemas se hacen mas complejos y difíciles de entenderlos. He aquí la importancia del uso de las herramientas de comprensión, con ellas se puede lograr un entendimiento ágil y facilitar las arduas tareas de interpretación de códigos.
 
-Como se mencionó en el capítulo anterior la CP desarrolla métodos, técnicas y herramientas que facilitan al programador entender los programas. 
+Como se mencionó en el capítulo anterior la CP desarrolla métodos, técnicas y herramientas que facilitan al programador entender los programas.
+Construir herramientas de CP que se encargan de analizar ids en los códigos fuentes de los programas es una tarea importante de llevar a cabo. 
 
-Construir herramientas de CP que se encargan de analizar ids en los códigos fuentes de los programas son importantes de llevar a cabo. 
-
-El la siguiente tabla se muestra un análisis léxico que se realizó sobre 2.7 millones de lineas de códigos escritos en lenguaje JAVA\texttrademark \cite{DFPM05}.\\%colocar biblo de law
+El la siguiente tabla se muestra un análisis léxico que se realizó sobre 2.7 millones de lineas de códigos escritos en lenguaje JAVA\texttrademark \cite{DFPM05,DMDJ13}.\\
 
 \begin{center}
    \begin{tabular}{| l | c | c | c | c | }
@@ -359,7 +358,7 @@ El la siguiente tabla se muestra un análisis léxico que se realizó sobre 2.7 
 
 Se ve claramente que mas de las dos terceras partes (71.5\%) de los caracteres en el código fuente forman parte de un id. 
 
-Por ende en el ámbito de CP los ids son una fuente importante de información que el futuro lector del código o encargado de mantenimiento debe tener en cuenta. 
+Por ende en el ámbito de CP los ids son una fuente importante de información que el futuro lector del código o encargado de mantenimiento debe tener en cuenta. Utilizar una herramienta que analice los ids dando a conocer su significado ayuda a revelar esta información.
 
 \section{Conceptos claves}
 
@@ -374,7 +373,13 @@ Un id en un programa esta asociado a un concepto del programa.
 
 Se puede decir entonces que un id es un representante de un concepto ubicado en el dominio del problema \cite{DFPM05}.
 
-Por lo tanto si los ids están bien nombrados se pueden descubrir los conceptos que representan en el dominio del programa mas fácilmente y de esta manera agiliza la comprensión del código, aumenta la productividad, mejora la calidad durante la etapa de mantenimiento \cite{DFPM05}.
+Otro concepto importante es la consistencia de nombres en los ids dentro de un sistema:
+
+\begin{verse}
+\textbf{Consistencia de nombres:} Para cada id debe tener asociado si y solo si solo un concepto.
+\end{verse}
+
+Por lo tanto si los ids están bien nombrados y la consistencia esta presente se pueden descubrir los conceptos que representan en el dominio del programa mas fácilmente y de esta manera agiliza la comprensión del código, aumenta la productividad, mejora la calidad durante la etapa de mantenimiento \cite{DFPM05}.
 
 En la siguiente sección se menciona como el nombramiento de los ids impacta enormemente en la lectura comprensiva del código fuente. 
 
@@ -384,13 +389,13 @@ En la siguiente sección se menciona como el nombramiento de los ids impacta eno
 %Intro
 Durante los desarrollos de los sistemas, las reglas de nombramiento de ids se enfocan más en el formato del código y en la documentación en lugar de enfocarse en el concepto que el id representa. Luego durante la etapa de mantenimiento del software la forma en la que los ids están nombrados no es muy tenida en cuenta para comprender el sistema.
 
-En la actualidad existen innumerables convenciones de codificación en distintos lenguajes, alguna de ellas son:
+En la actualidad existen innumerables convenciones en cuanto al nombramiento de los ids, alguna de ellas son:
 
 \begin{itemize}
 \itemsep0em%reduce espacio
 \item En el caso de JAVA\texttrademark los nombres de los paquetes deben ser con minúscula (main.system) y las clases con mayúscula en la primer letra de cada palabra que compone el nombre (MainClass).
 
-\item En el caso de C\#\texttrademark las clases se nombran igual que JAVA\texttrademark pero los paquetes en cada nivel de nombre debe comenzar con mayúscula y resto minúscula (Main.System), etc.
+\item En el caso de C\#\texttrademark las clases se nombran igual que JAVA\texttrademark pero los paquetes en cada nivel de nombre debe comenzar con mayúscula y resto minúscula (Main.System).
 \end{itemize}
 
 Esto indica que se concentra mas en los aspectos sintácticos del id y no tanto en los aspectos semánticos en lo que respecta al nombramiento. 
@@ -405,20 +410,24 @@ Esto indica que se concentra mas en los aspectos sintácticos del id y no tanto 
 %En este contexto se dice que se logra un nombramiento conciso y consistente de ids. 
 
 %Problema: de porque no existe un correcto nombramiento
-Otra evidencia fehaciente de la importancia en el buen nombramiento son las técnicas que se aplican para protección de código, algunas de ellas se encargan de reemplazar los nombres originales de los ids por secuencias de caracteres aleatorios 
-para reducir la comprensión, esta se conocen con el nombre de ofuscación de código \cite{DFPM05}. La ofuscación es común en los sistemas de índole comercial, en la figura \ref{captura2} se puede observar un ejemplo tomado de un caso real en donde la función \textsf{mr\_mr\_1} no parece complicada pero se desconoce la finalidad de su ejecución \cite{DFPM05}.
+Una evidencia fehaciente de la importancia en el buen nombramiento son las técnicas que se aplican para protección de código, algunas de ellas se encargan de reemplazar los nombres originales de los ids por secuencias de caracteres aleatorios 
+para reducir la comprensión, esta se conocen con el nombre de ofuscación de código. La ofuscación es común en los sistemas de índole comercial, en la figura \ref{captura2} se puede observar un ejemplo tomado de un caso real en donde la función \textsf{mr\_mr\_1} no parece complicada pero se desconoce la finalidad de su ejecución\cite{DFPM05}.
 
 \begin{figure}[t] %[h] para here [b] para bottom [t] para top
 \centering
 \includegraphics[scale= 0.70]{./idd_1.png}
 \caption{Trozo de Código de un Sistema Comercial}
 \label{captura2}
-\end{figure} 
+\end{figure}
 
+Los autores Feild, Binkley, Lawrie \cite{FBL06,HDD06,EMSE12} distinguen 2 formas de nombramiento en los ids conocidas como \textit{hardwords} y \textit{softwords}. Los hardwords destacan la separación de cada palabra que compone el identificador a través de una marca específica; algunos ejemplos son: \textsf{fileSystem} marca bien la separación de cada palabra con el uso de mayúscula entre las minúsculas\footnote[1]{Algunos autores lo llaman camel-case a este nombramiento} o \textsf{fileSYSTEM} así también como utilizar un símbolo especial como es el caso del guion bajo \textsf{file\_system}. En cambio los softwords no poseen ningún tipo de separador o marca que de indicios de las palabras que lo componen; por ejemplo: \textsf{textinput} esta compuesta por \textsf{text} y por \textsf{input} sin tener una marca que destaque la separación.
 
-Intuitivamente se concluye 	que mientras mejor nombrado estén los ids con respecto al concepto que representa, mayor es el impacto que tendrá en la interpretación del sistema \cite{DFPM05}. 
+Si bien en el párrafo anterior se dio una taxonomía de como se clasifican los ids, en los ejemplos no se refleja como normalmente se nombra un id.
+Generalmente los programadores para reducir el esfuerzo de tipeo escriben los ids en forma abreviada compuestos por mas de una palabra, esto se lo conoce con el nombre de acrónimos. Para dar un ejemplo sobre esto: el id \textsf{fileSystem} los programadores lo suelen nombran como \textsf{flSys}, \textsf{fiStm}, \textsf{fl\_sys} u otras tantas posibles representaciones abreviadas.
 
-Existen tres razones destacadas que derivan al mal nombramiento de los ids:
+Intuitivamente se concluye 	que mientras mejor nombrado estén los ids con respecto al concepto que representa, mayor es el impacto que tendrá en la interpretación del sistema\cite{DFPM05}. 
+
+Existen tres razones destacadas que conllevan al mal nombramiento:
 
 \begin{enumerate}
 \itemsep0em%reduce espacio
@@ -435,14 +444,13 @@ En la practica es muy difícil mantener una consistencia global de nombres en lo
 
 %sinonimos y homonimos
 
-Otra amenaza que atenta contra las “buenas constumbres” de nombramiento en los ids son conocidas en el lenguaje natural con el nombre de sinónimos y homónimos. Cabe recordar que para mantener una consistencia de nombres en los ids, para cada id debe existir si y solo si un concepto. Los homónimos son palabras que pueden tener mas de un significado por ende el concepto al que esta asociado no esta muy claro (Ej: un id con el nombre `file' generalmente se asocia al concepto de archivo pero puede que se refiera a una estructura o a una fila de una tabla). Por otro lado los sinónimos indican que para un mismo concepto pueden tener asociados diferentes nombres (Ej: un id con el nombre `accountNumber' y otro `account' hacen referencia al mismo concepto numero de cuenta bancaria). Esta demostrado que los códigos con mucha presencia de estos casos mencionados hacen que se dificulte identificar con claridad los conceptos en el código y por ende aumenta los esfuerzos de comprensión.
-
+Otra amenaza que atenta contra las “buenas constumbres” de nombramiento en los ids son conocidas en el lenguaje natural con el nombre de sinónimos y homónimos. Cabe recordar que para mantener una consistencia de nombres en los ids, para cada id debe existir si y solo si un concepto. Los homónimos son palabras que pueden tener mas de un significado por ende el concepto al que esta asociado no esta muy claro (Ej: un id con el nombre `file' generalmente se asocia al concepto de archivo pero puede que se refiera a una estructura o a una fila de una tabla). Por otro lado los sinónimos indican que para un mismo concepto pueden tener asociados diferentes nombres (Ej: un id con el nombre `accountNumber' y otro `account' hacen referencia al mismo concepto `numero de cuenta bancaria'). Esta demostrado que los códigos con mucha presencia de estos casos mencionados hacen que se dificulte identificar con claridad los conceptos en el código y por ende aumenta los esfuerzos de comprensión del programa.
 
 %solucion propuesta
-Los autores \cite{DFPM05} proponen utilizar una herramienta que solucione los problemas de mal nombramiento planteados anteriormente, dado la dificultad que conlleva a la construcción de una herramienta totalmente automática que se encargue de nombrar correctamente los ids se elaboró una solución semi-automática. La misma consiste en el uso de un diccionario junto con la interacción del programador.
+Los autores \cite{DFPM05} proponen utilizar una herramienta que solucione los problemas de mal nombramiento planteados anteriormente, dado la dificultad que conlleva a la construcción de una herramienta totalmente automática que se encargue de nombrar correctamente los ids se elaboró una herramienta semi-automática que necesita la intervención del programador. Esta herramienta construye y mantiene un diccionario de ids a medida que el sistema se va desarrollando.
 
 \begin{verse}
-\textbf{Diccionarios de Datos:} Este concepto conocido también como glosario de proyecto es recomendado por los textos orientados a la administración de proyectos de software. Con los diccionarios se describe de forma clara todos los términos usados en los grandes sistemas de software ademas proveen una referencia completa a todos los participantes de un proyecto durante todo el ciclo de vida del producto.
+\textbf{Diccionarios de Datos:} Este concepto conocido también como glosario de proyecto es recomendado en los textos orientados a la administración de proyectos de software. Con los diccionarios se describe de forma clara todos los términos usados en los grandes sistemas de software ademas proveen una referencia completa a todos los participantes de un proyecto durante todo el ciclo de vida del producto.
 \end{verse}
 
 \begin{figure}[h] %[h] para here [b] para bottom [t] para top
@@ -524,26 +532,13 @@ Mientras se realiza el desarrollo del código la herramienta ayuda al programado
 
 \textbf{Renombre global de ids:} Esta función permite renombrar cualquier id generando una vista previa y validando el nombre de los ids a medida que sistema va evolucionando. De esta forma se preserva la consistencia de nombres.
 
-La herramienta idd trabaja internamente con un colector de ids que esta acoplado al proceso de compilación del proyecto(build proyect) de Eclipse. Los ids se van recaudando a medida que el programa se va compilando. Los nombres, el tipo, la descripción se van guardando en un archivo XML. También con la herramienta idd puede exportar un archivo en formato HTML. Este formato permite una lectura clara de los ids con toda información asociada \cite{DFPM05}. 
-
+La herramienta idd trabaja internamente con un colector de ids que esta acoplado al proceso de compilación del proyecto(build proyect) de Eclipse. Los ids se van recaudando a medida que el programa se va compilando. Los nombres, el tipo, la descripción se van guardando en un archivo XML. También se puede exportar en un archivo en formato HTML el cual permite una lectura más clara de los ids con toda información asociada\cite{DFPM05}.
 
 
 %%=========Lawrie
-\pagebreak
-La buena calidad en el nombramiento de los ids descripta anteriormente abre la posibilidad de construir herramientas que ejecuten técnicas de regresión para traducir los ids a palabras conocidas.
- 
-Los autores Feild, Binkley, Lawrie \cite{FBL06,HDD06} distinguen 2 formas de nombramiento en los ids conocidas como \textit{hardwords} y \textit{softwords}. Los hardwords destacan la separación de cada palabra que compone el identificador a través de una marca específica; algunos ejemplos son: \textsf{fileSystem} marca bien la separación de cada palabra con el uso de mayúscula entre las minúsculas\footnote[1]{Algunos autores lo llaman camel-case a este nombramiento} o \textsf{fileSYSTEM} así también como utilizar un símbolo especial como es el caso del guion bajo \textsf{file\_system}. En cambio los softwords no poseen ningún tipo de separador o marca que de indicios de las palabras que lo componen; por ejemplo: \textsf{textinput} esta compuesta por \textsf{text} y por \textsf{input} sin tener una marca que destaque la separación.
 
-Si bien en el párrafo anterior se dio una taxonomía de como se clasifican los ids, en los ejemplos no se refleja como normalmente se nombra un id.
-Generalmente los programadores para reducir el esfuerzo de tipeo escriben los ids en forma abreviada compuestos por mas de una palabra, esto se lo conoce con el nombre de acrónimos. Para dar un ejemplo sobre esto: el id \textsf{fileSystem} los programadores lo suelen nombran como \textsf{flSys}, \textsf{fiStm}, \textsf{fl\_sys} u otras tantas posibles representaciones abreviadas.
+Para concluir la buena calidad en el nombramiento de los ids descripta anteriormente no solo mejora el entendimiento del código sino que también abre la posibilidad de construir herramientas que ejecuten técnicas de regresión para traducir los nombres de los ids a palabras conocidas. 
 
-
-
-
-
-
-
- 
 %%=====================================
 
 \section{Análisis de Identificadores}
@@ -555,6 +550,11 @@ El proceso que se lleva a cabo para realizar la traducción consiste de dos paso
 II) Expandir las abreviaciones que resultaron como producto del paso anterior (Ejemplo: \textsf{fl-sys} $\Rightarrow$ \textsf{file system}).
 
 Tanto los nombres de los ids como las abreviaturas utilizadas en ellos dependen mucho de la idiosincrasia del programador y esto representa un verdadero desafío para las herramientas de análisis de ids.
+
+
+
+
+
 
 
 \pagebreak 
@@ -618,6 +618,11 @@ En caso de que el parseo falle el proceso se reinicia desde el comienzo partiend
 La interfaz de usuario de \textbf{Identifier Restructurer} se visualiza en la figura \ref{ire4}, el id de entrada se muestra en el primer cuadro de texto \textsf{updstd\_form}. Se usa heurísticas sencillas(guión bajo, camel-case) para separar las palabras del id, en este caso \textsf{updstd} y \textsf{form}. Como esta segmentación esta incompleta el usuario puede separar manualmente en el segundo cuadro de texto la palabra \textsf{upd} y \textsf{std}. En el tercer cuadro de texto se propone la forma estándar de cada palabra. Cuando una palabra no se puede expandir la herramienta muestra un signo de pregunta en su lugar (?). En este caso \textsf{upd} $\rightarrow$ \textsf{Update}, \textsf{std} $\rightarrow$ (?), \textsf{form}$\rightarrow$ \textsf{Form}, como \textsf{std} no esta presente en el diccionario se necesita la intervención del desarrollador para que se complete correctamente a  \textsf{Standard}. Luego las palabras expandidas son asociadas a la función gramatical. En esta etapa puede existir para una secuencia de palabras mas de una función gramatical(la gramática es ambigua y puede generar mas de una secuencia de tokens). En caso de suceder esto el usuario puede elegir cual es la secuencia mas adecuada, en el ejemplo no ocurre esto y la única posibilidad es mostrada en el cuarto cuadro de dialogo(figura \ref{ire4}). Finalmente el resultado se muestra en en cuadro de texto de mas abajo, en el cuadro de Parsing se puede apreciar la acción que aplica el id, en este caso \textbf{ActionOnObject(Update,Form)} `actualizar formulario'.
 
 Cuando se arma la asociación de los nombres ids con los nuevos nombres generados la misma debería cumplir con la propiedad de inyectividad, de esta forma se evita que haya conflictos de nombres entre los distintos ids del programa. Al final de esta etapa la herramienta ayuda al programador a conseguir este objetivo resaltando los posibles conflictos en los nombres.
+
+\begin{framed}
+\textbf{Prueba:} PruebaPruebaPruebaPruebaPrueba.
+\end{framed}
+
 
 
 %Con este estudio se puede observar que los ids son una fuente importante de información, por eso elaborar técnicas que analicen ids es un aporte destacado para la CP.

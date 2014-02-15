@@ -68,6 +68,15 @@
   publisher = {Luis Barbosa, Antonio Cerone and Siraj Shaikh}
 }
 
+@ARTICLE{DMDJ13,
+  author = {Dave Binkley, Marcia Davis, Dawn Lawrie, Jonathan I. Maletic, Christopher
+	Morrell and Bonita Sharif},
+  title = {The impact of identifier style on effort and comprehension.},
+  journal = {Empirical Software Engineering},
+  year = {2013},
+  file = {DMDJ13.pdf:DMDJ13.pdf:PDF}
+}
+
 @INPROCEEDINGS{TERD01,
   author = {Thomas Eisenbarth and Rainer Koschke and Daniel Simon},
   title = {Aiding Program Comprehension by Static and Dynamic Feature Analysis},

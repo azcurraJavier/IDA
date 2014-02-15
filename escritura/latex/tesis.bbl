@@ -40,6 +40,11 @@ Daniela da~Cruz, Pedro~Rangel Henriques, and Jorge~Sousa Pinto.
 \newblock {\em Proceeding of the Third International Workshop on Foundations
   and Techniques for Open Source Software Certification}, 2009.
 
+\bibitem{DMDJ13}
+Dawn~Lawrie Dave~Binkley, Marcia~Davis and Bonita Sharif.
+\newblock The impact of identifier style on effort and comprehension.
+\newblock {\em Empirical Software Engineering}, 2013.
+
 \bibitem{TERD01}
 Thomas Eisenbarth, Rainer Koschke, and Daniel Simon.
 \newblock Aiding program comprehension by static and dynamic feature analysis.
