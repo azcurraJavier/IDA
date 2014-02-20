@@ -45,6 +45,11 @@ Dawn~Lawrie Dave~Binkley, Marcia~Davis and Bonita Sharif.
 \newblock The impact of identifier style on effort and comprehension.
 \newblock {\em Empirical Software Engineering}, 2013.
 
+\bibitem{DCHD06}
+Henry~Feild Dawn~Lawrie, Christopher~Morrell and David Binkley.
+\newblock What’s in a name? a study of identifiers.
+\newblock 2006.
+
 \bibitem{TERD01}
 Thomas Eisenbarth, Rainer Koschke, and Daniel Simon.
 \newblock Aiding program comprehension by static and dynamic feature analysis.
