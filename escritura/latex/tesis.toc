@@ -1,20 +1,22 @@
 \select@language {spanish}
-\contentsline {chapter}{\numberline {1}Introducci\IeC {\'o}n}{2}
-\contentsline {section}{\numberline {1.1}Problema}{2}
-\contentsline {section}{\numberline {1.2}Soluci\IeC {\'o}n}{4}
-\contentsline {section}{\numberline {1.3}Contribuci\IeC {\'o}n}{9}
-\contentsline {section}{\numberline {1.4}Organizaci\IeC {\'o}n de Trabajo Final}{10}
-\contentsline {chapter}{\numberline {2}Comprensi\IeC {\'o}n de Programas}{11}
-\contentsline {section}{\numberline {2.1}Introducci\IeC {\'o}n}{11}
-\contentsline {section}{\numberline {2.2}Modelos Cognitivos}{12}
-\contentsline {section}{\numberline {2.3}Extracci\IeC {\'o}n de Informaci\IeC {\'o}n}{14}
-\contentsline {section}{\numberline {2.4}Estrategias de Interconexi\IeC {\'o}n de \\Dominios}{16}
-\contentsline {section}{\numberline {2.5}Visualizaci\IeC {\'o}n de Software}{17}
-\contentsline {section}{\numberline {2.6}Comentarios}{18}
-\contentsline {chapter}{\numberline {3}An\IeC {\'a}lisis de Identificadores: Estado del Arte}{20}
-\contentsline {section}{\numberline {3.1}Introducci\IeC {\'o}n}{20}
-\contentsline {section}{\numberline {3.2}Conceptos claves}{22}
-\contentsline {section}{\numberline {3.3}Nombramiento de Identificadores}{23}
-\contentsline {subsection}{\numberline {3.3.1}Identifier Dictionary}{28}
-\contentsline {section}{\numberline {3.4}An\IeC {\'a}lisis de Identificadores}{31}
-\contentsline {subsection}{\numberline {3.4.1}Identifier Restructuring Tool}{32}
+\contentsline {chapter}{\numberline {1}Introducci\IeC {\'o}n}{3}
+\contentsline {section}{\numberline {1.1}Problema}{3}
+\contentsline {section}{\numberline {1.2}Soluci\IeC {\'o}n}{5}
+\contentsline {section}{\numberline {1.3}Contribuci\IeC {\'o}n}{10}
+\contentsline {section}{\numberline {1.4}Organizaci\IeC {\'o}n de Trabajo Final}{11}
+\contentsline {chapter}{\numberline {2}Comprensi\IeC {\'o}n de Programas}{12}
+\contentsline {section}{\numberline {2.1}Introducci\IeC {\'o}n}{12}
+\contentsline {section}{\numberline {2.2}Modelos Cognitivos}{13}
+\contentsline {section}{\numberline {2.3}Extracci\IeC {\'o}n de Informaci\IeC {\'o}n}{15}
+\contentsline {section}{\numberline {2.4}Estrategias de Interconexi\IeC {\'o}n de \\Dominios}{17}
+\contentsline {section}{\numberline {2.5}Visualizaci\IeC {\'o}n de Software}{18}
+\contentsline {section}{\numberline {2.6}Comentarios}{19}
+\contentsline {chapter}{\numberline {3}An\IeC {\'a}lisis de Identificadores: Estado del Arte}{21}
+\contentsline {section}{\numberline {3.1}Introducci\IeC {\'o}n}{21}
+\contentsline {section}{\numberline {3.2}Conceptos claves}{23}
+\contentsline {section}{\numberline {3.3}Nombramiento de Identificadores}{24}
+\contentsline {subsection}{\numberline {3.3.1}Clasificaci\IeC {\'o}n}{24}
+\contentsline {subsection}{\numberline {3.3.2}Nombramiento Sint\IeC {\'a}ctico vs Sem\IeC {\'a}ntico}{25}
+\contentsline {subsection}{\numberline {3.3.3}Identifier Dictionary}{29}
+\contentsline {section}{\numberline {3.4}An\IeC {\'a}lisis de Identificadores}{32}
+\contentsline {subsection}{\numberline {3.4.1}Identifier Restructuring Tool}{33}

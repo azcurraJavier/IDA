@@ -6,6 +6,9 @@ Warning--empty booktitle in MPMR07
 Warning--empty booktitle in BRM10
 Warning--empty booktitle in BCPT99
 Warning--empty booktitle in BCPT00
+Warning--empty booktitle in HFDL06
+Warning--empty booktitle in DLHD06
+Warning--empty booktitle in LFBEX07
 Warning--empty booktitle in DCHD06
 Warning--empty booktitle in TERD01
 Warning--empty booktitle in DWE04
@@ -13,7 +16,6 @@ Warning--empty booktitle in EHPV09
 Warning--empty booktitle in HDD06
 Warning--empty booktitle in JDPH08
 Warning--empty booktitle in WHAFVR11
-Warning--empty booktitle in LFBEX07
 Warning--empty booktitle in MPOB03
 Warning--empty booktitle in DFPM05
 Warning--empty publisher in RSPMGH02
@@ -21,45 +23,45 @@ Warning--empty booktitle in MAS05
 Warning--empty booktitle in PFT02
 Warning--empty booktitle in TIE89
 Warning--empty booktitle in MMFAF07
-You've used 26 entries,
+You've used 28 entries,
             2118 wiz_defined-function locations,
-            645 strings with 7960 characters,
-and the built_in function-call counts, 7358 in all, are:
-= -- 652
-> -- 360
+            651 strings with 8121 characters,
+and the built_in function-call counts, 7857 in all, are:
+= -- 694
+> -- 381
 < -- 2
-+ -- 146
-- -- 116
-* -- 407
-:= -- 1246
-add.period$ -- 78
-call.type$ -- 26
-change.case$ -- 134
++ -- 155
+- -- 122
+* -- 426
+:= -- 1328
+add.period$ -- 84
+call.type$ -- 28
+change.case$ -- 143
 chr.to.int$ -- 0
-cite$ -- 45
-duplicate$ -- 338
-empty$ -- 653
-format.name$ -- 116
-if$ -- 1539
+cite$ -- 49
+duplicate$ -- 364
+empty$ -- 705
+format.name$ -- 122
+if$ -- 1646
 int.to.chr$ -- 0
-int.to.str$ -- 26
-missing$ -- 26
-newline$ -- 133
-num.names$ -- 52
-pop$ -- 227
+int.to.str$ -- 28
+missing$ -- 28
+newline$ -- 143
+num.names$ -- 56
+pop$ -- 246
 preamble$ -- 1
-purify$ -- 110
+purify$ -- 117
 quote$ -- 0
-skip$ -- 201
+skip$ -- 218
 stack$ -- 0
-substring$ -- 216
-swap$ -- 42
+substring$ -- 227
+swap$ -- 44
 text.length$ -- 2
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 102
-warning$ -- 19
-while$ -- 60
-width$ -- 28
-write$ -- 255
-(There were 19 warnings)
+type$ -- 110
+warning$ -- 21
+while$ -- 64
+width$ -- 30
+write$ -- 273
+(There were 21 warnings)

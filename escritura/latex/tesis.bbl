@@ -45,6 +45,22 @@ Dawn~Lawrie Dave~Binkley, Marcia~Davis and Bonita Sharif.
 \newblock The impact of identifier style on effort and comprehension.
 \newblock {\em Empirical Software Engineering}, 2013.
 
+\bibitem{HFDL06}
+Henry~Feild Dawn~Lawrie and David Binkley.
+\newblock An empirical comparison of techniques for extracting concept
+  abbreviations from identifiers.
+\newblock 2006.
+
+\bibitem{DLHD06}
+Henry~Feild Dawn~Lawrie and David Binkley.
+\newblock Syntactic identifier conciseness and consistency.
+\newblock 2006.
+
+\bibitem{LFBEX07}
+Henry~Feild Dawn~Lawrie and David Binkley.
+\newblock Extracting meaning from abbreviated identifier.
+\newblock 2007.
+
 \bibitem{DCHD06}
 Henry~Feild Dawn~Lawrie, Christopher~Morrell and David Binkley.
 \newblock What’s in a name? a study of identifiers.
@@ -89,11 +105,6 @@ José~Luís Freitas, Daniela da~Cruz, and Pedro~Rangel Henriques.
 Wilhelm Hasselbring, Andreas Fuhr, and Volker Riediger.
 \newblock First international workshop on model-driven software migration.
 \newblock Marzo 2011.
-
-\bibitem{LFBEX07}
-Dawn Lawrie, Henry Feild, and David Binkley.
-\newblock Extracting meaning from abbreviated identifier.
-\newblock 2007.
 
 \bibitem{MPOB03}
 Michael~P. O’Brien.
