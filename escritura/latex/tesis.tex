@@ -10,6 +10,8 @@
 \usepackage{framed} %recuadros de texto
 \usepackage{multicol} %colocar texto en columnas
 
+\usepackage{amsmath}%formulas y funciones mat
+
 % Title Page
 \title{Análisis de Identificadores para Abstraer conceptos del Dominio del Problema}
 \author{Javier Azcurra\\\\Trabajo Final de Licenciatura en Cs. de la Computación\\\\\\Facultad de Ciencias Físico Matemáticas y Naturales\\Universidad Nacional de San Luis}
@@ -61,7 +63,7 @@ Luego las técnicas de análisis de identificadores constan de dos etapas la pri
 
 \end{abstract}
 
-\tableofcontents %Genera el indice
+%\tableofcontents %Genera el indice
 
 %CAPITULO1=============================================================
 
@@ -592,7 +594,9 @@ Para concluir con esta sección la buena calidad en el nombramiento de los ids d
 
 Los lectores de códigos de programas tienen inconvenientes para entender el propósito de los ids y deben invertir tiempo en analizar el significado de su presencia. Estrategias automáticas dedicadas a facilitar este análisis son bienvenidas en el contexto de la CP.
 
-La literatura correspondiente a estrategias de análisis de ids indican que los ids ocultan información relevante del domino del problema detrás de sus abreviaturas\cite{EHPV09,LFBEX07}. 
+La literatura correspondiente a estrategias de análisis de ids indican que los ids ocultan información relevante del domino del problema detrás de sus abreviaturas\cite{EHPV09,LFBEX07}.
+
+Tanto los nombres de los ids como las abreviaturas utilizadas en ellos dependen mucho de la idiosincrasia del programador. Por lo tanto construir herramientas automáticas que analicen ids representa un verdadero desafío en el área de CP. 
 
 Una manera de desplegar esta información oculta es intentar convertir estas abreviaturas en palabras completas del lenguaje natural. Por ende el foco del análisis de los ids se basa en la traducción de palabras abreviadas a palabras completas.
 
@@ -606,17 +610,87 @@ El proceso automático que se lleva a cabo para realizar la traducción menciona
 \item \textbf{Expansión:} Expandir las abreviaciones que resultaron como producto del paso anterior. (Ejemplo: \textsf{fl-sys} $\Rightarrow$ \textsf{file system}).
 \end{enumerate}
 
-Cabe mencionar que el ejemplo mostrado en ambos pasos corresponde a un caso de \textit{hardword} (ver sección anterior) en donde la separación de las palabras es destacada. Sin embargo la dificultad se presenta en las \textit{softwords}(ver sección anterior) ya que la división no esta marcada(Ejemplo: \textsf{hashtable} $\Rightarrow$ \textsf{hash-table}). El objetivo primordial del análisis de ids es detectar estos casos para posteriormente llevar a cabo la expansión\cite{HFDL06}.  
+Cabe mencionar que el ejemplo mostrado en ambos pasos corresponde a un caso de \textit{hardword} (ver sección anterior) en donde la separación de las palabras es destacada. Sin embargo la dificultad se presenta en los \textit{softwords}(ver sección anterior) ya que la división no esta marcada(Ejemplo: \textsf{hashtable} $\Rightarrow$ \textsf{hash-table}). Existen también casos híbridos (Ejemplo: \textsf{hashtable\_entry}). En este caso el id tiene una marca de separación (guión bajo) con dos hardwords \textsf{hashtable} y \textsf{entry}. A su vez el hardword \textsf{hashtable} posee dos softwords \textsf{hash} y \textsf{table}, mientras que \textsf{entry} es un hardword compuesto por un solo softword. 
 
-Tanto los nombres de los ids como las abreviaturas utilizadas en ellos dependen mucho de la idiosincrasia del programador. Por lo tanto construir herramientas automáticas que analicen ids representa un verdadero desafío en el área de CP.
+%noindent - Elimina sangria
+\begin{framed}
+\noindent El objetivo primordial del análisis de ids es detectar casos de softword y proceder a separarlos para posteriormente llevar a cabo la expansión\cite{HFDL06,LFBEX07}.  
+\end{framed}
+
 
 %Se puede usar técnicas de recuperación de información para mejorar el procedimiento de traducción.
 
+%greedy - samurai 
+\subsection{Algoritmo de División: Greedy}
 
-%Samurai - greedy - random 
+El algoritmo emplea tres listas compuestas por\cite{HFDL06,LFBEX07}: 
+\begin{description}
+\itemsep0em%reduce espacio
+\item[Palabras del diccionario:] El contenido es de diccionarios públicos sumado a las palabras del comando de Linux \textsf{ispell} que corrobora ortografía.
 
+\item[Abreviaciones conocidas:] La lista se arma con abreviaciones extraídas de distintos programas y de autores expertos. Se incluyen abreviaciones comunes (\textsf{alt} $\rightarrow$ \textsf{altitude}) y abreviaciones de programación (\textsf{txt} $\rightarrow$ \textsf{text}).
 
+\item[Palabras excluyentes(stop list):] Esta lista posee que son irrelevantes para realizar la división de los ids incluye palabras claves(\texttt{while}), ids predefinidos(\texttt{NULL}), nombres y funciones de librerias (\texttt{strcpy},\texttt{errno}), y todos los ids que puedan tener un solo caracter. Esta lista es muy grande.
+\end{description}
 
+El algoritmo de greedy primero divide las hardwords, cada hard word resultante que este en alguna lista se considera un solo softword. Si el hard word no esta se considera como múltiples soft words. La búsqueda en esos soft words comienza mirando el prefijo y el sufijo mas largo presente en alguna lista. Para los prefijos se empieza mirando toda la palabra y se van extrayendo caracteres del final hasta encontrar el prefijo mas largo(o no haya mas caracteres), de manera simétrica, para los sufijos se extraen caracteres de la primera posición hasta encontrar el sufijo mas largo en alguna lista. Hasta que no se vacíe el string analizado ambas búsquedas se llaman recursivamente por los caracteres restantes. Finalmente aquella que tuvo mejor desempeño (mayor división de palabras) es la elegida y los soft words resultantes se separan con una marca\cite{HFDL06,LFBEX07}.
+
+\subsection{Algoritmo de División: Samurai}
+
+Esta técnica divide a los ids en secuencias de palabras basándose en la extracción de frecuencias de aparición de las palabras en el código fuente\cite{EHPV09}. 
+
+El algoritmo selecciona la partición mas adecuada en los ids multi-palabra en base a una función de puntuación (scoring). Esto permite que no sea necesario utilizar diccionarios predefinidos y las palabras que se obtienen producto de la división no son limitadas por el contenido de estos diccionarios. De esta manera la técnica va evolucionando con el tiempo a medida que aparezcan nuevas tecnologías y nuevas palabras se incorporen en el vocabulario de los programadores.
+
+Esta técnica esta inspirada de un técnica de expansión de abreviaturas usada por los programadores, en donde el código fuente tiene presencia de posibles expansiones de abreviaturas (ver mas adelante).%referencia: hill - Automatically mining abbreviation
+
+La técnica según el autor\cite{EHPV09} no solo divide los ids sino que también aquellos que aparezcan en los comentarios y en los literales strings. El parámetro de entrada del algoritmo se llama \textit{token}.
+
+El algortimo se encarga de extraer información respecto a la frecuencia de strings del código fuente y luego se construyen dos tablas de frecuencia de strings. Para la construcción de estas tablas primero se ejecuta el algoritmo que extrae del código fuente todos los \textit{tokens} (strings) del tipo hardword. Estos strings son agregados en la \textit{tabla de frecuencias específicas}, donde una entrada corresponde al listado de tokens extraídos del programa actual bajo análisis (cada token es único en la tabla) y la otra corresponde al numero de ocurrencia de cada string. Por otro lado existe la \textit{tabla de frecuencias globales} que contiene las mismas dos columnas que la tabla anterior, strings y sus frecuencias pero en este caso la información es recolectada de distintos códigos de programas de gran envergadura. Durante el proceso de división del token, Samurai ejecuta la función de scoring que se basa en la información de ambas tablas antedichas\cite{EHPV09}.
+
+%aclarar que puede recivir distintos tipos de ids ademas de los ya mencionados
+El algoritmo ejecuta dos rutinas \textit{mixedCaseSplit} y después \textit{sameCaseSplit}. La primera básicamente se encarga de dividir los hardwords (aquellas palabras que poseen guion o son del tipo camel-case), luego cada una de las palabras obtenidas son pasadas a la segunda rutina para continuar con en análisis\cite{EHPV09}.
+
+La rutina \textit{mixedCaseSplit} primero particiona usando dos funciones \textit{splitOnSpecialCharsAndDigits} que reemplaza el posible caracter especial por espacio en blanco y luego \textit{splitOnLowercaseToUppercase} de la misma forma que la anterior agrega un blanco entre dos caracteres que sea una minúscula seguido por una mayúscula. En este punto solo quedan tokens de la forma softword o que contengan una mayúscula seguido de minúscula (Ejemplos: \textsf{List, ASTVisitor, GPSstate, state, finalstate, NAMESPACE, MAX}). Los casos de softword van directo a la rutina \textit{sameCaseSplit} el resto del tipo mayúscula seguido de minúscula continua con el proceso de división para determinar cual es la separación de palabras mas adecuada utilizando la función de scoring. Son dos opciones que se pueden determinar en este punto: a) que la separación se realice entre el cambio de mayúscula y minúscula (ejemplo: \textsf{GPS state}) o b) que se a haga antes de la primer mayuscula siguiendo con la filosofía camel-case (ejemplo: \textsf{GP Sstate}). Aquella que tenga el puntaje (score) mas alto entre las dos será por la cual se decida\cite{EHPV09}.
+
+La próxima rutina \textit{sameCaseSplit} recibe como entrada un substring \textit{s}, el cual puede tener tres tipos de variantes: a) todos los caracteres en minúsculas o b) todos con mayúsculas o c) el primer caracter con mayúscula seguido por todas minúsculas. La rutina primero examina cada punto posible de división en \textit{s} dividiendo en \textit{score(left)} y \textit{score(right)} respectivamente. La decisión de cual es la mejor división se basa en a)substrings que no tengan prefijos(o sufijos) ordinarios\footnote[1]{lista de prefijos y sufijos http://www.cis.udel.
+edu/˜enslen/samurai).} y b)el puntaje de la división elegida sobresalga del resto\cite{EHPV09}. 
+
+%una sola division no se llama recursivamente (!prefix ^ toSplitl ^ toSplitr)
+Para esclarecer este punto cada partición (izquierda o derecha) obtenida se calcula el score y luego este es comparado con el puntaje de la palabra original (antes de ser procesada por la rutina) y el puntaje de la palabra actual (en un principio ambas son iguales pero a medida que avanza la recursión la palabra actual va cambiando)\cite{EHPV09}.
+%agregar ejemplos gráficos etc.
+
+%si se cumple solo la parte izquierda se llama recursivamente (!prefix ^ toSplitl)
+En caso de que solo se cumpla el ítem (a) se considera que la parte izquierda es un candidato y la cadena de la parte derecha se invoca recursivamente de nuevo con la rutina porque podría seguir dividiéndose en mas partes.
+
+Si la parte derecha se termina dividiendo, luego entre la izquierda y la derecha también, sin embargo en caso que la derecha no se divida tampoco se debería separar entre ambas partes. Los análisis de datos indican que no se debe separar la actual posición en base solo a la evidencia en la izquierda ya que puede ser erróneo (Ejemplo: \textsf{string ified}). Siguiendo la ejecución recursiva de samurai para la cadena \textsf{nonnegativedecimaltype} se ejecuta correctamente a \textsf{nonnegative decimal type}.
+
+Un problema son las palabras cortas, porque tienen mucha aparición en los códigos y la cota de score es mas alta que las palabras mas largas. Es por ello que la raíz cuadrada se coloca en el resultado de score antes de comparar, sino la división frecuentemente seria errónea(Ejemplo: \textsf{per formed} no es correcta)\cite{EHPV09}\\.
+
+\textbf{Función de Scoring}
+
+Para que la técnica samurai pueda llevar a cabo su tarea de separación de ids se necesita la función de scoring. La misma toma 2 decisiones claves en el proceso de división, como bien se describe anteriormente:
+
++ En la rutina \textit{mixedCaseSplit} para determinar si el la división del token si es un caso de sencillo de camel-case u otra variante.
+
++ En la rutina \textit{sameCaseSplit} para puntuar las diferentes particiones de substrings y elegir la mejor separación.
+
+Dado un string \textit{s}, la función \textit{score(s)} indica la frecuencia de aparición de \textit{s} en el programa bajo análisis y también la frecuencia en un conjunto grande de programas predefinidos. La formula es la siguiente:
+
+\begin{center}
+$Freq(s,p) + globalFreq(s) / \log_{10}(AllStrsFreq(p))$
+\end{center}
+
+Donde p es el programa de estudio, $Freq(s,p)$ es la frecuencia de ocurrencia de s en p. $AllStrsFreq(p)$ es la frecuencia total de todos los strings en el programa p. $globalFreq(s)$ es la frecuencia de que s aparezca en un gran conjunto de programas. Los programas tomados como muestra son alrededor de 9000 escritos en JAVA y se extrajeron 630.000 palabras divididas\cite{EHPV09}.
+
+\subsection{Algoritmo de expansión de abreviaturas}
+
+%\pagebreak
+%\begin{figure}[h] %[h] para here [b] para bottom [t] para top
+%\centering
+%\includegraphics[scale=0.75]{./sam_11.png}
+%\caption{Algoritmo mixedCaseSplit}
+%\label{sam1}
+%\end{figure}
 
 %Extracting meaning - lawrie
 A continuación se presenta una herramienta que basa su análisis en ids nombrados con hardwords. La herramienta realiza una reestructuración de nombres de ids. Los nombres se cambian por nombres mas explicativos agregando un verbo que indica la función del id en el código, mas precisamente después de renombrar los ids se visualiza claramente el rol que cumple el id en el programa.

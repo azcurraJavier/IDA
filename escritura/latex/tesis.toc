@@ -19,4 +19,6 @@
 \contentsline {subsection}{\numberline {3.3.2}Nombramiento Sint\IeC {\'a}ctico vs Sem\IeC {\'a}ntico}{25}
 \contentsline {subsection}{\numberline {3.3.3}Identifier Dictionary}{29}
 \contentsline {section}{\numberline {3.4}An\IeC {\'a}lisis de Identificadores}{32}
-\contentsline {subsection}{\numberline {3.4.1}Identifier Restructuring Tool}{33}
+\contentsline {subsection}{\numberline {3.4.1}Algoritmo de Divisi\IeC {\'o}n: Greedy}{33}
+\contentsline {subsection}{\numberline {3.4.2}Algoritmo de Divisi\IeC {\'o}n: Samurai}{34}
+\contentsline {subsection}{\numberline {3.4.3}Identifier Restructuring Tool}{37}
