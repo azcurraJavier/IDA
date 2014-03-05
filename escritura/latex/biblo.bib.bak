@@ -98,14 +98,6 @@
   file = {DLHD06.pdf:DLHD06.pdf:PDF}
 }
 
-@INPROCEEDINGS{HFDL06,
-  author = {Dawn Lawrie, Henry Feild and David Binkley},
-  title = {An empirical comparison of techniques for extracting concept abbreviations
-	from identifiers.},
-  year = {2006},
-  file = {HFDL06.pdf:HFDL06.pdf:PDF}
-}
-
 @INPROCEEDINGS{TERD01,
   author = {Thomas Eisenbarth and Rainer Koschke and Daniel Simon},
   title = {Aiding Program Comprehension by Static and Dynamic Feature Analysis},
@@ -126,8 +118,16 @@
 	27}
 }
 
+@INPROCEEDINGS{EZH08,
+  author = {Emily Hill, Zachary P. Fry, Haley Boyd},
+  title = {Automatically Mining Abbreviation Expansions in Programs to Enhance
+	Software Maintenance Tools.},
+  year = {2008},
+  file = {EZH08.pdf:EZH08.pdf:PDF}
+}
+
 @INPROCEEDINGS{EHPV09,
-  author = {Eric Enslen and Emily Hill and Lori Pollock and K. Vijay-Shanker},
+  author = {Eric Enslen, Emily Hill, Lori Pollock and K. Vijay-Shanker},
   title = {Mining Source Code to Automatically Split Identifiers for Software
 	Analysis},
   year = {2009},
@@ -232,9 +232,7 @@
 @INPROCEEDINGS{MMFAF07,
   author = {Marco Torchiano and Massimiliano Di Penta},
   title = {Software Migration Projects in Italian Industry: Preliminary Results
-	from a
-	
-	State of the Practice Survey},
+	from a State of the Practice Survey.},
   year = {2007},
   file = {MMFAF07.pdf:MMFAF07.pdf:PDF}
 }

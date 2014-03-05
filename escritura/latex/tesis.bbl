@@ -45,12 +45,6 @@ Dawn~Lawrie Dave~Binkley, Marcia~Davis and Bonita Sharif.
 \newblock The impact of identifier style on effort and comprehension.
 \newblock {\em Empirical Software Engineering}, 2013.
 
-\bibitem{HFDL06}
-Henry~Feild Dawn~Lawrie and David Binkley.
-\newblock An empirical comparison of techniques for extracting concept
-  abbreviations from identifiers.
-\newblock 2006.
-
 \bibitem{DLHD06}
 Henry~Feild Dawn~Lawrie and David Binkley.
 \newblock Syntactic identifier conciseness and consistency.
@@ -78,8 +72,14 @@ David~W. Embley.
 \newblock Australian Computer Society, Inc. Darlinghurst, Australia, Australia,
   2004.
 
+\bibitem{EZH08}
+Haley~Boyd Emily~Hill, Zachary P.~Fry.
+\newblock Automatically mining abbreviation expansions in programs to enhance
+  software maintenance tools.
+\newblock 2008.
+
 \bibitem{EHPV09}
-Eric Enslen, Emily Hill, Lori Pollock, and K.~Vijay-Shanker.
+Lori~Pollock Eric~Enslen, Emily~Hill and K.~Vijay-Shanker.
 \newblock Mining source code to automatically split identifiers for software
   analysis.
 \newblock 2009.

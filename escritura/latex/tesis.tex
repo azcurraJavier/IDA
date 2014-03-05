@@ -614,7 +614,7 @@ Cabe mencionar que el ejemplo mostrado en ambos pasos corresponde a un caso de \
 
 %noindent - Elimina sangria
 \begin{framed}
-\noindent El objetivo primordial del análisis de ids es detectar casos de softword y proceder a separarlos para posteriormente llevar a cabo la expansión\cite{HFDL06,LFBEX07}.  
+\noindent El objetivo primordial del análisis de ids es detectar casos de softword y proceder a separarlos para posteriormente llevar a cabo la expansión\cite{FBL06,LFBEX07}.  
 \end{framed}
 
 
@@ -623,7 +623,7 @@ Cabe mencionar que el ejemplo mostrado en ambos pasos corresponde a un caso de \
 %greedy - samurai 
 \subsection{Algoritmo de División: Greedy}
 
-El algoritmo emplea tres listas compuestas por\cite{HFDL06,LFBEX07}: 
+El algoritmo emplea tres listas compuestas por\cite{FBL06,LFBEX07}: 
 \begin{description}
 \itemsep0em%reduce espacio
 \item[Palabras del diccionario:] El contenido es de diccionarios públicos sumado a las palabras del comando de Linux \textsf{ispell} que corrobora ortografía.
@@ -633,7 +633,7 @@ El algoritmo emplea tres listas compuestas por\cite{HFDL06,LFBEX07}:
 \item[Palabras excluyentes(stop list):] Esta lista posee que son irrelevantes para realizar la división de los ids incluye palabras claves(\texttt{while}), ids predefinidos(\texttt{NULL}), nombres y funciones de librerias (\texttt{strcpy},\texttt{errno}), y todos los ids que puedan tener un solo caracter. Esta lista es muy grande.
 \end{description}
 
-El algoritmo de greedy primero divide las hardwords, cada hard word resultante que este en alguna lista se considera un solo softword. Si el hard word no esta se considera como múltiples soft words. La búsqueda en esos soft words comienza mirando el prefijo y el sufijo mas largo presente en alguna lista. Para los prefijos se empieza mirando toda la palabra y se van extrayendo caracteres del final hasta encontrar el prefijo mas largo(o no haya mas caracteres), de manera simétrica, para los sufijos se extraen caracteres de la primera posición hasta encontrar el sufijo mas largo en alguna lista. Hasta que no se vacíe el string analizado ambas búsquedas se llaman recursivamente por los caracteres restantes. Finalmente aquella que tuvo mejor desempeño (mayor división de palabras) es la elegida y los soft words resultantes se separan con una marca\cite{HFDL06,LFBEX07}.
+El algoritmo de greedy primero divide las hardwords, cada hard word resultante que este en alguna lista se considera un solo softword. Si el hard word no esta se considera como múltiples soft words. La búsqueda en esos soft words comienza mirando el prefijo y el sufijo mas largo presente en alguna lista. Para los prefijos se empieza mirando toda la palabra y se van extrayendo caracteres del final hasta encontrar el prefijo mas largo(o no haya mas caracteres), de manera simétrica, para los sufijos se extraen caracteres de la primera posición hasta encontrar el sufijo mas largo en alguna lista. Hasta que no se vacíe el string analizado ambas búsquedas se llaman recursivamente por los caracteres restantes. Finalmente aquella que tuvo mejor desempeño (mayor división de palabras) es la elegida y los soft words resultantes se separan con una marca\cite{FBL06,LFBEX07}.
 
 \subsection{Algoritmo de División: Samurai}
 
@@ -666,7 +666,7 @@ Si la parte derecha se termina dividiendo, luego entre la izquierda y la derecha
 
 Un problema son las palabras cortas, porque tienen mucha aparición en los códigos y la cota de score es mas alta que las palabras mas largas. Es por ello que la raíz cuadrada se coloca en el resultado de score antes de comparar, sino la división frecuentemente seria errónea(Ejemplo: \textsf{per formed} no es correcta)\cite{EHPV09}\\.
 
-\textbf{Función de Scoring}
+\noindent \textbf{Función de Scoring}
 
 Para que la técnica samurai pueda llevar a cabo su tarea de separación de ids se necesita la función de scoring. La misma toma 2 decisiones claves en el proceso de división, como bien se describe anteriormente:
 
@@ -674,15 +674,49 @@ Para que la técnica samurai pueda llevar a cabo su tarea de separación de ids 
 
 + En la rutina \textit{sameCaseSplit} para puntuar las diferentes particiones de substrings y elegir la mejor separación.
 
-Dado un string \textit{s}, la función \textit{score(s)} indica la frecuencia de aparición de \textit{s} en el programa bajo análisis y también la frecuencia en un conjunto grande de programas predefinidos. La formula es la siguiente:
+Dado un string \textbf{s}, la función \textit{score(s)} indica la frecuencia de aparición de \textbf{s} en el programa bajo análisis y también la frecuencia en un conjunto grande de programas predefinidos. La formula es la siguiente:
 
 \begin{center}
 $Freq(s,p) + globalFreq(s) / \log_{10}(AllStrsFreq(p))$
 \end{center}
 
-Donde p es el programa de estudio, $Freq(s,p)$ es la frecuencia de ocurrencia de s en p. $AllStrsFreq(p)$ es la frecuencia total de todos los strings en el programa p. $globalFreq(s)$ es la frecuencia de que s aparezca en un gran conjunto de programas. Los programas tomados como muestra son alrededor de 9000 escritos en JAVA y se extrajeron 630.000 palabras divididas\cite{EHPV09}.
+Donde \textbf{p} es el programa de estudio, $Freq(s,p)$ es la frecuencia de ocurrencia de \textbf{s} en \textbf{p}. $AllStrsFreq(p)$ es la frecuencia total de todos los strings en el programa \textbf{p}. $globalFreq(s)$ es la frecuencia de que \textbf{s} aparezca en un gran conjunto de programas. Los programas tomados como muestra son alrededor de 9000 escritos en JAVA y se extrajeron 630.000 palabras divididas\cite{EHPV09}.
 
-\subsection{Algoritmo de expansión de abreviaturas}
+\subsection{Algoritmos de expansión de abreviaturas}
+%noindent elimina sangria
+\noindent \textbf{Algoritmo 1}
+
+El algoritmo de expansión de abreviaturas ideado por Lawrie, Feild, and Binkley \cite{LFBEX07, EZH08} trabaja con cuatro listas para realizar su tarea:
+
+\begin{itemize}
+\itemsep0em%reduce espacio
+\item Una lista de palabras en lenguaje natural que se extraen del código fuente.
+\item Una lista de frases (en lenguaje natural) presentes también en el código.
+\item Una lista de palabras irrelevantes (stop list).
+\item Una lista de palabras de un diccionario de lenguaje natural.
+\end{itemize}
+
+La primer lista se confecciona de la siguiente manera, para cada función \textit{f} dentro del código se crea una lista de palabras contenida en los comentarios que están antes o dentro de la función \textit{f} o también una lista de ids del tipo hardword(si existen) dentro de \textit{f}. La lista de frases se arma utilizando un `extractor de frases' \cite{a} el principal recurso son los comentarios y los ids multi-palabras\footnote[1]{Que posee mas de una palabra}. En este punto se construye un acrónimo\footnote[2]{Abreviación formada por las primeras letras de cada palabra en una frase, ej gif: Graphics Interchange Format} con las primeras letras de cada palabra de alguna frase, si ese acrónimo coincide con alguno de los ids extraídos, entonces esa frase se considera como potencial expansión (Ejemplo: la frase \textsf{file status} es una expansión posible en el id \textsf{fs\_exists}).
+
+Una vez que las listas de palabras y frases potenciales se confeccionan, la expansión comienza. Este proceso posee dos  etapas, primero se chequean las listas con palabras extraídas del código y de los comentarios, en caso de no tener éxito la búsqueda continúa en el diccionario con palabras en ingles.
+
+Las palabras en la lista de palabras irrelevantes(stop-list) incluyen artículos (the, an, etc.) y palabras reservadas del lenguaje de programación que se este utilizando (\textsf{while, for, if,} etc.)\footnote[3]{esta lista usa la misma política que samurai}.
+
+%al igual que samurai stop list y steming usa tecnicas de ir - completar si es necesario
+
+Esta técnica de expansión descripta solo retorna expansiones potenciales si cada una de ellas es única para una determinada abreviatura. Como trabajo futuro se plantea la posibilidad de escoger de forma automática para una abreviatura un sola expansión entre múltiples posibilidades\cite{LFBEX07,EZH08}.
+
+%noindent elimina sangria
+\noindent \textbf{\\Algoritmo 2}
+
+El algoritmo de expansión de abreviaturas que construyó Emily Hill, Zachary Fry, Haley Boyd ademas de buscar potenciales expansiones al igual que el algoritmo anterior, también se encarga de seleccionar la que mejor se ajusta en caso de que haya mas de una elección\cite{EZH08}.
+
+Una mejora destacable con respecto al algoritmo previo es que no se necesita un diccionario con palabras en lenguaje natural. Los diccionarios (en ingles) incluyen demasiadas palabras e implica disponer de un gran almacenamiento, lo ideal es disponer de un diccionario con palabras que incluyan solo palabras adecuadas al ámbito de la ciencias de la computación pero esto no esta disponible. La listas de abreviaciones comunes y palabras irrelevantes son armadas a partir de distintos softwares y pueden ser ajustadas a mano a la necesidad del usuario.
+
+La técnica de extracción de palabras candidatas a expandirse sigue la misma filosofía que la construcción de una tabla de símbolos en un compilador.
+Se comienza con un alcance mas cercano donde se examina nombres, tipos, sentencias. Luego gradualmente el alcance crece para incluir métodos y comentarios. Si la técnica no encuentra una palabra expandida adecuada la búsqueda continua dentro del programa y en JAVA SE 1.5.
+
+
 
 %\pagebreak
 %\begin{figure}[h] %[h] para here [b] para bottom [t] para top
@@ -697,7 +731,7 @@ A continuación se presenta una herramienta que basa su análisis en ids nombrad
 
 
 %tonella-caprile
-%\pagebreak 
+\pagebreak 
 \subsection{Identifier Restructuring Tool}
 
 \begin{figure}[h] %[h] para here [b] para bottom [t] para top

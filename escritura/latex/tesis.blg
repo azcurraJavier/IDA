@@ -2,16 +2,17 @@ This is BibTeX, Version 0.99c (TeX Live 2009/Debian)
 The top-level auxiliary file: tesis.aux
 The style file: plain.bst
 Database file #1: biblo.bib.bib
+Warning--I didn't find a database entry for "a"
 Warning--empty booktitle in MPMR07
 Warning--empty booktitle in BRM10
 Warning--empty booktitle in BCPT99
 Warning--empty booktitle in BCPT00
-Warning--empty booktitle in HFDL06
 Warning--empty booktitle in DLHD06
 Warning--empty booktitle in LFBEX07
 Warning--empty booktitle in DCHD06
 Warning--empty booktitle in TERD01
 Warning--empty booktitle in DWE04
+Warning--empty booktitle in EZH08
 Warning--empty booktitle in EHPV09
 Warning--empty booktitle in HDD06
 Warning--empty booktitle in JDPH08
@@ -25,36 +26,36 @@ Warning--empty booktitle in TIE89
 Warning--empty booktitle in MMFAF07
 You've used 28 entries,
             2118 wiz_defined-function locations,
-            651 strings with 8121 characters,
-and the built_in function-call counts, 7857 in all, are:
-= -- 694
-> -- 381
+            653 strings with 8156 characters,
+and the built_in function-call counts, 7757 in all, are:
+= -- 687
+> -- 365
 < -- 2
-+ -- 155
-- -- 122
-* -- 426
-:= -- 1328
++ -- 148
+- -- 116
+* -- 413
+:= -- 1310
 add.period$ -- 84
 call.type$ -- 28
-change.case$ -- 143
+change.case$ -- 140
 chr.to.int$ -- 0
 cite$ -- 49
 duplicate$ -- 364
 empty$ -- 705
-format.name$ -- 122
-if$ -- 1646
+format.name$ -- 116
+if$ -- 1629
 int.to.chr$ -- 0
 int.to.str$ -- 28
 missing$ -- 28
 newline$ -- 143
 num.names$ -- 56
-pop$ -- 246
+pop$ -- 243
 preamble$ -- 1
-purify$ -- 117
+purify$ -- 114
 quote$ -- 0
 skip$ -- 218
 stack$ -- 0
-substring$ -- 227
+substring$ -- 226
 swap$ -- 44
 text.length$ -- 2
 text.prefix$ -- 0
@@ -64,4 +65,4 @@ warning$ -- 21
 while$ -- 64
 width$ -- 30
 write$ -- 273
-(There were 21 warnings)
+(There were 22 warnings)
