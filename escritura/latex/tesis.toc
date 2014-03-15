@@ -17,8 +17,13 @@
 \contentsline {section}{\numberline {3.3}Nombramiento de Identificadores}{24}
 \contentsline {subsection}{\numberline {3.3.1}Clasificaci\IeC {\'o}n}{24}
 \contentsline {subsection}{\numberline {3.3.2}Nombramiento Sint\IeC {\'a}ctico vs Sem\IeC {\'a}ntico}{25}
-\contentsline {subsection}{\numberline {3.3.3}Identifier Dictionary}{29}
-\contentsline {section}{\numberline {3.4}An\IeC {\'a}lisis de Identificadores}{32}
-\contentsline {subsection}{\numberline {3.4.1}Algoritmo de Divisi\IeC {\'o}n: Greedy}{33}
-\contentsline {subsection}{\numberline {3.4.2}Algoritmo de Divisi\IeC {\'o}n: Samurai}{34}
-\contentsline {subsection}{\numberline {3.4.3}Identifier Restructuring Tool}{37}
+\contentsline {subsection}{\numberline {3.3.3}Herramienta: Identifier Dictionary}{29}
+\contentsline {section}{\numberline {3.4}Traducci\IeC {\'o}n de Identificadores}{32}
+\contentsline {subsection}{\numberline {3.4.1}Introducci\IeC {\'o}n}{32}
+\contentsline {subsection}{\numberline {3.4.2}Conceptos y Desaf\IeC {\'\i }os observados}{32}
+\contentsline {subsection}{\numberline {3.4.3}Algoritmo de Divisi\IeC {\'o}n: Greedy}{34}
+\contentsline {subsection}{\numberline {3.4.4}Algoritmo de Divisi\IeC {\'o}n: Samurai}{35}
+\contentsline {subsection}{\numberline {3.4.5}Algoritmo de Expansi\IeC {\'o}n 1}{40}
+\contentsline {subsection}{\numberline {3.4.6}Algoritmo de Expansi\IeC {\'o}n 2}{41}
+\contentsline {subsection}{\numberline {3.4.7}Herramienta: Identifier Restructuring}{44}
+\contentsline {section}{\numberline {3.5}Conclusiones}{49}

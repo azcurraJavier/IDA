@@ -2,7 +2,6 @@ This is BibTeX, Version 0.99c (TeX Live 2009/Debian)
 The top-level auxiliary file: tesis.aux
 The style file: plain.bst
 Database file #1: biblo.bib.bib
-Warning--I didn't find a database entry for "a"
 Warning--empty booktitle in MPMR07
 Warning--empty booktitle in BRM10
 Warning--empty booktitle in BCPT99
@@ -26,7 +25,7 @@ Warning--empty booktitle in TIE89
 Warning--empty booktitle in MMFAF07
 You've used 28 entries,
             2118 wiz_defined-function locations,
-            653 strings with 8156 characters,
+            652 strings with 8155 characters,
 and the built_in function-call counts, 7757 in all, are:
 = -- 687
 > -- 365
@@ -65,4 +64,4 @@ warning$ -- 21
 while$ -- 64
 width$ -- 30
 write$ -- 273
-(There were 22 warnings)
+(There were 21 warnings)
