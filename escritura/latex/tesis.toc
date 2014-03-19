@@ -23,7 +23,7 @@
 \contentsline {subsection}{\numberline {3.4.2}Conceptos y Desaf\IeC {\'\i }os observados}{32}
 \contentsline {subsection}{\numberline {3.4.3}Algoritmo de Divisi\IeC {\'o}n: Greedy}{34}
 \contentsline {subsection}{\numberline {3.4.4}Algoritmo de Divisi\IeC {\'o}n: Samurai}{35}
-\contentsline {subsection}{\numberline {3.4.5}Algoritmo de Expansi\IeC {\'o}n 1}{40}
-\contentsline {subsection}{\numberline {3.4.6}Algoritmo de Expansi\IeC {\'o}n 2}{41}
-\contentsline {subsection}{\numberline {3.4.7}Herramienta: Identifier Restructuring}{44}
-\contentsline {section}{\numberline {3.5}Conclusiones}{49}
+\contentsline {subsection}{\numberline {3.4.5}Algoritmo de Expansi\IeC {\'o}n B\IeC {\'a}sico}{40}
+\contentsline {subsection}{\numberline {3.4.6}Algoritmo de Expansi\IeC {\'o}n AMAP}{41}
+\contentsline {subsection}{\numberline {3.4.7}Herramienta: Identifier Restructuring}{49}
+\contentsline {section}{\numberline {3.5}Conclusiones}{54}

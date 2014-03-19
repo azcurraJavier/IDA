@@ -1,7 +1,7 @@
 \documentclass[12pt]{report}
 
 \usepackage{graphicx}
-\usepackage[spanish]{babel} % Para separar correctamente las palabras
+\usepackage[spanish, es-tabla]{babel} % Para separar correctamente las palabras, es-tabla: para que nombre a la tabla como tal y no cuadro.
 \usepackage[utf8]{inputenc} % Este paquete permite poner acentos y eñes usando codificación utf-8
 \usepackage{setspace}
 \onehalfspace %para espacio y medio
@@ -598,12 +598,11 @@ Los lectores de códigos de programas tienen inconvenientes para entender el pro
 
 La literatura correspondiente a estrategias de análisis de ids indican que los ids ocultan información relevante del domino del problema detrás de sus abreviaturas\cite{EHPV09,LFBEX07}. 
 
-Una manera de desplegar esta información oculta es intentar convertir estas abreviaturas en palabras completas del lenguaje natural. Por ende el foco del análisis de los ids se basa en la traducción de palabras abreviadas a palabras completas.
-
-
 \subsection{Conceptos y Desafíos observados}
 
-El proceso automático que se lleva a cabo para realizar la traducción de ids consta de dos pasos{LFBEX07}:
+Una manera de desplegar la información oculta detrás de los ids es intentar convertir estas abreviaturas en palabras completas del lenguaje natural. Por ende el foco del análisis de los ids se basa en la traducción de palabras abreviadas a palabras completas.
+
+El proceso automático que se lleva a cabo para realizar la traducción de ids consta de dos pasos\cite{LFBEX07}:
 
 \begin{enumerate}
 \itemsep0em%reduce espacio
@@ -715,7 +714,7 @@ $Freq(s,p) + globalFreq(s) / \log_{10}(AllStrsFreq(p))$
 Donde \textbf{p} es el programa de estudio, $Freq(s,p)$ es la frecuencia de ocurrencia de \textbf{s} en \textbf{p}. $AllStrsFreq(p)$ es la frecuencia total de todos los strings en el programa \textbf{p}. $globalFreq(s)$ es la frecuencia de aparición de \textbf{s} en una gran conjunto de programas tomados como muestras\footnote[1]{Estos programas son alrededor de 9000 y están escritos en JAVA}\cite{EHPV09}.
 
 \pagebreak
-\subsection{Algoritmo de Expansión 1}
+\subsection{Algoritmo de Expansión Básico}
 %noindent elimina sangria
 %\noindent \textbf{Algoritmo 1}
 
@@ -739,32 +738,97 @@ Las palabras en la lista de palabras irrelevantes(stop-list)\footnote[2]{Esta li
 
 Esta técnica de expansión descripta solo retorna expansiones potenciales si cada una de ellas es única para una determinada abreviatura y en caso contrario no retorna nada. En este sentido como trabajo futuro se plantea la posibilidad de escoger de forma automática un sola expansión entre múltiples posibilidades para una abreviatura\cite{LFBEX07,EZH08}.
 
-\subsection{Algoritmo de Expansión 2}
+\subsection{Algoritmo de Expansión AMAP}
 %noindent elimina sangria
 %\noindent \textbf{\\Algoritmo 2}
 
-El algoritmo de expansión de abreviaturas que construyó Emily Hill, Zachary Fry, Haley Boyd\cite{EZH08} ademas de buscar potenciales expansiones al igual que el algoritmo anterior, también se encarga de seleccionar la que mejor se ajusta en caso de que haya mas de una elección y de esta forma siempre devuelve un resultado.
+El algoritmo de expansión de abreviaturas que construyó Emily Hill, Zachary Fry, Haley Boyd\cite{EZH08} conocido como \textit{Automatically Mining Abbreviation Expansions in Programs} (AMAP) ademas de buscar potenciales expansiones al igual que el algoritmo anterior, también se encarga de seleccionar la que mejor se ajusta en caso de que haya mas de una elección y de esta forma mejoran los resultados esperados.
 
-Una mejora destacable con respecto al algoritmo previo es que no se necesita un diccionario con palabras en lenguaje natural. Los diccionarios (en inglés) incluyen demasiadas palabras e implica disponer de un gran almacenamiento. Las listas de abreviaciones comunes y palabras irrelevantes son armadas a partir de distintos softwares y pueden ser ajustadas a mano a la necesidad del usuario.
+Una mejora destacable con respecto al algoritmo previo es que no se necesita un diccionario con palabras en lenguaje natural. Los diccionarios (en inglés) incluyen demasiadas palabras e implica disponer de un gran almacenamiento. 
 
-Para agilizar la lectura se asigna el nombre de `palabras abreviadas' aquellas que necesitan expandirse y `palabras largas' a las normales que no están abreviadas.
+Las fuentes de palabras que se utilizan son una lista de abreviaciones comunes que se obtienen automáticamente desde distintos programas y puede a su vez incorporar palabras en forma personalizada. La lista palabras irrelevantes (stop-list) y la de contracciones más comunes se arman manualmente.
+
+Para agilizar la lectura se asigna el nombre de “palabras abreviadas” aquellas que necesitan expandirse y “palabras largas” a las palabras normales que no están abreviadas(expandidas).
 
 La técnica automatizada busca palabras largas candidatas para una palabra abreviada dentro del código con la misma filosofía que se usa en la construcción de una tabla de símbolos en un compilador.
 
-Se comienza con un alcance mas cercano donde se examina sentencias vecinas a la palabra abreviada. Luego gradualmente el alcance crece para incluir métodos, sus comentarios, y los comentarios de la clase. Si la técnica no encuentra una palabra larga adecuada para la abreviada la búsqueda continua mirando todo el programa y finalmente en JAVA SE 1.5. Los autores asumen que para una palabra abreviada esta asociada a una sola palabra larga dentro de un método. En caso de que esto no se cumpla se puede achicar el alcance de esta asunción a bloques o incluso a sentencias de código.\\
+Se comienza con un alcance mas cercano donde se examinan sentencias vecinas a la palabra abreviada. Luego gradualmente el alcance estático crece para incluir métodos, comentarios de métodos, y los comentarios de la clase. Si la técnica no encuentra una palabra larga adecuada para una determinada palabra abreviada, la búsqueda continua mirando todo el programa y finalmente en JAVA SE 1.5. 
+
+Los autores asumen que una palabra abreviada esta asociada a una sola palabra larga dentro de un método. Es inusual que dentro de un método una palabra abreviada posea mas de una expansión posible. En caso de que esto se cumpla se puede cambiar la asunción y estipular que una palabra abreviada solo tiene una sola expansión posible dentro de los bloques o achicando aun más solo dentro de las sentencias de código.
 
 
-\noindent \textbf{Expansión Mas Frecuente (MFE)\\}
+A continuación se explican los siguientes ítems: 1) Como se realiza la búsqueda para encontrar palabras largas candidatas dentro de un método. 2) Como se buscan nuevas palabras si el alcance local del método no es suficiente. 3) Como se elije entre varias opciones posibles cual es la mejor expansión.
 
-La estrategia MFE mejora la precisión de acertar con la expansión de una abreviatura. La idea consiste en ejecutar ---- sobre el programa entero. Para cada palabra abreviada, se cuenta el numero de veces que esa palabra se le asigna una determinada palabra larga. Se calcula la frecuencia relativa que una palabra abreviada fue expandida con cada palabra larga. La palabra larga con mayor frecuencia relativa se considera la expansión mas frecuente. Al final se agrupan (tambien) las palabras largas con las mismas chances de ser las correctas cuando se crea la lista de MFE.
-
-Sin embargo suele pasar que la expansión mas probable es la incorrecta. Para evitar que suceda se considera a su vez, una palabra larga debe superar mas de la mitad (0.5) en la frecuencia de aparición con respecto a una abreviatura y también que la palabra abreviada haya sido elegida al menos 3 veces en todo el programa.%Aclara mas esto
-
-La técnica MFE tiene 2 niveles, el primero es el nivel de programa y uno mas general a nivel JAVA. El nivel de programa es ideal ya que expande las abreviaturas con palabras propias del dominio del problema. El nivel mas general se arma con la API de Java. En la tabla \ref{t} se muestra algunos casos de frecuencias mas altas de JAVA 5. En caso de que una palabra abreviada no obtenga un candidato de expansión, MFE se puede entrenar sobre una gran cantidad de programas JAVA para encontrarlo. Existe la posibilidad de armar una lista a mano para casos puntuales que ayude a mejorar la precisión de MFE. Otras soluciones propuestas son documentación online relacionada a JAVA o vinculada a la ciencias de computación en general.
+Comenzando por el item 1, la búsqueda de las palabras largas contiene dos algoritmos, uno que recibe como entrada palabras abreviadas compuestas por una sola palabra(singulares) y el otro algoritmo se encarga de procesar multi-palabras.
 
 
+\\
+
+\noindent \textbf{Búsqueda por Palabras Singulares\\}
+
+El primer paso para buscar palabras largas consiste en construir una expresión regular con un patrón de búsqueda.  Este patrón se encarga de seleccionar las palabras largas que coincidan con las letras de la palabra abreviada.
+
+La expresión regular se construye a partir de la palabra abreviada, a continuación se detalla como se arman los patrones: 
+
+\begin{description}
+\itemsep0em%reduce espacio
+\item[Patrón prefijo:] Se construye colocando la palabra abreviada ($sf$) seguida da la expresión regular [a-z]+. Las palabras que coinciden si o si deberán comenzar con $sf$. Finalmente la expresión regular queda: $sf$[a-z]+.
+
+\item[Patrón compuesto por letras:]  La expresión regular se construye insertando [a-z]* después de cada letra de la palabra abreviada ($sf$). Si $sf=c_{1},c_{2},c_{3},..,c_{n}$, donde $n$ es la longitud de la palabra abreviada. El patrón queda: $c_{1}$[a-z]*$c_{2}$[a-z]*$c_{3}$[a-z]*..$c_{n}$.
+\end{description}
+
+
+\begin{figure}[h] %[h] para here [b] para bottom [t] para top
+\centering
+\includegraphics[scale=0.8]{./exp_1.png}
+\caption{Algoritmo de Expansión de una sola Palabra.}
+\label{exp1}
+\end{figure}
+
+
+En la figura \ref{exp1} se presenta un algoritmo\cite{EZH08} con un enfoque de búsqueda de palabras largas basada en abreviaturas compuestas por una sola palabra. Con el \textsf{if} de la línea 6 se impide básicamente dos cosas: que no se busquen palabras largas improbables de coincidir con la palabra abreviada pasada como entrada y que no se procesen palabras abreviadas con muchas vocales consecutivas. 
+
+Esta comprobado que la mayoría de las palabras abreviadas con vocales consecutivas se expanden como multi-palabras (ej: gui $\rightarrow$ graphical user interface, ‘ioe’ $\rightarrow$ invalid object exception) por ende de estos casos se encarga el algoritmo de la próxima sección.
+
+En este algoritmo los autores determinaron que el \textit{patrón compuesto por letras} no se usara. Este patrón es muy flexible y se eligen palabras largas incorrectas(ej de casos incorrectos: lang $\rightarrow$ loading, br $\rightarrow$ bar, mtc $\rightarrow$ matching).
+
+En las líneas 7-19 se describe el proceso de búsqueda. Si alguna de las sentencias de búsqueda encuentran un sola palabra larga candidata, el algoritmo finaliza y retorna el resultado. En la línea 8 se busca usando la palabra abreviada ($sf$) y el patrón dentro del comentario Java Doc en el método correspondiente. Si falla en la línea 9 se busca en los nombres de los tipos ubicados en las variables declaradas. Si no tiene éxito sigue en la línea 10 con el nombre del método. En caso de seguir sin resultado se continua en la línea 11 con distintas variantes del patrón en las sentencias.
+
+Si la ejecución continua, la línea 12 se restringe la búsqueda por palabras que tengan al menos 3 caracteres ya que generalmente aquellas con 2 tienden a ser multi-palabras (ej: \textsf{fl $\rightarrow$ file system} ver próxima sección). Luego en las líneas 13-14 se busca con el patrón en palabras del método y palabras de comentarios dentro del método.
+
+Para finalizar en la línea 17 si la palabra abreviada es mas larga que un solo caracter y el patrón prefijo coincide, se comienza la búsqueda usando el patrón en los comentarios de la clase.\\
+
+\noindent \textbf{Búsqueda por Multi-Palabras\\}
+
+Al igual que la búsqueda por palabras singulares, la búsqueda por multi-palabras se va incrementando en el alcance de código hasta encontrar un candidato que coincida con el patrón. Sin embargo, es importante tener en cuenta hasta donde los patrones multi-palabras realizan la búsqueda. Por ejemplo, una abreviatura \textsf{il} puede coincidir con la frase “\textbf{i}t is importante to \textbf{l}imit” en la sentencia anterior. Se preprocesa el texto y los comentarios dentro del método sin ir mas allá de las declaraciones y de los ids propios del método. También se dividen los comentarios y los literales strings en frases usando signos de puntuación (?!,;). Las abreviaciones como \textsf{val} no se expanden a \textsf{verify and load}, por que las palabras irrelevantes (stop words en este caso \textsf{and}) se remueven de los comentarios y textos en el cuerpo del método.
+
+Los patrones utilizados en las búsquedas multi-palabras se construyen:
+
+\begin{description}
+\itemsep0em%reduce espacio
+\item[Patrón acrónimo:] Se elaboró colocando la expresión regular [a-z]+[ ]+, después de cada letra de la palabra abreviada ($pa$). Si $pa=c_{1},c_{2},c_{3},..,c_{n}$, donde $n$ es la longitud de la palabra abreviada. El patrón queda: \mbox{$c_{1}$[a-z]+[ ]+$c_{2}$[a-z]+[ ]+$c_{3}$[a-z]+[ ]+..[a-z]+[ ]+$c_{n}$}. Permite encontrar acrónimos tales como \textbf{xml} $\rightarrow$ extensible markup language.
+
+\item[Patrón de Combinación de Palabras:] En este caso el patrón se construye de manera similar al anterior pero se usa la expresión regular [a-z]*?[ ]*? despues de cada caracter de la palabra abreviada ($pa$). Si $pa=c_{1},c_{2},c_{3},..,c_{n}$, donde $n$ es la longitud de la palabra abreviada. El patrón queda:$c_{1}$[a-z]*?[ ]*?$c_{2}$[a-z]*?[ ]*?$c_{3}$[a-z]*?[ ]*?..[[a-z]*?[ ]*?$c_{n}$. De esta manera se pueden capturar palabras del tipo \textsf{arg} $\rightarrow$ \textbf{a}ccess \textbf{r}i\textbf{g}hts, permitiendo mas capturas que el patrón anterior.
+\end{description}
+
+
+El algoritmo presentado en la figura \ref{exp2} de búsqueda por multi-palabras\cite{EZH08} en la línea 6 se asegura de filtrar combinaciones de palabras largas incorrectas. Los patrones de combinación de palabras son menos restrictivos que los patrones de acrónimos y frecuentemente conllevan a malas decisiones. La búsqueda se restringe a palabras abreviadas ingresadas con longitud 4 ó mayor. Esto genera la sensación de que se pierden casos de 2 ó 3 caracteres pero estudios indican que son la minoría\cite{EZH08}.
+ 
+Al igual que el algoritmo anterior en las líneas 8-10 se realiza la búsqueda primero en JAVA Doc, luego en nombres de tipos, después en nombres de los métodos. Dado que la complejidad de tiempo tiene cotas altas cuando se busca con expresiones regulares multi-palabras en sentencias, esta búsqueda no se realiza como se hizo en el algortimo anterior. En las siguientes líneas 11-13 se examinan los ids(incluyendo declaraciones), literales strings y comentarios del método. Finalmente en la línea 15 se busca en comentarios de la clase con el patrón acrónimo. Cabe aclarar que al igual que el \textit{patrón compuesto por letras}, el \textit{patrón de combinación de palabras} no se usa ya que puede tomar palabras largas incorrectas.
+
+
+\begin{figure}[h] %[h] para here [b] para bottom [t] para top
+\centering
+\includegraphics[scale=0.8]{./exp_2.png}
+\caption{Algoritmo de Expansión Multi-Palabra.}
+\label{exp2}
+\end{figure}
+
+
+\pagebreak
+\begin{table}
 \begin{center}
-   \begin{tabular}{| l |l | l | }
+   \begin{tabular}{| l |l | l |}
      \hline \textsf{Abreviatura} & \textsf{Palabra Exp.} & \textsf{Frec. Relativa} \\
      \hline \textsf{int} & \textsf{integer} & 0.821 \\
      \hline \textsf{impl} & \textsf{implement} & 0.840 \\
@@ -772,11 +836,28 @@ La técnica MFE tiene 2 niveles, el primero es el nivel de programa y uno mas ge
      \hline \textsf{pos} & \textsf{position} & 0.828 \\
      \hline	   
    \end{tabular}
-\label{tabla_mfe}  
+   \label{tab_mfe}
+\caption{Algunas Frecuencias Relativas de ids en JAVA 5}
 \end{center}   
+\end {table}
+
+Si ninguna de las estrategias de expansión funciona en el ámbito local dentro de un método, se procede a buscar la palabra abreviada en un listado de contracciones mas comunes. Si finalmente sigue si poder encontrarse una coincidencia se recurre a la técnica conocida como expansión mas frecuente (MFE).\\
+
+\noindent \textbf{Expansión Más Frecuente (MFE)\\}
+
+La estrategia MFE\cite{EZH08} mejora la precisión de acertar con la expansión de una abreviatura. La idea consiste en ejecutar la misma estrategia local de expansión de abreviaturas explicada anteriormente pero sobre el programa entero. Para cada palabra abreviada, se cuenta el numero de veces que esa palabra se le asigna una palabra larga candidata. Luego se calcula la frecuencia relativa de una palabra abreviada con respecto a cada palabra larga encontrada. La palabra larga con mayor frecuencia relativa se considera la expansión mas frecuente. Al final del proceso se agrupan las palabras largas potenciales en un listado de MFE.
+
+Sin embargo suele pasar que la expansión mas probable es la incorrecta. Para evitar que suceda se considera a su vez que una palabra larga debe superar en su frecuencia relativa mas de la mitad (0.5) y también que una palabra abreviada tenga al menos 3 asignaciones de palabras largas candidatas en todo el programa.
+
+La técnica MFE tiene 2 niveles, el primero es a nivel de programa y el otro mas general a nivel JAVA. El nivel de programa es ideal ya que expande las abreviaturas con palabras propias del dominio del problema. El nivel mas general se arma con la API de Java. En la tabla \ref{tab_mfe} se muestra algunos casos de frecuencias relativas mas altas de JAVA 5. En caso de que una palabra abreviada no obtenga un candidato de expansión MFE también puede entrenarse sobre una gran cantidad de programas JAVA para mejorar la precisión. A su vez también existe la posibilidad de armar una lista a mano para casos puntuales de expansión que no son de frecuente aparición. Otras soluciones propuestas son entrenar sobre documentación online relacionada a JAVA o documentación vinculada a la ciencias de computación en general.
+
+Este algoritmo de expansión de abreviaturas es totalmente automatizado y se implementó como un plugin de Eclipse. Actualmente solo soporta procesamiento por lotes pero se tiene pensado que corra en segundo plano brindando apoyo a herramientas de mantenimiento de software\cite{EZH08}.
+
+
+
 
 %Extracting meaning - lawrie
-A continuación se presenta una herramienta que basa su análisis solo en ids nombrados de la forma hardword. La herramienta realiza una reestructuración de nombres de ids. Los nombres se cambian por nombres mas explicativos agregando un verbo que indica la función del id en el código, mas precisamente después de renombrar los ids se visualiza claramente el rol que cumple el id en el programa\cite{EZH08,DCHD06,DLHD06,LFBEX07,BCPT00,BCPT99}.
+%A continuación se presenta una herramienta que basa su análisis solo en ids nombrados de la forma hardword. La herramienta realiza una reestructuración de nombres de ids. Los nombres se cambian por nombres mas explicativos agregando un verbo que indica la función del id en el código, mas precisamente después de renombrar los ids se visualiza claramente el rol que cumple el id en el programa\cite{EZH08,DCHD06,DLHD06,LFBEX07,BCPT00,BCPT99}.
 
 
 %tonella-caprile
