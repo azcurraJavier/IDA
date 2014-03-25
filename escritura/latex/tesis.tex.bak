@@ -345,11 +345,16 @@ En el capítulo anterior se introdujo en el ámbito de comprensión de programas
 
 Los equipos de desarrollos de software frecuentemente enfocan todo su esfuerzo en el análisis, diseño, implementación y mantenimiento de los sistemas, restandole importancia a la documentación. Por lo tanto es común encontrar paquetes softwares carentes de documentación lo cual indica que la lectura de los códigos de los sistemas es la única manera de interpretarlos. Es necesaria la interpretación del sistema sobre todo en grandes equipos de desarrollo por el simple hecho de que un integrante del equipo puede tomar código ajeno para continuar con su desarrollo o realizar algún tipo de mantenimiento (Ver capítulo 2).
 
-Como los códigos de los sistemas crecen a partir de los nuevos requerimientos y el frecuente mantenimiento, esto implica que cada vez mas los sistemas se hacen mas complejos y difíciles de entenderlos. He aquí la importancia del uso de las herramientas de comprensión, con ellas se puede lograr un entendimiento ágil y facilitar las arduas tareas de interpretación de códigos.
+Teniendo en cuenta que los códigos de los sistemas crecen a partir de los nuevos requerimientos y el frecuente mantenimiento, esto implica que cada vez mas los sistemas se hacen mas complejos y difíciles de entenderlos. He aquí la importancia del uso de las herramientas de comprensión, con ellas se puede lograr un entendimiento ágil y facilitar las arduas tareas de interpretación de códigos.
 
 Como se mencionó en el capítulo anterior la CP desarrolla métodos, técnicas y herramientas que facilitan al programador entender los programas.
 
-La extracción de información estática es un aspecto importante de la CP (Capítulo 2) en donde se pueden aplicar técnicas de compilación conocidas para extraer información oculta detrás de los componentes visibles en los códigos de los programas sin necesidad de ejecutarlos. Uno de los componentes mas importantes presentes en los códigos de los sistemas que contienen información oculta son los identificadores (ids).
+La extracción de información estática es un aspecto importante de la CP (Capítulo 2) en donde se pueden aplicar técnicas de compilación conocidas para extraer información oculta detrás de los componentes visibles en los códigos de los programas sin necesidad de ejecutarlos.
+
+%whats the name - Lawrie
+Existen dos fuentes importantes de información que se encuentran dentro de los códigos de los programas una son los comentarios y la otra son los ids. Sin embargo cuando en el código no abundan los comentarios la única fuente son los ids.
+
+%Uno de los componentes mas importantes presentes en los códigos de los sistemas que contienen información oculta son los identificadores (ids).
 
 El la siguiente tabla se muestra un análisis léxico que se realizó sobre 2.7 millones de lineas de códigos escritos en lenguaje JAVA.\\
 
@@ -371,18 +376,13 @@ Se ve claramente que mas de las dos terceras partes (71.5\%) de los caracteres e
 
 Por ende en el ámbito de CP los ids son una fuente importante de información que el lector del código o encargado de mantenimiento debe tener en cuenta. Utilizar una herramienta que analice los ids dando a conocer su significado ayuda a revelar esta información, mejora la comprensión, aumenta la productividad y agiliza el mantenimiento de los sistemas.
 
-Para finalizar construir herramientas de CP que se encargan de analizar ids en los códigos fuentes de los programas es una tarea importante de llevar a cabo.
+Por lo antedicho, construir herramientas de CP que se encargan de analizar ids en los códigos fuentes de los programas constituye un aporte importante al ámbito de CP. Antes de comenzar en la incursión de herramientas existentes que analizan ids, se detallan algunos conceptos claves relacionados a los ids.
 
 \section{Conceptos claves}
 
-%whats the name - Lawrie
-Existen dos fuentes importantes de información que se encuentran dentro de los códigos de los programas una son los comentarios y la otra son los ids. Cuando en el código no abundan los comentarios la única fuente son los ids.
-
-\begin{verse}
-\textbf{Identificador (id)}: básicamente se define como una secuencia de letras, dígitos o caracteres especiales de cualquier longitud que sirve para identificar las entidades del programa (clases, funciones, variables, tipos estructurados, etc.). 
-Cada lenguaje tiene sus propias reglas que definen como pueden estar construidos sus nombres. Por lo general lenguajes como C y JAVA no esta permitido declarar ids que coincidan con palabras reservadas o que contengan algunos símbolos especiales (\$,\&,\#, etc) a excepción de guiones(\_ ,$\--$).
-\end{verse}
-
+\textit{“Un \textbf{Identificador (id)}: básicamente se define como una secuencia de letras, dígitos o caracteres especiales de cualquier longitud que sirve para identificar las entidades del programa (clases, funciones, variables, tipos estructurados, etc.)”}
+ 
+Cada lenguaje tiene sus propias reglas que definen como pueden estar construidos los nombres de sus ids. Por lo general lenguajes como C y JAVA no esta permitido declarar ids que coincidan con palabras reservadas o que contengan algunos símbolos especiales (\$,\&,\#) a excepción de guiones(\_ ,$\--$).
 
 Un id en un programa esta asociado a un concepto del programa. 
 
@@ -393,33 +393,34 @@ Un id en un programa esta asociado a un concepto del programa.
 Dicho de otra manera un id es un representante de un concepto ubicado en el dominio del problema\cite{DFPM05,DMDJ13}.%mas biblografia
 
 %whats the name - Lawrie
-Para mejorar la CP se requiere que los nombres de los ids comuniquen de manera clara los conceptos que representan\cite{DCHD06}. Sin embargo esto no sucede frecuentemente. En la siguiente sección se menciona como el nombramiento de los ids impacta enormemente en la lectura comprensiva del código fuente. 
+Para mejorar la CP se requiere que los nombres de los ids comuniquen de manera clara los conceptos que representan\cite{DFPM05,DLHD06,DCHD06}. Sin embargo esto no sucede frecuentemente. En la siguiente sección se menciona como el nombramiento de los ids impacta enormemente en la lectura comprensiva del código fuente.
 
 
-\pagebreak
 \section{Nombramiento de Identificadores}
 
 %Deißenbock and Pizka DFPM05
 %Intro
-\subsection{Clasificación}
 Durante los desarrollos de los sistemas, las reglas de nombramiento de ids se enfocan más en el formato del código y en la documentación en lugar de enfocarse en el concepto que el id representa. Luego durante la etapa de mantenimiento del software la forma en la que los ids están nombrados no es muy tenida en cuenta para comprender el sistema.
 
-Estudios realizados sobre 100 programadores\cite{DCHD06} sobre comprensión de ids indican que existen tres tipos principales de nombramiento en los ids (entre paréntesis se da el ejemplo asociado al concepto \textsf{File System Input}): 
+\subsection{Clasificación}
+Estudios realizados sobre 100 programadores\cite{DCHD06} sobre comprensión de ids indican que existen tres tipos principales de nombramiento (tomando como ejemplo el concepto \textsf{File System Input}): 
 
 \begin{itemize}
 \itemsep0em%reduce espacio
 \item Palabras completas (\textsf{fileSystemInput}).
-\item Abreviaciones\footnote[1]{Este nombramiento lo llaman acrónimo} (\textsf{flSysIpt}).
-\item Una sola letra (\textsf{fsi}). 
+\item Abreviaciones (\textsf{flSysIpt}).
+\item Una sola letra\footnote[1]{Este nombramiento lo llaman acrónimo algunos autores} (\textsf{fsi}). 
 \end{itemize}
 
-De mas esta decir que los nombres de los ids pueden estar compuestos por mas de una palabra como claramente se muestra arriba.
+De mas esta decir que los nombres de los ids pueden estar compuestos por mas de una palabra como claramente se muestra arriba en los 2 primeros casos.
 
 El estudio arrojó que las palabras completas son las mas comprendidas, sin embargo las estadísticas marcan en algunos casos que las abreviaciones que se ubican en segundo lugar no demuestran una diferencia notoria con respecto a las palabras completas\cite{DCHD06}.
 
-Siguiendo con las clasificaciones los autores Feild, Binkley, Lawrie \cite{FBL06,HDD06,DMDJ13} distinguen 2 formas de nombramiento en los ids conocidas como \textit{hardwords} y \textit{softwords}. Estos nombramientos generalmente se aplican a los ids que están abreviados o en forma de palabras completas y contienen mas de una palabra.
+A su vez los autores  Feild, Binkley, Lawrie \cite{FBL06,HDD06,DMDJ13} en los nombramientos que contienen mas de una palabra como es el caso de las \textit{palabras completas} y las \textit{abreviaciones} hacen 2 distinciones extras conocidas como \textit{hardwords} y \textit{softwords}.
 
-Los \textit{hardwords} destacan la separación de cada palabra que compone el identificador a través de una marca específica; algunos ejemplos son: \textsf{fileSystem} marca bien la separación de cada palabra con el uso de mayúscula entre las minúsculas\footnote[2]{Algunos autores lo llaman camel-case a este nombramiento} o \textsf{fileSYSTEM} así también como utilizar un símbolo especial como es el caso del guion bajo \textsf{file\_system}. En cambio los \textit{softwords} no poseen ningún tipo de separador o marca que de indicios de las palabras que lo componen; por ejemplo: \textsf{textinput} o \textsf{TEXTINPUT} esta compuesta por \textsf{text} y por \textsf{input} sin tener una marca que destaque la separación.
+Los \textit{hardwords} destacan la separación de cada palabra que compone el identificador a través de una marca específica; algunos ejemplos son: \textsf{fileSystem}\footnote[1]{Algunos autores lo llaman camel-case a este nombramiento} marca bien la separación de cada palabra con el uso de mayúscula entre las minúsculas o \textsf{fileSYSTEM} así también como utilizar un símbolo especial como es el caso del guion bajo \textsf{file\_system}. 
+
+En cambio los \textit{softwords} no poseen ningún tipo de separador o marca que de indicios de las palabras que lo componen; por ejemplo: \textsf{textinput} o \textsf{TEXTINPUT} esta compuesta por \textsf{text} y por \textsf{input} sin tener una marca que destaque la separación.
 
 %Si bien en el párrafo anterior se dio una taxonomía de como se clasifican los ids, en los ejemplos no se refleja como normalmente se nombra un id.
 %Generalmente los programadores para reducir el esfuerzo de tipeo escriben los ids en forma abreviada compuestos por mas de una palabra, esto se lo conoce con el nombre de acrónimos. Para dar un ejemplo sobre esto: el id \textsf{fileSystem} los programadores lo suelen nombran como \textsf{flSys}, \textsf{fiStm}, \textsf{fl\_sys} u otras tantas posibles representaciones abreviadas.
@@ -429,14 +430,14 @@ Los \textit{hardwords} destacan la separación de cada palabra que compone el id
 %Caprile and Tonella - Software entities are born and live with their names. \cite{BCPT99}
 
 %================================
-\subsection{Nombramiento Sintáctico vs Semántico}
-En la actualidad existen innumerables convenciones en cuanto al nombramiento de los ids, alguna de ellas son:
+\subsection{Importancia del Nombramiento}
+En la actualidad existen innumerables convenciones en cuanto al nombramiento sintáctico de los ids, alguna de ellas son:
 
 \begin{itemize}
 \itemsep0em%reduce espacio
-\item En el caso de JAVA\texttrademark los nombres de los paquetes deben ser con minúscula (main.system) y las clases con mayúscula en la primer letra de cada palabra que compone el nombre (MainClass).
+\item En el caso de JAVA los nombres de los paquetes deben ser con minúscula (main.packed) y las clases con mayúscula en la primer letra de cada palabra que compone el nombre (MainClass).
 
-\item En el caso de C\#\texttrademark las clases se nombran igual que JAVA\texttrademark pero los paquetes en cada nivel de nombre debe comenzar con mayúscula y resto minúscula (Main.System).
+\item En el caso de C\# las clases se nombran igual que JAVA pero los paquetes en cada nivel de nombre debe comenzar con mayúscula y resto minúscula (Main.Packed).
 \end{itemize}
 
 Esto indica que se concentra mas en los aspectos sintácticos del id y no tanto en los aspectos semánticos en lo que respecta al nombramiento. 
@@ -461,7 +462,7 @@ Esto indica que se concentra mas en los aspectos sintácticos del id y no tanto 
 Una evidencia fehaciente de la importancia en el nombramiento semántico son las técnicas que se aplican para protección de código, algunas de ellas se encargan de reemplazar los nombres originales de los ids por secuencias de caracteres aleatorios 
 para reducir la comprensión, esta se conocen con el nombre de ofuscación de código. La ofuscación es común en los sistemas de índole comercial, en la figura \ref{captura2} se puede observar un ejemplo tomado de un caso real en donde la función \textsf{mr\_mr\_1} no parece complicada pero se desconoce la finalidad de su ejecución\cite{DFPM05}.
 
-A su vez los programadores restan importancia al correcto nombramiento semántico de los ids, existen tres razones destacadas que conllevan a esto:
+A su vez los programadores cuando programan restan importancia al correcto nombramiento semántico de los ids, existen tres razones destacadas que conllevan a esto:
 
 \begin{enumerate}
 \itemsep0em%reduce espacio
@@ -469,10 +470,10 @@ A su vez los programadores restan importancia al correcto nombramiento semántic
 
 \item Los desarrolladores tienen poco conocimiento de los nombres usados en los ids ubicados en otros sectores del código fuente.
 
-\item Durante la evolución del sistema los nombres de los ids se mantienen y no adaptan sus nombres a las nuevas funcionalidades que pueden tener.
+\item Durante la evolución del sistema los nombres de los ids se mantienen y no adaptan sus nombres a las nuevas funcionalidades(o conceptos) que pueden tener.
 \end{enumerate}
 
-En este sentido el mal nombramiento de los ids se combate con la programación “menos egoísta” que consiste en hacer programas mas claros y entendibles para el futuro lector que no esta familiarizado con el mismo. Para lograrlo se deben respetar dos reglas en cuanto al nombramiento\cite{DFPM05,DLHD06}:
+En este sentido el mal nombramiento de los ids se combate con la programación “menos egoísta” que consiste en hacer programas mas claros y entendibles para el futuro lector que no esta familiarizado. Para lograrlo se deben respetar dos reglas en cuanto al nombramiento\cite{DFPM05,DLHD06}:
 
 %\noindent remueve la sangria!
 \begin{framed}
@@ -500,7 +501,7 @@ Los autores Deissenboeck y Pizka\cite{DFPM05} proponen utilizar una herramienta 
 \textbf{Diccionarios de Datos:} Este concepto conocido también como `glosario de proyecto' se recomienda en los textos orientados a la administración de proyectos de software. Con los diccionarios se describe en forma clara todos los términos utilizados en los grandes sistemas de software y con esto se brinda una referencia completa a todos los participantes de un proyecto durante todo el ciclo de vida del producto.
 \end{verse}
 
-A continuación se describe una herramienta que ayuda al buen nombramiento de ids y mantiene la consistencia de nombres.
+A continuación se describe la herramienta que ayuda al buen nombramiento de ids y mantiene la consistencia de nombres.
 
 \begin{figure}[h] %[h] para here [b] para bottom [t] para top
 \centering
@@ -586,7 +587,9 @@ La herramienta IDD trabaja internamente con un colector de ids que esta acoplado
 
 %%=========Lawrie
 
-Para concluir con esta sección la buena calidad en el nombramiento de los ids descripta anteriormente no solo mejora el entendimiento del código sino que también abre la posibilidad para construir herramientas que ejecuten técnicas de regresión. Estas técnicas  traducen los nombres de los ids a palabras más completas en lenguaje natural y de esta manera facilitar el entendimiento de desarrolladores no tan expertos. En la sección siguiente se dan a conocer casos que utilizan estas técnicas de regresión.
+La herramienta colabora en mejorar el nombramiento de los ids con un esfuerzo moderado como se describió antes, sin embargo otros autores\cite{LFBEX07,DLHD06} determinan que los esfuerzos son moderados solo para sistemas que se empiezan a programar desde el comienzo y no con sistemas ya existentes.
+
+Para concluir con esta sección la buena calidad en el nombramiento de los ids descripta anteriormente no solo mejora el entendimiento del código sino que también facilita la construcción herramientas que ejecuten técnicas de regresión. Algunas técnicas traducen los nombres de los ids a palabras más completas en lenguaje natural y de esta manera facilitar el entendimiento de desarrolladores no tan expertos. En la sección siguiente se dan a conocer casos que utilizan estas técnicas de regresión.
 
 %%=====================================
 \pagebreak
@@ -606,7 +609,7 @@ El proceso automático que se lleva a cabo para realizar la traducción de ids c
 
 \begin{enumerate}
 \itemsep0em%reduce espacio
-\item \textbf{División:} Separar el id en las palabras que lo componen usando algún separador especial. (Ejemplo: \textsf{flSys} $\Rightarrow$ \textsf{fl-sys}).
+\item \textbf{División:} Separar el id en las palabras que lo componen usando algún separador especial\footnote[1]{Siempre y cuando el id contenga más de una palabra.}. (Ejemplo: \textsf{flSys} $\Rightarrow$ \textsf{fl-sys}).
 
 \item \textbf{Expansión:} Expandir las abreviaciones que resultaron como producto del paso anterior. (Ejemplo: \textsf{fl-sys} $\Rightarrow$ \textsf{file system}).
 \end{enumerate}
@@ -615,17 +618,14 @@ Cabe mencionar que el ejemplo mostrado en ambos pasos corresponde a un caso de \
 
 %noindent - Elimina sangria
 \begin{framed}
-\noindent El objetivo primordial del análisis de ids es detectar los casos de softword luego proceder a separar las palabras abreviadas que la componen(si es mas de una) para posteriormente realizar la expansión\cite{FBL06,LFBEX07}.  
+\noindent El objetivo primordial del análisis de ids es detectar los casos de softword luego proceder a separar las palabras abreviadas que la componen para posteriormente realizar la expansión\cite{FBL06,LFBEX07}.  
 \end{framed}
 
-Para llevar a cabo la tarea de traducción de ids es necesario recurrir a fuentes de palabras en lenguaje natural (inglés en este caso). Existen 2 tipos de fuentes, dentro del mismo código extrayendo palabras presentes en comentarios, literales y documentación. La otra fuente se encuentra fuera del programa consultando diccionarios o listas de palabras predefinidas.
-
-
-Algunos inconvenientes que se presentan cuando se desarrollan herramientas que traduzcan ids:
+Para llevar a cabo la tarea de traducción de ids es necesario recurrir a fuentes de palabras en lenguaje natural (inglés en este caso). Existen 2 tipos de fuentes, dentro del mismo código extrayendo palabras presentes en comentarios, literales y documentación. La otra fuente se encuentra fuera del programa consultando diccionarios o listas de palabras predefinidas.\\\\Algunos inconvenientes que se presentan cuando se desarrollan herramientas que traduzcan ids:
 
 \begin{description}
 \itemsep0em%reduceenglish espacio
-\item[Dificultad para armar diccionarios apropiados:]  La mayoría de los diccionarios en Inglés se usan para corregir la ortografía. Las palabras que incluyen son sustantivos propios, abreviaciones, contracciones\footnote[1]{Las que llevan apostrofes ej: let's} y demás palabras que puedan aparecer en un software. Sin embargo la inclusión de muchas palabras genera que una simple abreviación ($char,tab,id$) se trate como una palabra expandida y no se expanda. Por el contrario si contiene pocas palabras, la expansión se realiza mas frecuente de lo normal.
+\item[Dificultad para armar diccionarios apropiados:]  La mayoría de los diccionarios en Inglés se usan para corregir la ortografía. Las palabras que incluyen son sustantivos propios, abreviaciones, contracciones\footnote[1]{Palabras en ingles que llevan apostrofes ej: let's.} y demás palabras que puedan aparecer en un software. Sin embargo la inclusión de muchas palabras genera que una simple abreviación ($char,tab,id$) se trate como una palabra expandida y no se expanda. Por el contrario si contiene pocas palabras, la expansión se realiza mas frecuente de lo normal.
 % lo ideal es disponer de un diccionario con palabras que incluyan solo palabras adecuadas al ámbito de la ciencias de la computación pero lamentablemente esto no esta disponible.
 
 \item[Las abreviaciones poseen muchos candidatos a expandir:] Es complicado para un id abreviado con \textsf{def} determinar con precisión cual es la mejor traducción entre tantos candidatos \textsf{definition, default, defect}. Otra observación hecha es que mientras mas corta es la abreviación mas candidatos posee y lo que mas frustra es que la mayoría de los ids poseen entre 1 y 3 caracteres, el mas común es \textsf{i} que generalmente es \textsf{integer} pero podrían ser otros \textsf{interface, interrupt},etc. Se requieren procesos inteligentes para solucionarlo.
@@ -646,53 +646,57 @@ En las próximas 2 secciones se detallan algoritmos encargados de la división d
 El algoritmo de greedy elaborado por Lawrie, Feild, Binkley\cite{FBL06,LFBEX07} es sencillo y emplea tres listas:
 \begin{description}
 \itemsep0em%reduce espacio
-\item[Palabras del diccionario:] Contiene palabras de diccionarios públicos sumado a las palabras del comando de Linux \textsf{ispell} que corrobora ortografía en la linea de comandos.
+\item[Palabras de diccionarios:] Contiene palabras de diccionarios públicos sumado a las palabras del comando de Linux \textsf{ispell} que corrobora ortografía en la linea de comandos.
 
-\item[Abreviaciones conocidas:] La lista se arma con abreviaciones extraídas de distintos programas y de autores expertos. Se incluyen abreviaciones comunes (ej: \textsf{alt} $\rightarrow$ \textsf{altitude}) y abreviaciones de programación (ej: \textsf{txt} $\rightarrow$ \textsf{text}).
+\item[Abreviaciones conocidas:] La lista se arma con abreviaciones extraídas de distintos programas y de autores expertos. Se incluyen abreviaciones comunes (ej: \textsf{alt} $\rightarrow$ \textsf{altitude}) y abreviaciones de programación \mbox{(ej: \textsf{txt} $\rightarrow$ \textsf{text}).}
 
 \item[Palabras excluyentes(stop list):] Posee palabras que son irrelevantes para realizar la división de los ids incluye palabras claves(ej: \texttt{while}), ids predefinidos(ej: \texttt{NULL}), nombres y funciones de librerías (ej: \texttt{strcpy},\texttt{errno}), y todos los ids que puedan tener un solo caracter. Esta lista es muy grande.
 \end{description}
 
-El algoritmo de greedy procede de la siguiente manera, el id que recibe como entrada primero se divide en las hardwords que lo componen(ej: \textsf{file\_txt} en \textsf{fileinput} y \textsf{txt}), cada hardword resultante que este en alguna lista antedicha se considera un solo softword. Si algún hardword no está se considera como múltiples softwords que necesitan subdividirse(ej: \textsf{fileinput} en \textsf{file} y \textsf{input}). La búsqueda en esos softwords toma el prefijo y el sufijo mas largo presente en alguna lista. Por un lado se ejecuta un proceso encargado de los prefijos, este empieza mirando toda la palabra por completo y se van extrayendo caracteres del final hasta encontrar el prefijo mas largo(o no haya mas caracteres). De manera simétrica, otro proceso encargado de los sufijos, extrae caracteres de la primera posición hasta encontrar el sufijo mas largo presente en alguna lista. Hasta que no se vacíe el string analizado ambas búsquedas se llaman recursivamente por los caracteres restantes. De esta manera se obtiene un alto ratio de división. Los softwords resultantes se separan con una marca\cite{FBL06,LFBEX07}.
+El algoritmo de greedy procede de la siguiente manera, el id que recibe como entrada primero se divide en las hardwords que lo componen(ej: \textsf{file\_txt} en \textsf{fileinput} y \textsf{txt}), cada hardword resultante que este en alguna lista antedicha se considera un solo softword. Si algún hardword no está en alguna lista se considera como múltiples softwords que necesitan subdividirse(ej: \textsf{fileinput} en \textsf{file} y \textsf{input}). La búsqueda en esos softwords toma el prefijo y el sufijo mas largo presente en alguna lista. Por un lado se ejecuta un proceso encargado de los prefijos, este empieza mirando toda la palabra por completo y se van extrayendo caracteres del final hasta encontrar el prefijo mas largo(o no haya mas caracteres). De manera simétrica, otro proceso encargado de los sufijos, extrae caracteres de la primera posición hasta encontrar el sufijo mas largo presente en alguna lista. Hasta que no se vacíe el string analizado ambas búsquedas se llaman recursivamente por los caracteres restantes. De esta manera se obtiene un alto ratio de división. Los softwords resultantes se separan con una marca\cite{FBL06,LFBEX07}.
 
 \subsection{Algoritmo de División: Samurai}
 
-Esta técnica pensada por Emily Hill, Zachary Fry, Haley Boyd\cite{EHPV09} divide a los ids en secuencias de palabras al igual que Greedy con la diferencia que la división es mas efectiva. La estrategia utiliza información presente en el código para llevar a cabo el objetivo. Esto permite que no sea necesario utilizar diccionarios predefinidos y las palabras que se obtienen producto de la división no están limitadas por el contenido de estos diccionarios. De esta manera la técnica va evolucionando con el tiempo a medida que aparezcan nuevas tecnologías y nuevas palabras se incorporen en el vocabulario de los programadores.
+Esta técnica pensada por Eric Enslen, Emily Hill, Lori Pollock, Vijay-Shanker\cite{EHPV09} divide a los ids en secuencias de palabras al igual que Greedy con la diferencia que la división es mas efectiva. La estrategia utiliza información presente en el código para llevar a cabo el objetivo. Esto permite que no sea necesario utilizar diccionarios predefinidos y las palabras que se obtienen producto de la división no están limitadas por el contenido de estos diccionarios. De esta manera la técnica va evolucionando con el tiempo a medida que aparezcan nuevas tecnologías y que nuevas palabras se incorporen al vocabulario de los programadores.
 
-El algoritmo selecciona la partición mas adecuada en los ids multi-palabra\footnote[1]{Que posee mas de una palabra} en base a una función de puntuación (scoring). Esta función utiliza información que se recauda extrayendo las frecuencias de aparición de palabras dentro del código fuente. Estas palabras pueden estar en contenidas en comentarios, literales strings y documentación.
+El algoritmo selecciona la partición mas adecuada en los ids multi-palabra\footnote[1]{Que posee mas de una palabra.} en base a una función de puntuación (scoring). Esta función utiliza información que se recauda extrayendo las frecuencias de aparición de palabras dentro del código fuente. Estas palabras pueden estar contenidas en comentarios, literales strings y documentación.
 
-Esta estrategia esta inspirada de un técnica de expansión de abreviaturas\cite{EZH08} creada por el mismo autor (ver sección mas adelante).
+Esta estrategia de separación esta inspirada en un técnica de expansión de abreviaturas AMAP\cite{EZH08} que se presenta en las próximas secciones.
 
-La técnica según el autor\cite{EHPV09} no solo divide los ids sino que también aquellos que aparezcan en los comentarios y en los literales strings. Esto ocurre porque el objetivo es mas amplio que solo dividir ids. Por esta razón nombra al parámetro de entrada del algoritmo como \textit{token} y no simplemente id por ejemplo.
+La técnica Samurai según el autor\cite{EHPV09} no solo divide los ids sino que también aquellos que aparezcan en los comentarios y en los literales strings. Esto ocurre porque el objetivo es mas amplio y no consiste en solo dividir ids. Por esta razón nombra al parámetro de entrada del algoritmo como \textit{token} y no \mbox{simplemente id.}
 
-El algoritmo se encarga de extraer información respecto a la frecuencia de strings del código fuente y luego se construyen dos tablas de frecuencia de strings. Para la construcción de una de las tablas primero se ejecuta el algoritmo que extrae del código fuente todos los \textit{tokens} (strings) del tipo hardword. Estos strings son agregados en la \textit{tabla de frecuencias específicas}, donde una entrada corresponde al listado de tokens extraídos del programa actual bajo análisis (cada token es único en la tabla) y la otra corresponde al numero de ocurrencia de cada string. Por otro lado existe la \textit{tabla de frecuencias globales} que contiene las mismas dos columnas que la tabla anterior, strings y sus frecuencias pero en este caso la información es recolectada de distintos códigos de programas de gran envergadura. Durante el proceso de división del token, Samurai ejecuta la función de scoring que se basa en la información de ambas tablas antedichas\cite{EHPV09}.
+El algoritmo se encarga de extraer información respecto a la frecuencia de tokens en el código fuente y luego se construyen dos tablas de frecuencia de tokens. 
+
+Para la construcción de una de las tablas primero se ejecuta el algoritmo que extrae del código fuente todos los tokens del tipo hardword. Estos tokens son agregados en la \textit{tabla de frecuencias específicas}, donde una entrada de la tabla corresponde al listado de tokens extraídos del programa actual bajo análisis (cada token es único en la tabla) y la otra entrada corresponde al numero de ocurrencia de cada token. Por otro lado existe la \textit{tabla de frecuencias globales} que contiene las mismas dos columnas que la tabla anterior, tokens y sus frecuencias pero en este caso la información es recolectada de distintos programas de gran envergadura. Durante el proceso de división del token, Samurai ejecuta la función de scoring que se basa en la información de ambas tablas antedichas\cite{EHPV09}.
 
 \begin{figure}[h] %[h] para here [b] para bottom [t] para top
 \centering
-\includegraphics[scale=0.5]{./sam_1.png}
+\includegraphics[scale=0.53]{./sam_1.png}
 \caption{Algoritmos mixedCaseSplit y sameCaseSplit}
 \label{sam1}
 \end{figure}
 
 %aclarar que puede recivir distintos tipos de ids ademas de los ya mencionados
-El algoritmo ejecuta dos rutinas \textit{mixedCaseSplit} y después \textit{sameCaseSplit}(figura \ref{sam1}). La primera básicamente se encarga de dividir los hardwords (palabras que poseen guion bajo o son del tipo camel-case), luego cada una de las palabras obtenidas son pasadas a la segunda rutina para continuar con el análisis\cite{EHPV09}.
+El algoritmo ejecuta dos rutinas \textit{mixedCaseSplit} y después \mbox{\textit{sameCaseSplit}} (figura \ref{sam1}). La primera básicamente se encarga de dividir los hardwords (palabras que poseen guion bajo o son del tipo camel-case), luego cada una de las palabras obtenidas son pasadas a la segunda rutina para continuar con el análisis\cite{EHPV09}.
 
-La rutina \textit{mixedCaseSplit} primero particiona usando dos funciones(líneas 4 y 5) \textit{splitOnSpecialCharsAndDigits} que reemplaza todos los posibles caracteres especiales por espacio en blanco y luego \textit{splitOnLowercaseToUppercase} de la misma forma que la anterior agrega un blanco entre dos caracteres que sea una minúscula seguido por una mayúscula. En este punto solo quedan tokens de la forma softword o que contengan una mayúscula seguido de minúscula (Ejemplos: \textsf{List, ASTVisitor, GPSstate, state, finalstate,\linebreak  NAMESPACE, MAX}). Los casos de softword van directo a la rutina \textit{sameCaseSplit} el resto del tipo mayúscula seguido de minúscula continua con el proceso de división para determinar cual es la separación de palabras mas adecuada utilizando la función de scoring. Son dos opciones que se pueden determinar en este punto: a) que la separación se realice entre el cambio de mayúscula y minúscula (ejemplo: \textsf{GPS state}) o b) que se a haga antes de la primer mayúscula siguiendo con la filosofía camel-case (ejemplo: \textsf{GP Sstate}). Aquella que tenga el puntaje (score) mas alto entre las dos será por la cual se decida, luego las partes son enviadas a \textit{sameCaseSplit}\cite{EHPV09}.
+La rutina \textit{mixedCaseSplit} primero particiona usando dos funciones(líneas 4 y 5) \textit{splitOnSpecialCharsAndDigits} que reemplaza todos los posibles caracteres especiales por espacio en blanco y luego \mbox{\textit{splitOnLowercaseToUppercase}} de la misma forma que la anterior agrega un blanco entre dos caracteres que sea una minúscula seguido por una mayúscula. En este punto solo quedan tokens de la forma softword o que contengan una mayúscula seguido de minúscula (Ejemplos: \textsf{List, ASTVisitor, GPSstate, state, finalstate, MAX}).
 
-La próxima rutina \textit{sameCaseSplit} recibe como entrada un substring \textit{s}, el cual puede tener tres tipos de variantes: a) todos los caracteres en minúsculas o b) todos con mayúsculas o c) el primer caracter con mayúscula seguido por todas minúsculas. La rutina primero examina cada punto posible de división en \textit{s} dividiendo en \textit{score(left)} y \textit{score(right)} respectivamente(línea 9 y 10). La decisión de cual es la mejor división se basa en a) substrings que no tengan prefijos(o sufijos) ordinarios\footnote[1]{Listas de prefijos y sufijos http://www.cis.udel.edu/˜enslen/samurai).}(línea 11) y b) el puntaje de la división elegida sobresalga del resto\cite{EHPV09}. 
+Los casos de softword(\textsf{finalstate}, \textsf{MAX}) van directo a la rutina \mbox{\textit{sameCaseSplit}}. El resto del tipo mayúscula seguido de minúscula continua con el proceso de división para determinar cual es la separación de palabras mas adecuada utilizando la función de scoring(líneas 13-30). Son dos opciones que se pueden determinar en este punto: a) que la separación se realice entre el cambio de mayúscula y minúscula (ejemplo: \textsf{GPS state}) o b) que se a haga antes de la primer mayúscula siguiendo con la filosofía camel-case (ejemplo: \textsf{GP Sstate}). Aquella que tenga el puntaje (score) mas alto entre las dos será por la cual se decida, luego las partes resultantes son enviadas a \textit{sameCaseSplit}\cite{EHPV09}.
+
+La próxima rutina \textit{sameCaseSplit} recibe como entrada un substring \textit{s}, el cual puede tener tres tipos de variantes: a) todos los caracteres en minúsculas o b) todos con mayúsculas o c) el primer caracter con mayúscula seguido por todas minúsculas(\textsf{Visitor}). La rutina primero examina cada punto posible de división en \textit{s} dividiendo en \textit{score(left)} y \textit{score(right)} respectivamente(línea 9 y 10). La decisión de cual es la mejor división se basa en a) substrings que no tengan prefijos o sufijos ordinarios\footnote[1]{Listas de prefijos y sufijos http://www.cis.udel.edu/˜enslen/samurai).}(línea 11) y b) el puntaje de la división elegida sobresalga del resto(líneas 12-14). 
 
 %una sola division no se llama recursivamente (!prefix ^ toSplitl ^ toSplitr)
-Para esclarecer este punto cada partición (izquierda o derecha) obtenida se calcula el score y luego este es comparado con el puntaje de la palabra original ($score_{ns}$ score original) y el puntaje de la palabra actual ($score(s)$ en un principio ambas son iguales pero a medida que avanza la recursión $score(s)$ varia con respecto a $score_{ns}$ - línea 12 y 13).
+Para esclarecer este punto cada partición (izquierda o derecha) obtenida se calcula el score y luego este es comparado con el puntaje de la palabra original ($score_{ns}$ score original) y el puntaje de la palabra actual ($score(s)$). En un principio ambas son iguales pero a medida que avanza la recursión $score(s)$ varia con respecto a $score_{ns}$ (líneas 12 y 13).
 %agregar ejemplos gráficos etc.
 
 %si se cumple solo la parte izquierda se llama recursivamente (!prefix ^ toSplitl)
 En caso de que solo se cumpla el ítem (a)(no tengan prefijos y sufijos ordinarios) se considera que la parte izquierda es un candidato y la cadena de la parte derecha se invoca recursivamente de nuevo con la rutina porque podría seguir dividiéndose en mas partes (línea 20).
 
-Si la parte derecha se termina dividiendo, luego entre la izquierda y la derecha también, sin embargo en caso que la derecha no se divida tampoco se debería separar entre ambas partes(el \textsf{if} de la linea 21 controla esto). Los análisis de datos indican que no se debe separar la actual posición en base solo a la evidencia en la izquierda ya que puede ser erróneo (Ejemplo: \textsf{string ified}). 
+Si la parte derecha se termina dividiendo, luego entre la izquierda y la derecha también. Sin embargo en caso que la parte derecha no se divida tampoco se debería separar entre ambas partes(el \textsf{if} de la linea 21 controla esto). Los análisis de datos\cite{EHPV09} indican que no se debe separar la actual posición en base solo a la evidencia en la izquierda ya que puede ser erróneo, un caso conocido erróneo es \textsf{string ified}). 
 
-Siguiendo la ejecución recursiva de samurai para la cadena \textsf{nonnegativedecimaltype} se ejecuta correctamente a \textsf{nonnegative decimal type}\cite{EHPV09}.
+La ejecución recursiva de samurai para la cadena \textsf{nonnegativedecimaltype} se ejecuta correctamente y divide la cadena \textsf{nonnegative decimal type}\cite{EHPV09}.
 
-Un problema son las palabras cortas, porque tienen mucha aparición en los códigos y la cota de score es mas alta que las palabras mas largas. Es por ello que la raíz cuadrada se coloca en el resultado de score antes de comparar(línea 12 y 13), sino la división frecuentemente seria errónea(Ejemplo: \textsf{per formed} no es correcta)\cite{EHPV09}.\\
+Un problema son las palabras de pocos caracteres, porque tienen mucha aparición en los códigos y la cota de score es mas alta que las palabras mas largas. Por esta razón la raíz cuadrada se coloca en el resultado de score antes de comparar(línea 12 y 13), sino la división frecuentemente seria errónea, un ejemplo de esto es \textsf{per formed}.\\
 
 \noindent \textbf{Función de Scoring}
 
@@ -700,7 +704,7 @@ Para que la técnica samurai pueda llevar a cabo la tarea de separación de ids 
 
 \begin{itemize}
 \itemsep0em%reduce espacio
-\item En la rutina \textit{mixedCaseSplit} para determinar si el la división del token es un caso de camel-case u otra variante.
+\item En la rutina \textit{mixedCaseSplit} para determinar si el la división del id es un caso de camel-case o no.
 
 \item En la rutina \textit{sameCaseSplit} para puntuar las diferentes particiones de substrings y elegir la mejor separación.
 \end{itemize}
@@ -722,17 +726,17 @@ El algoritmo de expansión de abreviaturas ideado por Lawrie, Feild, Binkley(mis
 
 \begin{itemize}
 \itemsep0em%reduce espacio
-\item Una lista de palabras (en lenguaje natural) que se extraen del código fuente.
+\item Una lista de palabras (en lenguaje natural) que se extraen del código.
 \item Una lista de frases (en lenguaje natural) presentes también en el código.
 \item Una lista de palabras irrelevantes (stop list).
 \item Una lista de palabras de un diccionario en inglés.
 \end{itemize}
 
-La primer lista se confecciona de la siguiente manera, para cada función \textit{f} dentro del código se crea una lista de palabras contenida en los comentarios que están antes o dentro de la función \textit{f} o también una lista de ids del tipo hardword(si existen) dentro de \textit{f}(Alcance local de la función). La lista de frases se arma utilizando una herramienta que las extrae, el principal recurso son los comentarios y los ids multi-palabras. En este punto se construye un acrónimo\footnote[1]{Abreviación formada por las primeras letras de cada palabra en una frase, ej gif: Graphics Interchange Format.} con las palabras de alguna frase, si ese acrónimo coincide con alguno de los ids extraídos, entonces esa frase se considera como potencial expansión (Ejemplo: la frase \textsf{file status exists} es una expansión posible en el id \textsf{fs\_exists}).
+La primer lista se confecciona de la siguiente manera, para cada función \textit{f} dentro del código se crea una lista de palabras que se extraen de los comentarios que están antes (comentarios JAVA Doc) o dentro de la función \textit{f}. También se incorporan los ids del tipo hardword(si existen) dentro del alcance local de \textit{f}. La lista de frases se arma utilizando una herramienta que las extrae, el principal recurso son los comentarios y los ids multi-palabras. En este punto se construye un acrónimo\footnote[1]{Abreviación formada por las primeras letras de cada palabra en una frase, gif: Graphics Interchange Format.} con las palabras de alguna frase, si ese acrónimo coincide con alguno de los ids extraídos, entonces esa frase se considera como potencial expansión (Ejemplo: la frase \textsf{file status exists} es una expansión posible en el id \textsf{fs\_exists}).
 
 Una vez que las listas de palabras y frases potenciales se confeccionan, la expansión comienza. Este proceso conlleva dos etapas, primero se chequean las listas con palabras extraídas del código y de los comentarios, en caso de no tener éxito la búsqueda continúa con el diccionario compuesto con palabras en inglés como último recurso.
 
-Las palabras en la lista de palabras irrelevantes(stop-list)\footnote[2]{Esta lista se usa con la misma política que samurai.} incluyen artículos (the, an, etc.) y palabras reservadas del lenguaje de programación que se este utilizando (\textsf{while, for, if,} etc.). El significado de estas palabras no aportan información importante en la comprensión del código y son fácilmente reconocidas por los ingenieros del software.
+Las palabras en la lista de palabras irrelevantes(stop-list)\footnote[2]{Esta lista se usa con la misma política que el algoritmo Greedy.} incluyen artículos (the, an, etc.) y palabras reservadas del lenguaje de programación que se este utilizando (\textsf{while, for, if,} etc.). El significado de estas palabras no aporta información importante en la comprensión del código y son fácilmente reconocidas por los ingenieros del software.
 
 %al igual que samurai stop list y steming usa tecnicas de ir - completar si es necesario
 
@@ -742,33 +746,30 @@ Esta técnica de expansión descripta solo retorna expansiones potenciales si ca
 %noindent elimina sangria
 %\noindent \textbf{\\Algoritmo 2}
 
-El algoritmo de expansión de abreviaturas que construyó Emily Hill, Zachary Fry, Haley Boyd\cite{EZH08} conocido como \textit{Automatically Mining Abbreviation Expansions in Programs} (AMAP) ademas de buscar potenciales expansiones al igual que el algoritmo anterior, también se encarga de seleccionar la que mejor se ajusta en caso de que haya mas de una elección y de esta forma mejoran los resultados esperados.
+El algoritmo de expansión de abreviaturas que construyó Emily Hill, Zachary Fry, Haley Boyd\cite{EZH08} conocido como \textit{Automatically Mining Abbreviation Expansions in Programs} (AMAP) ademas de buscar potenciales expansiones al igual que el algoritmo anterior, también se encarga de seleccionar la que mejor se ajusta en caso de que haya mas de un resultado posible.
 
 Una mejora destacable con respecto al algoritmo previo es que no se necesita un diccionario con palabras en lenguaje natural. Los diccionarios (en inglés) incluyen demasiadas palabras e implica disponer de un gran almacenamiento. 
 
 Las fuentes de palabras que se utilizan son una lista de abreviaciones comunes que se obtienen automáticamente desde distintos programas y puede a su vez incorporar palabras en forma personalizada. La lista palabras irrelevantes (stop-list) y la de contracciones más comunes se arman manualmente.
 
-Para agilizar la lectura se asigna el nombre de “palabras abreviadas” aquellas que necesitan expandirse y “palabras largas” a las palabras normales que no están abreviadas(expandidas).
+Para agilizar la lectura se asigna el nombre de “palabras abreviadas” aquellas que se desean expandir y “palabras largas” a las palabras normales que no están abreviadas.
 
 La técnica automatizada busca palabras largas candidatas para una palabra abreviada dentro del código con la misma filosofía que se usa en la construcción de una tabla de símbolos en un compilador.
 
-Se comienza con un alcance mas cercano donde se examinan sentencias vecinas a la palabra abreviada. Luego gradualmente el alcance estático crece para incluir métodos, comentarios de métodos, y los comentarios de la clase. Si la técnica no encuentra una palabra larga adecuada para una determinada palabra abreviada, la búsqueda continua mirando todo el programa y finalmente en JAVA SE 1.5. 
+Se comienza con el alcance estático mas cercano donde se examinan sentencias vecinas a la palabra abreviada. Luego gradualmente el alcance estático crece para incluir métodos, comentarios de métodos, y los comentarios de la clase. Si la técnica no encuentra una palabra larga adecuada para una determinada palabra abreviada, la búsqueda continua mirando todo el programa y finalmente en JAVA SE 1.5. 
 
 Los autores asumen que una palabra abreviada esta asociada a una sola palabra larga dentro de un método. Es inusual que dentro de un método una palabra abreviada posea mas de una expansión posible. En caso de que esto se cumpla se puede cambiar la asunción y estipular que una palabra abreviada solo tiene una sola expansión posible dentro de los bloques o achicando aun más solo dentro de las sentencias de código.
 
 
 A continuación se explican los siguientes ítems: 1) Como se realiza la búsqueda para encontrar palabras largas candidatas dentro de un método. 2) Como se buscan nuevas palabras si el alcance local del método no es suficiente. 3) Como se elije entre varias opciones posibles cual es la mejor expansión.
 
-Comenzando por el item 1, la búsqueda de las palabras largas contiene dos algoritmos, uno que recibe como entrada palabras abreviadas compuestas por una sola palabra(singulares) y el otro algoritmo se encarga de procesar multi-palabras.
-
-
-\\
+Comenzando por el item 1, la búsqueda de las palabras largas contiene dos algoritmos, uno que recibe como entrada palabras abreviadas compuestas por una sola palabra(singulares) y el otro algoritmo se encarga de procesar multi-palabras.\\
 
 \noindent \textbf{Búsqueda por Palabras Singulares\\}
 
 El primer paso para buscar palabras largas consiste en construir una expresión regular con un patrón de búsqueda.  Este patrón se encarga de seleccionar las palabras largas que coincidan con las letras de la palabra abreviada.
 
-La expresión regular se construye a partir de la palabra abreviada, a continuación se detalla como se arman los patrones: 
+La expresión regular se construye a partir de la palabra abreviada, a continuación se detalla como se arman los patrones: \\
 
 \begin{description}
 \itemsep0em%reduce espacio
@@ -780,7 +781,7 @@ La expresión regular se construye a partir de la palabra abreviada, a continuac
 
 \begin{figure}[h] %[h] para here [b] para bottom [t] para top
 \centering
-\includegraphics[scale=0.8]{./exp_1.png}
+\includegraphics[scale=0.7]{./exp_1.png}
 \caption{Algoritmo de Expansión de una sola Palabra.}
 \label{exp1}
 \end{figure}
@@ -788,16 +789,24 @@ La expresión regular se construye a partir de la palabra abreviada, a continuac
 
 En la figura \ref{exp1} se presenta un algoritmo\cite{EZH08} con un enfoque de búsqueda de palabras largas basada en abreviaturas compuestas por una sola palabra. Con el \textsf{if} de la línea 6 se impide básicamente dos cosas: que no se busquen palabras largas improbables de coincidir con la palabra abreviada pasada como entrada y que no se procesen palabras abreviadas con muchas vocales consecutivas. 
 
-Esta comprobado que la mayoría de las palabras abreviadas con vocales consecutivas se expanden como multi-palabras (ej: gui $\rightarrow$ graphical user interface, ‘ioe’ $\rightarrow$ invalid object exception) por ende de estos casos se encarga el algoritmo de la próxima sección.
+Esta comprobado que la mayoría de las palabras abreviadas con vocales consecutivas se expanden como multi-palabras (ej: \textsf{gui} $\rightarrow$ \textsf{graphical user interface}, \textsf{ioe} $\rightarrow$ \textsf{invalid object exception}) por ende de estos casos se encarga el algoritmo de la próxima sección.
 
-En este algoritmo los autores determinaron que el \textit{patrón compuesto por letras} no se usara. Este patrón es muy flexible y se eligen palabras largas incorrectas(ej de casos incorrectos: lang $\rightarrow$ loading, br $\rightarrow$ bar, mtc $\rightarrow$ matching).
+En este algoritmo los autores determinaron que el \textit{patrón compuesto por letras} no se usara. Este patrón es muy flexible y se eligen palabras largas incorrectas(ej de casos incorrectos: \textsf{lang} $\rightarrow$ \textsf{loading}, \textsf{br} $\rightarrow$ \textsf{bar}, \textsf{mtc} $\rightarrow$ \textsf{matching}).
 
-En las líneas 7-19 se describe el proceso de búsqueda. Si alguna de las sentencias de búsqueda encuentran un sola palabra larga candidata, el algoritmo finaliza y retorna el resultado. En la línea 8 se busca usando la palabra abreviada ($sf$) y el patrón dentro del comentario Java Doc en el método correspondiente. Si falla en la línea 9 se busca en los nombres de los tipos ubicados en las variables declaradas. Si no tiene éxito sigue en la línea 10 con el nombre del método. En caso de seguir sin resultado se continua en la línea 11 con distintas variantes del patrón en las sentencias.
+En las líneas 7-19 se describe el proceso de búsqueda. Si alguna de las sentencias de búsqueda encuentran un sola palabra larga candidata, el algoritmo finaliza y retorna el resultado. En la línea 8 se busca usando la palabra abreviada ($sf$) y el patrón dentro del comentario Java Doc en el método correspondiente. Si falla en la línea 9 se busca en los nombres de los tipos ubicados en las variables declaradas. Si no tiene éxito sigue en la línea 10 con el nombre del método. En caso de seguir sin resultado se continua en la línea 11 con distintas variantes del patrón en las sentencias. En la figura \ref{exp3} se pueden observar los distintos casos que se describieron.
 
-Si la ejecución continua, la línea 12 se restringe la búsqueda por palabras que tengan al menos 3 caracteres ya que generalmente aquellas con 2 tienden a ser multi-palabras (ej: \textsf{fl $\rightarrow$ file system} ver próxima sección). Luego en las líneas 13-14 se busca con el patrón en palabras del método y palabras de comentarios dentro del método.
+Si la ejecución continua, la línea 12 se restringe la búsqueda por palabras que tengan al menos 3 caracteres ya que generalmente aquellas con 2 tienden a ser multi-palabras (ej: \textsf{fl $\rightarrow$ file system} / ver próxima sección). Luego en las líneas 13-14 se busca con el patrón en palabras del método y palabras de comentarios dentro del método.
+
+\begin{figure}[h] %[h] para here [b] para bottom [t] para top
+\centering
+\includegraphics[scale=0.7]{./exp_3.png}
+\caption{Ejemplos de trozos de Código.}
+\label{exp3}
+\end{figure}
 
 Para finalizar en la línea 17 si la palabra abreviada es mas larga que un solo caracter y el patrón prefijo coincide, se comienza la búsqueda usando el patrón en los comentarios de la clase.\\
 
+\pagebreak
 \noindent \textbf{Búsqueda por Multi-Palabras\\}
 
 Al igual que la búsqueda por palabras singulares, la búsqueda por multi-palabras se va incrementando en el alcance de código hasta encontrar un candidato que coincida con el patrón. Sin embargo, es importante tener en cuenta hasta donde los patrones multi-palabras realizan la búsqueda. Por ejemplo, una abreviatura \textsf{il} puede coincidir con la frase “\textbf{i}t is importante to \textbf{l}imit” en la sentencia anterior. Se preprocesa el texto y los comentarios dentro del método sin ir mas allá de las declaraciones y de los ids propios del método. También se dividen los comentarios y los literales strings en frases usando signos de puntuación (?!,;). Las abreviaciones como \textsf{val} no se expanden a \textsf{verify and load}, por que las palabras irrelevantes (stop words en este caso \textsf{and}) se remueven de los comentarios y textos en el cuerpo del método.
@@ -806,26 +815,52 @@ Los patrones utilizados en las búsquedas multi-palabras se construyen:
 
 \begin{description}
 \itemsep0em%reduce espacio
-\item[Patrón acrónimo:] Se elaboró colocando la expresión regular [a-z]+[ ]+, después de cada letra de la palabra abreviada ($pa$). Si $pa=c_{1},c_{2},c_{3},..,c_{n}$, donde $n$ es la longitud de la palabra abreviada. El patrón queda: \mbox{$c_{1}$[a-z]+[ ]+$c_{2}$[a-z]+[ ]+$c_{3}$[a-z]+[ ]+..[a-z]+[ ]+$c_{n}$}. Permite encontrar acrónimos tales como \textbf{xml} $\rightarrow$ extensible markup language.
+\item[Patrón acrónimo:] Se elaboró colocando la expresión regular [a-z]+[ ]+, después de cada letra de la palabra abreviada ($pa$). Si $pa=c_{1},c_{2},c_{3},..,c_{n}$, donde $n$ es la longitud de la palabra abreviada. El patrón queda: \mbox{$c_{1}$[a-z]+[ ]+$c_{2}$[a-z]+[ ]+$c_{3}$[a-z]+[ ]+..[a-z]+[ ]+$c_{n}$}. Permite encontrar acrónimos tales como \textsf{xml} $\rightarrow$ \textsf{extensible markup language}.
 
-\item[Patrón de Combinación de Palabras:] En este caso el patrón se construye de manera similar al anterior pero se usa la expresión regular [a-z]*?[ ]*? despues de cada caracter de la palabra abreviada ($pa$). Si $pa=c_{1},c_{2},c_{3},..,c_{n}$, donde $n$ es la longitud de la palabra abreviada. El patrón queda:$c_{1}$[a-z]*?[ ]*?$c_{2}$[a-z]*?[ ]*?$c_{3}$[a-z]*?[ ]*?..[[a-z]*?[ ]*?$c_{n}$. De esta manera se pueden capturar palabras del tipo \textsf{arg} $\rightarrow$ \textbf{a}ccess \textbf{r}i\textbf{g}hts, permitiendo mas capturas que el patrón anterior.
+\item[Patrón de Combinación de Palabras:] En este caso el patrón se construye de manera similar al anterior pero se usa la expresión regular [a-z]*?[ ]*? despues de cada caracter de la palabra abreviada ($pa$). Si $pa=c_{1},c_{2},c_{3},..,c_{n}$, donde $n$ es la longitud de la palabra abreviada. El patrón queda: $c_{1}$[a-z]*?[ ]*?$c_{2}$[a-z]*?[ ]*?$c_{3}$[a-z]*?[ ]*?..[[a-z]*?[ ]*?$c_{n}$. De esta manera se pueden capturar palabras del tipo \textsf{arg} $\rightarrow$ \textsf{\textbf{a}ccess \textbf{r}i\textbf{g}hts}, permitiendo mas capturas que el patrón anterior.
 \end{description}
-
-
-El algoritmo presentado en la figura \ref{exp2} de búsqueda por multi-palabras\cite{EZH08} en la línea 6 se asegura de filtrar combinaciones de palabras largas incorrectas. Los patrones de combinación de palabras son menos restrictivos que los patrones de acrónimos y frecuentemente conllevan a malas decisiones. La búsqueda se restringe a palabras abreviadas ingresadas con longitud 4 ó mayor. Esto genera la sensación de que se pierden casos de 2 ó 3 caracteres pero estudios indican que son la minoría\cite{EZH08}.
- 
-Al igual que el algoritmo anterior en las líneas 8-10 se realiza la búsqueda primero en JAVA Doc, luego en nombres de tipos, después en nombres de los métodos. Dado que la complejidad de tiempo tiene cotas altas cuando se busca con expresiones regulares multi-palabras en sentencias, esta búsqueda no se realiza como se hizo en el algortimo anterior. En las siguientes líneas 11-13 se examinan los ids(incluyendo declaraciones), literales strings y comentarios del método. Finalmente en la línea 15 se busca en comentarios de la clase con el patrón acrónimo. Cabe aclarar que al igual que el \textit{patrón compuesto por letras}, el \textit{patrón de combinación de palabras} no se usa ya que puede tomar palabras largas incorrectas.
 
 
 \begin{figure}[h] %[h] para here [b] para bottom [t] para top
 \centering
-\includegraphics[scale=0.8]{./exp_2.png}
+\includegraphics[scale=0.7]{./exp_2.png}
 \caption{Algoritmo de Expansión Multi-Palabra.}
 \label{exp2}
 \end{figure}
 
+El algoritmo presentado en la figura \ref{exp2} de búsqueda por multi-palabras\cite{EZH08} en la línea 6 se asegura de filtrar combinaciones de palabras largas incorrectas. Los patrones de \textit{combinación de palabras} son menos restrictivos que los patrones de \textit{acrónimos} y frecuentemente conllevan a malas decisiones. La búsqueda se restringe a palabras abreviadas ingresadas con longitud 4 ó mayor. Esto genera la sensación de que se pierden casos de 2 ó 3 caracteres pero estudios indican que son la minoría\cite{EZH08}.
+ 
+Al igual que el algoritmo anterior en las líneas 8-10 se realiza la búsqueda primero en comentarios JAVA Doc, luego en nombres de tipos, después en nombres de los métodos (Figura \ref{exp3}). Dado que la complejidad de tiempo tiene cotas altas cuando se busca con expresiones regulares multi-palabras en sentencias, esta búsqueda no se realiza como se hizo en el algoritmo anterior. En las siguientes líneas 11-13 se examinan los ids(incluyendo declaraciones), literales strings y comentarios del método. Finalmente en la línea 15 se busca en comentarios de la clase con el patrón acrónimo. Cabe aclarar que al igual que el \textit{patrón compuesto por letras} en el algoritmo anterior, el \textit{patrón de combinación de palabras} en este caso no se usa ya que puede tomar palabras largas incorrectas.
+
+Finalmente después de observar cientos de casos de palabras largas los autores concluyen que el mejor orden de ejecución de las técnicas de búsqueda es ejecutar los patrones: acrónimo, prefijo, compuesto por letras, combinación de palabras.
+
+Si ninguna de las estrategias de expansión funciona en el ámbito local dentro de un método, se procede a buscar la palabra abreviada en un listado de contracciones mas comunes. Si finalmente sigue si poder encontrarse una coincidencia se recurre a la técnica conocida como expansión mas frecuente (MFE).\\
+
+\noindent \textbf{Decidir entre Múltiples Alternativas\\}
+
+Existe la posibilidad de que una abreviación posea múltiples alternativas potenciales de expansión dentro del mismo alcance estático. Por ejemplo el patrón prefijo para \textsf{val} puede coincidir \textsf{value} o \textsf{valid}. La técnica de elección entre múltiples candidatos procede de la siguiente manera:
+
+\begin{enumerate}
+\itemsep0em%reduce espacio
+\item Se elije la palabra larga dentro del alcance estático con mayor frecuencia de aparición. Tomando el ejemplo anterior para \textsf{val} si \textsf{value} aparece 3 veces y \textsf{valid} una sola vez, se elije la primera.
+
+\item Se agrupa las palabras largas con similares características. Por ejemplo si \textsf{def} coincide con \textsf{defaults}, \textsf{default} y \textsf{define} donde todas aparecen 2 veces, en este caso se agrupa las 2 primeras en solo \textsf{default} con una cantidad de 4 predominando sobre \textsf{define}.
+
+\item En caso de que la igualdad persista, se acumulan las frecuencias de aparición entre las distintas búsquedas para determinar un solo candidato. Por ejemplo, si el id \textsf{fs} coincide con \textsf{file system} y \textsf{file socket} ambas con 2 apariciones en los comentarios de JAVA Doc, si en la búsquedas siguientes nombres de tipos de ids, literales, comentarios aparece \textsf{file socket} este termina prevaleciendo sobre \textsf{file system}.
+
+\item Finalmente si todas las anteriores fallan se recurre al método de expansión mas frecuente (MFE). 
+
+\end{enumerate}
 
 \pagebreak
+\noindent \textbf{Expansión Más Frecuente (MFE)\\}
+
+La estrategia MFE\cite{EZH08} mejora la precisión de acertar con la expansión de una abreviatura. La idea consiste en ejecutar la misma estrategia local de expansión de abreviaturas explicada anteriormente pero sobre el programa entero. Para cada palabra abreviada, se cuenta el numero de veces que esa palabra se le asigna una palabra larga candidata. Luego se calcula la frecuencia relativa de una palabra abreviada con respecto a cada palabra larga encontrada. La palabra larga con mayor frecuencia relativa se considera la expansión mas frecuente. Al final del proceso se agrupan las palabras largas potenciales en un listado de MFE.
+
+Sin embargo suele pasar que la expansión mas probable es la incorrecta. Para evitar que suceda se considera a su vez que una palabra larga debe superar en su frecuencia relativa mas de la mitad (0.5) y también que una palabra abreviada tenga al menos 3 asignaciones de palabras largas candidatas en todo el programa.
+
+La técnica MFE tiene 2 niveles, el primero es a nivel de programa y el otro mas general a nivel JAVA. El nivel de programa es ideal ya que expande las abreviaturas con palabras propias del dominio del problema. El nivel mas general se arma con la API de Java. En la tabla \ref{tab_mfe} se muestra algunos casos de frecuencias relativas mas altas de JAVA 5. En caso de que una palabra abreviada no obtenga un candidato de expansión MFE también puede entrenarse sobre una gran cantidad de programas JAVA para mejorar la precisión. A su vez también existe la posibilidad de armar una lista a mano para casos puntuales de expansión que no son de frecuente aparición. Otras soluciones propuestas son entrenar sobre documentación online relacionada a JAVA o documentación vinculada a la ciencias de computación en general.
+
 \begin{table}
 \begin{center}
    \begin{tabular}{| l |l | l |}
@@ -841,23 +876,12 @@ Al igual que el algoritmo anterior en las líneas 8-10 se realiza la búsqueda p
 \end{center}   
 \end {table}
 
-Si ninguna de las estrategias de expansión funciona en el ámbito local dentro de un método, se procede a buscar la palabra abreviada en un listado de contracciones mas comunes. Si finalmente sigue si poder encontrarse una coincidencia se recurre a la técnica conocida como expansión mas frecuente (MFE).\\
 
-\noindent \textbf{Expansión Más Frecuente (MFE)\\}
-
-La estrategia MFE\cite{EZH08} mejora la precisión de acertar con la expansión de una abreviatura. La idea consiste en ejecutar la misma estrategia local de expansión de abreviaturas explicada anteriormente pero sobre el programa entero. Para cada palabra abreviada, se cuenta el numero de veces que esa palabra se le asigna una palabra larga candidata. Luego se calcula la frecuencia relativa de una palabra abreviada con respecto a cada palabra larga encontrada. La palabra larga con mayor frecuencia relativa se considera la expansión mas frecuente. Al final del proceso se agrupan las palabras largas potenciales en un listado de MFE.
-
-Sin embargo suele pasar que la expansión mas probable es la incorrecta. Para evitar que suceda se considera a su vez que una palabra larga debe superar en su frecuencia relativa mas de la mitad (0.5) y también que una palabra abreviada tenga al menos 3 asignaciones de palabras largas candidatas en todo el programa.
-
-La técnica MFE tiene 2 niveles, el primero es a nivel de programa y el otro mas general a nivel JAVA. El nivel de programa es ideal ya que expande las abreviaturas con palabras propias del dominio del problema. El nivel mas general se arma con la API de Java. En la tabla \ref{tab_mfe} se muestra algunos casos de frecuencias relativas mas altas de JAVA 5. En caso de que una palabra abreviada no obtenga un candidato de expansión MFE también puede entrenarse sobre una gran cantidad de programas JAVA para mejorar la precisión. A su vez también existe la posibilidad de armar una lista a mano para casos puntuales de expansión que no son de frecuente aparición. Otras soluciones propuestas son entrenar sobre documentación online relacionada a JAVA o documentación vinculada a la ciencias de computación en general.
-
-Este algoritmo de expansión de abreviaturas es totalmente automatizado y se implementó como un plugin de Eclipse. Actualmente solo soporta procesamiento por lotes pero se tiene pensado que corra en segundo plano brindando apoyo a herramientas de mantenimiento de software\cite{EZH08}.
-
-
-
+Este algoritmo de expansión de abreviaturas es totalmente automatizado y se implementó como un plugin de Eclipse. Actualmente solo soporta procesamiento por lotes pero se tiene pensado que corra en segundo plano brindando apoyo a herramientas de mantenimiento de software\cite{EZH08}.\\
 
 %Extracting meaning - lawrie
-%A continuación se presenta una herramienta que basa su análisis solo en ids nombrados de la forma hardword. La herramienta realiza una reestructuración de nombres de ids. Los nombres se cambian por nombres mas explicativos agregando un verbo que indica la función del id en el código, mas precisamente después de renombrar los ids se visualiza claramente el rol que cumple el id en el programa\cite{EZH08,DCHD06,DLHD06,LFBEX07,BCPT00,BCPT99}.
+Hasta ahora se han descripto algoritmos y técnicas que recientemente se pensaron y elaboraron. En la próxima sección se presenta una herramienta que fue construida en los comienzos de los estudios basados en ids. La herramienta se encarga de hacer una reestructuración de nombres de ids y es tomada como objeto de estudio por varios autores\cite{EZH08,DCHD06,DLHD06,LFBEX07}.
+
 
 
 %tonella-caprile
@@ -872,12 +896,15 @@ Este algoritmo de expansión de abreviaturas es totalmente automatizado y se imp
 \end{figure}
 
 La herramienta Restructuring Tool\cite{BCPT00} se encarga de recibir como entrada un código fuente escrito en lenguaje C y luego a través de un proceso de transformación cada nombramiento de los ids(solo trabaja con ids del tipo hardword), se expande a palabras completas, retornando de esta manera el mismo código pero con los ids expandidos.
+
+Los nombres se cambian por nombres mas explicativos agregando un verbo que indica la función del id en el código, mas precisamente después de renombrar los ids se visualiza claramente el rol que cumple el id en el programa.
+
 El código fuente se convierte de esta manera en un código mas entendible y mejora la comprensión. El proceso consta de tres etapas (Figura \ref{ire1}): 
 
 \begin{enumerate}
 \itemsep0em%reduce espacio
 \item \textbf{Identifier Extractor:} Recupera una lista con los nombres de los ids presentes en el código. Este módulo se programó con un parser modificado de C que reconoce los ids y los extrae.
-\item \textbf{Identifier Restructurer:} Genera una asociación entre el nombramiento actual del id y un nombramiento nuevo estándar, expandido y más claro. El primer paso consiste en segmentar el id en las palabras que lo constituyen, después cada palabra se expande usando un diccionario de palabras estándar (estándar léxico) y finalmente la secuencia de palabras del id debe coincidir con reglas predefinidas por una gramática para determinar que acción cumple el id en el código (estándar sintáctico).
+\item \textbf{Identifier Restructurer:} Genera una asociación entre el nombramiento actual del id y un nuevo nombramiento estándar expandido. El primer paso consiste en segmentar el id en las palabras que lo constituyen, después cada palabra se expande usando un diccionario de palabras estándar (estándar léxico) y finalmente la secuencia de palabras del id debe coincidir con reglas predefinidas por una gramática para determinar que acción cumple el id en el código \mbox{(estándar sintáctico).}
 \item \textbf{Identifier Replacer:} Transforma el código original en el nuevo código usando las asociaciones que se construyeron en la etapa anterior. Se emplea un scanner léxico para evitar reemplazar posibles nombres de ids contenidos en literales strings y en comentarios.
 \end{enumerate}
 
@@ -897,7 +924,7 @@ Los pasos 1 y 3 están totalmente automatizados. Sin embargo no sucede lo mismo 
 \label{ire3}
 \end{figure}
 
-A continuación se detalla el paso 2 que es el mas importante de esta herramienta (Figura \ref{ire2}).
+A continuación se detalla el paso 2 que es el mas importante de esta herramienta, en la Figura \ref{ire2} se desglosa las diferentes etapas.
 
 \begin{description}
 \itemsep0em%reduce espacio
@@ -905,9 +932,9 @@ A continuación se detalla el paso 2 que es el mas importante de esta herramient
 
 \item[Standard Lexicon:] Una vez lograda la separación de las palabras estas son mapeadas a una forma estándar(expandidas) con la ayuda de un diccionario léxico\cite{BCPT99}(Ejemplo: \textsf{upd} $\rightarrow$ \textsf{Update}). Este diccionario puede ser definido por el usuario al igual que el procedimiento para actualizarlo. En caso de que no exista una asociación se puede construir un diccionario de sinónimos con términos extraídos del código fuente que se consideran estándares y sino el usuario puede realizar la expansión manualmente. Para comenzar el análisis los autores\cite{BCPT00} de la herramienta construyeron los diccionarios de manera genérica tomando como muestra 10 programas. Sin embargo se aconseja que con el tiempo los diccionarios deben crecer con la inclusión de nuevos términos.
 
-\item[Tokenization:] Una vez obtenidas las palabras a una forma estándar en el paso anterior, se procede a asignar cada palabra a un \textit{tipo léxico} (verbo, sustantivo, adjetivo). Por ejemplo la palabra Update $\rightarrow$ $<$Update,verb$>$ y Standard $\rightarrow$ $<$Standard,adjective$>$. Esta tuplas se denominan tokens y se utiliza un `diccionario de tipos' para generarlos de manera automática, este diccionario al igual que los otros se arma previamente a gusto del programador\cite{BCPT99}. Sin embargo existen casos que se necesita la intervención humana para determinar el tipo correcto, por ejemplo: free en inglés es un verbo, adjetivo y a la vez un adverbio en este caso la herramienta va a elegir lo que el diccionario le indique (si free esta presente).
+\item[Tokenization:] Una vez obtenidas las palabras a una forma estándar en el paso anterior, se procede a asignar cada palabra a un \textit{tipo léxico} (verbo, sustantivo, adjetivo). Por ejemplo la palabra Update $\rightarrow$ $<$Update,verb$>$ y Standard $\rightarrow$ $<$Standard,adjective$>$. Esta tuplas se denominan tokens y se utiliza un `diccionario de tipos' para generarlos de manera automática, este diccionario al igual que los otros se arma previamente a gusto del programador\cite{BCPT99}. Sin embargo existen casos que se necesita la intervención humana para determinar el tipo correcto, por ejemplo: free en inglés es un verbo, es un adjetivo y a la vez un adverbio.% En este caso la herramienta va a elegir lo que el diccionario le indique (si free esta presente).
 
-\item[Parsing:] Finalmente la secuencia de tokens obtenidos en la etapa anterior se parsea usando una gramática predefinida para determinar cual es el rol/acción del id en código fuente de esta manera se determina la `acción semántica' del id. Esta gramática puede ser construida por el usuario, en la figura \ref{ire3} se muestra la desarrollada por los autores. Es una gramática regular donde los símbolos terminales están indicados con $<>$, las producciones con negrita indican distintos tipos de ids donde el verbo expresa la acción y el sustantivo representa al objeto de la acción, por ejemplo \textbf{ActionOnObject} $\Rightarrow$ $<$verb$>$,$<$noun$>$ $\equiv$ $<$go,home$>$ por ejemplo.
+\item[Parsing:] Finalmente la secuencia de tokens obtenidos en la etapa anterior se parsea usando una gramática predefinida para determinar cual es el rol/acción del id en el código fuente y de esta manera se determina la `acción semántica' del id. Esta gramática puede ser construida por el usuario, en la figura \ref{ire3} se muestra la desarrollada por los autores. Es una gramática regular donde los símbolos terminales están indicados con $<>$, las producciones con negrita indican distintos tipos de ids donde el verbo expresa la acción y el sustantivo representa al objeto de la acción, por ejemplo \textbf{ActionOnObject} $\Rightarrow$ $<$verb$>$,$<$noun$>$ $\equiv$ $<$go,home$>$ por ejemplo.
 
 En caso de que el parseo falle el proceso se reinicia desde el comienzo partiendo nuevamente de la etapa de segmentación\cite{BCPT00} (figura \ref{ire2}).
 \end{description}
@@ -919,13 +946,25 @@ En caso de que el parseo falle el proceso se reinicia desde el comienzo partiend
 \label{ire4}
 \end{figure}
 
-La interfaz de usuario de \textbf{Identifier Restructurer} se visualiza en la figura \ref{ire4}, el id de entrada se muestra en el primer cuadro de texto \textsf{updstd\_form}. Se usa heurísticas sencillas(guión bajo, camel-case) para separar las palabras del id, en este caso \textsf{updstd} y \textsf{form}. Como esta segmentación esta incompleta el usuario puede separar manualmente en el segundo cuadro de texto la palabra \textsf{upd} y \textsf{std}. En el tercer cuadro de texto se propone la forma estándar de cada palabra. Cuando una palabra no se puede expandir la herramienta muestra un signo de pregunta en su lugar (?). En este caso \textsf{upd} $\rightarrow$ \textsf{Update}, \textsf{std} $\rightarrow$ (?), \textsf{form} $\rightarrow$ \textsf{Form}, como \textsf{std} no esta presente en el diccionario se necesita la intervención del desarrollador para que se complete correctamente a \textsf{Standard}. Luego las palabras expandidas son asociadas a la función gramatical. En esta etapa puede existir para una secuencia de palabras mas de una función gramatical(la gramática es ambigua y puede generar mas de una secuencia de tokens). En caso de suceder esto el usuario puede elegir cual es la secuencia mas adecuada, en el ejemplo no ocurre esto y la única posibilidad es mostrada en el cuarto cuadro de texto(figura \ref{ire4}). Finalmente el resultado se muestra en en cuadro de texto de mas abajo y en el cuadro de Parsing se puede apreciar la acción que aplica el id, en este caso \textbf{ActionOnObject(Update,Form)} `actualizar formulario'.
+La interfaz de usuario de \textbf{Identifier Restructurer} se visualiza en la figura \ref{ire4}, el id de entrada se muestra en el primer cuadro de texto \textsf{updstd\_form}. Se usa heurísticas sencillas(guión bajo, camel-case) para separar las palabras del id, en este caso \textsf{updstd} y \textsf{form}. Como esta segmentación esta incompleta el usuario puede separar manualmente en el segundo cuadro de texto la palabra \textsf{upd} y \textsf{std}. En el tercer cuadro de texto se propone la forma estándar de cada palabra. Cuando una palabra no se puede expandir la herramienta muestra un signo de pregunta en su lugar (?). En este caso \textsf{upd} $\rightarrow$ \textsf{Update}, \textsf{std} $\rightarrow$ (?), \textsf{form} $\rightarrow$ \textsf{Form}, como \textsf{std} no esta presente en el diccionario se necesita la intervención del desarrollador para que se complete correctamente a \textsf{Standard}. Luego las palabras expandidas son asociadas a la función gramatical. En esta etapa puede existir para una secuencia de palabras mas de una función gramatical(la gramática es ambigua y puede generar mas de una secuencia de tokens). En caso de suceder esto el usuario puede elegir cual es la secuencia mas adecuada. En el ejemplo mostrado solo existe una única función gramatical y es reflejada en el cuarto cuadro de texto(figura \ref{ire4}). Luego en el cuadro de Parsing se puede apreciar la acción que aplica el id, en este caso \textbf{ActionOnObject(Update,Form)} `actualizar formulario'. Finalmente el resultado se detalla en el último cuadro de texto de mas abajo.
 
 Cuando se arma la asociación de los nombres ids con los nuevos nombres generados la misma debería cumplir con la propiedad de inyectividad, de esta forma se evita que haya conflictos de nombres entre los distintos ids del programa. Al final de esta etapa la herramienta ayuda al programador a conseguir este objetivo resaltando los posibles conflictos en los nombres.
 
-Finalmente la etapa \textbf{Identifier Replacer} toma todas las ocurrencias del id \textsf{updstd\_form} y se reemplaza por \textsf{UpdateStandarForm}, como se mencionó con anterioridad.
+Para concluir la etapa \textbf{Identifier Replacer} toma todas las ocurrencias del id \textsf{updstd\_form} y se reemplaza por \textsf{UpdateStandarForm}, como se mencionó con anterioridad.
 
 \section{Conclusiones}
+
+Las observaciones que se destacan en el estado del arte de las técnicas de análisis de ids apuntan al nombramiento correcto de los ids. Al comienzo de este capitulo se detalló una herramienta que ayuda a lograr esta meta, sin embargo no trascendió ya que es costosa de utilizar sobre grandes proyectos de software y solo es efectiva cuando se emplea desde el arranque del desarrollo de un sistema.
+
+El correcto nombramiento en los ids es crucial para la comprensión de los sistemas. Además en este contexto se facilitan las tareas que realizan las herramientas/técnicas encargadas de extraer conceptos del dominio del problema basándose en ids. 
+
+Estas herramientas/técnicas han ido evolucionando con el pasar del tiempo. Al principio algunas etapas necesitaban la intervención del usuario para realizar las tareas, se puede decir entonces que usaban procesos semi-automatizados. A medida que se construyeron nuevas técnicas, se buscó más la automatización haciendo que el programador se involucre menos.
+
+Como se mencionó en este capítulo, las primeras técnicas utilizaban netamente diccionarios de palabras en lenguaje natural, lo cual requiere mucho espacio de almacenamiento. Mas tarde se intentó disminuir el uso de estos diccionarios mirando más los recursos internos de información dentro los sistemas, como es el caso de los comentarios, literales strings y la documentación.
+
+Sin embargo, suele ocurrir que estos recursos internos son escasos, entonces los autores de las recientes técnicas decidieron recurrir a procesos que examinan programas de gran envergadura y recolectar palabras útiles que ayuden a traducir el significado de los ids en los códigos. De esta forma se dispone de diccionarios con bajas exigencias de almacenamiento y que están constituidos de palabras mas adecuadas al ámbito de las ciencias de la computación.
+
+
 %Con este estudio se puede observar que los ids son una fuente importante de información, por eso elaborar técnicas que analicen ids es un aporte destacado para la CP.
 
 %\section{Técnicas de División de Identificadores}

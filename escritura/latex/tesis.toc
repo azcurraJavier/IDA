@@ -16,14 +16,14 @@
 \contentsline {section}{\numberline {3.2}Conceptos claves}{23}
 \contentsline {section}{\numberline {3.3}Nombramiento de Identificadores}{24}
 \contentsline {subsection}{\numberline {3.3.1}Clasificaci\IeC {\'o}n}{24}
-\contentsline {subsection}{\numberline {3.3.2}Nombramiento Sint\IeC {\'a}ctico vs Sem\IeC {\'a}ntico}{25}
+\contentsline {subsection}{\numberline {3.3.2}Importancia del Nombramiento}{25}
 \contentsline {subsection}{\numberline {3.3.3}Herramienta: Identifier Dictionary}{29}
-\contentsline {section}{\numberline {3.4}Traducci\IeC {\'o}n de Identificadores}{32}
-\contentsline {subsection}{\numberline {3.4.1}Introducci\IeC {\'o}n}{32}
-\contentsline {subsection}{\numberline {3.4.2}Conceptos y Desaf\IeC {\'\i }os observados}{32}
-\contentsline {subsection}{\numberline {3.4.3}Algoritmo de Divisi\IeC {\'o}n: Greedy}{34}
-\contentsline {subsection}{\numberline {3.4.4}Algoritmo de Divisi\IeC {\'o}n: Samurai}{35}
-\contentsline {subsection}{\numberline {3.4.5}Algoritmo de Expansi\IeC {\'o}n B\IeC {\'a}sico}{40}
-\contentsline {subsection}{\numberline {3.4.6}Algoritmo de Expansi\IeC {\'o}n AMAP}{41}
-\contentsline {subsection}{\numberline {3.4.7}Herramienta: Identifier Restructuring}{49}
-\contentsline {section}{\numberline {3.5}Conclusiones}{54}
+\contentsline {section}{\numberline {3.4}Traducci\IeC {\'o}n de Identificadores}{33}
+\contentsline {subsection}{\numberline {3.4.1}Introducci\IeC {\'o}n}{33}
+\contentsline {subsection}{\numberline {3.4.2}Conceptos y Desaf\IeC {\'\i }os observados}{33}
+\contentsline {subsection}{\numberline {3.4.3}Algoritmo de Divisi\IeC {\'o}n: Greedy}{35}
+\contentsline {subsection}{\numberline {3.4.4}Algoritmo de Divisi\IeC {\'o}n: Samurai}{36}
+\contentsline {subsection}{\numberline {3.4.5}Algoritmo de Expansi\IeC {\'o}n B\IeC {\'a}sico}{41}
+\contentsline {subsection}{\numberline {3.4.6}Algoritmo de Expansi\IeC {\'o}n AMAP}{42}
+\contentsline {subsection}{\numberline {3.4.7}Herramienta: Identifier Restructuring}{52}
+\contentsline {section}{\numberline {3.5}Conclusiones}{57}
