@@ -54,12 +54,15 @@
 %\end{abstract}
 
 \begin{abstract}
-Las demandas actuales en el desarrollo del software implican una evolución y mantenimiento constante del mismo con el menor costo de tiempo y de recursos. Pensar en estrategias que faciliten las tediosas tareas que diariamente conllevan al crecimiento de los sistemas nos da incapie a iniciarnos en la investigación de herramientas automatizadas que posibiliten el reemplazo del esfuerzo manual que realizan los ingenieros de software a la hora de interpretar un programa.
+Las demandas actuales en el desarrollo del software implican una evolución y mantenimiento constante del mismo con el menor costo de tiempo y de recursos. La ingeniería del software (IS) se encarga de llevar adelante esta tarea. Dentro de la IS existe el área de Comprensión de Programas (CP). Esta área se dedica a agilizar la comprensión de los sistemas de software, en base al desarrollo de  Métodos, Técnicas, Estrategias y Herramientas. Las técnicas de extracción de información estáticas es una de ellas y se encargan de recolectar componentes relevantes del código sin necesidad de ejecutar el programa. Uno de los componentes que abundan en los códigos son los identificadores (ids). Los estudios indican que los ids esconden detrás de sus abreviaturas indicios de las funcionalidades de los sistemas. Por ende construir herramientas automatizadas que extraigan y analicen ids es un gran aporte al área de CP. La extracción de ids es lo mas sencillo y se logra con un parser construido a medida, mientras que el análisis es mas complicado, la forma en que cada ids son nombrados depende de cada programador. Una aproximación a una solución es tomar cada id extraído y someterlo a un proceso de expansión de abreviaturas. Al expandir las abreviaturas del id a palabras completas se podrá esclarecer que funcionalidad aporta en el sistema. Para lograr esta expansión se emplean distintas fuentes compuestas de información informal: comentarios, literales, documentación o bien con fuentes externas al sistema basándose en diccionarios de palabras. 
 
-Estudios indican que los identificadores abundan en los códigos de programas y poseen información relevante detrás de sus abreviaturas por lo tanto no debe ser pasados por alto su análisis cuando se están elaborando herramientas automatizadas de interpretación de códigos.
-El correspondiente trabajo habla de técnicas basadas en el análisis de identificadores en códigos escritos en lenguaje JAVA\texttrademark .
-Se utilizan técnicas de compilación para capturar identificadores.
-Luego las técnicas de análisis de identificadores constan de dos etapas la primera consiste en la división de las distintas abreviaturas que componen un identificador y la segunda etapa se encarga de la expansión “semántica” de cada abreviatura obtenida en la etapa previa, es decir, expandir las abreviaciones en palabras completas. Para lograr esta expansión se emplean distintas fuentes compuestas de información informal: comentarios, literales, documentación o bien con fuentes externas al sistema basándose en diccionarios. Cada una de las estrategias de análisis de identificadores utilizan distintas políticas es por ello que algunas se implementaron en la herramienta \textit{Identifier Analyzer} (IDA) con el objetivo de poder comparar el desempeño de cada estrategia en base a distintos casos de estudio y así arribar a conclusiones.
+En este trabajo final se describen distintas políticas de análisis de ids. También se desarrolló una herramienta \textit{Identifier Analyzer} (IDA) que implementan algunas de estas políticas, con el objetivo de comparar el desempeño de cada una en base a distintos casos de estudio y así arribar a conclusiones.
+
+
+
+
+%Pensar en estrategias que faciliten las tediosas tareas que diariamente conllevan al crecimiento de los sistemas nos da incapie a iniciarnos en la investigación de herramientas automatizadas que posibiliten el reemplazo del esfuerzo manual que realizan los ingenieros de software a la hora de interpretar un programa.
+
 
 \end{abstract}
 
@@ -68,10 +71,13 @@ Luego las técnicas de análisis de identificadores constan de dos etapas la pri
 %CAPITULO1=============================================================
 
 \chapter{Introducción}
-\section{Problema}
+\section{El Problema}
 
 
-La ingeniería de software contiene tres temáticas muy importantes en desarrollo de los sistemas: el \textit{mantenimiento del software}, la \textit{evolución del software} y la \textit{migración del software}. Para que puedan llevar a cabo sus iniciativas las tres necesitan interpretar previamente el sistema que se esta desarrollando.
+La ingeniería de software contiene tres temáticas muy importantes en desarrollo de los sistemas: el \textit{mantenimiento del software}, la \textit{evolución del software} y la \textit{migración del software}. 
+
+
+Para que puedan llevar a cabo sus iniciativas las tres necesitan interpretar previamente el sistema que se esta desarrollando.
 
 La etapa de mantenimiento es importante en el desarrollo de un software ya que este esta sujeto a cambio y a una permanente evolución\cite{PFT02}.
 Es común también que por la constate actualización de los sistemas operativos, los motores de base de datos y demás sistemas externos que interactúan con el software desarrollado entren en conflicto, por eso en la fase de mantenimiento también se debe ir actualizando los distintos componentes del producto para una mejor compatibilidad.\cite{RSPMGH02}. Por lo antedicho entre otras diversas razones indican que el mantenimiento del software consume mucho esfuerzo y dinero. Es necesario pensar en estrategias de automatización que puedan ser aplicadas en fases del mantenimiento del software que ayuden a reducir estos costos, para lograrlo se requiere una comprensión del objeto que se va a modificar antes de realizar algún cambio que sea de utilidad.
