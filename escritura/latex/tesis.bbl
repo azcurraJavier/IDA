@@ -1,5 +1,20 @@
 \begin{thebibliography}{10}
 
+\bibitem{AHUL06}
+R.~Sethi A.~V.~Aho and J.~D. Ullman.
+\newblock Compilers principles, techniques and tools.
+\newblock 2006.
+
+\bibitem{THBE99}
+Thoms Bell.
+\newblock The concept of dynamic analysis.
+\newblock 1999.
+
+\bibitem{KBVR00}
+Keith~H. Bennett and Vaclav~T. Rajlich.
+\newblock Software maintenance and evolution: a roadmap.
+\newblock 2000.
+
 \bibitem{MBPHRU10}
 M.~Beron, P.~Henriques, and R.~Uzal.
 \newblock {\em Inspección de Programas para Interconectar las Vistas
@@ -7,7 +22,7 @@ M.~Beron, P.~Henriques, and R.~Uzal.
 \newblock PhD thesis, Universidade do Minho, Braga. Portugal, 2010.
 
 \bibitem{MPMR07}
-Mario Beron, Pedro~R. Henriques, Maria~J. Varanda, and RobertoUzal.
+Mario Beron, Pedro~R. Henriques, Maria~J. Varanda, and Roberto Uzal.
 \newblock Program inspection to inter-connect the operational and behavioral
   views for program comprehension.
 \newblock 2007.
@@ -34,12 +49,6 @@ Bruno Caprile and Paolo Tonella.
 \newblock Restructuring program identifier names.
 \newblock IEEE Computer Society, 2000.
 
-\bibitem{DCPHJP09}
-Daniela da~Cruz, Pedro~Rangel Henriques, and Jorge~Sousa Pinto.
-\newblock Code analysis: Past and present.
-\newblock {\em Proceeding of the Third International Workshop on Foundations
-  and Techniques for Open Source Software Certification}, 2009.
-
 \bibitem{DMDJ13}
 Dawn~Lawrie Dave~Binkley, Marcia~Davis and Bonita Sharif.
 \newblock The impact of identifier style on effort and comprehension.
@@ -59,18 +68,6 @@ Henry~Feild Dawn~Lawrie and David Binkley.
 Henry~Feild Dawn~Lawrie, Christopher~Morrell and David Binkley.
 \newblock What’s in a name? a study of identifiers.
 \newblock 2006.
-
-\bibitem{TERD01}
-Thomas Eisenbarth, Rainer Koschke, and Daniel Simon.
-\newblock Aiding program comprehension by static and dynamic feature analysis.
-\newblock page 602, 2001.
-
-\bibitem{DWE04}
-David~W. Embley.
-\newblock Toward semantic understanding: an approach based on information
-  extraction ontologies.
-\newblock Australian Computer Society, Inc. Darlinghurst, Australia, Australia,
-  2004.
 
 \bibitem{EZH08}
 Haley~Boyd Emily~Hill, Zachary P.~Fry.
@@ -149,10 +146,5 @@ Marco Torchiano and Massimiliano~Di Penta.
 \newblock Software migration projects in italian industry: Preliminary results
   from a state of the practice survey.
 \newblock 2007.
-
-\bibitem{VMAVA95}
-A.~Von~Mayrhauser and A.~M. Vans.
-\newblock Program comprehension during software maintenance and evolution.
-\newblock {\em Computer}, 28(8):44--55, 1995.
 
 \end{thebibliography}

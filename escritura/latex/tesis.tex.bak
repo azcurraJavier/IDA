@@ -54,12 +54,11 @@
 %\end{abstract}
 
 \begin{abstract}
-Las demandas actuales en el desarrollo del software implican una evolución y mantenimiento constante del mismo con el menor costo de tiempo y de recursos. La ingeniería del software (IS) se encarga de llevar adelante esta tarea. Dentro de la IS existe el área de Comprensión de Programas (CP). Esta área se dedica a agilizar la comprensión de los sistemas de software, en base al desarrollo de  Métodos, Técnicas, Estrategias y Herramientas. Las técnicas de extracción de información estáticas es una de ellas y se encargan de recolectar componentes relevantes del código sin necesidad de ejecutar el programa. Uno de los componentes que abundan en los códigos son los identificadores (ids). Los estudios indican que los ids esconden detrás de sus abreviaturas indicios de las funcionalidades de los sistemas. Por ende construir herramientas automatizadas que extraigan y analicen ids es un gran aporte al área de CP. La extracción de ids es lo mas sencillo y se logra con un parser construido a medida, mientras que el análisis es mas complicado, la forma en que cada ids son nombrados depende de cada programador. Una aproximación a una solución es tomar cada id extraído y someterlo a un proceso de expansión de abreviaturas. Al expandir las abreviaturas del id a palabras completas se podrá esclarecer que funcionalidad aporta en el sistema. Para lograr esta expansión se emplean distintas fuentes compuestas de información informal: comentarios, literales, documentación o bien con fuentes externas al sistema basándose en diccionarios de palabras. 
+Las demandas actuales en el desarrollo del software implican una evolución y mantenimiento constante del mismo con el menor costo de tiempo y de recursos. La ingeniería del software (IS) se encarga de llevar adelante esta tarea. Dentro de la IS existe el área de Comprensión de Programas (CP). Esta área se dedica a agilizar la comprensión de los sistemas de software, en base al desarrollo de  Métodos, Técnicas, Estrategias y Herramientas. La técnica de extracción de información estática es una de ellas y se encarga de recolectar componentes relevantes del código sin necesidad de ejecutar el programa. Un componente conocido que abundan en los códigos son los identificadores (ids). Los estudios indican que los ids esconden detrás de sus abreviaturas indicios de las funcionalidades de los sistemas. Por ende cons\-truir herramientas automatizadas que extraigan y analicen ids es un gran aporte al área de CP. La extracción de ids es lo mas sencillo y se logra con un parser construido a medida. Sin embargo el análisis del significado de los ids es mas complicado ya que el nombramiento de estos depende de cada programador. Una aproximación a una solución es tomar cada id extraído y someterlo a un proceso de expansión de abreviaturas. Al expandir las abreviaturas del id a palabras completas se podrá esclarecer que funcionalidad aporta en el sistema. Para lograr esta expansión se emplean distintas fuentes compuestas de información informal: comentarios, literales, documentación o bien con fuentes externas al sistema basándose en diccionarios de palabras. 
 
-En este trabajo final se describen distintas políticas de análisis de ids. También se desarrolló una herramienta \textit{Identifier Analyzer} (IDA) que implementan algunas de estas políticas, con el objetivo de comparar el desempeño de cada una en base a distintos casos de estudio y así arribar a conclusiones.
+En este trabajo final se describen distintas estrategias que analizan los ids en base a la expansión. 
 
-
-
+También se desarrolló una herramienta en JAVA llamada \textit{Identifier Analyzer} (IDA) que implementan algunas de estas estrategias, con el objetivo de comparar el desempeño de cada una de acuerdo con distintos casos de estudio y de esta forma arribar a conclusiones.
 
 %Pensar en estrategias que faciliten las tediosas tareas que diariamente conllevan al crecimiento de los sistemas nos da incapie a iniciarnos en la investigación de herramientas automatizadas que posibiliten el reemplazo del esfuerzo manual que realizan los ingenieros de software a la hora de interpretar un programa.
 
@@ -70,162 +69,261 @@ En este trabajo final se describen distintas políticas de análisis de ids. Tam
 
 %CAPITULO1=============================================================
 
-\chapter{Introducción}
-\section{El Problema}
+\chapter{Introducción: Problema y Solución}
+
+Cuando se desarrollan los sistemas de software se busca que el producto final satisfaga las necesidades de los usuarios, que perdure en el mayor tiempo posible el buen funcionamiento, en caso de hacer una modificación para mejorarlo no implique grandes costos. Estos puntos conllevan a un software exitoso y la disciplina encargada de conseguirlo es la \mbox{\textit{Ingeniería de Software} (IS).}
+% mbox obliga a mantener en la misma linea
+
+La IS abarca, entre otras tantas, tres temáticas importantes que están orientadas al desarrollo de buenos sistemas: el \textit{mantenimiento del software}, la \textit{evolución del software} y la \textit{migración del software}. 
+
+\section{Mantenimiento del Software}
+
+La etapa de mantenimiento es importante en el desarrollo del software, por el simple hecho que esta sujeto a cambios y a una permanente \mbox{evolución\cite{PFT02}.}
+
+El mantenimiento del software según la IEEE standards 729, \textit{es la mo\-dificación del software que se realiza posterior a la entrega del producto al usuario con el fin de arreglar fallas, mejorar el rendimiento, o adaptar el sistema al ambiente que ha cambiado.}
+
+De la definición anterior se desprenden 4 tipos de cambios que se pueden realizar en la etapa de mantenimiento. El \textit{mantenimiento correctivo} cambia el software para reparar las fallas detectadas por el usuario. El \textit{mantenimiento adaptativo} modifica el sistema para adaptarlo a cambios externos como por ejemplo actualización del sistema operativo o el motor de base de datos. El \textit{ mantenimiento perfectivo} se encarga de agregar nuevas funcionalidades al software que son descubiertas por el usuario. Por último el \textit{mantenimiento preventivo} realiza cambios al programa para facilitar futuras correcciones o adaptaciones que puedan surgir en el futuro\cite{RSPMGH02}.
+
+%Es común también que por la constate actualización de los sistemas operativos, los motores de base de datos y demás sistemas externos que interactúan con el software desarrollado entren en conflicto, por eso en la fase de mantenimiento también se debe ir actualizando los distintos componentes del producto para una mejor compatibilidad\cite{RSPMGH02}. 
+
+Por lo antedicho entre otras diversas razones\cite{KBVR00} indican que el mantenimiento del software consume mucho esfuerzo y dinero. En algunos casos los costos de mantenimiento pueden duplicar a los que se emplearon en el desarrollo del producto. Las causas que pueden aumentar estos costos son, el mal diseño de la arquitectura del programa, la mala codificación, la ausencia de documentación.
+
+No es descabellado pensar estrategias de automatización que puedan ser aplicadas en fases del mantenimiento del software que ayuden a reducir estos costos, para lograrlo se requiere una comprensión del objeto que se va a modificar antes de realizar algún cambio que sea de utilidad.
+ 
+Algunos autores concluyen que el mantenimiento del software y la comprensión de los programas son conceptos que están relacionados. \textit{Mientras mas fácil sea comprender un sistema, mas fácil será de mantenerlo}.
 
 
-La ingeniería de software contiene tres temáticas muy importantes en desarrollo de los sistemas: el \textit{mantenimiento del software}, la \textit{evolución del software} y la \textit{migración del software}. 
-
-
-Para que puedan llevar a cabo sus iniciativas las tres necesitan interpretar previamente el sistema que se esta desarrollando.
-
-La etapa de mantenimiento es importante en el desarrollo de un software ya que este esta sujeto a cambio y a una permanente evolución\cite{PFT02}.
-Es común también que por la constate actualización de los sistemas operativos, los motores de base de datos y demás sistemas externos que interactúan con el software desarrollado entren en conflicto, por eso en la fase de mantenimiento también se debe ir actualizando los distintos componentes del producto para una mejor compatibilidad.\cite{RSPMGH02}. Por lo antedicho entre otras diversas razones indican que el mantenimiento del software consume mucho esfuerzo y dinero. Es necesario pensar en estrategias de automatización que puedan ser aplicadas en fases del mantenimiento del software que ayuden a reducir estos costos, para lograrlo se requiere una comprensión del objeto que se va a modificar antes de realizar algún cambio que sea de utilidad.
-
+\section{Evolución del Software}
 
 Los sistemas complejos evolucionan con el tiempo, los nuevos usuarios y requisitos durante el desarrollo del mismo causan que el producto final posiblemente no sea el que se planteó en un comienzo. 
-Generalmente los ingenieros del software utilizan modelos de procesos conocidos que se diseñan de antemano para adaptarse a un producto que evoluciona con el tiempo, estos modelos se conocen con el nombre de modelos evolutivos o modelos iterativos, este ultimo hace referencia a que el ingeniero del software obtenga una versión entregable del producto cada vez más completa en cada iteración, esto se considera importante ya que las fechas ajustadas y el mercado competitivo obligan a entregar una versión funcional limitada lo más rápido posible y no esperar a tener una única versión completa al final del proceso de desarrollo\cite{RSPMGH02}.
-La evolución del software básicamente se atribuye al crecimiento de los sistemas, es decir, tomar una versión operativa y generar una nueva versión ampliada, para lograrlo se necesita previamente una correcta y eficiente interpretación del sistema.
+
+La evolución del software básicamente se atribuye al crecimiento de los sistemas a través del tiempo, es decir, tomar una versión operativa y generar una nueva versión ampliada\cite{KBVR00}.
+
+Generalmente, los ingenieros del software recurren a los modelos evolutivos. Estos modelos indican que cuando se desarrolla un producto de software es conveniente que se divida en distintas iteraciones. A medida que avanza el desarrollo, cada iteración retorna una version entregable cada vez más compleja\cite{RSPMGH02}. Estos modelos son muy recomendados sobre todo si se tienen fechas ajustadas donde se necesita una versión funcional lo mas rápido posible y no esperar una versión completa al final del proceso de desarrollo.
+
+Es necesario y fundamental comprender correctamente la iteración actual del producto antes de comenzar con una nueva. Los integrantes en el proceso de desarrollo pueden ir variando durante las distintas iteraciones y teniendo en cuenta que se va acomplejando cada vez mas, la comprensión del sistema durante la evolución representa un verdadero desafío.
 
 
-La migración del software es una tarea fundamental y compleja dentro del mantenimiento del software. El objetivo es convertir un viejo sistema dentro de una nueva tecnología sin cambiar la funcionalidad del mismo, lograr esto es costoso \cite{WHAFVR11}. Las migraciones de sistemas mas comunes que se conocen son iniciadas por cambios en el hardware, sistemas operativos, arquitectura, interfaces web, base de datos, entre otras mas \cite{MMFAF07}. Es importante lograr una buena comprensión del sistema antiguo, una forma de alcanzarlo es elevar el código antiguo a un nivel más alto de abstracción tomando las principales características.
+\section{Migración del Software}
 
-%WICC:
-De todos los problemas a los que se enfrentan los desarrolladores de software el primordial es el de mantener los sistemas en buen funcionamiento \cite{VMAVA95}. 
-Esta tarea es imposible de llevar a cabo de forma manual debido a que consume muchos costos y esfuerzo humano. 
-Por esta razón, existe una área de la Ingeniería de Software que se  
-dedica al desarrollo de técnicas de inspección y comprensión de software. 
-Esta área tiene como principal objetivo que el desarrollador logre un entendimiento 
-acabado del software de estudio de forma tal de poder modificarlo disminuyendo en lo posible la gran mayoría de costos \cite{BRM10}. 
-El área mencionada se conoce en la jerga de la Ingeniería de Software como: \textit{Comprensión de Programas (CP)}.
+Las migraciones de sistemas mas comunes que se conocen son causadas por cambios en el hardware obsoleto, nuevos sistemas operativos, cambios en la arquitectura, interfaces web, base de datos, entre otras mas\cite{MMFAF07}. 
+ 
+De acuerdo con la IEEE standards 1219 \textit{la migración del sofware es convertir o adaptar un viejo sistema(sistema heredado) a un nuevo contexto tecnológico sin cambiar la funcionalidad del mismo}.
+ 
+La migración de grandes sistemas es fundamental, sin embargo esta demostrado que es costosa y compleja\cite{MMFAF07}. Para llevarla a cabo reduciendo estos costos se puede hacer previamente una buena comprensión del sistema antiguo. Una forma de comprensión utilizada recientemente consiste en un modelado de datos\cite{WHAFVR11}. Este modelado empleado para facilitar las migraciones se encarga de elevar el código antiguo a un nivel más alto de abstracción tomando solo las principales características.
 
-La CP es una rama de la Ingeniería de Software cuyo objetivo 
-principal es desarrollar métodos, técnicas y herramientas que faciliten al programador 
-el entendimiento de las funcionalidades de los sistemas de software.
-Una forma de alcanzar este objetivo consiste en relacionar el Domino del Problema, 
-es decir la salida del sistema, con el dominio del programa, o sea 
-con las partes del programa utilizadas para generar la salida del sistema.
-\textbf{La construcción de esta relación representa el principal desafío en el contexto de la CP.}
+\section{Comprensión de Programas}
 
+Como se explicó en las secciones anteriores, es fundamental lograr comprender el sistema para llevar adelante las tareas de mantenimiento, evolución y migración del software.
+	
+Por esta razón, existe una área de la IS que se dedica al desarrollo de técnicas de inspección y comprensión de software. 
+
+Esta área tiene como principal objetivo que el desarrollador logre un entendimiento acabado del software de estudio de forma tal de poder mo\-dificarlo disminuyendo en lo posible la gran mayoría de los costos. El área mencionada se conoce en la jerga de la IS como \mbox{\textit{Comprensión de Programas} (CP).}
+
+%==========================================
+
+La CP se encarga de desarrollar métodos, técnicas y herramientas que faciliten al programador el entendimiento de las funcionalidades de los sistemas de software.
+
+Una forma de alcanzar este objetivo\cite{BRM10,MPMR07,MBPHRU10} consiste en relacionar el \textit{Dominio del Problema} con el \textit{Dominio del Programa}. El primero hace referencia a los elementos que forman parte de la salida del sistema, mientras que el segundo indican las componentes del programa empleados para generar la salida del sistema.
+
+La construcción de esta relación es compleja y representa el principal desafío en el contexto de la CP. Una aproximación para alcanzar esta relación consiste en armar una representación del \textit{Dominio del Problema}, luego una representación para el \textit{Dominio del Programa} y finalmente unir ambas representaciones con una \textit{Estrategia de Vinculación}.
+
+%La comprension de programas
+%La visualizacion de software
+%Extraccion de Información
+
+%Problema y solucion
+
+
+%De todos los problemas a los que se enfrentan los desarrolladores de software el primordial es el de mantener los sistemas en buen funcionamiento \cite{VMAVA95}. 
+%Esta tarea es imposible de llevar a cabo de forma manual debido a que consume muchos costos y esfuerzo humano.
 %==============================================================================
 
 
-\section{Solución}
+Una camino para elaborar las representaciones antedichas y conseguir una aproximación al problema de CP es utilizar técnicas de Extracción de Información, la Visualización de Software y la Interconexión de Dominios\cite{MPMR07,STOREY99,BROOK82}.
 
-\textbf{Una solución que se aproxime al desafío previamente mencionado consiste en construir una representación para el dominio del problema y otra para el dominio del programa luego unir ambas representaciones utilizando una estrategia de vinculación} 
-El camino que facilita la vinculación de las dos representaciones consiste en el uso/creación de Herramientas de Comprensión. 
-Una Herramienta de Compresión presenta diferentes perspectivas del software que posibilitan que el ingeniero pueda percibir el funcionamiento del sistema. 
-Para construir herramientas de comprensión, se deben tener en cuenta cuatro pilares importantes: \textit{Modelos Cognitivos}
-\textit{Extracción de la Información},
-\textit{Interconexión de Dominios} y la
-\textit{Visualización de Software} \cite{STOREY99,BROOK82}.
-
-
-Los \textit{Modelos Cognitivos} se refiere a las estrategias de estudio y las estructuras de información usadas por los programadores para comprender los programas. Están formados por distintos componentes: Conocimiento, un modelo mental y un proceso de asimilación.
-Existen dos tipos de conocimientos uno es el interno que constituye los conocimientos que el programador tiene incorporado y el otro es el Externo en donde el sistema a estudiar provee al desarrollador nuevos conceptos.
-El modelo mental es la representación mental que el programador tiene sobre el sistema. Algunos modelos conocidos por los arquitectos del software como el \textit{Unified Modeling Language} UML, \textit{Entity Relationship} ER entre otros pueden verse como representaciones de modelos mentales.
-Por último, el proceso de asimilación engloba la estrategia que utiliza el programador para entender los programas. Ellas son Botton-up, Top-Down e Hibrida.
-Varios autores concluyen que estos conceptos conforman la base para encontrar la relación entre el dominio del problema y el dominio del programa\cite{TIE89,MPOB03}.
-
-
-La \textit{Visualización del Software} es una característica importante en la comprensión de programas, básicamente provee una o varias representaciones visuales (o vistas) de algún sistema particular \cite{BRM10}.
-Dichas vistas, cuando están bien elaboradas, permiten analizar y percibir la información extraída desde un programa con mayor facilidad.
-Para lograr lo antedicho se utilizan librerías gráficas conocidas, algunas de ellas son Jung, Prefuse, Graphviz y Cairo.
-Cabe destacar que el diseñador de la visualización debe hacer un análisis profundo para seleccionar la librería mas adecuada.
-La visualización de software orientada a la comprensión de programa tiene como principal desafío generar vistas que ayuden a relacionar el Dominio del Problema con el Dominio del Programa.
-
-La \textit{Interconexión de Dominios} \cite{BRM10} tiene como principal objeto de estudio la transformación y vinculación de un dominio específico en otro dominio. 
-%Este último dominio puede estar en un alto o bajo nivel de abstracción. 
-El punto importante es que cada componente de un dominio se vea reflejado en una o más componentes del otro y viceversa. 
-A modo de ejemplo, se puede mencionar la transformación de un código fuente Dominio del Programa) en un Grafo de Llamadas a Funciones (Dominio de Grafos). En este contexto existe una amplia gama de transformaciones siendo la más escasa y difícil de conseguir aquella que relaciona el Dominio del Problema con el Dominio del Programa.
+%\section{Extracción de Información}
 
 Por \textit{Extracción de la Información} se entiende el uso/desarrollo de técnicas que permitan extraer información desde el sistema de estudio. 
 Esta información puede ser: Estática o Dinámica, dependiendo de las necesidades del 
 ingeniero de software o del equipo de trabajo.
-Para la extracción de la información estática se utilizan técnicas de compilación tradicionales, que se encargan de recuperar información de cada componente del sistema. Todas las actividades que forman parte de esta tarea se realizan desde el código fuente sin ejecutar el sistema. Generalmente, en este tipo de trabajos se construye un analizador sintáctico con las acciones semánticas necesarias para extraer la información requerida.
-Por otro lado la extracción dinámica de información del sistema se obtiene  
-aplicando técnicas de instrumentación de código, estas técnicas consisten en insertar sentencias dentro del código fuente del sistema con el fin de recuperar las partes del programa que se utilizaron para 
-producir la salida. 
+Para la extracción de la información estática se utilizan técnicas de compilación tradicionales\cite{AHUL06}, que se encargan de recuperar información de cada componente del sistema. Todas las actividades que forman parte de esta tarea se realizan desde el código fuente sin ejecutar el sistema. Generalmente, en este tipo de trabajos se construye un analizador sintáctico con las acciones semánticas necesarias para extraer la información requerida.
+
+Por otro lado la extracción dinámica de información del sistema se obtiene aplicando técnicas de instrumentación de código, estas técnicas consisten en insertar sentencias dentro del código fuente del sistema con el fin de recuperar las partes del programa que se utilizaron para producir la salida\cite{THBE99}.
+ 
 La principal diferencia que radica entre ambas técnicas es que las dinámicas requieren que el sistema se ejecute, mientras que las estáticas esto no es necesario.
 
-Los párrafos precedentes permiten percibir la importancia de las técnicas de \textbf{extracción de la información}. 
-Sin ellas no sería posible la construcción de visualizaciones y técnicas de interconexión de dominios\cite{BRM10}. 
+Una vez extraída la información necesaria se pueden elaborar estrategias de visualización de software para explayar la información obtenida.
 
-\textbf{Concluimos que tanto la representación del dominio del problema como la representación del dominio del programa se construye en base a la información, estática y dinámica, que se extrae de los mismos. 
-La estrategia de vinculación usa esa información para construir un mapeo entre los elementos de ambos dominios.}
-En el correspondiente trabajo se describe una línea de investigación que tiene como principal foco de estudio el análisis y la implementación de técnicas de extracción de la información estática en los sistemas de software que permitan aproximar a la construcción de la relación entre el Dominio del Problema y el Dominio del Programa.
-Finalmente, es importante mencionar que la información dinámica es tan importante como la información estática, sin embargo su extracción requiere del estudio de otro tipo de aproximaciones que conforman en sí otra línea de investigación.
+%\section{Visualización de Software}
 
-Actualmente, existen muchas herramientas de comprensión que basan sus análisis en componentes que están presentes en la información estática de los códigos de programas, alguno de ellos son nombres de variables, tipos de las variables,los métodos de un programa orientado a objeto, las variables locales a un método, etc. Estos son elementos que componen la información formal. Sin embargo, a través del estudio del estado del arte, se pudo detectar que son pocas las estrategias de análisis estático que analizan la información informal que se encuentra disponible en el código fuente, por información informal se entiende aquella contenida en 
-los: \textit{comentarios de los módulos}, \textit{comentarios de las funciones}, \textit{literales strings}, \textit{documentación del sistema} etc.
-Esto se debe a que dicha información se encuentra expresada en lenguaje natural y por lo tanto su interpretación escapa del análisis estático y requiere de la aplicación de \textit{Técnicas de Procesamiento de Lenguaje Natural} \cite{DCPHJP09,TERD01}.
-Este trabajo se centra en los \textit{identificadores} ids como fuente principal de información. Detrás de los ids se encuentra oculta información que es propia del dominio del problema. Generalmente los ids están compuestos por más de una palabra en forma de abreviatura (nombrados como acrónimos por algunos autores) y una vía posible para exponer la información oculta consiste en traducir estas abreviaturas en sus correspondientes palabras expresadas en lenguaje natural.
+La \textit{Visualización del Software} es una característica importante en la comprensión de programas por que ayuda a representar visualmente la información de los sistemas de software\cite{BRM10}. Con esto se simplifica la comprensión del software y de esta manera se facilita el mantenimiento, la evolución y la migración de los sistemas.
+
+Con la visualización de software se puede implementar sistemas de visualización. Estos sistemas brindan información a través de las vistas. Dichas vistas, cuando están bien elaboradas, permiten analizar y percibir la información extraída desde un programa con mayor facilidad.
+
+Para aclarar aun mas este punto, si se implementan buenos sistemas de visualización, se pueden lograr una correcta representación del dominio del problema, del dominio del programa y de la estrategia que vincula ambas representaciones que se explicó con anterioridad. Un concepto clave para vincular la representación de ambos dominios es la Interconexión de Dominios.
+
+
+%\section{Interconexión de Dominios}
+
+La Interconexión de Dominios tiene como principal objeto de estudio la transformación y vinculación de un dominio específico en otro dominio\cite{MPMR07}. 
+%Este último dominio puede estar en un alto o bajo nivel de abstracción. 
+El punto importante es que cada componente de un dominio se vea reflejado en una o más componentes del otro y viceversa. 
+A modo de ejemplo, se puede mencionar la transformación de un código fuente Dominio del Programa) en un Grafo de Llamadas a Funciones (Dominio de Grafos). En este contexto existe una amplia gama de transformaciones siendo la más escasa y difícil de conseguir aquella que relaciona el Dominio del Problema con el Dominio del Programa.
+
+
+
+
+
+
+
+
+ 
+%Para construir herramientas de comprensión, se deben tener en cuenta cuatro pilares importantes: \textit{Modelos Cognitivos}
+%\textit{Extracción de la Información},
+%\textit{Interconexión de Dominios} y la
+%\textit{Visualización de Software} \cite{STOREY99,BROOK82}.
+%
+%
+%Los \textit{Modelos Cognitivos} se refiere a las estrategias de estudio y las estructuras de información usadas por los programadores para comprender los programas. Están formados por distintos componentes: Conocimiento, un modelo mental y un proceso de asimilación.
+%Existen dos tipos de conocimientos uno es el interno que constituye los conocimientos que el programador tiene incorporado y el otro es el Externo en donde el sistema a estudiar provee al desarrollador nuevos conceptos.
+%El modelo mental es la representación mental que el programador tiene sobre el sistema. Algunos modelos conocidos por los arquitectos del software como el \textit{Unified Modeling Language} UML, \textit{Entity Relationship} ER entre otros pueden verse como representaciones de modelos mentales.
+%Por último, el proceso de asimilación engloba la estrategia que utiliza el programador para entender los programas. Ellas son Botton-up, Top-Down e Hibrida.
+%Varios autores concluyen que estos conceptos conforman la base para encontrar la relación entre el dominio del problema y el dominio del programa\cite{TIE89,MPOB03}.
+%
+%
+%La \textit{Visualización del Software} es una característica importante en la comprensión de programas, básicamente provee una o varias representaciones visuales (o vistas) de algún sistema particular \cite{BRM10}.
+%Dichas vistas, cuando están bien elaboradas, permiten analizar y percibir la información extraída desde un programa con mayor facilidad.
+%Para lograr lo antedicho se utilizan librerías gráficas conocidas, algunas de ellas son Jung, Prefuse, Graphviz y Cairo.
+%Cabe destacar que el diseñador de la visualización debe hacer un análisis profundo para seleccionar la librería mas adecuada.
+%La visualización de software orientada a la comprensión de programa tiene como principal desafío generar vistas que ayuden a relacionar el Dominio del Problema con el Dominio del Programa.
+%
+%La \textit{Interconexión de Dominios} \cite{BRM10} tiene como principal objeto de estudio la transformación y vinculación de un dominio específico en otro dominio. 
+%%Este último dominio puede estar en un alto o bajo nivel de abstracción. 
+%El punto importante es que cada componente de un dominio se vea reflejado en una o más componentes del otro y viceversa. 
+%A modo de ejemplo, se puede mencionar la transformación de un código fuente Dominio del Programa) en un Grafo de Llamadas a Funciones (Dominio de Grafos). En este contexto existe una amplia gama de transformaciones siendo la más escasa y difícil de conseguir aquella que relaciona el Dominio del Problema con el Dominio del Programa.
+%
+%Por \textit{Extracción de la Información} se entiende el uso/desarrollo de técnicas que permitan extraer información desde el sistema de estudio. 
+%Esta información puede ser: Estática o Dinámica, dependiendo de las necesidades del 
+%ingeniero de software o del equipo de trabajo.
+%Para la extracción de la información estática se utilizan técnicas de compilación tradicionales, que se encargan de recuperar información de cada componente del sistema. Todas las actividades que forman parte de esta tarea se realizan desde el código fuente sin ejecutar el sistema. Generalmente, en este tipo de trabajos se construye un analizador sintáctico con las acciones semánticas necesarias para extraer la información requerida.
+%Por otro lado la extracción dinámica de información del sistema se obtiene  
+%aplicando técnicas de instrumentación de código, estas técnicas consisten en insertar sentencias dentro del código fuente del sistema con el fin de recuperar las partes del programa que se utilizaron para 
+%producir la salida. 
+%La principal diferencia que radica entre ambas técnicas es que las dinámicas requieren que el sistema se ejecute, mientras que las estáticas esto no es necesario.
+%
+% 
+%
+%\textbf{Concluimos que tanto la representación del dominio del problema como la representación del dominio del programa se construye en base a la información, estática y dinámica, que se extrae de los mismos. 
+%La estrategia de vinculación usa esa información para construir un mapeo entre los elementos de ambos dominios.}
+
+
+%En el correspondiente trabajo se describe una línea de investigación que tiene como principal foco de estudio el análisis y la implementación de técnicas de extracción de la información estática en los sistemas de software que permitan aproximar a la construcción de la relación entre el Dominio del Problema y el Dominio del Programa.
+
+
+
+%Finalmente, es importante mencionar que la información dinámica es tan importante como la información estática, sin embargo su extracción requiere del estudio de otro tipo de aproximaciones que conforman en sí otra línea de investigación.
+
+
+\section{Problema y la Solución}
+
+Los párrafos precedentes permiten percibir la importancia de las técnicas de extracción de la información. 
+Sin ellas no sería posible la construcción de visualizaciones y técnicas de interconexión de dominios\cite{BRM10,MPMR07}.
+
+Este trabajo final se centrará en el análisis de técnicas de extracción de información estática.
+
+Es importante aclarar que la información dinámica es tan importante como la información estática, sin embargo su extracción requiere del estudio de otro tipo de aproximaciones y escapan a los objetivos de este trabajo.
+
+Actualmente, en los códigos de software abundan componentes que conforman la información estática alguno de ellos son nombres de variables, tipos de las variables, los métodos de un programa, las variables locales a un método, constantes, comentarios. De todos estos componentes se seleccionó a los identificadores como principal foco de estudio. 
+
+%Esto se debe a que dicha información se encuentra expresada en lenguaje natural y por lo tanto su interpretación escapa del análisis estático y requiere de la aplicación de \textit{Técnicas de Procesamiento de Lenguaje Natural} \cite{DCPHJP09,TERD01}.
+
+Estudios realizados\cite{DFPM05} indican que gran parte de los códigos están conformados por identificadores (ids), por ende abundante información estática esta contenida en ellos.
+
+Generalmente, los ids están compuestos por más de una palabra en forma de abreviaturas. Varios autores coinciden\cite{BCPT99,LFBEX07,EZH08,EHPV09,DLHD06,DCHD06} que detrás de las abreviaturas de los ids se encuentra oculta información que es propia del dominio del problema.
+
+Una vía posible para exponer la información oculta consiste en traducir estas abreviaturas en sus correspondientes palabras expresadas en lenguaje natural. Si bien existen varias herramientas automatizadas que extraen ids, no hay muchas que traduzcan el significado de sus abreviaturas.
+
+%Sin embargo, a través del estudio del estado del arte, se pudo detectar que son pocas las estrategias de análisis estático que analizan la información informal que se encuentra disponible en el código fuente, por información informal se entiende aquella contenida en los comentarios de los módulos, comentarios de las funciones, literales strings y documentación del sistema.
+
+%Este trabajo se centra en los \textit{identificadores} ids como fuente principal de información.
 
 La solución mas viable para conseguir lo planteado en el párrafo anterior consiste en tomar los ids presentes en el código del sistema luego aplicarles técnicas de división en donde se descompone al identificador en las distintas palabras abreviadas que lo componen
 y finalmente emplear técnicas de expansión a las abreviaturas para transformar las mismas en palabras completas.
-La dificultad que presenta esta técnica es que normalmente los nombres de los ids se basan en función de la idiosincrasia del 
-programador \cite{LFBEX07, EHPV09}
-y esto representa un problema para el traductor. Otro problema a tener en cuenta es que las abreviaturas representan palabras en lenguaje natural, el cual es ambiguo y puede generar controversia en la conversión.
 
-Por lo tanto se necesita la ayuda de fuentes que contengan información informal presentes en el código que aporten en el proceso de la traducción de los ids. Los candidatos serios a lograr este cometido son comentarios y los literales string.
-Sin duda, los comentarios tienen como principal finalidad ayudar a 
-entender un segmento de código \cite{JDPH08}.
-Dicho de otra manera, son una fuente importante de información de 
-los conceptos del Dominio del Problema. 
-Por esta razón, se puede ver a los comentarios como una herramienta 
-natural para entender el significado de los ids de un código,
-como así también el funcionamiento del sistema en sí.
+La dificultad que presenta la traducción de ids a palabras completas es que normalmente los nombres de los ids se basan en función de la idiosincrasia del programador\cite{LFBEX07, EHPV09} y esto representa un problema para el traductor. 
+
+Otro problema a tener en cuenta es que las abreviaturas representan palabras en lenguaje natural, el cual es ambiguo y puede generar controversia en la conversión.
+
+Una forma para afrontar esta dificultad es recurriendo a fuentes de información informal que se encuentran disponible en el código fuente. Por información informal se entiende aquella contenida en los comentarios de los módulos, comentarios de las funciones, literales strings, documentación del sistema y todos lo demás recursos descriptivos del programa que estén escritos en lenguaje natural.
+
+%Por lo tanto se necesita la ayuda de fuentes que contengan información informal presentes en el código que aporten en el proceso de la traducción de los ids. Los candidatos serios a lograr este cometido son comentarios y los literales string.
+%Dicho de otra manera, son una fuente importante de información de los conceptos del Dominio del Problema.
+
+Sin duda, los comentarios tienen como principal finalidad ayudar a comprender un segmento de código\cite{JDPH08}. Por esta razón, se puede ver a los comentarios como una herramienta natural para entender el significado de los ids de un código, como así también el funcionamiento del sistema en sí.
 
 Por otro lado para poder entender la semántica de los ids, se toman literales o constantes strings.
-Estos representan un valor constante formado por secuencias de caracteres. 
-Ellos son generalmente utilizados en la muestra de carteles por pantalla, y 
-comúnmente se almacenan en variables de tipo \textit{string} (como es el caso de los programas escritos en Java).
-Tanto los literales como los comentarios están escritos en lenguaje natural, por lo tanto es un desafío su correcta interpretación.
-Detrás de la información informal se oculta información relevante del Dominio del Problema.
-Esta información es muy importante porque facilita  la reconstrucción de la relación del Dominio del Problema con el Dominio del Programa \cite{DWE04}.
+Estos representan un valor constante formado por secuencias de caracteres. Ellos son generalmente utilizados en la muestra de carteles por pantalla, y comúnmente se almacenan en variables de \mbox{tipo string.}
 
-En este trabajo se buscan estrategias basadas en el análisis de los ids que faciliten la comprensión de programas haciendo así un pequeño aporte en la solución a la problemática de vincular ambos dominios mencionados, tareas que se realizaron: 
+Los literales string como los comentarios pueden brindar indicios del significado de las abreviaturas que se desean expandir, sin embargo se debe considerar que estos están escritos en lenguaje natural por lo tanto su correcta interpretación puede dificultarse por la ambigüedad.
+
+En caso de que estas fuentes de información informal sean escasas dentro del mismo sistema, se puede recurrir a alternativas externas como es el caso de los diccionarios de palabras en lenguaje natural.
+
+Para abordar las iniciativas planteadas y brindar una solución a la problemática de traducir los ids se pretende:
 
 \begin{itemize}
+\itemsep0em%reduce espacio
+\item Construir un analizador sintáctico en lenguaje Java que permite extraer los ids, comentarios y literales encontrados en el código fuente del sistema de estudio. La herramienta a seleccionar para realizar esta tarea es ANTLR\footnote[1]{ANother Tool for Language Recognition - http://www.antlr.org/}.
 
-\item Se investigaron herramientas de construcción de Analizadores Léxicos y Analizadores Sintácticos que emplean la teoría asociada a las gramáticas de atributos. 
-De la investigación mencionada previamente,  
-se determinó que la herramienta \textit{ANTLR}\footnote[1]{http://www.antlr.org/} es la más adecuada para extraer eficazmente los ids y toda la información relevante asociada a ellos que facilite su análisis.
+\item Armar un diccionario de palabras en lenguaje natural que sirva como alternativa a las fuentes de información informal.
 
-\item Se construyó un analizador sintáctico del lenguaje Java que permite extraer los ids, comentarios y literales encontrados en el código fuente del sistema de estudio.
+\item Investigar técnicas de división de ids y técnicas expansión de abreviaturas. Estas técnicas utilizan como principal recurso la información brindada en los comentarios y los literales extraídos del código. Como segunda posibilidad se recurre al diccionario.
 
-\item  Se estudiaron y se implementaron las técnicas de división de ids Greedy, Random \cite{HDD06,FBL06} que se encargan de separar a los ids en partes, donde cada parte representa una palabra abreviada.
+\item Implementar empleando el lenguaje JAVA las técnicas del item anterior en una herramienta denominada IDA \textit{Identifier Analyzer}. Esta herramienta también permite visualizar los atributos (ambiente, tipo de identificador, número de línea, etc) de cada objeto mostrando la parte del código donde se encuentra ubicados.
 
-\item Se investigaron y se implementaron técnicas de expansión de ids en donde las abreviaturas previamente divididas se expanden en palabras completas.  
-Dichas técnicas llevan a disponer de listas de palabras formadas de los comentarios y literales capturados, (como así también una lista de palabras del diccionario en español).
+%\item Graficar los resultados obtenidos....
 
-\item Se implementó una herramienta \textit{Identifier Analyzer} (IDA) que permite visualizar los atributos (ambiente, tipo de identificador, número de línea,etc) de cada objeto mostrando la parte del código donde se encuentra ubicados. Se incorporó en la implementación ademas las técnicas mencionadas en los ítems anteriores usando \textit{ANTLR} como herramienta soporte para la extracción de información.
+\item Comparar el desempeño de cada técnica implementada en IDA y sacar las conclusiones pertinentes.
 
 \end{itemize}
+
+\pagebreak 
+\section{Contribución}
+
+El correspondiente trabajo final es un aporte al área de CP que basa su estudio sobre como capturar conceptos del dominio del problema a través del análisis de los ids en programas escritos en JAVA. 
+
+Este análisis consiste en técnicas de traducción de ids a palabras completas considerando distintas fuentes de información informal como es el caso de los comentarios, los literales o diccionarios de palabras. Luego las distintas técnicas se implementan para comparar el desempeño de cada una.
+
+Finalmente se extraen conclusiones en base a los resultados obtenidos y se determinan posibles trabajos futuros sobre la investigación realizada.
+
+%se buscan estrategias basadas en el análisis de los ids que faciliten la comprensión de programas haciendo así un pequeño aporte en la solución a la problemática de vincular ambos dominios mencionados. Esta información es muy importante porque facilita  la reconstrucción de la relación del Dominio del Problema con el Dominio del Programa\cite{DWE04}.
+
+%\begin{itemize}
+%
+%\item Se investigaron herramientas de construcción de Analizadores Léxicos y Analizadores Sintácticos que emplean la teoría asociada a las gramáticas de atributos. 
+%De la investigación mencionada previamente,  
+%se determinó que la herramienta \textit{ANTLR}\footnote[1]{http://www.antlr.org/} es la más adecuada para extraer eficazmente los ids y toda la información relevante asociada a ellos que facilite su análisis.
+%
+%\item Se construyó un analizador sintáctico del lenguaje Java que permite extraer los ids, comentarios y literales encontrados en el código fuente del sistema de estudio.
+%
+%\item  Se estudiaron y se implementaron las técnicas de división de ids Greedy, Random \cite{HDD06,FBL06} que se encargan de separar a los ids en partes, donde cada parte representa una palabra abreviada.
+%
+%\item Se investigaron y se implementaron técnicas de expansión de ids en donde las abreviaturas previamente divididas se expanden en palabras completas.  
+%Dichas técnicas llevan a disponer de listas de palabras formadas de los comentarios y literales capturados, (como así también una lista de palabras del diccionario en español).
+%
+%\item Se implementó una herramienta \textit{Identifier Analyzer} (IDA) que permite visualizar los atributos (ambiente, tipo de identificador, número de línea,etc) de cada objeto mostrando la parte del código donde se encuentra ubicados. Se incorporó en la implementación ademas las técnicas mencionadas en los ítems anteriores usando \textit{ANTLR} como herramienta soporte para la extracción de información.
+%
+%\end{itemize}
 
 
 %======================================================================
 
-%\pagebreak %salto de pagina
-\section{Contribución}
-La línea de investigación descrita en este trabajo final se encuentra enmarcada en el 
-contexto del proyecto: \textit{Ingeniería del Software: Conceptos Métodos Técnicas y 
-Herramientas en un Contexto de Ingeniería de Software en Evolución} de la Universidad 
-Nacional de San Luis. 
-Dicho proyecto, es reconocido por el programa de incentivos y es la continuación de 
-diferentes proyectos de investigación de gran éxito a nivel nacional e internacional.
+\section{Organización del Trabajo Final}
+%En este trabajo final se presenta una línea de investigación que se centra en el estudio, creación e implementación de técnicas de extracción de la información estática desde los sistemas de software. 
+%Esta información puede ser estrictamente relacionada con el código del programa, o bien con la información informal provista por los programadores a través de comentarios, literales y documentación. 
 
-También se forma parte del proyecto bilateral entre la Universidade do Minho (Portugal)
- y la Universidad Nacional de San Luis (Argentina) denominado \textit{Quixote: Desarrollo de 
-Modelos del Dominio del Problema para Inter-relacionar las Vistas Comportamental y 
-Operacional de Sistemas de Software}. Quixote\footnote[2]{http://www3.di.uminho.pt/~gepl/} fue aprobado por el 
-Ministerio de Ciencia, Tecnología e Innovación Productiva de la Nación 
-(MINCyT) y la Fundação para a Ciência e Tecnología (FCT) de Portugal. 
-Ambos entes soportan económicamente la realización de diferentes misiones de investigación desde Argentina a Portugal y viceversa.
-
-\section{Organización de Trabajo Final}
-En este trabajo final se presenta una línea de investigación que se centra en el estudio, creación e implementación de técnicas de extracción de la información estática desde los sistemas de software. 
-Esta información puede ser estrictamente relacionada con el código del programa, o bien con la información informal provista por los programadores a través de comentarios, literales y documentación. El trabajo esta organizado de la siguiente manera. El capítulo 2 define conceptos teóricos relacionados a la comprensión de programas, cuales son las necesidades que implica su estudio y que soluciones presenta en la vida del desarrollo del software. El capítulo 3 habla de técnicas de análisis de identificadores y que fuentes semánticas son utilizadas para su interpretación. El capítulo 4 trata sobre la herramienta \textit{Identifier Analyzer} (IDA) que implementa algunas técnicas de análisis de identificadores sobre códigos escritos en JAVA\texttrademark ademas de algunos casos de estudio. El capítulo 5 menciona las conclusiones elaboradas y posibles trabajos futuros.
+El trabajo esta organizado de la siguiente manera. El capítulo 2 define conceptos teóricos relacionados a la comprensión de programas, cuales son las necesidades que implica su estudio y que soluciones presenta en la vida del desarrollo del software. El capítulo 3 explica las técnicas de análisis de identificadores y que fuentes semánticas son utilizadas para su interpretación. El capítulo 4 trata sobre la herramienta \textit{Identifier Analyzer} (IDA) que implementa algunas técnicas de análisis de identificadores sobre códigos escritos en JAVA.
+En el capítulo 5 se describen las conclusiones elaboradas y posibles trabajos futuros.
 
 %CAPITULO2=============================================================
 

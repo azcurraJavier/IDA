@@ -2,6 +2,9 @@ This is BibTeX, Version 0.99c (TeX Live 2009/Debian)
 The top-level auxiliary file: tesis.aux
 The style file: plain.bst
 Database file #1: biblo.bib.bib
+Warning--empty booktitle in AHUL06
+Warning--empty booktitle in THBE99
+Warning--empty booktitle in KBVR00
 Warning--empty booktitle in MPMR07
 Warning--empty booktitle in BRM10
 Warning--empty booktitle in BCPT99
@@ -9,8 +12,6 @@ Warning--empty booktitle in BCPT00
 Warning--empty booktitle in DLHD06
 Warning--empty booktitle in LFBEX07
 Warning--empty booktitle in DCHD06
-Warning--empty booktitle in TERD01
-Warning--empty booktitle in DWE04
 Warning--empty booktitle in EZH08
 Warning--empty booktitle in EHPV09
 Warning--empty booktitle in HDD06
@@ -23,45 +24,45 @@ Warning--empty booktitle in MAS05
 Warning--empty booktitle in PFT02
 Warning--empty booktitle in TIE89
 Warning--empty booktitle in MMFAF07
-You've used 28 entries,
+You've used 27 entries,
             2118 wiz_defined-function locations,
-            652 strings with 8155 characters,
-and the built_in function-call counts, 7757 in all, are:
-= -- 687
-> -- 365
-< -- 2
-+ -- 148
-- -- 116
-* -- 413
-:= -- 1310
-add.period$ -- 84
-call.type$ -- 28
-change.case$ -- 140
+            635 strings with 7583 characters,
+and the built_in function-call counts, 7320 in all, are:
+= -- 637
+> -- 342
+< -- 1
++ -- 140
+- -- 108
+* -- 375
+:= -- 1237
+add.period$ -- 81
+call.type$ -- 27
+change.case$ -- 133
 chr.to.int$ -- 0
 cite$ -- 49
-duplicate$ -- 364
-empty$ -- 705
-format.name$ -- 116
-if$ -- 1629
+duplicate$ -- 349
+empty$ -- 685
+format.name$ -- 108
+if$ -- 1537
 int.to.chr$ -- 0
-int.to.str$ -- 28
-missing$ -- 28
-newline$ -- 143
-num.names$ -- 56
-pop$ -- 243
+int.to.str$ -- 27
+missing$ -- 27
+newline$ -- 138
+num.names$ -- 54
+pop$ -- 244
 preamble$ -- 1
-purify$ -- 114
+purify$ -- 108
 quote$ -- 0
-skip$ -- 218
+skip$ -- 203
 stack$ -- 0
-substring$ -- 226
-swap$ -- 44
-text.length$ -- 2
+substring$ -- 197
+swap$ -- 36
+text.length$ -- 1
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 110
-warning$ -- 21
-while$ -- 64
-width$ -- 30
-write$ -- 273
-(There were 21 warnings)
+type$ -- 106
+warning$ -- 22
+while$ -- 59
+width$ -- 29
+write$ -- 259
+(There were 22 warnings)
