@@ -54,6 +54,11 @@ Dawn~Lawrie Dave~Binkley, Marcia~Davis and Bonita Sharif.
 \newblock The impact of identifier style on effort and comprehension.
 \newblock {\em Empirical Software Engineering}, 2013.
 
+\bibitem{DLFB06}
+Henry~Feild Dawn~Lawrie and David Binkley.
+\newblock Quantifying identifier quality: an analysis of trends.
+\newblock Kluwer Academic Publishers-Plenum Publishers., 2006.
+
 \bibitem{DLHD06}
 Henry~Feild Dawn~Lawrie and David Binkley.
 \newblock Syntactic identifier conciseness and consistency.

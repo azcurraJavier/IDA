@@ -1,0 +1,404 @@
+\documentclass[a4paper,12pt]{report}
+
+\usepackage{graphicx}
+\usepackage[spanish, es-tabla]{babel} % Para separar correctamente las palabras, es-tabla: para que nombre a la tabla como tal y no cuadro.
+
+\usepackage[utf8]{inputenc} % Este paquete permite poner acentos y eñes usando codificación utf-8
+\usepackage{setspace}
+\onehalfspace %para espacio y medio
+
+\usepackage{amsmath}%formulas y funciones mat
+
+\newcommand{\at}{\makeatletter @\makeatother}%comando define la arroba porque no forma parte de latex
+
+%=====formato para escribir pseudo-algortimo.============
+%algorithm2e: para que ande 'sudo apt-get install texlive-science'
+%aqui se encuentra instalado:
+%/usr/share/texmf-texlive/tex/latex/algorithm2e/algorithm2e.sty
+\usepackage[spanish,ruled,vlined]{algorithm2e} 
+%ruled, vlined para formato de lineas.  
+%spanish setea idioma español
+%===================================================
+
+
+\begin{document}
+
+\begin{algorithm}[H]%H fuerza que se genere aqui
+\LinesNumbered%enumera las lineas
+\SetKwInOut{Input}{In}\SetKwInOut{Output}{Out}
+\Input{id a dividir, \textit{\textbf{idHarword}}}
+\Input{Diccionario Ingles + Palabras Linux \textbf{ispell}}
+\Input{Palabras Excluyentes, \textit{\textbf{stopList}}}
+\Output{id separado con espacios}
+
+\BlankLine
+\texttt{softwordDiv} $\leftarrow$ “”
+
+\texttt{softwordDiv} $\leftarrow$ dividirCaracteresEspecialesDigitos(\textit{\textbf{idHarword}})
+
+\texttt{softwordDiv} $\leftarrow$ dividirCamelCase(\texttt{softwordDiv})
+
+
+
+\BlankLine
+\ForAll{(Para cada substring \textit{\textbf{s}} separado por ` ' en \texttt{softwordDiv})}{
+\BlankLine
+
+\If{(\textbf{s} no pertenece a \textit{\textbf{stopList}} $\land$ \textbf{s} no pertenece a (Dicc + \textbf{ispell}))}{
+sPrefijo $\leftarrow$ buscarPrefijo(\textit{\textbf{s}},“”)
+
+sSufijo $\leftarrow$ buscarSufijo(\textit{\textbf{s}},“”)
+\BlankLine
+\tcp{\textit{Se elije la división que mayor particiones hizo.}}
+\textit{\textbf{s}} $\leftarrow$ maxDivisión(sPrefijo,sSufijo)
+
+}
+}
+\BlankLine
+\Return \texttt{softwordDiv} \tcp{\textit{Retorna el id dividido por espacios.}}
+
+\caption{División Greedy\label{GSA}}
+\end{algorithm}
+
+\begin{function}[H]
+\LinesNumbered%enumera las lineas
+\SetKwInOut{Input}{In}\SetKwInOut{Output}{Out}
+\Input{abreviaturas a dividir, \textit{\textbf{s}}}
+\Output{abreviaturas separadas con espacios, \textit{\textbf{abrevSeparada}}}
+\BlankLine
+\tcp{\textit{Punto de parada de la recursión.}}
+\If{(length(\textit{\textbf{s}}) $=$ 0)}{
+\BlankLine
+\Return \textit{\textbf{abrevSeparada}}
+}
+\BlankLine
+\If{(\textbf{s} pertenece a \textit{\textbf{stopList}} $\vee$ \textbf{s} pertenece a (Dicc + \textbf{ispell}))}{
+\BlankLine
+%\tcp{\textit{Se separa con espacio y se ejecuta la función con el resto.}}
+\BlankLine
+\Return (\textit{\textbf{s}} $+$ ` ' $+$ buscarPrefjjo(\textit{\textbf{abrevSeparada}},“”) )
+}
+\BlankLine
+\tcp{\textit{Se extrae y se guarda el último caracter de s.}}
+\BlankLine
+\textit{\textbf{abrevSeparada}} $\leftarrow$ \textit{\textbf{s}}[length(\textit{\textbf{s}}) - 1] $+$ \textit{\textbf{abrevSeparada}}
+\BlankLine
+
+\tcp{\textit{Llamar nuevamente a la función sin el último caracter.}}
+\BlankLine
+\textit{\textbf{s}} $\leftarrow$  \textit{\textbf{s}}[0 , length(\textit{\textbf{s}}) - 1]
+
+\Return buscarPrefjjo(\textit{\textbf{s}},\textit{\textbf{abrevSeparada}})
+
+\caption{buscarPrefjjo(string \textit{\textbf{s}}, string \textit{\textbf{abrevSeparada}})}
+\end{function}
+
+\begin{function}[H]
+\LinesNumbered%enumera las lineas
+\SetKwInOut{Input}{In}\SetKwInOut{Output}{Out}
+\Input{abreviaturas a dividir, \textit{\textbf{s}}}
+\Output{abreviaturas separadas con espacios, \textit{\textbf{abrevSeparada}}}
+\BlankLine
+\tcp{\textit{Punto de parada de la recursión.}}
+\If{(length(\textit{\textbf{s}}) $=$ 0)}{
+\BlankLine
+\Return \textit{\textbf{abrevSeparada}}
+}
+\BlankLine
+\If{(\textbf{s} pertenece a \textit{\textbf{stopList}} $\vee$ \textbf{s} pertenece a (Dicc + \textbf{ispell}))}{
+\BlankLine
+%\tcp{\textit{Se separa con espacio y se ejecuta la función con el resto.}}
+\BlankLine
+\Return (buscarSufijo(\textit{\textbf{abrevSeparada}},“”) $+$ ` ' $+$ \textit{\textbf{s}})
+}
+\BlankLine
+\tcp{\textit{Se extrae y se guarda el primer caracter de s.}}
+\BlankLine
+\textit{\textbf{abrevSeparada}} $\leftarrow$ \textit{\textbf{abrevSeparada}} $+$ \textit{\textbf{s}}[0]
+\BlankLine
+\tcp{\textit{Llamar nuevamente a la función sin el primer caracter.}}
+\BlankLine
+\textit{\textbf{s}} $\leftarrow$ \textit{\textbf{s}}[1 , length(\textit{\textbf{s}})]
+
+\Return buscarSufijo(\textit{\textbf{s}},\textit{\textbf{abrevSeparada}})
+
+\caption{buscarSufijo(string \textit{\textbf{s}}, string \textit{\textbf{abrevSeparada}})}
+\end{function}
+
+%=================
+
+\begin{algorithm}
+\LinesNumbered%enumera las lineas
+\SetKwInOut{Input}{In}\SetKwInOut{Output}{Out}
+\Input{token a dividir, \textbf{\textit{token}}}
+\Output{token separado con espacios, \textbf{\textit{tokenSep}}}
+\BlankLine
+\textbf{\textit{token}} $\leftarrow $ dividirCaracteresEspecialesDigitos(\textbf{\textit{token}})
+
+\textbf{\textit{token}} $\leftarrow $ dividirMinusSeguidoMayus(\textbf{\textit{token}})
+
+\textbf{\textit{tokenSep}} $\leftarrow $ “”
+\BlankLine
+\ForAll{(Para cada substring \textbf{\textit{s}} separado por ` ' en \textbf{\textit{token}})}{
+\BlankLine
+
+\If{( $\exists \{ i|esMayus(\textbf{s}[i]) \land esMinus(\textbf{s}[i+1]) \} $)}{
+\BlankLine
+$n \leftarrow$ length(\textbf{\textit{s}}) $-$ 1
+\BlankLine
+\tcp{\textit{se determina con la función score si es del tipo camelcase u otra alternativa}} 
+\BlankLine
+$scoreCamel \leftarrow$ score(\textbf{\textit{s}}[i,n])   
+
+$scoreAlter \leftarrow$ score(\textbf{\textit{s}}[i+1,n])  
+\BlankLine
+\If{($scoreCamel > \sqrt{scoreAlter}$)}{
+\BlankLine
+\If{(i $>$ 0)}{
+\BlankLine
+\textbf{\textit{s}} $\leftarrow$ \textbf{\textit{s}}[0,i $-$ 1] + ` ' + \textbf{\textit{s}}[i,n] \tcp{\textit{GP Sstate}}
+}
+
+}\Else{
+\BlankLine
+\textbf{\textit{s}} $\leftarrow$ \textbf{\textit{s}}[0,i] $+$ ` ' $+$ \textbf{\textit{s}}[i $+$ 1,n]  \tcp{\textit{GPS state}}
+}
+
+}
+\BlankLine
+\textbf{\textit{tokenSep}} $\leftarrow$ \textbf{\textit{tokenSep}} $+$ ` ' $+$\textbf{\textit{s}}
+
+}
+\BlankLine
+\textbf{\textit{token}} $\leftarrow$ \textbf{\textit{tokenSep}}
+
+\textbf{\textit{tokenSep}} $\leftarrow$ ` '
+\BlankLine
+\ForAll{(Para cada substring \textbf{\textit{s}} separado por ` ' en \textbf{token})}{
+\BlankLine
+\textbf{\textit{tokenSep}} $\leftarrow$ \textbf{\textit{tokenSep}} $+$ ` ' $+$ \textbf{divisiónSoftWord}(\textbf{\textit{s}},score(\textbf{\textit{s}}))
+}
+\BlankLine
+\Return \textbf{\textit{tokenSep}}
+
+\caption{divisiónHardWord(\textbf{\textit{token}}) \label{AHW}}
+\end{algorithm}
+
+%%=================
+
+\begin{algorithm}[H]
+\LinesNumbered%enumera las lineas
+\SetKwInOut{Input}{Input}\SetKwInOut{Output}{Output}
+\Input{softword string, \textbf{\textit{s}}}
+\Input{score sin dividir, \textbf{\textit{score$_{sd}$}}}
+\Output{token separado con espacios, \textbf{\textit{tokenSep}}}
+\BlankLine%espacio en blanco
+
+\textbf{\textit{tokenSep}} $\leftarrow$ \textbf{\textit{s}}, n $\leftarrow$ length(\textbf{\textit{s}}) - 1
+
+i $\leftarrow$ 0, \textbf{\textit{maxScore}} $\leftarrow -$ 1
+\BlankLine
+
+\While{(i $<$ n)}{
+\BlankLine
+\textbf{\textit{score$_{izq}$}} $\leftarrow$ score(\textbf{\textit{s}}[0,i])
+
+\textbf{\textit{score$_{der}$}} $\leftarrow$ score(\textbf{\textit{s}}[i+1,n])
+\BlankLine
+\textbf{\textit{preSuf}} $\leftarrow$ esPrefijo(\textbf{\textit{s}}[0,i]) $\vee$ esSufijo(\textbf{\textit{s}}[i+1,n])
+\BlankLine
+\textbf{\textit{split$_{izq}$}} $\leftarrow$  $\sqrt{score_{izq}} >$ max(score(\textbf{\textit{s}}),\textbf{\textit{score$_{sd}$}})
+
+\textbf{\textit{split$_{der}$}} $\leftarrow$  $\sqrt{score_{der}} >$ max(score(\textbf{\textit{s}}),\textbf{\textit{score$_{sd}$}})
+\BlankLine
+
+\If{$($!\textbf{\textit{presuf}} $\land$ \textbf{\textit{split$_{izq}$}} $\land$ \textbf{\textit{split$_{der}$}}$)$}{
+\BlankLine
+\If{$(($\textbf{\textit{split$_{izq}$}} $+$ \textbf{\textit{split$_{der}$}}$)$ $>$ \textbf{maxScore}$)$}{
+\BlankLine
+\textbf{\textit{maxScore}} $\leftarrow$ (\textbf{\textit{split$_{izq}$}}$+$\textbf{\textit{split$_{der}$}})
+
+\textbf{\textit{tokenSep}} $\leftarrow$ \textbf{\textit{s}}[0,i] + ` ' + \textbf{\textit{s}}[i+1,n]
+}
+
+}\ElseIf{$(!$\textbf{\textit{presuf}} $\land$ \textbf{\textit{split$_{izq}$}}$)$}{
+\BlankLine
+\textbf{\textit{temp}} $\leftarrow$ \textbf{divisiónSoftWord}(\textbf{\textit{s}}[i+1,n],\textbf{\textit{score$_{sd}$}})
+
+\If{$($\textbf{\textit{temp}} se dividió?$)$}{
+\textbf{\textit{tokenSep}} $\leftarrow$ \textbf{\textit{s}}[0,i] + ` ' + \textbf{\textit{temp}}
+}
+
+}
+\BlankLine
+i $\leftarrow$ i+1
+}
+\BlankLine
+\Return \textbf{\textit{tokenSep}}
+
+\caption{divisiónSoftWord(\textbf{\textit{s}},\textbf{\textit{score$_{sd}$}}) \label{ASW}}
+\end{algorithm}
+
+%%=================
+
+\begin{algorithm}
+\LinesNumbered%enumera las lineas
+\SetKwInOut{Input}{In}\SetKwInOut{Output}{Out}
+\Input{Abreviatura a expandir, \textit{\textbf{abrev}}}
+\Input{Lista de Palabras extraídas del código, \textit{\textbf{wordList}}}
+\Input{Lista de Frases extraídas del código, \textit{\textbf{phraseList}}}
+\Input{Palabras Excluyentes, \textit{\textbf{stopList}}}
+\Input{Diccionario Ingles, \textit{\textbf{dicc}}}
+\Output{Abreviatura expandida, o null si no encontró una}
+\BlankLine
+
+\If{(\textit{\textbf{abrev}} $\in$ \textit{\textbf{stopList}})}{
+\Return null
+}
+\BlankLine
+listaExpansión $\leftarrow$ [ ]
+\BlankLine
+\tcp{\textit{Buscar coincidencia de acrónimo.}}
+
+\ForAll{(Para cada frase \textit{\textbf{phrase}} en \textit{\textbf{phraseList}})}{
+\BlankLine
+
+\If{ $(\exists \{$\textbf{phrase} $|$ \textit{\textbf{abrev}} es un acrónimo de \textit{\textbf{phrase}}$\})$}{
+listaExpansión.add(\textit{\textbf{phrase}}) 
+}
+}
+
+\BlankLine
+\tcp{\textit{Buscar abreviatura común.}}
+
+\ForAll{(Para cada palabra \textit{\textbf{word}} en  \textit{\textbf{wordList}})}{
+\BlankLine
+\If{ $(\exists \{$\textbf{word} $|$ \textit{\textbf{abrev}} es una abreviatura de \textit{\textbf{word}}$\})$}{
+listaExpansión.add(\textit{\textbf{word}}) 
+}
+
+}
+
+\BlankLine
+\tcp{\textit{Si no hay éxito, buscar en el diccionario.}}
+
+\If{(isEmpty(listaExpansión))}{
+\BlankLine
+listaCandidatos $\leftarrow$ buscarDiccionario(\textit{\textbf{abrev}},\textit{\textbf{dicc}})
+listaExpansión.add(listaCandidatos)
+}
+
+
+\BlankLine
+únicaExpansión $\leftarrow$ null
+\BlankLine
+\tcp{\textit{Debe haber un solo resultado, sino no retorna nada.}}
+
+\If{(length(listaExpansión) $=$ 1)}{
+\BlankLine
+únicaExpansión $\leftarrow$ listaExpansión[0]
+}
+\BlankLine
+\Return únicaExpansión 
+
+\caption{Expansión Básica \label{BEA}}
+\end{algorithm}
+
+
+
+
+
+%%=================
+
+\begin{algorithm}
+\LinesNumbered%enumera las lineas
+\SetKwInOut{Input}{In}\SetKwInOut{Output}{Out}
+\Input{palabra abreviada, \textit{\textbf{pa}}}
+\Input{expresión regular se encarga de buscar la palabra larga, \textit{\textbf{patrón}}}
+\Input{cuerpo y comentarios del método}
+\Input{comentarios de la clase}
+\Output{palabras largas candidatas, o null si no hay}
+\BlankLine
+\tcp{\textit{Las expresiones regulares están entre comillas}}
+\BlankLine
+
+\If{ $($\textbf{patrón} prefijo $\vee$ \textit{\textbf{pa}} coincide “[a-z][aeiou]$+$” $\vee$ length(\textit{\textbf{pa}}) $>$ 3$)$ $\land$ $($\textit{\textbf{pa}} no coincide con “[a-z][aeiou][aeiou]$+$”$)$}{
+
+
+\BlankLine
+\tcp{\textit{Si alguna de las siguientes búsquedas encuentra un único resultado, el algoritmo lo retorna finalizando la ejecución}}
+\BlankLine
+Buscar en Comentarios JavaDoc con “\textsf{\at param} \textit{\textbf{pa patrón}}”
+\BlankLine
+Buscar en Nombres de Tipos y la correspondiente Variable declarada con “\textit{\textbf{patrón pa}}”
+\BlankLine
+Buscar en el Nombre del Método con “\textit{\textbf{patrón}}”
+\BlankLine
+Buscar en las Sentencias con “\textit{\textbf{patrón pa}}” y “\textit{\textbf{pa patrón}}”
+\BlankLine
+\If{$($length(\textit{\textbf{pa}} $\neq$ 2)$)$}{
+\BlankLine
+Buscar en palabras del Método con “\textit{\textbf{patrón}}”
+\BlankLine
+Buscar en palabras que están en los Comentarios del Método con “\textit{\textbf{patrón}}”
+
+}
+
+\If{$($length(\textit{\textbf{pa}} $>$ 1)$)$ $\land$ $($\textit{\textbf{patrón}} prefijo$)$}{
+\BlankLine
+\tcp{\textit{Solo se busca con patrones prefijos}}
+
+Buscar en palabras que están en los Comentarios de la Clase con “\textit{\textbf{patrón}}”
+}
+}
+
+\caption{Búsqueda por Palabras Singulares \label{BPS}}
+\end{algorithm}
+
+
+%%=================
+
+\begin{algorithm}
+\LinesNumbered%enumera las lineas
+\SetKwInOut{Input}{In}\SetKwInOut{Output}{Out}
+\Input{palabra abreviada potencial, \textit{\textbf{pa}}}
+\Input{expresión regular se encarga de buscar la palabra larga, \textit{\textbf{patrón}}}
+\Input{cuerpo y comentarios del método}
+\Input{comentarios de la clase}
+\Output{palabras largas candidatas, o null si no hay}
+\BlankLine
+\tcp{\textit{Las expresiones regulares están entre comillas}}
+\BlankLine
+
+\If{$($\textit{\textbf{patrón}} acrónimo $\vee$ length(\textit{\textbf{pa}}) $>$ 3$)$}{
+
+\BlankLine
+\tcp{\textit{Si alguna de las siguientes búsquedas encuentra un único resultado, el algoritmo lo retorna finalizando la ejecución}}
+\BlankLine
+Buscar en Comentarios JavaDoc con “\textsf{\at param} \textit{\textbf{pa patrón}}”
+\BlankLine
+Buscar en Nombres de Tipos y la correspondiente Variable declarada con “\textit{\textbf{patrón pa}}”
+\BlankLine
+Buscar en el Nombre del Método con “\textit{\textbf{patrón}}”
+\BlankLine
+Buscar en todos los ids (y sus tipos) dentro del Método con “\textit{\textbf{patrón}}”
+\BlankLine
+Buscar en Literales String con “\textit{\textbf{patrón}}”
+\BlankLine
+\tcp{\textit{En este punto se buscó en todos los lugares posibles dentro del método}}
+\BlankLine
+Buscar en palabras que están en los Comentarios del Método con “\textit{\textbf{patrón}}”
+\BlankLine
+\If{$($\textit{\textbf{patrón}} acrónimo$)$}{
+\BlankLine
+\tcp{\textit{Solo se busca con patrones Acrónimos}}
+Buscar en palabras que están en los Comentarios de la Clase con “\textit{\textbf{patrón}}”
+}
+}
+
+\caption{Búsqueda por Multi Palabras \label{BMP}}
+\end{algorithm}
+
+\end{document}
+
+
