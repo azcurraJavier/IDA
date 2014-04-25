@@ -737,9 +737,9 @@ La herramienta IDD trabaja internamente con un colector de ids que está acoplad
 
 %%=========Lawrie
 
-La herramienta colabora en mejorar el nombramiento de los ids con un esfuerzo moderado como se describió antes, sin embargo otros autores\cite{LFBEX07,DLHD06} determinan que los esfuerzos son moderados solo para sistemas que se empiezan a programar desde el comienzo y no con sistemas ya existentes.
+La herramienta IDD colabora en mejorar el nombramiento de los ids con un esfuerzo moderado como se describió antes. Sin embargo otros autores\cite{LFBEX07,DLHD06} determinan que los esfuerzos son moderados solo para sistemas que se empiezan a programar desde el comienzo y no con sistemas ya existentes.
 
-Para concluir con esta sección la buena calidad en el nombramiento de los ids descripta anteriormente no solo mejora el entendimiento del código sino que también facilita la construcción herramientas que ejecuten técnicas de regresión. Algunas técnicas traducen los nombres de los ids a palabras más completas en lenguaje natural y de esta manera facilitar el entendimiento de desarrolladores no tan expertos. En la sección siguiente se dan a conocer casos que utilizan estas técnicas de regresión.
+Para concluir con esta sección, la buena calidad en el nombramiento de los ids descripta mejora el entendimiento del código. En este sentido, muchos expertos sostienen que las técnicas de Ingeniería Inversa se emplean con mayor precisión si el código esta bien escrito. Algunas de estas técnicas que tiene como objetivo mejorar la comprensión de los sistemas se encargan de traducir los nombres abreviados de los ids a palabras más completas en lenguaje natural. En la sección siguiente se describen este tipo de técnicas de regresión.
 
 %%=====================================
 \pagebreak
@@ -791,7 +791,7 @@ En las próximas 2 secciones se detallan algoritmos encargados de la división d
 %greedy - samurai 
 \subsection{Algoritmo de División: Greedy}
 
-El algoritmo de Greedy elaborado por Lawrie, Feild, Binkley\cite{DLFB06,FBL06,HDD06,LFBEX07,EHPV09} es sencillo y emplea tres listas:
+El algoritmo de Greedy elaborado por Lawrie, Feild, Binkley\cite{DLFB06,FBL06,HDD06,LFBEX07,EHPV09} que divide las palabras contenidas en un id, es sencillo y emplea tres listas:
 \begin{description}
 \itemsep0em%reduce espacio
 \item[Palabras de diccionarios:] Contiene palabras de diccionarios públicos y del diccionario que utiliza el comando de Linux \textsf{ispell}\footnote[1]{Comando de Linux generalmente utilizado para corregir errores ortográficos(inglés) en archivos de texto. http://linuxcommand.org/man\_pages/ispell1.html}.
@@ -810,6 +810,8 @@ De manera simétrica, otro proceso recursivo se hace cargo de los sufijos(ver Fu
 De la misma forma que la función de prefijos cuando encuentra una palabra, se inserta un separador(` ') y el resto se procesa por la función \textbf{buscarSufijo}(línea 4).
 
 Una vez que ambos procesos terminaron, los resultados son retornados al algoritmos principal y mediante una funcion de comparación se elije el que obtuvo mayores particiones(línea 8). Finalmente el algoritmo Greedy retorna el id destacando las palabras que lo componen mediante el separador espacio \mbox{(\textsf{file input txt})}.
+
+%En lo que respecta a la implantación, el algoritmo forma parte de una herramienta de interpretación de ids. En primera instancia extrae los ids de los códigos a traves de un scanner elaborado a medida. Este lexer se modificó...
 
 
 \begin{algorithm}[H]%H fuerza que se genere aqui
@@ -1105,7 +1107,7 @@ El algoritmo de expansión de abreviaturas ideado por Lawrie, Feild, Binkley(mis
 \item Una lista de palabras de un diccionario en inglés.
 \end{itemize}
 
-La primer lista se confecciona de la siguiente manera, para cada función \textit{f} dentro del código se crea una lista de palabras que se extraen de los comentarios que están antes (comentarios JAVA Doc) o dentro de la función \textit{f}. También se incorporan los ids del tipo hardword(si existen) dentro del alcance local de \textit{f}. La lista de frases se arma utilizando una herramienta que las extrae, el principal recurso son los comentarios y los ids multi-palabras. En este punto se construye un acrónimo\footnote[1]{Abreviación formada por las primeras letras de cada palabra en una frase, gif: Graphics Interchange Format.} con las palabras de alguna frase, si ese acrónimo coincide con alguno de los ids extraídos, entonces esa frase se considera como potencial expansión (Ejemplo: la frase \textsf{file status} es una expansión posible para el id \textsf{fs\_exists} $\rightarrow$ \textsf{file status exists}).
+La primer lista se confecciona de la siguiente manera, para cada función \textit{f} dentro del código se crea una lista de palabras que se extraen de los comentarios que están antes (comentarios JAVA Doc) o dentro de la función \textit{f}. También se incorporan los ids del tipo hardword(si existen) dentro del alcance local de \textit{f}. La lista de frases se arma utilizando una herramienta que las extrae\cite{FFCW01}, el principal recurso son los comentarios y los ids multi-palabras. En este punto se construye un acrónimo\footnote[1]{Abreviación formada por las primeras letras de cada palabra en una frase, gif: Graphics Interchange Format.} con las palabras de alguna frase, si ese acrónimo coincide con alguno de los ids extraídos, entonces esa frase se considera como potencial expansión (Ejemplo: la frase \textsf{file status} es una expansión posible para el id \textsf{fs\_exists} $\rightarrow$ \textsf{file status exists}).
 
 Una vez que las listas de palabras y frases potenciales se confeccionan, la ejecución del algoritmo comienza. Este algoritmo(ver algoritmo \ref{BEA}) recibe como entrada la abreviatura a expandir y las 4 listas antes descriptas. El primer paso es ver si la abreviatura forma parte de la lista de palabras irrelevantes(stop-list línea 1)\footnote[2]{Esta lista se usa con la misma política que el algoritmo Greedy.}. En caso de que así sea, no se retornan resultados. La razón de esto es porque estas palabras no aportan información importante en la comprensión del código y son fácilmente reconocidas por los ingenieros del software. Algunos casos son artículos/conectores (the, an, or) y palabras reservadas del lenguaje de programación que se utilice\textsf{while, for, if,} etc.).
 
@@ -1494,15 +1496,15 @@ Para concluir la etapa \textbf{Identifier Replacer} toma todas las ocurrencias d
 
 \section{Conclusiones}
 
-Las observaciones que se destacan en el estado del arte de las técnicas de análisis de ids apuntan al nombramiento correcto de los ids. Al comienzo de este capitulo se detalló una herramienta que ayuda a lograr esta meta, sin embargo no trascendió ya que es costosa de utilizar sobre grandes proyectos de software y solo es efectiva cuando se emplea desde el arranque del desarrollo de un sistema.
+Las observaciones que se destacan en el estado del arte de las técnicas de análisis de ids apuntan por un lado al nombramiento correcto de los ids. Al comienzo de este capitulo se detalló una herramienta que ayuda a lograr esta meta. Sin embargo no trascendió ya que es costosa de utilizar sobre grandes proyectos de software y solo es efectiva cuando se emplea desde el arranque del desarrollo de un sistema.
 
 El correcto nombramiento en los ids es crucial para la comprensión de los sistemas. Además en este contexto se facilitan las tareas que realizan las herramientas/técnicas encargadas de extraer conceptos del dominio del problema basándose en ids. 
 
-Estas herramientas/técnicas han ido evolucionando con el pasar del tiempo. Al principio algunas etapas necesitaban la intervención del usuario para realizar las tareas, se puede decir entonces que usaban procesos semi-automatizados. A medida que se construyeron nuevas técnicas, se buscó más la automatización haciendo que el programador se involucre menos.
+Estas herramientas/técnicas han ido evolucionando con el pasar del tiempo. Al principio algunas etapas necesitaban la intervención del usuario para realizar las tareas, se puede decir que usaban procesos semi-automatizados. A medida que se construyeron nuevas técnicas, se buscó más la automatización haciendo que el programador se involucre menos.
 
 Como se mencionó en este capítulo, las primeras técnicas utilizaban netamente diccionarios de palabras en lenguaje natural, lo cual requiere mucho espacio de almacenamiento. Mas tarde se intentó disminuir el uso de estos diccionarios mirando más los recursos internos de información dentro los sistemas, como es el caso de los comentarios, literales strings y la documentación.
 
-Sin embargo, suele ocurrir que estos recursos internos son escasos, entonces los autores de las recientes técnicas decidieron recurrir a procesos que examinan programas de gran envergadura y recolectar palabras útiles que ayuden a traducir el significado de los ids en los códigos. De esta forma se dispone de diccionarios con bajas exigencias de almacenamiento y que están constituidos de palabras mas adecuadas al ámbito de las ciencias de la computación.
+Sin embargo, suele ocurrir que estos recursos internos son escasos. Es por esto, que los autores de las recientes técnicas decidieron recurrir a procesos que examinan programas de gran envergadura y recolectar palabras útiles que ayuden a traducir el significado de los ids. De esta forma, se dispone de diccionarios con bajas exigencias de almacenamiento y que están constituidos de palabras mas adecuadas al ámbito de las ciencias de la computación.
 
 
 %Con este estudio se puede observar que los ids son una fuente importante de información, por eso elaborar técnicas que analicen ids es un aporte destacado para la CP.

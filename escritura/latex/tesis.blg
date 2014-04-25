@@ -25,45 +25,45 @@ Warning--empty booktitle in MAS05
 Warning--empty booktitle in PFT02
 Warning--empty booktitle in TIE89
 Warning--empty booktitle in MMFAF07
-You've used 28 entries,
+You've used 29 entries,
             2118 wiz_defined-function locations,
-            640 strings with 7737 characters,
-and the built_in function-call counts, 7590 in all, are:
-= -- 661
-> -- 355
+            648 strings with 7864 characters,
+and the built_in function-call counts, 7918 in all, are:
+= -- 696
+> -- 368
 < -- 1
-+ -- 145
-- -- 112
-* -- 388
-:= -- 1282
-add.period$ -- 84
-call.type$ -- 28
-change.case$ -- 138
++ -- 150
+- -- 116
+* -- 411
+:= -- 1337
+add.period$ -- 87
+call.type$ -- 29
+change.case$ -- 143
 chr.to.int$ -- 0
-cite$ -- 51
-duplicate$ -- 362
-empty$ -- 711
-format.name$ -- 112
-if$ -- 1595
+cite$ -- 52
+duplicate$ -- 373
+empty$ -- 737
+format.name$ -- 116
+if$ -- 1662
 int.to.chr$ -- 0
-int.to.str$ -- 28
-missing$ -- 28
-newline$ -- 143
-num.names$ -- 56
-pop$ -- 253
+int.to.str$ -- 29
+missing$ -- 29
+newline$ -- 148
+num.names$ -- 58
+pop$ -- 256
 preamble$ -- 1
-purify$ -- 112
+purify$ -- 116
 quote$ -- 0
-skip$ -- 211
+skip$ -- 219
 stack$ -- 0
-substring$ -- 202
-swap$ -- 37
+substring$ -- 232
+swap$ -- 38
 text.length$ -- 1
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 110
+type$ -- 114
 warning$ -- 23
-while$ -- 61
-width$ -- 30
-write$ -- 269
+while$ -- 65
+width$ -- 31
+write$ -- 280
 (There were 23 warnings)

@@ -98,6 +98,11 @@ Henry Feild, David Binkley, and Dawn Lawrie.
 \newblock Identifier splitting: A study of two techniques.
 \newblock Abril 2006.
 
+\bibitem{FFCW01}
+Fangfang Feng and W.~Bruce Croft.
+\newblock Probabilistic techniques for phrase extraction.
+\newblock {\em Inf. Process. Manage.}, 37:199--220, 2001.
+
 \bibitem{JDPH08}
 José~Luís Freitas, Daniela da~Cruz, and Pedro~Rangel Henriques.
 \newblock The role of comments on program comprehension.
