@@ -27,5 +27,5 @@
 \contentsline {subsection}{\numberline {3.4.3}Algoritmo de Divisi\IeC {\'o}n: Samurai}{37}
 \contentsline {subsection}{\numberline {3.4.4}Algoritmo de Expansi\IeC {\'o}n B\IeC {\'a}sico}{43}
 \contentsline {subsection}{\numberline {3.4.5}Algoritmo de Expansi\IeC {\'o}n AMAP}{45}
-\contentsline {subsection}{\numberline {3.4.6}Herramienta: Identifier Restructuring}{55}
-\contentsline {section}{\numberline {3.5}Conclusiones}{59}
+\contentsline {subsection}{\numberline {3.4.6}Herramienta: Identifier Restructuring}{56}
+\contentsline {section}{\numberline {3.5}Conclusiones}{60}
