@@ -17,7 +17,7 @@
 \contentsline {chapter}{\numberline {3}An\IeC {\'a}lisis de Identificadores: Estado del Arte}{20}
 \contentsline {section}{\numberline {3.1}Introducci\IeC {\'o}n}{20}
 \contentsline {section}{\numberline {3.2}Conceptos claves}{22}
-\contentsline {section}{\numberline {3.3}Nombramiento de Identificadores}{22}
+\contentsline {section}{\numberline {3.3}Nombramiento de Identificadores}{23}
 \contentsline {subsection}{\numberline {3.3.1}Clasificaci\IeC {\'o}n}{23}
 \contentsline {subsection}{\numberline {3.3.2}Importancia del Nombramiento}{24}
 \contentsline {subsection}{\numberline {3.3.3}Herramienta: Identifier Dictionary}{28}
@@ -28,4 +28,4 @@
 \contentsline {subsection}{\numberline {3.4.4}Algoritmo de Expansi\IeC {\'o}n B\IeC {\'a}sico}{43}
 \contentsline {subsection}{\numberline {3.4.5}Algoritmo de Expansi\IeC {\'o}n AMAP}{45}
 \contentsline {subsection}{\numberline {3.4.6}Herramienta: Identifier Restructuring}{56}
-\contentsline {section}{\numberline {3.5}Conclusiones}{60}
+\contentsline {section}{\numberline {3.5}Conclusiones}{61}
