@@ -157,4 +157,9 @@ Marco Torchiano and Massimiliano~Di Penta.
   from a state of the practice survey.
 \newblock 2007.
 
+\bibitem{VMAVA95}
+A.~Von~Mayrhauser and A.~M. Vans.
+\newblock Program comprehension during software maintenance and evolution.
+\newblock {\em Computer}, 28(8):44--55, 1995.
+
 \end{thebibliography}
