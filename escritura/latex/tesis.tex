@@ -95,27 +95,39 @@ Universidad Nacional de San Luis
   
 \end{titlepage}
 
-%\renewcommand{\abstractname}{Agradecimientos}
+\renewcommand{\abstractname}{\Large Resumen}
+
+\begin{abstract}
+
+Las demandas actuales en el desarrollo del software implican una evolución y mantenimiento constante con el menor costo de tiempo y de recursos. La ingeniería del software (IS) se encarga de llevar adelante esta tarea. Dentro de la IS existe el área de Comprensión de Programas (CP). Esta área se dedica a agilizar la comprensión de los sistemas de software, en base al desarrollo de  Métodos, Técnicas, Estrategias y Herramientas. 
+
+Una técnica de la CP es la extracción de información estática, la misma permite recolectar componentes relevantes del código sin necesidad de ejecutar el programa. Un componente conocido que abundan en los códigos son los identificadores (ids). 
+
+Estudios indican\cite{BCPT99,LFBEX07,EZH08,EHPV09,DLHD06,DCHD06} que los ids esconden detrás de sus abreviaturas indicios de las funcionalidades de los sistemas. Por ende, cons\-truir herramientas automatizadas que extraigan y analicen ids es un gran aporte al área de CP. La extracción de ids es lo más sencillo y se logra con un parser construido a medida. 
+
+Sin embargo, el análisis del significado de los ids en el código fuente es más complicado por que el nombramiento de estos depende de cada programador. Una estrategia para analizar ids es expandir las abreviatura que lo componen.%CONSULTAR
+
+La expansión de las abreviaturas del id a palabras completas es compleja, pero si se hace correctamente esclarece la comprensión del sistema. Para lograr esta expansión, se emplean recursos propios del programa de estudio: comentarios, literales, documentación o bien, con fuentes externas al sistema basándose en diccionarios de palabras. 
+
+En este trabajo final de licenciatura, se describen técnicas conocidas que analizan ids en base a la expansión de sus abreviaturas. También se describe una herramienta desarrollada en JAVA llamada \mbox{\textit{Identifier Analyzer}} (IDA) que implementan algunas de estas estrategias. Luego, se explica los resultados obtenidos por la herramienta de acuerdo a distintos casos de estudio. Finalmente se arriba a conclusiones.
+
+%Pensar en estrategias que faciliten las tediosas tareas que diariamente conllevan al crecimiento de los sistemas nos da incapie a iniciarnos en la investigación de herramientas automatizadas que posibiliten el reemplazo del esfuerzo manual que realizan los ingenieros de software a la hora de interpretar un programa.
+
+
+\end{abstract}
+
+%\renewcommand{\abstractname}{\Large Agradecimientos}
+%
 %\begin{abstract}
 %\begin{multicols}{2}
 %\begin{flushleft}
 %\end{flushleft}
 %\columnbreak
 %\begin{flushright}
-%\textbf{{\large \textit{“Hay en el mundo un lenguaje que todos comprenden: es el lenguaje del entusiasmo, de las cosas hechas con amor y con voluntad, en busca de aquello que se desea o en lo que se cree.”\linebreak\linebreak Paulo Cohelo}}}
+%\textit{“Hay en el mundo un lenguaje que todos comprenden: es el lenguaje del entusiasmo, de las cosas hechas con amor y con voluntad, en busca de aquello que se desea o en lo que se cree.”\linebreak Paulo Cohelo}
 %\end{flushright}
 %\end{multicols}
 %\end{abstract}
-
-\begin{abstract}
-Las demandas actuales en el desarrollo del software implican una evolución y mantenimiento constante del mismo con el menor costo de tiempo y de recursos. La ingeniería del software (IS) se encarga de llevar adelante esta tarea. Dentro de la IS existe el área de Comprensión de Programas (CP). Esta área se dedica a agilizar la comprensión de los sistemas de software, en base al desarrollo de  Métodos, Técnicas, Estrategias y Herramientas. La técnica de extracción de información estática es una de ellas y se encarga de recolectar componentes relevantes del código sin necesidad de ejecutar el programa. Un componente conocido que abundan en los códigos son los identificadores (ids). Los estudios indican que los ids esconden detrás de sus abreviaturas indicios de las funcionalidades de los sistemas. Por ende cons\-truir herramientas automatizadas que extraigan y analicen ids es un gran aporte al área de CP. La extracción de ids es lo más sencillo y se logra con un parser construido a medida. Sin embargo el análisis del significado de los ids es más complicado ya que el nombramiento de estos depende de cada programador. Una aproximación a una solución es tomar cada id extraído y someterlo a un proceso de expansión de abreviaturas. Al expandir las abreviaturas del id a palabras completas se podrá esclarecer que funcionalidad aporta en el sistema. Para lograr esta expansión se emplean distintas fuentes compuestas de información informal: comentarios, literales, documentación o bien con fuentes externas al sistema basándose en diccionarios de palabras. 
-
-En este trabajo final se describen distintas estrategias que analizan los ids en base a la expansión. También se desarrolló una herramienta en JAVA llamada \mbox{\textit{Identifier Analyzer}} (IDA) que implementan algunas de estas estrategias, con el objetivo de comparar el desempeño de cada una de acuerdo con distintos casos de estudio y de esta forma arribar a conclusiones.
-
-%Pensar en estrategias que faciliten las tediosas tareas que diariamente conllevan al crecimiento de los sistemas nos da incapie a iniciarnos en la investigación de herramientas automatizadas que posibiliten el reemplazo del esfuerzo manual que realizan los ingenieros de software a la hora de interpretar un programa.
-
-
-\end{abstract}
 
 \tableofcontents %Genera el indice
 
@@ -134,15 +146,15 @@ La etapa de mantenimiento es importante en el desarrollo del software, por el si
 
 El mantenimiento del software según la IEEE standards 729, \textit{es la mo\-dificación del software que se realiza posterior a la entrega del producto al usuario con el fin de arreglar fallas, mejorar el rendimiento, o adaptar el sistema al ambiente que ha cambiado.}
 
-De la definición anterior se desprenden 4 tipos de cambios que se pueden realizar en la etapa de mantenimiento. El \textit{mantenimiento correctivo} cambia el software para reparar las fallas detectadas por el usuario. El \textit{mantenimiento adaptativo} modifica el sistema para adaptarlo a cambios externos como por ejemplo actualización del sistema operativo o el motor de base de datos. El \textit{ mantenimiento perfectivo} se encarga de agregar nuevas funcionalidades al software que son descubiertas por el usuario. Por último el \textit{mantenimiento preventivo} realiza cambios al programa para facilitar futuras correcciones o adaptaciones que puedan surgir en el futuro\cite{RSPMGH02}.
+De la definición anterior se desprenden 4 tipos de cambios que se pueden realizar en la etapa de mantenimiento. El \textit{mantenimiento correctivo} cambia el software para reparar las fallas detectadas por el usuario. El \textit{mantenimiento adaptativo} modifica el sistema para adaptarlo a cambios externos, como por ejemplo actualización del sistema operativo o el motor de base de datos. El \textit{ mantenimiento perfectivo} se encarga de agregar nuevas funcionalidades al software que son descubiertas por el usuario. Por último, el \textit{mantenimiento preventivo} realiza cambios al programa para facilitar futuras correcciones o adaptaciones que puedan surgir en el futuro\cite{RSPMGH02}.
 
 %Es común también que por la constate actualización de los sistemas operativos, los motores de base de datos y demás sistemas externos que interactúan con el software desarrollado entren en conflicto, por eso en la fase de mantenimiento también se debe ir actualizando los distintos componentes del producto para una mejor compatibilidad\cite{RSPMGH02}. 
 
-Por lo antedicho entre otras diversas razones\cite{KBVR00} indican que el man\-tenimiento del software consume mucho esfuerzo y dinero. En algunos casos los costos de mantenimiento pueden duplicar a los que se emplearon en el desarro\-llo del producto. Las causas que pueden aumentar estos costos son, el mal diseño de la arquitectura del programa, la mala codificación, la ausencia de documentación.
+Por lo antedicho, entre otras diversas razones\cite{KBVR00} indican que el man\-tenimiento del software consume mucho esfuerzo y dinero. En algunos casos, los costos de mantenimiento pueden duplicar a los que se emplearon en el desarro\-llo del producto. Las causas que pueden aumentar estos costos son, el mal diseño de la arquitectura del programa, la mala codificación, la ausencia de documentación.
 
 No es descabellado pensar estrategias de automatización que puedan ser aplicadas en fases del mantenimiento del software que ayuden a reducir estos costos, para lograrlo se requiere una comprensión del objeto que se va a modificar antes de realizar algún cambio que sea de utilidad.
  
-Algunos autores concluyen que el mantenimiento del software y la comprensión de los programas son conceptos que están relacionados. \textit{Mientras más fácil sea comprender un sistema, más fácil será de mantenerlo}.
+Algunos autores\cite{KBVR00,MAS05,RSPMGH02,PFT02} concluyen que el mantenimiento del software y la comprensión de los programas son conceptos que están fuertemente relacionados. Ellos destacan que: \textit{“Mientras más fácil sea comprender un sistema, más fácil será de mantenerlo”}.
 
 
 \section{Evolución del Software}
@@ -151,7 +163,9 @@ Los sistemas complejos evolucionan con el tiempo, los nuevos usuarios y requisit
 
 La evolución del software básicamente se atribuye al crecimiento de los sistemas a través del tiempo, es decir, tomar una versión operativa y generar una nueva versión ampliada\cite{KBVR00}.
 
-Generalmente, los ingenieros del software recurren a los modelos evolutivos. Estos modelos indican que cuando se desarrolla un producto de software es conveniente que se divida en distintas iteraciones. A medida que avanza el desarrollo, cada iteración retorna una version entregable cada vez más compleja\cite{RSPMGH02}. Estos modelos son muy recomendados sobre todo si se tienen fechas ajustadas donde se necesita una versión funcional lo más rápido posible y no esperar una versión completa al final del proceso de desarrollo.
+Generalmente, los ingenieros del software recurren a los modelos evolutivos. Estos modelos indican que cuando se desarrolla un producto de software es conveniente que se divida en distintas iteraciones. A medida que avanza el desarrollo, cada iteración retorna una version entregable cada vez más compleja\cite{RSPMGH02}. 
+
+Estos modelos son muy recomendados sobre todo si se tienen fechas ajustadas donde se necesita una versión funcional lo más rápido posible. De esta manera, no se necesita esperar una versión completa al final del proceso de desarrollo.
 
 Es necesario y fundamental comprender correctamente la iteración actual del producto antes de comenzar con una nueva. Los integrantes en el proceso de desarrollo pueden ir variando durante las distintas iteraciones y teniendo en cuenta que se va acomplejando cada vez más, la comprensión del sistema durante la evolución representa un verdadero desafío.
 
@@ -162,13 +176,15 @@ Las migraciones de sistemas más comunes que se conocen son causadas por cambios
  
 De acuerdo con la IEEE standards 1219 \textit{la migración del sofware es convertir o adaptar un viejo sistema(sistema heredado) a un nuevo contexto tecnológico sin cambiar la funcionalidad del mismo}.
  
-La migración de grandes sistemas es fundamental, sin embargo está demostrado que es costosa y compleja\cite{MMFAF07}. Para llevarla a cabo reduciendo estos costos se puede hacer previamente una buena comprensión del sistema antiguo. Una forma de comprensión utilizada recientemente consiste en un mode\-lado de datos\cite{WHAFVR11}. Este modelado que facilita las migraciones se encarga de elevar el código antiguo a un nivel más alto de abstracción tomando solo las principales características del programa.
+La migración de grandes sistemas es fundamental, sin embargo está demostrado que es costosa y compleja\cite{MMFAF07}. Para llevarla a cabo reduciendo estos costos se recomienda hacer previamente una buena comprensión del sistema antiguo. 
+
+Una técnica de comprensión de sistemas utilizada recientemente consiste en un mode\-lado de datos\cite{WHAFVR11}. Este modelado que facilita las migraciones de software, se encarga de elevar el código antiguo a un nivel más alto de abstracción tomando solo las principales características del programa.
 
 \section{Comprensión de Programas}
 
 Como se explicó en las secciones anteriores, es fundamental lograr comprender el sistema para llevar adelante las tareas de mantenimiento, evolución y migración del software.
 	
-Por esta razón, existe una área de la IS que se dedica al desarrollo de técnicas de inspección y comprensión de software. 
+Por esta razón, existe un área de la IS que se dedica al desarrollo de técnicas de inspección y comprensión de software. 
 
 Esta área tiene como principal objetivo que el desarrollador logre un entendimiento acabado del software de estudio de forma tal de poder mo\-dificarlo disminuyendo en lo posible la gran mayoría de los costos. El área mencionada se conoce en la jerga de la IS como \mbox{\textit{Comprensión de Programas} (CP).}
 
@@ -213,14 +229,16 @@ La \textit{Visualización del Software} es una característica importante en la 
 
 Con la visualización de software se puede implementar sistemas de visualización. Estos sistemas brindan información a través de las vistas. Dichas vistas, cuando están bien elaboradas, permiten analizar y percibir la información extraída desde un programa con mayor facilidad.
 
-Para aclarar aun más este punto, si se implementan buenos sistemas de visualización, se pueden lograr una correcta representación del dominio del problema, del dominio del programa y de la estrategia que vincula ambas representaciones que se explicó con anterioridad. Un concepto clave para vincular la representación de ambos dominios es la Interconexión de Dominios.
+Para aclarar aun más este punto, si se implementan buenos sistemas de visualización, se pueden lograr una correcta representación del dominio del problema, del dominio del programa y de la estrategia que vincula ambas representaciones que se explicó con anterioridad.
+
+% Un concepto clave para vincular la representación de ambos dominios es la Interconexión de Dominios.
 
 
 %\section{Interconexión de Dominios}
 
-La Interconexión de Dominios tiene como principal objeto de estudio la transformación y vinculación de un dominio específico en otro dominio\cite{MPMR07}. 
+%La Interconexión de Dominios tiene como principal objeto de estudio la transformación y vinculación de un dominio específico en otro dominio\cite{MPMR07}. 
 %Este último dominio puede estar en un alto o bajo nivel de abstracción. 
-El punto importante es que cada componente de un dominio se vea reflejado en una o más componentes del otro y viceversa. 
+%El punto importante es que cada componente de un dominio se vea reflejado en una o más componentes del otro y viceversa. 
 A modo de ejemplo, se puede mencionar la transformación de un código fuente (Dominio del Programa) en un Grafo de Llamadas a Funciones (Dominio de Grafos). En este contexto existe una amplia gama de transformaciones siendo la más escasa y difícil de conseguir aquella que relaciona el Dominio del Problema con el Dominio del Programa.
 
 
@@ -276,7 +294,7 @@ A modo de ejemplo, se puede mencionar la transformación de un código fuente (D
 
 %Finalmente, es importante mencionar que la información dinámica es tan importante como la información estática, sin embargo su extracción requiere del estudio de otro tipo de aproximaciones que conforman en sí otra línea de investigación.
 
-
+\pagebreak
 \section{Problema y la Solución}
 
 Los párrafos precedentes permiten percibir la importancia de las técnicas de extracción de la información. 
@@ -300,10 +318,10 @@ Una vía posible para exponer la información oculta consiste en traducir estas 
 
 %Este trabajo se centra en los \textit{identificadores} ids como fuente principal de información.
 
-La solución más viable para conseguir lo planteado en el párrafo anterior consiste en tomar los ids presentes en el código del sistema luego aplicarles técnicas de división en donde se descompone al identificador en las distintas palabras abreviadas que lo componen
-y finalmente emplear técnicas de expansión a las abreviaturas para transformar las mismas en palabras completas.
+La solución más viable para conseguir lo planteado en el párrafo anterior consiste en tomar los ids presentes en el código del sistema. Luego aplicarles técnicas de división en donde se descompone al identificador en las distintas palabras abreviadas que lo componen. Finalmente, emplear técnicas de expansión a las abreviaturas para transformar las mismas en palabras completas.
 
-La dificultad que presenta la traducción de ids a palabras completas es que normalmente los nombres de los ids se basan en función de la idiosincrasia del programador\cite{LFBEX07, EHPV09} y esto representa un problema para el traductor. 
+
+Normalmente, los nombres de los ids son elegidos en base a criterios del programador\cite{LFBEX07, EHPV09}. Esto representa la principal dificultad para las técnicas de expansión de abreviaturas de ids.
 
 Otro problema a tener en cuenta es que las abreviaturas representan palabras en lenguaje natural, el cual es ambiguo y puede generar controversia en la conversión.
 
@@ -312,7 +330,7 @@ Una forma para afrontar esta dificultad es recurrir a fuentes de información in
 %Por lo tanto se necesita la ayuda de fuentes que contengan información informal presentes en el código que aporten en el proceso de la traducción de los ids. Los candidatos serios a lograr este cometido son comentarios y los literales string.
 %Dicho de otra manera, son una fuente importante de información de los conceptos del Dominio del Problema.
 
-Sin duda, los comentarios tienen como principal finalidad ayudar a comprender un segmento de código\cite{JDPH08}. Por esta razón, se puede ver a los comentarios como una herramienta natural para entender el significado de los ids de un código, como así también el funcionamiento del sistema en sí.
+Sin duda, los comentarios tienen como principal finalidad ayudar a comprender un segmento de código\cite{JDPH08}. Por esta razón, se puede ver a los comentarios como una herramienta natural para entender el significado de los ids en el código, como así también el funcionamiento del sistema.
 
 Por otro lado para poder entender la semántica de los ids, se toman li\-terales o constantes strings.
 Estos representan un valor constante formado por secuencias de caracteres. Ellos son generalmente utilizados en la muestra de carteles por pantalla, y comúnmente se almacenan en variables de \mbox{tipo string.}
@@ -344,7 +362,7 @@ Para abordar las iniciativas planteadas y hacer algunos aportes a la solución d
 
 El correspondiente trabajo final es un aporte al área de CP que basa su estudio sobre como capturar conceptos del dominio del problema a través del análisis de los ids en programas escritos en JAVA. 
 
-Este análisis consiste en técnicas de traducción de ids a palabras completas considerando distintas fuentes de información informal como es el caso de los comentarios, los literales o diccionarios de palabras. Luego las diferentes técnicas se implementan para comparar el desempeño de cada una.
+Este análisis consiste en técnicas de traducción de ids a palabras completas considerando distintas fuentes de información informal, como es el caso de los comentarios, los literales o diccionarios de palabras. Luego las diferentes técnicas se implementan para comparar el desempeño de cada una.
 
 %Finalmente se extraen conclusiones en base a los resultados obtenidos y se determinan posibles trabajos futuros sobre la investigación realizada.
 
