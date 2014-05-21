@@ -154,7 +154,7 @@ Por lo antedicho, entre otras diversas razones\cite{KBVR00} indican que el man\-
 
 No es descabellado pensar estrategias de automatización que puedan ser aplicadas en fases del mantenimiento del software que ayuden a reducir estos costos, para lograrlo se requiere una comprensión del objeto que se va a modificar antes de realizar algún cambio que sea de utilidad.
  
-Algunos autores\cite{KBVR00,MAS05,RSPMGH02,PFT02} concluyen que el mantenimiento del software y la comprensión de los programas son conceptos que están fuertemente relacionados. Ellos destacan que: \textit{“Mientras más fácil sea comprender un sistema, más fácil será de mantenerlo”}.
+Algunos autores\cite{KBVR00,MAS05,RSPMGH02,PFT02} concluyen que el mantenimiento del software y la comprensión de los programas son conceptos que están fuertemente relacionados. Una frase conocida en la jerga de la IS es: \textit{“Mientras más fácil sea comprender un sistema, más fácil será de mantenerlo”}.
 
 
 \section{Evolución del Software}
@@ -172,29 +172,35 @@ Es necesario y fundamental comprender correctamente la iteración actual del pro
 
 \section{Migración del Software}
 
-Las migraciones de sistemas más comunes que se conocen son causadas por cambios en el hardware obsoleto, nuevos sistemas operativos, cambios en la arquitectura, interfaces web, base de datos, entre otras\cite{MMFAF07}. 
+Las tareas de mantenimiento de software no solo se realizan para mejorar cuestiones internas del sistema, como es el caso de arreglos de errores de programación o requisitos nuevos del usuario. También se necesitan para adaptar el software al contexto cambiante. Es aquí donde la etapa de \textit{migración del software} entra en escena.
  
-De acuerdo con la IEEE standards 1219 \textit{la migración del sofware es convertir o adaptar un viejo sistema(sistema heredado) a un nuevo contexto tecnológico sin cambiar la funcionalidad del mismo}.
+De acuerdo con la IEEE standards 1219, \textit{la migración del software es convertir o adaptar un viejo sistema(sistema heredado) a un nuevo contexto tecnológico sin cambiar la funcionalidad del mismo}.
+
+Las migraciones de sistemas más comunes que se llevan a cabo son causadas por cambios en el hardware obsoleto, nuevos sistemas operativos, cambios en la arquitectura y nuevas base de datos. Sin duda, la que más se ha acentuado en los últimos años son la aparición de nuevas tecnologías web y las mobile (basadas en dispositivos móviles)\cite{MMFAF07}.
  
 La migración de grandes sistemas es fundamental, sin embargo está demostrado que es costosa y compleja\cite{MMFAF07}. Para llevarla a cabo reduciendo estos costos se recomienda hacer previamente una buena comprensión del sistema antiguo. 
 
-Una técnica de comprensión de sistemas utilizada recientemente consiste en un mode\-lado de datos\cite{WHAFVR11}. Este modelado que facilita las migraciones de software, se encarga de elevar el código antiguo a un nivel más alto de abstracción tomando solo las principales características del programa.
+Una técnica de comprensión de sistemas ideada recientemente para la migración de software, consiste en un mode\-lado de datos\cite{WHAFVR11}. Este modelado se encarga de elevar el código antiguo en distintos niveles de abstracción. De esta forma, el grupo encargado de la migración solo debe preocuparse por convertir el antiguo código a la nueva tecnología.
+
+Nuevamente la comprensión de programas se hace presente en temáticas relacionadas al desarrollo de proyectos de software.
 
 \section{Comprensión de Programas}
 
-Como se explicó en las secciones anteriores, es fundamental lograr comprender el sistema para llevar adelante las tareas de mantenimiento, evolución y migración del software.
+Como se explicó en las secciones anteriores, es crucial lograr comprender el sistema para llevar adelante las tareas de mantenimiento, evolución y migración del software.
 	
-Por esta razón, existe un área de la IS que se dedica al desarrollo de técnicas de inspección y comprensión de software. 
+Por esta razón, existe un área de la IS que se dedica al desarrollo de técnicas de inspección y comprensión de software. Esta área se conoce con el nombre de \mbox{\textit{Comprensión de Programas} (CP).}
 
-Esta área tiene como principal objetivo que el desarrollador logre un entendimiento acabado del software de estudio de forma tal de poder mo\-dificarlo disminuyendo en lo posible la gran mayoría de los costos. El área mencionada se conoce en la jerga de la IS como \mbox{\textit{Comprensión de Programas} (CP).}
+La CP se define como: \textit{Una disciplina de la IS encargada de ayudar al desarrollador a lograr un entendimiento acabado del software. De forma tal que se pueda analizar disminuyendo en lo posible el tiempo y los costos}\cite{MPMR07}.  
 
-%==========================================
+La CP asiste al equipo de desarrollo de software proveyendo métodos, técnicas y herramientas que faciliten el entendimiento del sistema de estudio.
 
-La CP se encarga de desarrollar métodos, técnicas y herramientas que faciliten al programador el entendimiento de las funcionalidades de los sistemas de software.
+Para crear estos métodos, técnicas y herramientas se necesitan estudiar distintas temáticas asociadas a la CP. Una temática importante entre otras tantas es la \textit{extracción de la información}.
 
-Una forma de alcanzar este objetivo\cite{BRM10,MPMR07,MBPHRU10} consiste en relacionar el \textit{Dominio del Problema} con el \textit{Dominio del Programa}. El primero hace referencia a los elementos que forman parte de la salida del sistema, mientras que el segundo indican las componentes del programa empleados para generar la salida del sistema.
+%CONSULTAR: SE DEBE MENCIONAR MODELOS COGNITIVOS, VIS DE SOFT (SERAN TRATADOS EN LA PROX SECCION) ETC...
 
-La construcción de esta relación es compleja y representa el principal desafío en el contexto de la CP. Una aproximación para alcanzar esta relación consiste en armar una representación del \textit{Dominio del Problema}, luego una representación para el \textit{Dominio del Programa} y finalmente unir ambas representaciones con una \textit{Estrategia de Vinculación}.
+%Una forma de alcanzar este objetivo consiste en relacionar el \textit{Dominio del Problema} con el \textit{Dominio del Programa}\cite{BRM10,MPMR07,MBPHRU10}. El primero hace referencia a los elementos que forman parte de la salida del sistema, mientras que el segundo indican las componentes del programa empleados para generar la salida del sistema.
+
+%La construcción de esta relación es compleja y representa el principal desafío en el contexto de la CP. Una aproximación para alcanzar esta relación consiste en armar una representación del \textit{Dominio del Problema}, luego una representación para el \textit{Dominio del Programa} y finalmente unir ambas representaciones con una \textit{Estrategia de Vinculación}.
 
 %La comprension de programas
 %La visualizacion de software
@@ -207,45 +213,42 @@ La construcción de esta relación es compleja y representa el principal desafí
 %Esta tarea es imposible de llevar a cabo de forma manual debido a que consume muchos costos y esfuerzo humano.
 %==============================================================================
 
+%Para construir   temáticas de Extracción de Información y la Visualización de Software\cite{MPMR07,STOREY99,BROOK82}.
 
-Una camino para elaborar las representaciones antedichas y conseguir una aproximación al problema de CP es utilizar técnicas de Extracción de Información, la Visualización de Software y la Interconexión de Dominios\cite{MPMR07,STOREY99,BROOK82}.
+\section{Extracción de Información}
 
-%\section{Extracción de Información}
-
-Por \textit{Extracción de la Información} se entiende el uso/desarrollo de técnicas que permitan extraer información desde el sistema de estudio. 
+En la CP, la \textit{Extracción de la Información} se define como \textit{el uso/desarrollo de técnicas que permitan extraer información desde el sistema de estudio}. 
 Esta información puede ser: Estática o Dinámica, dependiendo de las necesidades del 
 ingeniero de software o del equipo de trabajo.
-Para la extracción de la información estática se utilizan técnicas de compilación tradicionales\cite{AHUL06}, que se encargan de recuperar información de cada componente del sistema. Todas las actividades que forman parte de esta tarea se realizan desde el código fuente sin ejecutar el sistema. Generalmente, para este tipo de trabajos se construye un analizador sintáctico con las acciones semánticas necesarias para extraer la información requerida.
 
-Por otro lado la extracción dinámica de información del sistema se obtiene aplicando técnicas de instrumentación de código, estas técnicas consisten en insertar sentencias dentro del código fuente del sistema con el fin de recuperar las partes del programa que se utilizaron para producir la salida\cite{THBE99}.
+La extracción de la información estática recupera las distintas entidades presentes en el código fuente de un programa\cite{AHUL06}. Normalmente se utilizan técnicas de compilación tradicionales, que se encargan de recuperar información de cada componente del sistema. Todas las actividades que forman parte de esta tarea se realizan desde el código fuente sin ejecutar el sistema. 
+%Generalmente, para este tipo de trabajos se construye un analizador sintáctico. Este analizador posee acciones semánticas que se encargan de extraer la información requerida.
+
+Por otro lado, la extracción dinámica de información implica obtener los elementos que se utilizaron en la ejecución del sistema\cite{THBE99}. Generalmente no todas las partes del código son ejecutadas, por lo tanto no todos los elementos se pueden recuperar en una sola corrida.
+
+Para extraer información dinámicamente se utiliza las técnicas de instrumentación de código. Estas técnicas, consisten en insertar sentencias dentro del código fuente con el fin de recuperar las partes del programa que se utilizaron para producir la salida.
  
-La principal diferencia que radica entre ambas técnicas es que las dinámicas requieren que el sistema se ejecute, mientras que las estáticas esto no es necesario.
+La principal diferencia que radica entre ambas técnicas es que las dinámicas requieren que el sistema se ejecute, mientras que las estáticas esto no es necesario. A veces, se recomienda complementar el uso de ambas estrategias para obtener mejores resultados.
 
-Una vez extraída la información necesaria se pueden elaborar estrategias de visualización de software para explayar la información obtenida.
+%Una vez extraída la información necesaria se pueden elaborar estrategias de visualización de software para explayar la información obtenida.
 
 %\section{Visualización de Software}
 
-La \textit{Visualización del Software} es una característica importante en la comprensión de programas por que ayuda a representar visualmente la información de los sistemas de software\cite{BRM10}. Con esto se simplifica la comprensión del software y de esta manera se facilita el mantenimiento, la evolución y la migración de los sistemas.
+%La \textit{Visualización del Software} es una característica importante en la comprensión de programas por que ayuda a representar visualmente la información de los sistemas de software\cite{BRM10}. Con esto se simplifica la comprensión del software y de esta manera se facilita el mantenimiento, la evolución y la migración de los sistemas.
 
-Con la visualización de software se puede implementar sistemas de visualización. Estos sistemas brindan información a través de las vistas. Dichas vistas, cuando están bien elaboradas, permiten analizar y percibir la información extraída desde un programa con mayor facilidad.
+%Con la visualización de software se puede implementar sistemas de visualización. Estos sistemas brindan información a través de las vistas. Dichas vistas, cuando están bien elaboradas, permiten analizar y percibir la información extraída desde un programa con mayor facilidad.
 
-Para aclarar aun más este punto, si se implementan buenos sistemas de visualización, se pueden lograr una correcta representación del dominio del problema, del dominio del programa y de la estrategia que vincula ambas representaciones que se explicó con anterioridad. Un concepto clave para vincular la representación de ambos dominios es la Interconexión de Dominios.
+%Para aclarar aun más este punto, si se implementan buenos sistemas de visualización, se pueden lograr una correcta representación del dominio del problema, del dominio del programa y de la estrategia que vincula ambas representaciones que se explicó con anterioridad.
+
+% Un concepto clave para vincular la representación de ambos dominios es la Interconexión de Dominios.
 
 
 %\section{Interconexión de Dominios}
 
-La Interconexión de Dominios tiene como principal objeto de estudio la transformación y vinculación de un dominio específico en otro dominio\cite{MPMR07}. 
+%La Interconexión de Dominios tiene como principal objeto de estudio la transformación y vinculación de un dominio específico en otro dominio\cite{MPMR07}. 
 %Este último dominio puede estar en un alto o bajo nivel de abstracción. 
-El punto importante es que cada componente de un dominio se vea reflejado en una o más componentes del otro y viceversa. 
-A modo de ejemplo, se puede mencionar la transformación de un código fuente (Dominio del Programa) en un Grafo de Llamadas a Funciones (Dominio de Grafos). En este contexto existe una amplia gama de transformaciones siendo la más escasa y difícil de conseguir aquella que relaciona el Dominio del Problema con el Dominio del Programa.
-
-
-
-
-
-
-
-
+%El punto importante es que cada componente de un dominio se vea reflejado en una o más componentes del otro y viceversa. 
+%A modo de ejemplo, se puede mencionar la transformación de un código fuente (Dominio del Programa) en un Grafo de Llamadas a Funciones (Dominio de Grafos). En este contexto existe una amplia gama de transformaciones siendo la más escasa y difícil de conseguir aquella que relaciona el Dominio del Problema con el Dominio del Programa.
  
 %Para construir herramientas de comprensión, se deben tener en cuenta cuatro pilares importantes: \textit{Modelos Cognitivos}
 %\textit{Extracción de la Información},
@@ -292,32 +295,38 @@ A modo de ejemplo, se puede mencionar la transformación de un código fuente (D
 
 %Finalmente, es importante mencionar que la información dinámica es tan importante como la información estática, sin embargo su extracción requiere del estudio de otro tipo de aproximaciones que conforman en sí otra línea de investigación.
 
+%Los párrafos precedentes permiten percibir la importancia de las técnicas de extracción de la información. 
+%Sin ellas no sería posible la construcción de visualizaciones y técnicas de interconexión de dominios\cite{BRM10,MPMR07}.
 
-\section{Problema y la Solución}
+Este trabajo final se centrará en el análisis de técnicas de extracción de información estática. Es importante aclarar que la información dinámica es tan importante como la información estática, sin embargo su extracción requiere del estudio de otro tipo de aproximaciones y escapan a los objetivos de este trabajo.
 
-Los párrafos precedentes permiten percibir la importancia de las técnicas de extracción de la información. 
-Sin ellas no sería posible la construcción de visualizaciones y técnicas de interconexión de dominios\cite{BRM10,MPMR07}.
-
-Este trabajo final se centrará en el análisis de técnicas de extracción de información estática.
-
-Es importante aclarar que la información dinámica es tan importante como la información estática, sin embargo su extracción requiere del estudio de otro tipo de aproximaciones y escapan a los objetivos de este trabajo.
-
-Actualmente, en los códigos de software abundan componentes que conforman la información estática. Alguno de ellos son, nombres de variables, tipos de las variables, los métodos de un programa, las variables locales a un método, constantes, comentarios. De todos estos componentes se seleccionó a los identificadores como principal foco de estudio. 
+Como se mencionó previamente, en los códigos de software abundan componentes que conforman la información estática. Alguno de ellos son, nombres de variables, tipos de las variables, los métodos de un programa, las variables locales a un método, constantes. Todos estos componentes se representan mediante los identificadores (ids). Los ids abarcan gran parte de los elementos de un código por lo tanto su análisis no debe pasarse por alto. 
 
 %Esto se debe a que dicha información se encuentra expresada en lenguaje natural y por lo tanto su interpretación escapa del análisis estático y requiere de la aplicación de \textit{Técnicas de Procesamiento de Lenguaje Natural} \cite{DCPHJP09,TERD01}.
 
-Estudios realizados\cite{DFPM05} indican que gran parte de los códigos están conformados por identificadores (ids), por ende abundante información estática está contenida en ellos.
+%El análisis de los ids representa el foco de estudio de este trabajo.
 
-Generalmente, los ids están compuestos por más de una palabra en forma de abreviaturas. Varios autores coinciden\cite{BCPT99,LFBEX07,EZH08,EHPV09,DLHD06,DCHD06} que detrás de las abreviaturas de los ids se encuentra oculta información que es propia del dominio del problema.
+\section{Análisis de Identificadores}
 
-Una vía posible para exponer la información oculta consiste en traducir estas abreviaturas en sus correspondientes palabras expresadas en lenguaje natural. Si bien existen varias herramientas automatizadas que extraen ids, no hay muchas que traduzcan el significado de sus abreviaturas.
+Estudios realizados\cite{DFPM05} indican que gran parte de los códigos están conformados por identificadores (ids), por ende abundante información estática está representada por ellos(ver capítulo 3).
+
+Generalmente, los ids están compuestos por más de una palabra en forma de abreviaturas. Varios autores coinciden\cite{BCPT99,LFBEX07,EZH08,EHPV09,DLHD06,DCHD06} que detrás de las abreviaturas de los ids, se encuentra oculta información que es relevante para la CP.
+
+% que es propia del dominio del problema.
+
+Una vía posible para exponer la información oculta consiste en traducir estas abreviaturas en sus correspondientes palabras expresadas en lenguaje natural. 
+
+Para conseguir esta meta, primero se extraen los identificadores, luego se les aplica técnicas de división en donde se descompone al identificador en las distintas palabras abreviadas que lo componen. Finalmente, se emplea estrategias de expansión a las abreviaturas para transformar las mismas en palabras completas.
+
+Si bien existen varias herramientas automatizadas que extraen ids de los códigos, no hay muchas herramientas que implementan varias estrategias encargadas de expandir ids.
 
 %Sin embargo, a través del estudio del estado del arte, se pudo detectar que son pocas las estrategias de análisis estático que analizan la información informal que se encuentra disponible en el código fuente, por información informal se entiende aquella contenida en los comentarios de los módulos, comentarios de las funciones, literales strings y documentación del sistema.
 
 %Este trabajo se centra en los \textit{identificadores} ids como fuente principal de información.
 
-La solución más viable para conseguir lo planteado en el párrafo anterior consiste en tomar los ids presentes en el código del sistema. Luego aplicarles técnicas de división en donde se descompone al identificador en las distintas palabras abreviadas que lo componen. Finalmente, emplear técnicas de expansión a las abreviaturas para transformar las mismas en palabras completas.
 
+\pagebreak
+\section{Problema y la Solución}
 
 Normalmente, los nombres de los ids son elegidos en base a criterios del programador\cite{LFBEX07, EHPV09}. Esto representa la principal dificultad para las técnicas de expansión de abreviaturas de ids.
 
@@ -359,8 +368,9 @@ Para abordar las iniciativas planteadas y hacer algunos aportes a la solución d
 \section{Contribución}
 
 El correspondiente trabajo final es un aporte al área de CP que basa su estudio sobre como capturar conceptos del dominio del problema a través del análisis de los ids en programas escritos en JAVA. 
+%CONSULTAR
 
-Este análisis consiste en técnicas de traducción de ids a palabras completas considerando distintas fuentes de información informal, como es el caso de los comentarios, los literales o diccionarios de palabras. Luego las diferentes técnicas se implementan para comparar el desempeño de cada una.
+Este análisis consiste en técnicas de traducción de ids a palabras completas considerando distintas fuentes de información informal, como es el caso de los comentarios, los literales o diccionarios de palabras. Luego las diferentes técnicas se implementan en una herramienta para comparar el desempeño de cada una.
 
 %Finalmente se extraen conclusiones en base a los resultados obtenidos y se determinan posibles trabajos futuros sobre la investigación realizada.
 
