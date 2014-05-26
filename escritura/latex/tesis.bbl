@@ -5,6 +5,11 @@ R.~Sethi A.~V.~Aho and J.~D. Ullman.
 \newblock Compilers principles, techniques and tools.
 \newblock 2006.
 
+\bibitem{AAJU88}
+A.V. Aho, J.E. Hopcroft, and J.D. Ullman.
+\newblock {\em Estructuras de datos y algoritmos}.
+\newblock Sistemas Tecnicos de Edicion, 1988.
+
 \bibitem{THBE99}
 Thoms Bell.
 \newblock The concept of dynamic analysis.
@@ -74,6 +79,12 @@ Henry~Feild Dawn~Lawrie, Christopher~Morrell and David Binkley.
 \newblock What’s in a name? a study of identifiers.
 \newblock 2006.
 
+\bibitem{ERNS99}
+Ramez~A. Elmasri and Shankrant~B. Navathe.
+\newblock {\em Fundamentals of Database Systems}.
+\newblock Addison-Wesley Longman Publishing Co., Inc., Boston, MA, USA, 3rd
+  edition, 1999.
+
 \bibitem{EZH08}
 Haley~Boyd Emily~Hill, Zachary P.~Fry.
 \newblock Automatically mining abbreviation expansions in programs to enhance
@@ -129,11 +140,10 @@ Roger~S. Pressman.
 \newblock {\em Ingeniería del Software un enfoque práctico}.
 \newblock 2002.
 
-\bibitem{STOREY99}
-M.~A. Storey, F.~D. Fracchia, and H.~A. M{\"u}ller.
-\newblock Cognitive design elements to support the construction of a mental
-  model during software exploration.
-\newblock {\em The Journal of Systems \& Software}, 44(3):171--185, 1999.
+\bibitem{TSTA80}
+T.A. Standish.
+\newblock {\em Data structure techniques}.
+\newblock Computer Sciences. Addison-Wesley, 1980.
 
 \bibitem{MAS05}
 Margaret~Anne Storey.
