@@ -1,0 +1,72 @@
+This is BibTeX, Version 0.99c (TeX Live 2009/Debian)
+The top-level auxiliary file: inscripcion-azcurra.aux
+The style file: plain.bst
+Database file #1: biblo.bib
+Warning--empty booktitle in AHUL06
+Warning--empty booktitle in THBE99
+Warning--empty booktitle in KBVR00
+Warning--empty booktitle in MPMR07
+Warning--empty booktitle in BRM10
+Warning--empty booktitle in BCPT99
+Warning--empty booktitle in BCPT00
+Warning--empty booktitle in DLFB06
+Warning--empty booktitle in DLHD06
+Warning--empty booktitle in LFBEX07
+Warning--empty booktitle in DCHD06
+Warning--empty booktitle in TERD01
+Warning--can't use both author and editor fields in ERNS99
+Warning--empty booktitle in DWE04
+Warning--empty booktitle in EZH08
+Warning--empty booktitle in EHPV09
+Warning--empty booktitle in HDD06
+Warning--empty booktitle in JDPH08
+Warning--empty booktitle in WHAFVR11
+Warning--empty booktitle in MPOB03
+Warning--empty booktitle in DFPM05
+Warning--empty publisher in RSPMGH02
+Warning--empty booktitle in MAS05
+Warning--empty booktitle in PFT02
+Warning--empty booktitle in TIE89
+Warning--empty booktitle in MMFAF07
+You've used 36 entries,
+            2118 wiz_defined-function locations,
+            697 strings with 9075 characters,
+and the built_in function-call counts, 9890 in all, are:
+= -- 881
+> -- 462
+< -- 2
++ -- 187
+- -- 146
+* -- 525
+:= -- 1673
+add.period$ -- 109
+call.type$ -- 36
+change.case$ -- 177
+chr.to.int$ -- 0
+cite$ -- 62
+duplicate$ -- 463
+empty$ -- 901
+format.name$ -- 146
+if$ -- 2079
+int.to.chr$ -- 0
+int.to.str$ -- 36
+missing$ -- 39
+newline$ -- 183
+num.names$ -- 72
+pop$ -- 306
+preamble$ -- 1
+purify$ -- 145
+quote$ -- 0
+skip$ -- 276
+stack$ -- 0
+substring$ -- 292
+swap$ -- 53
+text.length$ -- 2
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 136
+warning$ -- 26
+while$ -- 82
+width$ -- 38
+write$ -- 354
+(There were 26 warnings)

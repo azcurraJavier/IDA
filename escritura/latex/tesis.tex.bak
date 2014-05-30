@@ -201,7 +201,7 @@ Una aproximación para relacionar ambos dominios consiste en elaborar la siguien
 
 I) Armar una representación del \textit{Dominio del Problema}. II) Construir una representación para el \textit{Dominio del Programa}. III) Unir ambas representaciones con una \textit{Estrategia de Vinculación}.
 
-Para llevar a cabo los 3 pasos mencionados, se necesitan estudiar temáticas asociadas a la CP. Las mas importantes son:
+Para llevar a cabo los 3 pasos mencionados, se necesitan estudiar temáticas asociadas a la CP. Las más importantes son:
 
 \begin{itemize}
 \itemsep0em%reduce espacio

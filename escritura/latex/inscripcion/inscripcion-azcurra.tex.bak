@@ -1,0 +1,104 @@
+\documentclass[a4paper,12pt]{report}
+\usepackage[spanish, es-tabla]{babel}
+\usepackage[utf8]{inputenc} 
+\usepackage[margin=1.1in]{geometry}
+
+\usepackage{setspace}
+\onehalfspace %para espacio y medio
+\setlength\parindent{0pt}%elimina sangria
+
+\begin{document}
+
+{\Large \textbf{Título:}} Análisis de Identificadores para Abstraer conceptos del Dominio del Problema.
+\vskip0.5cm
+\textbf{Autor:} Javier Azcurra Marilungo.
+\vskip0.5cm
+\textbf{Dirección:}
+\begin{itemize}
+\itemsep0em%reduce espacio
+\item \textbf{Director:} Dr. Mario Marcelo Berón.
+
+\item \textbf{Co-Director:} Dr. Germán Antonio Montejano.
+\end{itemize}
+
+\textbf{Objetivos:} Los objetivos principales de este trabajo final de Licenciatura son:
+\begin{itemize}
+\itemsep0em%reduce espacio
+\item Extraer identificadores de programas escritos en lenguaje JAVA.
+
+\item Analizar los identificadores extraídos.
+
+\item Construir en JAVA una herramienta que implemente los ítems anteriores.
+
+\item Evidenciar las posibilidades de relacionar la salida de un programa con los elementos involucrados que producen dicha salida.
+\end{itemize}
+
+\textbf{Antecedentes:}
+\vskip0.5cm
+%\hspace{0.5cm}  %Sangria
+\hspace{0.5cm} La Comprensión de Programas (CP) \cite{BRM10,MPMR07,MBPHRU10,MAS05} es un área de la Ingeniería de Software cuyo objetivo 
+principal es desa\-rrollar métodos, técnicas y herramientas que faciliten al programador 
+el entendimiento de las funcionalidades de los sistemas de software.
+Una forma de alcanzar este objetivo consiste en relacionar el Domino del Problema, 
+es decir la salida del sistema, con el dominio del programa, o sea 
+con las partes del programa utilizadas para generar la salida del sistema \cite{VMAVA95,MPOB03,BROOK82}.
+La construcción de esta relación representa el principal desafío en el contexto de la 
+CP. Una solución posible al desafío previamente mencionado consiste en construir 
+una representación para cada dominio y luego vincular ambas representaciones.
+La representación de ambos dominios se construye en base a la información, 
+estática y dinámica, que se extrae de los mismos. En la actualidad se conocen distintas técnicas y herramientas que llevan a cabo esta tarea \cite{AHUL06,THBE99}.
+ 
+\hspace{0.5cm}La información dinámica requiere que el sistema sea modificado sin cambiar su 
+semántica y luego ejecutado.
+
+
+
+La información estática se extrae desde el código fuente del sistema usando 
+técnicas de compilación.
+
+\textbf{Metodología:}
+\vskip0.5cm
+
+
+
+\textbf{Plan y Cronograma de tareas:}
+\vskip0.5cm
+
+
+\begin{enumerate}
+\itemsep0em%reduce espacio
+\item Estudiar las técnicas, herramientas y conceptos relacionados con la comprensión de programas: esto permite conocer todos aquellos aspectos vinculados con la comprensión de sistemas;
+\end{enumerate}
+
+\textbf{Recursos:}
+\vskip0.5cm
+\hspace{0.5cm}El correspondiente trabajo final se llevará a cabo en la Universidad Nacional de San Luis, en el Área Programación y Metodologías de Desarrollo de Software enmarcado en los siguientes proyectos:
+
+\begin{itemize}
+\itemsep0em%reduce espacio
+\item \textit{“Ingeniería del Software: Conceptos Métodos Técnicas y 
+Herramientas en un Contexto de Ingeniería de Software en Evolución”} de la Universidad 
+Nacional de San Luis. 
+Dicho proyecto, es reconocido por el programa de incentivos y es la continuación de 
+diferentes proyectos de investigación de gran éxito a nivel nacional e internacional.
+
+\item “Quixote - Development of Problem Domain Models to Interconnect the Behavioral and Operational Views to Aid in Software Systems Comprehension” (código de proyecto: PO/09/38).  Quixote es un proyecto bilateral entre la Universidade do Minho (Portugal) y la Universidad Nacional de San Luis (Argentina). Dicho proyecto fue aprobado por el Ministerio de Ciencia, Tecnología e Innovación Productiva de la Nación (MinCyT)\footnote[1]{www.mincyt.gov.ar/}, y la Fundação para a Ciência e Tecnología (FCT)\footnote[2]{www.fct.mctes.pt/} de Portugal. 
+
+\end{itemize}
+
+\hspace{0.5cm}Ambos entes soportan económicamente la realización de diferentes misiones de investigación desde Argentina a Portugal y viceversa, como así también la presentación y publicación de artículos en diferentes congresos nacionales e internacionales.\\
+
+\hspace{0.5cm}Por otro lado, el equipamiento necesario es una PC con el sistema Linux, impresora y papel para realizar las impresiones del informe. También se hará uso de internet, de material bibliográfico provisto por la biblioteca “Antonio Esteban Agüero”; y  de material provisto por las librerías digitales a las que se tiene acceso desde la Universidad.
+
+
+
+%========================================
+\renewcommand{\bibname}{\normalsize \textbf{Bibliografía}}
+
+\bibliographystyle{plain}%{alpha}
+\bibliography{biblo}
+\nocite{*}%para que imprima toda la referencias sin necesidad de citar
+
+{\textbf{\\\\Firma de alumno y asesores}}
+
+\end{document}
