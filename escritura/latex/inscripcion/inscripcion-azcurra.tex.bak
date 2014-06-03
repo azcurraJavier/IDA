@@ -43,18 +43,23 @@ Una forma de alcanzar este objetivo consiste en relacionar el Domino del Problem
 es decir la salida del sistema, con el dominio del programa, o sea 
 con las partes del programa utilizadas para generar la salida del sistema \cite{VMAVA95,MPOB03,BROOK82}.
 La construcción de esta relación representa el principal desafío en el contexto de la 
-CP. Una solución posible al desafío previamente mencionado consiste en construir 
+CP. 
+
+\hspace{0.5cm}Una solución posible al desafío previamente mencionado consiste en construir 
 una representación para cada dominio y luego vincular ambas representaciones.
 La representación de ambos dominios se construye en base a la información, 
 estática y dinámica, que se extrae de los mismos. En la actualidad se conocen distintas técnicas y herramientas que llevan a cabo esta tarea \cite{AHUL06,THBE99}.
  
-\hspace{0.5cm}La información dinámica requiere que el sistema sea modificado sin cambiar su 
-semántica y luego ejecutado.
+\hspace{0.5cm}La información dinámica se extrae del sistema en tiempo de ejecución. Las técnicas encargadas de extraer este tipo de información, insertan sentencias nuevas en el código fuente del programa. Esta inserción no altera la funcionalidad original del programa. La finalidad de las nuevas sentencias es registrar las actividades realizadas durante la ejecución del programa. 
 
+\hspace{0.5cm}El código nuevo puede ser enriquecido con sentencias que simplemente impriman las secciones que se están ejecutando. Más complejo aún, cambiar un conjunto de sentencias por uno nuevo para hacer un estudio más preciso en ciertas partes del código.
 
+\hspace{0.5cm}El volumen de información obtenida puede ser de gran magnitud. Es por esto, que el encargado de realizar esta tarea debe conocer con claridad los lugares estratégicos donde colocar las sentencias.
 
-La información estática se extrae desde el código fuente del sistema usando 
-técnicas de compilación.
+\hspace{0.5cm}La instrumentación de código es una técnica de análisis dinámico. Esta técnica inserta sentencias para crear trazas de ejecución en distintas partes del código. Las trazas clarifican la ejecución del programa mejorando la comprensión del mismo.
+
+\hspace{0.5cm}Por otro lado, la información estática se extrae desde el código fuente del sistema usando 
+técnicas de compilación tradicionales. Una de estas técnicas consiste en armar y recorrer el árbol de sintaxis abstracta (ASA). Esto permite realizar un análisis sintáctico y semántico en el código fuente.
 
 \textbf{Metodología:}
 \vskip0.5cm
