@@ -1,0 +1,199 @@
+\begin{thebibliography}{10}
+
+\bibitem{AHUL06}
+R.~Sethi A.~V.~Aho and J.~D. Ullman.
+\newblock Compilers principles, techniques and tools.
+\newblock 2006.
+
+\bibitem{AAJU88}
+A.V. Aho, J.E. Hopcroft, and J.D. Ullman.
+\newblock {\em Estructuras de datos y algoritmos}.
+\newblock Sistemas Tecnicos de Edicion, 1988.
+
+\bibitem{THBE99}
+Thoms Bell.
+\newblock The concept of dynamic analysis.
+\newblock 1999.
+
+\bibitem{KBVR00}
+Keith~H. Bennett and Vaclav~T. Rajlich.
+\newblock Software maintenance and evolution: a roadmap.
+\newblock 2000.
+
+\bibitem{MBPHRU10}
+M.~Beron, P.~Henriques, and R.~Uzal.
+\newblock {\em Inspección de Programas para Interconectar las Vistas
+  Comportamental y Operacional para la Comprensión de Programas.}
+\newblock PhD thesis, Universidade do Minho, Braga. Portugal, 2010.
+
+\bibitem{MPMR07}
+Mario Beron, Pedro~R. Henriques, Maria~J. Varanda, and Roberto Uzal.
+\newblock Program inspection to inter-connect the operational and behavioral
+  views for program comprehension.
+\newblock 2007.
+
+\bibitem{BRM10}
+Mario~M. Berón, Daniel Riesco, and Germán Montejano.
+\newblock Estrategias para facilitar la comprensión de programas.
+\newblock San Luis, Argentina, April 2010.
+
+\bibitem{BROOK82}
+R.~Brook.
+\newblock A theoretical analysis of the role of documentation in the
+  comprehension of computer programs.
+\newblock {\em Proceedings of the 1982 conference on Human factors in computing
+  systems}, pages 125--129, 1982.
+
+\bibitem{BCPT99}
+Bruno Caprile and Paolo Tonella.
+\newblock Nomen est omen: Analyzing the language of function identifiers.
+\newblock IEEE Computer Society, 1999.
+
+\bibitem{BCPT00}
+Bruno Caprile and Paolo Tonella.
+\newblock Restructuring program identifier names.
+\newblock IEEE Computer Society, 2000.
+
+\bibitem{DCPHJP09}
+Daniela da~Cruz, Pedro~Rangel Henriques, and Jorge~Sousa Pinto.
+\newblock Code analysis: Past and present.
+\newblock {\em Proceeding of the Third International Workshop on Foundations
+  and Techniques for Open Source Software Certification}, 2009.
+
+\bibitem{DMDJ13}
+Dawn~Lawrie Dave~Binkley, Marcia~Davis and Bonita Sharif.
+\newblock The impact of identifier style on effort and comprehension.
+\newblock {\em Empirical Software Engineering}, 2013.
+
+\bibitem{DLFB06}
+Henry~Feild Dawn~Lawrie and David Binkley.
+\newblock Quantifying identifier quality: an analysis of trends.
+\newblock Kluwer Academic Publishers-Plenum Publishers., 2006.
+
+\bibitem{DLHD06}
+Henry~Feild Dawn~Lawrie and David Binkley.
+\newblock Syntactic identifier conciseness and consistency.
+\newblock 2006.
+
+\bibitem{LFBEX07}
+Henry~Feild Dawn~Lawrie and David Binkley.
+\newblock Extracting meaning from abbreviated identifier.
+\newblock 2007.
+
+\bibitem{DCHD06}
+Henry~Feild Dawn~Lawrie, Christopher~Morrell and David Binkley.
+\newblock What’s in a name? a study of identifiers.
+\newblock 2006.
+
+\bibitem{TERD01}
+Thomas Eisenbarth, Rainer Koschke, and Daniel Simon.
+\newblock Aiding program comprehension by static and dynamic feature analysis.
+\newblock page 602, 2001.
+
+\bibitem{ERNS99}
+Ramez~A. Elmasri and Shankrant~B. Navathe.
+\newblock {\em Fundamentals of Database Systems}.
+\newblock Addison-Wesley Longman Publishing Co., Inc., Boston, MA, USA, 3rd
+  edition, 1999.
+
+\bibitem{DWE04}
+David~W. Embley.
+\newblock Toward semantic understanding: an approach based on information
+  extraction ontologies.
+\newblock Australian Computer Society, Inc. Darlinghurst, Australia, Australia,
+  2004.
+
+\bibitem{EZH08}
+Haley~Boyd Emily~Hill, Zachary P.~Fry.
+\newblock Automatically mining abbreviation expansions in programs to enhance
+  software maintenance tools.
+\newblock 2008.
+
+\bibitem{EHPV09}
+Lori~Pollock Eric~Enslen, Emily~Hill and K.~Vijay-Shanker.
+\newblock Mining source code to automatically split identifiers for software
+  analysis.
+\newblock 2009.
+
+\bibitem{FBL06}
+Henry Feild, David Binkley, and Dawn Lawrie.
+\newblock An empirical comparison of techniques for extracting concept
+  abbreviations from identifiers.
+\newblock In {\em In Proceedings of IASTED International Conference on Software
+  Engineering and Applications (SEA 2006}, 2006.
+
+\bibitem{HDD06}
+Henry Feild, David Binkley, and Dawn Lawrie.
+\newblock Identifier splitting: A study of two techniques.
+\newblock Abril 2006.
+
+\bibitem{FFCW01}
+Fangfang Feng and W.~Bruce Croft.
+\newblock Probabilistic techniques for phrase extraction.
+\newblock {\em Inf. Process. Manage.}, 37:199--220, 2001.
+
+\bibitem{JDPH08}
+José~Luís Freitas, Daniela da~Cruz, and Pedro~Rangel Henriques.
+\newblock The role of comments on program comprehension.
+\newblock 2008.
+
+\bibitem{WHAFVR11}
+Wilhelm Hasselbring, Andreas Fuhr, and Volker Riediger.
+\newblock First international workshop on model-driven software migration.
+\newblock Marzo 2011.
+
+\bibitem{MPOB03}
+Michael~P. O’Brien.
+\newblock Software comprehension – a review and research direction.
+\newblock 2003.
+
+\bibitem{DFPM05}
+DeiBenbock~F Pizka~M.
+\newblock Concise and consistent naming.
+\newblock Institut fur Informatik, Technische Universitat Munchen Boltzmannstr,
+  2005.
+
+\bibitem{RSPMGH02}
+Roger~S. Pressman.
+\newblock {\em Ingeniería del Software un enfoque práctico}.
+\newblock 2002.
+
+\bibitem{TSTA80}
+T.A. Standish.
+\newblock {\em Data structure techniques}.
+\newblock Computer Sciences. Addison-Wesley, 1980.
+
+\bibitem{STOREY99}
+M.~A. Storey, F.~D. Fracchia, and H.~A. M{\"u}ller.
+\newblock Cognitive design elements to support the construction of a mental
+  model during software exploration.
+\newblock {\em The Journal of Systems \& Software}, 44(3):171--185, 1999.
+
+\bibitem{MAS05}
+Margaret~Anne Storey.
+\newblock Theories, methods and tools in program comprehension: Past, present
+  and future.
+\newblock 2005.
+
+\bibitem{PFT02}
+Pierre~F. Tiako.
+\newblock Maintenance in joint software development.
+\newblock 2002.
+
+\bibitem{TIE89}
+Tim Tiemens.
+\newblock Cognitive models of program comprehension.
+\newblock 1989.
+
+\bibitem{MMFAF07}
+Marco Torchiano and Massimiliano~Di Penta.
+\newblock Software migration projects in italian industry: Preliminary results
+  from a state of the practice survey.
+\newblock 2007.
+
+\bibitem{VMAVA95}
+A.~Von~Mayrhauser and A.~M. Vans.
+\newblock Program comprehension during software maintenance and evolution.
+\newblock {\em Computer}, 28(8):44--55, 1995.
+
+\end{thebibliography}

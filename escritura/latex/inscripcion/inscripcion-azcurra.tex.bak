@@ -1,19 +1,20 @@
 \documentclass[a4paper,12pt]{report}
 \usepackage[spanish, es-tabla]{babel}
 \usepackage[utf8]{inputenc} 
-\usepackage[margin=1.1in]{geometry}
-
+\usepackage[margin=1in]{geometry}%margenes
+\usepackage{graphicx}
 \usepackage{setspace}
 \onehalfspace %para espacio y medio
 \setlength\parindent{0pt}%elimina sangria
+\pagenumbering{gobble}%elimina nro de pag
 
 \begin{document}
 
-{\Large \textbf{Título:}} Análisis de Identificadores para Abstraer conceptos del Dominio del Problema.
+{\large \textbf{Título:}} Análisis de Identificadores para Abstraer conceptos del Dominio del Problema.
 \vskip0.5cm
-\textbf{Autor:} Javier Azcurra Marilungo.
+{\large \textbf{Autor:}} Javier Azcurra Marilungo.
 \vskip0.5cm
-\textbf{Dirección:}
+{\large \textbf{Dirección:}}
 \begin{itemize}
 \itemsep0em%reduce espacio
 \item \textbf{Director:} Dr. Mario Marcelo Berón.
@@ -21,7 +22,7 @@
 \item \textbf{Co-Director:} Dr. Germán Antonio Montejano.
 \end{itemize}
 
-\textbf{Objetivos:} Los objetivos principales de este trabajo final de Licenciatura son:
+{\large \textbf{Objetivos:}} Los objetivos principales de este trabajo final de Licenciatura son:
 \begin{itemize}
 \itemsep0em%reduce espacio
 \item Extraer identificadores de programas escritos en lenguaje JAVA.
@@ -30,10 +31,10 @@
 
 \item Construir en JAVA una herramienta que implemente los ítems anteriores.
 
-\item Evidenciar las posibilidades de relacionar la salida de un programa con los elementos involucrados que producen dicha salida.
+\item Evidenciar una aproximación que relacione la salida de un programa con los elementos involucrados que producen dicha salida.
 \end{itemize}
 
-\textbf{Antecedentes:}
+{\large \textbf{Antecedentes:}}
 \vskip0.5cm
 %\hspace{0.5cm}  %Sangria
 \hspace{0.5cm} La Comprensión de Programas (CP) \cite{BRM10,MPMR07,MBPHRU10,MAS05} es un área de la Ingeniería de Software cuyo objetivo 
@@ -46,36 +47,109 @@ La construcción de esta relación representa el principal desafío en el contex
 CP. 
 
 \hspace{0.5cm}Una solución posible al desafío previamente mencionado consiste en construir 
-una representación para cada dominio y luego vincular ambas representaciones.
-La representación de ambos dominios se construye en base a la información, 
-estática y dinámica, que se extrae de los mismos. En la actualidad se conocen distintas técnicas y herramientas que llevan a cabo esta tarea \cite{AHUL06,THBE99}.
+una representación para cada dominio, luego se procede a vincular ambas representaciones a través de una estrategia de vinculación.
+La representación de ambos dominios, se construye en base a la información 
+estática y dinámica que se extrae de los mismos. En la actualidad se conocen distintas técnicas y herramientas que llevan a cabo esta tarea \cite{AHUL06,THBE99}.
  
 \hspace{0.5cm}La información dinámica se extrae del sistema en tiempo de ejecución. Las técnicas encargadas de extraer este tipo de información, insertan sentencias nuevas en el código fuente del programa. Esta inserción no altera la funcionalidad original del programa. La finalidad de las nuevas sentencias es registrar las actividades realizadas durante la ejecución del programa. 
 
-\hspace{0.5cm}El código nuevo puede ser enriquecido con sentencias que simplemente impriman las secciones que se están ejecutando. Más complejo aún, cambiar un conjunto de sentencias por uno nuevo para hacer un estudio más preciso en ciertas partes del código.
+\hspace{0.5cm}Las sentencias nuevas insertadas pueden simplemente imprimir las secciones que se están ejecutando. Más complejo aún, se pueden agregar un conjunto de sentencias nuevas que reemplacen a otro conjunto (sin alterar la funcionalidad original) para hacer un estudio más preciso en ciertas partes del código.
 
-\hspace{0.5cm}El volumen de información obtenida puede ser de gran magnitud. Es por esto, que el encargado de realizar esta tarea debe conocer con claridad los lugares estratégicos donde colocar las sentencias.
+\hspace{0.5cm}El volumen de información extraída puede ser de gran magnitud. Es por esto, que el encargado de hacer el análisis dinámico debe conocer con claridad los lugares estratégicos donde colocar las sentencias.
 
-\hspace{0.5cm}La instrumentación de código es una técnica de análisis dinámico. Esta técnica inserta sentencias para crear trazas de ejecución en distintas partes del código. Las trazas clarifican la ejecución del programa mejorando la comprensión del mismo.
+\hspace{0.5cm}La instrumentación de código es una de las técnicas más conocidas del análisis dinámico\cite{THBE99}. Esta técnica, inserta sentencias para crear trazas de ejecución en distintas partes del código. Las trazas clarifican la ejecución del programa mejorando la comprensión del mismo.
 
-\hspace{0.5cm}Por otro lado, la información estática se extrae desde el código fuente del sistema usando 
-técnicas de compilación tradicionales. Una de estas técnicas consiste en armar y recorrer el árbol de sintaxis abstracta (ASA). Esto permite realizar un análisis sintáctico y semántico en el código fuente.
+\hspace{0.5cm}El análisis estático es tan importante como el análisis dinámico. El análisis estático a diferencia del dinámico, no requiere ejecutar el sistema.
 
-\textbf{Metodología:}
+\hspace{0.5cm}Para realizar el análisis estático, se extrae información presente en el código utilizando técnicas de compilación tradicionales. Estas técnicas realizan un análisis sintáctico y semántico en el código fuente.
+
+\hspace{0.5cm}Para llevar a cabo estos análisis se recorre el árbol de sintaxis abstracta (ASA)\cite{AHUL06}. En la fase de compilación, el ASA se construye a medida que se analiza el código.
+
+\hspace{0.5cm}Una forma de construir el ASA es por comprensión\cite{AHUL06}, esta forma se logra en la etapa del análisis sintáctico durante el proceso de compilación del código. Es la más sencilla y se utiliza en tareas de chequeos de tipos, generación de código, construcción de grafo de funciones, entre otras.
+
+\hspace{0.5cm}Otra forma de elaborar el ASA es por extensión\cite{AHUL06}, esta forma se usa para hacer análisis más complejos en el código. También extrae mayor cantidad de información en tiempo de compilación. Algunos ejemplos de tareas que se pueden realizar son, extracción de identificadores, extracción de funciones y tipos y demás objetos presentes en el código. 
+
+\hspace{0.5cm}El ASA por extensión también se usa para resolver conflictos a nivel semántico, como es el caso de borrar referencias a variables redundantes, detectar funciones o estructuras a través del uso de punteros.
+
+\hspace{0.5cm}El correspondiente trabajo hará más énfasis en la extracción de información estática. Cabe destacar que la dinámica también es importante, sin embargo su análisis requiere de otro tipo de aproximaciones que escapan a los objetivos de este trabajo. 
+
+\hspace{0.5cm}Como bien se explico en párrafos precedentes, se pueden extraer distintos objetos del código fuente de forma estática usando técnicas de compilación, y sin la necesidad de ejecutar el código. 
+
+%=======================================
+
+\hspace{0.5cm}Un elemento que abunda en los códigos son los identificadores. Estudios realizados sobre 2.7 millones de lineas de código escritas en JAVA, indican que más del 70\% de los caracteres del código fuente forman parte de un identificador \cite{DFPM05,DMDJ13}.
+
+\hspace{0.5cm}Los identificadores normalmente están conformados con abreviaturas en su nombramiento. Estudios realizados \cite{BCPT99,LFBEX07,EZH08,EHPV09} arrojan que detrás de las abreviaturas se encuentra oculta información importante del dominio del problema.
+
+\hspace{0.5cm}Por lo antedicho, construir herramientas que puedan extraer y analizar identificadores desde los códigos JAVA es un gran aporte al área de CP. 
+
+\hspace{0.5cm}Una forma de analizar identificadores consiste en desplegar la información oculta de sus abreviaturas. Para lograr este cometido, primero se necesita dividir las distintas abreviaturas que el identificador compone. Por ejemplo: \textsf{inp\_fl\_sys} $\rightarrow$ \textsf{inp fl sys}. Luego se someten a un proceso de expansión. Por ejemplo: \textsf{inp fl sys} $\rightarrow$ \textsf{input file system}.
+
+\hspace{0.5cm}Para realizar los pasos de división y expansión se recurren a fuentes de información informal dentro del código: comentarios, literales strings, documentación. En caso de que estas fuentes escaseen, se pueden utilizar fuentes externas al código como es el caso de los diccionarios de palabras en lenguaje natural.
+
+\hspace{0.5cm}En la actualidad existen técnicas/herramientas que extraen, dividen y expanden identificadores. Sin embargo, no abundan herramientas que integren todas estas tareas. A su vez, tampoco abundan herramientas que permita utilizar distintas políticas de división y expansión de abreviaturas. De esta forma, se podría variar los resultados obtenidos y determinar el más adecuado.
+
+\hspace{0.5cm}En base a lo descripto en los párrafos anteriores, en el presente trabajo final de licenciatura se elaborará un analizador sintáctico en lenguaje JAVA que extrae los identificadores, comentarios y literales encontrados en distintos código fuentes escritos en JAVA.
+
+\hspace{0.5cm}Luego se va investigar técnicas conocidas de división y de expansión de abreviaturas pertenecientes a identificadores, algunas de ellas serán implementadas. 
+
+\hspace{0.5cm}Finalmente, se procederá a implementar una herramienta que integre el analizador y las técnicas de análisis de identificadores nombradas en el párrafo anterior. Esta herramienta mostrará la importancia de la información estática contenida detrás de los identificadores. Extraer esta información permite encarar uno de los desafíos principales de la CP: vincular el Dominio del Problema con el Dominio del Programa.
 \vskip0.5cm
 
 
-
-\textbf{Plan y Cronograma de tareas:}
+{\large \textbf{Metodología:}}
 \vskip0.5cm
 
+\hspace{0.5cm}La metodología a utilizar en este trabajo final, esta enmarcada por 3 etapas principales:
+
+\begin{itemize}
+\renewcommand{\labelitemi}{$\circ$}%icono circulo
+\itemsep0em%reduce espacio
+\item \textbf{Primera Etapa: Investigación de conceptos orientados a la Comprensión de Programas y a la extracción de información estática.}
+
+\hspace{0.5cm}En esta etapa se incorporan los conocimientos necesarios para llevar adelante este trabajo final. Se investigará sobre comprensión de programas y las áreas que contiene. De todas estas áreas, se hará más hincapié en la extracción de información estática en base al análisis de identificadores presentes en los códigos. Este análisis, servirá para la elaboración de técnicas de comprensión de sistemas.
+
+\pagebreak
+\item \textbf{Segunda Etapa: Realización del analizador sintáctico que extrae\\identificadores de los códigos escritos en JAVA.}
+
+\hspace{0.5cm}Se construirá un analizador sintáctico (parser) encargado de extraer identificadores desde los códigos escritos en JAVA. También, se construirá un analizador lexicográfico (lexer) que extraiga los eventuales comentarios presentes en los códigos. Estos comentarios ayudarán al análisis de identificadores. Para ambas construcciones, se utilizará una herramienta que facilite esta tarea. Se llevarán a cabo las pruebas pertinentes.
+
+\vskip0.5cm
+\item \textbf{Tercera Etapa: Construcción de la herramienta que analiza\\identificadores e integra los analizadores realizados en la etapa previa.}
+
+\hspace{0.5cm}Finalmente, en esta etapa se construye una herramienta que contendrá el lexer y el parser elaborado en la etapa anterior. A su vez, implementa algunas técnicas de análisis de identificadores estudiadas en la primer etapa. La finalidad de esta herramienta es extraer información estática en base a los identificadores analizados. Esta información extraída, se considera del Dominio del Problema y es un aporte a la reconstrucción de la relación entre: el Dominio del Problema y el Dominio del Programa.
+
+\end{itemize}
+
+{\large \textbf{Plan y cronograma de tareas:}}
 
 \begin{enumerate}
 \itemsep0em%reduce espacio
-\item Estudiar las técnicas, herramientas y conceptos relacionados con la comprensión de programas: esto permite conocer todos aquellos aspectos vinculados con la comprensión de sistemas;
+\item Estudiar conceptos, técnicas y herramientas sobre la comprensión de programas: con esto se lográ conocer las características relacionadas al ámbito de la comprensión de sistemas.
+
+\item\label{plan1} Investigar conceptos, técnicas y herramientas relacionados al análisis de identificadores: aquí se adquieren los conceptos necesarios para extraer información del Dominio del Problema, en base a los identificadores.
+
+%\item Estudiar herramientas automatizadas que generen Analizadores Lexicográficos y Analizadores Sintácticos, se hará preferencia en aquellas que usen gramática de atributos.
+
+\item Investigar herramientas que puedan generar un Analizador Lexicográfico (lexer) y un Analizador Sintáctico (parser). Preferentemente se escogerán aquellas que empleen gramáticas de atributos.
+
+\item Estudiar la gramática de JAVA y construir el Analizador Lexicográfico (lexer) y Analizador Sintáctico (parser), el primero va extraer comentarios y el segundo identificadores.
+
+\item Implementar una herramienta en JAVA que  contenga distintas técnicas de análisis de identificadores investigados en el ítem \ref{plan1}. Esta herramienta también contendrá el lexer y el parser de la etapa anterior.
+
+\item Escribir el informe del trabajo final. Mientras se ejecutan los ítems precedentes, se irá redactando el informe correspondiente al trabajo final.
 \end{enumerate}
 
-\textbf{Recursos:}
+
+\begin{figure}[h] %[h] para here [b] para bottom [t] para top
+\centerline{%queda centrada mejor la imagen
+\includegraphics[width=375pt,height=205pt]{./crono.png}
+}
+\end{figure} 
+
+
+
+{\large \textbf{Recursos:}}
 \vskip0.5cm
 \hspace{0.5cm}El correspondiente trabajo final se llevará a cabo en la Universidad Nacional de San Luis, en el Área Programación y Metodologías de Desarrollo de Software enmarcado en los siguientes proyectos:
 
@@ -98,12 +172,12 @@ diferentes proyectos de investigación de gran éxito a nivel nacional e interna
 
 
 %========================================
-\renewcommand{\bibname}{\normalsize \textbf{Bibliografía}}
+\renewcommand{\bibname}{\large \textbf{Bibliografía}}
 
 \bibliographystyle{plain}%{alpha}
 \bibliography{biblo}
 \nocite{*}%para que imprima toda la referencias sin necesidad de citar
 
-{\textbf{\\\\Firma de alumno y asesores}}
+{\large \textbf{\\\\Firma de alumno y asesores}}
 
 \end{document}
