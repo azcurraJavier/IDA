@@ -6,7 +6,7 @@ package VentanasPaneles;
 
 import Listas.Clase;
 import Listas.MostrarTabla;
-import SplitID.Greedy;
+import SplitID.SplitUtils;
 import SplitID.SamuraiPaper;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
@@ -59,7 +59,7 @@ public class SplitPanel extends javax.swing.JDialog {
             for(MostrarTabla ide: listId){
                 nomIde = ide.getNomId();
                 filaTabla[0]= nomIde;
-                splitIde = Greedy.ejecutar(nomIde,true);//true=caso 1 de upperlower false=caso 2
+                splitIde = SplitUtils.ejecutar(nomIde,true);//true=caso 1 de upperlower false=caso 2
                 filaTabla[1]= splitIde.replaceAll(" ", "-");//para que se destaque la separación
 
                 lisIdsSplited.add(filaTabla[1].toString().toLowerCase());
