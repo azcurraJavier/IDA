@@ -27,7 +27,7 @@ public class GreedyPaperTest {
         
         
         System.out.println("test init bd 00");
-        DictionaryDB.Dictionary.restartBd();
+        DictionaryDB.Dictionary.initBd();
         
         System.out.println("test greedy 01");
         String idHardword = "tablehomechair";

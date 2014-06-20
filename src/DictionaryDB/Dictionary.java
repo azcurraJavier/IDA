@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
+import java.util.ArrayList;
 
 /**
  *
@@ -25,6 +26,20 @@ public abstract class Dictionary {
         ConnectionDB.CerrarConBD();
         
         return exists;
+        
+    }
+    
+    public static ArrayList<String> likeWordDic(String table, String word){
+        
+        ArrayList<String> elems;
+        
+        Connection con = ConnectionDB.AbrirConBD();
+        
+        elems = OperationDB.like(table, word, con);        
+        
+        ConnectionDB.CerrarConBD();
+        
+        return elems;
         
     }
     
@@ -110,6 +125,20 @@ public abstract class Dictionary {
 //        
 //        
 //        createTableInsertValuesBD(csvFile, table);
+        
+        
+        //Tablas para samurai - prefijos y sufijos
+        csvFile = "Diccionarios/samurai.pref.txt";
+	
+        table = "sam_pref";
+        
+        createTableInsertValuesBD(csvFile, table, con);       
+        
+        csvFile = "Diccionarios/samurai.suf.txt";
+	
+        table = "sam_suf";
+        
+        createTableInsertValuesBD(csvFile, table, con);        
         
         ConnectionDB.CerrarConBD();         
         

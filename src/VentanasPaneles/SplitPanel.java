@@ -66,7 +66,7 @@ public class SplitPanel extends javax.swing.JDialog {
                 
                 samurai = new SamuraiPaper(lisClases.get(0),"strDomicilio");
                 
-                samurai.mixedCaseSplit();
+                //samurai.mixedCaseSplit();
                 
                 //splitIde = Samurai.ejecutar(nomIde);
                 //filaTabla[2]= splitIde.replaceAll(" ", "   ");//para que se destaque la separación

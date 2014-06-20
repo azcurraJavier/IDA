@@ -7,6 +7,7 @@
 package DictionaryDB;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -67,8 +68,50 @@ public class OperationDBTest {
         expResult = true;
         result = OperationDB.select(table, word, con);
         assertEquals(expResult, result);
+        
+ 
+        System.out.println("test like 1");
+        
+        table = "tabla_prueba";
+        
+        con = ConnectionDB.AbrirConBD();
+        assertNotNull(con);        
 
+        word = "prue";        
+        
+//        Object likeRes[] = OperationDB.like(table, word, con);
+//        
+//        assertEquals("prueba_prueba", likeRes[0]);
+//        
+//        
+//        System.out.println("test like 2");
+//        
+//        table = "tabla_prueba";
+//        
+//        con = ConnectionDB.AbrirConBD();
+//        assertNotNull(con);        
+//
+//        word = "peba";        
+//        
+//        likeRes = OperationDB.like(table, word, con);
+//        
+//        assertEquals("prueba_prueba", likeRes[0]);
+        
+        //////////
+        System.out.println("test like 3");
+        
+        table = "tabla_prueba";
+        
+        con = ConnectionDB.AbrirConBD();
+        assertNotNull(con);        
 
+        word = "jdyndkc";//este valor no existe debe devolver vacio        
+        
+        ArrayList<String> likeRes = OperationDB.like(table, word, con);
+        
+        assertEquals(0, likeRes.size());
+
+        //////
         
         System.out.println("test drop table");
 
