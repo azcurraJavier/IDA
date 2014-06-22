@@ -9,6 +9,7 @@ public class MostrarTabla {
     private String modificador;
     private int numApa;
     private String strAsignado;//solo en caso de literales
+    private int numLinea;
     
     
     public MostrarTabla(String ambiente){
@@ -20,6 +21,7 @@ public class MostrarTabla {
         this.modificador = "";
         this.numApa = 1;
         this.strAsignado = "";
+        this.numLinea = 0;
     }
 
     public void setModificador(String modificador) {
@@ -41,6 +43,10 @@ public class MostrarTabla {
     public void setStrAsignado(String strAsignado) {
         this.strAsignado = strAsignado;
     }
+
+    public void setNumLinea(int numLinea) {
+        this.numLinea = numLinea;
+    }    
 
     public String getAmbiente() {
         return ambiente;
@@ -65,5 +71,10 @@ public class MostrarTabla {
     public String getTipo() {
         return tipo;
     }
+
+    public int getNumLinea() {
+        return numLinea;
+    }   
+    
     
 }

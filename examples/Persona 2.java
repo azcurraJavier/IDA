@@ -1,10 +1,11 @@
+//prueba
 public class Persona {
 // Atributos Persona
 
 //documento persona
     private int docPrsa;
 //nombre
-    private String nbr_prsa;
+    private String nbr_prsa = "nosenose";
 //edad
     private int ed_prsa;
 //genero
@@ -28,6 +29,7 @@ public class Persona {
 // Métodos set`s
     public void setDocPrsa(int valor) {
         this.docPrsa = valor;
+        nbr_prsa = "pepito";
     }
 
     public void setNbr(String valor) {

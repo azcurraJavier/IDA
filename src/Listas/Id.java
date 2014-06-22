@@ -7,11 +7,14 @@ public class Id {
     private int cantAp;
     
     private String strContenido;
+    
+    private int line;
 
-    public Id(String nom) {
+    public Id(String nom, int l) {
         nomID = nom;
         cantAp = 1;
         strContenido = new String();
+        line = l;
     }
 
     public int getCantAp() {
@@ -32,6 +35,10 @@ public class Id {
     
     public void sumCantAp(){
         cantAp ++;
-    }    
+    }
+
+    public int getLine() {
+        return line;
+    } 
     
 }

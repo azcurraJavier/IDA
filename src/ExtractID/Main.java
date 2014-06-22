@@ -350,7 +350,7 @@ public class Main extends javax.swing.JFrame {
                 lisCom.add(com.getCom());
             }
            lisCom.add("==================="); 
-           lisCom.addAll(c.getLisLiterales());
+           //lisCom.addAll(c.getLisLiterales());
         } 
     
         return lisCom;

@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Rectangle;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -22,36 +23,37 @@ import javax.swing.text.JTextComponent;
 
 public class CodigoPanel extends javax.swing.JPanel {
 
-    Set<String> setReserv = new HashSet<String>(Arrays.asList("abstract", "assert", "boolean", "break", "byte", "case", "catch", "char", "class", 
-                                                   "const", "continue", "default", "do", "double", "else", "enum", "extends", "false", "final", "finally",
-                                                   "float", "for", "goto", "if", "implements", "import", "instanceof", "int", "interface", "long", "native",
-                                                   "new", "null", "package", "private", "protected", "public", "return", "short", "static", "strictfp", "super",
-                                                   "switch", "synchronized", "this", "throw", "throws", "transient", "true", "try", "void", "volatile", "while"));
-    
-    Set<String> setSimbol = new HashSet<String>(Arrays.asList(",","{","}","(",")",";","+","+=","-","-=","*","*=","/","/=","%","%=","++","--",">",">=","<","<=","!","!=",
-                                                                "&&","||","==","=","~","?:","|","|=","^","^=","&","&=",">>",">>=","<<","<<=",">>>",">>>="));
-    
-    Map<String,String> mapReservSimbol = new HashMap<String,String>(){{
-        put("\"","&quot");
-        put(">","&gt");
-        put("<","&lt");
-        put("&","&amp");
-        put("'","&#039");
-        put("''","&#034");
-    }};
-    
-    
+    Set<String> setReserv = new HashSet<String>(Arrays.asList("abstract", "assert", "boolean", "break", "byte", "case", "catch", "char", "class",
+            "const", "continue", "default", "do", "double", "else", "enum", "extends", "false", "final", "finally",
+            "float", "for", "goto", "if", "implements", "import", "instanceof", "int", "interface", "long", "native",
+            "new", "null", "package", "private", "protected", "public", "return", "short", "static", "strictfp", "super",
+            "switch", "synchronized", "this", "throw", "throws", "transient", "true", "try", "void", "volatile", "while"));
+
+    Set<String> setSimbol = new HashSet<String>(Arrays.asList(",", "{", "}", "(", ")", ";", "+", "+=", "-", "-=", "*", "*=", "/", "/=", "%", "%=", "++", "--", ">", ">=", "<", "<=", "!", "!=",
+            "&&", "||", "==", "=", "~", "?:", "|", "|=", "^", "^=", "&", "&=", ">>", ">>=", "<<", "<<=", ">>>", ">>>="));
+
+    Map<String, String> mapReservSimbol = new HashMap<String, String>() {
+        {
+            //put("\"", "&quot");
+            put(">", "&gt");
+            put("<", "&lt");
+            put("&", "&amp");
+            put("'", "&#039");
+            put("''", "&#034");
+        }
+    };
+
     private Clase claseAsociada = null;
 
     public CodigoPanel(Clase unaClass) {
         initComponents();
-        
+
         //jTextAreaCod.setFont(new Font("Monospaced", Font.PLAIN, 12));
         jEditorPaneCod.setFont(new Font("Monospaced", Font.PLAIN, 13));
-        jEditorPaneCod.setContentType("text/html"); 
+        jEditorPaneCod.setContentType("text/html");
 
         claseAsociada = unaClass;
-        
+
         try {
 
             FileInputStream fr = new FileInputStream(claseAsociada.getPunteroArchivo());
@@ -63,10 +65,9 @@ public class CodigoPanel extends javax.swing.JPanel {
             int num = 1;
 
             while ((line = reader.readLine()) != null) {
-                
-                
+
                 line = reservWordsH(line);
-          
+
                 if (num < 10) {
                     buffer.append("0").append(num).append(". ").append(line);
                 } else {
@@ -79,9 +80,10 @@ public class CodigoPanel extends javax.swing.JPanel {
             }
 
             reader.close();
-
+            
             //jTextAreaCod.setText(buffer.toString());
-            jEditorPaneCod.setText("<html><pre>"+buffer.toString()+"</pre></html>");
+            jEditorPaneCod.setText("<html><pre>"+"<font size=\"6\"/>"
+                    + buffer.toString() + "</font></pre></html>");
 
             //jTextAreaCod.setCaretPosition(6);
             jEditorPaneCod.setCaretPosition(6);
@@ -119,7 +121,7 @@ public class CodigoPanel extends javax.swing.JPanel {
     Highlighter.HighlightPainter myHighlightPainter = new MyHighlightPainter(Color.cyan);
 
 // Creates highlights around all occurrences of pattern in textComp
-    private void highlight(JTextComponent textComp, String pattern) {
+    private void highlight(JTextComponent textComp, String pattern, int line) {
         // First remove all old highlights
         removeHighlights(textComp);
         boolean unaVez = true;
@@ -132,7 +134,7 @@ public class CodigoPanel extends javax.swing.JPanel {
             // Search for pattern
             while ((pos = text.indexOf(pattern, pos)) >= 0) {
 
-                if (checkTextSurr(text, pos, pattern.length())) {
+                if (checkTextSurr(text, pos, pattern.length(), line)) {
                     // Create highlighter using private painter and apply around pattern
                     hilite.addHighlight(pos, pos + pattern.length(), myHighlightPainter);
                 }//la idea es si busco id => que NO resalte idPersona 
@@ -158,7 +160,7 @@ public class CodigoPanel extends javax.swing.JPanel {
         }
     }
 
-    private boolean checkTextSurr(String text, int pos, int patternLenght) {
+    private boolean checkTextSurr(String text, int pos, int patternLenght, int line) {
 
         int posMin = 0;
 
@@ -168,6 +170,26 @@ public class CodigoPanel extends javax.swing.JPanel {
 
         int posMax = pos + patternLenght + 1;
 
+        ////Este control sirve para cuando el nro de linea
+        //de lo que necesito remarcar viene por parametro
+        if (line != -1) {
+            int lineMin = line - 1, lineMax = line + 1;
+
+            String strLineMin = lineMin >= 0 && lineMin <= 9 ? "0" + lineMin : "" + lineMin;
+            String strLineMax = lineMax >= 0 && lineMax <= 9 ? "0" + lineMax : "" + lineMax;
+
+            int posLineTopMin = text.indexOf(strLineMin + ".");
+            int posLineTopMax = text.indexOf(strLineMax + ".");
+
+            if (posLineTopMin != -1 && posMin < posLineTopMin) {
+                return false;
+            }
+            if (posLineTopMax != -1 && posLineTopMax < posMax) {
+                return false;
+            }
+        }
+
+        ///////////////////////////////////////////
         String wordOr = text.substring(pos, pos + patternLenght);
 
         String wordMin = text.substring(posMin, pos + patternLenght);
@@ -192,9 +214,9 @@ public class CodigoPanel extends javax.swing.JPanel {
         }
     }
 
-    public void setHighlight(String text) {
+    public void setHighlight(String text, int line) {
         //highlight(jTextAreaCod, text);
-        highlight(jEditorPaneCod,text);
+        highlight(jEditorPaneCod, text, line);
     }
 
     public JPanel emptyPanel(String name) {
@@ -205,74 +227,99 @@ public class CodigoPanel extends javax.swing.JPanel {
 
         label.setFont(new Font("arial", 1, 20));
 
-
         jPane.add(label, 0);
 
         return jPane;
 
     }
-    
-    private String reservWordsH(String linea){
-        
-        String newLin="";
-        
-        if(linea.trim().isEmpty()){
+
+    private boolean blockComment = false;
+
+    private boolean blockLiteral2 = false;
+
+    private String reservWordsH(String linea) {
+
+        String newLin = "";
+
+        if (linea.trim().isEmpty()) {
             return newLin;
         }
-        
-        String words []=linea.split(" ");
-        
-        if(linea.startsWith("//")){
-            return "<span style=\"color: #006400;\">"+linea+"</span>";
+
+        if (linea.trim().endsWith("*/")) {
+            blockComment = false;
+            return "<span style=\"color: #006400;\">" + linea + "</span>";
         }
-        
-        for(String w:words){
-           
-            if(setReserv.contains(w)){
+
+        if (blockComment || linea.trim().startsWith("/*")) {
+            blockComment = true;
+            return "<span style=\"color: #006400;\">" + linea + "</span>";
+        }
+
+        if (linea.trim().startsWith("//")) {
+            return "<span style=\"color: #006400;\">" + linea + "</span>";
+        }
+
+        String words[] = linea.split(" ");
+
+        for (String w : words) {
+
+            if (setReserv.contains(w)) {
                 //Palabras reservadas
-                w="<b><span style=\"color: #00008B;\">"+w+"</span></b>";
-                
-            }else{           
-        
+                w = "<b><span style=\"color: #00008B;\">" + w + "</span></b>";
+
+            } else {
+
                 w = checkCar(w);
             }
-        
-            newLin +=w+ " ";
+
+            newLin += w + " ";
         }
 
-        newLin = newLin.substring(0, newLin.length()-1);//retira espacio al final
-        
+        newLin = newLin.substring(0, newLin.length() - 1);//retira espacio al final
+
         return newLin;
     }
-    
-    private String checkCar(String word){
-        
-        String newWord = "";
-        
-         char[] charArray = word.toCharArray();
-         
-         for(Character c:charArray){
 
-            if(setSimbol.contains(c.toString())){
-                //simbolos
-                String cast = mapReservSimbol.get(c.toString());
-                cast = cast!=null?cast:c.toString();
-                newWord +="<b><span style=\"color: #00008B;\">"+cast+"</span></b>";
+    private String checkCar(String word) {
+
+        String newWord = "";
+
+        char[] charArray = word.toCharArray();
+
+        for (Character c : charArray) {            
+            //simbolos
+            String cast = mapReservSimbol.get(c.toString());
+            cast = cast != null ? cast : c.toString();//palabras reservadas            
+
+            if (!blockLiteral2 && setSimbol.contains(cast)) {             
+
+                newWord += "<b><span style=\"color: #00008B;\">" + cast + "</span></b>";
                 continue;
             }
-            
-            if(c.toString().matches("[0-9]+(.[0-9]+)?")){
+
+            if (!blockLiteral2 && cast.matches("[0-9]+(.[0-9]+)?")) {
                 //numeros
-                newWord +="<span style=\"color: red;\">"+c+"</span>";                
+                newWord += "<b><span style=\"color: red;\">" + cast + "</span></b>";
                 continue;
             }
-         
-            newWord += c.toString();
-         }        
-         
-         return newWord;
+
+            if (cast.equals("\"")) {
+                if (!blockLiteral2) {//abriendo literal
+                    newWord += "<b><span style=\"color: #CE7B00;\">" + cast;
+
+                } else {//cerrando literal
+                    newWord += cast + "</span></b>";
+                }
+
+                blockLiteral2 = blockLiteral2 != true;
+                continue;
+            }
+
+            newWord += cast.toString();
+        }
+
+        return newWord;
     }
-    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

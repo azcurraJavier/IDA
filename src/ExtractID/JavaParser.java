@@ -1,4 +1,4 @@
-// $ANTLR 3.4 Java.g 2014-06-12 23:44:15
+// $ANTLR 3.4 Java.g 2014-06-21 21:44:21
 
         /* esto es para que el parser sea visto desde el resto del proyecto y viceversa */
 	package ExtractID;
@@ -180,8 +180,8 @@ public class JavaParser extends Parser {
         public Clase getClaseAnalisis(){return claseAnalisis;}
 
 
-        ArrayList<String> lisLiterales = new ArrayList<String>(); 
-        public ArrayList<String> getLisLiterales(){return this.lisLiterales;}
+        ArrayList<Literal> lisLiterales = new ArrayList(); 
+        public ArrayList<Literal> getLisLiterales(){return this.lisLiterales;}
     	
 
 
@@ -1803,7 +1803,7 @@ public class JavaParser extends Parser {
             state._fsp--;
             if (state.failed) return unaClase;
 
-            if ( state.backtracking==0 ) {c.setIde(new Id((I1!=null?I1.getText():null))); c.setModClase((modifiers1!=null?input.toString(modifiers1.start,modifiers1.stop):null));unaClase =c;}
+            if ( state.backtracking==0 ) {c.setIde(new Id((I1!=null?I1.getText():null),I1.getLine())); c.setModClase((modifiers1!=null?input.toString(modifiers1.start,modifiers1.stop):null));unaClase =c;}
 
             }
 
@@ -4082,7 +4082,7 @@ public class JavaParser extends Parser {
 
                     Id1=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_methodDeclaration1978); if (state.failed) return retval;
 
-                    if ( state.backtracking==0 ) {retval.me = new Metodo(mod,tipo,new Id((Id1!=null?Id1.getText():null)));retval.lineaMetodo =Id1.getLine();}
+                    if ( state.backtracking==0 ) {retval.me = new Metodo(mod,tipo,new Id((Id1!=null?Id1.getText():null),Id1.getLine()));retval.lineaMetodo =Id1.getLine();}
 
                     pushFollow(FOLLOW_formalParameters_in_methodDeclaration1994);
                     f1=formalParameters();
@@ -4415,7 +4415,7 @@ public class JavaParser extends Parser {
 
                     Id2=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_methodDeclaration2296); if (state.failed) return retval;
 
-                    if ( state.backtracking==0 ) {retval.me = new Metodo(mod,tipo,new Id((Id2!=null?Id2.getText():null)));retval.lineaMetodo =Id2.getLine();}
+                    if ( state.backtracking==0 ) {retval.me = new Metodo(mod,tipo,new Id((Id2!=null?Id2.getText():null),Id2.getLine()));retval.lineaMetodo =Id2.getLine();}
 
                     pushFollow(FOLLOW_formalParameters_in_methodDeclaration2312);
                     f2=formalParameters();
@@ -4679,7 +4679,7 @@ public class JavaParser extends Parser {
             {
             IDENTIFIER7=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_variableDeclarator2754); if (state.failed) return id;
 
-            if ( state.backtracking==0 ) {id = new Id((IDENTIFIER7!=null?IDENTIFIER7.getText():null));}
+            if ( state.backtracking==0 ) {id = new Id((IDENTIFIER7!=null?IDENTIFIER7.getText():null),IDENTIFIER7.getLine());}
 
             // Java.g:361:9: ( '[' ']' )*
             loop51:
@@ -4728,7 +4728,7 @@ public class JavaParser extends Parser {
                     state._fsp--;
                     if (state.failed) return id;
 
-                    if ( state.backtracking==0 ) {if(flagStr){id.setStrContenido(v1);}}
+                    if ( state.backtracking==0 ) {/*if(flagStr){id.setStrContenido(v1);}*/}
 
                     }
                     break;
@@ -6417,7 +6417,7 @@ public class JavaParser extends Parser {
 
             IDENTIFIER11=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_normalParameterDecl3778); if (state.failed) return pa;
 
-            if ( state.backtracking==0 ) {pa = new Parametro((variableModifiers9!=null?input.toString(variableModifiers9.start,variableModifiers9.stop):null), (type10!=null?input.toString(type10.start,type10.stop):null), new Id((IDENTIFIER11!=null?IDENTIFIER11.getText():null)));}
+            if ( state.backtracking==0 ) {pa = new Parametro((variableModifiers9!=null?input.toString(variableModifiers9.start,variableModifiers9.stop):null), (type10!=null?input.toString(type10.start,type10.stop):null), new Id((IDENTIFIER11!=null?IDENTIFIER11.getText():null),IDENTIFIER11.getLine()));}
 
             // Java.g:487:9: ( '[' ']' )*
             loop73:
@@ -14075,7 +14075,7 @@ public class JavaParser extends Parser {
                     {
                     str=(Token)match(input,STRINGLITERAL,FOLLOW_STRINGLITERAL_in_literal8776); if (state.failed) return retval;
 
-                    if ( state.backtracking==0 ) {lisLiterales.add(str.getText());retval.s =str.getText();}
+                    if ( state.backtracking==0 ) {lisLiterales.add(new Literal(str.getLine(),str.getText())); retval.s =str.getText();}
 
                     }
                     break;

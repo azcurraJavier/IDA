@@ -16,7 +16,7 @@ public class Clase {
     //Lista de comentatios del archivo (clase)
     private ArrayList<Comentario> LisComentario;
     //Lista de literales del archivo (clase)
-    private ArrayList<String> LisLiterales;
+    private ArrayList<Literal> LisLiterales;
     //Para mostrar los id por la tabla
     private ArrayList<MostrarTabla> lisMostrarTabla = new ArrayList<MostrarTabla>();
     //Para calculo en Samurai
@@ -111,6 +111,7 @@ public class Clase {
                 for (Iterator<Entry<String, Declaracion>> it = c.getLisDecl().entrySet().iterator(); it.hasNext();) {
                     Declaracion d = it.next().getValue();
                     m.setNomId(d.getIdent().getNomID());
+                    m.setNumLinea(d.getIdent().getLine());
                     m.setNumApa(d.getIdent().getCantAp());
                     m.setModificador(d.getModificador());
                     m.setTipo(d.getTipo());
@@ -127,6 +128,7 @@ public class Clase {
             if (met != null) {
 
                 m.setNomId(met.getIde().getNomID());
+                m.setNumLinea(met.getIde().getLine());
                 m.setNumApa(met.getIde().getCantAp());
                 m.setModificador(met.getModif());
                 m.setTipo(met.getTipo());
@@ -141,13 +143,14 @@ public class Clase {
         m = new MostrarTabla("Clase Global");//clase
         m.setModificador(this.modClase);
         m.setNomId(this.ide.getNomID());
+        m.setNumLinea(this.ide.getLine());
         lisMostrarTabla.add(m);
         this.cantTotalId++;
 
 
         if (this.nomPaq != null && !this.nomPaq.isEmpty()) {
             m = new MostrarTabla("Clase Global");//paquete
-            m.setNomId(this.nomPaq);
+            m.setNomId(this.nomPaq);            
             lisMostrarTabla.add(m);
             this.cantTotalId++;
         }
@@ -161,11 +164,11 @@ public class Clase {
         return cantTotalId;
     }
 
-    public void setLisLiterales(ArrayList<String> LisLiterales) {
+    public void setLisLiterales(ArrayList<Literal> LisLiterales) {
         this.LisLiterales = LisLiterales;
     }
 
-    public ArrayList<String> getLisLiterales() {
+    public ArrayList<Literal> getLisLiterales() {
         return LisLiterales;
     }
 

@@ -42,8 +42,8 @@ scope GlobalOne {
     public Clase getClaseAnalisis(){return claseAnalisis;}
 
 
-    ArrayList<String> lisLiterales = new ArrayList<String>(); 
-    public ArrayList<String> getLisLiterales(){return this.lisLiterales;}
+    ArrayList<Literal> lisLiterales = new ArrayList(); 
+    public ArrayList<Literal> getLisLiterales(){return this.lisLiterales;}
 	
 }
 
@@ -148,7 +148,7 @@ normalClassDeclaration returns [Clase unaClase]
         )?
         ('implements' typeList
         )?            
-        c = classBody {c.setIde(new Id($I1.text)); c.setModClase($modifiers.text);$unaClase =c;}
+        c = classBody {c.setIde(new Id($I1.text,$I1.getLine())); c.setModClase($modifiers.text);$unaClase =c;}
     ;
 
 
@@ -308,7 +308,7 @@ $lisUsosId = $me.buscarUsoDecl($lisUsosId);$lisUsosId = $me.buscarUsoParam($lisU
          modifiers {mod = $modifiers.text;tipo="";}
         (typeParameters
         )?
-        Id1 = IDENTIFIER {$me = new Metodo(mod,tipo,new Id($Id1.text));$lineaMetodo=Id1.getLine();}
+        Id1 = IDENTIFIER {$me = new Metodo(mod,tipo,new Id($Id1.text,$Id1.getLine()));$lineaMetodo=Id1.getLine();}
         f1 = formalParameters {$me.addListParam(f1);}
         ('throws' qualifiedNameList
         )?
@@ -324,7 +324,7 @@ $lisUsosId = $me.buscarUsoDecl($lisUsosId);$lisUsosId = $me.buscarUsoParam($lisU
         (type {tipo = $type.text;}
         |   'void' {tipo = "void";}
         )
-        Id2 = IDENTIFIER {$me = new Metodo(mod,tipo,new Id($Id2.text));$lineaMetodo=Id2.getLine();}
+        Id2 = IDENTIFIER {$me = new Metodo(mod,tipo,new Id($Id2.text,$Id2.getLine()));$lineaMetodo=Id2.getLine();}
         f2 = formalParameters {$me.addListParam(f2);}
         ('[' ']'
         )*
@@ -357,10 +357,10 @@ variableDeclarator [boolean flag] returns [Id id]
 @init{
     boolean flagStr = flag;
 }
-    :   IDENTIFIER {$id = new Id($IDENTIFIER.text);}
+    :   IDENTIFIER {$id = new Id($IDENTIFIER.text,$IDENTIFIER.getLine());}
         ('[' ']'
         )*
-        ('=' v1 = variableInitializer {if(flagStr){$id.setStrContenido(v1);}}
+        ('=' v1 = variableInitializer {/*if(flagStr){$id.setStrContenido(v1);}*/}
         )?
     ;
 
@@ -483,7 +483,7 @@ formalParameterDecls returns [Map<String,Parametro> lisParam]
     ;
 
 normalParameterDecl returns [Parametro pa]
-    :   variableModifiers type IDENTIFIER {$pa = new Parametro($variableModifiers.text, $type.text, new Id($IDENTIFIER.text));}
+    :   variableModifiers type IDENTIFIER {$pa = new Parametro($variableModifiers.text, $type.text, new Id($IDENTIFIER.text,$IDENTIFIER.getLine()));}
         ('[' ']'
         )*
     ;
@@ -1068,7 +1068,7 @@ literal returns [String s]
     |   FLOATLITERAL
     |   DOUBLELITERAL
     |   CHARLITERAL
-    |   str = STRINGLITERAL {lisLiterales.add(str.getText());$s=str.getText();}
+    |   str = STRINGLITERAL {lisLiterales.add(new Literal(str.getLine(),str.getText())); $s=str.getText();}
     |   TRUE
     |   FALSE
     |   NULL

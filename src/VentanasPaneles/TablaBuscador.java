@@ -2,8 +2,11 @@ package VentanasPaneles;
 
 import Listas.Clase;
 import Listas.Comentario;
+import Listas.Literal;
 import Listas.MostrarTabla;
 import Listas.PalabraHash;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.RowFilter;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
@@ -14,14 +17,14 @@ public class TablaBuscador extends javax.swing.JPanel {
     private MiModelo modeloTabla;
     private MiJTable tablaElem;
     private TableRowSorter<TableModel> tableSort;
-    private int buscarColumna = 1;
+    private int buscarColumna = 2;
     private Clase unaClase;
     private PalabraHash p;
     private CodigoPanel codigoPanel;
     private int tipoSel;
     
 //    private JScrollPane jScrollpane;   
-    
+    private static final Map<Integer,String> lineaLit = new HashMap<>();
     
     private boolean hasElemets = true;//controla si tiene elementos
 
@@ -52,60 +55,73 @@ public class TablaBuscador extends javax.swing.JPanel {
         switch (tipoTabla) {
 
             case 0://Identificadores                
+                modeloTabla.addColumn("Nro Linea");
                 modeloTabla.addColumn("IDENTIFICADOR");
                 modeloTabla.addColumn("Tipo - T.Retorno");
                 modeloTabla.addColumn("Modificador");
                 modeloTabla.addColumn("N° Apariciones");
 
-                fila = new Object[5];
+                fila = new Object[6];
 
                 for (MostrarTabla m : unaClase.getIdTablaClase()) {
 
-                    if (!"String".equals(m.getTipo())) {
+                    //if (!"String".equals(m.getTipo())) {
                         fila[0] = m.getAmbiente();
-                        fila[1] = m.getNomId();
-                        fila[2] = m.getTipo();
-                        fila[3] = m.getModificador();
-                        fila[4] = m.getNumApa();
+                        fila[1] = m.getNumLinea();
+                        fila[2] = m.getNomId();
+                        fila[3] = m.getTipo();
+                        fila[4] = m.getModificador();
+                        fila[5] = m.getNumApa();
                         modeloTabla.addRow(fila);
-                    }
+                   // }
+                        
+                      if ("String".equals(m.getTipo())) {
+                          lineaLit.put(m.getNumLinea(), m.getNomId());
+                      }
                 }
 
                 break;
 
             case 1://Strings
-                modeloTabla.addColumn("IDENTIFICADOR");
-                modeloTabla.addColumn("String Asignado");
-                buscarColumna = 2;
+                
+                modeloTabla.addColumn("Nro Linea");
+                modeloTabla.addColumn("LITERAL");
+                modeloTabla.addColumn("ID Asignado");               
 
-                fila = new Object[3];
+                fila = new Object[4];
 
-                for (MostrarTabla m : unaClase.getIdTablaClase()) {
+//                for (MostrarTabla m : unaClase.getIdTablaClase()) {
+//
+//                    if ("String".equals(m.getTipo()) && !m.getStrAsignado().isEmpty()) {
+//                        fila[0] = m.getAmbiente();
+//                        fila[1] = m.getNomId();
+//                        fila[2] = m.getNumLinea();
+//                        fila[3] = m.getStrAsignado().trim();
+//                        modeloTabla.addRow(fila);
+//                    }
+//                }
 
-                    if ("String".equals(m.getTipo()) && !m.getStrAsignado().isEmpty()) {
-                        fila[0] = m.getAmbiente();
-                        fila[1] = m.getNomId();
-                        fila[2] = m.getStrAsignado().trim();
+                for (Literal s : unaClase.getLisLiterales()) {
+
+                    String id = lineaLit.get(s.getLine());
+                    
+                    if (validString(s.getText())) {
+                        fila[0] = "-";//"@"+unaClase.getIde().getNomID();
+                        fila[1] = s.getLine();                        
+                        fila[2] = s.getText();
+                        fila[3] = id==null?"-":id;
                         modeloTabla.addRow(fila);
                     }
                 }
-
-                for (String s : unaClase.getLisLiterales()) {
-
-                    if (validString(s)) {
-                        fila[0] = "@"+unaClase.getIde().getNomID();
-                        fila[1] = "-";
-                        fila[2] = s;
-                        modeloTabla.addRow(fila);
-                    }
-                }
+                //una vez que la variable estatica se usa hay que limpiarla
+                lineaLit.clear();
 
                 break;
 
             case 2://Comentarios
 
                 jButtonTagCloud.setVisible(true);
-                buscarColumna = 2;
+                
                 modeloTabla.addColumn("Nro Linea");
                 modeloTabla.addColumn("Comentario");
 
@@ -270,27 +286,12 @@ public class TablaBuscador extends javax.swing.JPanel {
 
 
         int row = tablaElem.getSelectedRow();
-        int column = -1;
 
-        switch (tipoSel) {
-
-            case 0:
-            
-                column = 1;
-                break;
-                
-            case 1:
-            case 2:
-                column = 2;
-                break;
-
-        }
-
-        String text = modeloTabla.getValueAt(row, column).toString();
+        String text = modeloTabla.getValueAt(row, 2).toString();
         
-        text = text.trim().replaceAll("\n", "");
+        text = text.trim().replaceAll("\n", "");   
 
-        codigoPanel.setHighlight(text);        
+        codigoPanel.setHighlight(text,(int)modeloTabla.getValueAt(row, 1));        
         
 
 
