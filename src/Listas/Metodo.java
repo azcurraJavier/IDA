@@ -144,6 +144,7 @@ public class Metodo {
 
                 m.setNomId(p.getIdent().getNomID());
                 m.setNumApa(p.getIdent().getCantAp());
+                m.setNumLinea(p.getIdent().getLine());
                 m.setModificador(p.getModif());
                 m.setTipo(p.getTipo());
                 m.setStrAsignado(p.getIdent().getStrContenido());

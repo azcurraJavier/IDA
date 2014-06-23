@@ -5,7 +5,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Rectangle;
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -23,13 +22,13 @@ import javax.swing.text.JTextComponent;
 
 public class CodigoPanel extends javax.swing.JPanel {
 
-    Set<String> setReserv = new HashSet<String>(Arrays.asList("abstract", "assert", "boolean", "break", "byte", "case", "catch", "char", "class",
+    Set<String> setReserv = new HashSet<>(Arrays.asList("abstract", "assert", "boolean", "break", "byte", "case", "catch", "char", "class",
             "const", "continue", "default", "do", "double", "else", "enum", "extends", "false", "final", "finally",
             "float", "for", "goto", "if", "implements", "import", "instanceof", "int", "interface", "long", "native",
             "new", "null", "package", "private", "protected", "public", "return", "short", "static", "strictfp", "super",
             "switch", "synchronized", "this", "throw", "throws", "transient", "true", "try", "void", "volatile", "while"));
 
-    Set<String> setSimbol = new HashSet<String>(Arrays.asList(",", "{", "}", "(", ")", ";", "+", "+=", "-", "-=", "*", "*=", "/", "/=", "%", "%=", "++", "--", ">", ">=", "<", "<=", "!", "!=",
+    Set<String> setSimbol = new HashSet<>(Arrays.asList(",", "{", "}", "(", ")", ";", "+", "+=", "-", "-=", "*", "*=", "/", "/=", "%", "%=", "++", "--", ">", ">=", "<", "<=", "!", "!=",
             "&&", "||", "==", "=", "~", "?:", "|", "|=", "^", "^=", "&", "&=", ">>", ">>=", "<<", "<<=", ">>>", ">>>="));
 
     Map<String, String> mapReservSimbol = new HashMap<String, String>() {
@@ -51,7 +50,7 @@ public class CodigoPanel extends javax.swing.JPanel {
         //jTextAreaCod.setFont(new Font("Monospaced", Font.PLAIN, 12));
         jEditorPaneCod.setFont(new Font("Monospaced", Font.PLAIN, 13));
         jEditorPaneCod.setContentType("text/html");
-
+        
         claseAsociada = unaClass;
 
         try {
@@ -80,9 +79,9 @@ public class CodigoPanel extends javax.swing.JPanel {
             }
 
             reader.close();
-            
+
             //jTextAreaCod.setText(buffer.toString());
-            jEditorPaneCod.setText("<html><pre>"+"<font size=\"6\"/>"
+            jEditorPaneCod.setText("<html><pre>" + "<font size=\"6\"/>"
                     + buffer.toString() + "</font></pre></html>");
 
             //jTextAreaCod.setCaretPosition(6);
@@ -125,37 +124,39 @@ public class CodigoPanel extends javax.swing.JPanel {
         // First remove all old highlights
         removeHighlights(textComp);
         boolean unaVez = true;
+        
         try {
             Highlighter hilite = textComp.getHighlighter();
             Document doc = textComp.getDocument();
             String text = doc.getText(0, doc.getLength());
             int pos = 0;
 
+            int posRect = 0;//guarda el valor para ubicar en el texto
+            
             // Search for pattern
             while ((pos = text.indexOf(pattern, pos)) >= 0) {
 
                 if (checkTextSurr(text, pos, pattern.length(), line)) {
                     // Create highlighter using private painter and apply around pattern
                     hilite.addHighlight(pos, pos + pattern.length(), myHighlightPainter);
+                    posRect = pos;
+                    break;
                 }//la idea es si busco id => que NO resalte idPersona 
 
                 pos += pattern.length();
 
-                if (unaVez) {
-
-                    int index = text.indexOf(pattern);
-                    if (index < 0) {
-                        return;
-                    }
-                    try {
-                        Rectangle rect = textComp.modelToView(index);
-                        textComp.scrollRectToVisible(rect);
-                    } catch (BadLocationException e1) {
-                    }
-                    unaVez = false;
-                }
-
             }
+
+            
+            if (posRect < 0) {
+                return;
+            }
+            try {
+                Rectangle rect = textComp.modelToView(posRect);
+                textComp.scrollRectToVisible(rect);
+            } catch (BadLocationException e1) {
+            }
+
         } catch (BadLocationException e) {
         }
     }
@@ -206,10 +207,9 @@ public class CodigoPanel extends javax.swing.JPanel {
     private void removeHighlights(JTextComponent textComp) {
         Highlighter hilite = textComp.getHighlighter();
         Highlighter.Highlight[] hilites = hilite.getHighlights();
-
-        for (int i = 0; i < hilites.length; i++) {
-            if (hilites[i].getPainter() instanceof MyHighlightPainter) {
-                hilite.removeHighlight(hilites[i]);
+        for (Highlighter.Highlight hilite1 : hilites) {
+            if (hilite1.getPainter() instanceof MyHighlightPainter) {
+                hilite.removeHighlight(hilite1);
             }
         }
     }
@@ -255,8 +255,19 @@ public class CodigoPanel extends javax.swing.JPanel {
             return "<span style=\"color: #006400;\">" + linea + "</span>";
         }
 
-        if (linea.trim().startsWith("//")) {
-            return "<span style=\"color: #006400;\">" + linea + "</span>";
+        
+        String subLinea1 ="",subLinea2="";
+        
+        if (linea.contains("//")) {
+            
+            int pos = linea.indexOf("//");
+            
+            subLinea1 = linea.substring(0,pos);
+            //String subLinea2 = linea.substring(pos);             
+            
+            subLinea2 ="<span style=\"color: #006400;\">" + linea.substring(pos) + "</span>";
+            
+            linea=subLinea1;//continua el analisis con la linea no comentada                  
         }
 
         String words[] = linea.split(" ");
@@ -277,7 +288,7 @@ public class CodigoPanel extends javax.swing.JPanel {
 
         newLin = newLin.substring(0, newLin.length() - 1);//retira espacio al final
 
-        return newLin;
+        return newLin+subLinea2;//se concatena el resto que puede haber sido comentado
     }
 
     private String checkCar(String word) {
@@ -286,12 +297,12 @@ public class CodigoPanel extends javax.swing.JPanel {
 
         char[] charArray = word.toCharArray();
 
-        for (Character c : charArray) {            
+        for (Character c : charArray) {
             //simbolos
             String cast = mapReservSimbol.get(c.toString());
-            cast = cast != null ? cast : c.toString();//palabras reservadas            
+            cast = cast != null ? cast : c.toString();//palabras reservadas de html            
 
-            if (!blockLiteral2 && setSimbol.contains(cast)) {             
+            if (!blockLiteral2 && setSimbol.contains(cast)) {
 
                 newWord += "<b><span style=\"color: #00008B;\">" + cast + "</span></b>";
                 continue;
@@ -334,7 +345,6 @@ public class CodigoPanel extends javax.swing.JPanel {
         jTabbedPaneProp.setBorder(javax.swing.BorderFactory.createTitledBorder("Propiedades"));
         jTabbedPaneProp.setFocusable(false);
 
-        jEditorPaneCod.setEditable(false);
         jScrollPane1.setViewportView(jEditorPaneCod);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -344,16 +354,18 @@ public class CodigoPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTabbedPaneProp)
-                    .addComponent(jScrollPane1))
+                    .addComponent(jTabbedPaneProp, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addGap(14, 14, 14)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTabbedPaneProp, javax.swing.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE)
                 .addContainerGap())
         );

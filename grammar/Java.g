@@ -483,7 +483,7 @@ formalParameterDecls returns [Map<String,Parametro> lisParam]
     ;
 
 normalParameterDecl returns [Parametro pa]
-    :   variableModifiers type IDENTIFIER {$pa = new Parametro($variableModifiers.text, $type.text, new Id($IDENTIFIER.text,$IDENTIFIER.getLine()));}
+    :   variableModifiers type IDENTIFIER {$pa = new Parametro($variableModifiers.text, $type.text, new Id($IDENTIFIER.text,$IDENTIFIER.line));}
         ('[' ']'
         )*
     ;

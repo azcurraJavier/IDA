@@ -11,6 +11,7 @@ public class MostrarTabla {
     private String strAsignado;//solo en caso de literales
     private int numLinea;
     
+           
     
     public MostrarTabla(String ambiente){
     

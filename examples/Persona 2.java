@@ -1,5 +1,5 @@
-//prueba
-public class Persona {
+
+public class Persona {//prueba
 // Atributos Persona
 
 //documento persona
@@ -66,5 +66,5 @@ public class Persona {
 
     public String getGen() {
         return this.gnrPrsa;
-    }
+    }//prueba2
 }

@@ -15,7 +15,11 @@ public class TablaBuscador extends javax.swing.JPanel {
 
     private String getBuscar;
     private MiModelo modeloTabla;
+    private MiModelo modeloTablaDec;
+    private MiModelo modeloTablaRef;
     private MiJTable tablaElem;
+    private MiJTable tablaElemDec;
+    private MiJTable tablaElemRef;
     private TableRowSorter<TableModel> tableSort;
     private int buscarColumna = 2;
     private Clase unaClase;
@@ -31,6 +35,9 @@ public class TablaBuscador extends javax.swing.JPanel {
     public TablaBuscador(int tipoTabla, Clase unaCla, CodigoPanel codigoPanel) {
 
         initComponents();
+        
+        jScrollPaneDecl.setVisible(false);
+        jScrollPaneRef.setVisible(false);
         
 //        jScrollpane = new JScrollPane();
 //        jScrollpane.setVisible(true);
@@ -48,7 +55,7 @@ public class TablaBuscador extends javax.swing.JPanel {
 
         modeloTabla = new MiModelo();
         
-        modeloTabla.addColumn("Ambiente");   //ordenar por ambiente(default)   
+        modeloTabla.addColumn("-");   //ordenar por ambiente(default)   
 
         Object[] fila;
 
@@ -56,22 +63,26 @@ public class TablaBuscador extends javax.swing.JPanel {
 
             case 0://Identificadores                
                 modeloTabla.addColumn("Nro Linea");
-                modeloTabla.addColumn("IDENTIFICADOR");
-                modeloTabla.addColumn("Tipo - T.Retorno");
+                modeloTabla.addColumn("Nombre ID");
+                modeloTabla.addColumn("Representa");
+                modeloTabla.addColumn("Tipo");
                 modeloTabla.addColumn("Modificador");
-                modeloTabla.addColumn("N° Apariciones");
+                modeloTabla.addColumn("Nro Dec");
+                modeloTabla.addColumn("Nro Ref");
 
-                fila = new Object[6];
+                fila = new Object[8];
 
                 for (MostrarTabla m : unaClase.getIdTablaClase()) {
 
                     //if (!"String".equals(m.getTipo())) {
-                        fila[0] = m.getAmbiente();
+                        fila[0] = "-";//m.getAmbiente();
                         fila[1] = m.getNumLinea();
                         fila[2] = m.getNomId();
-                        fila[3] = m.getTipo();
-                        fila[4] = m.getModificador();
-                        fila[5] = m.getNumApa();
+                        fila[3] = "-";
+                        fila[4] = m.getTipo();
+                        fila[5] = m.getModificador();
+                        fila[6] = 1;
+                        fila[7] = 1;
                         modeloTabla.addRow(fila);
                    // }
                         
@@ -128,7 +139,7 @@ public class TablaBuscador extends javax.swing.JPanel {
                 fila = new Object[3];
                 
                 for (Comentario com : unaClase.getLisComentario()) {
-                    fila[0] = com.getAmbiente();
+                    fila[0] =  "-";//com.getAmbiente();
                     fila[1] = com.getLinea();
                     fila[2] = com.getCom().trim();
                     modeloTabla.addRow(fila);
@@ -145,7 +156,7 @@ public class TablaBuscador extends javax.swing.JPanel {
         if (modeloTabla.hasRows()) {//si tiene filas
 
             tablaElem = new MiJTable(modeloTabla);
-
+                                    
             
 
                         
@@ -155,22 +166,10 @@ public class TablaBuscador extends javax.swing.JPanel {
             
             tableSort = new TableRowSorter<TableModel>(modeloTabla);
 
-            tablaElem.setRowSorter(tableSort);
+            //tablaElem.setRowSorter(tableSort);           
             
-            jScrollpane.setViewportView(tablaElem);       
-            
-            
-//                    javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-//        this.setLayout(layout);
-//        layout.setHorizontalGroup(
-//            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-//            .addComponent(jScrollpane, javax.swing.GroupLayout.DEFAULT_SIZE,javax.swing.GroupLayout.DEFAULT_SIZE , tablaElem.getAnchoTotaltabla())
-//        );
-//       layout.setVerticalGroup(
-//            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-//            .addComponent(jScrollpane, javax.swing.GroupLayout.DEFAULT_SIZE, tablaElem.getRowHeight(), Short.MAX_VALUE)
-//        );
-    
+            jScrollPane.setViewportView(tablaElem);
+      
             
             tablaElem.addMouseListener(new java.awt.event.MouseAdapter() {
                 public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -181,6 +180,41 @@ public class TablaBuscador extends javax.swing.JPanel {
         }else{
             hasElemets = false;        
         }
+        
+        //tablas extras declaracion referencias
+        if (tipoTabla == 0) {
+
+            jScrollPaneDecl.setVisible(true);
+            jScrollPaneRef.setVisible(true);
+
+            modeloTablaDec = new MiModelo();
+            modeloTablaRef = new MiModelo();
+
+            modeloTablaDec.addColumn("Línea");
+            modeloTablaDec.addColumn("Ubicación");
+
+            modeloTablaRef.addColumn("Línea");
+            modeloTablaRef.addColumn("Ubicación");
+
+            tablaElemDec = new MiJTable(modeloTablaDec);
+            tablaElemRef = new MiJTable(modeloTablaRef);
+
+            tablaElemDec.autoAjuste();
+            tablaElemRef.autoAjuste();
+
+            tableSort = new TableRowSorter<TableModel>(modeloTablaDec);
+            //tablaElemDec.setRowSorter(tableSort);
+            jScrollPaneDecl.setViewportView(tablaElemDec);
+
+            tableSort = new TableRowSorter<TableModel>(modeloTablaRef);
+            //tablaElemRef.setRowSorter(tableSort);
+            jScrollPaneRef.setViewportView(tablaElemRef);
+        }
+
+    }
+    
+    private void cargarTablasExtras(String id){
+    
 
     }
     
@@ -193,7 +227,9 @@ public class TablaBuscador extends javax.swing.JPanel {
         jPanel4 = new javax.swing.JPanel();
         jTextFieldBusc = new javax.swing.JTextField();
         jButtonTagCloud = new javax.swing.JButton();
-        jScrollpane = new javax.swing.JScrollPane();
+        jScrollPane = new javax.swing.JScrollPane();
+        jScrollPaneDecl = new javax.swing.JScrollPane();
+        jScrollPaneRef = new javax.swing.JScrollPane();
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Buscar..."));
 
@@ -226,22 +262,31 @@ public class TablaBuscador extends javax.swing.JPanel {
             }
         });
 
-        jScrollpane.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jScrollPane.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jScrollPaneDecl.setBorder(javax.swing.BorderFactory.createTitledBorder("Declaraciones"));
+
+        jScrollPaneRef.setBorder(javax.swing.BorderFactory.createTitledBorder("Referencias"));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollpane, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButtonTagCloud, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)))
-                .addGap(225, 225, 225))
+                        .addGap(0, 632, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPaneDecl, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPaneRef, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -253,9 +298,12 @@ public class TablaBuscador extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(28, 28, 28)
                         .addComponent(jButtonTagCloud)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollpane, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPaneDecl, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPaneRef, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -294,6 +342,14 @@ public class TablaBuscador extends javax.swing.JPanel {
         codigoPanel.setHighlight(text,(int)modeloTabla.getValueAt(row, 1));        
         
 
+        if(true){
+            
+            
+            cargarTablasExtras("pepito");           
+          
+            
+        }
+        
 
     }
 
@@ -338,7 +394,9 @@ public class TablaBuscador extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonTagCloud;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JScrollPane jScrollpane;
+    private javax.swing.JScrollPane jScrollPane;
+    private javax.swing.JScrollPane jScrollPaneDecl;
+    private javax.swing.JScrollPane jScrollPaneRef;
     private javax.swing.JTextField jTextFieldBusc;
     // End of variables declaration//GEN-END:variables
 }

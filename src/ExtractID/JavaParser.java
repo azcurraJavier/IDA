@@ -1,4 +1,4 @@
-// $ANTLR 3.4 Java.g 2014-06-21 21:44:21
+// $ANTLR 3.4 Java.g 2014-06-23 14:35:29
 
         /* esto es para que el parser sea visto desde el resto del proyecto y viceversa */
 	package ExtractID;
@@ -6417,7 +6417,7 @@ public class JavaParser extends Parser {
 
             IDENTIFIER11=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_normalParameterDecl3778); if (state.failed) return pa;
 
-            if ( state.backtracking==0 ) {pa = new Parametro((variableModifiers9!=null?input.toString(variableModifiers9.start,variableModifiers9.stop):null), (type10!=null?input.toString(type10.start,type10.stop):null), new Id((IDENTIFIER11!=null?IDENTIFIER11.getText():null),IDENTIFIER11.getLine()));}
+            if ( state.backtracking==0 ) {pa = new Parametro((variableModifiers9!=null?input.toString(variableModifiers9.start,variableModifiers9.stop):null), (type10!=null?input.toString(type10.start,type10.stop):null), new Id((IDENTIFIER11!=null?IDENTIFIER11.getText():null),(IDENTIFIER11!=null?IDENTIFIER11.getLine():0)));}
 
             // Java.g:487:9: ( '[' ']' )*
             loop73:
