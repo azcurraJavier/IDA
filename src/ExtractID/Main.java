@@ -7,18 +7,19 @@ package ExtractID;
 import Listas.Clase;
 import Listas.Comentario;
 import Listas.ListaClase;
-import Listas.MostrarTabla;
 import VentanasPaneles.AcercaDe;
 import VentanasPaneles.ClosableTabbedPane;
 import VentanasPaneles.CodigoPanel;
 import VentanasPaneles.DiccionaryPanel;
-import VentanasPaneles.ExpandPanel;
+import VentanasPaneles.MiModelo;
 import VentanasPaneles.SplitPanel;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -36,6 +37,9 @@ import org.antlr.runtime.RecognitionException;
  */
 public class Main extends javax.swing.JFrame {
 
+    
+    private CodigoPanel codigoPanel;
+    
     private static File[] archivosAnalisisId = null;
     
     private final ClosableTabbedPane jTabbedEsp;
@@ -46,7 +50,8 @@ public class Main extends javax.swing.JFrame {
                                                    "new", "null", "package", "private", "protected", "public", "return", "short", "static", "strictfp", "super",
                                                    "switch", "synchronized", "this", "throw", "throws", "transient", "true", "try", "void", "volatile", "while"));
 
-    private Set<String> lisIdsSplited = new HashSet<String>();
+    private Map<String,String> mapIdsSplited = new HashMap<>();
+    private Map<String,String> mapIdsExp = new HashMap<>();
 
     /**
      * Creates new form NewJFrame
@@ -242,48 +247,53 @@ public class Main extends javax.swing.JFrame {
 
             archivosAnalisisId = fileChooser.getSelectedFiles();
 
-            try {
-                ListaClase.clean();
+            
+            ListaClase.clean();
 
-                for (File fileAnalisis : archivosAnalisisId) {
+            for (File fileAnalisis : archivosAnalisisId) {
+
+                try {
+
 
                     JavaLexer lex = new JavaLexer(new ANTLRFileStream(fileAnalisis.getAbsolutePath()));
                     CommonTokenStream tokens = new CommonTokenStream(lex);
                     JavaParser g = new JavaParser(tokens);
 
                     Clase unaClase;
-                    try {
-                        g.compilationUnit();
-                        noErrorSintactico = g.ocurrioError();
 
-                        unaClase = g.getClaseAnalisis();
-                        unaClase.setPunteroArchivo(fileAnalisis);//seteo puntero archivo en la clase 
-                        /////comentarios/////
-                        ArrayList<Comentario> lisCom = lex.getLisCom(); //comentarios del lexer 
-                        unaClase.setLisComentario(lisCom);
-                        unaClase.setearAmbienteCometario();//seteo ambientes de comentarios
-                        unaClase.cargarIdTablaClase();//cargo elementos para las tablas
-                        unaClase.setLisLiterales(g.getLisLiterales());
-                        /////////////////////
-                        ListaClase.addElemLisClases(unaClase);
-                        
+                    g.compilationUnit();
+                    noErrorSintactico = g.ocurrioError();
 
-                    } catch (RecognitionException ex) {
-                        Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                    unaClase = g.getClaseAnalisis();
+                    unaClase.setPunteroArchivo(fileAnalisis);//seteo puntero archivo en la clase 
+                    /////comentarios/////
+                    ArrayList<Comentario> lisCom = lex.getLisCom(); //comentarios del lexer 
+                    unaClase.setLisComentario(lisCom);
+                    unaClase.setearAmbienteCometario();//seteo ambientes de comentarios
+                    unaClase.cargarTablaClase();//cargo elementos para las tablas
+                    unaClase.setLisLiterales(g.getLisLiterales());
+                    /////////////////////
+                    ListaClase.addElemLisClases(unaClase);
 
+
+                } catch (IOException | RecognitionException e) {
+                    noErrorSintactico = false;                
+                    JFrame p = new JFrame();
+                    String msg = "Existen Errores Sintacticos, corríjalos y vuelva a intentarlo";                
+                    msg = e.getMessage()!=null?e.getMessage():msg;
+                    JOptionPane.showMessageDialog(p,msg+"\nArchivo Seleccionado: "+fileAnalisis.getName() , "ERROR", JOptionPane.ERROR_MESSAGE);
                 }
-               
 
-            } catch (IOException e) {
             }
 
-            if (noErrorSintactico) {
 
+
+            if (noErrorSintactico) {
+                
                 for (Clase claseAnalisis : ListaClase.getLisClases()) {
 
-                    CodigoPanel codigoPanel = new CodigoPanel(claseAnalisis);
-                //jTabbedPaneCodigo.add(claseAnalisis.getPunteroArchivo().getName(), codigoPanel);
+                    codigoPanel = new CodigoPanel(claseAnalisis,mapIdsSplited,mapIdsExp);
+                    //jTabbedPaneCodigo.add(claseAnalisis.getPunteroArchivo().getName(), codigoPanel);
                     jTabbedEsp.addTab(claseAnalisis.getPunteroArchivo().getName(), codigoPanel);
                 }
 
@@ -295,14 +305,11 @@ public class Main extends javax.swing.JFrame {
                 jTabbedEsp.setVisible(true);
                 jMenuItem3.setEnabled(true);
                 jMenuItem2.setEnabled(true);
-                 jMenuItem2.setEnabled(true);
-                 jMenuItem4.setEnabled(true);
+                jMenuItem2.setEnabled(true);
+                jMenuItem4.setEnabled(true);
                 
                 //jMenuItem4.setEnabled(true);
 
-            } else {
-                JFrame p = new JFrame();
-                JOptionPane.showMessageDialog(p, "Existen Errores Sintácticos en el(los) archivo(s) seleccionados, corríjalos y vuelva a intentarlo", "ERROR SINTÁCTICO", JOptionPane.ERROR_MESSAGE);
             }
         }   
         
@@ -322,20 +329,32 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItemAlgGreedyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAlgGreedyActionPerformed
-        ArrayList<MostrarTabla> lisMt = new ArrayList<MostrarTabla>();
-        for(Clase c: ListaClase.getLisClases()){
-            lisMt.addAll(c.getIdTablaClase());
+        
+        
+        MiModelo tablaId = codigoPanel.getTablaId().getModeloTabla();
+        
+        Set<String> setIdExtract = new HashSet<>();
+        
+        int r = tablaId.getRowCount();        
+        
+        for(int i = 0;i<r;i++){        
             
-            
-            
-        }
+            setIdExtract.add(tablaId.getValueAt(i, 2).toString());
+        
+        }     
+        
+//        ArrayList<MostrarTabla> lisMt = new ArrayList<>();       
+//        
+//        for(Clase c: ListaClase.getLisClases()){
+//            lisMt.addAll(c.getIdTablaClase());          
+//        }
         
         SplitPanel tb;
-        tb = new SplitPanel(new javax.swing.JFrame(), true, lisMt, ListaClase.getLisClases());
+        tb = new SplitPanel(new javax.swing.JFrame(), true, setIdExtract);
         
         tb.setVisible(true);
         
-        lisIdsSplited = tb.getLisIdsSplited();
+        mapIdsSplited = tb.getLisIdsSplited();
     }//GEN-LAST:event_jMenuItemAlgGreedyActionPerformed
 
     
@@ -389,9 +408,9 @@ public class Main extends javax.swing.JFrame {
         }
        
    
-        ExpandPanel ep;
-        ep = new ExpandPanel(new javax.swing.JFrame(),true,lisCleaned,lisIdsSplited);
-        ep.setVisible(true);
+//        ExpandPanel ep;
+//        ep = new ExpandPanel(new javax.swing.JFrame(),true,lisCleaned,lisIdsSplited);
+//        ep.setVisible(true);
 
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 

@@ -21,6 +21,8 @@ import javax.swing.text.Highlighter;
 import javax.swing.text.JTextComponent;
 
 public class CodigoPanel extends javax.swing.JPanel {
+    
+    private TablaBuscador tablaId, tablaLit, tablaCom;
 
     Set<String> setReserv = new HashSet<>(Arrays.asList("abstract", "assert", "boolean", "break", "byte", "case", "catch", "char", "class",
             "const", "continue", "default", "do", "double", "else", "enum", "extends", "false", "final", "finally",
@@ -44,7 +46,7 @@ public class CodigoPanel extends javax.swing.JPanel {
 
     private Clase claseAsociada = null;
 
-    public CodigoPanel(Clase unaClass) {
+    public CodigoPanel(Clase unaClass, Map idSplit, Map idExp) {
         initComponents();
 
         //jTextAreaCod.setFont(new Font("Monospaced", Font.PLAIN, 12));
@@ -87,26 +89,26 @@ public class CodigoPanel extends javax.swing.JPanel {
             //jTextAreaCod.setCaretPosition(6);
             jEditorPaneCod.setCaretPosition(6);
 
-            TablaBuscador tBi = new TablaBuscador(0, claseAsociada, this);
+            tablaId = new TablaBuscador(0, claseAsociada, this,idSplit,idExp);
 
-            if (tBi.hasElem()) {
-                jTabbedPaneProp.addTab("Identificadores", tBi);
+            if (tablaId.hasElem()) {
+                jTabbedPaneProp.addTab("Identificadores", tablaId);
             } else {
                 jTabbedPaneProp.addTab("Identificadores", emptyPanel("Identificadores"));
             }
 
-            TablaBuscador tBl = new TablaBuscador(1, claseAsociada, this);
+            tablaLit = new TablaBuscador(1, claseAsociada, this,idSplit,idExp);
 
-            if (tBl.hasElem()) {
-                jTabbedPaneProp.addTab("Literales", tBl);
+            if (tablaLit.hasElem()) {
+                jTabbedPaneProp.addTab("Literales", tablaLit);
             } else {
                 jTabbedPaneProp.addTab("Literales", emptyPanel("Literales"));
             }
 
-            TablaBuscador tBc = new TablaBuscador(2, claseAsociada, this);
+            tablaCom = new TablaBuscador(2, claseAsociada, this,idSplit,idExp);
 
-            if (tBc.hasElem()) {
-                jTabbedPaneProp.addTab("Comentarios", tBc);
+            if (tablaCom.hasElem()) {
+                jTabbedPaneProp.addTab("Comentarios", tablaCom);
             } else {
                 jTabbedPaneProp.addTab("Comentarios", emptyPanel("Comentarios"));
             }
@@ -115,12 +117,13 @@ public class CodigoPanel extends javax.swing.JPanel {
             System.out.print(e.toString());
         }
 
-    }
-// An instance of the private subclass of the default highlight painter
-    Highlighter.HighlightPainter myHighlightPainter = new MyHighlightPainter(Color.cyan);
+    }  
 
 // Creates highlights around all occurrences of pattern in textComp
-    private void highlight(JTextComponent textComp, String pattern, int line) {
+    private void highlight(JTextComponent textComp, String pattern, int line, Color color) {
+        
+        Highlighter.HighlightPainter myHighlightPainter = new MyHighlightPainter(color);
+        
         // First remove all old highlights
         removeHighlights(textComp);
         boolean unaVez = true;
@@ -140,7 +143,7 @@ public class CodigoPanel extends javax.swing.JPanel {
                     // Create highlighter using private painter and apply around pattern
                     hilite.addHighlight(pos, pos + pattern.length(), myHighlightPainter);
                     posRect = pos;
-                    break;
+                    //break;
                 }//la idea es si busco id => que NO resalte idPersona 
 
                 pos += pattern.length();
@@ -174,7 +177,7 @@ public class CodigoPanel extends javax.swing.JPanel {
         ////Este control sirve para cuando el nro de linea
         //de lo que necesito remarcar viene por parametro
         if (line != -1) {
-            int lineMin = line - 1, lineMax = line + 1;
+            int lineMin = line, lineMax = line + 1;
 
             String strLineMin = lineMin >= 0 && lineMin <= 9 ? "0" + lineMin : "" + lineMin;
             String strLineMax = lineMax >= 0 && lineMax <= 9 ? "0" + lineMax : "" + lineMax;
@@ -214,9 +217,9 @@ public class CodigoPanel extends javax.swing.JPanel {
         }
     }
 
-    public void setHighlight(String text, int line) {
+    public void setHighlight(String text, int line, Color color) {
         //highlight(jTextAreaCod, text);
-        highlight(jEditorPaneCod, text, line);
+        highlight(jEditorPaneCod, text, line, color);
     }
 
     public JPanel emptyPanel(String name) {
@@ -286,8 +289,10 @@ public class CodigoPanel extends javax.swing.JPanel {
             newLin += w + " ";
         }
 
-        newLin = newLin.substring(0, newLin.length() - 1);//retira espacio al final
-
+        if(newLin.length()>0){
+            newLin = newLin.substring(0, newLin.length() - 1);//retira espacio al final
+        }
+        
         return newLin+subLinea2;//se concatena el resto que puede haber sido comentado
     }
 
@@ -332,6 +337,18 @@ public class CodigoPanel extends javax.swing.JPanel {
         return newWord;
     }
 
+    public TablaBuscador getTablaId() {
+        return tablaId;
+    }
+
+    public TablaBuscador getTablaLit() {
+        return tablaLit;
+    }
+
+    public TablaBuscador getTablaCom() {
+        return tablaCom;
+    }  
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

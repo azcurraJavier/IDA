@@ -1,5 +1,7 @@
 package Listas;
 
+import java.util.ArrayList;
+
 
 public class MostrarTabla {
     
@@ -11,11 +13,14 @@ public class MostrarTabla {
     private String strAsignado;//solo en caso de literales
     private int numLinea;
     
-           
+    private String representa;
+    
+    //tablas extras: decl y ref
+    private ArrayList<MostrarListaRef> listaRef;
     
     public MostrarTabla(String ambiente){
     
-        this.ambiente = ambiente;
+        this.ambiente = ambiente;//Clase pepe metodo toto
         this.strAsignado = "";
         this.nomId = "";
         this.tipo = "";
@@ -23,6 +28,10 @@ public class MostrarTabla {
         this.numApa = 1;
         this.strAsignado = "";
         this.numLinea = 0;
+        
+        this.representa = "";//parametro var local var global clase
+        this.listaRef = new ArrayList<>();
+        
     }
 
     public void setModificador(String modificador) {
@@ -48,6 +57,11 @@ public class MostrarTabla {
     public void setNumLinea(int numLinea) {
         this.numLinea = numLinea;
     }    
+
+    public void setRepresenta(String representa) {
+        this.representa = representa;
+    }  
+    
 
     public String getAmbiente() {
         return ambiente;
@@ -75,7 +89,20 @@ public class MostrarTabla {
 
     public int getNumLinea() {
         return numLinea;
-    }   
+    }
+
+    public String getRepresenta() {
+        return representa;
+    }      
+
+    public ArrayList<MostrarListaRef> getListaRef() {
+        return listaRef;
+    }  
+    
+    public void addListaRef(String l, String u){
+        listaRef.add(new MostrarListaRef(l,u));
+    }
+ 
     
     
 }

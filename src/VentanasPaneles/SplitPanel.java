@@ -4,14 +4,12 @@
  */
 package VentanasPaneles;
 
-import Listas.Clase;
-import Listas.MostrarTabla;
 import SplitID.SplitUtils;
 import SplitID.SamuraiPaper;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 import javax.swing.*;
 
@@ -34,15 +32,15 @@ public class SplitPanel extends javax.swing.JDialog {
     private MiModelo modeloTabla;
     private JTable tablaElem;
     
-    private Set<String> lisIdsSplited = new HashSet<String>();
+    private Map<String,String> mapIdsSplited = new HashMap<>();
     
     
-    public SplitPanel(java.awt.Frame parent, boolean modal,ArrayList<MostrarTabla> listId,ArrayList<Clase> lisClases) {
+    public SplitPanel(java.awt.Frame parent, boolean modal,Set<String> setIds) {
         super(parent, modal);
         initComponents();
         
         modeloTabla = new MiModelo();
-        tablaElem = new JTable(modeloTabla);
+        tablaElem = new MiJTable(modeloTabla);
         jScrollSplit.setViewportView(tablaElem);
 
         modeloTabla.addColumn("IDENTIFICADOR");
@@ -55,16 +53,21 @@ public class SplitPanel extends javax.swing.JDialog {
         SamuraiPaper samurai;
         
         
-        if(listId!=null){
-            for(MostrarTabla ide: listId){
-                nomIde = ide.getNomId();
-                filaTabla[0]= nomIde;
-                splitIde = SplitUtils.ejecutar(nomIde,true);//true=caso 1 de upperlower false=caso 2
-                filaTabla[1]= splitIde.replaceAll(" ", "-");//para que se destaque la separación
-
-                lisIdsSplited.add(filaTabla[1].toString().toLowerCase());
+        if(setIds!=null && !setIds.isEmpty()){
+                     
+            
+            for(String ide: setIds){
                 
-                samurai = new SamuraiPaper(lisClases.get(0),"strDomicilio");
+                filaTabla[0]= ide;
+                splitIde = SplitUtils.ejecutar(ide,true);//true=caso 1 de upperlower false=caso 2
+                filaTabla[1]= splitIde.replaceAll(" ", "-");//para que se destaque la separación
+                
+                mapIdsSplited.put(ide,filaTabla[1].toString().toLowerCase());
+                
+                
+                filaTabla[1] = "<html><b>"+filaTabla[1]+"</b></html>";                
+                
+                //samurai = new SamuraiPaper(lisClases.get(0),"strDomicilio");
                 
                 //samurai.mixedCaseSplit();
                 
@@ -94,8 +97,8 @@ public class SplitPanel extends javax.swing.JDialog {
         return returnStatus;
     }
 
-    public Set<String> getLisIdsSplited() {
-        return lisIdsSplited;
+    public Map<String,String> getLisIdsSplited() {
+        return mapIdsSplited;
     } 
     
 
