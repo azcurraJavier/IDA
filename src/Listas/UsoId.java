@@ -24,7 +24,17 @@ public class UsoId {
     public UsoId(String id,Integer linea, String alcance) {
         this(id,linea);
         this.alcance = alcance;
-    }    
+    }
+    
+    public UsoId(String id,Integer linea, String alcance, boolean esMetodo) {
+        this(id,linea,alcance);
+        this.esMetodo = esMetodo;
+    }
+    
+    public UsoId(String id,Integer linea, boolean esMetodo) {
+        this(id,linea);
+        this.esMetodo = esMetodo;
+    } 
     
     public void setLinea(String linea) {
         this.linea = linea;

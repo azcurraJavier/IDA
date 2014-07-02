@@ -1,13 +1,13 @@
 package Listas;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
 public class Clase {
-
-    private File punteroArchivo = null;
+    
+    private String code; //codigo leido de archivo
+    private String fileName; //nombre de archivo .java
     private String nomPaq;   //Paquete
     private int linPaq;   //Paquete linea
     private String modClase; //Modificador de la Clase  
@@ -22,6 +22,9 @@ public class Clase {
     private ArrayList<MostrarTabla> lisMostrarTabla = new ArrayList<MostrarTabla>();
     //Para calculo en Samurai
     private int cantTotalId = 0;
+    
+    private boolean varSinDeclarar = false;
+    private String varSinDecl;
     
     //se utiliza para ver las referencias de las var de clase y metodos
     private ArrayList<UsoId> lisUsoIdDecl;
@@ -64,6 +67,31 @@ public class Clase {
         return LisComentario;
     }
 
+    public String getCode() {
+        return code;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public boolean getVarSinDeclB() {
+        return varSinDeclarar;
+    } 
+
+    public String getVarSinDecl() {
+        return varSinDecl;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }   
+    
+
+    public void setCode(String code) {
+        this.code = code;
+    }    
+
     public void setLisComentario(ArrayList<Comentario> LisComentario) {
         this.LisComentario = LisComentario;
     }
@@ -78,14 +106,6 @@ public class Clase {
 
     public String getNomPaq() {
         return nomPaq;
-    }
-
-    public void setPunteroArchivo(File punteroArchivo) {
-        this.punteroArchivo = punteroArchivo;
-    }
-
-    public File getPunteroArchivo() {
-        return punteroArchivo;
     }
 
     public void setearAmbienteCometario() {
@@ -305,7 +325,7 @@ public class Clase {
             return;
         }
         
-        if(usoId.getId().equals("equals")){//palabra que lo toma como identificadorpor ende se debe excluir
+        if(usoId.getId().equals("equals") || usoId.getId().equals("System")){//palabra que lo toma como identificadorpor ende se debe excluir
             return;            
         }
             
@@ -331,8 +351,9 @@ public class Clase {
 
         }
         
-        if(!encontroDecl){                        
-            throw new NullPointerException("Existen variables sin declarar: " + usoId.getId() + " en línea: " + usoId.getLinea());
+        if(!encontroDecl){
+            varSinDeclarar = true;
+            varSinDecl ="Existen variables sin declarar: " + usoId.getId() + " en línea: " + usoId.getLinea();
         }
     }
     
@@ -341,6 +362,10 @@ public class Clase {
         if (lUsoId != null && !lUsoId.isEmpty()) {
 
             for (UsoId e : lUsoId) {
+                
+                if(varSinDeclarar){
+                    break;
+                }
                 globalDecl(e);
             }
         }

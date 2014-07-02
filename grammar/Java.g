@@ -67,7 +67,7 @@ compilationUnit
         )?
         (importDeclaration
         )*
-        (t=typeDeclaration {if(t==null){throw new NullPointerException(null);}
+        (t=typeDeclaration {if(t==null){System.out.println("Java.g Error: typeDeclaration == null!");noErr=false;}
             if(p!=null){t.setNomPaq(p.paqName); t.setLinPaq(p.paqLine);} claseAnalisis = t;} //puede haber mas de una clase por archivo !!!        
         )*
     ;
@@ -929,18 +929,25 @@ castExpression
 primary  returns [ArrayList<UsoId> lisUsosId]
 @init{
     $lisUsosId = new ArrayList<UsoId>(); //lista que se crea en nodo 'hoja'
+    UsoId ui = null;
 }
     :   parExpression 
     |   'this'
-        ('.' Id1 = IDENTIFIER {$lisUsosId.add(new UsoId($Id1.getText(),$Id1.getLine(),"global"));}
-        )*                      //setea que son metodos Id1
-        (ids1 = identifierSuffix {if(!ids1.isEmpty()){for(UsoId e : lisUsosId){e.setEsMetodo(true);}} $lisUsosId.addAll(ids1);}
+        ('.' Id1 = IDENTIFIER //la idea es setear global this.globalVar.globalVar la ultima
+        )* 
+        //setea que son metodos si Id1 lo indica
+        (ids1 = identifierSuffix 
+        {if(ids1.esMetodo){$lisUsosId.addAll(ids1.lisUsosId); ui = new UsoId($Id1.getText(),$Id1.getLine(),"global",true);}}
         )?
-    |   Id2 = IDENTIFIER {$lisUsosId.add(new UsoId($Id2.getText(),$Id2.getLine()));}
-        ('.' Id3 =IDENTIFIER {$lisUsosId.add(new UsoId($Id3.getText(),$Id3.getLine()));}
-        )*                      //setea que son metodos Id2 y Id3
-        (ids2 = identifierSuffix {if(!ids2.isEmpty()){for(UsoId e : lisUsosId){e.setEsMetodo(true);}} $lisUsosId.addAll(ids2);}
+        {if(ui==null){ui = new UsoId($Id1.getText(),$Id1.getLine(),"global",false);} $lisUsosId.add(ui);}
+
+    |   Id2 = IDENTIFIER
+        ('.' IDENTIFIER //no se considera
+        )*                      //setea que son metodos si Id2 lo indica
+        (ids2 = identifierSuffix 
+        {if(ids2.esMetodo){$lisUsosId.addAll(ids2.lisUsosId); ui = new UsoId($Id2.getText(),$Id2.getLine(),true);}}
         )?
+        {if(ui==null){ui = new UsoId($Id2.getText(),$Id2.getLine(),false);} $lisUsosId.add(ui);}
     |   'super'
         superSuffix
     |   literal
@@ -963,16 +970,17 @@ superSuffix
     ;
 
 
-identifierSuffix returns [ArrayList<UsoId> lisUsosId]
+identifierSuffix returns [ArrayList<UsoId> lisUsosId, boolean esMetodo]
 @init{
     $lisUsosId = new ArrayList<UsoId>();
+    $esMetodo =false;
 }
     :   ('[' ']'
         )+
         '.' 'class'
     |   ('[' expression ']'
         )+
-    |   a1 = arguments {$lisUsosId = a1;}
+    |   a1 = arguments {$lisUsosId = a1; $esMetodo=true;}
     |   '.' 'class'
     |   '.' nonWildcardTypeArguments IDENTIFIER arguments
     |   '.' 'this'

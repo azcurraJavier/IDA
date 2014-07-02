@@ -8,7 +8,6 @@ package VentanasPaneles;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
 import java.util.Set;
 import javax.swing.AbstractAction;
 import javax.swing.ActionMap;

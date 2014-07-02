@@ -5,7 +5,6 @@ import DictionaryDB.OperationDB;
 import Listas.Clase;
 import Listas.Comentario;
 import Listas.ListaClase;
-import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
@@ -15,37 +14,37 @@ import java.util.regex.Pattern;
  */
 public class ExpandBasic {
 
-    ArrayList<String> listPalabras;
+    private static ArrayList<String> listPalabras = new ArrayList();;
 
-    ArrayList<String> listFrases;
+    private static ArrayList<String> listFrases = new ArrayList();
 
     //////////////
-    ArrayList<String> listExp;
+    private static ArrayList<String> listExp = new ArrayList();
 
-    String unicaExp;
+    private static String unicaExp;
+    
+    private static boolean frasesProc = false;
 
-    public ExpandBasic() {
 
-        listExp = new ArrayList();
-        listPalabras = new ArrayList();
-        listFrases = new ArrayList();
-        //carga la lista de frases y de palabras desde los comentarios
-        procesarFrases();
-    }
-
-    public String ejecutar(String w) {
+    public static String ejecutar(String w) {
         
         if(w == null || w.isEmpty()){
-            return null;
+            return "";
         }
-
+        ConnectionDB.AbrirConBD();
+        
+        unicaExp = w;
+        
+        if(!frasesProc){
+            procesarFrases();
+        }
+        
         w = w.toLowerCase();
+        
 
-        Connection con = ConnectionDB.AbrirConBD();
-
-        if (OperationDB.select("stop_dict", w, con)) {
+        if (OperationDB.select("stop_dict", w)) {
             ConnectionDB.CerrarConBD();
-            return null;
+            return w;
         }
 
         //abreviacion comun
@@ -60,13 +59,12 @@ public class ExpandBasic {
 
         if (cand != null) {
             listExp.add(cand);
-        }        
-        
+        }                
         
         //Busqueda en diccionario - ultimo recurso
-        if (listExp.isEmpty()) {
-
-            listExp = OperationDB.like("word_dict", w, con);
+        if (w.length()>2 && listExp.isEmpty()) {
+            //exige 3 o más sino el like trae muchos resultados
+            listExp = OperationDB.like("words_dict", w);
 
         }
 
@@ -74,21 +72,21 @@ public class ExpandBasic {
 
         if (listExp.size() == 1) {
             unicaExp = listExp.get(0);
+        }else{
+            System.out.println("La palabra: "+w+" posee: " + listExp.size()+" expansiones");        
         }
 
         return unicaExp;
     }
 
-    private void procesarFrases() {
-
-        for (Clase c : ListaClase.getLisClases()) {
-            
-            Connection con = ConnectionDB.AbrirConBD();
+    private static void procesarFrases() {
+        
+        for (Clase c : ListaClase.getLisClases()) {          
 
             for (Comentario com : c.getLisComentario()) {
 
                 //filtrar palabras irrelevantes
-                String arrayCom[] = com.getCom().split(" ");                
+                String arrayCom[] = com.getCom().trim().split(" ");                
 
                 String frase = "";
 
@@ -97,7 +95,7 @@ public class ExpandBasic {
                     //para evitar problemas todo con minuscula
                     pal = pal.toLowerCase();
 
-                    if (!OperationDB.select("stop_dict", pal, con)) {
+                    if (!OperationDB.select("stop_dict", pal)) {
                         //si no es una palabra irrelevante la agrego
                         listPalabras.add(pal);
                         frase += pal + " ";
@@ -111,14 +109,14 @@ public class ExpandBasic {
                 }
 
             }
-            
-            ConnectionDB.CerrarConBD();
 
-        }
+        }        
+        
+        frasesProc = true;
 
     }
 
-    private String expandirAbrev(String w) {
+    private static String expandirAbrev(String w) {
 
         //abreviatura basica ej: triang -> triangule
         Pattern pat1 = Pattern.compile(w + "[a-z]*");
@@ -155,7 +153,7 @@ public class ExpandBasic {
 
     }
 
-    private String expandirAcro(String w) {
+    private static String expandirAcro(String w) {
 
         for (String frase : listFrases) {
 

@@ -1,5 +1,6 @@
 package SplitID;
 
+import DictionaryDB.ConnectionDB;
 import DictionaryDB.Dictionary;
 
 /**
@@ -8,12 +9,6 @@ import DictionaryDB.Dictionary;
  */
 public class GreedyPaper {
 
-    public GreedyPaper() {
-        
-        
-    }
-    
-       
     private static boolean buscarDicc(String w){
         
         return (Dictionary.searchWordDic("words_dict", w) ||
@@ -21,7 +16,9 @@ public class GreedyPaper {
                 Dictionary.searchWordDic("acro_dict", w));
     }
     
-    public String ejecutar(String idHardword){
+    public static String ejecutar(String idHardword){
+        
+        ConnectionDB.AbrirConBD();
         
         if(idHardword == null || idHardword.isEmpty()){
             return "";
@@ -58,6 +55,8 @@ public class GreedyPaper {
         }
         
         softwordDiv = softwordDiv.substring(0, softwordDiv.length()-1);
+        
+        ConnectionDB.CerrarConBD();
         
         return softwordDiv;
     

@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.sql.Connection;
 import java.util.ArrayList;
 
 /**
@@ -19,11 +18,11 @@ public abstract class Dictionary {
         
         boolean exists;
         
-        Connection con = ConnectionDB.AbrirConBD();
+        //Connection con = ConnectionDB.AbrirConBD();
         
-        exists = OperationDB.select(table, word, con);        
+        exists = OperationDB.select(table, word);        
         
-        ConnectionDB.CerrarConBD();
+       // ConnectionDB.CerrarConBD();
         
         return exists;
         
@@ -33,24 +32,24 @@ public abstract class Dictionary {
         
         ArrayList<String> elems;
         
-        Connection con = ConnectionDB.AbrirConBD();
+        //Connection con = ConnectionDB.AbrirConBD();
         
-        elems = OperationDB.like(table, word, con);        
+        elems = OperationDB.like(table, word);        
         
-        ConnectionDB.CerrarConBD();
+        //ConnectionDB.CerrarConBD();
         
         return elems;
         
     }
     
-    private static void createTableInsertValuesBD(String csvFile, String table, Connection con){
+    private static void createTableInsertValuesBD(String csvFile, String table){
     
         BufferedReader br = null;
         String line = "";    
         
         
         //Se crea la tabla
-        OperationDB.createTable(table, con);       
+        OperationDB.createTable(table);       
         
         try {
  
@@ -58,7 +57,7 @@ public abstract class Dictionary {
                 
 		while ((line = br.readLine()) != null) {
                         //Se insertan elementos desde archivo
-		        OperationDB.insert(table, line, con); 
+		        OperationDB.insert(table, line); 
 		}
  
 	} catch (FileNotFoundException e) {
@@ -89,7 +88,7 @@ public abstract class Dictionary {
         //Se crea la Bd
         ConnectionDB.CrearBD();           
         
-        Connection con = ConnectionDB.AbrirConBD();
+        ConnectionDB.AbrirConBD();
       
         
         //Se crean tablas y se insertan datos:
@@ -99,7 +98,7 @@ public abstract class Dictionary {
 	
         String table = "words_dict";
                 
-        createTableInsertValuesBD(csvFile, table, con);       
+        createTableInsertValuesBD(csvFile, table);       
 
         
         //Tabla de stop list:
@@ -107,7 +106,7 @@ public abstract class Dictionary {
 	
         table = "stop_dict";       
         
-        createTableInsertValuesBD(csvFile, table, con);
+        createTableInsertValuesBD(csvFile, table);
         
         
         //Tabla de acronimos:
@@ -115,7 +114,7 @@ public abstract class Dictionary {
 	
         table = "acro_dict";
         
-        createTableInsertValuesBD(csvFile, table, con);
+        createTableInsertValuesBD(csvFile, table);
         
         
         //Tabla de Sustantivos propios
@@ -132,13 +131,13 @@ public abstract class Dictionary {
 	
         table = "sam_pref";
         
-        createTableInsertValuesBD(csvFile, table, con);       
+        createTableInsertValuesBD(csvFile, table);       
         
         csvFile = "Diccionarios/samurai.suf.txt";
 	
         table = "sam_suf";
         
-        createTableInsertValuesBD(csvFile, table, con);        
+        createTableInsertValuesBD(csvFile, table);        
         
         ConnectionDB.CerrarConBD();         
         

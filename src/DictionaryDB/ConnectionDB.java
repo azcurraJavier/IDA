@@ -16,7 +16,7 @@ public abstract class ConnectionDB {
 
     private static Connection conn = null;
 
-    public static Connection CrearBD() {
+    public static void CrearBD() {
         try {
             //obtenemos el driver
             Class.forName("org.hsqldb.jdbcDriver");
@@ -40,11 +40,10 @@ public abstract class ConnectionDB {
             }
         }catch (SQLException | ClassNotFoundException e) {
             Logger.getLogger(e.getMessage());
-        }
-        return conn;
+        }        
     }
 
-    public static Connection AbrirConBD() {
+    public static void AbrirConBD() {
         try {
             //obtenemos el driver
             Class.forName("org.hsqldb.jdbcDriver");
@@ -57,8 +56,7 @@ public abstract class ConnectionDB {
             }
         } catch (SQLException | ClassNotFoundException e) {
             Logger.getLogger(e.getMessage());
-        }
-        return conn;
+        }        
     }
 
     public static void CerrarConBD() {
@@ -68,5 +66,9 @@ public abstract class ConnectionDB {
             Logger.getLogger(ConnectionDB.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    public static Connection getConn() {
+        return conn;
+    }   
 
 }

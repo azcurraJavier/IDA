@@ -4,12 +4,10 @@
  */
 package DictionaryDB;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Logger;
 
 /**
  *
@@ -17,7 +15,7 @@ import java.util.logging.Logger;
  */
 public abstract class OperationDB {
 
-    public static boolean createTable(String table, Connection con) {
+    public static boolean createTable(String table) {
 
         boolean res = false;
 
@@ -26,7 +24,7 @@ public abstract class OperationDB {
 
         //se ejecuta la consulta
         try {
-            PreparedStatement pstm = con.prepareStatement(q);
+            PreparedStatement pstm = ConnectionDB.getConn().prepareStatement(q);
             pstm.execute();
             pstm.close();
             res = true;
@@ -38,7 +36,7 @@ public abstract class OperationDB {
         return res;
     }
 
-    public static boolean insert(String table, String value, Connection con) {
+    public static boolean insert(String table, String value) {
 
         boolean res = false;
 
@@ -47,7 +45,7 @@ public abstract class OperationDB {
 
         //se ejecuta la consulta
         try {
-            PreparedStatement pstm = con.prepareStatement(q);
+            PreparedStatement pstm = ConnectionDB.getConn().prepareStatement(q);
             pstm.execute();
             pstm.close();
             res = true;
@@ -59,7 +57,7 @@ public abstract class OperationDB {
         return res;
     }
 
-    public static boolean select(String table, String word, Connection con) {
+    public static boolean select(String table, String word) {
 
         //Cantidad de registros devueltos
         int registros = 0;
@@ -75,7 +73,7 @@ public abstract class OperationDB {
             q2 += " WHERE word = " + "'" + word + "'";
         }
         try {
-            PreparedStatement pstm = con.prepareStatement(q2);
+            PreparedStatement pstm = ConnectionDB.getConn().prepareStatement(q2);
             ResultSet res = pstm.executeQuery();
             res.next();
             registros = res.getInt("total");
@@ -99,7 +97,7 @@ public abstract class OperationDB {
 
     }
 
-    public static ArrayList<String> like(String table, String word, Connection con) {
+    public static ArrayList<String> like(String table, String word) {
 
         if (word == null || word.isEmpty()) {
             return null;
@@ -120,7 +118,7 @@ public abstract class OperationDB {
         like2 = "'"+convertLike(word)+"'";//con esta: trg -> triangule
         
         try {
-            PreparedStatement pstm = con.prepareStatement(q + like1);
+            PreparedStatement pstm = ConnectionDB.getConn().prepareStatement(q + like1);
             ResultSet res = pstm.executeQuery();
             
                 while(res.next()){
@@ -138,19 +136,19 @@ public abstract class OperationDB {
 
     }
 
-    public static boolean dropTable(String table, Connection con) {
+    public static boolean dropTable(String table) {
 
         boolean res = false;      
 
         //se ejecuta la consulta
         try {
             //borra elementos
-            PreparedStatement pstm = con.prepareStatement(" TRUNCATE TABLE " + table);
+            PreparedStatement pstm = ConnectionDB.getConn().prepareStatement(" TRUNCATE TABLE " + table);
             pstm.execute();
             pstm.close();            
             
             //borra tabla
-            pstm = con.prepareStatement(" DROP TABLE " + table);
+            pstm = ConnectionDB.getConn().prepareStatement(" DROP TABLE " + table);
             pstm.execute();
             pstm.close();
             res = true;

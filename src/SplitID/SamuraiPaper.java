@@ -1,5 +1,6 @@
 package SplitID;
 
+import DictionaryDB.ConnectionDB;
 import DictionaryDB.Dictionary;
 import Listas.Clase;
 import Listas.MostrarTabla;
@@ -11,13 +12,13 @@ public class SamuraiPaper {
 
     private Clase claseActual;
     private String identificador;
-    private int cantTotalIde;
+    //private int cantTotalIde;
 
-    int frecuenciaLocal;
+    static int frecuenciaLocal;
 
     //Tablas de frecuencia
-    Map localFreqTable;
-    Map globalFreqTable;
+    static Map localFreqTable;
+    static Map globalFreqTable;
 
     public SamuraiPaper(Clase claseAc, String ide) {
 
@@ -25,7 +26,7 @@ public class SamuraiPaper {
 
         this.claseActual = claseAc;
         this.identificador = ide;
-        this.cantTotalIde = claseAc.getCantTotalId();
+        //this.cantTotalIde = claseAc.getCantTotalId();
 
         this.localFreqTable = new HashMap();
         this.globalFreqTable = new HashMap();
@@ -37,9 +38,14 @@ public class SamuraiPaper {
         }
 
     }
+    
+    public static String ejecutar(String id){
+
+       return mixedCaseSplit(id);
+    }
 
     //Manipulacion de tablas de frecuencia
-    public void addTokenLocalFreqTable(String id, int cantOcc) {
+    public static void addTokenLocalFreqTable(String id, int cantOcc) {
 
         if (id == null || id.trim().isEmpty() || cantOcc <= 0) {
             return;
@@ -61,7 +67,7 @@ public class SamuraiPaper {
 
     }
 
-    public int frecuenciaLocal(String id) {//Freq(t; p)        
+    public static int frecuenciaLocal(String id) {//Freq(t; p)        
 
 //        int cantApa = 0;
 //        for (MostrarTabla m : claseActual.getIdTablaClase()) {
@@ -85,7 +91,7 @@ public class SamuraiPaper {
 
     }
 
-    public int frecuenciaGlobal(String id) {//globalFreq(t)
+    public static int frecuenciaGlobal(String id) {//globalFreq(t)
 
 //        int cantApa = 0;
 //
@@ -131,7 +137,7 @@ public class SamuraiPaper {
 
     }
 
-    public int todasFreqStr() {//AllStrsFreq(p)
+    public static int todasFreqStr() {//AllStrsFreq(p)
 
 //        double freAcum = 0.0;
 //
@@ -162,7 +168,7 @@ public class SamuraiPaper {
 
     }
 
-    public double score(String id) {
+    public static double score(String id) {
 
         if (id == null || id.trim().isEmpty()) {
             return 0.0;
@@ -178,7 +184,7 @@ public class SamuraiPaper {
         return freqApa + (freqGlobal / logFreq);
     }
 
-    public String splitOnLowercaseToUppercase(String token) {
+    public static String splitOnLowercaseToUppercase(String token) {
 
         StringBuilder newStr = new StringBuilder();
 
@@ -198,7 +204,7 @@ public class SamuraiPaper {
         return token;
     }
 
-    public int existUpperToLower(String s) {
+    public static int existUpperToLower(String s) {
 
 //        for (int i = 0; i < s.length() - 1; i++) {//-1 sino puede dar excepción en i+1
 //            if (Character.isUpperCase(s.charAt(i)) && Character.isLowerCase(s.charAt(i + 1))) {
@@ -220,7 +226,7 @@ public class SamuraiPaper {
         return -1;
     }
 
-    public String subStr(String s, int x, int y) {
+    public static String subStr(String s, int x, int y) {
 
         if (s == null || s.trim().isEmpty()) {
             return "";
@@ -235,7 +241,9 @@ public class SamuraiPaper {
 
     }
 
-    public String mixedCaseSplit(String token) {
+    public static String mixedCaseSplit(String token) {
+        
+        ConnectionDB.AbrirConBD(); 
         
         String sToken = "";        
 
@@ -289,11 +297,13 @@ public class SamuraiPaper {
 
             sToken = sToken.equals("") ? sameCaseSplit(s, score(s)) : sToken + " " + sameCaseSplit(s, score(s));
         }
+        
+        ConnectionDB.CerrarConBD();
 
         return sToken;
     }
 
-    public String sameCaseSplit(String s, double score) {
+    public static String sameCaseSplit(String s, double score) {
 
         String splitS = s;
         int n = s.length();//se sca el -1 porque subStr es exclusivo
@@ -335,13 +345,13 @@ public class SamuraiPaper {
         return splitS;
     }
 
-    public boolean isPrefix(String s) {
+    public static boolean isPrefix(String s) {
 
         return Dictionary.searchWordDic("sam_pref", s);
 
     }
 
-    public boolean isSuffix(String s) {
+    public static boolean isSuffix(String s) {
 
         return Dictionary.searchWordDic("sam_suf", s);
 

@@ -4,10 +4,6 @@ import Listas.Clase;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Rectangle;
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -21,7 +17,7 @@ import javax.swing.text.Highlighter;
 import javax.swing.text.JTextComponent;
 
 public class CodigoPanel extends javax.swing.JPanel {
-    
+
     private TablaBuscador tablaId, tablaLit, tablaCom;
 
     Set<String> setReserv = new HashSet<>(Arrays.asList("abstract", "assert", "boolean", "break", "byte", "case", "catch", "char", "class",
@@ -52,82 +48,78 @@ public class CodigoPanel extends javax.swing.JPanel {
         //jTextAreaCod.setFont(new Font("Monospaced", Font.PLAIN, 12));
         jEditorPaneCod.setFont(new Font("Monospaced", Font.PLAIN, 13));
         jEditorPaneCod.setContentType("text/html");
-        
+
         claseAsociada = unaClass;
 
-        try {
+        String htmlCode = codeHtml(claseAsociada.getCode());
+        
+        //jTextAreaCod.setText(buffer.toString());
+        jEditorPaneCod.setText(htmlCode);
 
-            FileInputStream fr = new FileInputStream(claseAsociada.getPunteroArchivo());
-            InputStreamReader isr = new InputStreamReader(fr);
-            BufferedReader reader = new BufferedReader(isr);
-            StringBuilder buffer = new StringBuilder();
+        //jTextAreaCod.setCaretPosition(6);
+        jEditorPaneCod.setCaretPosition(6);
 
-            String line;
-            int num = 1;
+        tablaId = new TablaBuscador(0, claseAsociada, this);
 
-            while ((line = reader.readLine()) != null) {
-
-                line = reservWordsH(line);
-
-                if (num < 10) {
-                    buffer.append("0").append(num).append(". ").append(line);
-                } else {
-                    buffer.append(num).append(". ").append(line);
-                }
-
-                num++;
-
-                buffer.append("<br>");
-            }
-
-            reader.close();
-
-            //jTextAreaCod.setText(buffer.toString());
-            jEditorPaneCod.setText("<html><pre>" + "<font size=\"6\"/>"
-                    + buffer.toString() + "</font></pre></html>");
-
-            //jTextAreaCod.setCaretPosition(6);
-            jEditorPaneCod.setCaretPosition(6);
-
-            tablaId = new TablaBuscador(0, claseAsociada, this,idSplit,idExp);
-
-            if (tablaId.hasElem()) {
-                jTabbedPaneProp.addTab("Identificadores", tablaId);
-            } else {
-                jTabbedPaneProp.addTab("Identificadores", emptyPanel("Identificadores"));
-            }
-
-            tablaLit = new TablaBuscador(1, claseAsociada, this,idSplit,idExp);
-
-            if (tablaLit.hasElem()) {
-                jTabbedPaneProp.addTab("Literales", tablaLit);
-            } else {
-                jTabbedPaneProp.addTab("Literales", emptyPanel("Literales"));
-            }
-
-            tablaCom = new TablaBuscador(2, claseAsociada, this,idSplit,idExp);
-
-            if (tablaCom.hasElem()) {
-                jTabbedPaneProp.addTab("Comentarios", tablaCom);
-            } else {
-                jTabbedPaneProp.addTab("Comentarios", emptyPanel("Comentarios"));
-            }
-
-        } catch (IOException e) {
-            System.out.print(e.toString());
+        if (tablaId.hasElem()) {
+            jTabbedPaneProp.addTab("Identificadores", tablaId);
+        } else {
+            jTabbedPaneProp.addTab("Identificadores", emptyPanel("Identificadores"));
         }
 
-    }  
+        tablaLit = new TablaBuscador(1, claseAsociada, this);
+
+        if (tablaLit.hasElem()) {
+            jTabbedPaneProp.addTab("Literales", tablaLit);
+        } else {
+            jTabbedPaneProp.addTab("Literales", emptyPanel("Literales"));
+        }
+
+        tablaCom = new TablaBuscador(2, claseAsociada, this);
+
+        if (tablaCom.hasElem()) {
+            jTabbedPaneProp.addTab("Comentarios", tablaCom);
+        } else {
+            jTabbedPaneProp.addTab("Comentarios", emptyPanel("Comentarios"));
+        }
+
+    }
+
+    private String codeHtml(String code) {
+
+        String[] lines = code.split(System.getProperty("line.separator"));
+        
+        StringBuilder buffer = new StringBuilder();
+        String line;       
+        
+
+        for(int i=0;i<lines.length;i++){
+        
+            line = reservWordsH(lines[i]);
+            
+            if (i+1 < 10) {
+                buffer.append("0").append(i+1).append(". ").append(line);
+            } else {
+                buffer.append(i+1).append(". ").append(line);
+            }
+        
+            buffer.append("<br>");
+        
+        }
+        
+        return "<html><pre>" + "<font size=\"6\"/>"
+                + buffer.toString() + "</font></pre></html>";
+    }
 
 // Creates highlights around all occurrences of pattern in textComp
     private void highlight(JTextComponent textComp, String pattern, int line, Color color) {
-        
+
         Highlighter.HighlightPainter myHighlightPainter = new MyHighlightPainter(color);
-        
+
         // First remove all old highlights
         removeHighlights(textComp);
         boolean unaVez = true;
-        
+
         try {
             Highlighter hilite = textComp.getHighlighter();
             Document doc = textComp.getDocument();
@@ -135,7 +127,7 @@ public class CodigoPanel extends javax.swing.JPanel {
             int pos = 0;
 
             int posRect = 0;//guarda el valor para ubicar en el texto
-            
+
             // Search for pattern
             while ((pos = text.indexOf(pattern, pos)) >= 0) {
 
@@ -150,7 +142,6 @@ public class CodigoPanel extends javax.swing.JPanel {
 
             }
 
-            
             if (posRect < 0) {
                 return;
             }
@@ -258,19 +249,18 @@ public class CodigoPanel extends javax.swing.JPanel {
             return "<span style=\"color: #006400;\">" + linea + "</span>";
         }
 
-        
-        String subLinea1 ="",subLinea2="";
-        
+        String subLinea1 = "", subLinea2 = "";
+
         if (linea.contains("//")) {
-            
+
             int pos = linea.indexOf("//");
-            
-            subLinea1 = linea.substring(0,pos);
+
+            subLinea1 = linea.substring(0, pos);
             //String subLinea2 = linea.substring(pos);             
-            
-            subLinea2 ="<span style=\"color: #006400;\">" + linea.substring(pos) + "</span>";
-            
-            linea=subLinea1;//continua el analisis con la linea no comentada                  
+
+            subLinea2 = "<span style=\"color: #006400;\">" + linea.substring(pos) + "</span>";
+
+            linea = subLinea1;//continua el analisis con la linea no comentada                  
         }
 
         String words[] = linea.split(" ");
@@ -289,11 +279,11 @@ public class CodigoPanel extends javax.swing.JPanel {
             newLin += w + " ";
         }
 
-        if(newLin.length()>0){
+        if (newLin.length() > 0) {
             newLin = newLin.substring(0, newLin.length() - 1);//retira espacio al final
         }
-        
-        return newLin+subLinea2;//se concatena el resto que puede haber sido comentado
+
+        return newLin + subLinea2;//se concatena el resto que puede haber sido comentado
     }
 
     private String checkCar(String word) {
@@ -347,8 +337,8 @@ public class CodigoPanel extends javax.swing.JPanel {
 
     public TablaBuscador getTablaCom() {
         return tablaCom;
-    }  
-    
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -359,7 +349,7 @@ public class CodigoPanel extends javax.swing.JPanel {
 
         setFocusable(false);
 
-        jTabbedPaneProp.setBorder(javax.swing.BorderFactory.createTitledBorder("Propiedades"));
+        jTabbedPaneProp.setBorder(javax.swing.BorderFactory.createTitledBorder("Elementos Capturados"));
         jTabbedPaneProp.setFocusable(false);
 
         jScrollPane1.setViewportView(jEditorPaneCod);

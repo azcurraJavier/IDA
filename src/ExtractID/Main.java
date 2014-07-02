@@ -11,10 +11,10 @@ import VentanasPaneles.AcercaDe;
 import VentanasPaneles.ClosableTabbedPane;
 import VentanasPaneles.CodigoPanel;
 import VentanasPaneles.DiccionaryPanel;
-import VentanasPaneles.MiModelo;
-import VentanasPaneles.SplitPanel;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -27,9 +27,10 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import org.antlr.runtime.ANTLRFileStream;
+import org.antlr.runtime.ANTLRStringStream;
 import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.RecognitionException;
+import org.jdesktop.swingx.util.OS;
 
 /**
  *
@@ -37,51 +38,59 @@ import org.antlr.runtime.RecognitionException;
  */
 public class Main extends javax.swing.JFrame {
 
-    
     private CodigoPanel codigoPanel;
-    
-    private static File[] archivosAnalisisId = null;
-    
-    private final ClosableTabbedPane jTabbedEsp;
-    
-    public static Set<String> setReserv = new HashSet<String>(Arrays.asList("abstract", "assert", "boolean", "break", "byte", "case", "catch", "char", "class", 
-                                                   "const", "continue", "default", "do", "double", "else", "enum", "extends", "false", "final", "finally",
-                                                   "float", "for", "goto", "if", "implements", "import", "instanceof", "int", "interface", "long", "native",
-                                                   "new", "null", "package", "private", "protected", "public", "return", "short", "static", "strictfp", "super",
-                                                   "switch", "synchronized", "this", "throw", "throws", "transient", "true", "try", "void", "volatile", "while"));
 
-    private Map<String,String> mapIdsSplited = new HashMap<>();
-    private Map<String,String> mapIdsExp = new HashMap<>();
+    private static File[] archivosAnalisisId = null;
+
+    private final ClosableTabbedPane jTabbedEsp;
+
+    public static Set<String> setReserv = new HashSet<>(Arrays.asList("abstract", "assert", "boolean", "break", "byte", "case", "catch", "char", "class",
+            "const", "continue", "default", "do", "double", "else", "enum", "extends", "false", "final", "finally",
+            "float", "for", "goto", "if", "implements", "import", "instanceof", "int", "interface", "long", "native",
+            "new", "null", "package", "private", "protected", "public", "return", "short", "static", "strictfp", "super",
+            "switch", "synchronized", "this", "throw", "throws", "transient", "true", "try", "void", "volatile", "while"));
+
+    private Map<String, String> mapIdsSplited;
+    private Map<String, String> mapIdsExp;
+    
+    
+    private JFileChooser fileChooser;
+    private File currentDir;
 
     /**
      * Creates new form NewJFrame
      */
     public Main() {
         initComponents();
-                
+        
+        mapIdsSplited = new HashMap<>();
+        mapIdsExp = new HashMap<>();
+        
+        fileChooser = new JFileChooser();
+
         jTabbedEsp = new ClosableTabbedPane();
-        
+
         jTabbedEsp.setFocusable(false);
-        
+
         jTabbedEsp.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedEsp, javax.swing.GroupLayout.DEFAULT_SIZE, 907, Short.MAX_VALUE)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jTabbedEsp, javax.swing.GroupLayout.DEFAULT_SIZE, 907, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedEsp, javax.swing.GroupLayout.DEFAULT_SIZE, 532, Short.MAX_VALUE)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jTabbedEsp, javax.swing.GroupLayout.DEFAULT_SIZE, 532, Short.MAX_VALUE)
         );
-        
+
         jTabbedEsp.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jTabbedEspStateChanged(evt);
             }
         });
-        
+
     }
 
     /**
@@ -98,9 +107,6 @@ public class Main extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItemCerrTodo = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jMenuItemAlgGreedy = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
@@ -138,23 +144,6 @@ public class Main extends javax.swing.JFrame {
         jMenu1.add(jMenuItem3);
 
         jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Dividir Id");
-
-        jMenuItemAlgGreedy.setText("Algoritmo Greedy...");
-        jMenuItemAlgGreedy.setEnabled(false);
-        jMenuItemAlgGreedy.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemAlgGreedyActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuItemAlgGreedy);
-
-        jMenuItem5.setText("Algoritmo Samurai...");
-        jMenuItem5.setEnabled(false);
-        jMenu2.add(jMenuItem5);
-
-        jMenuBar1.add(jMenu2);
 
         jMenu3.setText("Expandir Id");
 
@@ -217,21 +206,15 @@ public class Main extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
+      
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        
-        String canonicalPath = "";
-        try {
-            canonicalPath = new File(".").getCanonicalPath();
-        } catch (IOException ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+
+        if(fileChooser.getCurrentDirectory() == null){            
+            //si no esta seteado ponemos la carpeta del usuario
+            currentDir = new File(System.getProperty("user.home"));
         }
         
-        
-        File file = new File(canonicalPath+"/examples");
-
-
-        JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setCurrentDirectory(file);
+        fileChooser.setCurrentDirectory(currentDir);
         FileNameExtensionFilter filter = new FileNameExtensionFilter("java", "java");
         fileChooser.setFileFilter(filter);
 
@@ -242,158 +225,192 @@ public class Main extends javax.swing.JFrame {
 
         if (seleccion == JFileChooser.APPROVE_OPTION) {
 
+            //guardamos el ultimo acceso
+            currentDir = fileChooser.getCurrentDirectory();
+            
             //jMenuItem1.setEnabled(false);
-             jMenuItemCerrTodo.setEnabled(true);
+            jMenuItemCerrTodo.setEnabled(true);
 
             archivosAnalisisId = fileChooser.getSelectedFiles();
 
-            
             ListaClase.clean();
 
             for (File fileAnalisis : archivosAnalisisId) {
 
+                //jacobe para dar formato al codigo leido desde el archivo
+                String prettyCode = prettyCode(fileAnalisis.getAbsolutePath());
+
+                if (prettyCode.isEmpty()) {
+                    JOptionPane.showMessageDialog(new JFrame(),
+                            "El archivo: " + fileAnalisis.getName()
+                            + " esta vacío o posee errores sintácticos", "ERROR", JOptionPane.ERROR_MESSAGE);
+                    continue;
+                }
+                ///////////////
+                
+                
+                JavaLexer lex = new JavaLexer(new ANTLRStringStream(prettyCode));
+                CommonTokenStream tokens = new CommonTokenStream(lex);
+                JavaParser g = new JavaParser(tokens);
+
+                Clase unaClase;
+
                 try {
-
-
-                    JavaLexer lex = new JavaLexer(new ANTLRFileStream(fileAnalisis.getAbsolutePath()));
-                    CommonTokenStream tokens = new CommonTokenStream(lex);
-                    JavaParser g = new JavaParser(tokens);
-
-                    Clase unaClase;
-
                     g.compilationUnit();
-                    noErrorSintactico = g.ocurrioError();
+                } catch (RecognitionException e) {
 
-                    unaClase = g.getClaseAnalisis();
-                    unaClase.setPunteroArchivo(fileAnalisis);//seteo puntero archivo en la clase 
-                    /////comentarios/////
-                    ArrayList<Comentario> lisCom = lex.getLisCom(); //comentarios del lexer 
-                    unaClase.setLisComentario(lisCom);
-                    unaClase.setearAmbienteCometario();//seteo ambientes de comentarios
-                    unaClase.cargarTablaClase();//cargo elementos para las tablas
-                    unaClase.setLisLiterales(g.getLisLiterales());
-                    /////////////////////
-                    ListaClase.addElemLisClases(unaClase);
-
-
-                } catch (IOException | RecognitionException e) {
-                    noErrorSintactico = false;                
-                    JFrame p = new JFrame();
-                    String msg = "Existen Errores Sintacticos, corríjalos y vuelva a intentarlo";                
-                    msg = e.getMessage()!=null?e.getMessage():msg;
-                    JOptionPane.showMessageDialog(p,msg+"\nArchivo Seleccionado: "+fileAnalisis.getName() , "ERROR", JOptionPane.ERROR_MESSAGE);
+                    noErrorSintactico = false;
                 }
+
+                noErrorSintactico = g.ocurrioError();
+
+                if (!noErrorSintactico) {
+                    JOptionPane.showMessageDialog(new JFrame(),
+                            "Error al analizar archivo: " + fileAnalisis.getName(), "ERROR", JOptionPane.ERROR_MESSAGE);
+                    continue;
+                }
+
+                //control de referencias sin declarar
+                unaClase = g.getClaseAnalisis();
+                
+                if (unaClase.getVarSinDeclB()) {
+                    JOptionPane.showMessageDialog(new JFrame(),
+                            "Error al analizar archivo: " + fileAnalisis.getName()+
+                            "\n"+unaClase.getVarSinDecl() , "ERROR", JOptionPane.ERROR_MESSAGE);
+                    continue;
+                }
+                ////////
+                
+                unaClase.setFileName(fileAnalisis.getName());//nombre archivo java
+                unaClase.setCode(prettyCode);//codigo leido de archivo
+                /////comentarios/////
+                ArrayList<Comentario> lisCom = lex.getLisCom(); //comentarios del lexer 
+                unaClase.setLisComentario(lisCom);
+                unaClase.setearAmbienteCometario();//seteo ambientes de comentarios
+                unaClase.cargarTablaClase();//cargo elementos para las tablas
+                unaClase.setLisLiterales(g.getLisLiterales());
+                /////////////////////
+                ListaClase.addElemLisClases(unaClase);
 
             }
 
+            for (Clase claseAnalisis : ListaClase.getLisClases()) {
 
-
-            if (noErrorSintactico) {
-                
-                for (Clase claseAnalisis : ListaClase.getLisClases()) {
-
-                    codigoPanel = new CodigoPanel(claseAnalisis,mapIdsSplited,mapIdsExp);
-                    //jTabbedPaneCodigo.add(claseAnalisis.getPunteroArchivo().getName(), codigoPanel);
-                    jTabbedEsp.addTab(claseAnalisis.getPunteroArchivo().getName(), codigoPanel);
-                }
-
-                //jTabbedPaneAnalisis.add("Identificadores", new TablaBuscador(0));
-                //jTabbedPaneAnalisis.add("Literales", new TablaBuscador(1));
-                //jTabbedPaneAnalisis.add("Comentarios", new TablaBuscador(2));
-
-                //jTabbedPaneCodigo.setVisible(true);
-                jTabbedEsp.setVisible(true);
-                jMenuItem3.setEnabled(true);
-                jMenuItem2.setEnabled(true);
-                jMenuItem2.setEnabled(true);
-                jMenuItem4.setEnabled(true);
-                
-                //jMenuItem4.setEnabled(true);
-
+                codigoPanel = new CodigoPanel(claseAnalisis, mapIdsSplited, mapIdsExp);
+                //jTabbedPaneCodigo.add(claseAnalisis.getPunteroArchivo().getName(), codigoPanel);
+                jTabbedEsp.addTab(claseAnalisis.getFileName(), codigoPanel);
             }
-        }   
-        
+
+            //jTabbedPaneAnalisis.add("Identificadores", new TablaBuscador(0));
+            //jTabbedPaneAnalisis.add("Literales", new TablaBuscador(1));
+            //jTabbedPaneAnalisis.add("Comentarios", new TablaBuscador(2));
+            //jTabbedPaneCodigo.setVisible(true);
+            jTabbedEsp.setVisible(true);
+            jMenuItem3.setEnabled(true);
+            jMenuItem2.setEnabled(true);
+            jMenuItem2.setEnabled(true);
+            jMenuItem4.setEnabled(true);
+
+            //jMenuItem4.setEnabled(true);
+        }
 
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    private String prettyCode(String path) {
+
+        String output = "";
+
+        try {
+            StringBuilder buffer = new StringBuilder();
+            BufferedReader reader = null;
+            
+            String dir;
+            
+            if(isLinux()){
+                dir = "jacobe//unix//jacobe";            
+            }else if(isWindows()){
+                dir = "/jacobe/win/jacobe";            
+            }else{
+                System.out.println("jacobe: No se reconoce el SO");
+                return "";
+            }
+
+            Process p = Runtime.getRuntime().exec(new String[]{dir, "-cfg=sun.cfg", path, "-stdout"});
+
+            reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
+
+            p.waitFor();
+            String line = "";
+
+            while ((line = reader.readLine()) != null) {
+                output += line + "\n";
+            }
+
+        } catch (IOException | InterruptedException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return output;
+
+    }
+    
+    public static boolean isWindows() {
+
+        return (OS.isWindows());
+    }
+    
+    public static boolean isLinux() {
+
+            return (OS.isLinux());
+
+    }
+
+
     private void jMenuItemCerrTodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCerrTodoActionPerformed
-        
+
         jTabbedEsp.removeAll();
         jMenuItemCerrTodo.setEnabled(false);
-        jMenuItemAlgGreedy.setEnabled(false);
-        
+
     }//GEN-LAST:event_jMenuItemCerrTodoActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         System.exit(0);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
-    private void jMenuItemAlgGreedyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAlgGreedyActionPerformed
-        
-        
-        MiModelo tablaId = codigoPanel.getTablaId().getModeloTabla();
-        
-        Set<String> setIdExtract = new HashSet<>();
-        
-        int r = tablaId.getRowCount();        
-        
-        for(int i = 0;i<r;i++){        
-            
-            setIdExtract.add(tablaId.getValueAt(i, 2).toString());
-        
-        }     
-        
-//        ArrayList<MostrarTabla> lisMt = new ArrayList<>();       
-//        
-//        for(Clase c: ListaClase.getLisClases()){
-//            lisMt.addAll(c.getIdTablaClase());          
-//        }
-        
-        SplitPanel tb;
-        tb = new SplitPanel(new javax.swing.JFrame(), true, setIdExtract);
-        
-        tb.setVisible(true);
-        
-        mapIdsSplited = tb.getLisIdsSplited();
-    }//GEN-LAST:event_jMenuItemAlgGreedyActionPerformed
+    private ArrayList<String> getListPhrase() {
 
-    
-    private ArrayList<String> getListPhrase(){
-        
-       ArrayList<String> lisCom = new ArrayList<String>();
-       //ArrayList<String> lisWords = new ArrayList<String>();
-       
-       
-        for(Clase c: ListaClase.getLisClases()){
-            for(Comentario com :c.getLisComentario()){
+        ArrayList<String> lisCom = new ArrayList<String>();
+        //ArrayList<String> lisWords = new ArrayList<String>();
+
+        for (Clase c : ListaClase.getLisClases()) {
+            for (Comentario com : c.getLisComentario()) {
                 lisCom.add(com.getCom());
             }
-           lisCom.add("==================="); 
-           //lisCom.addAll(c.getLisLiterales());
-        } 
-    
+            lisCom.add("===================");
+            //lisCom.addAll(c.getLisLiterales());
+        }
+
         return lisCom;
-    
+
     }
-    
-    
-    
+
+
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-              
+
         DiccionaryPanel ep;
-        ep = new DiccionaryPanel(new javax.swing.JFrame(),true,null, getListPhrase(),setReserv);
+        ep = new DiccionaryPanel(new javax.swing.JFrame(), true, null, getListPhrase(), setReserv);
         ep.setVisible(true);
-        
-        
+
+
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
 
         ArrayList<String> lisPhr = getListPhrase();
-        
+
         //palabras extraidas de las frases - comentarios y literales
         Set<String> lisCleaned = new HashSet<String>();
-        
+
         for (String phrase : lisPhr) {
 
             String words[] = phrase.split(" ");
@@ -406,8 +423,7 @@ public class Main extends javax.swing.JFrame {
                 }
             }
         }
-       
-   
+
 //        ExpandPanel ep;
 //        ep = new ExpandPanel(new javax.swing.JFrame(),true,lisCleaned,lisIdsSplited);
 //        ep.setVisible(true);
@@ -415,17 +431,16 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jTabbedEspStateChanged(javax.swing.event.ChangeEvent evt) {
-        
-        if(jTabbedEsp.getTabCount()==0){
+
+        if (jTabbedEsp.getTabCount() == 0) {
             jMenuItemCerrTodo.setEnabled(false);
-            jMenuItemAlgGreedy.setEnabled(false);
-        }else{      
+
+        } else {
             jMenuItemCerrTodo.setEnabled(true);
-            jMenuItemAlgGreedy.setEnabled(true);
+
         }
-    }   
-    
-    
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -457,15 +472,14 @@ public class Main extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 Main principal = new Main();
-                principal.setVisible(true);        
-                
+                principal.setVisible(true);
+
                 principal.setExtendedState(JFrame.MAXIMIZED_BOTH);
             }
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
@@ -473,9 +487,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItemAlgGreedy;
     private javax.swing.JMenuItem jMenuItemCerrTodo;
     // End of variables declaration//GEN-END:variables
 }
