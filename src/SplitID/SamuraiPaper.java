@@ -1,6 +1,5 @@
 package SplitID;
 
-import DictionaryDB.ConnectionDB;
 import DictionaryDB.Dictionary;
 import Listas.Clase;
 import Listas.MostrarTabla;
@@ -243,8 +242,6 @@ public class SamuraiPaper {
 
     public static String mixedCaseSplit(String token) {
         
-        ConnectionDB.AbrirConBD(); 
-        
         String sToken = "";        
 
         token = SplitUtils.splitSymbol(token);
@@ -298,8 +295,6 @@ public class SamuraiPaper {
             sToken = sToken.equals("") ? sameCaseSplit(s, score(s)) : sToken + " " + sameCaseSplit(s, score(s));
         }
         
-        ConnectionDB.CerrarConBD();
-
         return sToken;
     }
 

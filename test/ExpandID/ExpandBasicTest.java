@@ -39,7 +39,7 @@ public class ExpandBasicTest {
         
         c.setLisComentario(lisComentario);      
         
-        ListaClase.clean();
+        ListaClase.clear();
         
         ListaClase.addElemLisClases(c);
         

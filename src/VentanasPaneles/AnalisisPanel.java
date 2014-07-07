@@ -1,5 +1,6 @@
 package VentanasPaneles;
 
+import DictionaryDB.ConnectionDB;
 import ExpandID.ExpandBasic;
 import SplitID.GreedyPaper;
 import SplitID.SamuraiPaper;
@@ -303,6 +304,8 @@ public class AnalisisPanel extends javax.swing.JDialog {
         boolean greedy = jRadioBGreedy.isSelected();
 
         String splitIde;
+        
+        ConnectionDB.AbrirConBD();
 
         for (String ide : setIds) {
 
@@ -316,6 +319,8 @@ public class AnalisisPanel extends javax.swing.JDialog {
                 mapIdsSamurai.put(ide, splitIde);
             }
         }
+        
+        ConnectionDB.CerrarConBD();
 
         //carga tabla
         int colNum = modeloTabla.getColumnCount();
@@ -391,13 +396,19 @@ public class AnalisisPanel extends javax.swing.JDialog {
             
             String append = "";
             
+            ConnectionDB.AbrirConBD();
+            
             for(String s : arrayElem){
             
                 append += ExpandBasic.ejecutar(s) + " ";
                 
             }
             
+            ConnectionDB.CerrarConBD();
+            
             elem2 = append.trim().isEmpty()?"":append.substring(0, append.length()-1);
+            
+            mapIdsExpand.put(elem.toString(), elem2.toString());
         
             modeloTabla.setValueAt(elem2, i, colNum);
         

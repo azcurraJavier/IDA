@@ -1,7 +1,9 @@
 package VentanasPaneles;
 
+import ExtractID.Main;
 import Listas.Clase;
 import Listas.Comentario;
+import Listas.ListaClase;
 import Listas.Literal;
 import Listas.MostrarListaRef;
 import Listas.MostrarTabla;
@@ -14,6 +16,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.swing.JScrollPane;
 import javax.swing.RowFilter;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
@@ -78,7 +81,7 @@ public class TablaBuscador extends javax.swing.JPanel {
         unaClase = unaCla;
 
         jButtonTagCloud.setVisible(false);
-        jButtonAnId.setVisible(false);
+        jPanelAnalisis.setVisible(false);
 
         modeloTabla = new MiModelo();
         
@@ -95,7 +98,7 @@ public class TablaBuscador extends javax.swing.JPanel {
 
             case 0://Identificadores         
                 
-                jButtonAnId.setVisible(true);
+                jPanelAnalisis.setVisible(true);
                 
                 modeloTabla.addColumn("Línea");
                 modeloTabla.addColumn("Nombre ID");
@@ -222,38 +225,28 @@ public class TablaBuscador extends javax.swing.JPanel {
                 }
             });
             
+            if(tipoSel==0){
+                jScrollPaneRef.setVisible(true);
+            }
+            
 
         }else{
             hasElemets = false;        
         }        
-
-        if(tipoTabla==0){
-            initTablasExtras();
-
-        }
-
     }
-    
-    private void initTablasExtras() {
-
-        //tablas extras declaracion referencias
-
-        jScrollPaneRef.setVisible(true);
-
-        modeloTablaRef = new MiModelo();        
-
-        modeloTablaRef.addColumn("Línea");
-        modeloTablaRef.addColumn("Nombre ID");
-        modeloTablaRef.addColumn("Usado En");       
-  
-
-    }  
     
     private void cargarTablaRef(String nbre, int linea) {
 
         if (nbre == null) {
             return;
         }
+        
+        modeloTablaRef = new MiModelo();        
+
+        modeloTablaRef.addColumn("Línea");
+        modeloTablaRef.addColumn("Nombre ID");
+        modeloTablaRef.addColumn("Usado En");       
+
         
         MostrarTabla mSelected = null;
 
@@ -280,7 +273,7 @@ public class TablaBuscador extends javax.swing.JPanel {
             modeloTablaRef.addRow(fila);
         }
 
-        tablaElemRef = new MiJTable(modeloTablaRef);
+        tablaElemRef  = new MiJTable(modeloTablaRef);
 
         tablaElemRef.autoAjuste();
 
@@ -297,7 +290,7 @@ public class TablaBuscador extends javax.swing.JPanel {
     }
     
     
-    public void updateTableId(String nameCol, Map idMap){
+    public void updateTableId(String nameCol, Map idMap, String exp){
         
         if(idMap.isEmpty()){//no hay elementos
             return;
@@ -311,21 +304,37 @@ public class TablaBuscador extends javax.swing.JPanel {
             }
         }
         
+        int colGetInfo=2;//id sin dividir
+        
+        if(exp != null){
+            for (int j = 0; j < colNum; j++) {//veo si la columna ya existe
+                if (modeloTabla.getColumnName(j).equals(exp)) {
+                    colGetInfo=j;//id dividido
+                }
+            }        
+        }
+        
+        
         modeloTabla.addColumn(nameCol);
     
         Object elem,elem2;
-        
+        //recorre filas
         for(int i=0;i<modeloTabla.getRowCount();i++){
         
-            elem = modeloTabla.getValueAt(i, 2);
+            elem = modeloTabla.getValueAt(i, colGetInfo);
             
-            elem2 = idMap.get(cleanHtml(elem.toString()));           
+            elem2 = idMap.get(cleanHtml(elem.toString()).trim());           
             
             modeloTabla.setValueAt(elem2, i, colNum);
             
         }       
          
         tablaElem.autoAjuste();         
+    }
+    
+    
+    public void updateTableId(String nameCol, Map idMap){
+        updateTableId(nameCol, idMap,null);
     }
     
 
@@ -338,7 +347,9 @@ public class TablaBuscador extends javax.swing.JPanel {
         jButtonTagCloud = new javax.swing.JButton();
         jScrollPane = new javax.swing.JScrollPane();
         jScrollPaneRef = new javax.swing.JScrollPane();
+        jPanelAnalisis = new javax.swing.JPanel();
         jButtonAnId = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Buscar..."));
 
@@ -360,6 +371,7 @@ public class TablaBuscador extends javax.swing.JPanel {
         );
 
         jButtonTagCloud.setText("Ver TagCloud");
+        jButtonTagCloud.setEnabled(false);
         jButtonTagCloud.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonTagCloudActionPerformed(evt);
@@ -368,12 +380,39 @@ public class TablaBuscador extends javax.swing.JPanel {
 
         jScrollPaneRef.setBorder(javax.swing.BorderFactory.createTitledBorder("Referencias"));
 
-        jButtonAnId.setText("Analizar Identificadores");
+        jPanelAnalisis.setBorder(javax.swing.BorderFactory.createTitledBorder("Análisis de Identificadores"));
+
+        jButtonAnId.setText("Ejecutar Analisis");
         jButtonAnId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonAnIdActionPerformed(evt);
             }
         });
+
+        jButton1.setText("Diccionarios");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanelAnalisisLayout = new javax.swing.GroupLayout(jPanelAnalisis);
+        jPanelAnalisis.setLayout(jPanelAnalisisLayout);
+        jPanelAnalisisLayout.setHorizontalGroup(
+            jPanelAnalisisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelAnalisisLayout.createSequentialGroup()
+                .addGap(6, 6, 6)
+                .addComponent(jButtonAnId)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1)
+                .addGap(0, 10, Short.MAX_VALUE))
+        );
+        jPanelAnalisisLayout.setVerticalGroup(
+            jPanelAnalisisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelAnalisisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(jButtonAnId)
+                .addComponent(jButton1))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -387,7 +426,7 @@ public class TablaBuscador extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonTagCloud, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonAnId)
+                        .addComponent(jPanelAnalisis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 848, Short.MAX_VALUE)
@@ -400,19 +439,15 @@ public class TablaBuscador extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(11, 11, 11)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButtonTagCloud, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButtonAnId, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addComponent(jButtonTagCloud))
+                    .addComponent(jPanelAnalisis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPaneRef, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jScrollPaneRef, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+                    .addComponent(jScrollPane))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -449,7 +484,22 @@ public class TablaBuscador extends javax.swing.JPanel {
         splitPanel.setVisible(true);
         
         codigoPanel.getTablaId().updateTableId("Div Greedy", splitPanel.getMapIdsGreedy()); 
+        codigoPanel.getTablaId().updateTableId("Div Samurai", splitPanel.getMapIdsSamurai()); 
+        codigoPanel.getTablaId().updateTableId("Expansión de Greedy", splitPanel.getMapIdsExpand(),"Div Greedy"); 
+        codigoPanel.getTablaId().updateTableId("Expansión de Greedy", splitPanel.getMapIdsExpand(),"Div Samurai"); 
     }//GEN-LAST:event_jButtonAnIdActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+  
+        DiccionaryPanel dicPanel = Main.getDicPanel();
+        
+        if(dicPanel==null){
+               dicPanel = new DiccionaryPanel(new javax.swing.JFrame(), true);
+        }
+        
+        dicPanel.setVisible(true);
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void addLineaCom(String linea) {
 
@@ -482,12 +532,17 @@ public class TablaBuscador extends javax.swing.JPanel {
         //cargar tablas extras
         if(tipoSel == 0){
             
-             Object linea = modeloTabla.getValueAt(modelRow, 1);           
+            Object linea = modeloTabla.getValueAt(modelRow, 1);
              
-             initTablasExtras();
+            int nroRef = (int)modeloTabla.getValueAt(modelRow, 6);
             
-             cargarTablaRef(text,(int)linea); 
+            jScrollPaneRef.setViewportView(new MiJTable());
+            if(tablaElemRef!=null){tablaElemRef.removeAll();}
             
+            if(nroRef>0){//debe tener referencias!!              
+                
+               cargarTablaRef(text,(int)linea); 
+            }
         }        
 
     }
@@ -516,7 +571,11 @@ public class TablaBuscador extends javax.swing.JPanel {
     }
     
     //permite sacar el html limpiando los valores
-    private String cleanHtml(String html){       
+    private String cleanHtml(String html){
+        
+        if(html == null || html.isEmpty()){
+            return "";
+        }
         
         Pattern pattern = Pattern.compile("<html><b>(.*?)</b></html>");
         Matcher matcher = pattern.matcher(html);
@@ -525,7 +584,7 @@ public class TablaBuscador extends javax.swing.JPanel {
             return matcher.group(1);
         }
         
-        return "";
+        return html;
     
     }
 
@@ -568,9 +627,11 @@ public class TablaBuscador extends javax.swing.JPanel {
    
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonAnId;
     private javax.swing.JButton jButtonTagCloud;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanelAnalisis;
     private javax.swing.JScrollPane jScrollPane;
     private javax.swing.JScrollPane jScrollPaneRef;
     private javax.swing.JTextField jTextFieldBusc;

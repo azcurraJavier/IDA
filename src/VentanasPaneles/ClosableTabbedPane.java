@@ -1,6 +1,7 @@
 package VentanasPaneles;
 
 
+import Listas.ListaClase;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Cursor;
@@ -57,8 +58,8 @@ public class ClosableTabbedPane extends JTabbedPane{
 			if(closeUnderMouse(me.getX(), me.getY())){
 				boolean isToCloseTab = tabAboutToClose(selectedTab);
 				if (isToCloseTab && selectedTab > -1){
-                                        
-					tabbedPane.removeTabAt(selectedTab);
+                                        ListaClase.deleteClass(tabbedPane.getTitleAt(selectedTab));
+					tabbedPane.removeTabAt(selectedTab);                                        
 				}
 				selectedTab = tabbedPane.getSelectedIndex();                   
 
@@ -84,7 +85,7 @@ public class ClosableTabbedPane extends JTabbedPane{
                     } else {
                         tabbedPane.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
                         if (selectedTab > -1) {
-                            tabbedPane.setToolTipTextAt(selectedTab, "");
+                            //tabbedPane.setToolTipTextAt(selectedTab, "");
                         }
                     }
                 }

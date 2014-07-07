@@ -50,6 +50,46 @@ scope GlobalOne {
 @lexer::members { 
     private ArrayList<Comentario> lisCom = new ArrayList<Comentario>();
     public ArrayList<Comentario> getLisCom(){return this.lisCom;}
+
+    private void addComLis(int linea,String com){
+
+        com = com.replace("//", "");
+        com = com.replace("/*", "");
+        com = com.replace("*/", "");
+        com = com.replace("*", "");
+        
+        com = com.trim();
+
+        //si esta vacio no agrego
+        if(com.isEmpty()){
+            return;
+        } 
+
+        //si no posee mas de una linea...
+        if(!com.contains("\n")){
+            lisCom.add(new Comentario(linea, com));       
+            return;
+        }        
+        
+        //si posee mas se descompone....
+        String[] lines = com.split(System.getProperty("line.separator"));
+        
+        int lin = linea;
+        
+        for(String s:lines){
+            
+            s=s.trim();
+
+            //si esta vacio no agrego
+            if(!s.isEmpty()){
+                lisCom.add(new Comentario(lin, s));
+            }            
+            
+            lin++;
+        }       
+    
+    }
+
 }
 
 
@@ -770,8 +810,8 @@ expressionList returns [ArrayList<UsoId> lisUsosId]
 expression returns [ArrayList<UsoId> lisUsosId]
 @init{
     $lisUsosId = new ArrayList<UsoId>();
-}
-    :   c1 = conditionalExpression {$lisUsosId = c1;}
+}                                  //c1 puede venir con null                         
+    :   c1 = conditionalExpression {if(c1!=null){$lisUsosId = c1;}} 
         (assignmentOperator e1 = expression {$lisUsosId.addAll(e1);}
         )?
     ;
@@ -930,6 +970,7 @@ primary  returns [ArrayList<UsoId> lisUsosId]
 @init{
     $lisUsosId = new ArrayList<UsoId>(); //lista que se crea en nodo 'hoja'
     UsoId ui = null;
+    boolean esMet = false;
 }
     :   parExpression 
     |   'this'
@@ -937,17 +978,17 @@ primary  returns [ArrayList<UsoId> lisUsosId]
         )* 
         //setea que son metodos si Id1 lo indica
         (ids1 = identifierSuffix 
-        {if(ids1.esMetodo){$lisUsosId.addAll(ids1.lisUsosId); ui = new UsoId($Id1.getText(),$Id1.getLine(),"global",true);}}
+        {if(ids1.esMetodo){$lisUsosId.addAll(ids1.lisUsosId);esMet=true;}}
         )?
-        {if(ui==null){ui = new UsoId($Id1.getText(),$Id1.getLine(),"global",false);} $lisUsosId.add(ui);}
+        {if($Id1 != null){ui = new UsoId($Id1.getText(),$Id1.getLine(),"global",esMet); $lisUsosId.add(ui);}}
 
     |   Id2 = IDENTIFIER
         ('.' IDENTIFIER //no se considera
         )*                      //setea que son metodos si Id2 lo indica
         (ids2 = identifierSuffix 
-        {if(ids2.esMetodo){$lisUsosId.addAll(ids2.lisUsosId); ui = new UsoId($Id2.getText(),$Id2.getLine(),true);}}
+        {if(ids2.esMetodo){$lisUsosId.addAll(ids2.lisUsosId); esMet=true;}}
         )?
-        {if(ui==null){ui = new UsoId($Id2.getText(),$Id2.getLine(),false);} $lisUsosId.add(ui);}
+        {ui = new UsoId($Id2.getText(),$Id2.getLine(),esMet); $lisUsosId.add(ui);}
     |   'super'
         superSuffix
     |   literal
@@ -1252,11 +1293,13 @@ WS
     ;
     
 COMMENT
-         @init{
-            boolean isJavaDoc = false;
-        }
+@init{
+   boolean isJavaDoc = false;
+   int line=getLine()+1;
+}
 @after {
-  lisCom.add(new Comentario(getLine()-1,getText()));
+    //if(line==getLine()-1){line--;}
+    addComLis(line,getText());
 }
     :   '/*'
             {
@@ -1277,7 +1320,7 @@ COMMENT
 
 LINE_COMMENT
 @after {
-  lisCom.add(new Comentario(getLine()-1,getText()));
+  addComLis(getLine()-1,getText());
 }
     :   '//' ~('\n'|'\r')*  ('\r\n' | '\r' | '\n') 
             {

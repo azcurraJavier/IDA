@@ -42,6 +42,20 @@ public abstract class Dictionary {
         
     }
     
+    public static ArrayList<String> selectAllDic(String table){
+        
+        ArrayList<String> elems;
+        
+        //Connection con = ConnectionDB.AbrirConBD();
+        
+        elems = OperationDB.selectAll(table);        
+        
+        //ConnectionDB.CerrarConBD();
+        
+        return elems;
+        
+    }    
+    
     private static void createTableInsertValuesBD(String csvFile, String table){
     
         BufferedReader br = null;

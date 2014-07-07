@@ -1,6 +1,5 @@
 package ExpandID;
 
-import DictionaryDB.ConnectionDB;
 import DictionaryDB.OperationDB;
 import Listas.Clase;
 import Listas.Comentario;
@@ -30,8 +29,7 @@ public class ExpandBasic {
         
         if(w == null || w.isEmpty()){
             return "";
-        }
-        ConnectionDB.AbrirConBD();
+        }        
         
         unicaExp = w;
         
@@ -42,8 +40,7 @@ public class ExpandBasic {
         w = w.toLowerCase();
         
 
-        if (OperationDB.select("stop_dict", w)) {
-            ConnectionDB.CerrarConBD();
+        if (OperationDB.select("stop_dict", w)) {            
             return w;
         }
 
@@ -66,9 +63,7 @@ public class ExpandBasic {
             //exige 3 o más sino el like trae muchos resultados
             listExp = OperationDB.like("words_dict", w);
 
-        }
-
-        ConnectionDB.CerrarConBD();
+        }       
 
         if (listExp.size() == 1) {
             unicaExp = listExp.get(0);
@@ -81,36 +76,40 @@ public class ExpandBasic {
 
     private static void procesarFrases() {
         
-        for (Clase c : ListaClase.getLisClases()) {          
-
-            for (Comentario com : c.getLisComentario()) {
-
-                //filtrar palabras irrelevantes
-                String arrayCom[] = com.getCom().trim().split(" ");                
-
-                String frase = "";
-
-                for (String pal : arrayCom) {
-                    
-                    //para evitar problemas todo con minuscula
-                    pal = pal.toLowerCase();
-
-                    if (!OperationDB.select("stop_dict", pal)) {
-                        //si no es una palabra irrelevante la agrego
-                        listPalabras.add(pal);
-                        frase += pal + " ";
-                    }
-
-                }
-                
-                if(!frase.isEmpty()){
-                    frase = frase.substring(0, frase.length()-1);
-                    listFrases.add(frase);                
-                }
-
-            }
-
-        }        
+//        for (Clase c : ListaClase.getLisClases()) {          
+//
+//            for (Comentario com : c.getLisComentario()) {
+//
+//                //filtrar palabras irrelevantes
+//                String arrayCom[] = com.getCom().trim().split(" ");                
+//
+//                String frase = "";
+//
+//                for (String pal : arrayCom) {
+//                    
+//                    //para evitar problemas todo con minuscula
+//                    pal = pal.toLowerCase();
+//
+//                    if (!OperationDB.select("stop_dict", pal)) {
+//                        //si no es una palabra irrelevante la agrego
+//                        listPalabras.add(pal);
+//                        frase += pal + " ";
+//                    }
+//
+//                }
+//                
+//                if(!frase.isEmpty()){
+//                    frase = frase.substring(0, frase.length()-1);
+//                    listFrases.add(frase);                
+//                }
+//
+//            }
+//
+//        }        
+        
+//        if(Main.getDicPanel() == null){
+//        
+//        }
         
         frasesProc = true;
 

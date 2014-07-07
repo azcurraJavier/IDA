@@ -41,7 +41,7 @@ public class CodigoPanel extends javax.swing.JPanel {
     };
 
     private Clase claseAsociada = null;
-
+    
     public CodigoPanel(Clase unaClass, Map idSplit, Map idExp) {
         initComponents();
 
@@ -267,14 +267,7 @@ public class CodigoPanel extends javax.swing.JPanel {
 
         for (String w : words) {
 
-            if (setReserv.contains(w)) {
-                //Palabras reservadas
-                w = "<b><span style=\"color: #00008B;\">" + w + "</span></b>";
-
-            } else {
-
-                w = checkCar(w);
-            }
+            w = checkCar(w);
 
             newLin += w + " ";
         }
@@ -293,24 +286,30 @@ public class CodigoPanel extends javax.swing.JPanel {
         char[] charArray = word.toCharArray();
 
         for (Character c : charArray) {
+            
+            if (blockLiteral2 ==false && setSimbol.contains(c.toString())) {
+                
+                //simbolos
+                String cast = mapReservSimbol.get(c.toString());
+                cast = cast != null ? cast : c.toString();//palabras reservadas de html  
+                
+                //simbolos
+                newWord += "<b><span style=\"color: #00008B;\">" + cast + "</span></b>";
+                continue;
+            }            
+            
             //simbolos
             String cast = mapReservSimbol.get(c.toString());
             cast = cast != null ? cast : c.toString();//palabras reservadas de html            
 
-            if (!blockLiteral2 && setSimbol.contains(cast)) {
-
-                newWord += "<b><span style=\"color: #00008B;\">" + cast + "</span></b>";
-                continue;
-            }
-
-            if (!blockLiteral2 && cast.matches("[0-9]+(.[0-9]+)?")) {
+            if (blockLiteral2 ==false && cast.matches("[0-9]+(.[0-9]+)?")) {
                 //numeros
                 newWord += "<b><span style=\"color: red;\">" + cast + "</span></b>";
                 continue;
             }
 
             if (cast.equals("\"")) {
-                if (!blockLiteral2) {//abriendo literal
+                if (blockLiteral2 == false) {//abriendo literal
                     newWord += "<b><span style=\"color: #CE7B00;\">" + cast;
 
                 } else {//cerrando literal
@@ -323,9 +322,52 @@ public class CodigoPanel extends javax.swing.JPanel {
 
             newWord += cast.toString();
         }
+        
+        
+        if (blockLiteral2 ==false) {
+            
+            newWord = buscarPalabraRes(newWord);
+            //palabras reservadas
+            //return "<b><span style=\"color: #00008B;\">" + word + "</span></b>";            
+        }
 
         return newWord;
     }
+    
+    private String buscarPalabraRes(String w){
+        
+        
+        if(setReserv.contains(w)){
+            return "<b><span style=\"color: #00008B;\">" + w + "</span></b>";
+        }
+        
+        
+        for(int i=w.length();i>0;i--){
+        
+            if(setReserv.contains(w.substring(0,i))){
+            
+                 return "<b><span style=\"color: #00008B;\">" 
+                         + w.substring(0,i) + "</span></b>" +
+                         w.substring(i);
+            }
+        
+        }
+        
+        for(int i=0;i<w.length();i++){
+        
+            if(setReserv.contains(w.substring(i,w.length()))){
+            
+                 return w.substring(0,i) +"<b><span style=\"color: #00008B;\">" 
+                         + w.substring(i,w.length()) + "</span></b>";
+            }
+        
+        }
+        
+        return w;
+    
+    }
+    
+    
 
     public TablaBuscador getTablaId() {
         return tablaId;

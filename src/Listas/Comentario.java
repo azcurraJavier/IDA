@@ -8,10 +8,7 @@ public class Comentario {
 
     public Comentario(int i, String g) {
         this.linea = i;
-        g = g.replace("//", "");
-        g = g.replace("/*", "");
-        g = g.replace("*/", "");
-        this.com = g;
+        this.com = g;            
     }
 
     public String getCom() {
@@ -28,6 +25,6 @@ public class Comentario {
 
     public void setAmbiente(String ambiente) {
         this.ambiente = ambiente;
-    }
-    
-}
+    }    
+
+}   

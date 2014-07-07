@@ -12,11 +12,14 @@ public class PalabraHash {
     
     public PalabraHash() {
         pal = new HashMap();        
-        lisPalabra = new ArrayList<Palabra>();
-        
+        lisPalabra = new ArrayList<Palabra>();        
     }
     
     public void addPalabra(String p) {
+        
+        if(!p.matches(".*[A-Za-z].*")){
+            return;
+        }        
         
         if (pal.containsKey(p)) {
             int val = Integer.parseInt(pal.get(p).toString());

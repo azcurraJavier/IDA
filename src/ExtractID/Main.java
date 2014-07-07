@@ -4,9 +4,11 @@
  */
 package ExtractID;
 
+import DictionaryDB.Dictionary;
 import Listas.Clase;
 import Listas.Comentario;
 import Listas.ListaClase;
+import Listas.Literal;
 import VentanasPaneles.AcercaDe;
 import VentanasPaneles.ClosableTabbedPane;
 import VentanasPaneles.CodigoPanel;
@@ -15,12 +17,11 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
@@ -29,7 +30,6 @@ import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import org.antlr.runtime.ANTLRStringStream;
 import org.antlr.runtime.CommonTokenStream;
-import org.antlr.runtime.RecognitionException;
 import org.jdesktop.swingx.util.OS;
 
 /**
@@ -44,24 +44,22 @@ public class Main extends javax.swing.JFrame {
 
     private final ClosableTabbedPane jTabbedEsp;
 
-    public static Set<String> setReserv = new HashSet<>(Arrays.asList("abstract", "assert", "boolean", "break", "byte", "case", "catch", "char", "class",
-            "const", "continue", "default", "do", "double", "else", "enum", "extends", "false", "final", "finally",
-            "float", "for", "goto", "if", "implements", "import", "instanceof", "int", "interface", "long", "native",
-            "new", "null", "package", "private", "protected", "public", "return", "short", "static", "strictfp", "super",
-            "switch", "synchronized", "this", "throw", "throws", "transient", "true", "try", "void", "volatile", "while"));
-
     private Map<String, String> mapIdsSplited;
     private Map<String, String> mapIdsExp;
     
     
     private JFileChooser fileChooser;
     private File currentDir;
+    
+    private static DiccionaryPanel dicPanel;
 
     /**
      * Creates new form NewJFrame
      */
     public Main() {
         initComponents();
+        
+        ListaClase.init();
         
         mapIdsSplited = new HashMap<>();
         mapIdsExp = new HashMap<>();
@@ -93,6 +91,10 @@ public class Main extends javax.swing.JFrame {
 
     }
 
+    public static DiccionaryPanel getDicPanel() {
+        return dicPanel;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -104,12 +106,12 @@ public class Main extends javax.swing.JFrame {
 
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuAbrir = new javax.swing.JMenuItem();
         jMenuItemCerrTodo = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuRestBD = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem6 = new javax.swing.JMenuItem();
 
@@ -118,13 +120,13 @@ public class Main extends javax.swing.JFrame {
 
         jMenu1.setText("Archivo");
 
-        jMenuItem1.setText("Abrir Archivos...");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        jMenuAbrir.setText("Abrir Archivos...");
+        jMenuAbrir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                jMenuAbrirActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        jMenu1.add(jMenuAbrir);
 
         jMenuItemCerrTodo.setText("Cerrar Todo");
         jMenuItemCerrTodo.setEnabled(false);
@@ -145,9 +147,9 @@ public class Main extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu3.setText("Expandir Id");
+        jMenu3.setText("Diccionarios");
 
-        jMenuItem2.setText("Diccionarios ...");
+        jMenuItem2.setText("Ver Diccionarios ...");
         jMenuItem2.setEnabled(false);
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -156,15 +158,13 @@ public class Main extends javax.swing.JFrame {
         });
         jMenu3.add(jMenuItem2);
 
-        jMenuItem4.setText("Expandir ids encontrados ..");
-        jMenuItem4.setToolTipText("");
-        jMenuItem4.setEnabled(false);
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+        jMenuRestBD.setText("Restablecer B.D.");
+        jMenuRestBD.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
+                jMenuRestBDActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem4);
+        jMenu3.add(jMenuRestBD);
 
         jMenuBar1.add(jMenu3);
 
@@ -207,7 +207,7 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
       
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void jMenuAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuAbrirActionPerformed
 
         if(fileChooser.getCurrentDirectory() == null){            
             //si no esta seteado ponemos la carpeta del usuario
@@ -231,11 +231,17 @@ public class Main extends javax.swing.JFrame {
             //jMenuItem1.setEnabled(false);
             jMenuItemCerrTodo.setEnabled(true);
 
-            archivosAnalisisId = fileChooser.getSelectedFiles();
-
-            ListaClase.clean();
+            archivosAnalisisId = fileChooser.getSelectedFiles();            
 
             for (File fileAnalisis : archivosAnalisisId) {
+                
+                if(ListaClase.containsFileName(fileAnalisis.getName())){
+                    JOptionPane.showMessageDialog(new JFrame(),
+                            "Un archivo con el nombre: " + fileAnalisis.getName()
+                            + " ya se encuentra abierto!"
+                            , "Atención", JOptionPane.WARNING_MESSAGE);
+                    continue;
+                }
 
                 //jacobe para dar formato al codigo leido desde el archivo
                 String prettyCode = prettyCode(fileAnalisis.getAbsolutePath());
@@ -243,7 +249,9 @@ public class Main extends javax.swing.JFrame {
                 if (prettyCode.isEmpty()) {
                     JOptionPane.showMessageDialog(new JFrame(),
                             "El archivo: " + fileAnalisis.getName()
-                            + " esta vacío o posee errores sintácticos", "ERROR", JOptionPane.ERROR_MESSAGE);
+                            + " esta vacío o posee errores sintácticos,"+
+                                    "\nrevíselo e intente de nuevo."
+                            , "Atención", JOptionPane.WARNING_MESSAGE);
                     continue;
                 }
                 ///////////////
@@ -253,26 +261,26 @@ public class Main extends javax.swing.JFrame {
                 CommonTokenStream tokens = new CommonTokenStream(lex);
                 JavaParser g = new JavaParser(tokens);
 
-                Clase unaClase;
-
                 try {
                     g.compilationUnit();
-                } catch (RecognitionException e) {
+                    noErrorSintactico = g.ocurrioError();
+                    
+                } catch (Exception e) {
 
+                    System.out.println(getStackTrace(e));
                     noErrorSintactico = false;
-                }
+                }                
 
-                noErrorSintactico = g.ocurrioError();
-
-                if (!noErrorSintactico) {
+                Clase unaClase = g.getClaseAnalisis();                
+                
+                //control de carga de datos del parser
+                if (!noErrorSintactico || unaClase==null) {
                     JOptionPane.showMessageDialog(new JFrame(),
-                            "Error al analizar archivo: " + fileAnalisis.getName(), "ERROR", JOptionPane.ERROR_MESSAGE);
+                            "Error fatal al analizar archivo: " + fileAnalisis.getName(), "ERROR", JOptionPane.ERROR_MESSAGE);
                     continue;
                 }
-
-                //control de referencias sin declarar
-                unaClase = g.getClaseAnalisis();
                 
+                //control de referencias sin declarar
                 if (unaClase.getVarSinDeclB()) {
                     JOptionPane.showMessageDialog(new JFrame(),
                             "Error al analizar archivo: " + fileAnalisis.getName()+
@@ -291,14 +299,13 @@ public class Main extends javax.swing.JFrame {
                 unaClase.setLisLiterales(g.getLisLiterales());
                 /////////////////////
                 ListaClase.addElemLisClases(unaClase);
-
-            }
-
-            for (Clase claseAnalisis : ListaClase.getLisClases()) {
-
-                codigoPanel = new CodigoPanel(claseAnalisis, mapIdsSplited, mapIdsExp);
+                
+                
+                //Interfaz
+                codigoPanel = new CodigoPanel(unaClase, mapIdsSplited, mapIdsExp);
                 //jTabbedPaneCodigo.add(claseAnalisis.getPunteroArchivo().getName(), codigoPanel);
-                jTabbedEsp.addTab(claseAnalisis.getFileName(), codigoPanel);
+                jTabbedEsp.addTab(unaClase.getFileName(), codigoPanel); 
+
             }
 
             //jTabbedPaneAnalisis.add("Identificadores", new TablaBuscador(0));
@@ -309,19 +316,26 @@ public class Main extends javax.swing.JFrame {
             jMenuItem3.setEnabled(true);
             jMenuItem2.setEnabled(true);
             jMenuItem2.setEnabled(true);
-            jMenuItem4.setEnabled(true);
 
             //jMenuItem4.setEnabled(true);
         }
 
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_jMenuAbrirActionPerformed
 
+    public static String getStackTrace(final Throwable throwable) {
+        final StringWriter sw = new StringWriter();
+        final PrintWriter pw = new PrintWriter(sw, true);
+        throwable.printStackTrace(pw);
+        return sw.getBuffer().toString();
+    }
+    
+    
     private String prettyCode(String path) {
 
         String output = "";
 
         try {
-            StringBuilder buffer = new StringBuilder();
+            
             BufferedReader reader = null;
             
             String dir;
@@ -368,7 +382,8 @@ public class Main extends javax.swing.JFrame {
 
     private void jMenuItemCerrTodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCerrTodoActionPerformed
 
-        jTabbedEsp.removeAll();
+        ListaClase.clear();//remueve logica
+        jTabbedEsp.removeAll();//remueve interfaz
         jMenuItemCerrTodo.setEnabled(false);
 
     }//GEN-LAST:event_jMenuItemCerrTodoActionPerformed
@@ -376,59 +391,24 @@ public class Main extends javax.swing.JFrame {
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         System.exit(0);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
-
-    private ArrayList<String> getListPhrase() {
-
-        ArrayList<String> lisCom = new ArrayList<String>();
-        //ArrayList<String> lisWords = new ArrayList<String>();
-
-        for (Clase c : ListaClase.getLisClases()) {
-            for (Comentario com : c.getLisComentario()) {
-                lisCom.add(com.getCom());
-            }
-            lisCom.add("===================");
-            //lisCom.addAll(c.getLisLiterales());
-        }
-
-        return lisCom;
-
-    }
-
-
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
 
-        DiccionaryPanel ep;
-        ep = new DiccionaryPanel(new javax.swing.JFrame(), true, null, getListPhrase(), setReserv);
-        ep.setVisible(true);
-
-
+        if(dicPanel == null){
+            dicPanel = new DiccionaryPanel(new javax.swing.JFrame(), true);
+        }
+        
+        dicPanel.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-
-        ArrayList<String> lisPhr = getListPhrase();
-
-        //palabras extraidas de las frases - comentarios y literales
-        Set<String> lisCleaned = new HashSet<String>();
-
-        for (String phrase : lisPhr) {
-
-            String words[] = phrase.split(" ");
-
-            for (String w : words) {
-                w = w.replace("\n", "");
-                if (w.length() > 2 && w.matches("[A-Za-z]+")) {
-                    //todas las palablas lower case
-                    lisCleaned.add(w.toLowerCase().trim());
-                }
-            }
-        }
-
-//        ExpandPanel ep;
-//        ep = new ExpandPanel(new javax.swing.JFrame(),true,lisCleaned,lisIdsSplited);
-//        ep.setVisible(true);
-
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
+    private void jMenuRestBDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuRestBDActionPerformed
+        
+        
+      
+        Dictionary.restartBd();       
+        
+        
+        
+    }//GEN-LAST:event_jMenuRestBDActionPerformed
 
     private void jTabbedEspStateChanged(javax.swing.event.ChangeEvent evt) {
 
@@ -437,7 +417,10 @@ public class Main extends javax.swing.JFrame {
 
         } else {
             jMenuItemCerrTodo.setEnabled(true);
-
+        }
+        
+        if(dicPanel != null){
+            dicPanel.rebuildPhraseList();
         }
     }
 
@@ -482,12 +465,12 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenuItem jMenuAbrir;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItemCerrTodo;
+    private javax.swing.JMenuItem jMenuRestBD;
     // End of variables declaration//GEN-END:variables
 }

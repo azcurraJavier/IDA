@@ -96,6 +96,36 @@ public abstract class OperationDB {
         return true;
 
     }
+    
+    public static ArrayList<String> selectAll(String table) {
+    
+        //Cantidad de registros devueltos
+        int registros = 0;
+        
+        ArrayList<String> array = new ArrayList();
+
+        //Consultas SQL
+        String q = "SELECT *" + " FROM " + table;    
+
+        try {
+            PreparedStatement pstm = ConnectionDB.getConn().prepareStatement(q);
+            ResultSet res = pstm.executeQuery();
+            
+                while(res.next()){
+                    
+                    array.add(res.getString( "word" ));
+                    
+                    registros++;
+                }
+
+            res.close();
+        } catch (SQLException e) {
+            System.out.println(e.getLocalizedMessage());
+        }  
+
+        return array;
+    
+    }
 
     public static ArrayList<String> like(String table, String word) {
 
