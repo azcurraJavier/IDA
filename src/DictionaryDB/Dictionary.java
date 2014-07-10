@@ -153,8 +153,17 @@ public abstract class Dictionary {
         
         createTableInsertValuesBD(csvFile, table);        
         
-        ConnectionDB.CerrarConBD();         
+        ConnectionDB.CerrarConBD();       
         
+        /*
+        CREATE TABLE words_dict (word varchar(50) NOT NULL PRIMARY KEY)
+
+        CREATE TABLE proper_dict (word varchar(50) NOT NULL PRIMARY KEY)
+
+        CREATE TABLE contra_dict (word varchar(50) NOT NULL PRIMARY KEY)
+
+        CREATE TABLE stop_dict (word varchar(50) NOT NULL PRIMARY KEY)        
+        */
     }
     
     public static void restartBd() {

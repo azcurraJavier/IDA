@@ -276,12 +276,13 @@ public class Clase {
 
             Metodo met = c.getMetodo();
             if (met != null) {
-                m.setRepresenta("Método de Clase");
+                
                 m.setNomId(met.getIde().getNomID());
                 m.setNumLinea(met.getIde().getLine());
                 m.setNumApa(met.getIde().getCantAp());
                 m.setModificador(met.getModif());
                 m.setTipo(met.getTipo());
+                m.setRepresenta(met.getTipo().isEmpty()?"Constructor":"Método de Clase");
                 
                 for (UsoId u : this.lisUsoIdMet) {
                     //se agregan referancias para mostrar en la tabla

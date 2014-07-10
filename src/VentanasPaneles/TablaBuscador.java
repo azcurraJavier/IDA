@@ -3,7 +3,6 @@ package VentanasPaneles;
 import ExtractID.Main;
 import Listas.Clase;
 import Listas.Comentario;
-import Listas.ListaClase;
 import Listas.Literal;
 import Listas.MostrarListaRef;
 import Listas.MostrarTabla;
@@ -14,9 +13,11 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import javax.swing.JScrollPane;
+import javax.swing.JFrame;
 import javax.swing.RowFilter;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
@@ -490,9 +491,9 @@ public class TablaBuscador extends javax.swing.JPanel {
     }//GEN-LAST:event_jButtonAnIdActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-  
+
         DiccionaryPanel dicPanel = Main.getDicPanel();
-        
+
         if(dicPanel==null){
                dicPanel = new DiccionaryPanel(new javax.swing.JFrame(), true);
         }

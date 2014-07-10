@@ -8,7 +8,6 @@ import DictionaryDB.Dictionary;
 import Listas.Clase;
 import Listas.Comentario;
 import Listas.ListaClase;
-import Listas.Literal;
 import VentanasPaneles.AcercaDe;
 import VentanasPaneles.ClosableTabbedPane;
 import VentanasPaneles.CodigoPanel;
@@ -92,6 +91,11 @@ public class Main extends javax.swing.JFrame {
     }
 
     public static DiccionaryPanel getDicPanel() {
+        
+        if(dicPanel == null){
+            dicPanel = new DiccionaryPanel(new javax.swing.JFrame(), true);
+        }
+        
         return dicPanel;
     }
 
@@ -227,9 +231,6 @@ public class Main extends javax.swing.JFrame {
 
             //guardamos el ultimo acceso
             currentDir = fileChooser.getCurrentDirectory();
-            
-            //jMenuItem1.setEnabled(false);
-            jMenuItemCerrTodo.setEnabled(true);
 
             archivosAnalisisId = fileChooser.getSelectedFiles();            
 
@@ -414,14 +415,19 @@ public class Main extends javax.swing.JFrame {
 
         if (jTabbedEsp.getTabCount() == 0) {
             jMenuItemCerrTodo.setEnabled(false);
+            
+            dicPanel.removeAll();
+            dicPanel = null;
 
         } else {
             jMenuItemCerrTodo.setEnabled(true);
+            
+            if(dicPanel != null){
+                dicPanel.rebuildPhraseList();
+            }
         }
         
-        if(dicPanel != null){
-            dicPanel.rebuildPhraseList();
-        }
+
     }
 
     /**

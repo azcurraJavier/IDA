@@ -1,9 +1,8 @@
 package ExpandID;
 
+import DictionaryDB.ConnectionDB;
 import DictionaryDB.OperationDB;
-import Listas.Clase;
-import Listas.Comentario;
-import Listas.ListaClase;
+import ExtractID.Main;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
@@ -13,7 +12,7 @@ import java.util.regex.Pattern;
  */
 public class ExpandBasic {
 
-    private static ArrayList<String> listPalabras = new ArrayList();;
+    private static ArrayList<String> listPalabras = new ArrayList();
 
     private static ArrayList<String> listFrases = new ArrayList();
 
@@ -22,8 +21,6 @@ public class ExpandBasic {
 
     private static String unicaExp;
     
-    private static boolean frasesProc = false;
-
 
     public static String ejecutar(String w) {
         
@@ -32,10 +29,8 @@ public class ExpandBasic {
         }        
         
         unicaExp = w;
-        
-        if(!frasesProc){
-            procesarFrases();
-        }
+     
+        procesarFrases();        
         
         w = w.toLowerCase();
         
@@ -48,14 +43,16 @@ public class ExpandBasic {
         String cand = expandirAbrev(w);
 
         if (cand != null) {
-            listExp.add(cand);
+            //listExp.add(cand);
+            return cand;
         }
 
         //acronimo
         cand = expandirAcro(w);
 
         if (cand != null) {
-            listExp.add(cand);
+            //listExp.add(cand);
+            return cand;
         }                
         
         //Busqueda en diccionario - ultimo recurso
@@ -75,44 +72,16 @@ public class ExpandBasic {
     }
 
     private static void procesarFrases() {
+       
+        //para evitar problemas cierro la conexion y la vuelvo abrir
+       ConnectionDB.CerrarConBD();
         
-//        for (Clase c : ListaClase.getLisClases()) {          
-//
-//            for (Comentario com : c.getLisComentario()) {
-//
-//                //filtrar palabras irrelevantes
-//                String arrayCom[] = com.getCom().trim().split(" ");                
-//
-//                String frase = "";
-//
-//                for (String pal : arrayCom) {
-//                    
-//                    //para evitar problemas todo con minuscula
-//                    pal = pal.toLowerCase();
-//
-//                    if (!OperationDB.select("stop_dict", pal)) {
-//                        //si no es una palabra irrelevante la agrego
-//                        listPalabras.add(pal);
-//                        frase += pal + " ";
-//                    }
-//
-//                }
-//                
-//                if(!frase.isEmpty()){
-//                    frase = frase.substring(0, frase.length()-1);
-//                    listFrases.add(frase);                
-//                }
-//
-//            }
-//
-//        }        
-        
-//        if(Main.getDicPanel() == null){
-//        
-//        }
-        
-        frasesProc = true;
-
+       //palabras del panel de diccionario
+       listFrases = Main.getDicPanel().getFrasesCap();
+       listPalabras = Main.getDicPanel().getPalabrasCap();
+       
+       ConnectionDB.AbrirConBD();
+       
     }
 
     private static String expandirAbrev(String w) {
@@ -155,10 +124,16 @@ public class ExpandBasic {
     private static String expandirAcro(String w) {
 
         for (String frase : listFrases) {
-
+            
             String f[] = frase.split(" ");
+            
+            //si la longitud no coincide sigo
+            if(f.length != w.length()){
+                continue;
+            }
 
             int i = 0;
+            
             for (String cand : f) {
 
                 if (cand.charAt(0) != w.charAt(i)) {

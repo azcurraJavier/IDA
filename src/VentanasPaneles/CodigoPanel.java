@@ -394,6 +394,7 @@ public class CodigoPanel extends javax.swing.JPanel {
         jTabbedPaneProp.setBorder(javax.swing.BorderFactory.createTitledBorder("Elementos Capturados"));
         jTabbedPaneProp.setFocusable(false);
 
+        jEditorPaneCod.setEditable(false);
         jScrollPane1.setViewportView(jEditorPaneCod);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

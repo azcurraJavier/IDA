@@ -719,7 +719,7 @@ localVariableDeclaration returns [Map<String,Declaracion> lisDecl]
     |   trystatement
     |   'switch' parExpression '{' switchBlockStatementGroups '}'
     |   'synchronized' parExpression block
-    |   'return' (expression )? ';'
+    |   'return' ( r1 = expression {$lisUsosId.addAll(r1);} )? ';'
     |   'throw' expression ';'
     |   'break'
             (IDENTIFIER
@@ -980,7 +980,7 @@ primary  returns [ArrayList<UsoId> lisUsosId]
         (ids1 = identifierSuffix 
         {if(ids1.esMetodo){$lisUsosId.addAll(ids1.lisUsosId);esMet=true;}}
         )?
-        {if($Id1 != null){ui = new UsoId($Id1.getText(),$Id1.getLine(),"global",esMet); $lisUsosId.add(ui);}}
+        {if(Id1 != null){ui = new UsoId(Id1.getText(),Id1.getLine(),"global",esMet); $lisUsosId.add(ui);}}
 
     |   Id2 = IDENTIFIER
         ('.' IDENTIFIER //no se considera
@@ -988,7 +988,7 @@ primary  returns [ArrayList<UsoId> lisUsosId]
         (ids2 = identifierSuffix 
         {if(ids2.esMetodo){$lisUsosId.addAll(ids2.lisUsosId); esMet=true;}}
         )?
-        {ui = new UsoId($Id2.getText(),$Id2.getLine(),esMet); $lisUsosId.add(ui);}
+        {ui = new UsoId(Id2.getText(),Id2.getLine(),esMet); $lisUsosId.add(ui);}
     |   'super'
         superSuffix
     |   literal

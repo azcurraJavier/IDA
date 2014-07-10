@@ -23,6 +23,7 @@ import javax.swing.KeyStroke;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+import javax.swing.RowFilter;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
@@ -43,7 +44,8 @@ public final class DiccionaryPanel extends javax.swing.JDialog {
 
     private MiModelo modeloTabla;
     private MiJTable tablaElem;
-    private TableRowSorter<TableModel> tableSort;
+    private TableRowSorter<TableModel> tableSort1;
+    private TableRowSorter<TableModel> tableSort2;
     private PalabraHash palTag;
     private static TagCloudPanel tcp;
 
@@ -75,7 +77,7 @@ public final class DiccionaryPanel extends javax.swing.JDialog {
         Object[] filaTabla = new Object[1];
 
         ConnectionDB.AbrirConBD();
-        ArrayList<String> listDic = Dictionary.likeWordDic("words_dict", "aa");
+        ArrayList<String> listDic = Dictionary.likeWordDic("words_dict", "ab");
         ConnectionDB.CerrarConBD();
 
         for (String str : listDic) {
@@ -113,7 +115,9 @@ public final class DiccionaryPanel extends javax.swing.JDialog {
 //        tablaElem.autoAjuste();
         ///////////////////////////
         modeloTabla = new MiModelo();
-        tablaElem = new MiJTable(modeloTabla);
+        tablaElem = new MiJTable(modeloTabla);         
+        tableSort2 = new TableRowSorter<TableModel>(modeloTabla);
+        tablaElem.setRowSorter(tableSort2);  
         jScrollPalRes.setViewportView(tablaElem);
 
         modeloTabla.addColumn(" ");
@@ -163,6 +167,10 @@ public final class DiccionaryPanel extends javax.swing.JDialog {
 
         modeloTabla = new MiModelo();
         tablaElem = new MiJTable(modeloTabla);
+        tableSort1 = new TableRowSorter<TableModel>(modeloTabla);
+
+        tablaElem.setRowSorter(tableSort1);   
+        
         jScrollFraCap.setViewportView(tablaElem);
 
         modeloTabla.addColumn(" ");
@@ -180,7 +188,10 @@ public final class DiccionaryPanel extends javax.swing.JDialog {
             }
         }
 
+        //se limpia todo
         frasesCap.clear();
+        palabrasCap.clear();
+        palTag.clear();
         
         Object fl[] = new Object[1];
         
@@ -215,6 +226,8 @@ public final class DiccionaryPanel extends javax.swing.JDialog {
                     //si no es una palabra irrelevante la agrego
                     palabrasCap.add(pal);
                     frase += pal + " ";
+                    
+                    palTag.addPalabra(pal);//para tagcloud
                 }
 
             }
@@ -225,7 +238,7 @@ public final class DiccionaryPanel extends javax.swing.JDialog {
             }
             
             fl[0] = frase;
-            palTag.addPalabra(frase);//para tagcloud
+            
             modeloTabla.addRow(fl);//mostrar tabla
 
         }
@@ -252,11 +265,12 @@ public final class DiccionaryPanel extends javax.swing.JDialog {
         jScrollFraCap = new javax.swing.JScrollPane();
         jButton1 = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
-        jTextField4 = new javax.swing.JTextField();
+        jTextFBuscFra = new javax.swing.JTextField();
         jPanel5 = new javax.swing.JPanel();
         jScrollPalRes = new javax.swing.JScrollPane();
         jPanel7 = new javax.swing.JPanel();
-        jTextField5 = new javax.swing.JTextField();
+        jTextFBusExc = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
 
         setTitle("Diccionarios");
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -279,7 +293,7 @@ public final class DiccionaryPanel extends javax.swing.JDialog {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTextFieldDicIng, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
+            .addComponent(jTextFieldDicIng, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -317,15 +331,21 @@ public final class DiccionaryPanel extends javax.swing.JDialog {
 
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("Buscar Palabra"));
 
+        jTextFBuscFra.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextFBuscFraKeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTextField4, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
+            .addComponent(jTextFBuscFra, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTextField4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jTextFBuscFra, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -335,12 +355,11 @@ public final class DiccionaryPanel extends javax.swing.JDialog {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollFraCap)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(33, 33, 33)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 226, Short.MAX_VALUE)))
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollFraCap, javax.swing.GroupLayout.PREFERRED_SIZE, 495, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -363,15 +382,21 @@ public final class DiccionaryPanel extends javax.swing.JDialog {
 
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder("Buscar Palabra"));
 
+        jTextFBusExc.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextFBusExcKeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTextField5, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
+            .addComponent(jTextFBusExc, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTextField5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jTextFBusExc, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -379,21 +404,30 @@ public final class DiccionaryPanel extends javax.swing.JDialog {
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPalRes, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPalRes, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPalRes, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
+
+        jButton2.setText("Cerrar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -405,8 +439,12 @@ public final class DiccionaryPanel extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton2)
+                .addGap(21, 21, 21))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -416,10 +454,12 @@ public final class DiccionaryPanel extends javax.swing.JDialog {
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton2)
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
-        setSize(new java.awt.Dimension(937, 481));
+        setSize(new java.awt.Dimension(913, 475));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -469,6 +509,20 @@ public final class DiccionaryPanel extends javax.swing.JDialog {
 
     }//GEN-LAST:event_jTextFieldDicIngKeyReleased
 
+    private void jTextFBuscFraKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFBuscFraKeyReleased
+        
+        tableSort1.setRowFilter(RowFilter.regexFilter(jTextFBuscFra.getText(), 0));
+        
+    }//GEN-LAST:event_jTextFBuscFraKeyReleased
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        doClose(0);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jTextFBusExcKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFBusExcKeyReleased
+        tableSort2.setRowFilter(RowFilter.regexFilter(jTextFBusExc.getText(), 0));
+    }//GEN-LAST:event_jTextFBusExcKeyReleased
+
     private void doClose(int retStatus) {
         returnStatus = retStatus;
         setVisible(false);
@@ -477,6 +531,7 @@ public final class DiccionaryPanel extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -486,8 +541,8 @@ public final class DiccionaryPanel extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollDiccIn;
     private javax.swing.JScrollPane jScrollFraCap;
     private javax.swing.JScrollPane jScrollPalRes;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField jTextFBusExc;
+    private javax.swing.JTextField jTextFBuscFra;
     private javax.swing.JTextField jTextFieldDicIng;
     // End of variables declaration//GEN-END:variables
 

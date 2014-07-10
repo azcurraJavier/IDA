@@ -92,7 +92,6 @@ public class Metodo {
 //
 //        return lstStr;
 //    }
-
 //    public ArrayList<String> buscarUsoParam(ArrayList<String> lstStr) {
 //
 //        if (this.lisParam != null && this.lisParam.size() > 0) {
@@ -115,67 +114,60 @@ public class Metodo {
 //
 //        return lstStr;
 //    }
-
     public ArrayList<UsoId> buscarUsoIdDec(ArrayList<UsoId> lstId) {
-        
-        if(lstId == null || lstId.isEmpty()){
+
+        if (lstId == null || lstId.isEmpty()) {
             return lstId;
         }
 
-        if (this.lisDecl != null && !this.lisDecl.isEmpty()) {
+        ArrayList<UsoId> filtraUso = new ArrayList<>();
 
-            ArrayList<UsoId> filtraUso = new ArrayList<>();
+        for (UsoId e : lstId) {
 
-            for (UsoId e : lstId) {
-                
-                e.setUsadoEn("Método " + this.getIde().getNomID());
+            e.setUsadoEn("Método " + this.getIde().getNomID());
 
-                //si no es global y esta en los var local es una referencia!
-                if (!e.getAlcance().equals("global")
-                        && lisDecl.containsKey(e.getId())) {
+            //si no es global y esta en los var local es una referencia!
+            if (this.lisDecl != null && !this.lisDecl.isEmpty()
+                    && !e.getAlcance().equals("global")
+                    && lisDecl.containsKey(e.getId())) {
 
-                    this.lisUsoIdDecl.add(e);
-                } else {
-                    filtraUso.add(e); //la idea es sacar los elementos ya analizados
-                }
-
+                this.lisUsoIdDecl.add(e);
+            } else {
+                filtraUso.add(e); //la idea es sacar los elementos ya analizados
             }
 
-            return filtraUso;
         }
-                
-        return lstId;
+
+        return filtraUso;
+
     }
 
     public ArrayList<UsoId> buscarUsoIdPar(ArrayList<UsoId> lstId) {
-        
-        if(lstId == null || lstId.isEmpty()){
+
+        if (lstId == null || lstId.isEmpty()) {
             return lstId;
         }
 
-        if (this.lisParam != null && !this.lisParam.isEmpty()) {
+        ArrayList<UsoId> filtraUso = new ArrayList<>();
 
-            ArrayList<UsoId> filtraUso = new ArrayList<>();
+        for (UsoId e : lstId) {
 
-            for (UsoId e : lstId) {
-                
-                e.setUsadoEn("Método " + this.getIde().getNomID());
+            e.setUsadoEn("Método " + this.getIde().getNomID());
 
-                //si no es global y esta en los parametros es una referencia!
-                if (!e.getAlcance().equals("global")
-                        && lisParam.containsKey(e.getId())) {
+            //si no es global y esta en los parametros es una referencia!
+            if (this.lisParam != null && !this.lisParam.isEmpty()
+                    && !e.getAlcance().equals("global")
+                    && lisParam.containsKey(e.getId())) {
 
-                    this.lisUsoIdPara.add(e);
-                } else {
-                    filtraUso.add(e); //la idea es sacar los elementos ya analizados
-                }
-
+                this.lisUsoIdPara.add(e);
+            } else {
+                filtraUso.add(e); //la idea es sacar los elementos ya analizados
             }
 
-            return filtraUso;
         }
 
-        return lstId;
+        return filtraUso;
+
     }
 
 //    public ArrayList<MostrarTabla> cargarIdTablaMetodo() {
@@ -223,7 +215,6 @@ public class Metodo {
 //
 //        return lisMostrarTabla;
 //    }
-
     public int getCantTotalId() {
         return cantTotalId;
     }
@@ -257,9 +248,9 @@ public class Metodo {
                 lisMostrarTabla.add(m);
             }
         }
-        
+
         if (this.lisParam != null && !this.lisParam.isEmpty()) {
-        
+
             for (Iterator<Entry<String, Parametro>> it = lisParam.entrySet().iterator(); it.hasNext();) {
                 m = new MostrarTabla(this.getIde().getNomID());//seteo ambiente(nombre del metodo)
                 m.setRepresenta("Parámetro");
@@ -271,8 +262,7 @@ public class Metodo {
                 m.setModificador(p.getModif());
                 m.setTipo(p.getTipo());
                 m.setStrAsignado(p.getIdent().getStrContenido());
-                
-                
+
                 for (UsoId u : this.lisUsoIdPara) {
                     //se agregan referancias para mostrar en la tabla
                     if (p.getIdent().getNomID().equals(u.getId())) {
@@ -281,12 +271,12 @@ public class Metodo {
                 }
 
                 lisMostrarTabla.add(m);
-                
+
             }
-        
+
         }
-        
+
         return lisMostrarTabla;
-    }   
-   
+    }
+
 }

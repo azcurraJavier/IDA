@@ -12,7 +12,7 @@ public class PalabraHash {
     
     public PalabraHash() {
         pal = new HashMap();        
-        lisPalabra = new ArrayList<Palabra>();        
+        lisPalabra = new ArrayList<>();        
     }
     
     public void addPalabra(String p) {
@@ -48,5 +48,10 @@ public class PalabraHash {
         }
         
         return lisPalabra;
+    }
+    
+    public void clear(){
+        pal.clear();
+        lisPalabra.clear();       
     }
 }
