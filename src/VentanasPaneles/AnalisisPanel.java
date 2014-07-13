@@ -2,6 +2,8 @@ package VentanasPaneles;
 
 import DictionaryDB.ConnectionDB;
 import ExpandID.ExpandBasic;
+import ExtractID.Main;
+import Listas.Clase;
 import SplitID.GreedyPaper;
 import SplitID.SamuraiPaper;
 import java.awt.event.ActionEvent;
@@ -37,11 +39,20 @@ public class AnalisisPanel extends javax.swing.JDialog {
     private Map<String,String> mapIdsGreedy;
     private Map<String,String> mapIdsSamurai;
     
-    private Map<String,String> mapIdsExpand;
+    private Map<String,String> mapIdsExGreedy;
+    private Map<String,String> mapIdsExSamurai;
     
-    public AnalisisPanel(java.awt.Frame parent, boolean modal,Set<String> setIds) {
+    
+    public AnalisisPanel(java.awt.Frame parent, boolean modal,Set<String> setIds,Clase clase) {
         super(parent, modal);
         initComponents();
+        
+        //Se inician tablas de frecuencias
+        ConnectionDB.AbrirConBD();
+        SamuraiPaper.initTables(clase);
+        ConnectionDB.CerrarConBD();
+        //
+        
         
         jRadioBGreedy.setSelected(true);
         ButtonGroup group = new ButtonGroup();
@@ -56,7 +67,8 @@ public class AnalisisPanel extends javax.swing.JDialog {
         this.mapIdsGreedy = new HashMap<>();
         this.mapIdsSamurai = new HashMap<>();
         
-        this.mapIdsExpand = new HashMap<>();
+        this.mapIdsExGreedy = new HashMap<>();
+        this.mapIdsExSamurai = new HashMap<>();
         
         this.setIds = setIds;
                
@@ -122,13 +134,20 @@ public class AnalisisPanel extends javax.swing.JDialog {
         return mapIdsSamurai;
     }
 
-    public Map<String, String> getMapIdsExpand() {
-        return mapIdsExpand;
-    } 
-
     public Map<String, String> getMapIdsGreedy() {
         return mapIdsGreedy;
     }
+    
+    
+    public Map<String, String> getMapIdsExGreMap() {
+        return mapIdsExGreedy;
+    } 
+
+    public Map<String, String> getMapIdsExSamurai() {
+        return mapIdsExSamurai;
+    }
+    
+    
 
    
     /**
@@ -151,6 +170,7 @@ public class AnalisisPanel extends javax.swing.JDialog {
         jButtonExp = new javax.swing.JButton();
         jRadioBdeGre = new javax.swing.JRadioButton();
         jRadioBdeSam = new javax.swing.JRadioButton();
+        jButton1 = new javax.swing.JButton();
 
         jButton2.setText("G");
 
@@ -252,6 +272,13 @@ public class AnalisisPanel extends javax.swing.JDialog {
                 .addComponent(jRadioBdeSam))
         );
 
+        jButton1.setText("Tab");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -266,6 +293,8 @@ public class AnalisisPanel extends javax.swing.JDialog {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButton1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollSplit, javax.swing.GroupLayout.PREFERRED_SIZE, 508, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -275,11 +304,17 @@ public class AnalisisPanel extends javax.swing.JDialog {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(jScrollSplit, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cancelButton)
@@ -410,8 +445,12 @@ public class AnalisisPanel extends javax.swing.JDialog {
             
             elem2 = append.trim().isEmpty()?"":append.substring(0, append.length()-1);
             
-            mapIdsExpand.put(elem.toString(), elem2.toString());
-        
+            if (deGreedy) {
+                mapIdsExGreedy.put(elem.toString(), elem2.toString());
+            }else{
+                mapIdsExSamurai.put(elem.toString(), elem2.toString());
+            }
+            
             modeloTabla.setValueAt(elem2, i, colNum);
         
         }
@@ -430,6 +469,13 @@ public class AnalisisPanel extends javax.swing.JDialog {
             jButtonExp.setEnabled(false);
         }
     }//GEN-LAST:event_jButtonExpActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        SamuraiFreqTable s = new SamuraiFreqTable(new javax.swing.JFrame(), true,SamuraiPaper.getLocalFreqTable(), SamuraiPaper.getGlobalFreqTable());
+        
+        s.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
     
     private void doClose(int retStatus) {
         returnStatus = retStatus;
@@ -438,6 +484,7 @@ public class AnalisisPanel extends javax.swing.JDialog {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButtonDiv;
     private javax.swing.JButton jButtonExp;

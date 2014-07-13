@@ -67,12 +67,14 @@ public class ExpandBasic {
         }else{
             System.out.println("La palabra: "+w+" posee: " + listExp.size()+" expansiones");        
         }
-
+        
+        listExp.clear();
+        
         return unicaExp;
     }
 
     private static void procesarFrases() {
-       
+        
         //para evitar problemas cierro la conexion y la vuelvo abrir
        ConnectionDB.CerrarConBD();
         
@@ -85,6 +87,8 @@ public class ExpandBasic {
     }
 
     private static String expandirAbrev(String w) {
+        
+        String original = w;
 
         //abreviatura basica ej: triang -> triangule
         Pattern pat1 = Pattern.compile(w + "[a-z]*");
@@ -110,6 +114,10 @@ public class ExpandBasic {
         Pattern pat2 = Pattern.compile(w);
 
         for (String cand : listPalabras) {
+            
+            if(original.equals(cand)){
+                continue;//puede que la abreviatura tang este en lo comentarios debo descartar
+            }
 
             if (pat1.matcher(cand).matches() || pat2.matcher(cand).matches()) {
                 return cand;

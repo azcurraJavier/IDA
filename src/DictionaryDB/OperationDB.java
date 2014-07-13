@@ -21,6 +21,10 @@ public abstract class OperationDB {
 
         //Se arma la consulta
         String q = " CREATE TABLE IF NOT EXISTS " + table + " (word varchar(50) NOT NULL PRIMARY KEY) ";
+        
+        if(table.equals("sam_freq_table")){
+            q = " CREATE TABLE IF NOT EXISTS " + table + " (word varchar(50) NOT NULL PRIMARY KEY, freq INTEGER NOT NULL)";
+        }      
 
         //se ejecuta la consulta
         try {
@@ -42,6 +46,27 @@ public abstract class OperationDB {
 
         //Se arma la consulta
         String q = " INSERT INTO " + table + " (  word  ) VALUES ( '" + value + "' )";
+
+        //se ejecuta la consulta
+        try {
+            PreparedStatement pstm = ConnectionDB.getConn().prepareStatement(q);
+            pstm.execute();
+            pstm.close();
+            res = true;
+
+        } catch (SQLException ex) {            
+            System.out.println(ex.getLocalizedMessage());
+        }
+
+        return res;
+    }
+    
+    public static boolean multipleInsert(String table, String value1, String value2) {
+
+        boolean res = false;
+
+        //Se arma la consulta
+        String q = " INSERT INTO " + table + " VALUES ( '" + value1 + "','" + value2 + "' )";
 
         //se ejecuta la consulta
         try {
@@ -124,6 +149,32 @@ public abstract class OperationDB {
         }  
 
         return array;
+    
+    }
+    
+    public static int selectFreq(String table, String id) {
+    
+        int freq = 0;//si no encuentra el id se devuelve 0
+        
+        //Consultas SQL
+        String q = "SELECT *" + " FROM " + table +" WHERE word = '"+ id +"'";    
+
+        try {
+            PreparedStatement pstm = ConnectionDB.getConn().prepareStatement(q);
+            ResultSet res = pstm.executeQuery();
+            
+                if(res.next()){
+                    
+                   freq = res.getInt("freq" );                    
+                    
+                }
+
+            res.close();
+        } catch (SQLException e) {
+            System.out.println(e.getLocalizedMessage());
+        }  
+
+        return freq;
     
     }
 

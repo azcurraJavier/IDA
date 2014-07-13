@@ -13,11 +13,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import javax.swing.JFrame;
 import javax.swing.RowFilter;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
@@ -479,15 +476,15 @@ public class TablaBuscador extends javax.swing.JPanel {
         
         if(splitPanel == null){
             
-            splitPanel = new AnalisisPanel(new javax.swing.JFrame(), true, setIdExtract);            
+            splitPanel = new AnalisisPanel(new javax.swing.JFrame(), true, setIdExtract,unaClase);            
         }
         
         splitPanel.setVisible(true);
         
         codigoPanel.getTablaId().updateTableId("Div Greedy", splitPanel.getMapIdsGreedy()); 
         codigoPanel.getTablaId().updateTableId("Div Samurai", splitPanel.getMapIdsSamurai()); 
-        codigoPanel.getTablaId().updateTableId("Expansión de Greedy", splitPanel.getMapIdsExpand(),"Div Greedy"); 
-        codigoPanel.getTablaId().updateTableId("Expansión de Greedy", splitPanel.getMapIdsExpand(),"Div Samurai"); 
+        codigoPanel.getTablaId().updateTableId("Expansión de Greedy", splitPanel.getMapIdsExGreMap(),"Div Greedy"); 
+        codigoPanel.getTablaId().updateTableId("Expansión de Samurai", splitPanel.getMapIdsExSamurai(),"Div Samurai"); 
     }//GEN-LAST:event_jButtonAnIdActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

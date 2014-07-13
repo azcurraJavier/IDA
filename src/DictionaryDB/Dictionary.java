@@ -54,25 +54,45 @@ public abstract class Dictionary {
         
         return elems;
         
-    }    
+    }   
+    
+    public static int selectFreq(String table, String id){
+        
+        int elems;
+        
+        //Connection con = ConnectionDB.AbrirConBD();
+        
+        elems = OperationDB.selectFreq(table,id);        
+        
+        //ConnectionDB.CerrarConBD();
+        
+        return elems;
+        
+    }
     
     private static void createTableInsertValuesBD(String csvFile, String table){
     
         BufferedReader br = null;
-        String line = "";    
-        
+        String line = "";       
         
         //Se crea la tabla
         OperationDB.createTable(table);       
         
         try {
  
-		br = new BufferedReader(new FileReader(new File(csvFile)));                
+            br = new BufferedReader(new FileReader(new File(csvFile)));                
+
+            while ((line = br.readLine()) != null) {
                 
-		while ((line = br.readLine()) != null) {
-                        //Se insertan elementos desde archivo
-		        OperationDB.insert(table, line); 
-		}
+                //Se insertan elementos desde archivo
+                String[] c = line.split(";");
+
+                if(c.length == 1){
+                    OperationDB.insert(table, line);
+                }else{
+                    OperationDB.multipleInsert(table, c[0], c[1]);                        
+                }                       		        
+            }
  
 	} catch (FileNotFoundException e) {
 		e.printStackTrace();
@@ -151,7 +171,14 @@ public abstract class Dictionary {
 	
         table = "sam_suf";
         
-        createTableInsertValuesBD(csvFile, table);        
+        createTableInsertValuesBD(csvFile, table);   
+        
+        
+        csvFile = "Diccionarios/samurai.freq.global.txt";
+	
+        table = "sam_freq_table";
+        
+        createTableInsertValuesBD(csvFile, table);           
         
         ConnectionDB.CerrarConBD();       
         

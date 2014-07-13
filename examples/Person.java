@@ -10,13 +10,13 @@ public class Person {
     private int ag_prs;
 //gender person
     private String gnrPrs;
-
+//gnr gnr
     public Person(int doc, String name, int age) {
         setDocPrs(doc);
         setNm(name);
         setAg(age);
     }
-
+//gndr gndr
     public Person(int doc, String name, int age, String gen) {
         setDocPrs(doc);
         setNm(name);

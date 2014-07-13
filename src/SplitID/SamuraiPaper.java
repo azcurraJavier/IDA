@@ -1,50 +1,72 @@
 package SplitID;
 
 import DictionaryDB.Dictionary;
+import ExtractID.Main;
 import Listas.Clase;
 import Listas.MostrarTabla;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
-public class SamuraiPaper {
+public abstract class SamuraiPaper {
 
-    private Clase claseActual;
-    private String identificador;
-    //private int cantTotalIde;
-
-    static int frecuenciaLocal;
+    private static int frecuenciaLocal;
 
     //Tablas de frecuencia
-    static Map localFreqTable;
-    static Map globalFreqTable;
+    private static Map<String,Integer> localFreqTable;
+    private static Map<String,Integer> globalFreqTable;
 
-    public SamuraiPaper(Clase claseAc, String ide) {
+    public static void initTables(Clase claseAc) {
+        
+        ArrayList<String> lisPal = Main.getDicPanel().getPalabrasCap();
 
-        this.frecuenciaLocal = 0;
+        frecuenciaLocal = 0;
 
-        this.claseActual = claseAc;
-        this.identificador = ide;
         //this.cantTotalIde = claseAc.getCantTotalId();
-
-        this.localFreqTable = new HashMap();
-        this.globalFreqTable = new HashMap();
+        localFreqTable = new HashMap();
+        globalFreqTable = new HashMap();
 
         //cargar tablas
-        for (MostrarTabla m : claseActual.getIdTablaClase()) {
+        for (MostrarTabla m : claseAc.getIdTablaClase()) {
 
-            addTokenLocalFreqTable(m.getNomId(), m.getNumApa());
+            //addTokenLocalFreqTable(m.getNomId(), m.getListaRef().size() + 1);//ref + 1 (declaracion)
+ 
         }
+        
+        if(lisPal != null){
+            for(String pal:lisPal){
+                addTokenLocalFreqTable(pal, 1);
+            }
+        }
+        
+        String id;
+        for (Map.Entry mapEntry : localFreqTable.entrySet()) {
+            id = mapEntry.getKey().toString();
+            globalFreqTable.put(id, frecuenciaGlobal(id));        
+        }
+        
+        
 
     }
-    
-    public static String ejecutar(String id){
 
-       return mixedCaseSplit(id);
+
+    public static Map<String, Integer> getLocalFreqTable() {
+        return localFreqTable;
+    }
+
+    public static Map<String, Integer> getGlobalFreqTable() {
+        return globalFreqTable;
+    }
+    
+    
+
+    public static String ejecutar(String id) {
+
+        return divisionHardWord(id);
     }
 
     //Manipulacion de tablas de frecuencia
-    public static void addTokenLocalFreqTable(String id, int cantOcc) {
+    private static void addTokenLocalFreqTable(String id, int cantOcc) {
 
         if (id == null || id.trim().isEmpty() || cantOcc <= 0) {
             return;
@@ -54,7 +76,7 @@ public class SamuraiPaper {
 
         if (localFreqTable.containsKey(id)) {
 
-            temp = (int) localFreqTable.get(id);
+            temp =  localFreqTable.get(id);
 
             localFreqTable.remove(id);
 
@@ -66,7 +88,7 @@ public class SamuraiPaper {
 
     }
 
-    public static int frecuenciaLocal(String id) {//Freq(t; p)        
+    private static int frecuenciaLocal(String id) {//Freq(t; p)        
 
 //        int cantApa = 0;
 //        for (MostrarTabla m : claseActual.getIdTablaClase()) {
@@ -83,14 +105,14 @@ public class SamuraiPaper {
         }
 
         if (localFreqTable.containsKey(id)) {
-            return (int) localFreqTable.get(id);
+            return ((int) localFreqTable.get(id));
         }
 
-        return 1;
+        return 0;
 
     }
 
-    public static int frecuenciaGlobal(String id) {//globalFreq(t)
+    private static int frecuenciaGlobal(String id) {//globalFreq(t)
 
 //        int cantApa = 0;
 //
@@ -108,35 +130,40 @@ public class SamuraiPaper {
 //        }
 //
 //        return cantApa / cantTotalIde;
-        if (id == null || id.trim().isEmpty()) {
-            return 0;
-        }
-
-        if (id.length() == 1) {
-            return 50;
-        }
-
-        if (id.length() == 2) {
-            return 35;
-        }
-
-        if (id.length() == 3 && Dictionary.searchWordDic("acro_dict", id)) {
-            return 12;
-        }
-
-        if (id.length() >= 4) {
-
-            int temp = Dictionary.likeWordDic("words_dict", id).size();
-
-            return temp * 5;
-
-        }
-
-        return 1;
+        
+        return Dictionary.selectFreq("sam_freq_table", id);
+        
+        
+//        if (id == null || id.trim().isEmpty()) {
+//            return 0;
+//        }
+//
+//        if (id.length() == 1) {
+//            return 4;
+//        }
+//
+//        if (id.length() == 2) {
+//            return 3;
+//        }
+//
+//        if (id.length() == 3/* && Dictionary.searchWordDic("acro_dict", id)*/) {
+//            return 2;
+//        }
+//
+//        if (id.length() >= 4) {
+//
+////            int temp = Dictionary.likeWordDic("words_dict", id).size();
+////
+////            return temp * 5;
+//
+//            return 2;
+//        }
+//
+//        return 1;
 
     }
 
-    public static int todasFreqStr() {//AllStrsFreq(p)
+    private static int todasFreqStr() {//AllStrsFreq(p)
 
 //        double freAcum = 0.0;
 //
@@ -154,12 +181,10 @@ public class SamuraiPaper {
 //        }
 //
 //        return freAcum;
-        if (frecuenciaLocal != 0) {
+        if (frecuenciaLocal > 0) {
             return frecuenciaLocal;
         }
-
-        for (Iterator<Map> it = localFreqTable.entrySet().iterator(); it.hasNext();) {
-            Map.Entry mapEntry = (Map.Entry) it.next();
+        for (Map.Entry mapEntry : localFreqTable.entrySet()) {
             frecuenciaLocal += (int) mapEntry.getValue();
         }
 
@@ -167,7 +192,7 @@ public class SamuraiPaper {
 
     }
 
-    public static double score(String id) {
+    private static double score(String id) {
 
         if (id == null || id.trim().isEmpty()) {
             return 0.0;
@@ -183,14 +208,18 @@ public class SamuraiPaper {
         return freqApa + (freqGlobal / logFreq);
     }
 
-    public static String splitOnLowercaseToUppercase(String token) {
+    private static String splitOnLowercaseToUppercase(String token) {
 
         StringBuilder newStr = new StringBuilder();
 
         for (int i = 0; i < token.length() - 1; i++) {//-1 sino puede dar excepción en i+1
 
             newStr.append(token.charAt(i));
-            if (Character.isLowerCase(token.charAt(i)) && Character.isUpperCase(token.charAt(i + 1))) {
+            
+            if (token.charAt(i) != ' ' && 
+                    Character.isLowerCase(token.charAt(i)) && 
+                        Character.isUpperCase(token.charAt(i + 1))) {
+                
                 newStr.append(" ");
             }
 
@@ -203,7 +232,7 @@ public class SamuraiPaper {
         return token;
     }
 
-    public static int existUpperToLower(String s) {
+    private static int existUpperToLower(String s) {
 
 //        for (int i = 0; i < s.length() - 1; i++) {//-1 sino puede dar excepción en i+1
 //            if (Character.isUpperCase(s.charAt(i)) && Character.isLowerCase(s.charAt(i + 1))) {
@@ -225,7 +254,7 @@ public class SamuraiPaper {
         return -1;
     }
 
-    public static String subStr(String s, int x, int y) {
+    private static String subStr(String s, int x, int y) {
 
         if (s == null || s.trim().isEmpty()) {
             return "";
@@ -240,9 +269,9 @@ public class SamuraiPaper {
 
     }
 
-    public static String mixedCaseSplit(String token) {
-        
-        String sToken = "";        
+    private static String divisionHardWord(String token) {
+
+        String sToken = "";
 
         token = SplitUtils.splitSymbol(token);
         token = splitOnLowercaseToUppercase(token);
@@ -252,16 +281,18 @@ public class SamuraiPaper {
         for (String s : lisToken) {//este for es para casos camelcase
 
             int i = existUpperToLower(s);
+            
+            s = s.toLowerCase();
 
             if (i == -1) {
                 //si stoken es vacio asigno el s directamente
                 sToken = sToken.equals("") ? s : sToken + " " + s;
-                
+
                 //si no hay Mayus seguida de Minus continua con el prox s.
                 continue;
             }
 
-            int n = s.length() - 1;
+            int n = s.length();
 
             double camelScore;
 
@@ -274,31 +305,31 @@ public class SamuraiPaper {
             if (camelScore > raizAltSco) {
                 if (i > 0) {
 
-                    s = subStr(s, 0, i - 1) + " " + subStr(s, i, n);
+                    s = subStr(s, 0, i) + " " + subStr(s, i, n);
                 }
             } else {
 
-                s = subStr(s, 0, i) + " " + subStr(s, i + 1, n);
+                s = subStr(s, 0, i+1) + " " + subStr(s, i + 1, n);
             }
 
             //si stoken es vacio asigno el s directamente
             sToken = sToken.equals("") ? s : sToken + " " + s;
         }
 
-        token = sToken;
+        token = sToken.toLowerCase();
         sToken = "";
 
         lisToken = token.split(" ");
 
         for (String s : lisToken) {
 
-            sToken = sToken.equals("") ? sameCaseSplit(s, score(s)) : sToken + " " + sameCaseSplit(s, score(s));
+            sToken = sToken.equals("") ? divisionSoftWord(s, score(s)) : sToken + " " + divisionSoftWord(s, score(s));
         }
-        
+
         return sToken;
     }
 
-    public static String sameCaseSplit(String s, double score) {
+    private static String divisionSoftWord(String s, double score) {
 
         String splitS = s;
         int n = s.length();//se sca el -1 porque subStr es exclusivo
@@ -308,12 +339,12 @@ public class SamuraiPaper {
         boolean prefix, toSplitL, toSplitR;
 
         //tomo i = 1 por lo de limite exclusivo
-        for (int i = 1; i < n; i++) {
+        for (int i = 0; i <= n; i++) {//el = igual va porque sino no analiza toda la palabra
 
             scoreL = score(subStr(s, 0, i));
             scoreR = score(subStr(s, i, n));
 
-            prefix = isPrefix(subStr(s, 0, i)) || isSuffix(subStr(s, 0, i));
+            prefix = isPrefix(subStr(s, 0, i)) || isSuffix(subStr(s, i, n));
 
             toSplitL = Math.sqrt(scoreL) > Math.max(score(s), score);
             toSplitR = Math.sqrt(scoreR) > Math.max(score(s), score);
@@ -327,7 +358,7 @@ public class SamuraiPaper {
 
             } else if (!prefix && toSplitL) {
                 //llamada recursiva
-                String temp = sameCaseSplit(subStr(s, i, n), score);
+                String temp = divisionSoftWord(subStr(s, i, n), score);
 
                 if (temp.contains(" ")) {//temp se dividió?
                     splitS = subStr(s, 0, i) + " " + temp;
@@ -340,13 +371,21 @@ public class SamuraiPaper {
         return splitS;
     }
 
-    public static boolean isPrefix(String s) {
+    private static boolean isPrefix(String s) {
+        
+        if(s == null || s.isEmpty()){
+            return false;
+        }
 
         return Dictionary.searchWordDic("sam_pref", s);
 
     }
 
-    public static boolean isSuffix(String s) {
+    private static boolean isSuffix(String s) {
+        
+        if(s == null || s.isEmpty()){
+            return false;
+        }
 
         return Dictionary.searchWordDic("sam_suf", s);
 

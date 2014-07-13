@@ -356,7 +356,7 @@ $lisUsosId = $me.buscarUsoIdDec($lisUsosId);$lisUsosId = $me.buscarUsoIdPar($lis
         ('throws' qualifiedNameList
         )?
         '{' 
-        (explicitConstructorInvocation
+        (ex1 = explicitConstructorInvocation {$lisUsosId.addAll(ex1);}
         )?
         (b1 = blockStatement {lisDeclme.putAll(b1.lisDecl);$lisUsosId.addAll(b1.lisUsosId);}
         )* {$me.addListDecl(lisDeclme);}//le sumo cant de apariciones a la lista de declaraciones 
@@ -535,20 +535,23 @@ ellipsisParameterDecl
     ;
 
 
-explicitConstructorInvocation 
+explicitConstructorInvocation returns [ArrayList<UsoId> lisUsosId]
+@init{
+    $lisUsosId = new ArrayList<UsoId>();
+}
     :   (nonWildcardTypeArguments
         )?     //NOTE: the position of Identifier 'super' is set to the type args position here
         ('this'
         |'super'
         )
-        arguments ';'
+        a1 = arguments {$lisUsosId = a1;} ';'
 
     |   primary
         '.'
         (nonWildcardTypeArguments
         )?
         'super'
-        arguments ';'
+        a2 = arguments {$lisUsosId = a2;}';'
     ;
 
 qualifiedName returns [String paqName= "", int paqLine]
@@ -706,15 +709,15 @@ localVariableDeclaration returns [Map<String,Declaracion> lisDecl]
 @init{   
     $lisUsosId = new ArrayList<UsoId>();
 }
-    :   block
+    :   b1 = block {$lisUsosId.addAll(b1.lisUsosId);}
             
     |   ('assert'
         )
         expression (':' expression)? ';'
     |   'assert'  expression (':' expression)? ';'            
-    |   'if' p1 = parExpression statement ('else' statement)?{$lisUsosId.addAll(p1);}
+    |   'if' p1 = parExpression s1 = statement ('else' s2 = statement)?{$lisUsosId.addAll(p1); $lisUsosId.addAll(s1); $lisUsosId.addAll(s2);}
     |   forstatement
-    |   'while' p2 = parExpression statement {$lisUsosId.addAll(p2);}
+    |   'while' p2 = parExpression s3 = statement {$lisUsosId.addAll(p2); $lisUsosId.addAll(s3);}
     |   'do' statement 'while' parExpression ';'
     |   trystatement
     |   'switch' parExpression '{' switchBlockStatementGroups '}'
@@ -990,7 +993,7 @@ primary  returns [ArrayList<UsoId> lisUsosId]
         )?
         {ui = new UsoId(Id2.getText(),Id2.getLine(),esMet); $lisUsosId.add(ui);}
     |   'super'
-        superSuffix
+        s1 = superSuffix {$lisUsosId = s1;}
     |   literal
     |   creator                
     |   primitiveType
@@ -1001,13 +1004,17 @@ primary  returns [ArrayList<UsoId> lisUsosId]
     ;
     
 
-superSuffix  
-    :   arguments
+superSuffix returns [ArrayList<UsoId> lisUsosId]  
+@init{
+    $lisUsosId = new ArrayList<UsoId>();
+    boolean esMet = false;    
+}
+    :   a1 = arguments {$lisUsosId = a1;}//super(arg)
     |   '.' (typeArguments
         )?
-        IDENTIFIER
-        (arguments
-        )?
+        id1 = IDENTIFIER //super.varglob;
+        (a2 = arguments {$lisUsosId = a2; esMet = true;}//super.met(arg)
+        )? {$lisUsosId.add(new UsoId(id1.getText(),id1.getLine(),"global",esMet));}
     ;
 
 

@@ -386,6 +386,8 @@ public class Main extends javax.swing.JFrame {
         ListaClase.clear();//remueve logica
         jTabbedEsp.removeAll();//remueve interfaz
         jMenuItemCerrTodo.setEnabled(false);
+        mapIdsExp.clear();
+        mapIdsSplited.clear();
 
     }//GEN-LAST:event_jMenuItemCerrTodoActionPerformed
 
