@@ -79,11 +79,23 @@ Henry~Feild Dawn~Lawrie, Christopher~Morrell and David Binkley.
 \newblock What’s in a name? a study of identifiers.
 \newblock 2006.
 
+\bibitem{TERD01}
+Thomas Eisenbarth, Rainer Koschke, and Daniel Simon.
+\newblock Aiding program comprehension by static and dynamic feature analysis.
+\newblock page 602, 2001.
+
 \bibitem{ERNS99}
 Ramez~A. Elmasri and Shankrant~B. Navathe.
 \newblock {\em Fundamentals of Database Systems}.
 \newblock Addison-Wesley Longman Publishing Co., Inc., Boston, MA, USA, 3rd
   edition, 1999.
+
+\bibitem{DWE04}
+David~W. Embley.
+\newblock Toward semantic understanding: an approach based on information
+  extraction ontologies.
+\newblock Australian Computer Society, Inc. Darlinghurst, Australia, Australia,
+  2004.
 
 \bibitem{EZH08}
 Haley~Boyd Emily~Hill, Zachary P.~Fry.
@@ -124,6 +136,18 @@ Wilhelm Hasselbring, Andreas Fuhr, and Volker Riediger.
 \newblock First international workshop on model-driven software migration.
 \newblock Marzo 2011.
 
+\bibitem{STD1219}
+IEEE.
+\newblock {\em IEEE Standard for Software Maintenance, IEEE Std 1219-1998},
+  volume~2.
+\newblock IEEE Press, 1999.
+
+\bibitem{STD610}
+IEEE.
+\newblock {\em Standard Glossary of Software Engineering Terminology
+  610.12-1990}, volume~1.
+\newblock IEEE Press, 1999.
+
 \bibitem{MPOB03}
 Michael~P. O’Brien.
 \newblock Software comprehension – a review and research direction.
@@ -144,6 +168,12 @@ Roger~S. Pressman.
 T.A. Standish.
 \newblock {\em Data structure techniques}.
 \newblock Computer Sciences. Addison-Wesley, 1980.
+
+\bibitem{STOREY99}
+M.~A. Storey, F.~D. Fracchia, and H.~A. M{\"u}ller.
+\newblock Cognitive design elements to support the construction of a mental
+  model during software exploration.
+\newblock {\em The Journal of Systems \& Software}, 44(3):171--185, 1999.
 
 \bibitem{MAS05}
 Margaret~Anne Storey.

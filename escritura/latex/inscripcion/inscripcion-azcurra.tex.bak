@@ -133,7 +133,7 @@ estática y dinámica que se extrae de los mismos. En la actualidad se conocen d
 
 \item Investigar herramientas que puedan generar un Analizador Lexicográfico (lexer) y un Analizador Sintáctico (parser). Preferentemente se escogerán aquellas que empleen gramáticas de atributos.
 
-\item Estudiar la gramática de JAVA y construir el Analizador Lexicográfico (lexer) y Analizador Sintáctico (parser), el primero va extraer comentarios y el segundo identificadores.
+\item Estudiar la gramática de JAVA para construir el Analizador Lexicográfico (lexer) y Analizador Sintáctico (parser), el primero va extraer comentarios y el segundo identificadores.
 
 \item Implementar una herramienta en JAVA que  contenga distintas técnicas de análisis de identificadores investigados en el ítem \ref{plan1}. Esta herramienta también contendrá el lexer y el parser de la etapa anterior.
 
@@ -143,7 +143,7 @@ estática y dinámica que se extrae de los mismos. En la actualidad se conocen d
 
 \begin{figure}[h] %[h] para here [b] para bottom [t] para top
 \centerline{%queda centrada mejor la imagen
-\includegraphics[width=375pt,height=205pt]{./crono.png}
+\includegraphics[width=380pt,height=200pt]{./crono.png}
 }
 \end{figure} 
 
