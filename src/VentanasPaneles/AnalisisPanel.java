@@ -2,7 +2,7 @@ package VentanasPaneles;
 
 import DictionaryDB.ConnectionDB;
 import ExpandID.ExpandBasic;
-import ExtractID.Main;
+import ExtractID.Principal;
 import Listas.Clase;
 import SplitID.GreedyPaper;
 import SplitID.SamuraiPaper;
@@ -30,70 +30,129 @@ public class AnalisisPanel extends javax.swing.JDialog {
      */
     public static final int RET_OK = 1;
 
-    
-    private MiModelo modeloTabla;
-    private MiJTable tablaElem;
-    
+    private MiModelo modeloTablaId;
+    private MiJTable tablaElemId;
+
+    private MiModelo modeloTablaDiv;
+    private MiJTable tablaElemDiv;
+
+    private MiModelo modeloTablaExp;
+    private MiJTable tablaElemExp;
+
     private Set<String> setIds;
-    
-    private Map<String,String> mapIdsGreedy;
-    private Map<String,String> mapIdsSamurai;
-    
-    private Map<String,String> mapIdsExGreedy;
-    private Map<String,String> mapIdsExSamurai;
-    
-    
-    public AnalisisPanel(java.awt.Frame parent, boolean modal,Set<String> setIds,Clase clase) {
+
+    private Map<String, String> mapIdsGreedy;
+    private Map<String, String> mapIdsSamurai;
+
+    private Map<String, String> mapIdsExGreedy;
+    private Map<String, String> mapIdsExSamurai;
+
+    public AnalisisPanel(java.awt.Frame parent, boolean modal, Set<String> setIds, Clase clase) {
         super(parent, modal);
         initComponents();
-        
+
+        this.setIds = setIds;
+
         //Se inician tablas de frecuencias
         ConnectionDB.AbrirConBD();
+        ExpandBasic.procesarFrases(clase);
+        //samurai necesita la lista de palabras por eso se ejcuta primero ExpandBasic
         SamuraiPaper.initTables(clase);
         ConnectionDB.CerrarConBD();
         //
-        
-        
+
         jRadioBGreedy.setSelected(true);
         ButtonGroup group = new ButtonGroup();
         group.add(jRadioBGreedy);
         group.add(jRadioBSam);
-        
+
         ButtonGroup group2 = new ButtonGroup();
         group2.add(jRadioBdeGre);
         group2.add(jRadioBdeSam);
-        
-        
+
         this.mapIdsGreedy = new HashMap<>();
         this.mapIdsSamurai = new HashMap<>();
-        
+
         this.mapIdsExGreedy = new HashMap<>();
         this.mapIdsExSamurai = new HashMap<>();
-        
-        this.setIds = setIds;
-               
-        
-        modeloTabla = new MiModelo();
-        tablaElem = new MiJTable(modeloTabla);
-        jScrollSplit.setViewportView(tablaElem);
 
-        modeloTabla.addColumn("ID Capturado");       
-        
-        Object[] filaTabla = new Object[3];
-        String nomIde;
-        String splitIde="";
-        
-        if(setIds!=null && !setIds.isEmpty()){
-                     
-            
-            for(String ide: setIds){
-                
-                filaTabla[0]= "<html><b>"+ide+"</b></html>";
-                modeloTabla.addRow(filaTabla);
+        modeloTablaId = new MiModelo();
+        modeloTablaDiv = new MiModelo();
+        modeloTablaExp = new MiModelo();
+
+        tablaElemId = new MiJTable(modeloTablaId);
+        tablaElemDiv = new MiJTable(modeloTablaDiv);
+        tablaElemExp = new MiJTable(modeloTablaExp);
+
+        jScrollId.setViewportView(tablaElemId);
+        jScrollDiv.setViewportView(tablaElemDiv);
+        jScrollExp.setViewportView(tablaElemExp);
+
+        modeloTablaId.addColumn(" ");
+
+        Object[] filaTabla = new Object[1];
+
+        if (setIds != null && !setIds.isEmpty()) {
+
+            for (String ide : setIds) {
+
+                filaTabla[0] = "<html><b>" + ide + "</b></html>";
+                modeloTablaId.addRow(filaTabla);
             }
         }
+
+        for (int i = 0; i < modeloTablaId.getRowCount(); i++) {
+            modeloTablaDiv.addRow(new Object[1]);
+            modeloTablaExp.addRow(new Object[1]);
+        }
+
+        tablaElemId.autoAjuste();
+
+        tablaElemId.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                int row = tablaElemId.rowAtPoint(evt.getPoint());
+
+                if (tablaElemDiv.getRowCount() > 0) {
+                    tablaElemDiv.getSelectionModel().clearSelection();
+                    tablaElemDiv.setRowSelectionInterval(row, row);
+                }
+
+                if (tablaElemExp.getRowCount() > 0) {
+                    tablaElemExp.getSelectionModel().clearSelection();
+                    tablaElemExp.setRowSelectionInterval(row, row);
+                }
+            }
+        });
         
-        tablaElem.autoAjuste();
+        tablaElemDiv.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                int row = tablaElemDiv.rowAtPoint(evt.getPoint());
+                
+                tablaElemId.getSelectionModel().clearSelection();
+                tablaElemId.setRowSelectionInterval(row, row);
+                
+
+                if (tablaElemExp.getRowCount() > 0) {
+                    tablaElemExp.getSelectionModel().clearSelection();
+                    tablaElemExp.setRowSelectionInterval(row, row);
+                }
+            }
+        });
+        
+        tablaElemExp.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                int row = tablaElemExp.rowAtPoint(evt.getPoint());
+                
+                tablaElemId.getSelectionModel().clearSelection();
+                tablaElemId.setRowSelectionInterval(row, row);
+ 
+                tablaElemDiv.getSelectionModel().clearSelection();
+                tablaElemDiv.setRowSelectionInterval(row, row);
+            }
+        });          
 
         // Close the dialog when Esc is pressed
         String cancelName = "cancel";
@@ -107,28 +166,27 @@ public class AnalisisPanel extends javax.swing.JDialog {
             }
         });
     }
-    
-        //permite sacar el html limpiando los valores
-    private String cleanHtml(String html){       
-        
+
+    //permite sacar el html limpiando los valores
+    private String cleanHtml(String html) {
+
         Pattern pattern = Pattern.compile("<html><b>(.*?)</b></html>");
         Matcher matcher = pattern.matcher(html);
-        
-        if(matcher.find()){
+
+        if (matcher.find()) {
             return matcher.group(1);
         }
-        
+
         return "";
-    
+
     }
-    
 
     /**
      * @return the return status of this dialog - one of RET_OK or RET_CANCEL
      */
     public int getReturnStatus() {
         return returnStatus;
-    }  
+    }
 
     public Map<String, String> getMapIdsSamurai() {
         return mapIdsSamurai;
@@ -137,19 +195,15 @@ public class AnalisisPanel extends javax.swing.JDialog {
     public Map<String, String> getMapIdsGreedy() {
         return mapIdsGreedy;
     }
-    
-    
+
     public Map<String, String> getMapIdsExGreMap() {
         return mapIdsExGreedy;
-    } 
+    }
 
     public Map<String, String> getMapIdsExSamurai() {
         return mapIdsExSamurai;
     }
-    
-    
 
-   
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -161,7 +215,7 @@ public class AnalisisPanel extends javax.swing.JDialog {
 
         jButton2 = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
-        jScrollSplit = new javax.swing.JScrollPane();
+        jScrollId = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         jRadioBGreedy = new javax.swing.JRadioButton();
         jRadioBSam = new javax.swing.JRadioButton();
@@ -170,11 +224,16 @@ public class AnalisisPanel extends javax.swing.JDialog {
         jButtonExp = new javax.swing.JButton();
         jRadioBdeGre = new javax.swing.JRadioButton();
         jRadioBdeSam = new javax.swing.JRadioButton();
+        jScrollDiv = new javax.swing.JScrollPane();
+        jScrollExp = new javax.swing.JScrollPane();
+        jPanel3 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         jButton2.setText("G");
 
         setTitle("Análisis de Identificadores");
+        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 closeDialog(evt);
@@ -188,13 +247,15 @@ public class AnalisisPanel extends javax.swing.JDialog {
             }
         });
 
+        jScrollId.setBorder(javax.swing.BorderFactory.createTitledBorder("Identificadores Capturados"));
+
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Técnicas de División"));
 
-        jRadioBGreedy.setText("Greedy");
+        jRadioBGreedy.setText("Algoritmo Greedy");
 
-        jRadioBSam.setText("Samurai");
+        jRadioBSam.setText("Algoritmo Samurai");
 
-        jButtonDiv.setText("Dividir !");
+        jButtonDiv.setText("¡Dividir !");
         jButtonDiv.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonDivActionPerformed(evt);
@@ -207,29 +268,29 @@ public class AnalisisPanel extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jRadioBGreedy)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jRadioBGreedy)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonDiv, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jRadioBSam))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButtonDiv, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addComponent(jRadioBGreedy)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jRadioBGreedy)
+                    .addComponent(jButtonDiv))
+                .addGap(18, 18, 18)
                 .addComponent(jRadioBSam)
-                .addGap(0, 1, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButtonDiv)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Expandir Ids"));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Expandir Identificadores"));
         jPanel2.setPreferredSize(new java.awt.Dimension(191, 80));
 
-        jButtonExp.setText("Expandir !");
+        jButtonExp.setText("¡Expandir !");
         jButtonExp.setEnabled(false);
         jButtonExp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -237,7 +298,7 @@ public class AnalisisPanel extends javax.swing.JDialog {
             }
         });
 
-        jRadioBdeGre.setText("De greedy");
+        jRadioBdeGre.setText("De Greedy");
         jRadioBdeGre.setEnabled(false);
 
         jRadioBdeSam.setText("De Samurai");
@@ -247,37 +308,69 @@ public class AnalisisPanel extends javax.swing.JDialog {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jRadioBdeGre)
-                        .addGap(18, 18, 18))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jRadioBdeSam)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(jRadioBdeGre)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addComponent(jButtonExp)
                 .addContainerGap())
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(jRadioBdeSam)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jRadioBdeGre)
+                .addGap(18, 18, 18)
+                .addComponent(jRadioBdeSam)
+                .addContainerGap())
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
                 .addComponent(jButtonExp)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jRadioBdeGre)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jRadioBdeSam))
         );
 
-        jButton1.setText("Tab");
+        jScrollDiv.setBorder(javax.swing.BorderFactory.createTitledBorder("Resultado de la División"));
+
+        jScrollExp.setBorder(javax.swing.BorderFactory.createTitledBorder("Resultado de la Expansión"));
+
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+
+        jButton1.setText("<html>Información<br />Utilizada</html>");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
+
+        jButton3.setText("Diccionarios");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap(15, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton3)
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -286,45 +379,50 @@ public class AnalisisPanel extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollId, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollDiv, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(15, 15, 15)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 164, Short.MAX_VALUE))
+                            .addComponent(jScrollExp)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(cancelButton))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollSplit, javax.swing.GroupLayout.PREFERRED_SIZE, 508, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(cancelButton)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollId, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addComponent(jScrollSplit, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollExp, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollDiv, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cancelButton)
-                .addGap(112, 112, 112))
+                .addContainerGap())
         );
 
-        setSize(new java.awt.Dimension(542, 441));
+        setSize(new java.awt.Dimension(1017, 494));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-    
+
     /**
      * Closes the dialog
      */
@@ -341,7 +439,7 @@ public class AnalisisPanel extends javax.swing.JDialog {
         boolean greedy = jRadioBGreedy.isSelected();
 
         String splitIde;
-        
+
         ConnectionDB.AbrirConBD();
 
         for (String ide : setIds) {
@@ -356,32 +454,34 @@ public class AnalisisPanel extends javax.swing.JDialog {
                 mapIdsSamurai.put(ide, splitIde);
             }
         }
-        
+
         ConnectionDB.CerrarConBD();
 
         //carga tabla
-        int colNum = modeloTabla.getColumnCount();
+        int colNum = modeloTablaDiv.getColumnCount();
 
-        modeloTabla.addColumn(greedy ? "DIVISIÓN GREEDY" : "DIVISIÓN SAMURAI");
+        modeloTablaDiv.addColumn(greedy ? "GREEDY" : "SAMURAI");
 
         Object elem, elem2;
-        
+
         String cleanHtml;
 
-        for (int i = 0; i < modeloTabla.getRowCount(); i++) {
+        for (int i = 0; i < modeloTablaId.getRowCount(); i++) {
 
-            elem = modeloTabla.getValueAt(i, 0);
-            
+            elem = modeloTablaId.getValueAt(i, 0);
+
             cleanHtml = cleanHtml(elem.toString());
-            
+
             elem2 = greedy ? mapIdsGreedy.get(cleanHtml) : mapIdsSamurai.get(cleanHtml);
 
-            modeloTabla.setValueAt(elem2, i, colNum);
+            modeloTablaDiv.setValueAt(elem2, i, colNum);
 
         }
-        
-        tablaElem.autoAjuste();
-        
+
+        jScrollDiv.getVerticalScrollBar().setModel(jScrollId.getVerticalScrollBar().getModel());
+
+        tablaElemDiv.autoAjuste();
+
         if (greedy) {
             jRadioBGreedy.setEnabled(false);
             jRadioBSam.setSelected(true);
@@ -392,91 +492,108 @@ public class AnalisisPanel extends javax.swing.JDialog {
             jRadioBSam.setEnabled(false);
             jRadioBGreedy.setSelected(true);
             //
-            jRadioBdeSam.setEnabled(true);            
+            jRadioBdeSam.setEnabled(true);
             jRadioBdeSam.setSelected(true);
         }
-        
-        if(!jButtonExp.isEnabled()){jButtonExp.setEnabled(true);}
-        
+
+        if (!jButtonExp.isEnabled()) {
+            jButtonExp.setEnabled(true);
+        }
+
         if (!jRadioBGreedy.isEnabled() && !jRadioBSam.isEnabled()) {
             jButtonDiv.setEnabled(false);
         }
+        
+        tablaElemId.getSelectionModel().clearSelection();
+        tablaElemDiv.getSelectionModel().clearSelection();
+        tablaElemExp.getSelectionModel().clearSelection();
+        
 
     }//GEN-LAST:event_jButtonDivActionPerformed
 
     private void jButtonExpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExpActionPerformed
-        
+
         boolean deGreedy = jRadioBdeGre.isSelected();
-        
-        int colNum = modeloTabla.getColumnCount();
-        
-        String colNam = deGreedy ? "DIVISIÓN GREEDY" : "DIVISIÓN SAMURAI";
-        
+
+        String colNam = deGreedy ? "GREEDY" : "SAMURAI";
+
         int readCol = 0;
-        
-        for(int j=0;j<colNum;j++){//busa el nro de la columna
-            if(modeloTabla.getColumnName(j).equals(colNam)){
+
+        for (int j = 0; j < modeloTablaDiv.getColumnCount(); j++) {//busa el nro de la columna
+            if (modeloTablaDiv.getColumnName(j).equals(colNam)) {
                 readCol = j;
             }
-        }        
-        
-        Object elem, elem2;
-        String arrayElem[];
-        
-        modeloTabla.addColumn(deGreedy ? "Expansión de GREEDY" : "Expansión de SAMURAI");
+        }
 
-        for (int i = 0; i < modeloTabla.getRowCount(); i++) {
-            
-            elem = modeloTabla.getValueAt(i, readCol);
-            
+        Object elem, elem2;
+        String arrayElem[];      
+        int colNum = modeloTablaExp.getColumnCount();
+
+        modeloTablaExp.addColumn(deGreedy ? "Desde GREEDY" : "Desde SAMURAI");
+
+        for (int i = 0; i < modeloTablaId.getRowCount(); i++) {
+
+            elem = modeloTablaDiv.getValueAt(i, readCol);
+
             arrayElem = elem.toString().split("-");
-            
+
             String append = "";
-            
+
             ConnectionDB.AbrirConBD();
-            
-            for(String s : arrayElem){
-            
+
+            for (String s : arrayElem) {
+
                 append += ExpandBasic.ejecutar(s) + " ";
-                
+
             }
-            
+
             ConnectionDB.CerrarConBD();
-            
-            elem2 = append.trim().isEmpty()?"":append.substring(0, append.length()-1);
-            
+
+            elem2 = append.trim().isEmpty() ? "" : append.substring(0, append.length() - 1);
+
             if (deGreedy) {
                 mapIdsExGreedy.put(elem.toString(), elem2.toString());
-            }else{
+            } else {
                 mapIdsExSamurai.put(elem.toString(), elem2.toString());
-            }
+            }           
             
-            modeloTabla.setValueAt(elem2, i, colNum);
-        
+            modeloTablaExp.setValueAt(elem2, i, colNum);
+
         }
-        
-        tablaElem.autoAjuste();
-        
+
+        jScrollExp.getVerticalScrollBar().setModel(jScrollId.getVerticalScrollBar().getModel());
+
+        tablaElemExp.autoAjuste();
+
         if (deGreedy) {
             jRadioBdeGre.setEnabled(false);
-            jRadioBdeSam.setSelected(true);        
-        }else{
+            jRadioBdeSam.setSelected(true);
+        } else {
             jRadioBdeSam.setEnabled(false);
-            jRadioBdeGre.setSelected(true);        
+            jRadioBdeGre.setSelected(true);
         }
 
         if (!jRadioBdeGre.isEnabled() && !jRadioBdeSam.isEnabled()) {
             jButtonExp.setEnabled(false);
         }
+        
+        tablaElemId.getSelectionModel().clearSelection();
+        tablaElemDiv.getSelectionModel().clearSelection();
+        tablaElemExp.getSelectionModel().clearSelection();
+        
     }//GEN-LAST:event_jButtonExpActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-        SamuraiFreqTable s = new SamuraiFreqTable(new javax.swing.JFrame(), true,SamuraiPaper.getLocalFreqTable(), SamuraiPaper.getGlobalFreqTable());
-        
+        InfoUtilizadaPane s = new InfoUtilizadaPane(new javax.swing.JFrame(), true);
+
         s.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
-    
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        Principal.getDicPanel().setVisible(true);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
     private void doClose(int retStatus) {
         returnStatus = retStatus;
         setVisible(false);
@@ -486,15 +603,19 @@ public class AnalisisPanel extends javax.swing.JDialog {
     private javax.swing.JButton cancelButton;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButtonDiv;
     private javax.swing.JButton jButtonExp;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JRadioButton jRadioBGreedy;
     private javax.swing.JRadioButton jRadioBSam;
     private javax.swing.JRadioButton jRadioBdeGre;
     private javax.swing.JRadioButton jRadioBdeSam;
-    private javax.swing.JScrollPane jScrollSplit;
+    private javax.swing.JScrollPane jScrollDiv;
+    private javax.swing.JScrollPane jScrollExp;
+    private javax.swing.JScrollPane jScrollId;
     // End of variables declaration//GEN-END:variables
     private int returnStatus = RET_CANCEL;
 }

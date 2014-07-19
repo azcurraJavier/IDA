@@ -54,12 +54,6 @@ Bruno Caprile and Paolo Tonella.
 \newblock Restructuring program identifier names.
 \newblock IEEE Computer Society, 2000.
 
-\bibitem{DCPHJP09}
-Daniela da~Cruz, Pedro~Rangel Henriques, and Jorge~Sousa Pinto.
-\newblock Code analysis: Past and present.
-\newblock {\em Proceeding of the Third International Workshop on Foundations
-  and Techniques for Open Source Software Certification}, 2009.
-
 \bibitem{DMDJ13}
 Dawn~Lawrie Dave~Binkley, Marcia~Davis and Bonita Sharif.
 \newblock The impact of identifier style on effort and comprehension.
@@ -141,6 +135,18 @@ José~Luís Freitas, Daniela da~Cruz, and Pedro~Rangel Henriques.
 Wilhelm Hasselbring, Andreas Fuhr, and Volker Riediger.
 \newblock First international workshop on model-driven software migration.
 \newblock Marzo 2011.
+
+\bibitem{STD1219}
+IEEE.
+\newblock {\em IEEE Standard for Software Maintenance, IEEE Std 1219-1998},
+  volume~2.
+\newblock IEEE Press, 1999.
+
+\bibitem{STD610}
+IEEE.
+\newblock {\em Standard Glossary of Software Engineering Terminology
+  610.12-1990}, volume~1.
+\newblock IEEE Press, 1999.
 
 \bibitem{MPOB03}
 Michael~P. O’Brien.

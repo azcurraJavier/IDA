@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2014.5.7)  9 JUN 2014 14:03
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2014.5.7)  15 JUL 2014 19:24
 entering extended mode
  %&-line parsing enabled.
 **inscripcion-azcurra.tex
@@ -421,13 +421,13 @@ Underfull \hbox (badness 10000) in paragraph at lines 181--182
 ### semi simple group (level 1) entered at line 7 (\begingroup)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 2231 strings out of 494999
- 27796 string characters out of 1180817
- 90385 words of memory out of 3000000
- 5419 multiletter control sequences out of 15000+50000
+ 2234 strings out of 494999
+ 27833 string characters out of 1180817
+ 90390 words of memory out of 3000000
+ 5422 multiletter control sequences out of 15000+50000
  8548 words of font info for 30 fonts, out of 3000000 for 9000
  54 hyphenation exceptions out of 8191
- 25i,8n,32p,601b,824s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 25i,8n,32p,601b,823s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx12
 .pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/s
 hare/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-t
@@ -436,7 +436,7 @@ type1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf-texlive/fonts/type1/public/
 amsfonts/cm/cmss12.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm
 /cmsy10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmti12.pfb
 >
-Output written on inscripcion-azcurra.pdf (8 pages, 146543 bytes).
+Output written on inscripcion-azcurra.pdf (8 pages, 146007 bytes).
 PDF statistics:
  62 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

@@ -1,10 +1,5 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package ExtractID;
 
-import DictionaryDB.Dictionary;
 import Listas.Clase;
 import Listas.Comentario;
 import Listas.ListaClase;
@@ -21,8 +16,6 @@ import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -35,7 +28,7 @@ import org.jdesktop.swingx.util.OS;
  *
  * @author javier
  */
-public class Main extends javax.swing.JFrame {
+public class Principal extends javax.swing.JFrame {
 
     private CodigoPanel codigoPanel;
 
@@ -45,24 +38,20 @@ public class Main extends javax.swing.JFrame {
 
     private Map<String, String> mapIdsSplited;
     private Map<String, String> mapIdsExp;
-    
-    
+
     private JFileChooser fileChooser;
     private File currentDir;
-    
+
     private static DiccionaryPanel dicPanel;
 
-    /**
-     * Creates new form NewJFrame
-     */
-    public Main() {
+    public Principal() {
         initComponents();
-        
+
         ListaClase.init();
-        
+
         mapIdsSplited = new HashMap<>();
         mapIdsExp = new HashMap<>();
-        
+
         fileChooser = new JFileChooser();
 
         jTabbedEsp = new ClosableTabbedPane();
@@ -71,16 +60,8 @@ public class Main extends javax.swing.JFrame {
 
         jTabbedEsp.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jTabbedEsp, javax.swing.GroupLayout.DEFAULT_SIZE, 907, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jTabbedEsp, javax.swing.GroupLayout.DEFAULT_SIZE, 532, Short.MAX_VALUE)
-        );
+        //jframe maximizado
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         jTabbedEsp.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -90,12 +71,52 @@ public class Main extends javax.swing.JFrame {
 
     }
 
+    private void jTabbedEspStateChanged(javax.swing.event.ChangeEvent evt) {
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(desktopPane);
+        desktopPane.setLayout(layout);
+
+        if (jTabbedEsp.getTabCount() == 0) {
+ 
+            jMenuItemCerrTodo.setEnabled(false);
+            jTabbedEsp.setVisible(false);                        
+ 
+            
+            if (dicPanel != null) {
+                dicPanel.removeAll();
+                dicPanel = null;
+            }
+
+            //remueve el tab panne del desktop pane
+            layout.removeLayoutComponent(jTabbedEsp);            
+
+
+        } else {//>0
+            
+            jTabbedEsp.setVisible(true);                        
+            jMenuItemCerrTodo.setEnabled(true);            
+
+            ///Agrega tab pane al desktoppane
+            layout.setHorizontalGroup(
+                    layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTabbedEsp)
+            );
+            layout.setVerticalGroup(
+                    layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTabbedEsp)
+            );
+            ////            
+
+        }
+
+    }
+
     public static DiccionaryPanel getDicPanel() {
-        
-        if(dicPanel == null){
+
+        if (dicPanel == null) {
             dicPanel = new DiccionaryPanel(new javax.swing.JFrame(), true);
         }
-        
+
         return dicPanel;
     }
 
@@ -108,116 +129,108 @@ public class Main extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        desktopPane = new javax.swing.JDesktopPane();
+        menuBar = new javax.swing.JMenuBar();
+        fileMenu = new javax.swing.JMenu();
         jMenuAbrir = new javax.swing.JMenuItem();
         jMenuItemCerrTodo = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        editMenu = new javax.swing.JMenu();
+        jMenuVerDic = new javax.swing.JMenuItem();
         jMenuRestBD = new javax.swing.JMenuItem();
-        jMenu4 = new javax.swing.JMenu();
-        jMenuItem6 = new javax.swing.JMenuItem();
+        helpMenu = new javax.swing.JMenu();
+        jMenu4 = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Identifier Analyzer");
 
-        jMenu1.setText("Archivo");
+        fileMenu.setMnemonic('f');
+        fileMenu.setText("Archivo");
 
+        jMenuAbrir.setMnemonic('o');
         jMenuAbrir.setText("Abrir Archivos...");
         jMenuAbrir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuAbrirActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuAbrir);
+        fileMenu.add(jMenuAbrir);
 
+        jMenuItemCerrTodo.setMnemonic('s');
         jMenuItemCerrTodo.setText("Cerrar Todo");
         jMenuItemCerrTodo.setEnabled(false);
-        jMenuItemCerrTodo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemCerrTodoActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jMenuItemCerrTodo);
+        fileMenu.add(jMenuItemCerrTodo);
 
+        jMenuItem3.setMnemonic('x');
         jMenuItem3.setText("Salir");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem3ActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem3);
+        fileMenu.add(jMenuItem3);
 
-        jMenuBar1.add(jMenu1);
+        menuBar.add(fileMenu);
 
-        jMenu3.setText("Diccionarios");
+        editMenu.setMnemonic('e');
+        editMenu.setText("Diccionarios");
 
-        jMenuItem2.setText("Ver Diccionarios ...");
-        jMenuItem2.setEnabled(false);
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        jMenuVerDic.setMnemonic('t');
+        jMenuVerDic.setText("Ver Diccionarios...");
+        jMenuVerDic.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                jMenuVerDicActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuItem2);
+        editMenu.add(jMenuVerDic);
 
+        jMenuRestBD.setMnemonic('y');
         jMenuRestBD.setText("Restablecer B.D.");
-        jMenuRestBD.addActionListener(new java.awt.event.ActionListener() {
+        editMenu.add(jMenuRestBD);
+
+        menuBar.add(editMenu);
+
+        helpMenu.setMnemonic('h');
+        helpMenu.setText("Ayuda");
+
+        jMenu4.setMnemonic('a');
+        jMenu4.setText("Acerca de...");
+        jMenu4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuRestBDActionPerformed(evt);
+                jMenu4ActionPerformed(evt);
             }
         });
-        jMenu3.add(jMenuRestBD);
+        helpMenu.add(jMenu4);
 
-        jMenuBar1.add(jMenu3);
+        menuBar.add(helpMenu);
 
-        jMenu4.setText("Ayuda");
-
-        jMenuItem6.setText("Acerca de...");
-        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem6ActionPerformed(evt);
-            }
-        });
-        jMenu4.add(jMenuItem6);
-
-        jMenuBar1.add(jMenu4);
-
-        setJMenuBar(jMenuBar1);
+        setJMenuBar(menuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 837, Short.MAX_VALUE)
+            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 466, Short.MAX_VALUE)
+            .addComponent(desktopPane, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE)
         );
 
-        setSize(new java.awt.Dimension(847, 517));
+        setSize(new java.awt.Dimension(410, 330));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
-        AcercaDe ad;
-        ad = new AcercaDe(new javax.swing.JFrame(), true);
-
-        ad.setVisible(true);
-
-    }//GEN-LAST:event_jMenuItem6ActionPerformed
-
-      
     private void jMenuAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuAbrirActionPerformed
-
-        if(fileChooser.getCurrentDirectory() == null){            
+        if (fileChooser.getCurrentDirectory() == null) {
             //si no esta seteado ponemos la carpeta del usuario
             currentDir = new File(System.getProperty("user.home"));
         }
-        
+
         fileChooser.setCurrentDirectory(currentDir);
         FileNameExtensionFilter filter = new FileNameExtensionFilter("java", "java");
         fileChooser.setFileFilter(filter);
@@ -232,15 +245,14 @@ public class Main extends javax.swing.JFrame {
             //guardamos el ultimo acceso
             currentDir = fileChooser.getCurrentDirectory();
 
-            archivosAnalisisId = fileChooser.getSelectedFiles();            
+            archivosAnalisisId = fileChooser.getSelectedFiles();
 
             for (File fileAnalisis : archivosAnalisisId) {
-                
-                if(ListaClase.containsFileName(fileAnalisis.getName())){
+
+                if (ListaClase.containsFileName(fileAnalisis.getName())) {
                     JOptionPane.showMessageDialog(new JFrame(),
                             "Un archivo con el nombre: " + fileAnalisis.getName()
-                            + " ya se encuentra abierto!"
-                            , "Atención", JOptionPane.WARNING_MESSAGE);
+                            + " ya se encuentra abierto!", "Atención", JOptionPane.WARNING_MESSAGE);
                     continue;
                 }
 
@@ -250,14 +262,12 @@ public class Main extends javax.swing.JFrame {
                 if (prettyCode.isEmpty()) {
                     JOptionPane.showMessageDialog(new JFrame(),
                             "El archivo: " + fileAnalisis.getName()
-                            + " esta vacío o posee errores sintácticos,"+
-                                    "\nrevíselo e intente de nuevo."
-                            , "Atención", JOptionPane.WARNING_MESSAGE);
+                            + " esta vacío o posee errores sintácticos,"
+                            + "\nrevíselo e intente de nuevo.", "Atención", JOptionPane.WARNING_MESSAGE);
                     continue;
                 }
                 ///////////////
-                
-                
+
                 JavaLexer lex = new JavaLexer(new ANTLRStringStream(prettyCode));
                 CommonTokenStream tokens = new CommonTokenStream(lex);
                 JavaParser g = new JavaParser(tokens);
@@ -265,31 +275,31 @@ public class Main extends javax.swing.JFrame {
                 try {
                     g.compilationUnit();
                     noErrorSintactico = g.ocurrioError();
-                    
+
                 } catch (Exception e) {
 
                     System.out.println(getStackTrace(e));
                     noErrorSintactico = false;
-                }                
+                }
 
-                Clase unaClase = g.getClaseAnalisis();                
-                
+                Clase unaClase = g.getClaseAnalisis();
+
                 //control de carga de datos del parser
-                if (!noErrorSintactico || unaClase==null) {
+                if (!noErrorSintactico || unaClase == null) {
                     JOptionPane.showMessageDialog(new JFrame(),
                             "Error fatal al analizar archivo: " + fileAnalisis.getName(), "ERROR", JOptionPane.ERROR_MESSAGE);
                     continue;
                 }
-                
+
                 //control de referencias sin declarar
                 if (unaClase.getVarSinDeclB()) {
                     JOptionPane.showMessageDialog(new JFrame(),
-                            "Error al analizar archivo: " + fileAnalisis.getName()+
-                            "\n"+unaClase.getVarSinDecl() , "ERROR", JOptionPane.ERROR_MESSAGE);
+                            "Error al analizar archivo: " + fileAnalisis.getName()
+                            + "\n" + unaClase.getVarSinDecl(), "ERROR", JOptionPane.ERROR_MESSAGE);
                     continue;
                 }
                 ////////
-                
+
                 unaClase.setFileName(fileAnalisis.getName());//nombre archivo java
                 unaClase.setCode(prettyCode);//codigo leido de archivo
                 /////comentarios/////
@@ -300,12 +310,11 @@ public class Main extends javax.swing.JFrame {
                 unaClase.setLisLiterales(g.getLisLiterales());
                 /////////////////////
                 ListaClase.addElemLisClases(unaClase);
-                
-                
+
                 //Interfaz
                 codigoPanel = new CodigoPanel(unaClase, mapIdsSplited, mapIdsExp);
                 //jTabbedPaneCodigo.add(claseAnalisis.getPunteroArchivo().getName(), codigoPanel);
-                jTabbedEsp.addTab(unaClase.getFileName(), codigoPanel); 
+                jTabbedEsp.addTab(unaClase.getFileName(), codigoPanel);
 
             }
 
@@ -313,15 +322,22 @@ public class Main extends javax.swing.JFrame {
             //jTabbedPaneAnalisis.add("Literales", new TablaBuscador(1));
             //jTabbedPaneAnalisis.add("Comentarios", new TablaBuscador(2));
             //jTabbedPaneCodigo.setVisible(true);
-            jTabbedEsp.setVisible(true);
-            jMenuItem3.setEnabled(true);
-            jMenuItem2.setEnabled(true);
-            jMenuItem2.setEnabled(true);
 
             //jMenuItem4.setEnabled(true);
         }
-
     }//GEN-LAST:event_jMenuAbrirActionPerformed
+
+    private void jMenuVerDicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuVerDicActionPerformed
+        getDicPanel().setVisible(true);
+    }//GEN-LAST:event_jMenuVerDicActionPerformed
+
+    private void jMenu4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu4ActionPerformed
+
+        AcercaDe a = new AcercaDe(new JFrame(), true);
+        
+        a.setVisible(true);
+        
+    }//GEN-LAST:event_jMenu4ActionPerformed
 
     public static String getStackTrace(final Throwable throwable) {
         final StringWriter sw = new StringWriter();
@@ -329,23 +345,22 @@ public class Main extends javax.swing.JFrame {
         throwable.printStackTrace(pw);
         return sw.getBuffer().toString();
     }
-    
-    
+
     private String prettyCode(String path) {
 
         String output = "";
 
         try {
-            
+
             BufferedReader reader = null;
-            
+
             String dir;
-            
-            if(isLinux()){
-                dir = "jacobe//unix//jacobe";            
-            }else if(isWindows()){
-                dir = "/jacobe/win/jacobe";            
-            }else{
+
+            if (isLinux()) {
+                dir = "jacobe//unix//jacobe";
+            } else if (isWindows()) {
+                dir = "/jacobe/win/jacobe";
+            } else {
                 System.out.println("jacobe: No se reconoce el SO");
                 return "";
             }
@@ -362,73 +377,21 @@ public class Main extends javax.swing.JFrame {
             }
 
         } catch (IOException | InterruptedException ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(getStackTrace(ex));
         }
 
         return output;
 
     }
-    
+
     public static boolean isWindows() {
 
         return (OS.isWindows());
     }
-    
+
     public static boolean isLinux() {
 
-            return (OS.isLinux());
-
-    }
-
-
-    private void jMenuItemCerrTodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCerrTodoActionPerformed
-
-        ListaClase.clear();//remueve logica
-        jTabbedEsp.removeAll();//remueve interfaz
-        jMenuItemCerrTodo.setEnabled(false);
-        mapIdsExp.clear();
-        mapIdsSplited.clear();
-
-    }//GEN-LAST:event_jMenuItemCerrTodoActionPerformed
-
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        System.exit(0);
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-
-        if(dicPanel == null){
-            dicPanel = new DiccionaryPanel(new javax.swing.JFrame(), true);
-        }
-        
-        dicPanel.setVisible(true);
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
-
-    private void jMenuRestBDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuRestBDActionPerformed
-        
-        
-      
-        Dictionary.restartBd();       
-        
-        
-        
-    }//GEN-LAST:event_jMenuRestBDActionPerformed
-
-    private void jTabbedEspStateChanged(javax.swing.event.ChangeEvent evt) {
-
-        if (jTabbedEsp.getTabCount() == 0) {
-            jMenuItemCerrTodo.setEnabled(false);
-            
-            dicPanel.removeAll();
-            dicPanel = null;
-
-        } else {
-            jMenuItemCerrTodo.setEnabled(true);
-            
-            if(dicPanel != null){
-                dicPanel.rebuildPhraseList();
-            }
-        }
-        
+        return (OS.isLinux());
 
     }
 
@@ -449,36 +412,36 @@ public class Main extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Main principal = new Main();
-                principal.setVisible(true);
-
-                principal.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                new Principal().setVisible(true);
             }
         });
     }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
+    private javax.swing.JDesktopPane desktopPane;
+    private javax.swing.JMenu editMenu;
+    private javax.swing.JMenu fileMenu;
+    private javax.swing.JMenu helpMenu;
+    private javax.swing.JMenuItem jMenu4;
     private javax.swing.JMenuItem jMenuAbrir;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItemCerrTodo;
     private javax.swing.JMenuItem jMenuRestBD;
+    private javax.swing.JMenuItem jMenuVerDic;
+    private javax.swing.JMenuBar menuBar;
     // End of variables declaration//GEN-END:variables
+
 }

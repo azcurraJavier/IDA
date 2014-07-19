@@ -1,10 +1,8 @@
 package SplitID;
 
 import DictionaryDB.Dictionary;
-import ExtractID.Main;
+import ExpandID.ExpandBasic;
 import Listas.Clase;
-import Listas.MostrarTabla;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,8 +15,6 @@ public abstract class SamuraiPaper {
     private static Map<String,Integer> globalFreqTable;
 
     public static void initTables(Clase claseAc) {
-        
-        ArrayList<String> lisPal = Main.getDicPanel().getPalabrasCap();
 
         frecuenciaLocal = 0;
 
@@ -27,14 +23,14 @@ public abstract class SamuraiPaper {
         globalFreqTable = new HashMap();
 
         //cargar tablas
-        for (MostrarTabla m : claseAc.getIdTablaClase()) {
+        //for (MostrarTabla m : claseAc.getIdTablaClase()) {
 
             //addTokenLocalFreqTable(m.getNomId(), m.getListaRef().size() + 1);//ref + 1 (declaracion)
  
-        }
+        //}
         
-        if(lisPal != null){
-            for(String pal:lisPal){
+        if(ExpandBasic.getPalabrasCap() != null){
+            for(String pal:ExpandBasic.getPalabrasCap()){
                 addTokenLocalFreqTable(pal, 1);
             }
         }
@@ -244,6 +240,7 @@ public abstract class SamuraiPaper {
         }
 
         int i = 0;
+        
         while (i < s.length() - 1) {//-1 sino puede dar excepción en i+1
             if (Character.isUpperCase(s.charAt(i)) && Character.isLowerCase(s.charAt(i + 1))) {
                 return i;

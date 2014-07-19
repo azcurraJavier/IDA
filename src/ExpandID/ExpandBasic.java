@@ -2,8 +2,12 @@ package ExpandID;
 
 import DictionaryDB.ConnectionDB;
 import DictionaryDB.OperationDB;
-import ExtractID.Main;
+import Listas.Clase;
+import Listas.Comentario;
+import Listas.Literal;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 /**
@@ -12,14 +16,86 @@ import java.util.regex.Pattern;
  */
 public class ExpandBasic {
 
-    private static ArrayList<String> listPalabras = new ArrayList();
+    private static ArrayList<String> palabrasCap = new ArrayList();
 
-    private static ArrayList<String> listFrases = new ArrayList();
+    private static ArrayList<String> frasesCap = new ArrayList();
 
     //////////////
     private static ArrayList<String> listExp = new ArrayList();
 
     private static String unicaExp;
+    
+    
+    
+    public static void procesarFrases(Clase c) {
+        
+        
+        Set<String> comCap = new HashSet<>();
+        
+        for (Comentario com : c.getLisComentario()) {
+            comCap.add(com.getCom());
+        }
+        
+        for (Literal l : c.getLisLiterales()) {
+            comCap.add(l.getText());
+        }            
+            
+        //se limpia todo
+        frasesCap.clear();
+        palabrasCap.clear();
+        
+        
+        for (String linea : comCap) {
+
+            //limpieza
+            linea = linea.replaceAll("\"", "").trim();
+            //excluir simbolos
+            linea = linea.replaceAll("[^\\dA-Za-z ]", "");
+            
+            if(linea.isEmpty()){
+                continue;
+            }
+
+            //filtrar palabras irrelevantes
+            String arrayCom[] = linea.split(" ");
+
+            String frase = "";
+
+            for (String pal : arrayCom) {
+                
+                if(pal == null || pal.isEmpty()){
+                    continue;
+                }
+
+                //para evitar problemas todo con minuscula
+                pal = pal.toLowerCase();
+
+                if (!OperationDB.select("stop_dict", pal)) {
+                    //si no es una palabra irrelevante la agrego
+                    palabrasCap.add(pal);
+                    frase += pal + " ";                   
+                    
+                }
+
+            }
+
+            if (!frase.isEmpty()) {
+                frase = frase.substring(0, frase.length() - 1);
+                frasesCap.add(frase);
+            }            
+            
+
+        }
+       
+    }
+
+    public static ArrayList<String> getFrasesCap() {
+        return frasesCap;
+    }
+
+    public static ArrayList<String> getPalabrasCap() {
+        return palabrasCap;
+    }
     
 
     public static String ejecutar(String w) {
@@ -30,7 +106,7 @@ public class ExpandBasic {
         
         unicaExp = w;
      
-        procesarFrases();        
+        //procesarFrases();        
         
         w = w.toLowerCase();
         
@@ -73,19 +149,6 @@ public class ExpandBasic {
         return unicaExp;
     }
 
-    private static void procesarFrases() {
-        
-        //para evitar problemas cierro la conexion y la vuelvo abrir
-       ConnectionDB.CerrarConBD();
-        
-       //palabras del panel de diccionario
-       listFrases = Main.getDicPanel().getFrasesCap();
-       listPalabras = Main.getDicPanel().getPalabrasCap();
-       
-       ConnectionDB.AbrirConBD();
-       
-    }
-
     private static String expandirAbrev(String w) {
         
         String original = w;
@@ -113,7 +176,7 @@ public class ExpandBasic {
         //abreviatura compleja ej: tang -> triangule
         Pattern pat2 = Pattern.compile(w);
 
-        for (String cand : listPalabras) {
+        for (String cand : palabrasCap) {
             
             if(original.equals(cand)){
                 continue;//puede que la abreviatura tang este en lo comentarios debo descartar
@@ -131,7 +194,7 @@ public class ExpandBasic {
 
     private static String expandirAcro(String w) {
 
-        for (String frase : listFrases) {
+        for (String frase : frasesCap) {
             
             String f[] = frase.split(" ");
             
