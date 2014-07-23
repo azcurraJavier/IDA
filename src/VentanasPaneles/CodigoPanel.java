@@ -48,7 +48,7 @@ public class CodigoPanel extends javax.swing.JPanel {
         //jTextAreaCod.setFont(new Font("Monospaced", Font.PLAIN, 12));
         jEditorPaneCod.setFont(new Font("Monospaced", Font.PLAIN, 13));
         jEditorPaneCod.setContentType("text/html");
-
+        
         claseAsociada = unaClass;
 
         String htmlCode = codeHtml(claseAsociada.getCode());
@@ -106,9 +106,53 @@ public class CodigoPanel extends javax.swing.JPanel {
             buffer.append("<br>");
         
         }
+        //return "<html><pre bgcolor=\"#2A2A2A\">" + "<font size=\"6\",color=\"#939393\"/>"
         
         return "<html><pre>" + "<font size=\"6\"/>"
                 + buffer.toString() + "</font></pre></html>";
+    }
+    
+    public void replaceIdsCode(Map<Integer,Map> idExp){
+    
+        String code = claseAsociada.getCode();
+        String[] lines = code.split(System.getProperty("line.separator"));        
+        
+        for (Map.Entry mapEntry : idExp.entrySet()) {
+            
+            Map<String,String> idEntry2 = (Map) mapEntry.getValue();
+            
+            for (Map.Entry mapEntry2 : idEntry2.entrySet()){
+                
+                String regex =mapEntry2.getKey().toString();
+                String replace =mapEntry2.getValue().toString();
+                
+                if(regex.equals(replace)){//si es igual no tiene sentido reemplazar
+                    continue;
+                }
+                
+                replace = replace.replaceAll(" ", "_");//se coloca _ para que el código sea valido                
+                
+                int nroLine = (int)mapEntry.getKey() - 1;
+            
+                lines[nroLine] = lines[nroLine].replaceAll(regex, replace);
+            }          
+        
+        }
+        
+        StringBuilder buffer = new StringBuilder();
+        
+        for (String line1 : lines) {
+            buffer.append(line1);
+            buffer.append("\n");
+        }        
+        
+        String htmlCode = codeHtml(buffer.toString());
+        
+        //jTextAreaCod.setText(buffer.toString());
+        jEditorPaneCod.setText(htmlCode);
+
+        //jTextAreaCod.setCaretPosition(6);
+        jEditorPaneCod.setCaretPosition(6);
     }
 
 // Creates highlights around all occurrences of pattern in textComp
@@ -394,7 +438,14 @@ public class CodigoPanel extends javax.swing.JPanel {
         jTabbedPaneProp.setBorder(javax.swing.BorderFactory.createTitledBorder("Elementos Capturados"));
         jTabbedPaneProp.setFocusable(false);
 
+        jScrollPane1.setBorder(null);
+        jScrollPane1.setFocusable(false);
+        jScrollPane1.setRequestFocusEnabled(false);
+
         jEditorPaneCod.setEditable(false);
+        jEditorPaneCod.setBorder(null);
+        jEditorPaneCod.setFocusable(false);
+        jEditorPaneCod.setRequestFocusEnabled(false);
         jScrollPane1.setViewportView(jEditorPaneCod);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
