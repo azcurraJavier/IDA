@@ -15,9 +15,10 @@
 %algorithm2e: para que ande 'sudo apt-get install texlive-science'
 %aqui se encuentra instalado:
 %/usr/share/texmf-texlive/tex/latex/algorithm2e/algorithm2e.sty
-\usepackage[spanish,ruled,vlined]{algorithm2e} 
+\usepackage[spanish,ruled,vlined,onelanguage]{algorithm2e} 
 %ruled, vlined para formato de lineas.  
 %spanish setea idioma español
+%onelanguage español las palabras reservadas
 %===================================================
 
 
@@ -41,22 +42,22 @@
 \texttt{softwordDiv} $\leftarrow$ dividirCamelCase(\texttt{softwordDiv})
 
 \BlankLine
-\ForAll{$($Para cada substring \textit{\textbf{s}} separado por ` ' en \texttt{softwordDiv}$)$}{
+\ForAll{$($\textit{\textbf{s}} $|$ \textit{\textbf{s}} es un substring separado por ` ' en \texttt{softwordDiv}$)$}{
 \BlankLine
 
 \If{$($\textbf{s} no pertenece a $($\textit{\textbf{stopList}} $\cup$ \textit{\textbf{abrevList}} $\cup$ \textbf{ispellList} $))$}{
 \BlankLine
-sPrefijo $\leftarrow$ buscarPrefijo(\textit{\textbf{s}},“”)
+resultadoPrefijo $\leftarrow$ buscarPrefijo(\textit{\textbf{s}},“”)
 
-sSufijo $\leftarrow$ buscarSufijo(\textit{\textbf{s}},“”)
+resultadoSufijo $\leftarrow$ buscarSufijo(\textit{\textbf{s}},“”)
 \BlankLine
 \tcp{\textit{Se elije la división que mayor particiones hizo.}}
-\textit{\textbf{s}} $\leftarrow$ maxDivisión(sPrefijo,sSufijo)
+\textit{\textbf{s}} $\leftarrow$ maxDivisión(resultadoPrefijo,resultadoSufijo)
 
 }
 }
 \BlankLine
-\Return \texttt{softwordDiv} \tcp{\textit{Retorna el id dividido por espacios.}}
+\Return \texttt{softwordDiv} \tcp{\textit{Retorna el id dividido por ` '}}
 
 \caption{División Greedy\label{GSA}}
 \end{algorithm}
@@ -140,10 +141,10 @@ sSufijo $\leftarrow$ buscarSufijo(\textit{\textbf{s}},“”)
 
 \textbf{\textit{tokenSep}} $\leftarrow $ “”
 \BlankLine
-\ForAll{$($Para cada substring \textbf{\textit{s}} separado por ` ' en \textbf{\textit{token}}$)$}{
+\ForAll{$($\textbf{\textit{s}} $|$ \textbf{\textit{s}} es un substring  separado por ` ' en \textbf{\textit{token}}$)$}{
 \BlankLine
 
-\If{$($ $\exists \{ i|esMayus(\textbf{s}[i]) \land esMinus(\textbf{s}[i+1]) \}$ $)$}{
+\If{$($ $\exists \{ i|esMayus(\textbf{s}[i])  \land  esMinus(\textbf{s}[i+1]) \}$ $)$}{
 \BlankLine
 $n \leftarrow$ length(\textbf{\textit{s}}) $-$ 1
 \BlankLine
@@ -175,7 +176,7 @@ $scoreAlter \leftarrow$ score(\textbf{\textit{s}}[i+1,n])
 
 \textbf{\textit{tokenSep}} $\leftarrow$ ` '
 \BlankLine
-\ForAll{$($Para cada substring \textbf{\textit{s}} separado por ` ' en \textbf{token}$)$}{
+\ForAll{$($\textbf{\textit{s}} $|$ \textbf{\textit{s}} es un substring separado por ` ' en \textbf{token}$)$}{
 \BlankLine
 \textbf{\textit{tokenSep}} $\leftarrow$ \textbf{\textit{tokenSep}} $+$ ` ' $+$ \textbf{divisiónSoftWord}(\textbf{\textit{s}},score(\textbf{\textit{s}}))
 }
@@ -187,7 +188,7 @@ $scoreAlter \leftarrow$ score(\textbf{\textit{s}}[i+1,n])
 
 %%=================
 
-\begin{algorithm}[H]
+\begin{algorithm}
 \LinesNumbered%enumera las lineas
 \SetKwInOut{Input}{Entrada}\SetKwInOut{Output}{Salida}
 \Input{\textbf{\textit{s}} \tcp{\textit{softword string}}}
@@ -253,7 +254,7 @@ i $\leftarrow$ i+1
 \Output{\textbf{únicaExpansión} \tcp{\textit{Abreviatura expandida, o null}}}
 \BlankLine
 
-\If{$($\textit{\textbf{abrev}} $\in$ \textit{\textbf{stopList}}$)$}{
+\If{$($\textit{\textbf{abrev}} pertenece \textit{\textbf{stopList}}$)$}{
 \Return null
 }
 \BlankLine
@@ -261,10 +262,10 @@ listaExpansión $\leftarrow$ [ ]
 \BlankLine
 \tcp{\textit{Buscar coincidencia de acrónimo.}}
 
-\ForAll{$($Para cada frase \textit{\textbf{phrase}} en \textit{\textbf{phraseList}}$)$}{
+\ForAll{$($\textit{\textbf{phrase}} $|$ \textit{\textbf{phrase}} es una frase en \textit{\textbf{phraseList}}$)$}{
 \BlankLine
 
-\If{$($ $\exists \{$\textbf{phrase} $|$ \textit{\textbf{abrev}} es un acrónimo de \textit{\textbf{phrase}}$\}$ $)$}{
+\If{$($\textit{\textbf{abrev}} es un acrónimo de \textit{\textbf{phrase}}$)$}{
 listaExpansión.add(\textit{\textbf{phrase}}) 
 }
 }
@@ -272,9 +273,9 @@ listaExpansión.add(\textit{\textbf{phrase}})
 \BlankLine
 \tcp{\textit{Buscar abreviatura común.}}
 
-\ForAll{$($ Para cada palabra \textit{\textbf{word}} en  \textit{\textbf{wordList}} $)$}{
+\ForAll{$($\textit{\textbf{word}} $|$ \textit{\textbf{word}} es una palabra en  \textit{\textbf{wordList}} $)$}{
 \BlankLine
-\If{ $($ $\exists \{$\textbf{word} $|$ \textit{\textbf{abrev}} es una abreviatura de \textit{\textbf{word}}$\})$}{
+\If{ $($\textit{\textbf{abrev}} es una abreviatura de \textit{\textbf{word}}$)$}{
 listaExpansión.add(\textit{\textbf{word}}) 
 }
 
@@ -323,7 +324,7 @@ listaExpansión.add(listaCandidatos)
 \tcp{\textit{Las expresiones regulares están entre comillas}}
 \BlankLine
 
-\If{ $($\textbf{patrón} prefijo $\vee$ \textit{\textbf{pa}} coincide “[a-z][aeiou]$+$” $\vee$ length(\textit{\textbf{pa}}) $>$ 3$)$ $\land$ $($\textit{\textbf{pa}} no coincide con “[a-z][aeiou][aeiou]$+$”$)$}{
+\If{ $($\textbf{patrón} prefijo $\vee$ \textit{\textbf{pa}} coincide “[a-z][\^{}aeiou]$+$” $\vee$ length(\textit{\textbf{pa}}) $>$ 3$)$ $\land$ $($\textit{\textbf{pa}} no coincide con “[a-z][aeiou][aeiou]$+$”$)$}{
 
 
 \BlankLine
@@ -337,7 +338,7 @@ Buscar en el Nombre del Método con “\textit{\textbf{patrón}}”
 \BlankLine
 Buscar en las Sentencias con “\textit{\textbf{patrón pa}}” y “\textit{\textbf{pa patrón}}”
 \BlankLine
-\If{$($length(\textit{\textbf{pa}} $\neq$ 2)$)$}{
+\If{$($length(\textit{\textbf{pa}}) $\neq$ 2$)$}{
 \BlankLine
 Buscar en palabras del Método con “\textit{\textbf{patrón}}”
 \BlankLine
@@ -345,7 +346,7 @@ Buscar en palabras que están en los Comentarios del Método con “\textit{\tex
 
 }
 
-\If{$($length(\textit{\textbf{pa}} $>$ 1)$)$ $\land$ $($\textit{\textbf{patrón}} prefijo$)$}{
+\If{$($length(\textit{\textbf{pa}}) $>$ 1$)$ $\land$ $($\textit{\textbf{patrón}} prefijo$)$}{
 \BlankLine
 \tcp{\textit{Solo se busca con patrones prefijos}}
 
