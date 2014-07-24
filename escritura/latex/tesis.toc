@@ -32,3 +32,5 @@
 \contentsline {subsection}{\numberline {3.4.5}Algoritmo de Expansi\IeC {\'o}n AMAP}{46}
 \contentsline {subsection}{\numberline {3.4.6}Herramienta: Identifier Restructuring}{57}
 \contentsline {section}{\numberline {3.5}Conclusiones}{62}
+\contentsline {chapter}{\numberline {4}Identifier Analyzer (IDA)}{63}
+\contentsline {section}{\numberline {4.1}Arquitectura}{63}

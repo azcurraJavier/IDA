@@ -133,7 +133,9 @@ public class Principal extends javax.swing.JFrame {
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         jMenuAbrir = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItemCerrTodo = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
         jMenuItem3 = new javax.swing.JMenuItem();
         editMenu = new javax.swing.JMenu();
         jMenuVerDic = new javax.swing.JMenuItem();
@@ -148,7 +150,7 @@ public class Principal extends javax.swing.JFrame {
         fileMenu.setText("Archivo");
 
         jMenuAbrir.setMnemonic('o');
-        jMenuAbrir.setText("Abrir Archivos...");
+        jMenuAbrir.setText("Abrir archivo(s) JAVA...");
         jMenuAbrir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuAbrirActionPerformed(evt);
@@ -156,10 +158,14 @@ public class Principal extends javax.swing.JFrame {
         });
         fileMenu.add(jMenuAbrir);
 
+        jMenuItem1.setText("Abrir XML(s)...");
+        fileMenu.add(jMenuItem1);
+
         jMenuItemCerrTodo.setMnemonic('s');
         jMenuItemCerrTodo.setText("Cerrar Todo");
         jMenuItemCerrTodo.setEnabled(false);
         fileMenu.add(jMenuItemCerrTodo);
+        fileMenu.add(jSeparator1);
 
         jMenuItem3.setMnemonic('x');
         jMenuItem3.setText("Salir");
@@ -437,10 +443,12 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu helpMenu;
     private javax.swing.JMenuItem jMenu4;
     private javax.swing.JMenuItem jMenuAbrir;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItemCerrTodo;
     private javax.swing.JMenuItem jMenuRestBD;
     private javax.swing.JMenuItem jMenuVerDic;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JMenuBar menuBar;
     // End of variables declaration//GEN-END:variables
 

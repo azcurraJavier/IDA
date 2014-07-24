@@ -1742,6 +1742,20 @@ Sin embargo, suele ocurrir que estos recursos internos son escasos. Es por esto,
 %Estas técnicas exhiben información estática oculta detrás de los ids, esta información es importante porque da indicios de lo que un sistema realiza en su ejecución por ende es un aporte en el ámbito de Comprensión de Programas. --colocar abajo
 
 %========================================================================
+\chapter{Identifier Analyzer (IDA)}
+
+\section{Arquitectura}
+
+La herramienta IDA esta implementada con lenguaje JAVA y fue desarrollada usando el entorno de desarrollo NetBeans. IDA posee dos fuentes de entrada; una fuente corresponden a archivos  escritos en JAVA, la otra fuente corresponden a archivos escritos en XML.  
+
+\pagebreak
+\begin{figure}[ht] %[h] para here [b] para bottom [t] para top
+\centering
+\includegraphics[scale= 0.35]{./ida_arq.png}
+\caption{Arquitectura de IDA.}
+\label{ire4}
+\end{figure}
+
 \bibliographystyle{plain}%{alpha}
 \bibliography{biblo.bib}
 
