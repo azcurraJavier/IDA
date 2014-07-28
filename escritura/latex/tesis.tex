@@ -972,7 +972,6 @@ no se encuentra en ninguno de los 3 listados y las palabras \textsf{input} y \te
 
 Sin embargo, este inconveniente no lo tendrá \textbf{buscarSufijo} porque al retirar los caracteres del principio de la palabra, \textsf{input txt} será separado. Como \textsf{input} es una palabra conocida se agregará un espacio entre \textsf{fl input}. De esta manera el id queda correctamente separado \textsf{fl input txt}.\\
 
-
 \begin{algorithm}[H]%H fuerza que se genere aqui
 \LinesNumbered%enumera las lineas
 \SetKwInOut{Input}{Entrada}\SetKwInOut{Output}{Salida}
@@ -991,22 +990,22 @@ Sin embargo, este inconveniente no lo tendrá \textbf{buscarSufijo} porque al re
 \texttt{softwordDiv} $\leftarrow$ dividirCamelCase(\texttt{softwordDiv})
 
 \BlankLine
-\ForAll{$($Para cada substring \textit{\textbf{s}} separado por ` ' en \texttt{softwordDiv}$)$}{
+\ForAll{$($\textit{\textbf{s}} $|$ \textit{\textbf{s}} es un substring separado por ` ' en \texttt{softwordDiv}$)$}{
 \BlankLine
 
 \If{$($\textbf{s} no pertenece a $($\textit{\textbf{stopList}} $\cup$ \textit{\textbf{abrevList}} $\cup$ \textbf{ispellList} $))$}{
 \BlankLine
-sPrefijo $\leftarrow$ buscarPrefijo(\textit{\textbf{s}},“”)
+resultadoPrefijo $\leftarrow$ buscarPrefijo(\textit{\textbf{s}},“”)
 
-sSufijo $\leftarrow$ buscarSufijo(\textit{\textbf{s}},“”)
+resultadoSufijo $\leftarrow$ buscarSufijo(\textit{\textbf{s}},“”)
 \BlankLine
 \tcp{\textit{Se elije la división que mayor particiones hizo.}}
-\textit{\textbf{s}} $\leftarrow$ maxDivisión(sPrefijo,sSufijo)
+\textit{\textbf{s}} $\leftarrow$ maxDivisión(resultadoPrefijo,resultadoSufijo)
 
 }
 }
 \BlankLine
-\Return \texttt{softwordDiv} \tcp{\textit{Retorna el id dividido por espacios.}}
+\Return \texttt{softwordDiv} \tcp{\textit{Retorna el id dividido por ` '}}
 
 \caption{División Greedy\label{GSA}}
 \end{algorithm}
@@ -1076,6 +1075,7 @@ sSufijo $\leftarrow$ buscarSufijo(\textit{\textbf{s}},“”)
 \caption{buscarSufijo()}
 \end{function}
 
+
 \subsection{Algoritmo de División: Samurai}
 
 Esta técnica pensada por Eric Enslen, Emily Hill, Lori Pollock, Vijay-Shanker \cite{EHPV09} divide a los ids en secuencias de palabras al igual que Greedy, con la diferencia que la separación es más efectiva. La estrategia utiliza información presente en el código para llevar a cabo el objetivo. Esto permite que no sea necesario utilizar diccionarios predefinidos, además las palabras que se obtienen producto de la división no están limitadas por el contenido de estos diccionarios. De esta manera, la técnica va evolucionando con el tiempo a medida que aparezcan nuevas tecnologías y nuevas palabras se incorporen al vocabulario de los programadores.
@@ -1115,8 +1115,6 @@ Finalmente, todas las partes divididas se envían a \mbox{\textit{divisiónSoftW
 
 %b) Que se a haga antes de la primer mayúscula siguiendo con la filosofía camel-case (ejemplo: \textsf{GP Sstate} - línea 13). Para este caso, la opción correcta debe ser la a), ya que \textsf{state} debe tener mayor puntaje que \textsf{Sstate}.
 
-
-
 \begin{algorithm}
 \LinesNumbered%enumera las lineas
 \SetKwInOut{Input}{Entrada}\SetKwInOut{Output}{Salida}
@@ -1129,10 +1127,10 @@ Finalmente, todas las partes divididas se envían a \mbox{\textit{divisiónSoftW
 
 \textbf{\textit{tokenSep}} $\leftarrow $ “”
 \BlankLine
-\ForAll{$($Para cada substring \textbf{\textit{s}} separado por ` ' en \textbf{\textit{token}}$)$}{
+\ForAll{$($\textbf{\textit{s}} $|$ \textbf{\textit{s}} es un substring  separado por ` ' en \textbf{\textit{token}}$)$}{
 \BlankLine
 
-\If{$($ $\exists \{ i|esMayus(\textbf{s}[i]) \land esMinus(\textbf{s}[i+1]) \}$ $)$}{
+\If{$($ $\exists \{ i|esMayus(\textbf{s}[i])  \land  esMinus(\textbf{s}[i+1]) \}$ $)$}{
 \BlankLine
 $n \leftarrow$ length(\textbf{\textit{s}}) $-$ 1
 \BlankLine
@@ -1164,7 +1162,7 @@ $scoreAlter \leftarrow$ score(\textbf{\textit{s}}[i+1,n])
 
 \textbf{\textit{tokenSep}} $\leftarrow$ ` '
 \BlankLine
-\ForAll{$($Para cada substring \textbf{\textit{s}} separado por ` ' en \textbf{token}$)$}{
+\ForAll{$($\textbf{\textit{s}} $|$ \textbf{\textit{s}} es un substring separado por ` ' en \textbf{token}$)$}{
 \BlankLine
 \textbf{\textit{tokenSep}} $\leftarrow$ \textbf{\textit{tokenSep}} $+$ ` ' $+$ \textbf{divisiónSoftWord}(\textbf{\textit{s}},score(\textbf{\textit{s}}))
 }
@@ -1173,6 +1171,7 @@ $scoreAlter \leftarrow$ score(\textbf{\textit{s}}[i+1,n])
 
 \caption{divisiónHardWord \label{AHW}}
 \end{algorithm}
+
 
 La rutina recursiva \textit{divisiónSoftWord} (ver algoritmo \ref{ASW}) recibe como entrada un substring \textbf{\textit{s}}, el cual puede tener tres tipos de variantes: a) todos los caracteres en minúsculas, b) todos con mayúsculas, c) el primer caracter con mayúscula seguido por todas minúsculas (\textsf{Visitor}). El otro parámetro de entrada es el puntaje original \textbf{\textit{score$_{sd}$}} que corresponde a  \textbf{\textit{s}}.
 
@@ -1299,7 +1298,7 @@ Una vez que las listas de palabras y frases potenciales se confeccionan, la ejec
 \Output{\textbf{únicaExpansión} \tcp{\textit{Abreviatura expandida, o null}}}
 \BlankLine
 
-\If{$($\textit{\textbf{abrev}} $\in$ \textit{\textbf{stopList}}$)$}{
+\If{$($\textit{\textbf{abrev}} pertenece \textit{\textbf{stopList}}$)$}{
 \Return null
 }
 \BlankLine
@@ -1307,10 +1306,10 @@ listaExpansión $\leftarrow$ [ ]
 \BlankLine
 \tcp{\textit{Buscar coincidencia de acrónimo.}}
 
-\ForAll{$($Para cada frase \textit{\textbf{phrase}} en \textit{\textbf{phraseList}}$)$}{
+\ForAll{$($\textit{\textbf{phrase}} $|$ \textit{\textbf{phrase}} es una frase en \textit{\textbf{phraseList}}$)$}{
 \BlankLine
 
-\If{$($ $\exists \{$\textbf{phrase} $|$ \textit{\textbf{abrev}} es un acrónimo de \textit{\textbf{phrase}}$\}$ $)$}{
+\If{$($\textit{\textbf{abrev}} es un acrónimo de \textit{\textbf{phrase}}$)$}{
 listaExpansión.add(\textit{\textbf{phrase}}) 
 }
 }
@@ -1318,9 +1317,9 @@ listaExpansión.add(\textit{\textbf{phrase}})
 \BlankLine
 \tcp{\textit{Buscar abreviatura común.}}
 
-\ForAll{$($ Para cada palabra \textit{\textbf{word}} en  \textit{\textbf{wordList}} $)$}{
+\ForAll{$($\textit{\textbf{word}} $|$ \textit{\textbf{word}} es una palabra en  \textit{\textbf{wordList}} $)$}{
 \BlankLine
-\If{ $($ $\exists \{$\textbf{word} $|$ \textit{\textbf{abrev}} es una abreviatura de \textit{\textbf{word}}$\})$}{
+\If{ $($\textit{\textbf{abrev}} es una abreviatura de \textit{\textbf{word}}$)$}{
 listaExpansión.add(\textit{\textbf{word}}) 
 }
 
@@ -1445,7 +1444,7 @@ En las líneas 2-10 se describe el proceso de búsqueda. Si alguna de estas sent
 \tcp{\textit{Las expresiones regulares están entre comillas}}
 \BlankLine
 
-\If{ $($\textbf{patrón} prefijo $\vee$ \textit{\textbf{pa}} coincide “[a-z][aeiou]$+$” $\vee$ length(\textit{\textbf{pa}}) $>$ 3$)$ $\land$ $($\textit{\textbf{pa}} no coincide con “[a-z][aeiou][aeiou]$+$”$)$}{
+\If{ $($\textbf{patrón} prefijo $\vee$ \textit{\textbf{pa}} coincide “[a-z][\^{}aeiou]$+$” $\vee$ length(\textit{\textbf{pa}}) $>$ 3$)$ $\land$ $($\textit{\textbf{pa}} no coincide con “[a-z][aeiou][aeiou]$+$”$)$}{
 
 
 \BlankLine
@@ -1459,7 +1458,7 @@ Buscar en el Nombre del Método con “\textit{\textbf{patrón}}”
 \BlankLine
 Buscar en las Sentencias con “\textit{\textbf{patrón pa}}” y “\textit{\textbf{pa patrón}}”
 \BlankLine
-\If{$($length(\textit{\textbf{pa}} $\neq$ 2)$)$}{
+\If{$($length(\textit{\textbf{pa}}) $\neq$ 2$)$}{
 \BlankLine
 Buscar en palabras del Método con “\textit{\textbf{patrón}}”
 \BlankLine
@@ -1467,7 +1466,7 @@ Buscar en palabras que están en los Comentarios del Método con “\textit{\tex
 
 }
 
-\If{$($length(\textit{\textbf{pa}} $>$ 1)$)$ $\land$ $($\textit{\textbf{patrón}} prefijo$)$}{
+\If{$($length(\textit{\textbf{pa}}) $>$ 1$)$ $\land$ $($\textit{\textbf{patrón}} prefijo$)$}{
 \BlankLine
 \tcp{\textit{Solo se busca con patrones prefijos}}
 
@@ -1744,17 +1743,33 @@ Sin embargo, suele ocurrir que estos recursos internos son escasos. Es por esto,
 %========================================================================
 \chapter{Identifier Analyzer (IDA)}
 
-\section{Arquitectura}
-
-La herramienta IDA esta implementada con lenguaje JAVA y fue desarrollada usando el entorno de desarrollo NetBeans. IDA posee dos fuentes de entrada; una fuente corresponden a archivos  escritos en JAVA, la otra fuente corresponden a archivos escritos en XML.  
-
 \pagebreak
 \begin{figure}[ht] %[h] para here [b] para bottom [t] para top
 \centering
 \includegraphics[scale= 0.35]{./ida_arq.png}
 \caption{Arquitectura de IDA.}
-\label{ire4}
+\label{arq1}
 \end{figure}
+
+\section{Arquitectura}
+
+La herramienta IDA se implementó empleando lenguaje JAVA y se programó usando el entorno de desarrollo NetBeans\footnote[1]{https://www.netbeans.org}. 
+
+En la figura \ref{arq1} se puede apreciar la arquitectura de IDA. Esta herramienta se compone de tres etapas, la primera consiste en la extracción de datos, la segunda trata sobre la división de ids y la tercera sobre expansión de ids. A continuación se detallan cada una de ellas.
+
+La fase de extracción de datos es el primer paso, esta fase recibe como entrada un archivo JAVA (Entrada.java en figura \ref{arq1}), luego este archivo se procesa por un parser. Este parser se programó utilizando la herramienta ANTLR\footnote[2]{ANother Tool for Language Recognition. http://www.antlr.org/}. El antedicho parser, extrae y almacena en estructuras internas información estática perteneciente al código del archivo JAVA. Esta información está conformada por ids como elemento principal, literales y comentarios. Finalmente, toda esta información recolectada se almacena en un archivo XML (Entrada.xml en figura \ref{arq1}).
+
+Una vez completada la extracción de información, se da comienzo a la fase de división de ids. La misma tiene implementada dos algoritmos descriptos en el capítulo 3; uno es el algoritmo de división Greedy y el otro es el algoritmo Samurai. Ambos algoritmos reciben como entrada la información de la etapa antedicha, luego estos algoritmos se encargan de dividir los ids del archivo JAVA. Las divisiones se almacenan en estructuras internas que serán consultadas en la próxima etapa. Como estos algoritmos de división necesitan datos externos como diccionarios (en caso de Greedy) y tablas de frecuencias de palabras (en caso de Samurai), estos datos se encuentran almacenados en una base de datos embebida (parte superior de la figura \ref{arq1}). La tecnología utilizada en esta base, se la conoce como HSQLDB \footnote[1]{Hyper SQL Data Base. http://www.hsqldb.org} y al estar implementada en JAVA permite una mejor integración. Esta base también se ajusta a las necesidades ya que responde rápidamente las consultas.
+
+La tercera y última etapa tiene implementado el algoritmo de expansión convencional que también fue descripto en el capítulo 3. Este algoritmo toma los ids divididos en la etapa anterior y procede a expandirlos. Aquí también se necesitan los diccionarios, por eso se realizan consultas a HSQLDB. Una vez expandidos todos los ids, estos son reemplazados por los ids originales en el archivo de entrada, generando de esta manera el archivo de salida (Salida.java en figura \ref{arq1}).
+ 
+\section{Interfaz de IDA}
+
+En esta sección se describe la interfaz gráfica que tiene la herramienta IDA
+% para facilitar las tareas del usuario a la hora de analizar ids de un archivo JAVA. 
+Al ejecutar la herramienta, el primer menú que se visualiza es una simple barra de menús ubicada en el tope de la pantalla (ver figura nnn)..........
+
+
 
 \bibliographystyle{plain}%{alpha}
 \bibliography{biblo.bib}

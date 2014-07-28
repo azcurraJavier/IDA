@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<salida>
+	<lista_analisis_ids>
+	    
+		<nodo>
+	    	<id>"nmprs"</id>    
+	    	<div_greedy>"nm-prs"</div_greedy>	 
+	    	<div_sam>"nm-prs"</div_sam>
+	    	<exp_greedy>"name person"</exp_greedy>
+	    	<exp_sam>"name person"</exp_sam>
+	    </nodo>
+
+		<nodo>
+	    	<id>"setag"</id>    
+	    	<div_greedy>"set-a-g"</div_greedy>	 
+	    	<div_sam>"set-ag"</div_sam>
+	    	<exp_greedy>"set age gender"</exp_greedy>
+	    	<exp_sam>"set age"</exp_sam>
+	    </nodo>
+
+   		<nodo>
+	    	<id>"getgndr"</id>    
+	    	<div_greedy>"get-gnd-r"</div_greedy>	 
+	    	<div_sam>"get-gndr"</div_sam>
+	    	<exp_greedy>"get gender r"</exp_greedy>
+	    	<exp_sam>"get gender"</exp_sam>
+	    </nodo>
+
+		<nodo>
+	    	<id>"getagprs"</id>    
+	    	<div_greedy>"get-a-g-prs"</div_greedy>	 
+	    	<div_sam>"get-ag-prs"</div_sam>
+	    	<exp_greedy>"get age gender person"</exp_greedy>
+	    	<exp_sam>"get age person"</exp_sam>
+	    </nodo>
+
+	</lista_analisis_ids>
+
+	<lista_frases>
+		<frase>"name person inside"</frase>
+		<frase>"age of person should not exceed 99"</frase>
+		<frase>"gender must be male or female"</frase>
+		<frase>"invalid document!"</frase>	
+	</lista_frases>
+</salida>

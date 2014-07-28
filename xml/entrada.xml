@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<entrada>
+	<lista_ids>
+	    <id>"nmprs"</id>    
+	    <id>"setag"</id>
+	    <id>"getgndr"</id>
+	    <id>"docprs"</id>
+	</lista_ids>
+
+	<lista_frases>
+		<frase>"name person inside"</frase>
+		<frase>"age a person should not exceed 99"</frase>
+		<frase>"gender must be male or female"</frase>
+		<frase>"invalid document!"</frase>	
+	</lista_frases>
+</entrada>

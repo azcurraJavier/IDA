@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?><salida>
+<lista_analisis_ids>
+<nodo>
+<id>MyFirstProgram</id>
+<div_greedy>my-first-program</div_greedy>
+<div_sam>m-y-f-irst-p-rogram</div_sam>
+<exp_greedy>my first program</exp_greedy>
+<exp_sam>message y f irst print rogram</exp_sam>
+</nodo>
+<nodo>
+<id>args</id>
+<div_greedy>ar-gs</div_greedy>
+<div_sam>args</div_sam>
+<exp_greedy>ar gs</exp_greedy>
+<exp_sam>args</exp_sam>
+</nodo>
+<nodo>
+<id>name</id>
+<div_greedy>name</div_greedy>
+<div_sam>name</div_sam>
+<exp_greedy>name</exp_greedy>
+<exp_sam>name</exp_sam>
+</nodo>
+<nodo>
+<id>in</id>
+<div_greedy>in</div_greedy>
+<div_sam>in</div_sam>
+<exp_greedy>in</exp_greedy>
+<exp_sam>in</exp_sam>
+</nodo>
+<nodo>
+<id>main</id>
+<div_greedy>main</div_greedy>
+<div_sam>main</div_sam>
+<exp_greedy>main</exp_greedy>
+<exp_sam>main</exp_sam>
+</nodo>
+</lista_analisis_ids>
+<lista_frases>
+<frase>name</frase>
+<frase>print hello message</frase>
+<frase>caught exception</frase>
+<frase>hello</frase>
+<frase>instructor</frase>
+</lista_frases>
+</salida>
