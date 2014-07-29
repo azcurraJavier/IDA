@@ -111,7 +111,7 @@ La expansión de las abreviaturas del id a palabras completas es compleja, pero 
 
 %En este trabajo final de licenciatura, se describen técnicas conocidas que analizan ids en base a la expansión de sus abreviaturas. También se describe una herramienta desarrollada en JAVA llamada \mbox{\textit{Identifier Analyzer}} (IDA) que implementan algunas de estas estrategias. Luego, se explica los resultados obtenidos por la herramienta de acuerdo a distintos casos de estudio. Finalmente se arriba a conclusiones.
 
-En este trabajo final de licenciatura, se describe \mbox{\textit{Identifier Analyzer}} (IDA) una herramienta útil para el análisis de identificadores de programas escritos en java. IDA implementa técnicas de expansión de las abreviaturas de los identificadores con el propósito de facilitar la comprensión de los sistemas de software. 
+En este trabajo final de licenciatura, se describe \mbox{\textit{Identifier Analyzer}} (IDA) una herramienta útil para el análisis de identificadores de programas escritos en JAVA. IDA implementa técnicas de expansión de las abreviaturas de los identificadores con el propósito de facilitar la comprensión de los sistemas de software. 
 
 %Pensar en estrategias que faciliten las tediosas tareas que diariamente conllevan al crecimiento de los sistemas nos da incapie a iniciarnos en la investigación de herramientas automatizadas que posibiliten el reemplazo del esfuerzo manual que realizan los ingenieros de software a la hora de interpretar un programa.
 
@@ -1743,6 +1743,12 @@ Sin embargo, suele ocurrir que estos recursos internos son escasos. Es por esto,
 %========================================================================
 \chapter{Identifier Analyzer (IDA)}
 
+\section{Introducción}
+
+En este capítulo se describe una herramienta útil que se construyó a partir de la teoría explicada en el capítulo anterior. Esta herramienta, conocida como Identifier Analyzer (IDA), se encarga de analizar los ids que están presentes en distintos archivos JAVA. Estos archivos son pasados como entrada a elección del usuario, luego la herramienta permite aplicar distintas técnicas/algoritmos que analizan los ids. El resultado de aplicar estas técnicas, consiste en expandir los ids que están abreviados a palabras completas. Una vez realizada la expansión, IDA le permite al usuario reemplazar los ids del archivo original con el resultado de la expansión, creando así un nuevo archivo con código más legible. La iniciativa del desarrollo de IDA surgió porque en la actualidad no existe otra herramienta en el ámbito de la CP con similares características.
+
+En las próximas secciones se describen los distintos módulos que IDA posee. Para comenzar, en la próxima sección se hará una descripción de la arquitectura.
+
 \pagebreak
 \begin{figure}[ht] %[h] para here [b] para bottom [t] para top
 \centering
@@ -1765,7 +1771,7 @@ La tercera y última etapa tiene implementado el algoritmo de expansión convenc
  
 \section{Interfaz de IDA}
 
-En esta sección se describe la interfaz gráfica que tiene la herramienta IDA
+En esta sección se describe la interfaz gráfica que tiene la herramienta IDA.
 % para facilitar las tareas del usuario a la hora de analizar ids de un archivo JAVA. 
 Al ejecutar la herramienta, el primer menú que se visualiza es una simple barra de menús ubicada en el tope de la pantalla (ver figura nnn)..........
 

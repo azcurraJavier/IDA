@@ -33,5 +33,6 @@
 \contentsline {subsection}{\numberline {3.4.6}Herramienta: Identifier Restructuring}{57}
 \contentsline {section}{\numberline {3.5}Conclusiones}{62}
 \contentsline {chapter}{\numberline {4}Identifier Analyzer (IDA)}{63}
-\contentsline {section}{\numberline {4.1}Arquitectura}{64}
-\contentsline {section}{\numberline {4.2}Interfaz de IDA}{65}
+\contentsline {section}{\numberline {4.1}Introducci\IeC {\'o}n}{63}
+\contentsline {section}{\numberline {4.2}Arquitectura}{64}
+\contentsline {section}{\numberline {4.3}Interfaz de IDA}{65}

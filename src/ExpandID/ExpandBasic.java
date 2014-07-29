@@ -1,6 +1,5 @@
 package ExpandID;
 
-import DictionaryDB.ConnectionDB;
 import DictionaryDB.OperationDB;
 import Listas.Clase;
 import Listas.Comentario;

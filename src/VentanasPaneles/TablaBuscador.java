@@ -383,7 +383,7 @@ public class TablaBuscador extends javax.swing.JPanel {
 
         jScrollPaneRef.setBorder(javax.swing.BorderFactory.createTitledBorder("Referencias"));
 
-        jPanelHideCol.setBorder(javax.swing.BorderFactory.createTitledBorder("Columnas"));
+        jPanelHideCol.setBorder(javax.swing.BorderFactory.createTitledBorder("Ocultar Columnas"));
 
         jButtonRed.setText("<-Reducir");
         jButtonRed.setEnabled(false);
@@ -564,16 +564,56 @@ public class TablaBuscador extends javax.swing.JPanel {
 
         if (tablaElem.getColumnCount() > 7) {
             jButtonRed.setEnabled(true);
+            addCheckBox();
         }
-        
+
         //escribir xml de salida
 //        WriteXMLHandler wXml = new WriteXMLHandler(setIdExtract, splitPanel.getMapIdsGreedy(), splitPanel.getMapIdsSamurai(), 
 //                splitPanel.getMapIdsExGreMap(), splitPanel.getMapIdsExSamurai(), ExpandBasic.getFrasesCap());
 //        wXml.write("prueba");
-        
-        
-        
+
     }//GEN-LAST:event_jButtonAnId1ActionPerformed
+
+    private void addCheckBox() {
+
+        int colNum = modeloTabla.getColumnCount();
+
+        int colSamurai = 0;
+
+        for (int j = 0; j < colNum; j++) {//veo si la columna ya existe
+            if (modeloTabla.getColumnName(j).equals("Expansión de Samurai")) {
+                colSamurai = j;
+                break;
+            }
+        }
+
+        modeloTabla.addColumnEditable(colNum);
+
+        modeloTabla.addColumn("Samurai?");
+
+        tablaElem.getColumnModel().getColumn(colNum).setCellEditor(new MyCellEditor());
+        tablaElem.getColumnModel().getColumn(colNum).setCellRenderer(new MyCellRender());
+
+        for (int i = 0; i < modeloTabla.getRowCount(); i++) {
+            //agrega checkbox 
+            modeloTabla.setValueAt(true, i, colNum);
+
+            //resalta expansion samurai
+            String idSam = modeloTabla.getValueAt(i, colSamurai).toString();
+            modeloTabla.setValueAt("<html><b>" + idSam + "</b></html>", i, colSamurai);
+
+        }
+
+        tablaElem.autoAjuste();
+
+        tablaElem.addMouseListener(new java.awt.event.MouseAdapter() {
+           public void mousePressed(java.awt.event.MouseEvent evt) {
+               tablaElemMousePressed3(evt);
+           }
+        });
+
+    }
+
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         Principal.getDicPanel().setVisible(true);
@@ -611,10 +651,9 @@ public class TablaBuscador extends javax.swing.JPanel {
 
             int nroLine = m.getNumLinea();
             String id = m.getNomId();
-            
-            
+
             String idSplit = splitPanel.getMapIdsSamurai().get(id);
-            
+
             String exp = splitPanel.getMapIdsExSamurai().get(idSplit);
 
 //         }
@@ -745,6 +784,49 @@ public class TablaBuscador extends javax.swing.JPanel {
         modelRow = tablaElemRef.convertRowIndexToModel(row);
 
         codigoPanel.setHighlight(text, Integer.parseInt(modeloTablaRef.getValueAt(modelRow, 0).toString()), Color.orange);
+    }
+
+    private void tablaElemMousePressed3(java.awt.event.MouseEvent evt) {
+
+        int colNum = tablaElem.getSelectedColumn();         
+        
+        if (!modeloTabla.getColumnName(colNum).equals("Samurai?")) {
+            return;
+        }
+
+        int row = tablaElem.getSelectedRow();
+
+        boolean b = (boolean) modeloTabla.getValueAt(row, colNum);
+
+        String idSam="";
+        
+        if (!b) {//samurai
+
+            if (!modeloTabla.getValueAt(row, colNum - 1).toString().contains("<html>")) {
+                 idSam = modeloTabla.getValueAt(row, colNum - 1).toString();
+                modeloTabla.setValueAt("<html><b>" + idSam + "</b></html>", row, colNum - 1);
+            }
+            
+            if (modeloTabla.getValueAt(row, colNum - 2).toString().contains("<html>")) {
+                idSam = modeloTabla.getValueAt(row, colNum - 2).toString();
+                modeloTabla.setValueAt(cleanHtml(idSam), row, colNum - 2);
+            }
+
+        } else {//greedy
+
+            if (!modeloTabla.getValueAt(row, colNum - 2).toString().contains("<html>")) {
+                 idSam = modeloTabla.getValueAt(row, colNum - 2).toString();
+                modeloTabla.setValueAt("<html><b>" + idSam + "</b></html>", row, colNum - 2);
+            }
+            
+            if (modeloTabla.getValueAt(row, colNum - 1).toString().contains("<html>")) {                
+                
+                idSam = modeloTabla.getValueAt(row, colNum - 1).toString();
+                modeloTabla.setValueAt(cleanHtml(idSam), row, colNum - 1);
+            }
+
+        }
+
     }
 
     //permite sacar el html limpiando los valores
