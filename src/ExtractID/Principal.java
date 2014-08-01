@@ -164,6 +164,11 @@ public class Principal extends javax.swing.JFrame {
         jMenuItemCerrTodo.setMnemonic('s');
         jMenuItemCerrTodo.setText("Cerrar Todo");
         jMenuItemCerrTodo.setEnabled(false);
+        jMenuItemCerrTodo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemCerrTodoActionPerformed(evt);
+            }
+        });
         fileMenu.add(jMenuItemCerrTodo);
         fileMenu.add(jSeparator1);
 
@@ -344,6 +349,14 @@ public class Principal extends javax.swing.JFrame {
         a.setVisible(true);
         
     }//GEN-LAST:event_jMenu4ActionPerformed
+
+    private void jMenuItemCerrTodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCerrTodoActionPerformed
+
+        ListaClase.clear();
+        jTabbedEsp.removeAll();
+        jMenuItemCerrTodo.setEnabled(false);        
+        
+    }//GEN-LAST:event_jMenuItemCerrTodoActionPerformed
 
     public static String getStackTrace(final Throwable throwable) {
         final StringWriter sw = new StringWriter();

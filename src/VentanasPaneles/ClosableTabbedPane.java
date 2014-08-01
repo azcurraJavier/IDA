@@ -162,5 +162,5 @@ public class ClosableTabbedPane extends JTabbedPane{
         return choice == 0; // if returned false tab closing will be
                                                 // canceled
     }
-
-}
+    
+    }

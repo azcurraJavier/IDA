@@ -709,20 +709,20 @@ localVariableDeclaration returns [Map<String,Declaracion> lisDecl]
 @init{   
     $lisUsosId = new ArrayList<UsoId>();
 }
-    :   b1 = block {$lisUsosId.addAll(b1.lisUsosId);}
+    :   b1 = block {if(b1!=null){$lisUsosId.addAll(b1.lisUsosId);}}
             
     |   ('assert'
         )
         expression (':' expression)? ';'
     |   'assert'  expression (':' expression)? ';'            
-    |   'if' p1 = parExpression s1 = statement ('else' s2 = statement)?{$lisUsosId.addAll(p1); $lisUsosId.addAll(s1); $lisUsosId.addAll(s2);}
+    |   'if' p1 = parExpression s1 = statement ('else' s2 = statement)?{if(p1!=null){$lisUsosId.addAll(p1);}if(s1!=null){$lisUsosId.addAll(s1);} if(s2!=null){$lisUsosId.addAll(s2);}}
     |   forstatement
-    |   'while' p2 = parExpression s3 = statement {$lisUsosId.addAll(p2); $lisUsosId.addAll(s3);}
+    |   'while' p2 = parExpression s3 = statement {if(p2!=null){$lisUsosId.addAll(p2);} if(s3!=null){$lisUsosId.addAll(s3);}}
     |   'do' statement 'while' parExpression ';'
     |   trystatement
     |   'switch' parExpression '{' switchBlockStatementGroups '}'
     |   'synchronized' parExpression block
-    |   'return' ( r1 = expression {$lisUsosId.addAll(r1);} )? ';'
+    |   'return' ( r1 = expression {if(r1!=null){$lisUsosId.addAll(r1);}} )? ';'
     |   'throw' expression ';'
     |   'break'
             (IDENTIFIER
@@ -730,7 +730,7 @@ localVariableDeclaration returns [Map<String,Declaracion> lisDecl]
     |   'continue'
             (IDENTIFIER
             )? ';'
-    |   e1 = expression ';' {$lisUsosId.addAll(e1);}    
+    |   e1 = expression ';' {if(e1!=null){$lisUsosId.addAll(e1);}}    
     |   IDENTIFIER ':' statement
     |   ';'
 
@@ -838,37 +838,37 @@ assignmentOperator returns [String s]
 
 conditionalExpression returns [ArrayList<UsoId> lisUsosId]
     :   c1 = conditionalOrExpression {$lisUsosId = c1;}
-        ('?' e1 = expression {$lisUsosId.addAll(e1);} ':' c2 = conditionalExpression {$lisUsosId.addAll(c2);}
+        ('?' e1 = expression {$lisUsosId.addAll(e1);} ':' c2 = conditionalExpression {if(c2!=null){$lisUsosId.addAll(c2);}}
         )?
     ;
 
 conditionalOrExpression returns [ArrayList<UsoId> lisUsosId]
     :   c1 = conditionalAndExpression {$lisUsosId = c1;}
-        ('||' c2 = conditionalAndExpression {$lisUsosId.addAll(c2);}
+        ('||' c2 = conditionalAndExpression {if(c2!=null){$lisUsosId.addAll(c2);}}
         )*
     ;
 
 conditionalAndExpression returns [ArrayList<UsoId> lisUsosId]
     :   i1 = inclusiveOrExpression {$lisUsosId = i1;}
-        ('&&' i2 = inclusiveOrExpression {$lisUsosId.addAll(i2);}
+        ('&&' i2 = inclusiveOrExpression {if(i2!=null){$lisUsosId.addAll(i2);}}
         )*
     ;
 
 inclusiveOrExpression returns [ArrayList<UsoId> lisUsosId]
     :   e1 = exclusiveOrExpression {$lisUsosId = e1;}
-        ('|' e2 = exclusiveOrExpression {$lisUsosId.addAll(e2);}
+        ('|' e2 = exclusiveOrExpression {if(e2!=null){$lisUsosId.addAll(e2);}}
         )*
     ;
 
 exclusiveOrExpression returns [ArrayList<UsoId> lisUsosId]
     :   a1 = andExpression {$lisUsosId = a1;}
-        ('^' a2 = andExpression {$lisUsosId.addAll(a2);}
+        ('^' a2 = andExpression {if(a2!=null){$lisUsosId.addAll(a2);}}
         )*
     ;
 
 andExpression returns [ArrayList<UsoId> lisUsosId]
     :   e1 = equalityExpression {$lisUsosId = e1;}
-        ('&' e2 = equalityExpression {$lisUsosId.addAll(e2);}
+        ('&' e2 = equalityExpression {if(e2!=null){$lisUsosId.addAll(e2);}}
         )*
     ;
 
@@ -878,7 +878,7 @@ equalityExpression returns [ArrayList<UsoId> lisUsosId]
             (   '=='
             |   '!='
             )
-            i2 = instanceOfExpression {$lisUsosId.addAll(i2);}
+            i2 = instanceOfExpression {if(i2!=null){$lisUsosId.addAll(i2);}}
         )*
     ;
 
@@ -889,8 +889,8 @@ instanceOfExpression returns [ArrayList<UsoId> lisUsosId]
     ;
 
 relationalExpression returns [ArrayList<UsoId> lisUsosId]
-    :   h1 = shiftExpression {$lisUsosId = h1;}
-        (relationalOp h2 = shiftExpression{$lisUsosId.addAll(h2);}
+    :   h1 = shiftExpression {if(h1!=null){$lisUsosId = h1;}}
+        (relationalOp h2 = shiftExpression{if(h2!=null){$lisUsosId.addAll(h2);}}
         )*
     ;
 
@@ -903,7 +903,7 @@ relationalOp
 
 shiftExpression returns [ArrayList<UsoId> lisUsosId]
     :   a1 = additiveExpression {$lisUsosId = a1;}
-        (shiftOp a2 = additiveExpression {$lisUsosId.addAll(a2);}
+        (shiftOp a2 = additiveExpression {if(a2!=null){$lisUsosId.addAll(a2);}}
         )*
     ;
 
@@ -921,7 +921,7 @@ additiveExpression returns [ArrayList<UsoId> lisUsosId]
             (   '+'
             |   '-'
             )
-            m2 = multiplicativeExpression {$lisUsosId.addAll(m2);}
+            m2 = multiplicativeExpression {if(m2!=null){$lisUsosId.addAll(m2);}}
          )*
     ;
 
@@ -933,7 +933,7 @@ multiplicativeExpression returns [ArrayList<UsoId> lisUsosId]
             |   '/'
             |   '%'
             )
-            u2 = unaryExpression {$lisUsosId.addAll(u2);}
+            u2 = unaryExpression {if(u2!=null){$lisUsosId.addAll(u2);}}
         )*
     ;
 
@@ -950,6 +950,9 @@ unaryExpression  returns [ArrayList<UsoId> lisUsosId]
     ;
 
 unaryExpressionNotPlusMinus returns [ArrayList<UsoId> lisUsosId]
+@init{
+    $lisUsosId = new ArrayList<UsoId>(); 
+}
     :   '~' unaryExpression
     |   '!' unaryExpression
     |   castExpression

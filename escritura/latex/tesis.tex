@@ -1773,7 +1773,15 @@ La tercera y última etapa tiene implementado el algoritmo de expansión convenc
 
 En esta sección se describe la interfaz gráfica que tiene la herramienta IDA.
 % para facilitar las tareas del usuario a la hora de analizar ids de un archivo JAVA. 
-Al ejecutar la herramienta, el primer menú que se visualiza es una simple barra de menús ubicada en el tope de la pantalla (ver figura nnn)..........
+Al ejecutar la herramienta, el primer componente de interacción es una simple barra de menús ubicada en el tope de la pantalla (ver figura nn). Al hacer click en `Archivo' de la barra antes mencionada y luego en `Abrir Archivo(s) Java' del menú desplegable, se muestra una ventana de selección de archivos. Aquí el usuario puede elegir el/los archivo/s JAVA de entrada (ver figura nn). Una vez seleccionado el/los archivo/s JAVA, comienza la ejecución del parser que se encarga de extraer ids, comentarios y literales. 
+
+Al finalizar la ejecución del parser, se visualiza un panel que contiene arriba el código leído del archivo JAVA (ver figura nn), por otro lado, en la parte inferior los elementos extraídos del código (ver figura nn). 
+
+Para proceder con el análisis de ids, se debe pulsar el botón `Ejecutar Análisis' ubicado en el panel `Análisis de Identificadores' (ver figura mm), al hacerlo se abre un nuevo panel que en la parte izquierda inferior se encuentran listados los ids encontrados (ver figura mm). En el panel central superior se pueden seleccionar los dos algoritmos de división de ids (greedy y samurai), el botón `Divir' del mismo panel ejecuta la técnica seleccionada mostrando en el panel inferior la tabla con los resultados. De la misma manera, en los paneles subsiguientes de la derecha, permiten expandir las abreviaturas obtenidas en el panel de división. Pulsando el botón `Expandir' ejecuta el algoritmo de expansión básico tomando como entrada los ids divididos de greedy o samurai. Los resultados se muestran en el panel de abajo. Las tres tablas mostradas en los tres paneles inferiores ayudan al usuario a comparar los resultados obtenidos.
+
+Al cerrar la ventana del panel de análisis, los resultados obtenidos son cargados en la parte inferior del panel principal (ver figura nn). En la última columna se pueden apreciar múltiples casillas de selección consultando al usuario si desea elegir la expansión realizada a samurai o a greedy. Una vez concluida esta elección, se procede al panel `Expandir Ids en Código', este panel contiene dos botones, al pulsar `Expandir' se procede a reemplazar los ids del código de acuerdo a lo seleccionado en la tabla de ids extraídos. En caso retroceder con la acción de reemplazo se puede pulsar en el botón `deshacer' y restablecer el código original. Para finalizar, al pulsar el botón `Crear'  en el panel `Archivo de Salida' crea un nuevo archivo con los nuevos ids expandidos.
+
+\chapter{Casos de Estudio}
 
 
 

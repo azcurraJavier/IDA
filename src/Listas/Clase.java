@@ -352,10 +352,10 @@ public class Clase {
 
         }
         
-        if(!encontroDecl){
-            varSinDeclarar = true;
-            varSinDecl ="Existen variables sin declarar: " + usoId.getId() + " en línea: " + usoId.getLinea();
-        }
+//        if(!encontroDecl){
+//            varSinDeclarar = true;
+//            varSinDecl ="Existen variables sin declarar: " + usoId.getId() + " en línea: " + usoId.getLinea();
+//        }
     }
     
     public void buscarUsoId(ArrayList<UsoId> lUsoId) {

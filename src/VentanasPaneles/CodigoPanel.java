@@ -154,6 +154,19 @@ public class CodigoPanel extends javax.swing.JPanel {
         //jTextAreaCod.setCaretPosition(6);
         jEditorPaneCod.setCaretPosition(6);
     }
+    
+    public void restartCode(){
+        
+        String htmlCode = codeHtml(claseAsociada.getCode());
+        
+        //jTextAreaCod.setText(buffer.toString());
+        jEditorPaneCod.setText(htmlCode);
+
+        //jTextAreaCod.setCaretPosition(6);
+        jEditorPaneCod.setCaretPosition(6);
+    
+    
+    }
 
 // Creates highlights around all occurrences of pattern in textComp
     private void highlight(JTextComponent textComp, String pattern, int line, Color color) {

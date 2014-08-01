@@ -15,7 +15,9 @@ public class MyCellEditor extends DefaultCellEditor implements TableCellRenderer
     
     /** Constructor de clase */
     public MyCellEditor() {
-        super( new JCheckBox() );        
+        super( new JCheckBox() );  
+        component.setFocusCycleRoot(false);
+        component.setFocusable(false);
     }
 
     /** retorna valor de celda
