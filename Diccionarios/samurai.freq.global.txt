@@ -16,3 +16,7 @@ lst;30
 err;20
 ie;24
 chk;35
+min;35
+max;30
+performed;25
+num;20

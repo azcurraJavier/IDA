@@ -713,16 +713,16 @@ localVariableDeclaration returns [Map<String,Declaracion> lisDecl]
             
     |   ('assert'
         )
-        expression (':' expression)? ';'
+        exp1 = expression (':' exp2 = expression {$lisUsosId.addAll(exp2);})? ';' {$lisUsosId.addAll(exp1);}
     |   'assert'  expression (':' expression)? ';'            
     |   'if' p1 = parExpression s1 = statement ('else' s2 = statement)?{if(p1!=null){$lisUsosId.addAll(p1);}if(s1!=null){$lisUsosId.addAll(s1);} if(s2!=null){$lisUsosId.addAll(s2);}}
-    |   forstatement
+    |   f1 = forstatement {if(f1!=null){$lisUsosId.addAll(f1);}}
     |   'while' p2 = parExpression s3 = statement {if(p2!=null){$lisUsosId.addAll(p2);} if(s3!=null){$lisUsosId.addAll(s3);}}
-    |   'do' statement 'while' parExpression ';'
-    |   trystatement
+    |   'do' dos1 = statement 'while' pa1 = parExpression ';' {if(dos1!=null){$lisUsosId.addAll(dos1);} $lisUsosId.addAll(pa1);} 
+    |   tr1 = trystatement {if(tr1!=null){$lisUsosId.addAll(tr1);}}
     |   'switch' parExpression '{' switchBlockStatementGroups '}'
     |   'synchronized' parExpression block
-    |   'return' ( r1 = expression {if(r1!=null){$lisUsosId.addAll(r1);}} )? ';'
+    |   'return' ( r1 = expression {$lisUsosId.addAll(r1);} )? ';'
     |   'throw' expression ';'
     |   'break'
             (IDENTIFIER
@@ -753,23 +753,26 @@ switchLabel
     ;
 
 
-trystatement 
-    :   'try' block
-        (   catches 'finally' block
-        |   catches
-        |   'finally' block
+trystatement returns [ArrayList<UsoId> lisUsosId]
+    :   'try' b1 = block {if(b1!=null){$lisUsosId.addAll(b1.lisUsosId);}}
+        (   ca1 = catches 'finally' b2 = block {if(b2!=null){$lisUsosId.addAll(b2.lisUsosId);} $lisUsosId.addAll(ca1);}
+        |   ca2 = catches {$lisUsosId.addAll(ca2);}
+        |   'finally' b3 = block {if(b3!=null){$lisUsosId.addAll(b3.lisUsosId);}}
         )
      ;
 
-catches 
-    :   catchClause
-        (catchClause
+catches returns [ArrayList<UsoId> lisUsosId]
+@init{   
+    $lisUsosId = new ArrayList<UsoId>();
+}
+    :   c1 = catchClause {$lisUsosId = c1;}
+        (c2 = catchClause {if(c2!=null){$lisUsosId.addAll(c2);}}
         )*
     ;
 
-catchClause 
+catchClause returns [ArrayList<UsoId> lisUsosId]
     :   'catch' '(' formalParameter
-        ')' block 
+        ')' b1 = block {if(b1!=null){$lisUsosId.addAll(b1.lisUsosId);}}
     ;
 
 formalParameter 
@@ -778,20 +781,23 @@ formalParameter
         )*
     ;
 
-forstatement 
+forstatement returns [ArrayList<UsoId> lisUsosId]
+@init{   
+    $lisUsosId = new ArrayList<UsoId>();
+} 
     :   
         // enhanced for loop
         'for' '(' variableModifiers type IDENTIFIER ':' 
-        expression ')' statement
+        expression ')' s2 = statement {if(s2!=null){$lisUsosId.addAll(s2);}}
             
         // normal for loop
     |   'for' '(' 
                 (forInit
                 )? ';' 
-                (expression
+                ( e1 = expression {$lisUsosId.addAll(e1);}
                 )? ';' 
-                (expressionList
-                )? ')' statement
+                ( e2 = expressionList {if(e2!=null){$lisUsosId.addAll(e2);}}
+                )? ')' s1 = statement {if(s1!=null){$lisUsosId.addAll(s1);}}
     ;
 
 forInit
@@ -957,7 +963,7 @@ unaryExpressionNotPlusMinus returns [ArrayList<UsoId> lisUsosId]
     |   '!' unaryExpression
     |   castExpression
     |   p = primary {$lisUsosId = p;}
-        (selector //veresto
+        (s1 = selector {$lisUsosId.addAll(s1);}
         )*
         (   '++'
         |   '--'
@@ -975,26 +981,30 @@ castExpression
 primary  returns [ArrayList<UsoId> lisUsosId]
 @init{
     $lisUsosId = new ArrayList<UsoId>(); //lista que se crea en nodo 'hoja'
-    UsoId ui = null;
-    boolean esMet = false;
+    UsoId ui = null;    
 }
-    :   parExpression 
+    :   p1 = parExpression {$lisUsosId = p1;}
     |   'this'
-        ('.' Id1 = IDENTIFIER //la idea es setear global this.globalVar.globalVar la ultima
+        ('.' Id1 = IDENTIFIER {if(Id1 != null){ui = new UsoId(Id1.getText(),Id1.getLine(),false); $lisUsosId.add(ui);}}
         )* 
         //setea que son metodos si Id1 lo indica
         (ids1 = identifierSuffix 
-        {if(ids1.esMetodo){$lisUsosId.addAll(ids1.lisUsosId);esMet=true;}}
-        )?
-        {if(Id1 != null){ui = new UsoId(Id1.getText(),Id1.getLine(),"global",esMet); $lisUsosId.add(ui);}}
+        {//remueve el ultimo y lo reinserta como metodo = true
+        if(ids1.esMetodo && ui != null){$lisUsosId.remove($lisUsosId.size() - 1);ui.setEsMetodo(true); $lisUsosId.add(ui);}
 
-    |   Id2 = IDENTIFIER
-        ('.' IDENTIFIER //no se considera
+        if(ids1.esMetodo){$lisUsosId.addAll(ids1.lisUsosId);}}
+        )?        
+
+    |   Id2 = IDENTIFIER {if(Id2 != null){ui = new UsoId(Id2.getText(),Id2.getLine(),false); $lisUsosId.add(ui);}}
+        ('.' Id3 = IDENTIFIER {if(Id3 != null){ui = new UsoId(Id3.getText(),Id3.getLine(),false); $lisUsosId.add(ui);}}
         )*                      //setea que son metodos si Id2 lo indica
         (ids2 = identifierSuffix 
-        {if(ids2.esMetodo){$lisUsosId.addAll(ids2.lisUsosId); esMet=true;}}
+        {//remueve el ultimo y lo reinserta como metodo = true
+        if(ids2.esMetodo && ui != null){$lisUsosId.remove($lisUsosId.size() - 1);ui.setEsMetodo(true); $lisUsosId.add(ui);}
+
+        if(ids2.esMetodo){$lisUsosId.addAll(ids2.lisUsosId);}}
         )?
-        {ui = new UsoId(Id2.getText(),Id2.getLine(),esMet); $lisUsosId.add(ui);}
+        
     |   'super'
         s1 = superSuffix {$lisUsosId = s1;}
     |   literal
@@ -1040,10 +1050,14 @@ identifierSuffix returns [ArrayList<UsoId> lisUsosId, boolean esMetodo]
     ;
 
 
-selector
-    :   '.' IDENTIFIER
-        (arguments
-        )?
+selector returns [ArrayList<UsoId> lisUsosId]
+@init{
+    $lisUsosId = new ArrayList<UsoId>();
+    boolean esMet = false;    
+}
+    :   '.' id1 = IDENTIFIER 
+        (a1 = arguments {$lisUsosId = a1; esMet = true;}
+        )? {$lisUsosId.add(new UsoId(id1.getText(),id1.getLine(),"global",esMet));}
     |   '.' 'this'
     |   '.' 'super'
         superSuffix
@@ -1132,7 +1146,10 @@ literal
     |   FLOATLITERAL
     |   DOUBLELITERAL
     |   CHARLITERAL    //captura de literales string lista global
-    |   str = STRINGLITERAL {lisLiterales.add(new Literal(str.getLine(),str.getText()));}
+    |   str = STRINGLITERAL {String lit = str.getText(); 
+        if(!(lit.replaceAll("\"", "").trim().isEmpty())){
+            lisLiterales.add(new Literal(str.getLine(),lit));
+        }}
     |   TRUE
     |   FALSE
     |   NULL

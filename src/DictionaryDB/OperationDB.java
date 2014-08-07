@@ -242,6 +242,24 @@ public abstract class OperationDB {
         return res;
     }
     
+    public static boolean clearDB() {
+
+        boolean res = false;      
+
+        //se ejecuta la consulta
+        try {
+            //borra elementos
+            PreparedStatement pstm = ConnectionDB.getConn().prepareStatement("DROP SCHEMA PUBLIC CASCADE");
+            pstm.execute();
+            pstm.close(); 
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getLocalizedMessage());
+        }
+
+        return res;
+    }
+    
     
     private static String convertLike(String w){
         

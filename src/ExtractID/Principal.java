@@ -197,6 +197,11 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuRestBD.setMnemonic('y');
         jMenuRestBD.setText("Restablecer B.D.");
+        jMenuRestBD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuRestBDActionPerformed(evt);
+            }
+        });
         editMenu.add(jMenuRestBD);
 
         menuBar.add(editMenu);
@@ -357,6 +362,12 @@ public class Principal extends javax.swing.JFrame {
         jMenuItemCerrTodo.setEnabled(false);        
         
     }//GEN-LAST:event_jMenuItemCerrTodoActionPerformed
+
+    private void jMenuRestBDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuRestBDActionPerformed
+       
+        DictionaryDB.Dictionary.restartBd();        
+        
+    }//GEN-LAST:event_jMenuRestBDActionPerformed
 
     public static String getStackTrace(final Throwable throwable) {
         final StringWriter sw = new StringWriter();

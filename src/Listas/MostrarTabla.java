@@ -9,7 +9,7 @@ public class MostrarTabla {
     private String nomId;
     private String tipo;
     private String modificador;
-    private int numApa;
+    private int numApa;        //ver este porque creo que no se usa
     private String strAsignado;//solo en caso de literales
     private int numLinea;
     

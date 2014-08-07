@@ -49,7 +49,7 @@ public class ExpandBasic {
             //limpieza
             linea = linea.replaceAll("\"", "").trim();
             //excluir simbolos
-            linea = linea.replaceAll("[^\\dA-Za-z ]", "");
+            linea = linea.replaceAll("[^A-Za-z ]", "");
             
             if(linea.isEmpty()){
                 continue;
@@ -62,7 +62,7 @@ public class ExpandBasic {
 
             for (String pal : arrayCom) {
                 
-                if(pal == null || pal.isEmpty()){
+                if(pal == null || pal.isEmpty() || pal.length()<2){
                     continue;
                 }
 
@@ -107,28 +107,27 @@ public class ExpandBasic {
      
         //procesarFrases();        
         
-        w = w.toLowerCase();
-        
+        w = w.toLowerCase();        
 
         if (OperationDB.select("stop_dict", w)) {            
             return w;
         }
 
+        //acronimo
+        String cand = expandirAcro(w);
+
+        if (cand != null) {
+            //listExp.add(cand);
+            return cand;
+        }        
+        
         //abreviacion comun
-        String cand = expandirAbrev(w);
+        cand = expandirAbrev(w);
 
         if (cand != null) {
             //listExp.add(cand);
             return cand;
         }
-
-        //acronimo
-        cand = expandirAcro(w);
-
-        if (cand != null) {
-            //listExp.add(cand);
-            return cand;
-        }                
         
         //Busqueda en diccionario - ultimo recurso
         if (w.length()>2 && listExp.isEmpty()) {
@@ -192,6 +191,17 @@ public class ExpandBasic {
     }
 
     private static String expandirAcro(String w) {
+        
+        if(w == null){
+            return null;
+        }        
+        
+        int len = w.length();
+        
+        //solo se consideran aquellos de 2 o 3 caracteres
+        if(len != 2 && len != 3){
+            return null;
+        }
 
         for (String frase : frasesCap) {
             

@@ -329,7 +329,7 @@ public class Clase {
         if(usoId.getId().equals("equals") || usoId.getId().equals("System")){//palabra que lo toma como identificadorpor ende se debe excluir
             return;            
         }
-            
+        
         for (ClassBodyDecl c : this.LisClassBodyDecl) {
 
             if(usoId.isEsMetodo() == false && c.getLisDecl() != null && !c.getLisDecl().isEmpty() &&

@@ -266,7 +266,8 @@ listaExpansión $\leftarrow$ [ ]
 \BlankLine
 
 \If{$($\textit{\textbf{abrev}} es un acrónimo de \textit{\textbf{phrase}}$)$}{
-listaExpansión.add(\textit{\textbf{phrase}}) 
+%listaExpansión.add(\textit{\textbf{phrase}}) 
+\Return \textit{\textbf{phrase}} 
 }
 }
 
@@ -276,7 +277,8 @@ listaExpansión.add(\textit{\textbf{phrase}})
 \ForAll{$($\textit{\textbf{word}} $|$ \textit{\textbf{word}} es una palabra en  \textit{\textbf{wordList}} $)$}{
 \BlankLine
 \If{ $($\textit{\textbf{abrev}} es una abreviatura de \textit{\textbf{word}}$)$}{
-listaExpansión.add(\textit{\textbf{word}}) 
+%listaExpansión.add(\textit{\textbf{word}}) 
+\Return \textit{\textbf{word}}
 }
 
 }
@@ -284,11 +286,11 @@ listaExpansión.add(\textit{\textbf{word}})
 \BlankLine
 \tcp{\textit{Si no hay éxito, buscar en el diccionario.}}
 
-\If{$($isEmpty$($listaExpansión$))$}{
-\BlankLine
+%\If{$($isEmpty$($listaExpansión$))$}{
+%\BlankLine
 listaCandidatos $\leftarrow$ buscarDiccionario(\textit{\textbf{abrev}},\textit{\textbf{dicc}})
 listaExpansión.add(listaCandidatos)
-}
+%}
 
 
 \BlankLine

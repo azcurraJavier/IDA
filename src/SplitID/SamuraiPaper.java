@@ -3,6 +3,7 @@ package SplitID;
 import DictionaryDB.Dictionary;
 import ExpandID.ExpandBasic;
 import Listas.Clase;
+import Listas.MostrarTabla;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,11 +30,22 @@ public abstract class SamuraiPaper {
  
         //}
         
+        
+
+
+        
         if(ExpandBasic.getPalabrasCap() != null){
             for(String pal:ExpandBasic.getPalabrasCap()){
                 addTokenLocalFreqTable(pal, 1);
             }
         }
+        
+        
+        for(MostrarTabla mt : claseAc.getIdTablaClase()){            
+                                                  //referencias+declaracion=1 
+            addTokenLocalFreqTable(mt.getNomId(), mt.getListaRef().size()+1);
+        }
+        
         
         String id;
         for (Map.Entry mapEntry : localFreqTable.entrySet()) {
@@ -305,8 +317,11 @@ public abstract class SamuraiPaper {
                     s = subStr(s, 0, i) + " " + subStr(s, i, n);
                 }
             } else {
+                
+                if(camelScore != raizAltSco){
 
-                s = subStr(s, 0, i+1) + " " + subStr(s, i + 1, n);
+                    s = subStr(s, 0, i+1) + " " + subStr(s, i + 1, n);
+                }
             }
 
             //si stoken es vacio asigno el s directamente

@@ -195,14 +195,18 @@ public abstract class Dictionary {
     
     public static void restartBd() {
         
-        //se verifica que la base exista
+        //limpia base de memoria
+        ConnectionDB.AbrirConBD();
+        OperationDB.clearDB();
+        ConnectionDB.CerrarConBD();
+        
+        //limpia la base de disco
         if(new File(".hsqldb").exists()){
             deleteFolder(new File(".hsqldb"));
-        } 
+        }
         
         //se vuelven a crear las tablas
-        initBd();
-    
+        initBd();    
     }
     
     
