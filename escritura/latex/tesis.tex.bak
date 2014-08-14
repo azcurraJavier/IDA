@@ -1703,8 +1703,9 @@ En caso de que el parseo falle el proceso se reinicia desde el comienzo partiend
 \end{description}
 
 \begin{figure}[ht] %[h] para here [b] para bottom [t] para top
-\centering
+\centerline{%queda centrada mejor la imagen
 \includegraphics[scale= 0.67]{./ire_4.png}
+}
 \caption{Visualización de Restructuring Tool.}
 \label{ire4}
 \end{figure}
@@ -1747,14 +1748,15 @@ Sin embargo, suele ocurrir que estos recursos internos son escasos. Es por esto,
 
 \section{Introducción}
 
-En este capítulo se describe una herramienta útil que se construyó a partir de la teoría explicada en el capítulo anterior. Esta herramienta, conocida como Identifier Analyzer (IDA), se encarga de analizar los ids que están presentes en distintos archivos JAVA. Estos archivos son pasados como entrada a elección del usuario, luego la herramienta permite aplicar distintas técnicas/algoritmos que analizan los ids. El resultado de aplicar estas técnicas, consiste en expandir los ids que están abreviados a palabras completas. Una vez realizada la expansión, IDA le permite al usuario reemplazar los ids del archivo original con el resultado de la expansión, creando así un nuevo archivo con código más legible. La iniciativa del desarrollo de IDA surgió porque en la actualidad no existe otra herramienta en el ámbito de la CP con similares características.
+En este capítulo se describe una herramienta útil que se construyó a partir de la teoría explicada en el capítulo anterior. Esta herramienta, conocida como Identifier Analyzer (IDA), se encarga de analizar los ids que están presentes en distintos archivos JAVA. Estos archivos son pasados como entrada a elección del usuario, luego la herramienta permite aplicar distintas técnicas/algoritmos que analizan los ids. El resultado de aplicar estas técnicas, consiste en expandir los ids que están abreviados a palabras completas. Una vez realizada la expansión, IDA le permite al usuario reemplazar los ids del archivo original con el resultado de la expansión, creando así un nuevo archivo con código más legible y sin alterar la funcionalidad original del código. La iniciativa del desarrollo de IDA surgió porque en la actualidad no existe otra herramienta en el ámbito de la CP con similares características.
 
-En las próximas secciones se describen los distintos módulos que IDA posee. Para comenzar, en la próxima sección se hará una descripción de la arquitectura.
+En este capítulo se describen los distintos módulos que IDA posee, el flujo de ejecución y casos de estudio. Para comenzar, en la siguiente sección se  una descripción de la arquitectura de IDA.
 
 \pagebreak
 \begin{figure}[ht] %[h] para here [b] para bottom [t] para top
-\centering
+\centerline{%queda centrada mejor la imagen
 \includegraphics[scale= 0.35]{./ida_arq.png}
+}
 \caption{Arquitectura de IDA.}
 \label{arq1}
 \end{figure}
@@ -1763,36 +1765,189 @@ En las próximas secciones se describen los distintos módulos que IDA posee. Pa
 
 La herramienta IDA se implementó empleando lenguaje JAVA y se programó usando el entorno de desarrollo NetBeans\footnote[1]{https://www.netbeans.org}. 
 
-En la figura \ref{arq1} se puede apreciar la arquitectura de IDA. Esta herramienta se compone de tres etapas, la primera consiste en la extracción de datos, la segunda trata sobre la división de ids y la tercera sobre expansión de ids. A continuación se detallan cada una de ellas.
+En la figura \ref{arq1} se puede apreciar la arquitectura de IDA. Esta herramienta se compone de tres etapas, la primera consiste en la \textit{extracción de datos}, la segunda trata sobre la \textit{división de ids} y la tercera sobre \textit{expansión de ids}. A continuación se detallan cada una de ellas.
 
-La fase de extracción de datos es el primer paso, esta fase recibe como entrada un archivo JAVA (Entrada.java en figura \ref{arq1}), luego este archivo se procesa por un parser. Este parser se programó utilizando la herramienta ANTLR\footnote[2]{ANother Tool for Language Recognition. http://www.antlr.org/}. El antedicho parser, extrae y almacena en estructuras internas información estática perteneciente al código del archivo JAVA. Esta información está conformada por ids como elemento principal, literales y comentarios. Finalmente, toda esta información recolectada se almacena en un archivo XML (Entrada.xml en figura \ref{arq1}).
+\textbf{Fase de Extracción de Datos:} es el primer paso, esta fase recibe como entrada un archivo JAVA (Entrada.java en figura \ref{arq1}), luego este archivo se procesa por un parser\footnote[1]{También conocido como Analizador Sintáctico.}. Este parser se programó utilizando la herramienta \textit{ANTLR}\footnote[2]{ANother Tool for Language Recognition. http://www.antlr.org/}. El antedicho parser, extrae y almacena en estructuras internas información estática perteneciente al código del archivo JAVA. Esta información está conformada por ids como elemento principal, literales y comentarios (ver próxima sección). Finalmente, toda esta información recolectada se almacena en un archivo XML (Entrada.xml en figura \ref{arq1}). Aquí, el usuario a través de la interfaz de IDA, puede observar la información capturada del código con tablas claramente definidas (ver figura \ref{arq1}, flecha verde).
 
-Una vez completada la extracción de información, se da comienzo a la fase de división de ids. La misma tiene implementada dos algoritmos descriptos en el capítulo 3; uno es el algoritmo de división Greedy y el otro es el algoritmo Samurai. Ambos algoritmos reciben como entrada la información de la etapa antedicha, luego estos algoritmos se encargan de dividir los ids del archivo JAVA. Las divisiones se almacenan en estructuras internas que serán consultadas en la próxima etapa. Como estos algoritmos de división necesitan datos externos como diccionarios (en caso de Greedy) y tablas de frecuencias de palabras (en caso de Samurai), estos datos se encuentran almacenados en una base de datos embebida (parte superior de la figura \ref{arq1}). La tecnología utilizada en esta base, se la conoce como HSQLDB \footnote[1]{Hyper SQL Data Base. http://www.hsqldb.org} y al estar implementada en JAVA permite una mejor integración. Esta base también se ajusta a las necesidades ya que responde rápidamente las consultas.
+\textbf{Fase de División de Ids:} Una vez completada la extracción de información, se da comienzo a la fase de división de ids. La misma tiene implementada dos algoritmos descriptos en el capítulo 3; uno es el algoritmo de división Greedy y el otro es el algoritmo Samurai. Ambos algoritmos reciben como entrada la información de la etapa antedicha, luego estos algoritmos se encargan de dividir los ids del archivo JAVA. Las divisiones se almacenan en estructuras internas que serán consultadas en la próxima etapa. Como estos algoritmos de división necesitan datos externos como diccionarios (en caso de Greedy) y tablas de frecuencias de palabras (en caso de Samurai), estos datos se encuentran almacenados en una base de datos embebida (parte superior de la figura \ref{arq1}). La tecnología utilizada en esta base, se la conoce como HSQLDB\footnote[1]{Hyper SQL Data Base. http://www.hsqldb.org} y al estar implementada en JAVA permite una mejor integración. Esta base también se ajusta a las necesidades ya que responde rápidamente las consultas.
 
-La tercera y última etapa tiene implementado el algoritmo de expansión convencional que también fue descripto en el capítulo 3. Este algoritmo toma los ids divididos en la etapa anterior y procede a expandirlos. Aquí también se necesitan los diccionarios, por eso se realizan consultas a HSQLDB. Una vez expandidos todos los ids, estos son reemplazados por los ids originales en el archivo de entrada, generando de esta manera el archivo de salida (Salida.java en figura \ref{arq1}).
+\textbf{Fase de Expansión de Ids:} La tercera y última etapa tiene implementado el algoritmo de expansión convencional que también fue descripto en el capítulo 3. Este algoritmo toma como entrada los ids divididos en la etapa anterior, tanto de Greedy como de Samurai. A continuación, la herramienta procede a expandir los ids obtenidos por estos 2 algoritmos, dando como resultado ids expandidos desde Greedy y desde Samurai. Luego el usuario podrá elegir que expansión es la más adecuada. El algoritmo de expansión, también necesita los diccionarios, por eso se realizan consultas a HSQLDB. Una vez que el usuario elige la expansión más correcta de los ids, estas reemplazan los ids originales en el archivo de entrada, generando de esta manera el archivo de salida (Salida.java en figura \ref{arq1}).
 
-\section{Parser}
+\section{Analizador Sintáctico (Parser)}
 
-Se investigaron herramientas encargadas de construir de Analizadores Léxicos y Analizadores Sintácticos. Se dio preferencia a aquellas que emplean la teoría asociada a las gramáticas de atributos. De la investigación previamente descripta, se determinó que la herramienta \textit{ANTLR}\footnote[1]{http://www.antlr.org/} era la que mejor se ajustaba a las necesidades antes planteadas. La herramienta \textit{ANTLR} permite insertar acciones semánticas en la gramática JAVA. Estas acciones si están correctamente colocadas, pueden por ejemplo, programarse en ellas estructuras que recolecten los identificadores utilizados en un código (entre otras tantas acciones). Una vez insertadas estas acciones, la herramienta se encarga de generar el parser leyendo la gramática adicionando las acciones que fueron insertadas. De esta manera, se obtiene un parser que no solo examina el código para detectar errores a nivel sintáctico, sino también que recolecta ids.
-
-
-
-eficazmente los ids y toda la información relevante asociada a ellos que facilite su análisis.
-
-Se construyó un analizador sintáctico del lenguaje Java que permite extraer los ids, comentarios y literales encontrados en el código fuente del sistema de estudio.
+Se investigaron herramientas encargadas de construir Analizadores Sintácticos. Se dio preferencia a aquellas que emplean la teoría asociada a las gramáticas de atributos. De la investigación previamente descripta, se determinó que la herramienta \textit{ANTLR}\footnote[1]{http://www.antlr.org} era la que mejor se ajustaba a las necesidades antes planteadas. La herramienta \textit{ANTLR} permite insertar acciones semánticas en la gramática\footnote[2]{http://cs.au.dk/˜amoeller/dRegAut/JavaBNF} JAVA, estas acciones debe insertarse sin alterar la funcionalidad original de la gramática. Estas acciones si están correctamente colocadas, pueden por ejemplo, programarse en ellas estructuras que recolecten los identificadores, comentarios y literales utilizados en un código JAVA (entre otras tantas posibles acciones). Una vez insertadas estas acciones, \textit{ANTLR} se encarga de generar el parser leyendo la gramática adicionando las acciones que fueron insertadas. De esta manera, se obtiene un parser que no solo examina el código para detectar errores a nivel sintáctico, sino también que recolecta datos necesarios (ids, comentarios, literales) que serán utilizados en próximas etapas de la herramienta IDA. 
 %
  
 \section{Interfaz de IDA}
 
-En esta sección se describe la interfaz gráfica que tiene la herramienta IDA.
-% para facilitar las tareas del usuario a la hora de analizar ids de un archivo JAVA. 
-Al ejecutar la herramienta, el primer componente de interacción es una simple barra de menús ubicada en el tope de la pantalla (ver figura nn). Al hacer click en `Archivo' de la barra antes mencionada y luego en `Abrir Archivo(s) Java' del menú desplegable, se muestra una ventana de selección de archivos. Aquí el usuario puede elegir el/los archivo/s JAVA de entrada (ver figura nn). Una vez seleccionado el/los archivo/s JAVA, comienza la ejecución del parser que se encarga de extraer ids, comentarios y literales. 
+En esta sección, se describe la interfaz gráfica que tiene la herramienta IDA. Se explicarán en detalles cada función que posee los botones y como ayuda al usuario a analizar los ids.
+
+\vskip0.5cm
+\noindent \textbf{Barra de Menús}
+\vskip0.5cm
+Al ejecutar la herramienta, el primer componente de interacción es una simple barra de menús ubicada en el tope de la pantalla, los botones de esta barra son `Archivo', `Diccionarios' y `Ayuda' (ver figura \ref{ida1}). 
+
+\begin{figure}[h] %[h] para here [b] para bottom [t] para top
+\centerline{%queda centrada mejor la imagen
+\includegraphics[scale= 0.50]{./ida_01.png}
+}
+\caption{Barra de Menú}
+\label{ida1}
+\end{figure}
+
+Al hacer click en `Archivo' de la barra antes mencionada, se despliega un menú con los siguientes ítems (ver figura \ref{ida1}):
+
+\begin{description}
+\itemsep0em%reduce espacio
+\item[Abrir archivo(s) JAVA:] Abre un cuadro de dialogo que permite elegir uno o varios archivos con extensión JAVA.
+\item[Cerrar Todo:] Cierra todos los archivos JAVA abiertos actualmente en la aplicación.
+\item[Salir:] Cierra la Aplicación.
+\end{description}
+
+Cuando se pulsa en `Diccionarios' de la barra de menús, se despliega otro menú con con los siguientes ítems (ver figura \ref{ida1}):
+
+\begin{description}
+\itemsep0em%reduce espacio
+\item[Ver Diccionarios:] Abre una ventana que muestra un listado de palabras en Inglés que pertenece al comando de Linux \textsf{ispell}\footnote[1]{Comando de Linux generalmente utilizado para corregir errores ortográficos (inglés) en archivos de texto. http://linuxcommand.org/man\_pages/ispell1.html} (ver capítulo 3). La ventana antedicha también muestra un listado de palabras irrelevantes o stoplist (ver capítulo 3).
+\item[Restablecer B.D.(Base de Datos):] Las tablas correspondiente a Diccionarios y las frecuencias globales de Samurai ubicadas en la Base de Datos de HSQLDB son regeneradas. En caso de haber problemas con la base de datos, es útil regenerarla.
+
+%Esta regeneración toma datos de los archivos ubicados en la carpeta `Diccionarios' dentro del proyecto de la herramienta IDA. Restablecer la base es útil cuando se agregan nuevos datos a los diccionarios desde los archivos previamente descriptos.
+\end{description}
+
+Finalmente al pulsar `Ayuda' de la barra de menús, se despliega un solo botón (ver figura \ref{ida1}):
+
+\begin{description}
+\itemsep0em%reduce espacio
+\item[Acerca de:] Brinda información sobre el autor y directores involucrados en la construcción de la herramienta IDA.
+\end{description}
+
+\begin{figure}[t] %[h] para here [b] para bottom [t] para top
+\centerline{%queda centrada mejor la imagen
+\includegraphics[scale= 0.7]{./ida_02.png}
+}
+\caption{Ventana para seleccionar Archivos JAVA}
+\label{ida2}
+\end{figure}
+
+\vskip0.5cm
+\noindent \textbf{Panel de Elementos Capturados (Parte 1)}
+\vskip0.5cm
+
+Cuando se pulsa en el botón abrir `Abrir archivo(s) JAVA' explicado en la sección anterior, se abre una ventana para que el usuario elija uno o varios archivos JAVA (ver figura \ref{ida2}).
+
+Una vez que el usuario selecciona el/los archivo/s JAVA, el \textit{Panel de Elementos Capturados} aparece (ver figura \ref{ida3}). Este panel en la parte superior posee pestañas, por cada archivo abierto se crea una pestaña nueva que tiene como rótulo el nombre del archivo correspondiente (ver figura \ref{ida3} - Flecha 1). Cada pestaña puede ser cerrada pulsando en la cruz ubicada al lado del rótulo (ver figura mm). Es posible abrir varios archivos mediante el cuadro de dialogo de selección de archivos (ver figura \ref{ida2}) o también se puede ir eligiendo de a un archivo por apertura de este cuadro de dialogo. 
+
+\begin{figure}[h] %[h] para here [b] para bottom [t] para top
+\centerline{%queda centrada mejor la imagen
+\includegraphics[scale= 0.5]{./ida_03.png}
+}
+\caption{Panel de Elementos Capturados}
+\label{ida3}
+\end{figure}
+
+Cada pestaña en su interior posee un subpanel que se divide en dos partes principales (ver figura \ref{ida3} - Flecha 2). La parte superior contiene el código leído del archivo JAVA\footnote[1]{El código JAVA se ajusta el formato a través de la herramienta jacobe, http://www.tiobe.com/index.php/content/products/jacobe} y la parte inferior toda la información extraída referente a ids, literales y comentarios. Estos últimos tres poseen una pestaña cada uno (ver figura \ref{ida3} - Flecha 3). 
+
+Al pulsar la pestaña de los literales, se puede apreciar que contiene una tabla y un practico buscador para agilizar la búsquedas de literales en la tabla (ver figura \ref{ida4} - Flecha 1). La misma tiene 3 columnas, número de línea del literal, el literal propiamente dicho y la eventual asociación que pueda tener el literal con algún id (ver figura \ref{ida4} - Flecha 2). Al pulsar sobre la alguna fila de la tabla antes explicada, automáticamente el literal correspondiente se resalta en el código leído del archivo JAVA ubicado en la parte superior del panel de análisis que fue explicado con anterioridad (ver figura \ref{ida4} - Flecha 3).
+
+Al abrir la pestaña de los comentarios, también posee una tabla listando los comentarios encontrados en el archivo y el buscador de comentarios en la tabla (ver figura \ref{ida5} - Flecha 1). Esta tabla contiene 2 columnas que corresponde por un lado al comentario y por el otro al número de línea donde se encuentra el comentario dentro del código (ver figura \ref{ida5} - Flecha 2). Al igual que se describió en el párrafo anterior al hacer click en una de las filas de la tabla inmediatamente se resalta en el código mostrando la ubicación del comentario seleccionado (ver figura \ref{ida5} - Flecha 3).
+
+\begin{figure}[t] %[h] para here [b] para bottom [t] para top
+\centerline{%queda centrada mejor la imagen
+\includegraphics[scale= 0.5]{./ida_04.png}
+}
+\caption{Literales Capturados}
+\label{ida4}
+\end{figure}
+
+\begin{figure}[t] %[h] para here [b] para bottom [t] para top
+\centerline{%queda centrada mejor la imagen
+\includegraphics[scale= 0.43]{./ida_05.png}
+}
+\caption{Comentarios Capturados}
+\label{ida5}
+\end{figure}
+
+Pulsando la pestaña correspondiente a identificadores, en la tabla de Declaraciones (ver figura \ref{ida3} - Flecha 4) no solo se detalla el nombre sino que también el número de línea donde esta declarado, el tipo (int, char, etc.), el modificador (publico, privado, protegido), lo que el id representa (variable de clase, constructor, método de clase, etc.) y cuantas referencias tiene (lugares desde donde se utiliza). A su vez, las referencias son listadas en una tabla contigua que indica el número de línea y ambiente desde donde se usa el id (ver figura \ref{ida3} - Flecha 5). En las dos tablas antes descriptas, cuando se hace click en una fila se resalta la Declaración del id o la Referencia, según sea la tabla (ver figura \ref{ida3} - Flecha 2). Como en el caso de los literales y los comentarios esta tabla posee un buscador por id (ver figura \ref{ida3} - Flecha 6). 
+
+\begin{figure}[t] %[h] para here [b] para bottom [t] para top
+\centerline{%queda centrada mejor la imagen
+\includegraphics[scale= 0.6]{./ida_06.png}
+}
+\caption{Panel de Análisis}
+\label{ida6}
+\end{figure}
+
+Para comenzar con el análisis de ids capturados, se debe pulsar en el botón `Ejecutar Análisis' ubicado dentro del cuadro `Análisis de Identificadores' (ver figura \ref{ida3} - Flecha 7), al hacerlo se abrirá el Panel de Análisis que será explicado en la próxima sección.
+
+\vskip0.5cm
+\noindent \textbf{Panel de Análisis}
+\vskip0.5cm
+
+El Panel de Análisis (ver figura \ref{ida6}) contiene 3 partes principales, (de izquierda a derecha) la primera consiste en los ids capturados, los mismos están listados en el cuadro inferior izquierdo (ver figura \ref{ida6} - Flecha 1), arriba de estos se encuentran dos botones `Información Utilizada' y `Diccionarios', estos brindan información al usuario sobre los datos que se utilizan para ejecutar los algoritmos de análisis (ver figura \ref{ida6} - Flecha 2). Los mismos serán explicados en la próxima sección.
+
+Siguiendo con el panel de análisis, en el panel central superior (ver figura \ref{ida6} - Flecha 3) se pueden seleccionar los dos algoritmos de división de ids (Greedy y Samurai), el botón `Divir' del mismo panel ejecuta la técnica seleccionada mostrando en el panel inferior la tabla con los resultados (ver figura \ref{ida6} - Flecha 4). De la misma manera, en los paneles subsiguientes de la derecha, permiten expandir las abreviaturas obtenidas en el panel de división. Pulsando el botón `Expandir' ejecuta el algoritmo de expansión básico tomando como entrada los ids divididos de Greedy o Samurai (ver figura \ref{ida6} - Flecha 5). Los resultados de la expansión se muestran en el cuadro inferior derecho (ver figura \ref{ida6} - Flecha 6).
+
+\begin{figure}[t] %[h] para here [b] para bottom [t] para top
+\centerline{%queda centrada mejor la imagen
+\includegraphics[scale= 0.65]{./ida_07.png}
+}
+\caption{Información Utilizada para el Análisis de Ids}
+\label{ida7}
+\end{figure}
+
+\begin{figure}[t] %[h] para here [b] para bottom [t] para top
+\centerline{%queda centrada mejor la imagen
+\includegraphics[scale= 0.7]{./ida_08.png}
+}
+\caption{TagCloud: Nube de Etiquetas}
+\label{ida8}
+\end{figure}
+
+\vskip0.5cm
+\noindent \textbf{Información Utilizada y Diccionarios}
+\vskip0.5cm
+
+En la sección anterior se enumeraron dos botones `Información Utilizada' y `Diccionarios'. Pulsando el primero abre una ventana que contiene dos cuadros (ver figura \ref{ida7}), el cuadro de la derecha muestra las frecuencias correspondiente al algoritmo Samurai, los tokens mostrados en la primer columna son los que fueron capturados por el parser. Cabe recordar que la tabla de frecuencia local se construye en función de la frecuencia absoluta de aparición de tokens que se van encontrando en el código (ver capítulo 3), mientras que la tabla de frecuencia global ya está predefinida en la base y se armó mediante el análisis hecho por los autores (ver capítulo 3).
+
+\begin{figure}[t] %[h] para here [b] para bottom [t] para top
+\centerline{%queda centrada mejor la imagen
+\includegraphics[scale= 0.6]{./ida_09.png}
+}
+\caption{Panel de Diccionarios}
+\label{ida9}
+\end{figure}
+
+El cuadro de la izquierda lista en una tabla las frases capturadas (ver figura \ref{ida7}), estas frases se obtienen de los comentarios y los literales strings. A modo de agilizar la búsqueda de alguna palabra, la misma puede ser hecha en el cuadro de texto que dice `Buscar Palabra'. El botón `Tag Cloud' (ver figura \ref{ida7} - Flecha 1) abre una ventana conteniendo una `Nube de Etiquetas' (ver figura \ref{ida8}). Esta nube de palabras resalta en tamaño más grande las palabras que más frecuencia tienen\footnote[1]{Para generar esta nube de palabras se utiliza una herramienta OpenCloud escrita en JAVA. http://opencloud.mcavallo.org}, las palabras irrelevantes son filtradas, estas palabras incluyen artículos y palabras que están en la stoplist (ver capítulo 3). La antes mencionada nube de palabras ayuda a ver con mas claridad las palabras más frecuentes del código.
+
+Pulsando el botón `Diccionarios' abre una ventana con dos tablas (ver figura \ref{ida9}), la tabla de la izquierda lista todas las palabras en ingles que tiene el diccionario del comando de Linux \textit{ispell}, esta lista es utilizada por el algoritmo Greedy y el Expansión Básica (ver capítulo 3), la segunda tabla de la derecha enumera las palabras que pertenecen a la stoplist o lista de palabras irrelevantes, tambien utilizada por los dos algoritmos antedichos. Convenientemente, ambas tablas poseen un buscador por palabras dado que el contenido es amplio. La ventana que contiene estas tablas puede ser invocada desde la barra de menú (explicado en la sección de barra de menú) y también puede ser llamada desde el \textit{Panel de Elementos Capturados}, el botón que esta al lado de `Ejecutar Análisis' (ver figura \ref{ida3} - Flecha 8).
+
+\begin{figure}[t] %[h] para here [b] para bottom [t] para top
+\centerline{%queda centrada mejor la imagen
+\includegraphics[scale= 0.5]{./ida_10.png}
+}
+\caption{Panel de Elementos Capturados}
+\label{ida10}
+\end{figure}
+
+\vskip0.5cm
+\noindent \textbf{Panel de Elementos Capturados (Parte 2)}
+\vskip0.5cm
+
+Una vez Analizados los ids (Divididos y Expandidos) al cerrar el \textit{Panel de Análisis}, se retorna al panel de elementos capturados (ver figura \ref{ida10}), en la tabla que detalla los ids extraídos junto a la información asociada a ellos se le suma en nuevas columnas con la división y la expansión realizada en el \textit{Panel de Análisis} (ver figura \ref{ida10} - Flecha 1).
+
+En la última columna de la tabla se pueden apreciar múltiples casillas de selección consultando al usuario si desea elegir la expansión realizada desde Greedy, Samurai o ninguna (ver figura \ref{ida10} - Flecha 2). Una vez concluida esta elección, se procede al cuadro `Expandir Ids en Código', este panel contiene dos botones (ver figura \ref{ida10} - Flecha 3), al pulsar `Expandir' se procede a reemplazar los ids del código de acuerdo a lo seleccionado en la tabla de ids extraídos. En caso retroceder con la acción de reemplazo se puede pulsar en el botón `Deshacer' y restablecer el código original (ver figura \ref{ida10} - Flecha 4). Para finalizar, al pulsar el botón `Crear Archivo' en el cuadro `Archivo de Salida' (ver figura \ref{ida10} - Flecha 5) crea un nuevo archivo igual que el pasado como entrada, nada más que con los nuevos ids expandidos.
+
+Por último, en el cuadro `Ocultar Columnas' (ver figura \ref{ida10} - Flecha 6), se encuentran dos botones `Reducir' y `Ampliar'. El primero de ellos a modo de facilitar la visualización, oculta las columnas que hay entre los ids y las columnas que contienen el análisis de ids (las columnas que se ocultan son: tipo, modificador, número de referencias, Representa), permitiendo de esta manera al usuario comparar más claramente las distintas divisiones y expansiones de ids (ver figura \ref{ida10} - Flecha 6). Mientras que `Ampliar' restablece las columnas originales.
+
+\section{Flujo de Ejecución}
+
+Para llevar a cabo el análisis de ids en archivos JAVA, se debe pulsar en el botón `Archivo' de la barra de menú y luego en `Abrir Archivo(s) Java' del menú desplegable, se muestra una ventana de selección de archivos. Aquí el usuario puede elegir el/los archivo/s JAVA de entrada (ver figura nn). Una vez seleccionado el/los archivo/s JAVA, comienza la ejecución del parser que se encarga de extraer ids, comentarios y literales. 
 
 Al finalizar la ejecución del parser, se visualiza un panel que contiene arriba el código leído del archivo JAVA (ver figura nn), por otro lado, en la parte inferior los elementos extraídos del código (ver figura nn). 
 
-Para proceder con el análisis de ids, se debe pulsar el botón `Ejecutar Análisis' ubicado en el panel `Análisis de Identificadores' (ver figura mm), al hacerlo se abre un nuevo panel que en la parte izquierda inferior se encuentran listados los ids encontrados (ver figura mm). En el panel central superior se pueden seleccionar los dos algoritmos de división de ids (greedy y samurai), el botón `Divir' del mismo panel ejecuta la técnica seleccionada mostrando en el panel inferior la tabla con los resultados. De la misma manera, en los paneles subsiguientes de la derecha, permiten expandir las abreviaturas obtenidas en el panel de división. Pulsando el botón `Expandir' ejecuta el algoritmo de expansión básico tomando como entrada los ids divididos de greedy o samurai. Los resultados se muestran en el panel de abajo. Las tres tablas mostradas en los tres paneles inferiores ayudan al usuario a comparar los resultados obtenidos.
+Para proceder con el análisis de ids, se debe pulsar el botón `Ejecutar Análisis' ubicado en el panel `Análisis de Identificadores' (ver figura mm), al hacerlo se abre un nuevo panel que en la parte izquierda inferior se encuentran listados los ids encontrados (ver figura mm). En el panel central superior se pueden seleccionar los dos algoritmos de división de ids (Greedy y Samurai), el botón `Divir' del mismo panel ejecuta la técnica seleccionada mostrando en el panel inferior la tabla con los resultados. De la misma manera, en los paneles subsiguientes de la derecha, permiten expandir las abreviaturas obtenidas en el panel de división. Pulsando el botón `Expandir' ejecuta el algoritmo de expansión básico tomando como entrada los ids divididos de Greedy o Samurai. Los resultados se muestran en el panel de abajo. Las tres tablas mostradas en los tres paneles inferiores ayudan al usuario a comparar los resultados obtenidos.
 
-Al cerrar la ventana del panel de análisis, los resultados obtenidos son cargados en la parte inferior del panel principal (ver figura nn). En la última columna se pueden apreciar múltiples casillas de selección consultando al usuario si desea elegir la expansión realizada a samurai o a greedy. Una vez concluida esta elección, se procede al panel `Expandir Ids en Código', este panel contiene dos botones, al pulsar `Expandir' se procede a reemplazar los ids del código de acuerdo a lo seleccionado en la tabla de ids extraídos. En caso retroceder con la acción de reemplazo se puede pulsar en el botón `deshacer' y restablecer el código original. Para finalizar, al pulsar el botón `Crear'  en el panel `Archivo de Salida' crea un nuevo archivo con los nuevos ids expandidos.
+Al cerrar la ventana del panel de análisis, los resultados obtenidos son cargados en la parte inferior del panel principal (ver figura nn). En la última columna se pueden apreciar múltiples casillas de selección consultando al usuario si desea elegir la expansión realizada a Samurai o a Greedy o a ninguna de las dos. Una vez concluida esta elección, se procede al panel `Expandir Ids en Código', este panel contiene dos botones, al pulsar `Expandir' se procede a reemplazar los ids del código de acuerdo a lo seleccionado en la tabla de ids extraídos. En caso retroceder con la acción de reemplazo se puede pulsar en el botón `deshacer' y restablecer el código original. Para finalizar, al pulsar el botón `Crear'  en el panel `Archivo de Salida' crea un nuevo archivo con los nuevos ids expandidos.
 
 \section{Casos de Estudio}
 

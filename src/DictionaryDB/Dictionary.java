@@ -196,9 +196,9 @@ public abstract class Dictionary {
     public static void restartBd() {
         
         //limpia base de memoria
-        ConnectionDB.AbrirConBD();
-        OperationDB.clearDB();
-        ConnectionDB.CerrarConBD();
+//        ConnectionDB.AbrirConBD();
+//        OperationDB.clearDB();
+//        ConnectionDB.CerrarConBD();
         
         //limpia la base de disco
         if(new File(".hsqldb").exists()){

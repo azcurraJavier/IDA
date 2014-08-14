@@ -20,3 +20,4 @@ min;35
 max;30
 performed;25
 num;20
+tot;15

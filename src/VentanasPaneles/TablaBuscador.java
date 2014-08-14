@@ -251,7 +251,7 @@ public class TablaBuscador extends javax.swing.JPanel {
 
         modeloTablaRef.addColumn("Línea");
         modeloTablaRef.addColumn("Nombre ID");
-        modeloTablaRef.addColumn("Usado En");
+        modeloTablaRef.addColumn("Ambiente");
 
         MostrarTabla mSelected = null;
 

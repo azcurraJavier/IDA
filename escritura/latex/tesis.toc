@@ -35,7 +35,8 @@
 \contentsline {chapter}{\numberline {4}Identifier Analyzer (IDA)}{63}
 \contentsline {section}{\numberline {4.1}Introducci\IeC {\'o}n}{63}
 \contentsline {section}{\numberline {4.2}Arquitectura}{64}
-\contentsline {section}{\numberline {4.3}Parser}{65}
+\contentsline {section}{\numberline {4.3}Analizador Sint\IeC {\'a}ctico (Parser)}{66}
 \contentsline {section}{\numberline {4.4}Interfaz de IDA}{66}
-\contentsline {section}{\numberline {4.5}Casos de Estudio}{67}
-\contentsline {chapter}{\numberline {5}Conclusiones}{68}
+\contentsline {section}{\numberline {4.5}Flujo de Ejecuci\IeC {\'o}n}{75}
+\contentsline {section}{\numberline {4.6}Casos de Estudio}{77}
+\contentsline {chapter}{\numberline {5}Conclusiones}{78}
