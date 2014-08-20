@@ -161,7 +161,8 @@ public class Minesweeper extends JFrame implements ActionListener {
                 }
             }
         }
-        JOptionPane.showMessageDialog(this, "Boom!!! Game Over!!!");
+        String msgDialog = "Boom!!! Game Over!!!";
+        JOptionPane.showMessageDialog(this, msgDialog);
         restart();
     }
 

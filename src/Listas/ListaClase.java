@@ -8,18 +8,18 @@ public abstract class ListaClase {
     
     private static ArrayList<Clase> lisClases;  
     
-    private static Set<String> lisFileName;
+    private static Set<String> lisFileNamePath;
     
     public static void init(){        
         lisClases = new ArrayList<>();
-        lisFileName = new HashSet<>();
+        lisFileNamePath = new HashSet<>();
     }    
     
     public static void clear(){        
         
         if(lisClases != null){
             lisClases.clear();
-            lisFileName.clear();
+            lisFileNamePath.clear();
         }
     }
 
@@ -29,43 +29,43 @@ public abstract class ListaClase {
     
     public static void addElemLisClases(Clase unaClase) {
         
-        String fileName = unaClase.getFileName();
+        String fileNamePath = unaClase.getFileNamePath();
         
-        if(containsFileName(fileName)){
-            System.out.print("ListaClase.addElemLisClases: la clase " + fileName+" ya existe!");
+        if(containsFileName(fileNamePath)){
+            System.out.print("ListaClase.addElemLisClases: " + fileNamePath +" ya existe!");
             return;
         }
         
         lisClases.add(unaClase);
-        lisFileName.add(fileName);
+        lisFileNamePath.add(fileNamePath);
     } 
     
-    public static boolean containsFileName(String fileName){
+    public static boolean containsFileName(String fileNamePath){
         
-        if(fileName == null){
+        if(fileNamePath == null){
             System.out.print("ListaClase.containsFileName: el nombre esta null!");
             return false;
         }
     
-        return lisFileName.contains(fileName);
+        return lisFileNamePath.contains(fileNamePath);
     
     }
     
     //este metodo se llama de ClosableTabbedPane cuando se borra una pestaña
-    public static void deleteClass(String fileName){
+    public static void deleteClass(String fileNamePath){
                         
-        fileName = fileName.trim();//porque puede venir con espacio al final
+        fileNamePath = fileNamePath.trim();//porque puede venir con espacio al final
         
-        if(!containsFileName(fileName)){
-            System.out.print("ListaClase.deleteClass: la clase " + fileName+" no existe!");
+        if(!containsFileName(fileNamePath)){
+            System.out.print("ListaClase.deleteClass: " + fileNamePath+" no existe!");
             return;
         }
         
-        lisFileName.remove(fileName);
+        lisFileNamePath.remove(fileNamePath);
         
         for(int i=0;i<lisClases.size();i++){
          
-            if(lisClases.get(i).getFileName().equals(fileName)){
+            if(lisClases.get(i).getFileName().equals(fileNamePath)){
                 lisClases.remove(i);            
             }            
         }

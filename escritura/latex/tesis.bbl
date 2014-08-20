@@ -1,7 +1,7 @@
 \begin{thebibliography}{10}
 
 \bibitem{AHUL06}
-R.~Sethi A.~V.~Aho and J.~D. Ullman.
+A.~V. Aho, R.~Sethi, and J.~D. Ullman.
 \newblock Compilers principles, techniques and tools.
 \newblock 2006.
 
@@ -37,6 +37,11 @@ Mario~M. Berón, Daniel Riesco, and Germán Montejano.
 \newblock Estrategias para facilitar la comprensión de programas.
 \newblock San Luis, Argentina, April 2010.
 
+\bibitem{DMDJ13}
+Dave Binkley, Marcia Davis, Dawn Lawrie, and Bonita Sharif.
+\newblock The impact of identifier style on effort and comprehension.
+\newblock {\em Empirical Software Engineering}, 2013.
+
 \bibitem{BROOK82}
 R.~Brook.
 \newblock A theoretical analysis of the role of documentation in the
@@ -53,31 +58,6 @@ Bruno Caprile and Paolo Tonella.
 Bruno Caprile and Paolo Tonella.
 \newblock Restructuring program identifier names.
 \newblock IEEE Computer Society, 2000.
-
-\bibitem{DMDJ13}
-Dawn~Lawrie Dave~Binkley, Marcia~Davis and Bonita Sharif.
-\newblock The impact of identifier style on effort and comprehension.
-\newblock {\em Empirical Software Engineering}, 2013.
-
-\bibitem{DLFB06}
-Henry~Feild Dawn~Lawrie and David Binkley.
-\newblock Quantifying identifier quality: an analysis of trends.
-\newblock Kluwer Academic Publishers-Plenum Publishers., 2006.
-
-\bibitem{DLHD06}
-Henry~Feild Dawn~Lawrie and David Binkley.
-\newblock Syntactic identifier conciseness and consistency.
-\newblock 2006.
-
-\bibitem{LFBEX07}
-Henry~Feild Dawn~Lawrie and David Binkley.
-\newblock Extracting meaning from abbreviated identifier.
-\newblock 2007.
-
-\bibitem{DCHD06}
-Henry~Feild Dawn~Lawrie, Christopher~Morrell and David Binkley.
-\newblock What’s in a name? a study of identifiers.
-\newblock 2006.
 
 \bibitem{TERD01}
 Thomas Eisenbarth, Rainer Koschke, and Daniel Simon.
@@ -97,14 +77,8 @@ David~W. Embley.
 \newblock Australian Computer Society, Inc. Darlinghurst, Australia, Australia,
   2004.
 
-\bibitem{EZH08}
-Haley~Boyd Emily~Hill, Zachary P.~Fry.
-\newblock Automatically mining abbreviation expansions in programs to enhance
-  software maintenance tools.
-\newblock 2008.
-
 \bibitem{EHPV09}
-Lori~Pollock Eric~Enslen, Emily~Hill and K.~Vijay-Shanker.
+Eric Enslen, Emily Hill, Lori Pollock, and K.~Vijay-Shanker.
 \newblock Mining source code to automatically split identifiers for software
   analysis.
 \newblock 2009.
@@ -114,12 +88,12 @@ Henry Feild, David Binkley, and Dawn Lawrie.
 \newblock An empirical comparison of techniques for extracting concept
   abbreviations from identifiers.
 \newblock In {\em In Proceedings of IASTED International Conference on Software
-  Engineering and Applications (SEA 2006}, 2006.
+  Engineering and Applications (SEA 2006)}, 2006.
 
 \bibitem{HDD06}
 Henry Feild, David Binkley, and Dawn Lawrie.
 \newblock Identifier splitting: A study of two techniques.
-\newblock Abril 2006.
+\newblock April 2006.
 
 \bibitem{FFCW01}
 Fangfang Feng and W.~Bruce Croft.
@@ -136,6 +110,12 @@ Wilhelm Hasselbring, Andreas Fuhr, and Volker Riediger.
 \newblock First international workshop on model-driven software migration.
 \newblock Marzo 2011.
 
+\bibitem{EZH08}
+Emily Hill, Zachary~P. Fry, and Haley Boyd.
+\newblock Automatically mining abbreviation expansions in programs to enhance
+  software maintenance tools.
+\newblock 2008.
+
 \bibitem{STD1219}
 IEEE.
 \newblock {\em IEEE Standard for Software Maintenance, IEEE Std 1219-1998},
@@ -148,16 +128,35 @@ IEEE.
   610.12-1990}, volume~1.
 \newblock IEEE Press, 1999.
 
+\bibitem{DLFB06}
+Dawn Lawrie, Henry Feild, and David Binkley.
+\newblock Quantifying identifier quality: an analysis of trends.
+\newblock Kluwer Academic Publishers-Plenum Publishers., 2006.
+
+\bibitem{DLHD06}
+Dawn Lawrie, Henry Feild, and David Binkley.
+\newblock Syntactic identifier conciseness and consistency.
+\newblock 2006.
+
+\bibitem{LFBEX07}
+Dawn Lawrie, Henry Feild, and David Binkley.
+\newblock Extracting meaning from abbreviated identifier.
+\newblock 2007.
+
+\bibitem{DCHD06}
+Dawn Lawrie, Christopher Morrell, Henry Feild, and David Binkley.
+\newblock What’s in a name? a study of identifiers.
+\newblock 2006.
+
+\bibitem{DFPM05}
+Pizka M and DeiBenbock F.
+\newblock Concise and consistent naming.
+\newblock {\em Software Quality Control}, 2005.
+
 \bibitem{MPOB03}
 Michael~P. O’Brien.
 \newblock Software comprehension – a review and research direction.
 \newblock 2003.
-
-\bibitem{DFPM05}
-DeiBenbock~F Pizka~M.
-\newblock Concise and consistent naming.
-\newblock Institut fur Informatik, Technische Universitat Munchen Boltzmannstr,
-  2005.
 
 \bibitem{RSPMGH02}
 Roger~S. Pressman.

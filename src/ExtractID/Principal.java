@@ -261,10 +261,10 @@ public class Principal extends javax.swing.JFrame {
 
             for (File fileAnalisis : archivosAnalisisId) {
 
-                if (ListaClase.containsFileName(fileAnalisis.getName())) {
+                if (ListaClase.containsFileName(fileAnalisis.getAbsolutePath())) {
                     JOptionPane.showMessageDialog(new JFrame(),
-                            "Un archivo con el nombre: " + fileAnalisis.getName()
-                            + " ya se encuentra abierto!", "Atención", JOptionPane.WARNING_MESSAGE);
+                            "El archivo con la ruta: " + "\""+fileAnalisis.getAbsolutePath()+"\""
+                            + "\nya se encuentra abierto!", "Atención", JOptionPane.WARNING_MESSAGE);
                     continue;
                 }
 
@@ -273,8 +273,8 @@ public class Principal extends javax.swing.JFrame {
 
                 if (prettyCode.isEmpty()) {
                     JOptionPane.showMessageDialog(new JFrame(),
-                            "El archivo: " + fileAnalisis.getName()
-                            + " esta vacío o posee errores sintácticos,"
+                            "El archivo con la ruta: " + "\""+fileAnalisis.getAbsolutePath()+"\""
+                            + "\nesta vacío o posee errores sintácticos,"
                             + "\nrevíselo e intente de nuevo.", "Atención", JOptionPane.WARNING_MESSAGE);
                     continue;
                 }
@@ -299,20 +299,21 @@ public class Principal extends javax.swing.JFrame {
                 //control de carga de datos del parser
                 if (!noErrorSintactico || unaClase == null) {
                     JOptionPane.showMessageDialog(new JFrame(),
-                            "Error fatal al analizar archivo: " + fileAnalisis.getName(), "ERROR", JOptionPane.ERROR_MESSAGE);
+                            "Error fatal al analizar archivo: " + "\""+fileAnalisis.getAbsolutePath()+"\"", "ERROR", JOptionPane.ERROR_MESSAGE);
                     continue;
                 }
 
                 //control de referencias sin declarar
-                if (unaClase.getVarSinDeclB()) {
-                    JOptionPane.showMessageDialog(new JFrame(),
-                            "Error al analizar archivo: " + fileAnalisis.getName()
-                            + "\n" + unaClase.getVarSinDecl(), "ERROR", JOptionPane.ERROR_MESSAGE);
-                    continue;
-                }
+//                if (unaClase.getVarSinDeclB()) {
+//                    JOptionPane.showMessageDialog(new JFrame(),
+//                            "Error al analizar archivo: " + fileAnalisis.getName()
+//                            + "\n" + unaClase.getVarSinDecl(), "ERROR", JOptionPane.ERROR_MESSAGE);
+//                    continue;
+//                }
                 ////////
 
                 unaClase.setFileName(fileAnalisis.getName());//nombre archivo java
+                unaClase.setFileNamePath(fileAnalisis.getAbsolutePath());//ruta del archivo java                
                 unaClase.setCode(prettyCode);//codigo leido de archivo
                 /////comentarios/////
                 ArrayList<Comentario> lisCom = lex.getLisCom(); //comentarios del lexer 

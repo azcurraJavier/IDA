@@ -1,8 +1,16 @@
 % This file was created with JabRef 2.7b.
 % Encoding: UTF-8
 
+@BOOK{AAJU88,
+  title = {Estructuras de datos y algoritmos},
+  publisher = {Sistemas Tecnicos de Edicion},
+  year = {1988},
+  author = {Aho, A.V. and Hopcroft, J.E. and Ullman, J.D.},
+  isbn = {9780201640243}
+}
+
 @INPROCEEDINGS{AHUL06,
-  author = {A. V. Aho, R. Sethi and J. D. Ullman.},
+  author = {A. V. Aho and R. Sethi and J. D. Ullman.},
   title = {Compilers Principles, Techniques and Tools.},
   year = {2006},
   file = {AHUL06.pdf:AHUL06.pdf:PDF}
@@ -50,6 +58,14 @@
   file = {BRM10.pdf:BRM10.pdf:PDF}
 }
 
+@ARTICLE{DMDJ13,
+  author = {Dave Binkley and Marcia Davis and Dawn Lawrie and Bonita Sharif},
+  title = {The impact of identifier style on effort and comprehension.},
+  journal = {Empirical Software Engineering},
+  year = {2013},
+  file = {DMDJ13.pdf:DMDJ13.pdf:PDF}
+}
+
 @ARTICLE{BROOK82,
   author = {Brook, R.},
   title = {A theoretical analysis of the role of documentation in the comprehension
@@ -78,56 +94,6 @@
   file = {BCPT99.pdf:BCPT99.pdf:PDF}
 }
 
-@ARTICLE{DCPHJP09,
-  author = {Daniela da Cruz and Pedro Rangel Henriques and Jorge Sousa Pinto},
-  title = {Code Analysis: Past and Present},
-  journal = {Proceeding of the Third International Workshop on Foundations and
-	Techniques for Open Source Software Certification},
-  year = {2009},
-  address = {Los Alamitos, CA, USA},
-  file = {DCPHJP09.pdf:DCPHJP09.pdf:PDF},
-  issn = {1863-2122},
-  publisher = {Luis Barbosa, Antonio Cerone and Siraj Shaikh}
-}
-
-@ARTICLE{DMDJ13,
-  author = {Dave Binkley, Marcia Davis, Dawn Lawrie and Bonita Sharif},
-  title = {The impact of identifier style on effort and comprehension.},
-  journal = {Empirical Software Engineering},
-  year = {2013},
-  file = {DMDJ13.pdf:DMDJ13.pdf:PDF}
-}
-
-@INPROCEEDINGS{DCHD06,
-  author = {Dawn Lawrie, Christopher Morrell, Henry Feild and David Binkley},
-  title = {What’s in a Name? A Study of Identifiers},
-  year = {2006},
-  file = {DCHD06.pdf:DCHD06.pdf:PDF}
-}
-
-@INPROCEEDINGS{LFBEX07,
-  author = {Dawn Lawrie, Henry Feild and David Binkley},
-  title = {Extracting Meaning from Abbreviated Identifier},
-  year = {2007},
-  file = {LFBEX07.pdf:LFBEX07.pdf:PDF},
-  isbn = {978-0-7695-2880-9}
-}
-
-@INPROCEEDINGS{DLHD06,
-  author = {Dawn Lawrie, Henry Feild and David Binkley},
-  title = {Syntactic Identifier Conciseness and Consistency},
-  year = {2006},
-  file = {DLHD06.pdf:DLHD06.pdf:PDF}
-}
-
-@INPROCEEDINGS{DLFB06,
-  author = {Dawn Lawrie, Henry Feild and David Binkley.},
-  title = {Quantifying identifier quality: an analysis of trends.},
-  year = {2006},
-  publisher = {Kluwer Academic Publishers-Plenum Publishers.},
-  file = {DLFB06.pdf:DLFB06.pdf:PDF}
-}
-
 @INPROCEEDINGS{TERD01,
   author = {Thomas Eisenbarth and Rainer Koschke and Daniel Simon},
   title = {Aiding Program Comprehension by Static and Dynamic Feature Analysis},
@@ -135,6 +101,17 @@
   pages = {602},
   file = {TERD01.pdf:TERD01.pdf:PDF},
   optpublisher = {IEEE Computer Society}
+}
+
+@BOOK{ERNS99,
+  title = {Fundamentals of Database Systems},
+  publisher = {Addison-Wesley Longman Publishing Co., Inc.},
+  year = {1999},
+  editor = {Shanklin, Carter},
+  author = {Elmasri, Ramez A. and Navathe, Shankrant B.},
+  address = {Boston, MA, USA},
+  edition = {3rd},
+  isbn = {0805317554}
 }
 
 @INPROCEEDINGS{DWE04,
@@ -148,16 +125,8 @@
 	27}
 }
 
-@INPROCEEDINGS{EZH08,
-  author = {Emily Hill, Zachary P. Fry, Haley Boyd},
-  title = {Automatically Mining Abbreviation Expansions in Programs to Enhance
-	Software Maintenance Tools.},
-  year = {2008},
-  file = {EZH08.pdf:EZH08.pdf:PDF}
-}
-
 @INPROCEEDINGS{EHPV09,
-  author = {Eric Enslen, Emily Hill, Lori Pollock and K. Vijay-Shanker},
+  author = {Eric Enslen and Emily Hill and Lori Pollock and K. Vijay-Shanker},
   title = {Mining Source Code to Automatically Split Identifiers for Software
 	Analysis},
   year = {2009},
@@ -170,7 +139,7 @@
   title = {An empirical comparison of techniques for extracting concept abbreviations
 	from identifiers},
   booktitle = {In Proceedings of IASTED International Conference on Software Engineering
-	and Applications (SEA 2006},
+	and Applications (SEA 2006)},
   year = {2006},
   file = {FBL06.pdf:FBL06.pdf:PDF}
 }
@@ -179,7 +148,7 @@
   author = {Henry Feild and David Binkley and Dawn Lawrie},
   title = {Identifier Splitting: A Study of Two Techniques},
   year = {2006},
-  month = {Abril},
+  month = {April},
   file = {HDD06.pdf:HDD06.pdf:PDF},
   journal = {Mid-Atlantic Student Workshop on Programming Languages and Systems
 	Rutgers University}
@@ -210,6 +179,75 @@
   file = {WHAFVR11.pdf:WHAFVR11.pdf:PDF}
 }
 
+@INPROCEEDINGS{EZH08,
+  author = {Emily Hill and Zachary P. Fry and Haley Boyd},
+  title = {Automatically Mining Abbreviation Expansions in Programs to Enhance
+	Software Maintenance Tools.},
+  year = {2008},
+  file = {EZH08.pdf:EZH08.pdf:PDF}
+}
+
+@INBOOK{STD1219,
+  title = {IEEE Standard for Software Maintenance, IEEE Std 1219-1998},
+  publisher = {IEEE Press},
+  year = {1999},
+  author = {IEEE},
+  volume = {2},
+  booktitle = {IEEE Standards Software Engineering, Volume Two: Process Standards},
+  description = {AOEvolutionchapter short paper}
+}
+
+@INBOOK{STD610,
+  title = {Standard Glossary of Software Engineering Terminology 610.12-1990},
+  publisher = {IEEE Press},
+  year = {1999},
+  author = {IEEE},
+  volume = {1},
+  booktitle = {IEEE Standards Software Engineering, Volume One: Customer and Terminology
+	Standards},
+  description = {AOEvolutionchapter short paper}
+}
+
+@INPROCEEDINGS{LFBEX07,
+  author = {Dawn Lawrie and Henry Feild and David Binkley},
+  title = {Extracting Meaning from Abbreviated Identifier},
+  year = {2007},
+  file = {LFBEX07.pdf:LFBEX07.pdf:PDF},
+  isbn = {978-0-7695-2880-9}
+}
+
+@INPROCEEDINGS{DLHD06,
+  author = {Dawn Lawrie and Henry Feild and David Binkley},
+  title = {Syntactic Identifier Conciseness and Consistency},
+  year = {2006},
+  file = {DLHD06.pdf:DLHD06.pdf:PDF}
+}
+
+@INPROCEEDINGS{DLFB06,
+  author = {Dawn Lawrie and Henry Feild and David Binkley.},
+  title = {Quantifying identifier quality: an analysis of trends.},
+  year = {2006},
+  publisher = {Kluwer Academic Publishers-Plenum Publishers.},
+  file = {DLFB06.pdf:DLFB06.pdf:PDF}
+}
+
+@INPROCEEDINGS{DCHD06,
+  author = {Dawn Lawrie and Christopher Morrell and Henry Feild and David Binkley},
+  title = {What’s in a Name? A Study of Identifiers},
+  year = {2006},
+  file = {DCHD06.pdf:DCHD06.pdf:PDF}
+}
+
+@ARTICLE{DFPM05,
+  author = {Pizka M and DeiBenbock F},
+  title = {Concise and consistent naming},
+  journal = {Software Quality Control},
+  year = {2005},
+  file = {DFPM05.pdf:DFPM05.pdf:PDF},
+  organization = {Institut fur Informatik},
+  publisher = {Technische Universitat Munchen Boltzmannstr}
+}
+
 @INPROCEEDINGS{MPOB03,
   author = {Michael P. O’Brien},
   title = {Software Comprehension – A Review and Research Direction},
@@ -217,20 +255,21 @@
   file = {MPOB03.pdf:MPOB03.pdf:PDF}
 }
 
-@INPROCEEDINGS{DFPM05,
-  author = {Pizka M, DeiBenbock F},
-  title = {Concise and consistent naming},
-  year = {2005},
-  organization = {Institut fur Informatik},
-  publisher = {Technische Universitat Munchen Boltzmannstr},
-  file = {DFPM05.pdf:DFPM05.pdf:PDF}
-}
-
 @BOOK{RSPMGH02,
   title = {Ingeniería del Software un enfoque práctico},
   year = {2002},
   author = {Roger S. Pressman},
   file = {RSPMGH02.pdf:RSPMGH02.pdf:PDF}
+}
+
+@BOOK{TSTA80,
+  title = {Data structure techniques},
+  publisher = {Addison-Wesley},
+  year = {1980},
+  author = {Standish, T.A.},
+  series = {Computer Sciences},
+  isbn = {9780201072563},
+  lccn = {lc78067454}
 }
 
 @INPROCEEDINGS{MAS05,
@@ -288,51 +327,3 @@
   file = {VMAVA95.pdf:VMAVA95.pdf:PDF}
 }
 
-@BOOK{AAJU88,
-  title={Estructuras de datos y algoritmos},
-  author={Aho, A.V. and Hopcroft, J.E. and Ullman, J.D.},
-  isbn={9780201640243}, 
-  year={1988},
-  publisher={Sistemas Tecnicos de Edicion}
-}
-
-@BOOK{ERNS99,
- author = {Elmasri, Ramez A. and Navathe, Shankrant B.},
- editor = {Shanklin, Carter},
- title = {Fundamentals of Database Systems},
- year = {1999},
- isbn = {0805317554},
- edition = {3rd},
- publisher = {Addison-Wesley Longman Publishing Co., Inc.},
- address = {Boston, MA, USA}
-}
-
-@BOOK{TSTA80,
-  title={Data structure techniques},
-  author={Standish, T.A.},
-  isbn={9780201072563},
-  lccn={lc78067454},
-  series={Computer Sciences},  
-  year={1980},
-  publisher={Addison-Wesley}
-} 
-
-@INBOOK{STD1219,  
-  author = {IEEE},  
-  booktitle = {IEEE Standards Software Engineering, Volume Two: Process Standards},
-  description = {AOEvolutionchapter short paper},  
-  publisher = {IEEE Press},  
-  title = {IEEE Standard for Software Maintenance, IEEE Std 1219-1998},
-  volume = {2},
-  year = {1999}
-}
-
-@INBOOK{STD610,  
-  author = {IEEE},  
-  booktitle = {IEEE Standards Software Engineering, Volume One: Customer and Terminology Standards},
-  description = {AOEvolutionchapter short paper},  
-  publisher = {IEEE Press},  
-  title = {Standard Glossary of Software Engineering Terminology 610.12-1990},
-  volume = {1},
-  year = {1999}
-}

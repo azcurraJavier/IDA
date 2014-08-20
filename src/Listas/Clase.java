@@ -8,6 +8,7 @@ public class Clase {
     
     private String code; //codigo leido de archivo
     private String fileName; //nombre de archivo .java
+    private String fileNamePath; //ruta del archivo \home\entrada.java
     private String nomPaq;   //Paquete
     private int linPaq;   //Paquete linea
     private String modClase; //Modificador de la Clase  
@@ -55,6 +56,10 @@ public class Clase {
         this.LisClassBodyDecl = LisClassBodyDecl;
     }
 
+    public void setFileNamePath(String fileNamePath) {
+        this.fileNamePath = fileNamePath;
+    }   
+
     public Id getIde() {
         return ide;
     }
@@ -85,8 +90,11 @@ public class Clase {
 
     public void setFileName(String fileName) {
         this.fileName = fileName;
-    }   
-    
+    }  
+
+    public String getFileNamePath() {
+        return fileNamePath;
+    }
 
     public void setCode(String code) {
         this.code = code;

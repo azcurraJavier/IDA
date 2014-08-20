@@ -647,10 +647,10 @@ El la siguiente tabla se muestra un análisis léxico que se realizó sobre 2.7 
        \textbf{Identificadores} & 3886684 & 33.0 & \textbf{35723272} & \textbf{71.5} \\ \hline
        \textbf{Total} & \textbf{11765175} & \textbf{100.0} & \textbf{49978507} & \textbf{100.0} \\ \hline
      
-   	\end{tabular}
-   
-	\label{tabla1}   
+   	\end{tabular}  
+	   
    \caption{Resultado del Análisis Léxico}
+   \label{tabla1}
    
   \end{table} 
 \end{center}
@@ -1778,14 +1778,13 @@ En la figura \ref{arq1} se puede apreciar la arquitectura de IDA. Esta herramien
 Se investigaron herramientas encargadas de construir Analizadores Sintácticos. Se dio preferencia a aquellas que emplean la teoría asociada a las gramáticas de atributos. De la investigación previamente descripta, se determinó que la herramienta \textit{ANTLR}\footnote[1]{http://www.antlr.org} era la que mejor se ajustaba a las necesidades antes planteadas. La herramienta \textit{ANTLR} permite insertar acciones semánticas en la gramática\footnote[2]{http://cs.au.dk/˜amoeller/dRegAut/JavaBNF} JAVA, estas acciones debe insertarse sin alterar la funcionalidad original de la gramática. Estas acciones si están correctamente colocadas, pueden por ejemplo, programarse en ellas estructuras que recolecten los identificadores, comentarios y literales utilizados en un código JAVA (entre otras tantas posibles acciones). Una vez insertadas estas acciones, \textit{ANTLR} se encarga de generar el parser leyendo la gramática adicionando las acciones que fueron insertadas. De esta manera, se obtiene un parser que no solo examina el código para detectar errores a nivel sintáctico, sino también que recolecta datos necesarios (ids, comentarios, literales) que serán utilizados en próximas etapas de la herramienta IDA. 
 %
  
-\section{Interfaz de IDA}
+\section{Proceso de Análisis de Identificadores}
 
-En esta sección, se describe la interfaz gráfica que tiene la herramienta IDA. Se explicarán en detalles cada función que posee los botones y como ayuda al usuario a analizar los ids.
+En esta sección, se describe el flujo de ejecución que debe seguir el usuario con la herramienta IDA para llevar a cabo el análisis de los ids. Se explicarán en detalles la función de cada elemento de IDA y de como ayuda al usuario a analizar los ids.
 
-\vskip0.5cm
-\noindent \textbf{Barra de Menús}
-\vskip0.5cm
-Al ejecutar la herramienta, el primer componente de interacción es una simple barra de menús ubicada en el tope de la pantalla, los botones de esta barra son `Archivo', `Diccionarios' y `Ayuda' (ver figura \ref{ida1}). 
+\subsection{Barra de Menús}
+
+Al ejecutar la herramienta, el primer componente de interacción es una simple barra de menús ubicada en el tope de la pantalla, los botones de esta barra son \textit{Archivo}, \textit{Diccionarios} y \textit{Ayuda} (ver figura \ref{ida1}). 
 
 \begin{figure}[h] %[h] para here [b] para bottom [t] para top
 \centerline{%queda centrada mejor la imagen
@@ -1795,26 +1794,29 @@ Al ejecutar la herramienta, el primer componente de interacción es una simple b
 \label{ida1}
 \end{figure}
 
-Al hacer click en `Archivo' de la barra antes mencionada, se despliega un menú con los siguientes ítems (ver figura \ref{ida1}):
+Al hacer click en \textit{Archivo} de la barra antes mencionada, se despliega un menú con los siguientes ítems (ver figura \ref{ida1}):
 
 \begin{description}
 \itemsep0em%reduce espacio
-\item[Abrir archivo(s) JAVA:] Abre un cuadro de dialogo que permite elegir uno o varios archivos con extensión JAVA.
+\item[Abrir archivo(s) JAVA:] Abre una ventana que permite elegir uno o varios archivos con extensión JAVA. Estos archivos debe cumplir con ciertas reglas que son explicadas en la próxima sección.
 \item[Cerrar Todo:] Cierra todos los archivos JAVA abiertos actualmente en la aplicación.
 \item[Salir:] Cierra la Aplicación.
 \end{description}
 
-Cuando se pulsa en `Diccionarios' de la barra de menús, se despliega otro menú con con los siguientes ítems (ver figura \ref{ida1}):
+Cuando se pulsa en \textit{Diccionarios} de la barra de menús, se despliega otro menú con con los siguientes ítems (ver figura \ref{ida1}):
 
 \begin{description}
 \itemsep0em%reduce espacio
-\item[Ver Diccionarios:] Abre una ventana que muestra un listado de palabras en Inglés que pertenece al comando de Linux \textsf{ispell}\footnote[1]{Comando de Linux generalmente utilizado para corregir errores ortográficos (inglés) en archivos de texto. http://linuxcommand.org/man\_pages/ispell1.html} (ver capítulo 3). La ventana antedicha también muestra un listado de palabras irrelevantes o stoplist (ver capítulo 3).
+
+\item[Ver Diccionarios:] Abre una ventana que muestra un listado de palabras en Inglés que pertenece al comando de Linux \textit{ispell}\footnote[1]{Comando de Linux generalmente utilizado para corregir errores ortográficos (inglés) en archivos de texto. http://linuxcommand.org/man\_pages/ispell1.html} (ver capítulo 3). La ventana antedicha también muestra un listado de palabras irrelevantes o stoplist (ver capítulo 3). Esta ventana, se explica con más detalles en una sección más adelante.
+
+
 \item[Restablecer B.D.(Base de Datos):] Las tablas correspondiente a Diccionarios y las frecuencias globales de Samurai ubicadas en la Base de Datos de HSQLDB son regeneradas. En caso de haber problemas con la base de datos, es útil regenerarla.
 
 %Esta regeneración toma datos de los archivos ubicados en la carpeta `Diccionarios' dentro del proyecto de la herramienta IDA. Restablecer la base es útil cuando se agregan nuevos datos a los diccionarios desde los archivos previamente descriptos.
 \end{description}
 
-Finalmente al pulsar `Ayuda' de la barra de menús, se despliega un solo botón (ver figura \ref{ida1}):
+Finalmente al pulsar \textit{Ayuda} de la barra de menús, se despliega un solo botón (ver figura \ref{ida1}):
 
 \begin{description}
 \itemsep0em%reduce espacio
@@ -1825,17 +1827,37 @@ Finalmente al pulsar `Ayuda' de la barra de menús, se despliega un solo botón 
 \centerline{%queda centrada mejor la imagen
 \includegraphics[scale= 0.7]{./ida_02.png}
 }
-\caption{Ventana para seleccionar Archivos JAVA}
+\caption{Ventana para seleccionar Archivos JAVA.}
 \label{ida2}
 \end{figure}
 
-\vskip0.5cm
-\noindent \textbf{Panel de Elementos Capturados (Parte 1)}
-\vskip0.5cm
+\subsection{Carteles sobre Validación de Archivos}
 
-Cuando se pulsa en el botón abrir `Abrir archivo(s) JAVA' explicado en la sección anterior, se abre una ventana para que el usuario elija uno o varios archivos JAVA (ver figura \ref{ida2}).
+Cuando se pulsa en el botón abrir \textit{Abrir archivo(s) JAVA} explicado en la sección anterior, se abre una ventana para que el usuario elija uno o varios archivos JAVA (ver figura \ref{ida2}).
 
-Una vez que el usuario selecciona el/los archivo/s JAVA, el \textit{Panel de Elementos Capturados} aparece (ver figura \ref{ida3}). Este panel en la parte superior posee pestañas, por cada archivo abierto se crea una pestaña nueva que tiene como rótulo el nombre del archivo correspondiente (ver figura \ref{ida3} - Flecha 1). Cada pestaña puede ser cerrada pulsando en la cruz ubicada al lado del rótulo (ver figura mm). Es posible abrir varios archivos mediante el cuadro de dialogo de selección de archivos (ver figura \ref{ida2}) o también se puede ir eligiendo de a un archivo por apertura de este cuadro de dialogo. 
+Cabe destacar, que para que IDA funcione correctamente el archivo de entrada JAVA debe cumplir con ciertas validaciones. Una de ellas es, que el código del archivo este sintácticamente correcto (un ejemplo común de error sintáctico, entre otros,  es: no colocar punto y coma al final de una sentencia). Es por esto, que previamente el código es analizado por JACOBE\footnote[1]{Herramienta gratuita desarrollada en JAVA, http://www.tiobe.com/jacobe}, esta herramienta no solo chequea errores sintácticos, sino que también alinea el código fuente del archivo para que sea leído de una mejor manera por el usuario. Si algún archivo de entrada esta vacío o posee algún error sintáctico, JACOBE lo detecta y automáticamente se muestra un cartel al usuario (ver figura \ref{idaWar1}).
+
+La herramienta IDA, ademas realiza un control de los archivos abiertos, impidiendo que se abra el mismo archivo más de una vez. En caso de que esto suceda, se muestra un cartel al usuario mostrando la ruta del archivo (ver figura \ref{idaWar2}).
+
+\begin{figure}[t] %[h] para here [b] para bottom [t] para top
+\centerline{%queda centrada mejor la imagen
+\includegraphics[scale= 0.8]{./ida_war_01.png}
+}
+\caption{Aviso sobre Archivo JAVA no válido}
+\label{idaWar1}
+\end{figure}
+
+\begin{figure}[t] %[h] para here [b] para bottom [t] para top
+\centerline{%queda centrada mejor la imagen
+\includegraphics[scale= 0.8]{./ida_war_02.png}
+}
+\caption{Aviso sobre Archivo JAVA ya abierto en IDA.}
+\label{idaWar2}
+\end{figure}
+
+\subsection{Panel de Elementos Capturados (Parte 1)}
+
+Una vez que el usuario selecciona el/los archivo/s JAVA, si estos cumplen con las validaciones de la sección anterior, el/los archivos son procesados y el \textit{Panel de Elementos Capturados} aparece (ver figura \ref{ida3}). Este panel en la parte superior posee pestañas, por cada archivo abierto se crea una pestaña nueva que tiene como rótulo el nombre del archivo correspondiente (ver figura \ref{ida3} - Flecha 1). Cada pestaña puede ser cerrada pulsando en la cruz ubicada al lado del rótulo (ver figura \ref{ida3} - Flecha 1). Es posible abrir varios archivos mediante la ventana de selección de archivos (ver figura \ref{ida2}) o también se puede ir eligiendo de a un archivo por apertura de esta ventana. 
 
 \begin{figure}[h] %[h] para here [b] para bottom [t] para top
 \centerline{%queda centrada mejor la imagen
@@ -1845,7 +1867,7 @@ Una vez que el usuario selecciona el/los archivo/s JAVA, el \textit{Panel de Ele
 \label{ida3}
 \end{figure}
 
-Cada pestaña en su interior posee un subpanel que se divide en dos partes principales (ver figura \ref{ida3} - Flecha 2). La parte superior contiene el código leído del archivo JAVA\footnote[1]{El código JAVA se ajusta el formato a través de la herramienta jacobe, http://www.tiobe.com/index.php/content/products/jacobe} y la parte inferior toda la información extraída referente a ids, literales y comentarios. Estos últimos tres poseen una pestaña cada uno (ver figura \ref{ida3} - Flecha 3). 
+Cada pestaña en su interior posee un subpanel que se divide en dos partes principales (ver figura \ref{ida3} - Flecha 2). La parte superior contiene el código leído del archivo JAVA\footnote[1]{El código mostrado, está alineado con JACOBE ver sección anterior.} y la parte inferior toda la información extraída referente a ids, literales y comentarios. Estos últimos tres poseen una pestaña cada uno (ver figura \ref{ida3} - Flecha 3). 
 
 Al pulsar la pestaña de los literales, se puede apreciar que contiene una tabla y un practico buscador para agilizar la búsquedas de literales en la tabla (ver figura \ref{ida4} - Flecha 1). La misma tiene 3 columnas, número de línea del literal, el literal propiamente dicho y la eventual asociación que pueda tener el literal con algún id (ver figura \ref{ida4} - Flecha 2). Al pulsar sobre la alguna fila de la tabla antes explicada, automáticamente el literal correspondiente se resalta en el código leído del archivo JAVA ubicado en la parte superior del panel de análisis que fue explicado con anterioridad (ver figura \ref{ida4} - Flecha 3).
 
@@ -1879,9 +1901,7 @@ Pulsando la pestaña correspondiente a identificadores, en la tabla de Declaraci
 
 Para comenzar con el análisis de ids capturados, se debe pulsar en el botón `Ejecutar Análisis' ubicado dentro del cuadro `Análisis de Identificadores' (ver figura \ref{ida3} - Flecha 7), al hacerlo se abrirá el Panel de Análisis que será explicado en la próxima sección.
 
-\vskip0.5cm
-\noindent \textbf{Panel de Análisis}
-\vskip0.5cm
+\subsection{Panel de Análisis}
 
 El Panel de Análisis (ver figura \ref{ida6}) contiene 3 partes principales, (de izquierda a derecha) la primera consiste en los ids capturados, los mismos están listados en el cuadro inferior izquierdo (ver figura \ref{ida6} - Flecha 1), arriba de estos se encuentran dos botones `Información Utilizada' y `Diccionarios', estos brindan información al usuario sobre los datos que se utilizan para ejecutar los algoritmos de análisis (ver figura \ref{ida6} - Flecha 2). Los mismos serán explicados en la próxima sección.
 
@@ -1903,9 +1923,7 @@ Siguiendo con el panel de análisis, en el panel central superior (ver figura \r
 \label{ida8}
 \end{figure}
 
-\vskip0.5cm
-\noindent \textbf{Información Utilizada y Diccionarios}
-\vskip0.5cm
+\subsection{Información Utilizada y Diccionarios}
 
 En la sección anterior se enumeraron dos botones `Información Utilizada' y `Diccionarios'. Pulsando el primero abre una ventana que contiene dos cuadros (ver figura \ref{ida7}), el cuadro de la derecha muestra las frecuencias correspondiente al algoritmo Samurai, los tokens mostrados en la primer columna son los que fueron capturados por el parser. Cabe recordar que la tabla de frecuencia local se construye en función de la frecuencia absoluta de aparición de tokens que se van encontrando en el código (ver capítulo 3), mientras que la tabla de frecuencia global ya está predefinida en la base y se armó mediante el análisis hecho por los autores (ver capítulo 3).
 
@@ -1929,27 +1947,159 @@ Pulsando el botón `Diccionarios' abre una ventana con dos tablas (ver figura \r
 \label{ida10}
 \end{figure}
 
-\vskip0.5cm
-\noindent \textbf{Panel de Elementos Capturados (Parte 2)}
-\vskip0.5cm
+\subsection{Panel de Elementos Capturados (Parte 2)}
 
 Una vez Analizados los ids (Divididos y Expandidos) al cerrar el \textit{Panel de Análisis}, se retorna al panel de elementos capturados (ver figura \ref{ida10}), en la tabla que detalla los ids extraídos junto a la información asociada a ellos se le suma en nuevas columnas con la división y la expansión realizada en el \textit{Panel de Análisis} (ver figura \ref{ida10} - Flecha 1).
 
 En la última columna de la tabla se pueden apreciar múltiples casillas de selección consultando al usuario si desea elegir la expansión realizada desde Greedy, Samurai o ninguna (ver figura \ref{ida10} - Flecha 2). Una vez concluida esta elección, se procede al cuadro `Expandir Ids en Código', este panel contiene dos botones (ver figura \ref{ida10} - Flecha 3), al pulsar `Expandir' se procede a reemplazar los ids del código de acuerdo a lo seleccionado en la tabla de ids extraídos. En caso retroceder con la acción de reemplazo se puede pulsar en el botón `Deshacer' y restablecer el código original (ver figura \ref{ida10} - Flecha 4). Para finalizar, al pulsar el botón `Crear Archivo' en el cuadro `Archivo de Salida' (ver figura \ref{ida10} - Flecha 5) crea un nuevo archivo igual que el pasado como entrada, nada más que con los nuevos ids expandidos.
 
-Por último, en el cuadro `Ocultar Columnas' (ver figura \ref{ida10} - Flecha 6), se encuentran dos botones `Reducir' y `Ampliar'. El primero de ellos a modo de facilitar la visualización, oculta las columnas que hay entre los ids y las columnas que contienen el análisis de ids (las columnas que se ocultan son: tipo, modificador, número de referencias, Representa), permitiendo de esta manera al usuario comparar más claramente las distintas divisiones y expansiones de ids (ver figura \ref{ida10} - Flecha 6). Mientras que `Ampliar' restablece las columnas originales.
-
-\section{Flujo de Ejecución}
-
-Para llevar a cabo el análisis de ids en archivos JAVA, se debe pulsar en el botón `Archivo' de la barra de menú y luego en `Abrir Archivo(s) Java' del menú desplegable, se muestra una ventana de selección de archivos. Aquí el usuario puede elegir el/los archivo/s JAVA de entrada (ver figura nn). Una vez seleccionado el/los archivo/s JAVA, comienza la ejecución del parser que se encarga de extraer ids, comentarios y literales. 
-
-Al finalizar la ejecución del parser, se visualiza un panel que contiene arriba el código leído del archivo JAVA (ver figura nn), por otro lado, en la parte inferior los elementos extraídos del código (ver figura nn). 
-
-Para proceder con el análisis de ids, se debe pulsar el botón `Ejecutar Análisis' ubicado en el panel `Análisis de Identificadores' (ver figura mm), al hacerlo se abre un nuevo panel que en la parte izquierda inferior se encuentran listados los ids encontrados (ver figura mm). En el panel central superior se pueden seleccionar los dos algoritmos de división de ids (Greedy y Samurai), el botón `Divir' del mismo panel ejecuta la técnica seleccionada mostrando en el panel inferior la tabla con los resultados. De la misma manera, en los paneles subsiguientes de la derecha, permiten expandir las abreviaturas obtenidas en el panel de división. Pulsando el botón `Expandir' ejecuta el algoritmo de expansión básico tomando como entrada los ids divididos de Greedy o Samurai. Los resultados se muestran en el panel de abajo. Las tres tablas mostradas en los tres paneles inferiores ayudan al usuario a comparar los resultados obtenidos.
-
-Al cerrar la ventana del panel de análisis, los resultados obtenidos son cargados en la parte inferior del panel principal (ver figura nn). En la última columna se pueden apreciar múltiples casillas de selección consultando al usuario si desea elegir la expansión realizada a Samurai o a Greedy o a ninguna de las dos. Una vez concluida esta elección, se procede al panel `Expandir Ids en Código', este panel contiene dos botones, al pulsar `Expandir' se procede a reemplazar los ids del código de acuerdo a lo seleccionado en la tabla de ids extraídos. En caso retroceder con la acción de reemplazo se puede pulsar en el botón `deshacer' y restablecer el código original. Para finalizar, al pulsar el botón `Crear'  en el panel `Archivo de Salida' crea un nuevo archivo con los nuevos ids expandidos.
+Por último, en el cuadro `Ocultar Columnas' (ver figura \ref{ida10} - Flecha 6), se encuentran dos botones `Reducir' y `Ampliar'. El primero de ellos a modo de facilitar la visualización, oculta las columnas que hay entre los ids y las columnas que contienen el análisis de ids (las columnas que se ocultan son: tipo, modificador, número de referencias y Representa), permitiendo de esta manera al usuario comparar más claramente las distintas divisiones y expansiones de ids (ver figura \ref{ida10} - Flecha 6). Mientras que `Ampliar' restablece las columnas originales.
 
 \section{Casos de Estudio}
+
+En esta sección se presentarán casos de estudios realizados con la herramienta IDA. Cada uno de ellos contemplan un único archivo JAVA que son pasados como entrada en la herramienta. Con estos casos, se mostrará la utilidad de IDA y que motivó a desarrollarla.
+
+Dado que IDA necesita diccionarios para poder funcionar, se utilizan los mismos que emplean los autores de las técnicas explicadas en el capítulo 3 (por ejemplo \textit{ispell} de linux). Estos diccionarios están compuestos por palabras en idioma Inglés, por lo tanto, para que IDA funcione correctamente, solo se deben ingresar archivos con ids escritos en Inglés. A continuación se describen algunos casos de estudio.
+
+\begin{figure}[t] %[h] para here [b] para bottom [t] para top
+\centerline{%queda centrada mejor la imagen
+\includegraphics[scale= 0.5]{./caso_01.png}
+}
+\caption{Captura del Juego Buscaminas programado en JAVA}
+\label{caso1}
+\end{figure}
+
+\subsection{Buscaminas (Minesweeper)}
+
+El archivo JAVA denominado Minesweeper.java, al ejecutarlo posee el clásico y conocido juego llamado Buscaminas (Minesweeper en Inglés - ver figura \ref{caso1}). Este archivo posee 223 líneas que serán analizadas por IDA.
+
+Al ingresar el archivo Minesweeper.java, el parser extrae información referente a los ids (ver tabla \ref{tabla2}). También captura datos relacionados a los  literales Strings (ver tabla \ref{tabla3}) y a los comentarios (ver tabla \ref{tabla4}).
+
+\begin{center}
+	\begin{table}[t]
+	
+		\centering
+   		\begin{tabular}{| c | c | c | c | c | c | }      
+       \hline
+  	   \textsf{Línea} & \textsf{Nombre ID} & \textsf{Representa} & \textsf{Tipo} & \textsf{Modificador} & \textsf{Nro de Ref}\\ \hline
+7&Minesweeper&Clase&-&public&0 \\ \hline  	   
+10&bttns&Variable de Clase&JButton&private&13 \\ \hline
+12&min\_mtrx&Variable de Clase&int&private&11 \\ \hline
+14&txtMin&Variable de Clase&JTextField&private&5 \\ \hline
+17&rm&Variable de Clase&JLabel&private&1 \\ \hline
+20&min\_imag&Variable de Clase&ImageIcon&private&2 \\ \hline
+22&dim&Variable de Clase&int&private&20 \\ \hline
+24&TOTmin&Variable de Clase&int&private&3 \\ \hline
+25&squares&Variable de Clase&int&private&6 \\ \hline
+28&Minesweeper&Constructor&-&public&0 \\ \hline
+37&topPanel&Variable Local&JPanel&-&3 \\ \hline
+48&middlePanel&Variable Local&JPanel&-&2 \\ \hline
+71&plantMines&Método de Clase&void&private&2 \\ \hline
+71&mins&Parámetro&int&-&1 \\ \hline
+102&main&Método de Clase&void&public&0 \\ \hline
+102&args&Parámetro&String[]&-&0 \\ \hline
+107&actionPerformed&Método de Clase&void&public&0 \\ \hline
+107&ae&Parámetro&ActionEvent&-&1 \\ \hline
+124&uncoverEmpty&Método de Clase&void&private&1 \\ \hline
+124&j&Parámetro&int&-&1 \\ \hline
+124&i&Parámetro&int&-&1 \\ \hline
+134&restart&Método de Clase&void&private&2 \\ \hline
+150&win&Método de Clase&void&private&1 \\ \hline
+155&boom&Método de Clase&void&private&1 \\ \hline
+168&msgDialog&Variable Local&String&-&1 \\ \hline
+174&nearbyMines&Método de Clase&int&private&1 \\ \hline
+183&minsNum&Variable Local&int&-&5 \\ \hline
+203&xar2&Variable Local&int&-&5 \\ \hline
+204&yar2&Variable Local&int&-&9 \\ \hline
+174&xar&Parámetro&int&-&2 \\ \hline
+174&yar&Parámetro&int&-&2 \\ \hline     
+   	\end{tabular}  
+	 
+   \caption{Información de Ids extraída por el Parser ANTLR}
+   \label{tabla2}
+     
+  \end{table} 
+\end{center}
+
+\vspace{-2.5em}
+
+\begin{center}
+	\begin{table}[t]
+	
+		\centering
+   		\begin{tabular}{| c | c | c |}      
+       \hline
+  	   \textsf{Línea} & \textsf{Literal} & \textsf{Id Asociado} \\ \hline
+17&“Remaining Mines.”&- \\ \hline
+33&“.jpg”&- \\ \hline
+42&“North”&- \\ \hline
+61&“Center”&- \\ \hline
+65&“Minesweeper v 1.0 ”&- \\ \hline
+72&“Planting Mines... ”&- \\ \hline
+168&“Boom!!! Game Over!!!”&msgDialog \\ \hline
+
+  \end{tabular} 
+	 
+   \caption{Información de Literales extraída por el Parser}
+   \label{tabla3}
+     
+  \end{table} 
+\end{center}
+
+
+\begin{center}
+	\begin{table}[t]
+	
+		\centering
+   		\begin{tabular}{| c | c |}      
+       \hline
+  	   \textsf{Línea} & \textsf{Comentario} \\ \hline
+9&buttons \\ \hline
+13&Text Fields \\ \hline
+16&Labels \\ \hline
+19&Mines images \\ \hline
+21&Dimension \\ \hline
+23&total mines \\ \hline
+24&min min \\ \hline
+27&Time tp; \\ \hline
+31&load Images \\ \hline
+36&Top Panel \\ \hline
+47&Button panel \\ \hline
+50&Create y place button \\ \hline
+53&Create Button \\ \hline
+55&Place button \\ \hline
+57&Action Listener \\ \hline
+63&Window properties \\ \hline
+79&Legend of mines in Matrix \\ \hline
+80&1 contains Mine \\ \hline
+81&0 Not contains Mine \\ \hline
+82&Place random mine \\ \hline
+84&Generate random position \\ \hline
+90&Place mine \\ \hline
+92&Display mines panel \\ \hline
+106&Action Event \\ \hline
+125&Uncover an empty square \\ \hline
+128&Nearby Mines \\ \hline
+135&restart game \\ \hline
+151&Win the game \\ \hline
+156&lose the game \\ \hline
+160&Mines Random Images \\ \hline
+177&x axe row \\ \hline
+178&y axe column \\ \hline
+180&return the number of mines \\ \hline
+186&horizontal \\ \hline
+193&vertical \\ \hline
+201&diagonal \\ \hline
+202&Top left corner \\ \hline
+216&top right corner \\ \hline
+ 	   
+  \end{tabular}  
+	 
+   \caption{Información de Comentarios extraída por el Parser}
+   \label{tabla3}
+     
+  \end{table} 
+\end{center}
 
 
 \chapter{Conclusiones}

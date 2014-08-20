@@ -152,11 +152,14 @@ classOrInterfaceDeclaration returns [Clase unaClase]
     
   
 modifiers  returns [String modif]
+@init{
+    $modif = "";
+}
     :
     (    annotation
-    |   'public' 
-    |   'protected'
-    |   'private'
+    |   'public' {$modif = "public";}
+    |   'protected' {$modif = "protected";}
+    |   'private' {$modif = "private";}
     |   'static'
     |   'abstract'
     |   'final'
@@ -164,8 +167,8 @@ modifiers  returns [String modif]
     |   'synchronized'
     |   'transient'
     |   'volatile'
-    |   'strictfp'
-    )*
+    |   'strictfp'    
+    )* 
     ;
 
 
@@ -182,14 +185,14 @@ classDeclaration returns [Clase unaClase]
     ;
 
 normalClassDeclaration returns [Clase unaClase] 
-    :   modifiers  'class' I1 = IDENTIFIER
+    :   mo1 = modifiers  'class' I1 = IDENTIFIER
         (typeParameters /*Duda*/
         )?
         ('extends' type
         )?
         ('implements' typeList
         )?            
-        c = classBody {c.setIde(new Id($I1.text,$I1.getLine())); c.setModClase($modifiers.text);$unaClase =c;}
+        c = classBody {c.setIde(new Id($I1.text,$I1.getLine())); c.setModClase(mo1);$unaClase =c;}
     ;
 
 
@@ -348,7 +351,7 @@ $lisUsosId = $me.buscarUsoIdDec($lisUsosId);$lisUsosId = $me.buscarUsoIdPar($lis
 }
     :
         /* For constructor, return type is null, name is 'init' */
-         modifiers {mod = $modifiers.text;tipo="";}
+         mo2 = modifiers {mod = mo2;tipo="";}
         (typeParameters
         )?
         Id1 = IDENTIFIER {$me = new Metodo(mod,tipo,new Id($Id1.text,$Id1.getLine()));$lineaMetodo=Id1.getLine();}
@@ -361,7 +364,7 @@ $lisUsosId = $me.buscarUsoIdDec($lisUsosId);$lisUsosId = $me.buscarUsoIdPar($lis
         (b1 = blockStatement {lisDeclme.putAll(b1.lisDecl);$lisUsosId.addAll(b1.lisUsosId);}
         )* {$me.addListDecl(lisDeclme);}//le sumo cant de apariciones a la lista de declaraciones 
         '}'                                                                                                                    
-    |   modifiers {mod = $modifiers.text;}
+    |   mo1 = modifiers {mod = mo1;}
         (typeParameters
         )?
         (type {tipo = $type.text;}
@@ -387,7 +390,7 @@ fieldDeclaration returns [Map<String,Declaracion> lisDecl]
     String tipo = new String();    
 }
     :   
-        modifiers {mod = $modifiers.text;}
+        mo1 = modifiers {mod = mo1;}
         type      {tipo = $type.text;}  
         v1 = variableDeclarator {$lisDecl.put(v1.getNomID(),new Declaracion(mod,tipo,v1));}
         (',' v2 = variableDeclarator {$lisDecl.put(v2.getNomID(),new Declaracion(mod,tipo,v2));}
@@ -754,6 +757,9 @@ switchLabel
 
 
 trystatement returns [ArrayList<UsoId> lisUsosId]
+@init{   
+    $lisUsosId = new ArrayList<UsoId>();
+}
     :   'try' b1 = block {if(b1!=null){$lisUsosId.addAll(b1.lisUsosId);}}
         (   ca1 = catches 'finally' b2 = block {if(b2!=null){$lisUsosId.addAll(b2.lisUsosId);} $lisUsosId.addAll(ca1);}
         |   ca2 = catches {$lisUsosId.addAll(ca2);}
@@ -771,6 +777,9 @@ catches returns [ArrayList<UsoId> lisUsosId]
     ;
 
 catchClause returns [ArrayList<UsoId> lisUsosId]
+@init{   
+    $lisUsosId = new ArrayList<UsoId>();
+}
     :   'catch' '(' formalParameter
         ')' b1 = block {if(b1!=null){$lisUsosId.addAll(b1.lisUsosId);}}
     ;
