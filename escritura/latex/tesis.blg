@@ -2,72 +2,48 @@ This is BibTeX, Version 0.99c (TeX Live 2009/Debian)
 The top-level auxiliary file: tesis.aux
 The style file: plain.bst
 Database file #1: biblo.bib.bib
-Warning--empty booktitle in AHUL06
-Warning--empty booktitle in THBE99
-Warning--empty booktitle in KBVR00
 Warning--empty booktitle in MPMR07
-Warning--empty booktitle in BRM10
-Warning--empty booktitle in BCPT99
-Warning--empty booktitle in BCPT00
-Warning--empty booktitle in TERD01
 Warning--can't use both author and editor fields in ERNS99
-Warning--empty booktitle in DWE04
-Warning--empty booktitle in EHPV09
-Warning--empty booktitle in HDD06
-Warning--empty booktitle in JDPH08
-Warning--empty booktitle in WHAFVR11
-Warning--empty booktitle in EZH08
-Warning--empty chapter and pages in STD1219
 Warning--empty chapter and pages in STD610
-Warning--empty booktitle in DLFB06
-Warning--empty booktitle in DLHD06
-Warning--empty booktitle in LFBEX07
-Warning--empty booktitle in DCHD06
-Warning--empty booktitle in MPOB03
-Warning--empty publisher in RSPMGH02
-Warning--empty booktitle in MAS05
-Warning--empty booktitle in PFT02
-Warning--empty booktitle in TIE89
-Warning--empty booktitle in MMFAF07
 You've used 37 entries,
             2118 wiz_defined-function locations,
-            700 strings with 9127 characters,
-and the built_in function-call counts, 10478 in all, are:
-= -- 922
-> -- 525
-< -- 4
-+ -- 212
-- -- 170
-* -- 594
-:= -- 1779
-add.period$ -- 112
+            755 strings with 10760 characters,
+and the built_in function-call counts, 14322 in all, are:
+= -- 1440
+> -- 593
+< -- 21
++ -- 238
+- -- 196
+* -- 793
+:= -- 2129
+add.period$ -- 122
 call.type$ -- 37
-change.case$ -- 190
+change.case$ -- 203
 chr.to.int$ -- 0
-cite$ -- 64
-duplicate$ -- 476
-empty$ -- 925
-format.name$ -- 170
-if$ -- 2186
+cite$ -- 40
+duplicate$ -- 745
+empty$ -- 1136
+format.name$ -- 196
+if$ -- 3272
 int.to.chr$ -- 0
 int.to.str$ -- 37
-missing$ -- 42
+missing$ -- 41
 newline$ -- 188
-num.names$ -- 74
-pop$ -- 327
+num.names$ -- 76
+pop$ -- 290
 preamble$ -- 1
-purify$ -- 159
+purify$ -- 171
 quote$ -- 0
-skip$ -- 276
+skip$ -- 635
 stack$ -- 0
-substring$ -- 297
-swap$ -- 56
-text.length$ -- 4
+substring$ -- 666
+swap$ -- 335
+text.length$ -- 21
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 136
-warning$ -- 27
-while$ -- 84
+warning$ -- 3
+while$ -- 107
 width$ -- 39
-write$ -- 365
-(There were 27 warnings)
+write$ -- 415
+(There were 3 warnings)

@@ -29,7 +29,7 @@
 \lhead[]{\leftmark}
 \chead[]{}
 \rhead[]{\thepage}
-\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\headrulewidth}{1pt}%linea en cabecera
 
 %Pie de pag
 \lfoot[]{}
@@ -39,6 +39,8 @@
 
 %Setea configuracion enc y pie de pag
 \pagestyle{fancy}
+
+\usepackage{rotating} %rotacion de table
 
 
 \begin{document}
@@ -179,9 +181,9 @@ Las tareas de mantenimiento de software no solo se realizan para mejorar cuestio
  
 De acuerdo con la IEEE standard \cite{STD1219}, \textit{la migración del software es convertir o adaptar un viejo sistema (sistema heredado) a un nuevo contexto tecnológico sin cambiar la funcionalidad del mismo}.
 
-Las migraciones de sistemas más comunes que se llevan a cabo son causadas por cambios en el hardware obsoleto, nuevos sistemas operativos, cambios en la arquitectura y nuevas base de datos. Sin duda, la que más se ha acentuado en los últimos años son la aparición de nuevas tecnologías web y las mobile (basadas en dispositivos móviles) \cite{MMFAF07}.
+Las migraciones de sistemas más comunes que se llevan a cabo son causadas por cambios en el hardware obsoleto, nuevos sistemas operativos, cambios en la arquitectura y nuevas base de datos. Sin duda, la que más se ha acentuado en los últimos años son la aparición de nuevas tecnologías web y las mobile (basadas en dispositivos móviles) \cite{MMFAF08}.
  
-La migración de grandes sistemas es fundamental, sin embargo está demostrado que es costosa y compleja \cite{MMFAF07}. Para llevarla a cabo reduciendo estos costos se recomienda hacer previamente una buena comprensión del sistema antiguo. 
+La migración de grandes sistemas es fundamental, sin embargo está demostrado que es costosa y compleja \cite{MMFAF08}. Para llevarla a cabo reduciendo estos costos se recomienda hacer previamente una buena comprensión del sistema antiguo. 
 
 Una técnica de comprensión de sistemas ideada recientemente para la migración de software, consiste en un mode\-lado de datos \cite{WHAFVR11}. Esta modelado se encarga de abstraer el código antiguo a niveles más altos, al hacerlo reduce los esfuerzos de comprensión. De esta forma, el grupo encargado de la migración solo debe preocuparse por convertir el antiguo código a la nueva tecnología.
 
@@ -539,7 +541,7 @@ Teniendo cuenta que lo sistemas son cada vez más amplios y complejos. El volume
 
 Las técnicas de administración de información se encargan de brindar estrategias de almacenamiento y acceso eficiente a la información recolectada de los sistemas. 
 
-Dependiendo del tamaño de la información se utiliza una determinada estrategia. Estas estrategias indican el tipo de estructura de datos a utilizar y las operaciones de acceso sobre ellas \cite{AAJU88,TSTA80}. La eficiencia en espacio de almacenamiento y tiempo de acceso son claves a la hora de elegir una estrategia.
+Dependiendo del tamaño de la información se utiliza una determinada estrategia. Estas estrategias indican el tipo de estructura de datos a utilizar y las operaciones de acceso sobre ellas \cite{AAJU83,TSTA80}. La eficiencia en espacio de almacenamiento y tiempo de acceso son claves a la hora de elegir una estrategia.
 
 Cuando la cantidad de datos son de gran envergadura, se recomienda emplear una base de datos con índices adecuados para realizar las consultas \cite{ERNS99}.
 
@@ -1745,6 +1747,13 @@ Sin embargo, suele ocurrir que estos recursos internos son escasos. Es por esto,
 
 %========================================================================
 \chapter{Identifier Analyzer (IDA)}
+\fancyhf{}
+\pagestyle{fancy}
+%Encabezado
+\lhead[]{\leftmark}
+\chead[]{}
+\rhead[]{\thepage}
+\renewcommand{\headrulewidth}{1pt}
 
 \section{Introducción}
 
@@ -1889,7 +1898,7 @@ Al abrir la pestaña de los comentarios, también posee una tabla listando los c
 \label{ida5}
 \end{figure}
 
-Pulsando la pestaña correspondiente a identificadores, en la tabla de Declaraciones (ver figura \ref{ida3} - Flecha 4) no solo se detalla el nombre sino que también el número de línea donde esta declarado, el tipo (int, char, etc.), el modificador (publico, privado, protegido), lo que el id representa (variable de clase, constructor, método de clase, etc.) y cuantas referencias tiene (lugares desde donde se utiliza). A su vez, las referencias son listadas en una tabla contigua que indica el número de línea y ambiente desde donde se usa el id (ver figura \ref{ida3} - Flecha 5). En las dos tablas antes descriptas, cuando se hace click en una fila se resalta la Declaración del id o la Referencia, según sea la tabla (ver figura \ref{ida3} - Flecha 2). Como en el caso de los literales y los comentarios esta tabla posee un buscador por id (ver figura \ref{ida3} - Flecha 6). 
+Pulsando la pestaña correspondiente a identificadores, en la tabla de Declaraciones (ver figura \ref{ida3} - Flecha 4) no solo se detalla el nombre sino que también el número de línea donde esta declarado, el tipo (int, char, etc.), el modificador (publico, privado, protegido), lo que el id representa (variable de clase, constructor, método de clase, etc.) y cuantas referencias tiene (lugares desde donde se utiliza). A su vez, las referencias son listadas en una tabla contigua que indica el número de línea y ambiente (en que método o clase se ubica la referencia) desde donde se usa el id (ver figura \ref{ida3} - Flecha 5). En las dos tablas antes descriptas, cuando se hace click en una fila se resalta la Declaración del id o la Referencia, según sea la tabla (ver figura \ref{ida3} - Flecha 2). Como en el caso de los literales y los comentarios esta tabla posee un buscador por id (ver figura \ref{ida3} - Flecha 6). 
 
 \begin{figure}[t] %[h] para here [b] para bottom [t] para top
 \centerline{%queda centrada mejor la imagen
@@ -1957,11 +1966,13 @@ Por último, en el cuadro `Ocultar Columnas' (ver figura \ref{ida10} - Flecha 6)
 
 \section{Casos de Estudio}
 
-En esta sección se presentarán casos de estudios realizados con la herramienta IDA. Cada uno de ellos contemplan un único archivo JAVA que son pasados como entrada en la herramienta. Con estos casos, se mostrará la utilidad de IDA y que motivó a desarrollarla.
+En esta sección se presentarán casos de estudios realizados con la herramienta IDA. En cada uno de estos casos, se examinan los ids de un único archivo JAVA. A través de tablas, se irán mostrando los resultados parciales que se van obteniendo durante el proceso de análisis de los ids.
 
-Dado que IDA necesita diccionarios para poder funcionar, se utilizan los mismos que emplean los autores de las técnicas explicadas en el capítulo 3 (por ejemplo \textit{ispell} de linux). Estos diccionarios están compuestos por palabras en idioma Inglés, por lo tanto, para que IDA funcione correctamente, solo se deben ingresar archivos con ids escritos en Inglés. A continuación se describen algunos casos de estudio.
+Con estos casos, se pretende ostentar la utilidad de la herramienta IDA en base a los conceptos descriptos en el capítulo 3.
 
-\begin{figure}[t] %[h] para here [b] para bottom [t] para top
+Dado que IDA necesita diccionarios para poder funcionar, se utilizan los mismos que emplean los autores de las técnicas explicadas en el capítulo 3 (por ejemplo \textit{ispell} de linux). Estos diccionarios están compuestos por palabras en idioma Inglés, por lo tanto, para que IDA funcione correctamente, solo se deben ingresar archivos con ids escritos en Inglés. A continuación se describen los casos de estudio.
+
+\begin{figure}[h] %[h] para here [b] para bottom [t] para top
 \centerline{%queda centrada mejor la imagen
 \includegraphics[scale= 0.5]{./caso_01.png}
 }
@@ -1973,13 +1984,19 @@ Dado que IDA necesita diccionarios para poder funcionar, se utilizan los mismos 
 
 El archivo JAVA denominado Minesweeper.java, al ejecutarlo posee el clásico y conocido juego llamado Buscaminas (Minesweeper en Inglés - ver figura \ref{caso1}). Este archivo posee 223 líneas que serán analizadas por IDA.
 
-Al ingresar el archivo Minesweeper.java, el parser extrae información referente a los ids (ver tabla \ref{tabla2}). También captura datos relacionados a los  literales Strings (ver tabla \ref{tabla3}) y a los comentarios (ver tabla \ref{tabla4}).
+Al ingresar el archivo Minesweeper.java a la herramienta IDA, comienza la fase de extracción de datos y el analizador sintáctico captura información referente a los ids (ver tabla \ref{tabla2}). Esta información es exhibida para el usuario en el \textit{Panel de Elementos Capturados} como se explicó en la sección anterior.
 
-\begin{center}
-	\begin{table}[t]
-	
-		\centering
-   		\begin{tabular}{| c | c | c | c | c | c | }      
+Como se puede observar en la tabla \ref{tabla2}, el archivo de entrada Minesweeper.java posee ids del tipo hardwords y softwords (ver capítulo 3). Entre los hardwords se pueden observar \textsf{min\_mtrx}, \textsf{TOTmin}, \textsf{topPanel} (entre otros) ya que estos poseen una marca de separación entre las palabras que lo componen. Para el caso de los softwords se encuentran ids como \textsf{ae}, \textsf{mins}, \textsf{bttns} (entre otros).
+
+También se capturan datos relacionados a los literales Strings (ver tabla \ref{tabla3}) y a los comentarios (ver tabla \ref{tabla4}).
+
+Toda esta información se le muestra al usuario a través del Panel de Elementos Capturados (ver figura xxx). Luego se procede a analizar los ids, aplicando las técnicas de división y después la técnica de expansión de abreviaturas. Los resultados obtenidos se pueden apreciar en la tabla \ref{tabla5}.
+
+
+
+\begin{table}[h]
+\centering
+	\begin{tabular}{| c | c | c | c | c | c | }      
        \hline
   	   \textsf{Línea} & \textsf{Nombre ID} & \textsf{Representa} & \textsf{Tipo} & \textsf{Modificador} & \textsf{Nro de Ref}\\ \hline
 7&Minesweeper&Clase&-&public&0 \\ \hline  	   
@@ -2018,10 +2035,10 @@ Al ingresar el archivo Minesweeper.java, el parser extrae información referente
    \caption{Información de Ids extraída por el Parser ANTLR}
    \label{tabla2}
      
-  \end{table} 
-\end{center}
+\end{table} 
 
-\vspace{-2.5em}
+
+
 
 \begin{center}
 	\begin{table}[t]
@@ -2096,10 +2113,27 @@ Al ingresar el archivo Minesweeper.java, el parser extrae información referente
   \end{tabular}  
 	 
    \caption{Información de Comentarios extraída por el Parser}
-   \label{tabla3}
+   \label{tabla4}
      
   \end{table} 
 \end{center}
+
+\begin{sidewaystable}
+	
+		\centering
+   		\begin{tabular}{| c | c | c | c | c |}      
+       \hline
+  	   \textsf{Id} & \textsf{Greedy} & \textsf{Samurai} & \textsf{Exp desde Greedy} & \textsf{Exp desde Samurai} \\ \hline
+
+
+ 
+
+  \end{tabular}  
+	 
+   \caption{Análisis Realizado a los Ids extraídos de Minesweeper}
+   \label{tabla5}
+     
+\end{sidewaystable}
 
 
 \chapter{Conclusiones}

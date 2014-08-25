@@ -45,4 +45,4 @@
 \contentsline {subsection}{\numberline {4.4.6}Panel de Elementos Capturados (Parte 2)}{75}
 \contentsline {section}{\numberline {4.5}Casos de Estudio}{77}
 \contentsline {subsection}{\numberline {4.5.1}Buscaminas (Minesweeper)}{78}
-\contentsline {chapter}{\numberline {5}Conclusiones}{82}
+\contentsline {chapter}{\numberline {5}Conclusiones}{83}
