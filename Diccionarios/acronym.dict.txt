@@ -1922,7 +1922,6 @@ vsos
 vsync
 vtam
 vui
-w
 wais
 waits
 wan

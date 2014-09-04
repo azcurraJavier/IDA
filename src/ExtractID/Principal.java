@@ -142,7 +142,7 @@ public class Principal extends javax.swing.JFrame {
         helpMenu = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Identifier Analyzer");
 
         fileMenu.setMnemonic('f');
@@ -244,7 +244,8 @@ public class Principal extends javax.swing.JFrame {
         }
 
         fileChooser.setCurrentDirectory(currentDir);
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("java", "java");
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivo JAVA","java", "JAVA");
+        fileChooser.setAcceptAllFileFilterUsed(false);
         fileChooser.setFileFilter(filter);
 
         fileChooser.setMultiSelectionEnabled(true);
@@ -327,7 +328,7 @@ public class Principal extends javax.swing.JFrame {
                 //Interfaz
                 codigoPanel = new CodigoPanel(unaClase, mapIdsSplited, mapIdsExp);
                 //jTabbedPaneCodigo.add(claseAnalisis.getPunteroArchivo().getName(), codigoPanel);
-                jTabbedEsp.addTab(unaClase.getFileName(), codigoPanel);
+                jTabbedEsp.addTab(unaClase.getFileName(), fileAnalisis.getAbsolutePath(),codigoPanel);
 
             }
 

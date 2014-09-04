@@ -15,7 +15,7 @@ public class PalabraHash {
         lisPalabra = new ArrayList<>();        
     }
     
-    public void addPalabra(String p) {
+    public void addPalabra(String p, int valueParam) {
         
         if(!p.matches(".*[A-Za-z].*")){
             return;
@@ -23,11 +23,18 @@ public class PalabraHash {
         
         if (pal.containsKey(p)) {
             int val = Integer.parseInt(pal.get(p).toString());
-            val = val + 1;
+            val = val + valueParam;
             pal.put(p, val);
         } else {//else just add it
-            pal.put(p, 1);
-        }        
+            pal.put(p, valueParam);
+        }   
+    
+    
+    }
+    
+    public void addPalabra(String p) {
+        //agrega solo con 1
+        addPalabra(p, 1);
     }
     
     public int getCantApa(String key) {

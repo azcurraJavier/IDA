@@ -146,6 +146,8 @@ public class Minesweeper extends JFrame implements ActionListener {
 
     private void win() {
 	//Win the game
+        String msgDialog = "You Win!!!  Game Over!!!";
+        JOptionPane.showMessageDialog(this, msgDialog);
         restart();
     }
 

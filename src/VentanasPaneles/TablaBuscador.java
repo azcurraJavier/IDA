@@ -381,11 +381,6 @@ public class TablaBuscador extends javax.swing.JPanel {
 
         jButtonTagCloud.setText("Ver TagCloud");
         jButtonTagCloud.setEnabled(false);
-        jButtonTagCloud.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonTagCloudActionPerformed(evt);
-            }
-        });
 
         jScrollPaneRef.setBorder(javax.swing.BorderFactory.createTitledBorder("Referencias"));
 
@@ -566,14 +561,6 @@ public class TablaBuscador extends javax.swing.JPanel {
         getBuscar = jTextFieldBusc.getText();
         tableSort.setRowFilter(RowFilter.regexFilter(getBuscar, buscarColumna));
     }//GEN-LAST:event_jTextFieldBuscKeyReleased
-
-    private void jButtonTagCloudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTagCloudActionPerformed
-        TagCloudPanel tcp;
-        tcp = new TagCloudPanel(new javax.swing.JFrame(), true, p.getArray());
-
-        tcp.setVisible(true);
-
-    }//GEN-LAST:event_jButtonTagCloudActionPerformed
 
     private void jButtonAnId1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAnId1ActionPerformed
 

@@ -23,9 +23,10 @@ public class ClosableTabbedPane extends JTabbedPane{
 	}
 
 	
-	public void addTab(String title, CodigoPanel codPanel) {            
+	public void addTab(String title, String path, CodigoPanel codPanel) {            
                 
-		super.addTab(title+"   ", codPanel);                
+		super.addTab(title+"   ", codPanel);        
+                super.setToolTipText(path);
 	}     
 
 	
@@ -58,7 +59,7 @@ public class ClosableTabbedPane extends JTabbedPane{
 			if(closeUnderMouse(me.getX(), me.getY())){
 				boolean isToCloseTab = tabAboutToClose(selectedTab);
 				if (isToCloseTab && selectedTab > -1){
-                                        ListaClase.deleteClass(tabbedPane.getTitleAt(selectedTab));
+                                        ListaClase.deleteClass(tabbedPane.getToolTipText());
 					tabbedPane.removeTabAt(selectedTab);                                        
 				}
 				selectedTab = tabbedPane.getSelectedIndex();                   
@@ -85,7 +86,7 @@ public class ClosableTabbedPane extends JTabbedPane{
                     } else {
                         tabbedPane.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
                         if (selectedTab > -1) {
-                            //tabbedPane.setToolTipTextAt(selectedTab, "");
+                            tabbedPane.setToolTipTextAt(selectedTab, getToolTipText());
                         }
                     }
                 }

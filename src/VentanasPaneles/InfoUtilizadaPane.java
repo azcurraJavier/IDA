@@ -23,12 +23,15 @@ public class InfoUtilizadaPane extends javax.swing.JDialog {
 
     private MiModelo modeloTabla;
     private MiJTable tablaElem;
-    private TableRowSorter<TableModel> tableSort;
+    private TableRowSorter<TableModel> tableSort1;
+    private TableRowSorter<TableModel> tableSort2;
     
     private Map<String,Integer> localFreqTable;
     private Map<String,Integer> globalFreqTable;
-    private static TagCloudPanel tcp;
-    private PalabraHash palTag;
+    private static TagCloudPanel tcp1;
+    private static TagCloudPanel tcp2;
+    private PalabraHash palTag1;
+    private PalabraHash palTag2;
 
     /**
      * Creates new form SamuraiFreqTable
@@ -43,20 +46,34 @@ public class InfoUtilizadaPane extends javax.swing.JDialog {
         
         modeloTabla = new MiModelo();
         tablaElem = new MiJTable(modeloTabla);
+        tableSort2 = new TableRowSorter<TableModel>(modeloTabla);
+
+        tablaElem.setRowSorter(tableSort2);   
         jScrollPane1.setViewportView(tablaElem);
 
         modeloTabla.addColumn("<html>Token<br />Capturado</html>");
         modeloTabla.addColumn("<html>Frecuencia<br />Local</html>");
         modeloTabla.addColumn("<html>Frecuencia<br />Global</html>");
 
+        //tag cloud
+        palTag1 = new PalabraHash();
+        
         Object[] filaTabla = new Object[3];
 
         for (Map.Entry mapEntry : localFreqTable.entrySet()) {
+            
+            String palabra = mapEntry.getKey().toString().trim();
+            int valorAbs = (int)mapEntry.getValue();
+            
+            Integer valorRel = globalFreqTable.get(palabra);
 
-            filaTabla[0] = mapEntry.getKey().toString().trim();
-            filaTabla[1] = mapEntry.getValue();
-            filaTabla[2] = globalFreqTable.get(mapEntry.getKey().toString());
+            filaTabla[0] = palabra;
+            filaTabla[1] = valorAbs;
+            filaTabla[2] = valorRel == null? 0 : valorRel;
             modeloTabla.addRow(filaTabla);
+            
+            //para tagcloud
+            palTag1.addPalabra(palabra, valorAbs);
         }
         
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
@@ -70,9 +87,9 @@ public class InfoUtilizadaPane extends javax.swing.JDialog {
         
         modeloTabla = new MiModelo();
         tablaElem = new MiJTable(modeloTabla);
-        tableSort = new TableRowSorter<TableModel>(modeloTabla);
+        tableSort1 = new TableRowSorter<TableModel>(modeloTabla);
 
-        tablaElem.setRowSorter(tableSort);   
+        tablaElem.setRowSorter(tableSort1);   
         
         jScrollFraCap.setViewportView(tablaElem);
 
@@ -86,12 +103,12 @@ public class InfoUtilizadaPane extends javax.swing.JDialog {
             modeloTabla.addRow(filaTabla);
         }        
         
-        //tag cloud
-        palTag = new PalabraHash();
+        //tag cloud        
+        palTag2 = new PalabraHash();
         
         
         for(String s:ExpandBasic.getPalabrasCap()){
-            palTag.addPalabra(s);
+            palTag2.addPalabra(s);
         }
         ///
         
@@ -111,18 +128,20 @@ public class InfoUtilizadaPane extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
         jButton1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jTextFBuscFra = new javax.swing.JTextField();
         jScrollFraCap = new javax.swing.JScrollPane();
+        jButton2 = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jButton3 = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        jTextField1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Información Utilizada");
-
-        jScrollPane1.setBorder(javax.swing.BorderFactory.createTitledBorder("Tablas de Frecuencias - Algoritmo Samurai"));
+        setTitle("Palabras Capturadas");
 
         jButton1.setText("Cerrar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -132,13 +151,6 @@ public class InfoUtilizadaPane extends javax.swing.JDialog {
         });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Frases Capturadas - Algoritmo de Expansión"));
-
-        jButton2.setText("Ver Tagcloud");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
 
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("Buscar Palabra"));
 
@@ -159,6 +171,13 @@ public class InfoUtilizadaPane extends javax.swing.JDialog {
             .addComponent(jTextFBuscFra, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
+        jButton2.setText("<html>Tagcloud de<br />Palabras</html>");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -168,23 +187,77 @@ public class InfoUtilizadaPane extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(34, 34, 34)
-                        .addComponent(jButton2)
-                        .addContainerGap(138, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(197, Short.MAX_VALUE))
                     .addComponent(jScrollFraCap, javax.swing.GroupLayout.Alignment.TRAILING)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(jButton2)))
+                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollFraCap, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
+                .addComponent(jScrollFraCap, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Tablas de Frecuencias - Algoritmo Samurai"));
+
+        jButton3.setText("<html>Tagcloud de<br />Palabras</html>");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Buscar Palabra"));
+
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField1KeyReleased(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 6, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 117, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1)
                 .addContainerGap())
         );
 
@@ -193,27 +266,25 @@ public class InfoUtilizadaPane extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1)))
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(51, 51, 51)
+                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
-                .addContainerGap())
+                .addGap(24, 24, 24))
         );
 
         pack();
@@ -228,25 +299,46 @@ public class InfoUtilizadaPane extends javax.swing.JDialog {
 
     private void jTextFBuscFraKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFBuscFraKeyReleased
 
-        tableSort.setRowFilter(RowFilter.regexFilter(jTextFBuscFra.getText(), 0));
+        tableSort1.setRowFilter(RowFilter.regexFilter(jTextFBuscFra.getText(), 0));
     }//GEN-LAST:event_jTextFBuscFraKeyReleased
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
-        if (tcp == null) {
-            tcp = new TagCloudPanel(new javax.swing.JFrame(), true, palTag.getArray());
+        
+        String msg = "";
+        
+        if (tcp2 == null) {
+            tcp2 = new TagCloudPanel(new javax.swing.JFrame(), true, palTag2.getArray(),msg);
         }
-        tcp.setVisible(true);
+        tcp2.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        
+        String msg = "Nota: El tamaño de cada palabra depende de la Frecuencia Local";
+        
+        if (tcp1 == null) {
+            tcp1 = new TagCloudPanel(new javax.swing.JFrame(), true, palTag1.getArray(),msg);
+        }
+        tcp1.setVisible(true);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
+       tableSort2.setRowFilter(RowFilter.regexFilter(jTextField1.getText(), 0));
+    }//GEN-LAST:event_jTextField1KeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollFraCap;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextFBuscFra;
+    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

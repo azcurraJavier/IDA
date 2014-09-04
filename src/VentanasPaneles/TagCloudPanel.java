@@ -29,24 +29,25 @@ public class TagCloudPanel extends javax.swing.JDialog {
      * Creates new form TagClaudPanel
      */
     private Cloud cloud;
-    private Tag tag;
+    private Tag tag;   
     
-    Set<String> setConectors = new HashSet<String>(Arrays.asList("el","la","los","las","un","una","unos","unas","al","lo","del","de"));
  
-    public TagCloudPanel(java.awt.Frame parent, boolean modal, ArrayList<Palabra> lisPalabra) {
+    public TagCloudPanel(java.awt.Frame parent, boolean modal, ArrayList<Palabra> lisPalabra, String msg) {
         super(parent, modal);
         initComponents();
+        
+        jTextField1.setText(msg);
 
         cloud = new Cloud();
 
-        cloud.setMaxWeight(17.0);
-        cloud.setMaxTagsToDisplay(20);
+        cloud.setMaxWeight(50.0);
+        cloud.setMaxTagsToDisplay(500);
         
         for (Palabra p : lisPalabra) {
-            if(!setConectors.contains(p.getPal())){
-                tag = new Tag(p.getPal(), p.getCantApa());
-                cloud.addTag(tag);
-            }
+
+            tag = new Tag(p.getPal(), p.getCantApa());
+            cloud.addTag(tag);
+
         }
 
         jEditorPaneTagCloud.setText(tagCloud2HTML(cloud));
@@ -96,6 +97,7 @@ public class TagCloudPanel extends javax.swing.JDialog {
         jTextField1 = new javax.swing.JTextField();
 
         setTitle("Tag Cloud");
+        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 closeDialog(evt);
@@ -111,11 +113,11 @@ public class TagCloudPanel extends javax.swing.JDialog {
 
         jEditorPaneTagCloud.setEditable(false);
         jEditorPaneTagCloud.setContentType("text/html"); // NOI18N
+        jEditorPaneTagCloud.setForeground(new java.awt.Color(1, 102, 224));
         jScrollPane1.setViewportView(jEditorPaneTagCloud);
 
         jTextField1.setEditable(false);
         jTextField1.setFont(new java.awt.Font("Ubuntu", 0, 14)); // NOI18N
-        jTextField1.setText("Nota: Se excluyen algunos conectores u palabras irrelevantes");
         jTextField1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jTextField1.setFocusable(false);
 
@@ -126,7 +128,7 @@ public class TagCloudPanel extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 568, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 634, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 443, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -136,8 +138,8 @@ public class TagCloudPanel extends javax.swing.JDialog {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)
                 .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cancelButton)
