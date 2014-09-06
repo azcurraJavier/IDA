@@ -35,6 +35,7 @@ public abstract class OperationDB {
 
         } catch (SQLException ex) {
             System.out.println(ex.getLocalizedMessage());
+            System.out.println("Query: "+q);
         }
 
         return res;
@@ -54,8 +55,9 @@ public abstract class OperationDB {
             pstm.close();
             res = true;
 
-        } catch (SQLException ex) {            
+        } catch (SQLException ex) {             
             System.out.println(ex.getLocalizedMessage());
+            System.out.println("Query: "+q);
         }
 
         return res;
@@ -77,6 +79,7 @@ public abstract class OperationDB {
 
         } catch (SQLException ex) {            
             System.out.println(ex.getLocalizedMessage());
+            System.out.println("Query: "+q);
         }
 
         return res;
@@ -116,6 +119,7 @@ public abstract class OperationDB {
             res.close();
         } catch (SQLException e) {
             System.out.println(e.getLocalizedMessage());
+            System.out.println("Query: "+q);
         }
 
         return true;
@@ -146,6 +150,7 @@ public abstract class OperationDB {
             res.close();
         } catch (SQLException e) {
             System.out.println(e.getLocalizedMessage());
+            System.out.println("Query: "+q);
         }  
 
         return array;
@@ -172,6 +177,7 @@ public abstract class OperationDB {
             res.close();
         } catch (SQLException e) {
             System.out.println(e.getLocalizedMessage());
+            System.out.println("Query: "+q);
         }  
 
         return freq;
@@ -211,6 +217,7 @@ public abstract class OperationDB {
             
         } catch (SQLException e) {
             System.out.println(e.getLocalizedMessage());
+            System.out.println("Query: "+q);
         }
 
         return array;
@@ -237,6 +244,7 @@ public abstract class OperationDB {
 
         } catch (SQLException ex) {
             System.out.println(ex.getLocalizedMessage());
+            System.out.println("Query: "+" TRUNCATE TABLE " + table);
         }
 
         return res;
@@ -255,6 +263,7 @@ public abstract class OperationDB {
 
         } catch (SQLException ex) {
             System.out.println(ex.getLocalizedMessage());
+            System.out.println("Query: "+"TRUNCATE SCHEMA public AND COMMIT");
         }
 
         return res;

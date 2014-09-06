@@ -963,7 +963,7 @@ El algoritmo Greedy elaborado por Lawrie, Feild, Binkley \cite{DLFB06,FBL06,HDD0
 
 \item[Abreviaciones conocidas:] La lista se arma con abreviaciones extraídas de distintos programas y de autores expertos. Se incluyen abreviaciones comunes (ejemplo: \textsf{alt} $\rightarrow$ \textsf{altitude}) y abreviaciones de programación \mbox{(ejemplo: \textsf{txt} $\rightarrow$ \textsf{text}).}
 
-\item[Palabras excluyentes (stop list):] Posee palabras que son irrelevantes para realizar la división de los ids. Incluye palabras claves (ejemplo: \texttt{while}), ids predefinidos (ejemplo: \texttt{NULL}), nombres y funciones de librerías (ejemplo: \texttt{strcpy},\texttt{errno}), y todos los ids que puedan tener un solo caracter. Esta lista es muy grande.
+\item[Palabras excluyentes (stop list):] Posee palabras que son irrelevantes para realizar la división de los ids. Incluye palabras claves (ejemplo: \texttt{while}), ids predefinidos (ejemplo: \texttt{NULL}), nombres y funciones de librerías (ejemplo: \texttt{strcpy}, \texttt{errno}), y todos los ids que puedan tener un solo caracter. Esta lista es muy grande.
 \end{description}
 
 El algoritmo de Greedy utiliza las 3 listas nombradas al comienzo de la sección en forma de variable global. Esto ocurre porque las 3 listas son usadas por subrutinas más tarde. El algoritmo procede de la siguiente manera (ver algoritmo \ref{GSA}), el id que recibe como entrada primero se divide (con espacios en blanco) en las hardwords que lo componen (ejemplo: \textsf{fileinput\_txt} $\rightarrow$ \mbox{\textsf{fileinput}} y \textsf{txt} en la línea 2, si es camelcase \textsf{fileinputTxt} $\rightarrow$ \textsf{fileinput} y \textsf{txt} en la línea 3). Luego, cada palabra resultante en caso que esté en alguna de las 3 listas, se distingue como un único softword (ejemplo: \textsf{txt} pertenence a la lista de abreviaciones conocidas - línea 5). Si alguna palabra no está en alguna lista se considera como múltiples softwords que necesitan subdividirse (ejemplo: \textsf{fileinput} $\rightarrow$ \textsf{file} y \textsf{input} - línea 5).
@@ -1126,7 +1126,7 @@ Finalmente, todas las partes divididas se envían a \mbox{\textit{divisiónSoftW
 
 %b) Que se a haga antes de la primer mayúscula siguiendo con la filosofía camel-case (ejemplo: \textsf{GP Sstate} - línea 13). Para este caso, la opción correcta debe ser la a), ya que \textsf{state} debe tener mayor puntaje que \textsf{Sstate}.
 
-\begin{algorithm}
+\begin{algorithm}[H]
 \LinesNumbered%enumera las lineas
 \SetKwInOut{Input}{Entrada}\SetKwInOut{Output}{Salida}
 \Input{\textbf{\textit{token}} \tcp{\textit{token a dividir}}}
@@ -1204,7 +1204,7 @@ Si la parte derecha finalmente se divide, luego entre la parte izquierda y la de
 
 Otro problema detectado son las palabras de pocos caracteres (menor a 3). Estas palabras, tienen mucha aparición en los códigos y por lo general el puntaje es más alto que el resto. Por esta razón, el autor \cite{EHPV09} en base a un análisis sustancial decide colocar la raíz cuadrada en algunos resultados de score antes de comparar (línea 7 y 8), sino la división frecuentemente seria errónea. Un ejemplo es la palabra \mbox{\textsf{per formed}}. La presencia de la raíz cuadrada en el algoritmo \textit{divisiónHardWord} (línea 9), cuando se compara el caso camel-case y el caso alternativo también es para solucionar este problema.\\
 
-\begin{algorithm}
+\begin{algorithm}[H]
 \LinesNumbered%enumera las lineas
 \SetKwInOut{Input}{Entrada}\SetKwInOut{Output}{Salida}
 \Input{\textbf{\textit{s}} \tcp{\textit{softword string}}}
@@ -1299,7 +1299,7 @@ La lista de frases se arma utilizando una técnica que extrae frases en lenguaje
 
 Una vez que las listas de palabras y frases potenciales se confeccionan, la ejecución del algoritmo comienza. Este algoritmo (ver algoritmo \ref{BEA}) recibe como entrada la abreviatura a expandir y las 4 listas antes descriptas. El primer paso es ver si la abreviatura forma parte de la lista de palabras irrelevantes (stop-list línea 1)\footnote[2]{Esta lista se usa con la misma política que el algoritmo Greedy.}. En caso de que así sea, no se retornan resultados. La razón de esto es porque estas palabras no aportan información importante en la comprensión del código y son fácilmente reconocidas por los ingenieros del software. Algunos casos son artículos/conectores (the, an, or) y palabras reservadas del lenguaje de programación que se utilicen (\textsf{while, for, if,} etc.).
 
-\begin{algorithm}
+\begin{algorithm}[H]
 \LinesNumbered%enumera las lineas
 \SetKwInOut{Input}{Entrada}\SetKwInOut{Output}{Salida}
 \Input{\textit{\textbf{abrev}} \tcp{\textit{Abreviatura a expandir}}}
@@ -1446,7 +1446,7 @@ b) En caso de que el patrón sea el \textit{compuesto por letras} (no sea el pre
 
 En las líneas 2-10 se describe el proceso de búsqueda. Si alguna de estas sentencias de búsqueda encuentran un sola palabra larga candidata, el algoritmo finaliza y retorna el resultado. 
 
-\begin{algorithm}
+\begin{algorithm}[H]
 \LinesNumbered%enumera las lineas
 \SetKwInOut{Input}{Entrada}\SetKwInOut{Output}{Salida}
 \Input{\textit{\textbf{pa}} \tcp{\textit{Palabra Abreviada}}}
@@ -1535,7 +1535,7 @@ Al igual que el algoritmo de palabras singulares, el algoritmo de multi-palabras
 
 En el algoritmo \ref{BMP}, se presenta la búsqueda por multi-palabras \cite{EZH08}. Las variables de entrada son: la abreviatura multi-palabra a expandir, la expresión regular formada por el patrón elegido, los distintos comentarios que existan en el código (en la clase y en el método) y el cuerpo del método.
 
-\begin{algorithm}
+\begin{algorithm}[H]
 \LinesNumbered%enumera las lineas
 \SetKwInOut{Input}{Entrada}\SetKwInOut{Output}{Salida}
 \Input{\textit{\textbf{pa}} \tcp{\textit{Palabra Abreviada}}}
@@ -2063,10 +2063,10 @@ A continuación, se procede a analizar los ids, el usuario realiza esto con el \
 
 Los resultados mostrados en la tabla \ref{tabla5} se puede observar que las mejores expansiones de las abreviaturas provienen desde el algoritmo Samurai, el mismo posee una alta taza de acierto. De más está decir que mientras mejor sea la división, mejor expandido estará el id.
 
-Los ids analizados (ver tabla \ref{tabla5}) del tipo hardwords capturados, el tipo guión bajo se puede encontrar \textsf{min\_imag}, \textsf{min\_mtrx}  para el camel-case \textsf{minsNum}, \textsf{uncoverEmpty}, \mbox{\textsf{msgDialog}} y para el caso especial \textsf{TOTmin}. El algoritmo Greedy manifiesta imprecisiones a la hora de dividir ya que siempre considera que la mayor cantidad de divisiones es la mejor opción (ver tabla \ref{tabla5}), esto puede observarse en casos como \textsf{min--im--ag}, \textsf{min--s--num}, \textsf{bt--tn--s}, \textsf{t--o--tm--in}. Para el caso especial \textsf{TOTmin} es interesante ver como Samurai se da cuenta de ello y lo separa correctamente (ver sección \ref{sec:algSamu}), mientras que Greedy supone que es del tipo camel-case haciendo la separación incorrecta \textsf{t--o--tm--in}.
+Los ids capturados por la herramienta (ver tabla \ref{tabla5}) en lo que respecta a hardwords, se pueden encontrar con guión bajo  \textsf{min\_imag}, \textsf{min\_mtrx}  para el tipo camel-case \textsf{minsNum}, \textsf{uncoverEmpty}, \mbox{\textsf{msgDialog}} y para el caso especial \textsf{TOTmin} (variante camel-case). El algoritmo Greedy manifiesta imprecisiones a la hora de dividir ya que siempre considera que la mayor cantidad de divisiones es la mejor opción, esto puede observarse en casos como \textsf{min--im--ag}, \textsf{min--s--num}, \textsf{bt--tn--s}, \textsf{t--o--tm--in} (ver tabla \ref{tabla5}). Para el caso especial \textsf{TOTmin} es interesante ver como Samurai se da cuenta de ello y lo separa correctamente (ver sección \ref{sec:algSamu}), mientras que Greedy supone que es del tipo camel-case haciendo la separación incorrecta \textsf{t--o--tm--in}.
 
-En lo que respecta a softwords se aprecia la presencia de acrónimos como \textsf{rm} y \textsf{ae}. El algoritmo de expansión consulta la lista de frases (ver figura \ref{ida7} - flecha 4) los de comentarios y los literales capturados (ver tablas \ref{tabla3} y \ref{tabla4}), al encontrar coincidencia con el literal \textsf{“remaining mines”} y el comentario \textsf{“action event”}, selecciona ambos como la expansión correspondiente de \textsf{rm} y \textsf{ae} (ver tabla \ref{tabla5}).
-El resto de los softwords se puede considerar a \textsf{mins}, \textsf{bttns}, \textsf{dim}, aquí también Greedy acusa inconvenientes mientras que Samurai los divide sin problemas. %falta mostrar las tablas de frecuencias
+En lo que respecta a softwords se aprecia la presencia de acrónimos como \textsf{rm} y \textsf{ae}. El algoritmo de expansión consulta la lista de frases (ver figura \ref{ida7} - flecha 4) conformada por comentarios y los literales capturados (ver tablas \ref{tabla3} y \ref{tabla4}), al encontrar coincidencia con el literal \textsf{“remaining mines”} y el comentario \textsf{“action event”}, selecciona ambos como la expansión correspondiente de \textsf{rm} y \textsf{ae} (ver tabla \ref{tabla5}).
+El resto de los softwords se puede considerar a \textsf{mins}, \textsf{bttns}, \textsf{dim}, aquí Greedy también acusa inconvenientes mientras que Samurai los divide sin problemas. %falta mostrar las tablas de frecuencias
 
 Para finalizar, el id hardword \textsf{msgDialog} que se considera del tipo camel-case, la abreviatura \textsf{msg} no es expandida a \textit{message} ya que no existe en las tablas de Literales y Comentarios tal palabra (ver tablas \ref{tabla3} y \ref{tabla4}), por lo tanto el algoritmo de expansión recurre al diccionario de palabras en Inglés \textit{ispell} como último recurso. Como la consulta a este diccionario retorna abundantes resultados y al no poder decidir entre todos estos una única palabra, \textsf{msg} no se expande.
 
