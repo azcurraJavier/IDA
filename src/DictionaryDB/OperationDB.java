@@ -257,13 +257,13 @@ public abstract class OperationDB {
         //se ejecuta la consulta
         try {
             //borra elementos
-            PreparedStatement pstm = ConnectionDB.getConn().prepareStatement("TRUNCATE SCHEMA public AND COMMIT");
+            PreparedStatement pstm = ConnectionDB.getConn().prepareStatement("DROP SCHEMA PUBLIC CASCADE");
             pstm.execute();
             pstm.close(); 
 
         } catch (SQLException ex) {
             System.out.println(ex.getLocalizedMessage());
-            System.out.println("Query: "+"TRUNCATE SCHEMA public AND COMMIT");
+            System.out.println("Query: "+"DROP SCHEMA PUBLIC CASCADE");
         }
 
         return res;

@@ -45,7 +45,7 @@ public class Minesweeper extends JFrame implements ActionListener {
 
         //Button panel
         JPanel middlePanel = new JPanel(new GridLayout(dim, dim));
-        //Create y place button
+        //Create and place button
         for (int i = 0; i < dim; i++) {
             for (int j = 0; j < dim; j++) {
                 //Create Button

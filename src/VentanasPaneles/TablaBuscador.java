@@ -559,7 +559,7 @@ public class TablaBuscador extends javax.swing.JPanel {
 
     private void jTextFieldBuscKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldBuscKeyReleased
         getBuscar = jTextFieldBusc.getText();
-        tableSort.setRowFilter(RowFilter.regexFilter(getBuscar, buscarColumna));
+        tableSort.setRowFilter(RowFilter.regexFilter("(?i)" +getBuscar, buscarColumna));
     }//GEN-LAST:event_jTextFieldBuscKeyReleased
 
     private void jButtonAnId1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAnId1ActionPerformed

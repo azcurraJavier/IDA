@@ -114,10 +114,10 @@ public abstract class Dictionary {
     public static void initBd() { 
         
         //se verifica que la base y la tabla existen
-        if(new File(".hsqldb").exists()){
-            //en caso de que asi sea, finaliza initBd
-            return;
-        }//sino se procede a generarla:
+//        if(new File(".hsqldb").exists()){
+//            //en caso de que asi sea, finaliza initBd
+//            return;
+//        }//sino se procede a generarla:
         
         //Se crea la Bd
         ConnectionDB.CrearBD();           
@@ -196,14 +196,14 @@ public abstract class Dictionary {
     public static void restartBd() {
         
         //limpia base de memoria
-//        ConnectionDB.AbrirConBD();
-//        OperationDB.clearDB();
-//        ConnectionDB.CerrarConBD();
+        ConnectionDB.AbrirConBD();
+        OperationDB.clearDB();
+        ConnectionDB.CerrarConBD();
         
         //limpia la base de disco
-        if(new File(".hsqldb").exists()){
-            deleteFolder(new File(".hsqldb"));
-        }
+//        if(new File(".hsqldb").exists()){
+//            deleteFolder(new File(".hsqldb"));
+//        }
         
         //se vuelven a crear las tablas
         initBd();    

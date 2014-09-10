@@ -1,21 +1,121 @@
-///*
-// * To change this license header, choose License Headers in Project Properties.
-// * To change this template file, choose Tools | Templates
-// * and open the template in the editor.
-// */
-//
-//package SplitID;
-//
-//import Listas.Clase;
-//import org.junit.Test;
-//import static org.junit.Assert.*;
-//
-///**
-// *
-// * @author javier
-// */
-//public class SamuraiPaperTest {
-//    
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+package SplitID;
+
+import DictionaryDB.ConnectionDB;
+import ExpandID.ExpandBasic;
+import Listas.Clase;
+import Listas.ClassBodyDecl;
+import Listas.Comentario;
+import Listas.ListaClase;
+import Listas.Literal;
+import java.util.ArrayList;
+import org.junit.Test;
+import static org.junit.Assert.*;
+
+/**
+ *
+ * @author javier
+ */
+public class SamuraiPaperTest {
+    
+    
+    private String[] com = new String[]{
+"buttons",
+"Text Fields",
+"Labels",
+"Mines images",
+"Dimension",
+"total mines",
+"Create and place button",
+"Create Button",
+"Place button",
+"Action Listener",
+"Legend of mines in Matrix",
+"Place random mine",
+"Generate random position",
+//"Place mine",
+//"Display mines panel",
+//"Action Event",
+//"Uncover an empty square",
+//"Nearby Mines",
+//"restart game",
+//"Win the game",
+//"lose the game",
+//"Mines Random Images",
+//"x axe row",
+//"y axe column",
+//"return the number of mines",
+//"horizontal",
+//"vertical",
+//"diagonal",
+//"Top left corner",
+//"top right corner",
+//"Remaining Mines.",
+//".jpg",
+//"North",
+//"Center",
+//"Minesweeper v 1.0",
+//"Planting Mines... \n",
+//"You Win!!!  Game Over!!!",
+//"Boom!!! Game Over!!!"
+    };
+    
+    private String[] lit = new String[]{
+        "Minesweeper v 1.0",
+        "Planting Mines... \n",
+        "You Win!!!  Game Over!!!",
+        "Boom!!! Game Over!!!"
+    };
+    
+     ArrayList<Comentario> lisComentario = new ArrayList<>();
+     ArrayList<Literal> lisLiterales = new ArrayList<>();
+     
+     private String ejec(String s){
+         
+         String r = SamuraiPaper.ejecutar(s);
+         return r;
+     }
+    
+    @Test
+    public void testCases() {
+        
+        for(String s : com){
+             lisComentario.add(new Comentario(0, s));
+        }
+        
+        for(String s : lit){
+             lisLiterales.add(new Literal(0,s));
+        }
+        
+        
+        Clase c = new Clase(new ArrayList<ClassBodyDecl>());
+        
+        c.setLisComentario(lisComentario); 
+        c.setLisLiterales(lisLiterales);
+        c.setFileNamePath("/home");
+        
+        ListaClase.init();
+        
+        ListaClase.addElemLisClases(c);
+        
+        //Se inician tablas de frecuencias
+        ConnectionDB.AbrirConBD();
+        ExpandBasic.procesarFrases(c);
+        //samurai necesita la lista de palabras por eso se ejcuta primero ExpandBasic
+        SamuraiPaper.initTables(c);        
+        
+        assertEquals(ejec("txtflds"), "txt flds");        
+        
+        ConnectionDB.CerrarConBD();
+        
+    }
+    
+    
 //    public SamuraiPaperTest() {
 //    }
 //    
@@ -163,5 +263,5 @@
 //        assertEquals(expResult, result);
 //        
 //    }    
-//    
-//}
+    
+}

@@ -79,7 +79,8 @@ public class Principal extends javax.swing.JFrame {
         if (jTabbedEsp.getTabCount() == 0) {
  
             jMenuItemCerrTodo.setEnabled(false);
-            jTabbedEsp.setVisible(false);                        
+            jTabbedEsp.setVisible(false);  
+            jMenuRestBD.setEnabled(true);
  
             
             if (dicPanel != null) {
@@ -94,7 +95,8 @@ public class Principal extends javax.swing.JFrame {
         } else {//>0
             
             jTabbedEsp.setVisible(true);                        
-            jMenuItemCerrTodo.setEnabled(true);            
+            jMenuItemCerrTodo.setEnabled(true); 
+            jMenuRestBD.setEnabled(false);
 
             ///Agrega tab pane al desktoppane
             layout.setHorizontalGroup(
@@ -357,14 +359,20 @@ public class Principal extends javax.swing.JFrame {
 
         ListaClase.clear();
         jTabbedEsp.removeAll();
-        jMenuItemCerrTodo.setEnabled(false);        
+        jMenuItemCerrTodo.setEnabled(false);
+        jMenuRestBD.setEnabled(true);
         
     }//GEN-LAST:event_jMenuItemCerrTodoActionPerformed
 
     private void jMenuRestBDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuRestBDActionPerformed
        
-        DictionaryDB.Dictionary.restartBd();        
+        if(dicPanel != null){
+            //para actualizar la ventana ante posibles cambios
+            dicPanel.removeAll();
+            dicPanel = null;
+        }
         
+        DictionaryDB.Dictionary.restartBd();        
     }//GEN-LAST:event_jMenuRestBDActionPerformed
 
     public static String getStackTrace(final Throwable throwable) {

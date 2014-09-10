@@ -299,7 +299,7 @@ public class InfoUtilizadaPane extends javax.swing.JDialog {
 
     private void jTextFBuscFraKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFBuscFraKeyReleased
 
-        tableSort1.setRowFilter(RowFilter.regexFilter(jTextFBuscFra.getText(), 0));
+        tableSort1.setRowFilter(RowFilter.regexFilter("(?i)" +jTextFBuscFra.getText(), 0));
     }//GEN-LAST:event_jTextFBuscFraKeyReleased
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -324,7 +324,7 @@ public class InfoUtilizadaPane extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
-       tableSort2.setRowFilter(RowFilter.regexFilter(jTextField1.getText(), 0));
+       tableSort2.setRowFilter(RowFilter.regexFilter("(?i)" +jTextField1.getText(), 0));
     }//GEN-LAST:event_jTextField1KeyReleased
 
 

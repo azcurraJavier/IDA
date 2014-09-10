@@ -312,7 +312,7 @@ public final class DiccionaryPanel extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTextFBusExcKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFBusExcKeyReleased
-        tableSort2.setRowFilter(RowFilter.regexFilter(jTextFBusExc.getText(), 0));
+        tableSort2.setRowFilter(RowFilter.regexFilter("(?i)" +jTextFBusExc.getText(), 0));
     }//GEN-LAST:event_jTextFBusExcKeyReleased
 
     private void doClose(int retStatus) {
