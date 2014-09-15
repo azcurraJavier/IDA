@@ -17,16 +17,16 @@
 \vskip0.5cm
 {\Large \textbf{Dirección:}}
 \begin{itemize}
-\itemsep0em%reduce espacio
+%\itemsep0em%reduce espacio
 \item \textbf{Director:} Dr. Mario Marcelo Berón.
 
 \item \textbf{Co-Director:} Dr. Germán Antonio Montejano.
 \end{itemize}
 
-{\Large \textbf{Objetivos:}} Los objetivos principales de este trabajo final de Licenciatura son:
+{\Large \textbf{Objetivos:}} Los objetivos principales de este Trabajo Final de Licenciatura son:
 
 \begin{itemize}
-\itemsep0em%reduce espacio
+%\itemsep0em%reduce espacio
 
 \item Extraer identificadores de programas escritos en lenguaje JAVA.
 
@@ -39,25 +39,25 @@
 \item Evidenciar una aproximación que relacione la salida de un programa con los elementos involucrados que producen dicha salida.
 
 \end{itemize}
-{\Large \textbf{Antecedentes:}}
+{\Large \textbf{Antecedentes}}
 \vskip0.5cm
 %\hspace{0.5cm}  %Sangria
 
-\hspace{0.5cm} La Ingeniería del Software (IS) es una disciplina encargada de desarrollar sistemas de software de alta calidad. Para conseguir esta meta, la IS abarca, entre otras, tres temáticas importantes: el mantenimiento del software, la evolución del software y la migración del software \cite{RSPMGH02}.
+\hspace{0.5cm} La Ingeniería del Software (IS) es una disciplina encargada de desarrollar sistemas de software de alta calidad. Para conseguir esta meta, la IS abarca, entre otras, tres temáticas importantes: el mantenimiento de software, la evolución de software y la migración de software \cite{RSPMGH02}.
 
-\hspace{0.5cm} El mantenimiento del software \cite{PFT02} es la modificación del sistema después de la entrega al usuario. Esta modificación generalmente se hace para arreglar fallas, mejorar el rendimiento o adaptar el sistema al ambiente cambiante \cite{STD610}. Es por esto, que la comprensión del sistema es crucial para poder mantenerlo correctamente.
+\hspace{0.5cm} El mantenimiento de software \cite{PFT02} es la modificación del sistema después de la entrega al usuario. Esta modificación generalmente se hace para arreglar fallas, mejorar el rendimiento o adaptar el sistema al ambiente cambiante \cite{STD610}. Es por esto, que la comprensión del sistema es crucial para poder mantenerlo correctamente.
 
-\hspace{0.5cm} La evolución del software se encarga de ampliar los sistemas a través del tiempo. Esta ampliación consiste en tomar una versión operativa del software y generar una nueva versión mejorada en su eficiencia \cite{KBVR00}. La comprensión del sistema es necesaria y fundamental antes de comenzar hacia una nueva ampliación.
+\hspace{0.5cm} La evolución de software se encarga de ampliar los sistemas a través del tiempo. Esta ampliación consiste en tomar una versión operativa del software y generar una nueva versión mejorada en su eficiencia \cite{KBVR00}. La comprensión del sistema es necesaria y fundamental antes de comenzar hacia una nueva ampliación.
 
-\hspace{0.5cm} La migración del software es la conversión de un sistema antiguo a un nuevo contexto tecnológico, sin alterar la funcionalidad original del mismo. Esta conversión normalmente es costosa y compleja \cite{MMFAF08}. Para reducir estos costos, se aconseja comprender correctamente el viejo sistema.
+\hspace{0.5cm} La migración de software es la conversión de un sistema antiguo a un nuevo contexto tecnológico sin alterar la funcionalidad original del mismo. Esta conversión normalmente es costosa y compleja \cite{MMFAF08}. Para reducir estos costos, se aconseja comprender correctamente el viejo sistema.
 
-\hspace{0.5cm} Como se dijo en párrafos anteriores, la comprensión sistemas es fundamental para realizar tareas de mantenimiento, de evolución y de migración de software. Por esta razón, dentro de la IS se encuentra un área conocida como Comprensión de Programas (CP). La CP se define como: \textit{una disciplina de la IS encargada de ayudar al
+\hspace{0.5cm} Como se describió en párrafos anteriores, la comprensión de sistemas es fundamental para realizar tareas de mantenimiento, de evolución y de migración de software. Por esta razón, dentro de la IS se encuentra un área conocida como \textit{Comprensión de Programas} (CP). La CP se define como: \textit{una disciplina de la IS encargada de ayudar al
 desarrollador a lograr un entendimiento acabado del software, de forma que se pueda analizar disminuyendo el tiempo y los costos}. 
 
 \hspace{0.5cm} El objetivo principal de la CP  \cite{BRM10,MPMR07,MBPHRU10,MAS05} es desarrollar métodos, técnicas y herramientas que faciliten al programador 
 el entendimiento de las funcionalidades de los sistemas de software.
-Una forma de alcanzar este objetivo consiste en relacionar el Domino del Problema, 
-es decir la salida del sistema, con el dominio del programa, o sea 
+Una forma de alcanzar este objetivo consiste en relacionar el \textit{Domino del Problema}, 
+es decir la salida del sistema, con el \textit{Dominio del Programa}, o sea 
 con las partes del programa utilizadas para generar dicha salida \cite{VMAVA95,MPOB03,BROOK82,AMPM11}.
 La construcción de esta relación representa el principal desafío en el contexto de la 
 CP. 
@@ -65,7 +65,7 @@ CP.
 \hspace{0.5cm} Una aproximación a la solución del desafío previamente descripto, consiste en armar la siguiente reconstrucción:
 I) Elaborar una representación del \textit{Dominio del Problema}. II) Construir una representación para el \textit{Dominio del Programa}. III) Unir las representaciones de los pasos I y II con una \textit{Estrategia de Vinculación}.
 
-\hspace{0.5cm} Para lograr los 3 pasos antedichos, se estudian temáticas importantes asociadas a la CP, algunas de ellas son: los \textit{modelos cognitivos}, la \textit{visualización del software}, la \textit{interconexión de dominios}, la \textit{administración de la información}, la \textit{extracción de la información}. 
+\hspace{0.5cm} Para lograr los 3 pasos antedichos, se estudian temáticas importantes asociadas a la CP, algunas de ellas son: los \textit{modelos cognitivos}, la \textit{visualización de software}, la \textit{interconexión de dominios}, la \textit{administración de la información}, la \textit{extracción de la información}. 
 
 \hspace{0.5cm} Este trabajo final está orientado al estudio técnicas de \textit{extracción de información}, por ende, se hará más hincapié en ese tema. Sin embargo, el resto de las temáticas no dejan de ser importantes y constituyen amplias iniciativas de investigación en el área de la CP.
 
@@ -96,27 +96,30 @@ I) Elaborar una representación del \textit{Dominio del Problema}. II) Construir
 
 %=======================================
 
-\hspace{0.5cm}Un elemento estático que abunda en los códigos son los identificadores. Estudios realizados sobre 2.7 millones de lineas de código escritas en JAVA, indican que más del 70\% de los caracteres del código fuente forman parte de un identificador \cite{DFPM05,DMDJ13}.
+\hspace{0.5cm}Un elemento estático que abunda en los códigos son los identificadores. Estudios realizados sobre 2.7 millones de líneas de código escritas en JAVA, indican que más del 70\% de los caracteres del código fuente forman parte de un identificador \cite{DFPM05,DMDJ13}.
 
-\hspace{0.5cm}Los identificadores normalmente están conformados con abreviaturas en su nombramiento. Algunas investigaciones \cite{BCPT99,LFBEX07,EZH08,EHPV09} indican que detrás de las abreviaturas se encuentra oculta información importante del dominio del problema.
-
-\hspace{0.5cm}Por lo antedicho, investigar y construir herramientas que puedan extraer y analizar identificadores desde los códigos JAVA es un gran aporte al área de CP. Como se explicó antes, una forma de analizar identificadores consiste en desplegar la información oculta detrás de sus abreviaturas. Para lograr este cometido: I) Se extraen los identificadores del código de estudio, II) Luego se les aplica una técnica de división en donde se descompone al identificador en las distintas abreviaturas que lo compone. Por ejemplo: \textsf{inp\_fl\_sys} $\rightarrow$ \textsf{inp fl sys}. III) Por último, se emplea una técnica de expansión de abreviaturas que las expande a palabras completas. Por ejemplo: \textsf{inp fl sys} $\rightarrow$ \textsf{input file system}.
+\hspace{0.5cm} Algunos autores \cite{BCPT99,LFBEX07,EZH08,EHPV09} señalan que los identificadores ocultan información importante del \textit{Dominio del Problema}. Los identificadores de un programa normalmente están compuestos por más de una palabra en forma de abreviatura, por ejemplo: \textsf{inp\_fl\_sys}. Una forma de analizar identificadores y revelar la información oculta que estos contienen, implica realizar los siguientes pasos: I) Extraer los identificadores del código de estudio, II) Aplicar una técnica de división en donde se descompone al identificador en las distintas abreviaturas que lo componen. Por ejemplo: \textsf{inp\_fl\_sys} $\rightarrow$ \textsf{inp fl sys}. III) Por último, emplear una técnica de expansión de abreviaturas que las expande a palabras completas. Por ejemplo: \textsf{inp fl sys} $\rightarrow$ \textsf{input file system}.
 
 \hspace{0.5cm}Para realizar los pasos de división y expansión se recurren a fuentes de palabras/frases dentro del código, tales como: comentarios, literales strings, documentación.
 Sin duda, estas son fuentes naturales que ayudan a comprender el código \cite{JDPH08}.
 En caso de que estas fuentes sean escasas, una alternativa viable es consultar fuentes de palabras externas al código como es el caso de los diccionarios con palabras en lenguaje natural, entre otros.
 
-\hspace{0.5cm}En la actualidad existen técnicas/herramientas que extraen, dividen y expanden identificadores \cite{EZH08, EHPV09, BCPT00, HDD06}. Sin embargo, no abundan implementaciones que integren todas estas tareas en una única herramienta. A su vez, tampoco existen muchas herramientas que permita utilizar distintas políticas de división y expansión de abreviaturas, de esta forma, se podría variar los resultados obtenidos y determinar el más adecuado.
+\hspace{0.5cm}Por lo antedicho, investigar y construir herramientas que puedan extraer y analizar identificadores desde los códigos JAVA es un aporte al área de CP. En la actualidad existen técnicas que extraen, dividen y expanden identificadores \cite{EZH08, EHPV09, BCPT00, HDD06}. Desafortunadamente, no todas estas estrategias de análisis de identificadores se han programado en herramientas automáticas.
+Tomando como iniciativa el problema sobre la falta de herramientas automáticas en el marco de análisis de identificadores, el presente trabajo final de licenciatura pretende aproximar algunas soluciones. 
 
-\hspace{0.5cm} Tomando como iniciativa los problemas planteados en los párrafos anteriores, el presente trabajo final de licenciatura pretende aproximar algunas soluciones. Se va a elaborar un analizador sintáctico en lenguaje JAVA que extrae los identificadores, comentarios y literales encontrados en códigos fuentes escritos en lenguaje JAVA.
-Luego se van a investigar técnicas conocidas de división y de expansión de abreviaturas pertenecientes a identificadores. Finalmente, se procederá a implementar una herramienta que integre algunas técnicas de análisis de identificadores antedichas junto al analizador sintáctico explicado anteriormente. De esta manera, se obtendrá una única herramienta que extrae y analiza información estática contenida detrás de los identificadores. 
+\hspace{0.5cm} Se construirá una herramienta que extrae los identificadores de programas escritos con lenguaje JAVA. Esta herramienta
+también capturará comentarios y literales dentro del código que serán de utilidad a la hora de analizar los identificadores.
+Luego la herramienta aplicará técnicas de división y expansión de identificadores que fueron descriptas anteriormente.
+%Se va a elaborar un analizador sintáctico en lenguaje JAVA que extrae los identificadores, comentarios y literales encontrados en códigos fuentes escritos en lenguaje JAVA.
+%Luego se van a investigar técnicas conocidas de división y de expansión de abreviaturas pertenecientes a identificadores. Finalmente, se procederá a implementar una herramienta que integre algunas técnicas de análisis de identificadores antedichas junto al analizador sintáctico explicado anteriormente. 
 
-\hspace{0.5cm} El correspondiente trabajo final de licenciatura basa su estudio en capturar y abstraer conceptos del dominio del problema a través del análisis de identificadores. Este análisis, será mostrado con la herramienta antedicha, que implementa algunas estrategias conocidas \cite{DFPM05,DMDJ13,EHPV09} de análisis de identificadores en programas JAVA.
-Este es un aporte importante al área de la CP, ya que permite encarar a uno de sus principales desafíos: vincular el Dominio del Problema con el Dominio del Programa.
+\hspace{0.5cm} De esta manera, se obtendrá una herramienta que extrae y analiza información estática contenida detrás de los identificadores.
+%\hspace{0.5cm} El correspondiente trabajo final de licenciatura basa su estudio en capturar y abstraer conceptos del dominio del problema a través del análisis de identificadores. Este análisis, será mostrado con la herramienta antedicha, que implementa algunas estrategias conocidas \cite{DFPM05,DMDJ13,EHPV09} de análisis de identificadores en programas JAVA.
+Construir una herramienta de estas características es un aporte directo al área de la CP, ya que permite encarar a uno de sus principales desafíos: vincular el \textit{Dominio del Problema} con el \textit{Dominio del Programa}.
 \vskip0.5cm
 
 \pagebreak
-{\Large \textbf{Metodología:}}
+{\Large \textbf{Metodología}}
 \vskip0.5cm
 
 \hspace{0.5cm}La metodología a utilizar en este trabajo final, esta enmarcada por 3 etapas principales:
@@ -128,38 +131,41 @@ Este es un aporte importante al área de la CP, ya que permite encarar a uno de 
 
 \hspace{0.5cm}En esta etapa se incorporan los conocimientos necesarios para llevar adelante este trabajo final. Se investigará sobre comprensión de programas y las áreas que contiene. De todas estas áreas, se hará más hincapié en la extracción de información estática en base al análisis de identificadores presentes en los códigos. Este análisis, servirá para la implementación de técnicas de comprensión de sistemas.
 
-\item \textbf{Segunda Etapa: Elaboración del analizador sintáctico que extrae\\identificadores de los códigos escritos en JAVA.}
+\item \textbf{Segunda Etapa: Elaboración de una estrategia para extraer\\ identificadores.}
 
-\hspace{0.5cm}Se construirá un analizador sintáctico (parser) encargado de extraer identificadores, comentarios y literales desde los códigos escritos en JAVA. Estos comentarios y literales ayudarán al análisis de identificadores. Para construir este parser, se investigarán herramientas que ayude a la construcción y se elegirá la más adecuada. Se llevarán a cabo las pruebas pertinentes.
+%\hspace{0.5cm}Se construirá un analizador sintáctico (parser) encargado de extraer identificadores, comentarios y literales desde los códigos escritos en JAVA. Estos comentarios y literales ayudarán al análisis de identificadores. Para construir este parser, se investigarán herramientas que ayude a la construcción y se elegirá la más adecuada. Se llevarán a cabo las pruebas pertinentes.
+\hspace{0.5cm} En esta fase se realiza un estudio de técnicas/herramientas encargadas de la extracción de identificadores, comentarios y literales presentes en códigos de programas escritos en JAVA. Como se describió antes, los comentarios y literales ayudarán a analizar los identificadores. De todas estas técnicas de extracción, se elegirá la más adecuada para ser implementada. Por último, se llevarán a cabo las pruebas pertinentes.
+
+
 
 \vskip0.5cm
-\item \textbf{Tercera Etapa: Construcción de la herramienta que analiza\\identificadores e integra el parser elaborado en la etapa previa.}
+\item \textbf{Tercera Etapa: Construcción de la herramienta que analiza\\identificadores.}
 
-\hspace{0.5cm}Finalmente, en la última etapa se construye una herramienta que contendrá al analizador sintáctico elaborado en la etapa anterior y también implementa algunas de las técnicas de análisis de identificadores estudiadas en la primer etapa. La finalidad de esta herramienta es extraer y analizar información presente en identificadores ubicados en códigos JAVA. Esta información extraída y analizada, se considera propia del Dominio del Problema y es un aporte a la reconstrucción de la relación entre: el Dominio del Problema y el Dominio del Programa.
+\hspace{0.5cm}Finalmente, en la última etapa se construye una herramienta que contendrá la estrategia de extracción elaborada en la etapa anterior y también implementa algunas de las técnicas de análisis de identificadores estudiadas en la primer etapa. La finalidad de esta herramienta es extraer y analizar información presente en identificadores ubicados en códigos JAVA. Esta información extraída y analizada, se considera propia del \textit{Dominio del Problema} y es un aporte a la reconstrucción de la relación entre: el \textit{Dominio del Problema} y el \textit{Dominio del Programa}.
 
 \end{itemize}
 \pagebreak
-{\Large \textbf{Plan y cronograma de tareas:}}
+{\Large \textbf{\\Plan y cronograma de tareas}}
 
 \begin{enumerate}
 \itemsep0em%reduce espacio
 \item Estudiar conceptos, técnicas y herramientas sobre la comprensión de programas: con esto se lográ conocer las características relacionadas al ámbito de la comprensión de sistemas.
 
-\item\label{plan1} Investigar conceptos, técnicas y herramientas relacionados al análisis de identificadores: aquí se adquieren los conceptos necesarios para extraer información del Dominio del Problema, en base a los identificadores.
+\item\label{plan1} Investigar conceptos, técnicas y herramientas relacionados al análisis de identificadores: aquí se adquieren los conceptos necesarios para extraer información del \textit{Dominio del Problema}, en base a los identificadores.
 
 %\item Estudiar herramientas automatizadas que generen Analizadores Lexicográficos y Analizadores Sintácticos, se hará preferencia en aquellas que usen gramática de atributos.
 
-\item Investigar herramientas que ayuden a construir un Analizador Sintáctico (parser). Preferentemente se escogerán aquellas que empleen gramáticas de atributos \cite{AHUL06}.
+\item Investigar técnicas/herramientas que extraigan identificadores, comentarios y literales ubicados en códigos  escritos en lenguaje JAVA.
 
-\item Estudiar la gramática de JAVA e implementar el Analizador Sintáctico (parser) utilizando alguna herramienta investigada del item anterior.
+\item Elaborar un técnica de extracción de identificadores, comentarios y literales elegida en base a la investigación del ítem anterior.
 
-\item Implementar una herramienta en JAVA que  contenga distintas técnicas de análisis de identificadores investigados en el ítem \ref{plan1}. Esta herramienta también contendrá el parser elaborado en la etapa anterior.
+\item Implementar una herramienta en JAVA que  contenga distintas técnicas de análisis de identificadores investigados en el ítem \ref{plan1}. Esta herramienta también contendrá la técnica de extracción elaborada en la etapa anterior.
 
 \item Escribir el informe del trabajo final. Mientras se ejecutan los ítems precedentes, se irá redactando el informe correspondiente al trabajo final.
 \end{enumerate}
 
 
-\begin{figure}[t] %[h] para here [b] para bottom [t] para top
+\begin{figure}[b] %[h] para here [b] para bottom [t] para top
 \centerline{%queda centrada mejor la imagen
 \includegraphics[scale= 0.85]{./crono.png}
 }
@@ -167,7 +173,7 @@ Este es un aporte importante al área de la CP, ya que permite encarar a uno de 
 
 \pagebreak
 
-{\Large \textbf{Recursos:}}
+{\Large \textbf{Recursos}}
 \vskip0.5cm
 \hspace{0.5cm}El correspondiente trabajo final se llevará a cabo en la Universidad Nacional de San Luis, en el Área Programación y Metodologías de Desarrollo de Software enmarcado en los siguientes proyectos:
 
@@ -186,8 +192,7 @@ diferentes proyectos de investigación de gran éxito a nivel nacional e interna
 
 \hspace{0.5cm}Ambos entes soportan económicamente la realización de diferentes misiones de investigación desde Argentina a Portugal y viceversa, como así también la presentación y publicación de artículos en diferentes congresos nacionales e internacionales.\\
 
-\hspace{0.5cm}Por otro lado, el equipamiento necesario es una PC con el sistema Linux, impresora y papel para realizar las impresiones del informe. También se hará uso de internet, de material bibliográfico provisto por la biblioteca “Antonio Esteban Agüero”; y  de material provisto por las librerías digitales a las que se tiene acceso desde la Universidad.
-
+\hspace{0.5cm}Por otro lado, el equipamiento necesario es una PC con el sistema Linux, impresora y papel para realizar las impresiones del informe. También se hará uso de internet, de material bibliográfico provisto por la biblioteca “Antonio Esteban Agüero”; y  de material provisto por las librerías digitales a las que se tiene acceso desde la Universidad Nacional de San Luis.
 
 
 %========================================

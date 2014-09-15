@@ -24,16 +24,7 @@ public abstract class SamuraiPaper {
         globalFreqTable = new HashMap();
 
         //cargar tablas
-        //for (MostrarTabla m : claseAc.getIdTablaClase()) {
-
-            //addTokenLocalFreqTable(m.getNomId(), m.getListaRef().size() + 1);//ref + 1 (declaracion)
- 
-        //}
-        
-        
-
-
-        
+         
         if(ExpandBasic.getPalabrasCap() != null){
             for(String pal:ExpandBasic.getPalabrasCap()){
                 addTokenLocalFreqTable(pal, 1);
@@ -79,6 +70,9 @@ public abstract class SamuraiPaper {
         if (id == null || id.trim().isEmpty() || cantOcc <= 0) {
             return;
         }
+        
+        //importante: deben ir todos con minusculas
+        id = id.toLowerCase();
 
         int temp = 0;
 
@@ -98,16 +92,7 @@ public abstract class SamuraiPaper {
 
     private static int frecuenciaLocal(String id) {//Freq(t; p)        
 
-//        int cantApa = 0;
-//        for (MostrarTabla m : claseActual.getIdTablaClase()) {
-//
-//            if (id.equals(m.getNomId())) {
-//                cantApa = m.getNumApa();
-//                break;
-//            }
-//        }
-//
-//        return cantApa / cantTotalIde;
+ 
         if (id == null || id.trim().isEmpty()) {
             return 0;
         }
@@ -122,72 +107,16 @@ public abstract class SamuraiPaper {
 
     private static int frecuenciaGlobal(String id) {//globalFreq(t)
 
-//        int cantApa = 0;
-//
-//        for (Iterator<Clase> it = ListaClase.getLisClases().iterator(); it.hasNext();) {
-//            Clase cla = it.next();
-//
-//
-//            for (MostrarTabla m : cla.getIdTablaClase()) {
-//
-//                if (identificador.equals(m.getNomId())) {
-//                    cantApa += m.getNumApa();
-//                }
-//            }
-//
-//        }
-//
-//        return cantApa / cantTotalIde;
+        if (id == null || id.trim().isEmpty()) {
+            return 0;
+        }
         
         return Dictionary.selectFreq("sam_freq_table", id);
-        
-        
-//        if (id == null || id.trim().isEmpty()) {
-//            return 0;
-//        }
-//
-//        if (id.length() == 1) {
-//            return 4;
-//        }
-//
-//        if (id.length() == 2) {
-//            return 3;
-//        }
-//
-//        if (id.length() == 3/* && Dictionary.searchWordDic("acro_dict", id)*/) {
-//            return 2;
-//        }
-//
-//        if (id.length() >= 4) {
-//
-////            int temp = Dictionary.likeWordDic("words_dict", id).size();
-////
-////            return temp * 5;
-//
-//            return 2;
-//        }
-//
-//        return 1;
 
     }
 
     private static int todasFreqStr() {//AllStrsFreq(p)
 
-//        double freAcum = 0.0;
-//
-//        for (Iterator<Clase> it = ListaClase.getLisClases().iterator(); it.hasNext();) {
-//            Clase cla = it.next();
-//
-//
-//            for (MostrarTabla m : cla.getIdTablaClase()) {
-//
-//
-//                freAcum += frecuenciaLocal(m.getNomId());
-//
-//            }
-//
-//        }
-//
 //        return freAcum;
         if (frecuenciaLocal > 0) {
             return frecuenciaLocal;

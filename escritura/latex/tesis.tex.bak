@@ -636,7 +636,7 @@ Como se mencionó en el capítulo anterior la CP brinda métodos, técnicas y he
 %whats the name - Lawrie
 Entre los distintos componentes visibles se conocen los ids y los comentarios como principal fuente de información para la CP. Sin embargo, cuando en el código no abundan los comentarios la única fuente importante son los ids. 
 
-El la siguiente tabla se muestra un análisis léxico que se realizó sobre 2.7 millones de lineas de códigos escritos en lenguaje JAVA.
+El la siguiente tabla se muestra un análisis léxico que se realizó sobre 2.7 millones de líneas de códigos escritos en lenguaje JAVA.
 
 \begin{center}
 	\begin{table}[h]
