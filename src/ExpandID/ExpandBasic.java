@@ -1,11 +1,13 @@
 package ExpandID;
 
+import DictionaryDB.Dictionary;
 import DictionaryDB.OperationDB;
 import Listas.Clase;
 import Listas.Comentario;
 import Listas.Literal;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Random;
 import java.util.Set;
 import java.util.regex.Pattern;
 
@@ -23,35 +25,31 @@ public class ExpandBasic {
     private static ArrayList<String> listExp = new ArrayList();
 
     private static String unicaExp;
-    
-    
-    
+
     public static void procesarFrases(Clase c) {
-        
-        
+
         Set<String> comCap = new HashSet<>();
-        
+
         for (Comentario com : c.getLisComentario()) {
             comCap.add(com.getCom());
         }
-        
+
         for (Literal l : c.getLisLiterales()) {
             comCap.add(l.getText());
-        }            
-            
+        }
+
         //se limpia todo
         frasesCap.clear();
         palabrasCap.clear();
-        
-        
+
         for (String linea : comCap) {
 
             //limpieza
             linea = linea.replaceAll("\"", "").trim();
             //excluir simbolos
             linea = linea.replaceAll("[^A-Za-z ]", "");
-            
-            if(linea.isEmpty()){
+
+            if (linea.isEmpty()) {
                 continue;
             }
 
@@ -61,8 +59,8 @@ public class ExpandBasic {
             String frase = "";
 
             for (String pal : arrayCom) {
-                
-                if(pal == null || pal.isEmpty() || pal.length()<2){
+
+                if (pal == null || pal.isEmpty() || pal.length() < 2) {
                     continue;
                 }
 
@@ -72,8 +70,8 @@ public class ExpandBasic {
                 if (!OperationDB.select("stop_dict", pal)) {
                     //si no es una palabra irrelevante la agrego
                     palabrasCap.add(pal);
-                    frase += pal + " ";                   
-                    
+                    frase += pal + " ";
+
                 }
 
             }
@@ -81,11 +79,10 @@ public class ExpandBasic {
             if (!frase.isEmpty()) {
                 frase = frase.substring(0, frase.length() - 1);
                 frasesCap.add(frase);
-            }            
-            
+            }
 
         }
-       
+
     }
 
     public static ArrayList<String> getFrasesCap() {
@@ -95,21 +92,27 @@ public class ExpandBasic {
     public static ArrayList<String> getPalabrasCap() {
         return palabrasCap;
     }
-    
+
+    private static boolean buscarDicc(String w) {
+
+        return (Dictionary.searchWordDic("words_dict", w)
+                || Dictionary.searchWordDic("stop_dict", w)
+                || Dictionary.searchWordDic("acro_dict", w));
+    }
 
     public static String ejecutar(String w) {
-        
-        if(w == null || w.isEmpty()){
-            return "";
-        }        
-        
-        unicaExp = w;
-     
-        //procesarFrases();        
-        
-        w = w.toLowerCase();        
 
-        if (OperationDB.select("stop_dict", w)) {            
+        if (w == null || w.isEmpty()) {
+            return "";
+        }
+
+        unicaExp = w;
+
+        //procesarFrases();        
+        w = w.toLowerCase();
+
+        //si esta en algun diccionario no se ejecuta la expansion
+        if (buscarDicc(w)) {
             return w;
         }
 
@@ -119,8 +122,8 @@ public class ExpandBasic {
         if (cand != null) {
             //listExp.add(cand);
             return cand;
-        }        
-        
+        }
+
         //abreviacion comun
         cand = expandirAbrev(w);
 
@@ -128,27 +131,43 @@ public class ExpandBasic {
             //listExp.add(cand);
             return cand;
         }
-        
+
         //Busqueda en diccionario - ultimo recurso
-        if (w.length()>2 && listExp.isEmpty()) {
+        if (w.length() > 2) {
+
             //exige 3 o más sino el like trae muchos resultados
             listExp = OperationDB.like("words_dict", w);
 
-        }       
+            if (listExp == null || listExp.isEmpty() || w.length() > 3) {
+                listExp = OperationDB.like2("words_dict", w);
+            }
+
+        }
+
+        if (listExp == null || listExp.isEmpty()) {
+            return w;
+        }
 
         if (listExp.size() == 1) {
             unicaExp = listExp.get(0);
-        }else{
-            System.out.println("La palabra: "+w+" posee: " + listExp.size()+" expansiones");        
+        } else {
+            Random generator = new Random();
+            int i = generator.nextInt(listExp.size() - 1) + 1;
+
+            //retorna aleatoriamente un resultado
+            unicaExp = listExp.get(i);
+
+            //System.out.println("rand: "+i);
+            System.out.println("La palabra: " + w + " posee: " + listExp.size() + " expansiones, expansión aleatoria: " + unicaExp);
         }
-        
+
         listExp.clear();
-        
+
         return unicaExp;
     }
 
     private static String expandirAbrev(String w) {
-        
+
         String original = w;
 
         //abreviatura basica ej: triang -> triangule
@@ -175,8 +194,8 @@ public class ExpandBasic {
         Pattern pat2 = Pattern.compile(w);
 
         for (String cand : palabrasCap) {
-            
-            if(original.equals(cand)){
+
+            if (original.equals(cand)) {
                 continue;//puede que la abreviatura tang este en lo comentarios debo descartar
             }
 
@@ -191,40 +210,40 @@ public class ExpandBasic {
     }
 
     private static String expandirAcro(String w) {
-        
-        if(w == null){
+
+        if (w == null) {
             return null;
-        }        
-        
+        }
+
         int len = w.length();
-        
+
         //solo se consideran aquellos de 2 o 3 caracteres
-        if(len != 2 && len != 3){
+        if (len != 2 && len != 3) {
             return null;
         }
 
         for (String frase : frasesCap) {
-            
+
             String f[] = frase.split(" ");
-            
+
             //si la longitud no coincide sigo
-            if(f.length != w.length()){
+            if (f.length != w.length()) {
                 continue;
             }
 
             int i = 0;
-            
+
             for (String cand : f) {
 
                 if (cand.charAt(0) != w.charAt(i)) {
                     i = 0;
                     break;
-                }               
+                }
 
                 i++;
 
             }
-            
+
             //si la long de la palabra == al i entonces la frase coincide
             if (w.length() == i) {
                 return frase;

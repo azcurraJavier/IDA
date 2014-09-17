@@ -189,20 +189,15 @@ public abstract class OperationDB {
         if (word == null || word.isEmpty()) {
             return null;
         }
-
-        //Cantidad de registros devueltos
-        int registros = 0;
         
         ArrayList<String> array = new ArrayList();
 
         //Consultas SQL
         String q= "SELECT * FROM " + table + " WHERE word like ";        
 
-        String like1, like2;
+        String like1;
 
         like1 = "'"+word+"%'";//con esta query se buscan abreviaturas: horiz -> horizontal
-        
-        like2 = "'"+convertLike(word)+"'";//con esta: trg -> triangule
         
         try {
             PreparedStatement pstm = ConnectionDB.getConn().prepareStatement(q + like1);
@@ -212,7 +207,6 @@ public abstract class OperationDB {
                     
                     array.add(res.getString( "word" ));
                     
-                    registros++;
                 }
             
         } catch (SQLException e) {
@@ -222,6 +216,40 @@ public abstract class OperationDB {
 
         return array;
 
+    }
+    
+    public static ArrayList<String> like2(String table, String word) {
+        
+        if (word == null || word.isEmpty()) {
+            return null;
+        } 
+        
+        ArrayList<String> array = new ArrayList();
+
+        //Consultas SQL
+        String q= "SELECT * FROM " + table + " WHERE word like "; 
+        
+        String like2;        
+        
+        like2 = "'"+convertLike(word)+"'";//con esta: trg -> triangule
+        
+        try {
+            PreparedStatement pstm = ConnectionDB.getConn().prepareStatement(q + like2);
+            ResultSet res = pstm.executeQuery();
+            
+                while(res.next()){
+                    
+                    array.add(res.getString( "word" ));                    
+                   
+                }
+            
+        } catch (SQLException e) {
+            System.out.println(e.getLocalizedMessage());
+            System.out.println("Query: "+q);
+        }
+        
+        return array;
+    
     }
 
     public static boolean dropTable(String table) {

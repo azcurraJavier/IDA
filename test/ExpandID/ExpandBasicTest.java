@@ -6,6 +6,7 @@
 
 package ExpandID;
 
+import DictionaryDB.ConnectionDB;
 import Listas.Clase;
 import Listas.ClassBodyDecl;
 import Listas.Comentario;
@@ -23,6 +24,14 @@ public class ExpandBasicTest {
     public ExpandBasicTest() {
     }
 
+    
+    private String ejec(String s) {
+
+        String r = ExpandBasic.ejecutar(s);
+        return r;
+    }
+    
+    
     @Test
     public void testEjecutar() {
         
@@ -37,33 +46,26 @@ public class ExpandBasicTest {
         
         Clase c = new Clase(new ArrayList<ClassBodyDecl>());
         
-        c.setLisComentario(lisComentario);      
+        c.setLisComentario(lisComentario); 
+        c.setFileNamePath("/home");
         
-        ListaClase.clear();
+        ListaClase.init();
         
         ListaClase.addElemLisClases(c);
         
+        //Se inician tablas de frecuencias
+        ConnectionDB.AbrirConBD();
+        ExpandBasic.procesarFrases(c);
         
-        //expande la abreviatura comun pro a proof
-        String w = "pro";
-        ExpandBasic instance = new ExpandBasic();
-        String expResult = "proof";
-        String result = instance.ejecutar(w);
-        assertEquals(expResult, result);
+        assertEquals(ejec("pro"), "proof");
+        assertEquals(ejec("tp"), "test proof");
+        assertEquals(ejec("xp"), "xp");     
+        assertEquals(ejec("Mines"), "xp");     
         
-        //espande el acronimo tp a test proof
-        w = "tp";        
-        instance = new ExpandBasic();
-        expResult = "test proof";
-        result = instance.ejecutar(w);
-        assertEquals(expResult, result);
         
-        //no tiene exito se espera null
-        w = "xp";      
-        instance = new ExpandBasic();
-        result = instance.ejecutar(w);
-        assertNull(result);       
- 
+        assertNotSame(ejec("mssg"), "mssg"); 
+        
+        ConnectionDB.CerrarConBD(); 
     }
     
 }

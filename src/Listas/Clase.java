@@ -20,7 +20,7 @@ public class Clase {
     //Lista de literales del archivo (clase)
     private ArrayList<Literal> LisLiterales;
     //Para mostrar los id por la tabla
-    private ArrayList<MostrarTabla> lisMostrarTabla = new ArrayList<MostrarTabla>();
+    private ArrayList<MostrarTabla> lisMostrarTabla;
     //Para calculo en Samurai
     private int cantTotalId = 0;
     
@@ -33,8 +33,10 @@ public class Clase {
 
     public Clase(ArrayList<ClassBodyDecl> lcbd) {
         this.LisClassBodyDecl = lcbd;
-        this.LisComentario = new ArrayList<Comentario>();
+        this.LisComentario = new ArrayList<>();
+        this.LisLiterales = new ArrayList<>();
         this.modClase = new String();
+        lisMostrarTabla = new ArrayList<>();
         
         this.lisUsoIdDecl = new ArrayList<>();
         this.lisUsoIdMet = new ArrayList<>();
