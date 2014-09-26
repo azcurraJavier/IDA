@@ -1,8 +1,11 @@
 package SplitID;
 
 import DictionaryDB.Dictionary;
+import DictionaryDB.OperationDB;
 import ExpandID.ExpandBasic;
 import Listas.Clase;
+import Listas.Comentario;
+import Listas.Literal;
 import Listas.MostrarTabla;
 import java.util.HashMap;
 import java.util.Map;
@@ -12,8 +15,8 @@ public abstract class SamuraiPaper {
     private static int frecuenciaLocal;
 
     //Tablas de frecuencia
-    private static Map<String,Integer> localFreqTable;
-    private static Map<String,Integer> globalFreqTable;
+    private static Map<String, Integer> localFreqTable;
+    private static Map<String, Integer> globalFreqTable;
 
     public static void initTables(Clase claseAc) {
 
@@ -24,30 +27,86 @@ public abstract class SamuraiPaper {
         globalFreqTable = new HashMap();
 
         //cargar tablas
-         
-        if(ExpandBasic.getPalabrasCap() != null){
-            for(String pal:ExpandBasic.getPalabrasCap()){
-                addTokenLocalFreqTable(pal, 1);
-            }
+//        if(ExpandBasic.getPalabrasCap() != null){
+//            for(String pal:ExpandBasic.getPalabrasCap()){
+//                addTokenLocalFreqTable(pal, 1);
+//            }
+//        }
+        for (Comentario com : claseAc.getLisComentario()) {
+            fraseProces(com.getCom());
         }
-        
-        
-        for(MostrarTabla mt : claseAc.getIdTablaClase()){            
-                                                  //referencias+declaracion=1 
-            addTokenLocalFreqTable(mt.getNomId(), mt.getListaRef().size()+1);
+
+        for (Literal l : claseAc.getLisLiterales()) {
+            fraseProces(l.getText());
         }
-        
-        
+
+//        for(MostrarTabla mt : claseAc.getIdTablaClase()){            
+//                                                  //referencias+declaracion=1 
+//            addTokenLocalFreqTable(mt.getNomId(), mt.getListaRef().size()+1);
+//        }
+        //conserv
+        String softwordDiv;
+
+        for (MostrarTabla mt : claseAc.getIdTablaClase()) {
+
+            //separa simbolos especiales
+            softwordDiv = SplitUtils.splitSymbol(mt.getNomId());
+
+            //separa camelcase
+            softwordDiv = SplitUtils.splitCamelCase(softwordDiv);
+            
+            //debe haberse separado sino el softword tendra score y no se separara
+            if(softwordDiv.contains(" ")){
+                
+                //referencias+declaracion=1
+                for(int i=0; i<mt.getListaRef().size()+1;i++){
+                    //se repite por cada repeticion en el codigo
+                    fraseProces(softwordDiv);
+                }               
+                            
+            }            
+            
+        }
+
         String id;
         for (Map.Entry mapEntry : localFreqTable.entrySet()) {
             id = mapEntry.getKey().toString();
-            globalFreqTable.put(id, frecuenciaGlobal(id));        
+            globalFreqTable.put(id, frecuenciaGlobal(id));
         }
-        
-        
 
     }
 
+    private static void fraseProces(String linea) {
+
+        //limpieza
+        linea = linea.replaceAll("\"", "").trim();
+        //excluir simbolos
+        linea = linea.replaceAll("[^A-Za-z ]", "");
+
+        if (linea.isEmpty()) {
+            return;
+        }
+
+        //filtrar palabras irrelevantes
+        String arrayCom[] = linea.split(" ");
+
+        for (String pal : arrayCom) {
+
+            if (pal == null || pal.isEmpty()) {
+                continue;
+            }
+
+            //para evitar problemas todo con minuscula
+            pal = pal.toLowerCase();
+
+            //las letras no convienen
+            if (pal.length()> 1 && !OperationDB.select("stop_dict", pal)) {
+                //si no es una palabra irrelevante la agrego                    
+                addTokenLocalFreqTable(pal, 1);
+            }
+
+        }
+    }
 
     public static Map<String, Integer> getLocalFreqTable() {
         return localFreqTable;
@@ -56,8 +115,6 @@ public abstract class SamuraiPaper {
     public static Map<String, Integer> getGlobalFreqTable() {
         return globalFreqTable;
     }
-    
-    
 
     public static String ejecutar(String id) {
 
@@ -70,7 +127,7 @@ public abstract class SamuraiPaper {
         if (id == null || id.trim().isEmpty() || cantOcc <= 0) {
             return;
         }
-        
+
         //importante: deben ir todos con minusculas
         id = id.toLowerCase();
 
@@ -78,7 +135,7 @@ public abstract class SamuraiPaper {
 
         if (localFreqTable.containsKey(id)) {
 
-            temp =  localFreqTable.get(id);
+            temp = localFreqTable.get(id);
 
             localFreqTable.remove(id);
 
@@ -92,7 +149,6 @@ public abstract class SamuraiPaper {
 
     private static int frecuenciaLocal(String id) {//Freq(t; p)        
 
- 
         if (id == null || id.trim().isEmpty()) {
             return 0;
         }
@@ -110,7 +166,7 @@ public abstract class SamuraiPaper {
         if (id == null || id.trim().isEmpty()) {
             return 0;
         }
-        
+
         return Dictionary.selectFreq("sam_freq_table", id);
 
     }
@@ -152,11 +208,11 @@ public abstract class SamuraiPaper {
         for (int i = 0; i < token.length() - 1; i++) {//-1 sino puede dar excepción en i+1
 
             newStr.append(token.charAt(i));
-            
+
             if (token.charAt(i) != ' ' && 
                     Character.isLowerCase(token.charAt(i)) && 
                         Character.isUpperCase(token.charAt(i + 1))) {
-                
+
                 newStr.append(" ");
             }
 
@@ -181,7 +237,7 @@ public abstract class SamuraiPaper {
         }
 
         int i = 0;
-        
+
         while (i < s.length() - 1) {//-1 sino puede dar excepción en i+1
             if (Character.isUpperCase(s.charAt(i)) && Character.isLowerCase(s.charAt(i + 1))) {
                 return i;
@@ -219,7 +275,7 @@ public abstract class SamuraiPaper {
         for (String s : lisToken) {//este for es para casos camelcase
 
             int i = existUpperToLower(s);
-            
+
             s = s.toLowerCase();
 
             if (i == -1) {
@@ -246,10 +302,10 @@ public abstract class SamuraiPaper {
                     s = subStr(s, 0, i) + " " + subStr(s, i, n);
                 }
             } else {
-                
-                if(camelScore != raizAltSco){
 
-                    s = subStr(s, 0, i+1) + " " + subStr(s, i + 1, n);
+                if (camelScore != raizAltSco) {
+
+                    s = subStr(s, 0, i + 1) + " " + subStr(s, i + 1, n);
                 }
             }
 
@@ -313,8 +369,8 @@ public abstract class SamuraiPaper {
     }
 
     private static boolean isPrefix(String s) {
-        
-        if(s == null || s.isEmpty()){
+
+        if (s == null || s.isEmpty()) {
             return false;
         }
 
@@ -323,8 +379,8 @@ public abstract class SamuraiPaper {
     }
 
     private static boolean isSuffix(String s) {
-        
-        if(s == null || s.isEmpty()){
+
+        if (s == null || s.isEmpty()) {
             return false;
         }
 

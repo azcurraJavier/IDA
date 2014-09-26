@@ -126,24 +126,29 @@ public abstract class SplitUtils {
     
     }
     
-    public static String splitCamelCase(String c){
-                
-        StringBuilder newStr;       
-        
-        newStr = new StringBuilder();
+    public static String splitCamelCase(String c) {
 
-        newStr.append(c.charAt(0));//ignoro el 1er caracter
+        StringBuilder newStr = new StringBuilder();
 
-        for (int i = 1; i < c.length(); i++) {//i=1 ignoro el 1er caracter
-            if (Character.isUpperCase(c.charAt(i))) {
-                newStr.append(' ');//agrego espacio antes de la Mayúscula                      
-            }
+        for (int i = 0; i < c.length() - 1; i++) {//-1 sino puede dar excepción en i+1
+
             newStr.append(c.charAt(i));
+
+            if (c.charAt(i) != ' ' && 
+                    Character.isLowerCase(c.charAt(i)) && 
+                        Character.isUpperCase(c.charAt(i + 1))) {
+
+                newStr.append(" ");
+            }
+
         }
 
-        //collector(newStr.toString(), idc);
-        return newStr.toString();
-    
+        newStr.append(c.charAt(c.length() - 1));
+
+        c = newStr.toString();
+
+        return c;
+
     }
     
     public static String splitUpLow(String c){

@@ -60,7 +60,7 @@ public class ExpandBasic {
 
             for (String pal : arrayCom) {
 
-                if (pal == null || pal.isEmpty() || pal.length() < 2) {
+                if (pal == null || pal.isEmpty()) {
                     continue;
                 }
 
@@ -91,14 +91,7 @@ public class ExpandBasic {
 
     public static ArrayList<String> getPalabrasCap() {
         return palabrasCap;
-    }
-
-    private static boolean buscarDicc(String w) {
-
-        return (Dictionary.searchWordDic("words_dict", w)
-                || Dictionary.searchWordDic("stop_dict", w)
-                || Dictionary.searchWordDic("acro_dict", w));
-    }
+    } 
 
     public static String ejecutar(String w) {
 
@@ -111,8 +104,8 @@ public class ExpandBasic {
         //procesarFrases();        
         w = w.toLowerCase();
 
-        //si esta en algun diccionario no se ejecuta la expansion
-        if (buscarDicc(w)) {
+        //si esta en stop list no se ejecuta la expansion
+        if (Dictionary.searchWordDic("stop_dict", w)) {
             return w;
         }
 
@@ -133,12 +126,16 @@ public class ExpandBasic {
         }
 
         //Busqueda en diccionario - ultimo recurso
-        if (w.length() > 2) {
-
-            //exige 3 o más sino el like trae muchos resultados
+        
+        if(Dictionary.searchWordDic("words_dict", w)){
+            return w;
+        }
+        
+        if (w.length() == 1 || w.length() == 3) {//exige 3 sino el like trae muchos resultados
+            
             listExp = OperationDB.like("words_dict", w);
 
-            if (listExp == null || listExp.isEmpty() || w.length() > 3) {
+            if (listExp == null || listExp.isEmpty()) {
                 listExp = OperationDB.like2("words_dict", w);
             }
 

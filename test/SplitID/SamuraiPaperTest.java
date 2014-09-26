@@ -35,7 +35,7 @@ public class SamuraiPaperTest {
         "Action Listener",
         "Legend of mines in Matrix",
         "Place random mine",
-        "Generate random position", //"Place mine",
+        "Generate random position", //"Place mine",   
     //"Display mines panel",
     //"Action Event",
     //"Uncover an empty square",
@@ -100,9 +100,8 @@ public class SamuraiPaperTest {
         ListaClase.addElemLisClases(c);
 
         //Se inician tablas de frecuencias
-        ConnectionDB.AbrirConBD();
-        ExpandBasic.procesarFrases(c);
-        //samurai necesita la lista de palabras por eso se ejcuta primero ExpandBasic
+        ConnectionDB.AbrirConBD();        
+        
         SamuraiPaper.initTables(c);
 
         assertEquals(ejec("bttns"), "bttns");
@@ -111,6 +110,7 @@ public class SamuraiPaperTest {
         assertEquals(ejec("createplace"), "create place");
         assertEquals(ejec("remmines"), "rem mines");
         assertEquals(ejec("minesrem"), "mines rem");
+        assertEquals(ejec("plantmines"), "plant mines");
 
         assertEquals(ejec("labelstotalmines"), "labels total mines");
         assertEquals(ejec("labelscreateplace"), "labels create place");

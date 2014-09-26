@@ -41,10 +41,10 @@
 \contentsline {subsection}{\numberline {4.5.1}Barra de Men\IeC {\'u}s}{68}
 \contentsline {subsection}{\numberline {4.5.2}Lectura de Archivos JAVA}{69}
 \contentsline {subsection}{\numberline {4.5.3}Panel de Elementos Capturados (Parte 1)}{70}
-\contentsline {subsection}{\numberline {4.5.4}Panel de An\IeC {\'a}lisis}{72}
-\contentsline {subsection}{\numberline {4.5.5}Palabras Capturadas y Diccionarios}{73}
-\contentsline {subsection}{\numberline {4.5.6}Panel de Elementos Capturados (Parte 2)}{76}
-\contentsline {section}{\numberline {4.6}Casos de Estudio}{78}
-\contentsline {subsection}{\numberline {4.6.1}Buscaminas (Minesweeper)}{78}
-\contentsline {subsection}{\numberline {4.6.2}pepe.java}{84}
-\contentsline {chapter}{\numberline {5}Conclusiones}{85}
+\contentsline {subsection}{\numberline {4.5.4}Panel de An\IeC {\'a}lisis}{73}
+\contentsline {subsection}{\numberline {4.5.5}Palabras Capturadas y Diccionarios}{74}
+\contentsline {subsection}{\numberline {4.5.6}Panel de Elementos Capturados (Parte 2)}{77}
+\contentsline {section}{\numberline {4.6}Casos de Estudio}{79}
+\contentsline {subsection}{\numberline {4.6.1}Buscaminas (Minesweeper)}{79}
+\contentsline {subsection}{\numberline {4.6.2}Ejemplo 2}{85}
+\contentsline {chapter}{\numberline {5}Conclusiones}{86}

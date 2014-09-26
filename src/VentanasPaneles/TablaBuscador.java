@@ -562,6 +562,8 @@ public class TablaBuscador extends javax.swing.JPanel {
         tableSort.setRowFilter(RowFilter.regexFilter("(?i)" +getBuscar, buscarColumna));
     }//GEN-LAST:event_jTextFieldBuscKeyReleased
 
+    boolean firstOpen = false;
+    
     private void jButtonAnId1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAnId1ActionPerformed
 
         if (this.setIdExtract.isEmpty()) {
@@ -571,11 +573,13 @@ public class TablaBuscador extends javax.swing.JPanel {
                 this.setIdExtract.add(id);
 
             }
-        }
-
+        }        
+        
         if (splitPanel == null) {
 
             splitPanel = new AnalisisPanel(new javax.swing.JFrame(), true, setIdExtract, unaClase);
+            
+            firstOpen = true;
         }
 
         splitPanel.setVisible(true);
@@ -585,10 +589,13 @@ public class TablaBuscador extends javax.swing.JPanel {
         codigoPanel.getTablaId().updateTableId("Expansión de Greedy", splitPanel.getMapIdsExGreMap(), "Div Greedy");
         codigoPanel.getTablaId().updateTableId("Expansión de Samurai", splitPanel.getMapIdsExSamurai(), "Div Samurai");
 
-        if (tablaElem.getColumnCount() > 7) {
+        boolean add = !splitPanel.getMapIdsExGreMap().isEmpty() || !splitPanel.getMapIdsExSamurai().isEmpty();
+        
+        if (firstOpen && add) {
             jButtonRed.setEnabled(true);
             addCheckBox();
-            jButtonExp.setEnabled(true);                        
+            jButtonExp.setEnabled(true);       
+            firstOpen = false;
         }
 
         //escribir xml de salida
@@ -598,6 +605,8 @@ public class TablaBuscador extends javax.swing.JPanel {
 
     }//GEN-LAST:event_jButtonAnId1ActionPerformed
 
+    
+    
     private void addCheckBox() {
 
         int colNum = modeloTabla.getColumnCount();

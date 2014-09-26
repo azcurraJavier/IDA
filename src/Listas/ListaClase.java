@@ -65,7 +65,7 @@ public abstract class ListaClase {
         
         for(int i=0;i<lisClases.size();i++){
          
-            if(lisClases.get(i).getFileName().equals(fileNamePath)){
+            if(lisClases.get(i).getFileNamePath().equals(fileNamePath)){
                 lisClases.remove(i);            
             }            
         }

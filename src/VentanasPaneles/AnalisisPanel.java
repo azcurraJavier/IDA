@@ -54,9 +54,11 @@ public class AnalisisPanel extends javax.swing.JDialog {
         this.setIds = setIds;
 
         //Se inician tablas de frecuencias
-        ConnectionDB.AbrirConBD();
+        ConnectionDB.AbrirConBD();        
+        
+        //se preparan tablas de samurai y expansion basica
         ExpandBasic.procesarFrases(clase);
-        //samurai necesita la lista de palabras por eso se ejcuta primero ExpandBasic
+        
         SamuraiPaper.initTables(clase);
         ConnectionDB.CerrarConBD();
         //
