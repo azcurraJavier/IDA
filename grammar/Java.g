@@ -36,10 +36,10 @@ scope GlobalOne {
     }
 
     public boolean ocurrioError(){return noErr;}
+   
+    private Archivo archivoAnalisis;
 
-    private Clase claseAnalisis;
-
-    public Clase getClaseAnalisis(){return claseAnalisis;}
+    public Archivo getArchivo(){return archivoAnalisis;}
 
 
     ArrayList<Literal> lisLiterales = new ArrayList(); 
@@ -99,16 +99,21 @@ scope GlobalOne {
            
 compilationUnit
 @init{
-    //ArrayList<Clase> lisClases = new ArrayList<Clase>();    
+    archivoAnalisis = new Archivo();
+    ArrayList<Clase> lisClases = new ArrayList<>();
+}
+@after{
+    archivoAnalisis.setLisClases(lisClases);
 }
     :   (   (annotations
             )?
             p = packageDeclaration
+            {if(p!=null){archivoAnalisis.setNomPaq(p.paqName); archivoAnalisis.setLinPaq(p.paqLine);}}
         )?
         (importDeclaration
         )*
         (t=typeDeclaration {if(t==null){System.out.println("Java.g Error: typeDeclaration == null!");noErr=false;}
-            if(p!=null){t.setNomPaq(p.paqName); t.setLinPaq(p.paqLine);} claseAnalisis = t;} //puede haber mas de una clase por archivo !!!        
+            else{lisClases.add(t);}} //puede haber mas de una clase por archivo !!!        
         )*
     ;
 

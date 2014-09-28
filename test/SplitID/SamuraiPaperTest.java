@@ -10,7 +10,7 @@ import ExpandID.ExpandBasic;
 import Listas.Clase;
 import Listas.ClassBodyDecl;
 import Listas.Comentario;
-import Listas.ListaClase;
+import Listas.ListaArchivo;
 import Listas.Literal;
 import java.util.ArrayList;
 import org.junit.Test;
@@ -95,9 +95,9 @@ public class SamuraiPaperTest {
         c.setLisLiterales(lisLiterales);
         c.setFileNamePath("/home");
 
-        ListaClase.init();
+        ListaArchivo.init();
 
-        ListaClase.addElemLisClases(c);
+        ListaArchivo.addElemLisClases(c);
 
         //Se inician tablas de frecuencias
         ConnectionDB.AbrirConBD();        

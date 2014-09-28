@@ -10,7 +10,7 @@ import DictionaryDB.ConnectionDB;
 import Listas.Clase;
 import Listas.ClassBodyDecl;
 import Listas.Comentario;
-import Listas.ListaClase;
+import Listas.ListaArchivo;
 import java.util.ArrayList;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -49,9 +49,9 @@ public class ExpandBasicTest {
         c.setLisComentario(lisComentario); 
         c.setFileNamePath("/home");
         
-        ListaClase.init();
+        ListaArchivo.init();
         
-        ListaClase.addElemLisClases(c);
+        ListaArchivo.addElemLisClases(c);
         
         //Se inician tablas de frecuencias
         ConnectionDB.AbrirConBD();

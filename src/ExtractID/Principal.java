@@ -1,8 +1,9 @@
 package ExtractID;
 
+import Listas.Archivo;
 import Listas.Clase;
 import Listas.Comentario;
-import Listas.ListaClase;
+import Listas.ListaArchivo;
 import VentanasPaneles.AcercaDe;
 import VentanasPaneles.ClosableTabbedPane;
 import VentanasPaneles.CodigoPanel;
@@ -47,7 +48,7 @@ public class Principal extends javax.swing.JFrame {
     public Principal() {
         initComponents();
 
-        ListaClase.init();
+        ListaArchivo.init();
 
         mapIdsSplited = new HashMap<>();
         mapIdsExp = new HashMap<>();
@@ -264,7 +265,7 @@ public class Principal extends javax.swing.JFrame {
 
             for (File fileAnalisis : archivosAnalisisId) {
 
-                if (ListaClase.containsFileName(fileAnalisis.getAbsolutePath())) {
+                if (ListaArchivo.containsFileName(fileAnalisis.getAbsolutePath())) {
                     JOptionPane.showMessageDialog(new JFrame(),
                             "El archivo con la ruta: " + "\""+fileAnalisis.getAbsolutePath()+"\""
                             + "\nya se encuentra abierto!", "Atención", JOptionPane.WARNING_MESSAGE);
@@ -297,10 +298,10 @@ public class Principal extends javax.swing.JFrame {
                     noErrorSintactico = false;
                 }
 
-                Clase unaClase = g.getClaseAnalisis();
+                Archivo unArchivo = g.getArchivo();
 
                 //control de carga de datos del parser
-                if (!noErrorSintactico || unaClase == null) {
+                if (!noErrorSintactico || unArchivo == null) {
                     JOptionPane.showMessageDialog(new JFrame(),
                             "Error fatal al analizar archivo: " + "\""+fileAnalisis.getAbsolutePath()+"\"", "ERROR", JOptionPane.ERROR_MESSAGE);
                     continue;
@@ -315,17 +316,25 @@ public class Principal extends javax.swing.JFrame {
 //                }
                 ////////
 
-                unaClase.setFileName(fileAnalisis.getName());//nombre archivo java
-                unaClase.setFileNamePath(fileAnalisis.getAbsolutePath());//ruta del archivo java                
-                unaClase.setCode(prettyCode);//codigo leido de archivo
+                unArchivo.setFileName(fileAnalisis.getName());//nombre archivo java
+                unArchivo.setFileNamePath(fileAnalisis.getAbsolutePath());//ruta del archivo java                
+                unArchivo.setCode(prettyCode);//codigo leido de archivo
+                
                 /////comentarios/////
                 ArrayList<Comentario> lisCom = lex.getLisCom(); //comentarios del lexer 
-                unaClase.setLisComentario(lisCom);
-                unaClase.setearAmbienteCometario();//seteo ambientes de comentarios
-                unaClase.cargarTablaClase();//cargo elementos para las tablas
-                unaClase.setLisLiterales(g.getLisLiterales());
+                unArchivo.setLisComentario(lisCom);
+                
+                //unaClase.setearAmbienteCometario();//seteo ambientes de comentarios
+                
+                ////Literales/////
+                unArchivo.setLisLiterales(g.getLisLiterales());
+                
+
                 /////////////////////
-                ListaClase.addElemLisClases(unaClase);
+                
+                //unArchivo.cargartabla!!!!                
+                
+                ListaArchivo.addElemLisClases(unaClase);
 
                 //Interfaz
                 codigoPanel = new CodigoPanel(unaClase, mapIdsSplited, mapIdsExp);
@@ -357,7 +366,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void jMenuItemCerrTodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCerrTodoActionPerformed
 
-        ListaClase.clear();
+        ListaArchivo.clear();
         jTabbedEsp.removeAll();
         jMenuItemCerrTodo.setEnabled(false);
         jMenuRestBD.setEnabled(true);
