@@ -6,37 +6,37 @@ import java.util.Set;
 
 public abstract class ListaArchivo {    
     
-    private static ArrayList<Clase> lisClases;  
+    private static ArrayList<Archivo> lisArchivo;  
     
     private static Set<String> lisFileNamePath;
     
     public static void init(){        
-        lisClases = new ArrayList<>();
+        lisArchivo = new ArrayList<>();
         lisFileNamePath = new HashSet<>();
     }    
     
     public static void clear(){        
         
-        if(lisClases != null){
-            lisClases.clear();
+        if(lisArchivo != null){
+            lisArchivo.clear();
             lisFileNamePath.clear();
         }
     }
 
-    public static ArrayList<Clase> getLisClases() {
-        return lisClases;
+    public static ArrayList<Archivo> getLisArchivos() {
+        return lisArchivo;
     }
     
-    public static void addElemLisClases(Clase unaClase) {
+    public static void addElemLisArchivos(Archivo unArchivo) {
         
-        String fileNamePath = unaClase.getFileNamePath();
+        String fileNamePath = unArchivo.getFileNamePath();
         
         if(containsFileName(fileNamePath)){
-            System.out.print("ListaClase.addElemLisClases: " + fileNamePath +" ya existe!");
+            System.out.print("ListaClase.addElemLisArchivos: " + fileNamePath +" ya existe!");
             return;
         }
         
-        lisClases.add(unaClase);
+        lisArchivo.add(unArchivo);
         lisFileNamePath.add(fileNamePath);
     } 
     
@@ -52,7 +52,7 @@ public abstract class ListaArchivo {
     }
     
     //este metodo se llama de ClosableTabbedPane cuando se borra una pestaña
-    public static void deleteClass(String fileNamePath){
+    public static void deleteArchivo(String fileNamePath){
                         
         fileNamePath = fileNamePath.trim();//porque puede venir con espacio al final
         
@@ -63,10 +63,10 @@ public abstract class ListaArchivo {
         
         lisFileNamePath.remove(fileNamePath);
         
-        for(int i=0;i<lisClases.size();i++){
+        for(int i=0;i<lisArchivo.size();i++){
          
-            if(lisClases.get(i).getFileNamePath().equals(fileNamePath)){
-                lisClases.remove(i);            
+            if(lisArchivo.get(i).getFileNamePath().equals(fileNamePath)){
+                lisArchivo.remove(i);            
             }            
         }
     

@@ -1,7 +1,6 @@
 package ExtractID;
 
 import Listas.Archivo;
-import Listas.Clase;
 import Listas.Comentario;
 import Listas.ListaArchivo;
 import VentanasPaneles.AcercaDe;
@@ -15,8 +14,6 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -37,9 +34,6 @@ public class Principal extends javax.swing.JFrame {
 
     private final ClosableTabbedPane jTabbedEsp;
 
-    private Map<String, String> mapIdsSplited;
-    private Map<String, String> mapIdsExp;
-
     private JFileChooser fileChooser;
     private File currentDir;
 
@@ -48,10 +42,7 @@ public class Principal extends javax.swing.JFrame {
     public Principal() {
         initComponents();
 
-        ListaArchivo.init();
-
-        mapIdsSplited = new HashMap<>();
-        mapIdsExp = new HashMap<>();
+        ListaArchivo.init(); 
 
         fileChooser = new JFileChooser();
 
@@ -332,23 +323,17 @@ public class Principal extends javax.swing.JFrame {
 
                 /////////////////////
                 
-                //unArchivo.cargartabla!!!!                
+                unArchivo.cargarInfoTabla();
                 
-                ListaArchivo.addElemLisClases(unaClase);
+                ListaArchivo.addElemLisArchivos(unArchivo);
 
                 //Interfaz
-                codigoPanel = new CodigoPanel(unaClase, mapIdsSplited, mapIdsExp);
-                //jTabbedPaneCodigo.add(claseAnalisis.getPunteroArchivo().getName(), codigoPanel);
-                jTabbedEsp.addTab(unaClase.getFileName(), fileAnalisis.getAbsolutePath(),codigoPanel);
+                codigoPanel = new CodigoPanel(unArchivo);
+                
+                
+                jTabbedEsp.addTab(unArchivo.getFileName(), fileAnalisis.getAbsolutePath(),codigoPanel);
 
             }
-
-            //jTabbedPaneAnalisis.add("Identificadores", new TablaBuscador(0));
-            //jTabbedPaneAnalisis.add("Literales", new TablaBuscador(1));
-            //jTabbedPaneAnalisis.add("Comentarios", new TablaBuscador(2));
-            //jTabbedPaneCodigo.setVisible(true);
-
-            //jMenuItem4.setEnabled(true);
         }
     }//GEN-LAST:event_jMenuAbrirActionPerformed
 

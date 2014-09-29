@@ -2,7 +2,7 @@ package ExpandID;
 
 import DictionaryDB.Dictionary;
 import DictionaryDB.OperationDB;
-import Listas.Clase;
+import Listas.Archivo;
 import Listas.Comentario;
 import Listas.Literal;
 import java.util.ArrayList;
@@ -26,15 +26,15 @@ public class ExpandBasic {
 
     private static String unicaExp;
 
-    public static void procesarFrases(Clase c) {
+    public static void procesarFrases(Archivo archivo) {
 
         Set<String> comCap = new HashSet<>();
 
-        for (Comentario com : c.getLisComentario()) {
+        for (Comentario com : archivo.getLisComentario()) {
             comCap.add(com.getCom());
         }
 
-        for (Literal l : c.getLisLiterales()) {
+        for (Literal l : archivo.getLisLiterales()) {
             comCap.add(l.getText());
         }
 

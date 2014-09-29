@@ -6,35 +6,23 @@ import java.util.Map.Entry;
 
 public class Clase {
     
-    private String code; //codigo leido de archivo
-    private String fileName; //nombre de archivo .java
-    private String fileNamePath; //ruta del archivo \home\entrada.java
-    private String nomPaq;   //Paquete
-    private int linPaq;   //Paquete linea
     private String modClase; //Modificador de la Clase  
     private Id ide;          //Nombre de la Clase
+    
     //Lista de declaraciones/metodos de la clase:
-    private ArrayList<ClassBodyDecl> LisClassBodyDecl;
-    //Lista de comentatios del archivo (clase)
-    private ArrayList<Comentario> LisComentario;
-    //Lista de literales del archivo (clase)
-    private ArrayList<Literal> LisLiterales;
+    private ArrayList<ClassBodyDecl> lisClassBodyDecl;
+
     //Para mostrar los id por la tabla
     private ArrayList<MostrarTabla> lisMostrarTabla;
-    //Para calculo en Samurai
-    private int cantTotalId = 0;
-    
+        
     private boolean varSinDeclarar = false;
-    private String varSinDecl;
     
     //se utiliza para ver las referencias de las var de clase y metodos
     private ArrayList<UsoId> lisUsoIdDecl;
     private ArrayList<UsoId> lisUsoIdMet;
 
     public Clase(ArrayList<ClassBodyDecl> lcbd) {
-        this.LisClassBodyDecl = lcbd;
-        this.LisComentario = new ArrayList<>();
-        this.LisLiterales = new ArrayList<>();
+        this.lisClassBodyDecl = lcbd;
         this.modClase = new String();
         lisMostrarTabla = new ArrayList<>();
         
@@ -43,7 +31,7 @@ public class Clase {
     }
 
     public ArrayList<ClassBodyDecl> getClassBodyDecl() {
-        return LisClassBodyDecl;
+        return lisClassBodyDecl;
     }
 
     public void setIde(Id ide) {
@@ -55,12 +43,8 @@ public class Clase {
     }
 
     public void setLisClassBodyDecl(ArrayList<ClassBodyDecl> LisClassBodyDecl) {
-        this.LisClassBodyDecl = LisClassBodyDecl;
-    }
-
-    public void setFileNamePath(String fileNamePath) {
-        this.fileNamePath = fileNamePath;
-    }   
+        this.lisClassBodyDecl = LisClassBodyDecl;
+    }  
 
     public Id getIde() {
         return ide;
@@ -68,76 +52,33 @@ public class Clase {
 
     public String getModClase() {
         return modClase;
-    }
+    }   
 
-    public ArrayList<Comentario> getLisComentario() {
-        return LisComentario;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public String getFileName() {
-        return fileName;
-    }
 
     public boolean getVarSinDeclB() {
         return varSinDeclarar;
     } 
 
-    public String getVarSinDecl() {
-        return varSinDecl;
-    }
-
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
-    }  
-
-    public String getFileNamePath() {
-        return fileNamePath;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }    
-
-    public void setLisComentario(ArrayList<Comentario> LisComentario) {
-        this.LisComentario = LisComentario;
-    }
-
-    public void setNomPaq(String nomPaq) {
-        this.nomPaq = nomPaq;
-    }
-
-    public void setLinPaq(int linPaq) {
-        this.linPaq = linPaq;
-    }  
-
-    public String getNomPaq() {
-        return nomPaq;
-    }
-
-    public void setearAmbienteCometario() {
-
-        for (Comentario com : this.LisComentario) {
-            com.setAmbiente("Clase " + this.getIde().getNomID());//por defecto seteo con el nombre de la clase
-
-            int lineaMet;
-            for (ClassBodyDecl cBd : this.getClassBodyDecl()) {
-
-                Metodo met = cBd.getMetodo();
-                lineaMet = cBd.getLineaMetodoComentarioAmbiente();
-                if (met != null) {
-                    if (com.getLinea() >= lineaMet) {//si el comentario esta dentro del comentario
-
-                        com.setAmbiente("Método " + met.getIde().getNomID());//seteo el ambiente del comentario con el nom del met
-                    }
-                }
-            }
-        }
-
-    }
+//    public void setearAmbienteCometario() {
+//
+//        for (Comentario com : this.LisComentario) {
+//            com.setAmbiente("Clase " + this.getIde().getNomID());//por defecto seteo con el nombre de la clase
+//
+//            int lineaMet;
+//            for (ClassBodyDecl cBd : this.getClassBodyDecl()) {
+//
+//                Metodo met = cBd.getMetodo();
+//                lineaMet = cBd.getLineaMetodoComentarioAmbiente();
+//                if (met != null) {
+//                    if (com.getLinea() >= lineaMet) {//si el comentario esta dentro del comentario
+//
+//                        com.setAmbiente("Método " + met.getIde().getNomID());//seteo el ambiente del comentario con el nom del met
+//                    }
+//                }
+//            }
+//        }
+//
+//    }
 
 //    public void cargarIdTablaClase() {
 //
@@ -202,18 +143,6 @@ public class Clase {
         return this.lisMostrarTabla;
     }
 
-    public int getCantTotalId() {
-        return cantTotalId;
-    }
-
-    public void setLisLiterales(ArrayList<Literal> LisLiterales) {
-        this.LisLiterales = LisLiterales;
-    }
-
-    public ArrayList<Literal> getLisLiterales() {
-        return LisLiterales;
-    }
-
 //    private void searchDecl(String e) {//busca en las declaraciones globales y aumenta la cantidad de apariciones
 //
 //        if (this.LisClassBodyDecl != null && this.LisClassBodyDecl.size() > 0) {
@@ -251,7 +180,7 @@ public class Clase {
 
         MostrarTabla m;
 
-        for (ClassBodyDecl c : LisClassBodyDecl) {
+        for (ClassBodyDecl c : lisClassBodyDecl) {
 
             String ambiente = "@" + this.getIde().getNomID();
 
@@ -263,8 +192,7 @@ public class Clase {
                     Declaracion d = it.next().getValue();
                     m.setRepresenta("Variable de Clase");
                     m.setNomId(d.getIdent().getNomID());
-                    m.setNumLinea(d.getIdent().getLine());
-                    m.setNumApa(d.getIdent().getCantAp());
+                    m.setNumLinea(d.getIdent().getLine());                    
                     m.setModificador(d.getModificador());
                     m.setTipo(d.getTipo());
                     m.setStrAsignado(d.getIdent().getStrContenido());
@@ -288,8 +216,7 @@ public class Clase {
             if (met != null) {
                 
                 m.setNomId(met.getIde().getNomID());
-                m.setNumLinea(met.getIde().getLine());
-                m.setNumApa(met.getIde().getCantAp());
+                m.setNumLinea(met.getIde().getLine());                
                 m.setModificador(met.getModif());
                 m.setTipo(met.getTipo());
                 m.setRepresenta(met.getTipo().isEmpty()?"Constructor":"Método de Clase");
@@ -315,24 +242,13 @@ public class Clase {
         m.setNumLinea(this.ide.getLine());
         
         lisMostrarTabla.add(m);
-        //this.cantTotalId++;
-
-
-        if (this.nomPaq != null && !this.nomPaq.isEmpty()) {
-            m = new MostrarTabla("Clase Global");//paquete
-            m.setRepresenta("Paquete");                
-            m.setNomId(this.nomPaq);   
-            m.setNumLinea(this.linPaq);
-            lisMostrarTabla.add(m);
-            //this.cantTotalId++;
-        }
     }
     
     private void globalDecl(UsoId usoId) {
         
         boolean encontroDecl = false;
 
-        if (this.LisClassBodyDecl == null && this.LisClassBodyDecl.isEmpty()) {
+        if (this.lisClassBodyDecl == null && this.lisClassBodyDecl.isEmpty()) {
             return;
         }
         
@@ -340,7 +256,7 @@ public class Clase {
             return;            
         }
         
-        for (ClassBodyDecl c : this.LisClassBodyDecl) {
+        for (ClassBodyDecl c : this.lisClassBodyDecl) {
 
             if(usoId.isEsMetodo() == false && c.getLisDecl() != null && !c.getLisDecl().isEmpty() &&
 

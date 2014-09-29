@@ -12,8 +12,7 @@ public class Parametro {
     public Parametro(String m, String t, Id ide) {
         modif =m;
         tipo = t;
-        ident = ide;        
-        
+        ident = ide;
     }
 
     public Id getIdent() {

@@ -51,7 +51,7 @@ public class ExpandBasicTest {
         
         ListaArchivo.init();
         
-        ListaArchivo.addElemLisClases(c);
+        ListaArchivo.addElemLisArchivos(c);
         
         //Se inician tablas de frecuencias
         ConnectionDB.AbrirConBD();

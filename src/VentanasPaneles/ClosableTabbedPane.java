@@ -59,7 +59,7 @@ public class ClosableTabbedPane extends JTabbedPane{
 			if(closeUnderMouse(me.getX(), me.getY())){
 				boolean isToCloseTab = tabAboutToClose(selectedTab);
 				if (isToCloseTab && selectedTab > -1){
-                                        ListaArchivo.deleteClass(tabbedPane.getToolTipTextAt(selectedTab));
+                                        ListaArchivo.deleteArchivo(tabbedPane.getToolTipTextAt(selectedTab));
 					tabbedPane.removeTabAt(selectedTab);                                        
 				}
 				selectedTab = tabbedPane.getSelectedIndex();                   

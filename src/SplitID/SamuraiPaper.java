@@ -2,8 +2,7 @@ package SplitID;
 
 import DictionaryDB.Dictionary;
 import DictionaryDB.OperationDB;
-import ExpandID.ExpandBasic;
-import Listas.Clase;
+import Listas.Archivo;
 import Listas.Comentario;
 import Listas.Literal;
 import Listas.MostrarTabla;
@@ -18,7 +17,7 @@ public abstract class SamuraiPaper {
     private static Map<String, Integer> localFreqTable;
     private static Map<String, Integer> globalFreqTable;
 
-    public static void initTables(Clase claseAc) {
+    public static void initTables(Archivo archivo) {
 
         frecuenciaLocal = 0;
 
@@ -32,11 +31,11 @@ public abstract class SamuraiPaper {
 //                addTokenLocalFreqTable(pal, 1);
 //            }
 //        }
-        for (Comentario com : claseAc.getLisComentario()) {
+        for (Comentario com : archivo.getLisComentario()) {
             fraseProces(com.getCom());
         }
 
-        for (Literal l : claseAc.getLisLiterales()) {
+        for (Literal l : archivo.getLisLiterales()) {
             fraseProces(l.getText());
         }
 
@@ -47,7 +46,7 @@ public abstract class SamuraiPaper {
         //conserv
         String softwordDiv;
 
-        for (MostrarTabla mt : claseAc.getIdTablaClase()) {
+        for (MostrarTabla mt : archivo.getLisMostrarTabla()) {
 
             //separa simbolos especiales
             softwordDiv = SplitUtils.splitSymbol(mt.getNomId());

@@ -3,8 +3,7 @@ package Listas;
 public class Comentario {
     
     private int linea;
-    private String com;
-    private String ambiente;    
+    private String com;    
 
     public Comentario(int i, String g) {
         this.linea = i;
@@ -18,13 +17,5 @@ public class Comentario {
     public int getLinea() {
         return linea;
     }
-
-    public String getAmbiente() {
-        return ambiente;
-    }
-
-    public void setAmbiente(String ambiente) {
-        this.ambiente = ambiente;
-    }    
 
 }   

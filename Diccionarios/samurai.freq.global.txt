@@ -44,4 +44,3 @@ bmp;12
 put;14
 bag;7
 rem;23
-

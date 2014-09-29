@@ -19,20 +19,6 @@ public class SplitUtilsTest {
     }   
 
 
-    /**
-     * Test of ejecutar method, of class SplitUtils.
-     */
-    @Test
-    public void testEjecutar() {
-        System.out.println("ejecutar");
-        String c = "";
-        boolean casoUpperLower = false;
-        String expResult = "";
-        String result = SplitUtils.ejecutar(c, casoUpperLower);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
-    }
 
     /**
      * Test of splitSymbol method, of class SplitUtils.
@@ -57,20 +43,6 @@ public class SplitUtilsTest {
         String c = "testCamelCase";
         String expResult = "test Camel Case";
         String result = SplitUtils.splitCamelCase(c);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of splitUpLow method, of class SplitUtils.
-     */
-    @Test
-    public void testSplitUpLow() {
-        System.out.println("splitUpLow");
-        String c = "TESTUPLOWcase";
-        String expResult = "TESTUPLOW case";
-        String result = SplitUtils.splitUpLow(c);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");

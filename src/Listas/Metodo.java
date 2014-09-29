@@ -13,11 +13,9 @@ public class Metodo {
     private Id ide;
     private Map<String, Parametro> lisParam;
     private Map<String, Declaracion> lisDecl;
-
+    
     //Para mostrar los id por la tabla
     private ArrayList<MostrarTabla> lisMostrarTabla = new ArrayList<MostrarTabla>();//lo uso para mostrar los id por la tabla   
-    //Para calculo en Samurai
-    private int cantTotalId = 0;
 
     private ArrayList<UsoId> lisUsoIdDecl;
     private ArrayList<UsoId> lisUsoIdPara;
@@ -215,9 +213,6 @@ public class Metodo {
 //
 //        return lisMostrarTabla;
 //    }
-    public int getCantTotalId() {
-        return cantTotalId;
-    }
 
     //nuevo
     public ArrayList<MostrarTabla> cargarTablaMetodo() {
@@ -231,8 +226,7 @@ public class Metodo {
                 m.setRepresenta("Variable Local");
                 Declaracion d = it.next().getValue();
 
-                m.setNomId(d.getIdent().getNomID());
-                m.setNumApa(d.getIdent().getCantAp());
+                m.setNomId(d.getIdent().getNomID());                
                 m.setNumLinea(d.getIdent().getLine());
                 m.setModificador(d.getModificador());
                 m.setTipo(d.getTipo());
@@ -256,8 +250,7 @@ public class Metodo {
                 m.setRepresenta("Parámetro");
                 Parametro p = it.next().getValue();
 
-                m.setNomId(p.getIdent().getNomID());
-                m.setNumApa(p.getIdent().getCantAp());
+                m.setNomId(p.getIdent().getNomID());                
                 m.setNumLinea(p.getIdent().getLine());
                 m.setModificador(p.getModif());
                 m.setTipo(p.getTipo());

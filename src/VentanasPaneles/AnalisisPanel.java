@@ -3,7 +3,7 @@ package VentanasPaneles;
 import DictionaryDB.ConnectionDB;
 import ExpandID.ExpandBasic;
 import ExtractID.Principal;
-import Listas.Clase;
+import Listas.Archivo;
 import SplitID.GreedyPaper;
 import SplitID.SamuraiPaper;
 import java.awt.event.ActionEvent;
@@ -47,7 +47,7 @@ public class AnalisisPanel extends javax.swing.JDialog {
     private Map<String, String> mapIdsExGreedy;
     private Map<String, String> mapIdsExSamurai;
 
-    public AnalisisPanel(java.awt.Frame parent, boolean modal, Set<String> setIds, Clase clase) {
+    public AnalisisPanel(java.awt.Frame parent, boolean modal, Set<String> setIds, Archivo archivo) {
         super(parent, modal);
         initComponents();
 
@@ -57,9 +57,9 @@ public class AnalisisPanel extends javax.swing.JDialog {
         ConnectionDB.AbrirConBD();        
         
         //se preparan tablas de samurai y expansion basica
-        ExpandBasic.procesarFrases(clase);
+        ExpandBasic.procesarFrases(archivo);
         
-        SamuraiPaper.initTables(clase);
+        SamuraiPaper.initTables(archivo);
         ConnectionDB.CerrarConBD();
         //
 
@@ -555,6 +555,9 @@ public class AnalisisPanel extends javax.swing.JDialog {
                 mapIdsExSamurai.put(elem.toString(), elem2.toString());
             }           
             
+            //setear letras rojas
+            elem2 = resaltarLetras(elem.toString(), elem2.toString());
+            
             modeloTablaExp.setValueAt(elem2, i, colNum);
 
         }
@@ -581,6 +584,37 @@ public class AnalisisPanel extends javax.swing.JDialog {
         
     }//GEN-LAST:event_jButtonExpActionPerformed
 
+    private String format(Object s){
+        return "<span style=\"color: #1A008E;\">"+s+"</span>";
+    }
+    
+    private String resaltarLetras(String abrev, String expAbre){
+        
+        String abrev2 = abrev.replaceAll("-", "");//remuevo guion
+        
+        char acr[] = abrev2.toCharArray();
+        char palabra[] = expAbre.toCharArray();
+        
+        String ret = format(acr[0]);
+        
+        int i=1;//arranca en 1 porque en 0 se que coinciden        
+        
+        for(int j=1;j<palabra.length;j++){
+        
+            if(i<acr.length && acr[i]==(palabra[j])){
+                ret += format(palabra[j]);                
+                i++;                
+            }else{
+                ret += palabra[j];                
+            }                   
+            
+        }
+        
+        return "<html>"+ret+"</html>";
+
+    }
+    
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         InfoUtilizadaPane s = new InfoUtilizadaPane(new javax.swing.JFrame(), true);

@@ -1,6 +1,6 @@
 package VentanasPaneles;
 
-import Listas.Clase;
+import Listas.Archivo;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Rectangle;
@@ -40,18 +40,18 @@ public class CodigoPanel extends javax.swing.JPanel {
         }
     };
 
-    private Clase claseAsociada = null;
+    private Archivo archivoAnalisis = null;
     
-    public CodigoPanel(Clase unaClass, Map idSplit, Map idExp) {
+    public CodigoPanel(Archivo unaArchivo) {
         initComponents();
 
         //jTextAreaCod.setFont(new Font("Monospaced", Font.PLAIN, 12));
         jEditorPaneCod.setFont(new Font("Monospaced", Font.PLAIN, 13));
         jEditorPaneCod.setContentType("text/html");
         
-        claseAsociada = unaClass;
+        archivoAnalisis = unaArchivo;
 
-        String htmlCode = codeHtml(claseAsociada.getCode());
+        String htmlCode = codeHtml(archivoAnalisis.getCode());
         
         //jTextAreaCod.setText(buffer.toString());
         jEditorPaneCod.setText(htmlCode);
@@ -59,7 +59,7 @@ public class CodigoPanel extends javax.swing.JPanel {
         //jTextAreaCod.setCaretPosition(6);
         jEditorPaneCod.setCaretPosition(6);
 
-        tablaId = new TablaBuscador(0, claseAsociada, this);
+        tablaId = new TablaBuscador(0, archivoAnalisis, this);
 
         if (tablaId.hasElem()) {
             jTabbedPaneProp.addTab("Identificadores", tablaId);
@@ -67,7 +67,7 @@ public class CodigoPanel extends javax.swing.JPanel {
             jTabbedPaneProp.addTab("Identificadores", emptyPanel("Identificadores"));
         }
 
-        tablaLit = new TablaBuscador(1, claseAsociada, this);
+        tablaLit = new TablaBuscador(1, archivoAnalisis, this);
 
         if (tablaLit.hasElem()) {
             jTabbedPaneProp.addTab("Literales", tablaLit);
@@ -75,7 +75,7 @@ public class CodigoPanel extends javax.swing.JPanel {
             jTabbedPaneProp.addTab("Literales", emptyPanel("Literales"));
         }
 
-        tablaCom = new TablaBuscador(2, claseAsociada, this);
+        tablaCom = new TablaBuscador(2, archivoAnalisis, this);
 
         if (tablaCom.hasElem()) {
             jTabbedPaneProp.addTab("Comentarios", tablaCom);
@@ -114,7 +114,7 @@ public class CodigoPanel extends javax.swing.JPanel {
     
     public void replaceIdsCode(Map<Integer,Map> idExp){
     
-        String code = claseAsociada.getCode();
+        String code = archivoAnalisis.getCode();
         String[] lines = code.split(System.getProperty("line.separator"));        
         
         for (Map.Entry mapEntry : idExp.entrySet()) {
@@ -157,7 +157,7 @@ public class CodigoPanel extends javax.swing.JPanel {
     
     public void restartCode(){
         
-        String htmlCode = codeHtml(claseAsociada.getCode());
+        String htmlCode = codeHtml(archivoAnalisis.getCode());
         
         //jTextAreaCod.setText(buffer.toString());
         jEditorPaneCod.setText(htmlCode);

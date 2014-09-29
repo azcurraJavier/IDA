@@ -3,22 +3,16 @@ package Listas;
 
 public class Id {
     
-    private String nomID;
-    private int cantAp;
+    private String nomID;    
     
     private String strContenido;
     
     private int line;
 
     public Id(String nom, int l) {
-        nomID = nom;
-        cantAp = 1;
+        nomID = nom;        
         strContenido = new String();
         line = l;
-    }
-
-    public int getCantAp() {
-        return cantAp;
     }
 
     public String getNomID() {
@@ -33,10 +27,6 @@ public class Id {
         this.strContenido = strContenido;
     }
     
-    public void sumCantAp(){
-        cantAp ++;
-    }
-
     public int getLine() {
         return line;
     } 

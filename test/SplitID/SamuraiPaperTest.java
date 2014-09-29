@@ -6,7 +6,6 @@
 package SplitID;
 
 import DictionaryDB.ConnectionDB;
-import ExpandID.ExpandBasic;
 import Listas.Clase;
 import Listas.ClassBodyDecl;
 import Listas.Comentario;
@@ -97,7 +96,7 @@ public class SamuraiPaperTest {
 
         ListaArchivo.init();
 
-        ListaArchivo.addElemLisClases(c);
+        ListaArchivo.addElemLisArchivos(c);
 
         //Se inician tablas de frecuencias
         ConnectionDB.AbrirConBD();        

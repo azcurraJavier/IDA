@@ -5,11 +5,9 @@ import java.util.ArrayList;
 
 public class MostrarTabla {
     
-    private String ambiente;
     private String nomId;
     private String tipo;
-    private String modificador;
-    private int numApa;        //ver este porque creo que no se usa
+    private String modificador;    
     private String strAsignado;//solo en caso de literales
     private int numLinea;
     
@@ -20,12 +18,10 @@ public class MostrarTabla {
     
     public MostrarTabla(String ambiente){
     
-        this.ambiente = ambiente;//Clase pepe metodo toto
         this.strAsignado = "";
         this.nomId = "";
         this.tipo = "";
-        this.modificador = "";
-        this.numApa = 1;
+        this.modificador = "";        
         this.strAsignado = "";
         this.numLinea = 0;
         
@@ -42,10 +38,6 @@ public class MostrarTabla {
         this.nomId = nomId;
     }
 
-    public void setNumApa(int numApa) {
-        this.numApa = numApa;
-    }
-
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
@@ -60,12 +52,7 @@ public class MostrarTabla {
 
     public void setRepresenta(String representa) {
         this.representa = representa;
-    }  
-    
-
-    public String getAmbiente() {
-        return ambiente;
-    }
+    } 
 
     public String getModificador() {
         return modificador;
@@ -73,10 +60,6 @@ public class MostrarTabla {
 
     public String getNomId() {
         return nomId;
-    }
-
-    public int getNumApa() {
-        return numApa;
     }
 
     public String getStrAsignado() {
