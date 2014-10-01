@@ -246,8 +246,6 @@ public class Clase {
     
     private void globalDecl(UsoId usoId) {
         
-        boolean encontroDecl = false;
-
         if (this.lisClassBodyDecl == null && this.lisClassBodyDecl.isEmpty()) {
             return;
         }
@@ -262,8 +260,7 @@ public class Clase {
 
                     c.getLisDecl().containsKey(usoId.getId())) {
 
-                this.lisUsoIdDecl.add(usoId);
-                encontroDecl = true;
+                this.lisUsoIdDecl.add(usoId);                
                 break;
 
             }
@@ -271,17 +268,12 @@ public class Clase {
             if (usoId.isEsMetodo() == true && c.getMetodo() != null && //es un metodo
                     c.getMetodo().getIde().getNomID().equals(usoId.getId())) {
 
-                this.lisUsoIdMet.add(usoId);
-                encontroDecl = true;
+                this.lisUsoIdMet.add(usoId);                
                 break;
             }           
 
-        }
-        
-//        if(!encontroDecl){
-//            varSinDeclarar = true;
-//            varSinDecl ="Existen variables sin declarar: " + usoId.getId() + " en línea: " + usoId.getLinea();
-//        }
+        }        
+
     }
     
     public void buscarUsoId(ArrayList<UsoId> lUsoId) {

@@ -452,8 +452,8 @@ interfaceFieldDeclaration
     ;
 
 
-type returns [String tip]
-    :   classOrInterfaceType
+type returns [String tip, ArrayList<UsoId> lisUsosId]
+    :   c1 = classOrInterfaceType {if(c1!=null){$lisUsosId=c1;}else{$lisUsosId= new ArrayList<>();}}
         ('[' ']'
         )*
     |   primitiveType {$type.tip = $primitiveType.text;}
@@ -462,8 +462,11 @@ type returns [String tip]
     ;
 
 
-classOrInterfaceType 
-    :   IDENTIFIER
+classOrInterfaceType returns [ArrayList<UsoId> lisUsosId]
+@init{
+    $lisUsosId = new ArrayList<>(); 
+}
+    :   Id1 = IDENTIFIER {$lisUsosId.add(new UsoId(Id1.getText(),Id1.getLine(),"global",false));}
         (typeArguments
         )?
         ('.' IDENTIFIER
@@ -962,10 +965,10 @@ multiplicativeExpression returns [ArrayList<UsoId> lisUsosId]
  *       it's a literal with signed value. INTLTERAL AND LONG LITERAL are added here for this.
  */
 unaryExpression  returns [ArrayList<UsoId> lisUsosId]
-    :   '+'  unaryExpression
-    |   '-' unaryExpression
-    |   '++' unaryExpression
-    |   '--' unaryExpression
+    :   '+'  u1 = unaryExpression {$lisUsosId = u1;}
+    |   '-' u2 = unaryExpression {$lisUsosId = u2;}
+    |   '++' u3 = unaryExpression {$lisUsosId = u3;}
+    |   '--' u4 = unaryExpression {$lisUsosId = u4;}
     |   u = unaryExpressionNotPlusMinus {$lisUsosId = u;}
     ;
 
@@ -973,9 +976,9 @@ unaryExpressionNotPlusMinus returns [ArrayList<UsoId> lisUsosId]
 @init{
     $lisUsosId = new ArrayList<UsoId>(); 
 }
-    :   '~' unaryExpression
-    |   '!' unaryExpression
-    |   castExpression
+    :   '~' u1 = unaryExpression {$lisUsosId = u1;}
+    |   '!' u2 = unaryExpression {$lisUsosId = u2;}
+    |   c1 = castExpression {$lisUsosId = c1;}
     |   p = primary {$lisUsosId = p;}
         (s1 = selector {$lisUsosId.addAll(s1);}
         )*
@@ -984,9 +987,9 @@ unaryExpressionNotPlusMinus returns [ArrayList<UsoId> lisUsosId]
         )?
     ;
 
-castExpression 
+castExpression returns [ArrayList<UsoId> lisUsosId]
     :   '(' primitiveType ')' unaryExpression
-    |   '(' type ')' unaryExpressionNotPlusMinus
+    |   '(' t1 = type ')' u2 = unaryExpressionNotPlusMinus {$lisUsosId = t1.lisUsosId; $lisUsosId.addAll(u2);}
     ;
 
 /**
