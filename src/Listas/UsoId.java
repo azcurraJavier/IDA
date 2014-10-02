@@ -10,7 +10,7 @@ public class UsoId {
     
     private String linea;
     private String id;
-    private String alcance;//local o global
+    private String alcance;//local, global, clase
     private String ubicacion;//en que metodo constructor usado
     
     private boolean esMetodo = false;
@@ -34,6 +34,7 @@ public class UsoId {
     public UsoId(String id,Integer linea, boolean esMetodo) {
         this(id,linea);
         this.esMetodo = esMetodo;
+        this.alcance = "";
     } 
     
     public void setLinea(String linea) {

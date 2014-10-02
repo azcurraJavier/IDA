@@ -126,7 +126,7 @@ public class Metodo {
 
             //si no es global y esta en los var local es una referencia!
             if (this.lisDecl != null && !this.lisDecl.isEmpty()
-                    && !e.getAlcance().equals("global")
+                    && !e.getAlcance().equals("global") && !e.getAlcance().equals("clase")
                     && lisDecl.containsKey(e.getId())) {
 
                 this.lisUsoIdDecl.add(e);
@@ -154,7 +154,7 @@ public class Metodo {
 
             //si no es global y esta en los parametros es una referencia!
             if (this.lisParam != null && !this.lisParam.isEmpty()
-                    && !e.getAlcance().equals("global")
+                    && !e.getAlcance().equals("global") && !e.getAlcance().equals("global")
                     && lisParam.containsKey(e.getId())) {
 
                 this.lisUsoIdPara.add(e);

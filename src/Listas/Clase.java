@@ -1,8 +1,11 @@
 package Listas;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map.Entry;
+import java.util.Set;
 
 public class Clase {
     
@@ -54,10 +57,6 @@ public class Clase {
         return modClase;
     }   
 
-
-    public boolean getVarSinDeclB() {
-        return varSinDeclarar;
-    } 
 
 //    public void setearAmbienteCometario() {
 //
@@ -176,7 +175,7 @@ public class Clase {
 //
 //    }
     
-    public void cargarTablaClase() {
+    public void cargarTablaClase(ArrayList<UsoId> usoIdClase) {
 
         MostrarTabla m;
 
@@ -241,17 +240,32 @@ public class Clase {
         m.setNomId(this.ide.getNomID());
         m.setNumLinea(this.ide.getLine());
         
+        
+        for (UsoId u : usoIdClase) {
+            //se agregan referancias para mostrar en la tabla
+            if (this.ide.getNomID().equals(u.getId())) {
+                m.addListaRef(u.getLinea(), u.getUbicacion());
+            }
+        }
+        
+        
         lisMostrarTabla.add(m);
     }
     
-    private void globalDecl(UsoId usoId) {
+    private boolean globalDecl(UsoId usoId) {
+        
+        Set<String> exclusion = new HashSet<>(Arrays.asList("equals","System","resume","sleep","suspend","println","print","out","exit"));
         
         if (this.lisClassBodyDecl == null && this.lisClassBodyDecl.isEmpty()) {
-            return;
+            return false;
         }
         
-        if(usoId.getId().equals("equals") || usoId.getId().equals("System")){//palabra que lo toma como identificadorpor ende se debe excluir
-            return;            
+        if(usoId.getAlcance().equals("clase")){
+            return false;
+        }
+        
+        if(exclusion.contains(usoId.getId())){
+            return true; //palabras que lo toma como identificador por ende se debe excluir
         }
         
         for (ClassBodyDecl c : this.lisClassBodyDecl) {
@@ -261,7 +275,7 @@ public class Clase {
                     c.getLisDecl().containsKey(usoId.getId())) {
 
                 this.lisUsoIdDecl.add(usoId);                
-                break;
+                return true;
 
             }
 
@@ -269,25 +283,31 @@ public class Clase {
                     c.getMetodo().getIde().getNomID().equals(usoId.getId())) {
 
                 this.lisUsoIdMet.add(usoId);                
-                break;
+                return true;
             }           
 
-        }        
+        }
+        
+        return false;
 
     }
     
-    public void buscarUsoId(ArrayList<UsoId> lUsoId) {
+    public ArrayList<UsoId> buscarUsoId(ArrayList<UsoId> lUsoId) {
+        
+        ArrayList<UsoId> filtraUso = new ArrayList<>();
 
         if (lUsoId != null && !lUsoId.isEmpty()) {
 
             for (UsoId e : lUsoId) {
-                
-                if(varSinDeclarar){
-                    break;
+
+                if(!globalDecl(e)){
+                    //retorna solo los que no encontró
+                    filtraUso.add(e);
                 }
-                globalDecl(e);
             }
         }
+        
+        return filtraUso;
 
     }
     

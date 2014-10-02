@@ -7,50 +7,78 @@ import java.util.ArrayList;
  * @author javier
  */
 public class Archivo {
-    
+
     private String code; //codigo leido de archivo
     private String fileName; //nombre de archivo .java
     private String fileNamePath; //ruta del archivo \home\entrada.java
     private String nomPaq;   //Paquete
     private int linPaq;   //Paquete linea      
-    
+
     //Lista de comentatios del archivo (clase)
     private ArrayList<Comentario> lisComentario;
     //Lista de literales del archivo (clase)
-    private ArrayList<Literal> lisLiterales;   
-    
+    private ArrayList<Literal> lisLiterales;
+
     //Lista de Clases del archivo
     private ArrayList<Clase> lisClases;
-    
+
     //Para mostrar los id por la tabla
     private ArrayList<MostrarTabla> lisMostrarTabla;
+    
+    //Para mostrar los id por la tabla
+    private ArrayList<UsoId> lisUsoIdClase;
 
     public Archivo() {
         lisComentario = new ArrayList<>();
         lisLiterales = new ArrayList<>();
         lisClases = new ArrayList<>();
         lisMostrarTabla = new ArrayList<>();
+        lisUsoIdClase = new ArrayList<>();
     }
-    
-    public void cargarInfoTabla(){
-        
-        for(Clase c : lisClases){
-            
+
+    public void cargarInfoTabla() {
+
+        for (Clase c : lisClases) {
+
             //se carga información de cada tabla...
-            c.cargarTablaClase();
-            
+            c.cargarTablaClase(lisUsoIdClase);
+
             //...luego se agrega a esta lista...
             lisMostrarTabla.addAll(c.getIdTablaClase());
-        } 
+        }
         //informacion del paquete
         if (this.nomPaq != null && !this.nomPaq.isEmpty()) {
-            MostrarTabla m = new MostrarTabla("Clase Global");//paquete
-            m.setRepresenta("Paquete");                
-            m.setNomId(this.nomPaq);   
+            MostrarTabla m = new MostrarTabla("Global");//paquete
+            m.setRepresenta("Paquete");
+            m.setNomId(this.nomPaq);
             m.setNumLinea(this.linPaq);
             lisMostrarTabla.add(m);
-        }   
+        }
+
+    }
+
+    public void buscarUsoId(ArrayList<UsoId> lUsoId) {
         
+        if (this.lisClases == null && this.lisClases.isEmpty()) {
+            return;
+        }
+
+        if (lUsoId != null && !lUsoId.isEmpty()) {
+
+            for (UsoId e : lUsoId) {
+                
+                for (Clase c : this.lisClases) {
+                
+                    if (c.getIde().getNomID().equals(e.getId())
+                                && e.getAlcance().equals("clase")) {
+                        lisUsoIdClase.add(e);
+                    }                    
+                
+                }
+                
+            }
+        }
+
     }
 
     public void setCode(String code) {
@@ -79,8 +107,7 @@ public class Archivo {
 
     public void setLisMostrarTabla(ArrayList<MostrarTabla> lisMostrarTabla) {
         this.lisMostrarTabla = lisMostrarTabla;
-    }    
-    
+    }
 
     public void setLisComentario(ArrayList<Comentario> LisComentario) {
         this.lisComentario = LisComentario;
@@ -88,8 +115,7 @@ public class Archivo {
 
     public void setLisLiterales(ArrayList<Literal> LisLiterales) {
         this.lisLiterales = LisLiterales;
-    }  
-    
+    }
 
     public String getCode() {
         return code;
@@ -113,8 +139,7 @@ public class Archivo {
 
     public int getLinPaq() {
         return linPaq;
-    } 
-    
+    }
 
     public ArrayList<Comentario> getLisComentario() {
         return lisComentario;
@@ -122,11 +147,10 @@ public class Archivo {
 
     public ArrayList<Literal> getLisLiterales() {
         return lisLiterales;
-    }    
+    }
 
     public ArrayList<MostrarTabla> getLisMostrarTabla() {
         return lisMostrarTabla;
-    }   
-    
-    
+    }
+
 }

@@ -104,6 +104,7 @@ compilationUnit
 }
 @after{
     archivoAnalisis.setLisClases(lisClases);
+    if(t!=null && t.lisUsosId !=null){archivoAnalisis.buscarUsoId(t.lisUsosId);}
 }
     :   (   (annotations
             )?
@@ -112,8 +113,8 @@ compilationUnit
         )?
         (importDeclaration
         )*
-        (t=typeDeclaration {if(t==null){System.out.println("Java.g Error: typeDeclaration == null!");noErr=false;}
-            else{lisClases.add(t);}} //puede haber mas de una clase por archivo !!!        
+        (t=typeDeclaration {if(t.unaClase==null){System.out.println("Java.g Error: typeDeclaration == null!");noErr=false;}
+            else{lisClases.add(t.unaClase);}} //puede haber mas de una clase por archivo !!!        
         )*
     ;
 
@@ -145,13 +146,16 @@ qualifiedImportName
         )*
     ;
 
-typeDeclaration returns [Clase unaClase] 
-    :   c = classOrInterfaceDeclaration {$unaClase = c;}
+typeDeclaration returns [Clase unaClase, ArrayList<UsoId> lisUsosId] 
+    :   c = classOrInterfaceDeclaration {$unaClase = c.unaClase; $lisUsosId = c.lisUsosId;}
     |   ';'
     ;
 
-classOrInterfaceDeclaration returns [Clase unaClase] 
-    :   c = classDeclaration {$unaClase = c;}
+classOrInterfaceDeclaration returns [Clase unaClase, ArrayList<UsoId> lisUsosId]
+@init{    
+    $lisUsosId = new ArrayList<>();
+} 
+    :   c = classDeclaration {$unaClase = c.unaClase; $lisUsosId = c.lisUsosId;}
     |   interfaceDeclaration
     ;
     
@@ -184,12 +188,18 @@ variableModifiers returns [String s = ""]
     ;
     
 
-classDeclaration returns [Clase unaClase] 
-    :   n = normalClassDeclaration {$unaClase = n;}
+classDeclaration returns [Clase unaClase, ArrayList<UsoId> lisUsosId]
+@init{    
+    $lisUsosId = new ArrayList<>();
+}
+    :   n = normalClassDeclaration {$unaClase = n.unaClase; $lisUsosId=n.lisUsosId;}
     |   enumDeclaration
     ;
 
-normalClassDeclaration returns [Clase unaClase] 
+normalClassDeclaration returns [Clase unaClase, ArrayList<UsoId> lisUsosId]
+@init{    
+    $lisUsosId = new ArrayList<>();
+} 
     :   mo1 = modifiers  'class' I1 = IDENTIFIER
         (typeParameters /*Duda*/
         )?
@@ -197,7 +207,7 @@ normalClassDeclaration returns [Clase unaClase]
         )?
         ('implements' typeList
         )?            
-        c = classBody {c.setIde(new Id($I1.text,$I1.getLine())); c.setModClase(mo1);$unaClase =c;}
+        c = classBody {c.unaClase.setIde(new Id($I1.text,$I1.getLine())); c.unaClase.setModClase(mo1);$unaClase =c.unaClase; $lisUsosId=c.lisUsosId;}
     ;
 
 
@@ -292,7 +302,7 @@ typeList
         )*
     ;
 
-classBody returns [Clase unaClase]
+classBody returns [Clase unaClase, ArrayList<UsoId> lisUsosId]
 @init{
     ArrayList<ClassBodyDecl> clDecl = new ArrayList<ClassBodyDecl>();
     
@@ -301,7 +311,7 @@ classBody returns [Clase unaClase]
 @after{
     $unaClase = new Clase(clDecl);
     //analizo uso en variables globales
-    $unaClase.buscarUsoId(lisUsosId);
+    $lisUsosId = $unaClase.buscarUsoId(lisUsosId);
 }
     :   '{' 
         (c = classBodyDeclaration {clDecl.add(c.cBd);lisUsosId.addAll(c.lisUsosId);}
@@ -466,7 +476,7 @@ classOrInterfaceType returns [ArrayList<UsoId> lisUsosId]
 @init{
     $lisUsosId = new ArrayList<>(); 
 }
-    :   Id1 = IDENTIFIER {$lisUsosId.add(new UsoId(Id1.getText(),Id1.getLine(),"global",false));}
+    :   Id1 = IDENTIFIER {$lisUsosId.add(new UsoId(Id1.getText(),Id1.getLine(),"clase",false));}
         (typeArguments
         )?
         ('.' IDENTIFIER
@@ -695,7 +705,7 @@ blockStatement returns [Map<String,Declaracion> lisDecl, ArrayList<UsoId> lisUso
 }
     :   l1 = localVariableDeclarationStatement {$lisDecl = l1;}
     |   classOrInterfaceDeclaration
-    |   s1 = statement {$lisUsosId = s1;}
+    |   s1 = statement {$lisUsosId = s1.lisUsosId; $lisDecl.putAll(s1.lisDecl);}//$lisDecl.putAll(s1.lisDecl) declaraciones try catch
     ;
 
 
@@ -716,21 +726,22 @@ localVariableDeclaration returns [Map<String,Declaracion> lisDecl]
         )*
     ;
 
- statement returns [ArrayList<UsoId> lisUsosId]
+ statement returns [ArrayList<UsoId> lisUsosId, Map<String,Declaracion> lisDecl]
 @init{   
     $lisUsosId = new ArrayList<UsoId>();
+    $lisDecl = new HashMap<String,Declaracion>();
 }
-    :   b1 = block {if(b1!=null){$lisUsosId.addAll(b1.lisUsosId);}}
+    :   b1 = block {if(b1!=null){$lisUsosId.addAll(b1.lisUsosId); $lisDecl = b1.lisDecl;}}
             
     |   ('assert'
         )
         exp1 = expression (':' exp2 = expression {$lisUsosId.addAll(exp2);})? ';' {$lisUsosId.addAll(exp1);}
     |   'assert'  expression (':' expression)? ';'            
-    |   'if' p1 = parExpression s1 = statement ('else' s2 = statement)?{if(p1!=null){$lisUsosId.addAll(p1);}if(s1!=null){$lisUsosId.addAll(s1);} if(s2!=null){$lisUsosId.addAll(s2);}}
+    |   'if' p1 = parExpression s1 = statement ('else' s2 = statement {if(s2.lisUsosId !=null){$lisUsosId.addAll(s2.lisUsosId);}} )?  {if(p1!=null){$lisUsosId.addAll(p1);}if(s1.lisUsosId !=null){$lisUsosId.addAll(s1.lisUsosId);}}
     |   f1 = forstatement {if(f1!=null){$lisUsosId.addAll(f1);}}
-    |   'while' p2 = parExpression s3 = statement {if(p2!=null){$lisUsosId.addAll(p2);} if(s3!=null){$lisUsosId.addAll(s3);}}
-    |   'do' dos1 = statement 'while' pa1 = parExpression ';' {if(dos1!=null){$lisUsosId.addAll(dos1);} $lisUsosId.addAll(pa1);} 
-    |   tr1 = trystatement {if(tr1!=null){$lisUsosId.addAll(tr1);}}
+    |   'while' p2 = parExpression s3 = statement {if(p2!=null){$lisUsosId.addAll(p2);} if(s3.lisUsosId !=null){$lisUsosId.addAll(s3.lisUsosId);} $lisDecl = s3.lisDecl;}
+    |   'do' dos1 = statement 'while' pa1 = parExpression ';' {if(dos1.lisUsosId !=null){$lisUsosId.addAll(dos1.lisUsosId);} $lisUsosId.addAll(pa1);} 
+    |   tr1 = trystatement {if(tr1.lisUsosId!=null){$lisUsosId.addAll(tr1.lisUsosId);}  $lisDecl = tr1.lisDecl;}
     |   'switch' parExpression '{' switchBlockStatementGroups '}'
     |   'synchronized' parExpression block
     |   'return' ( r1 = expression {$lisUsosId.addAll(r1);} )? ';'
@@ -764,36 +775,42 @@ switchLabel
     ;
 
 
-trystatement returns [ArrayList<UsoId> lisUsosId]
+trystatement returns [Map<String,Declaracion> lisDecl, ArrayList<UsoId> lisUsosId]
 @init{   
     $lisUsosId = new ArrayList<UsoId>();
+    $lisDecl = new HashMap<String,Declaracion>();
 }
-    :   'try' b1 = block {if(b1!=null){$lisUsosId.addAll(b1.lisUsosId);}}
-        (   ca1 = catches 'finally' b2 = block {if(b2!=null){$lisUsosId.addAll(b2.lisUsosId);} $lisUsosId.addAll(ca1);}
-        |   ca2 = catches {$lisUsosId.addAll(ca2);}
+    :   'try' b1 = block {if(b1!=null){$lisUsosId.addAll(b1.lisUsosId);}}//retorna variables declaradas en try!
+        (   ca1 = catches 'finally' b2 = block {if(b2.lisUsosId!=null){$lisUsosId.addAll(b2.lisUsosId);} $lisUsosId.addAll(ca1.lisUsosId); $lisDecl = ca1.lisDecl;}
+        |   ca2 = catches {$lisUsosId.addAll(ca2.lisUsosId); $lisDecl = ca2.lisDecl;}
         |   'finally' b3 = block {if(b3!=null){$lisUsosId.addAll(b3.lisUsosId);}}
         )
      ;
 
-catches returns [ArrayList<UsoId> lisUsosId]
+catches returns [ArrayList<UsoId> lisUsosId, Map<String,Declaracion> lisDecl]
 @init{   
     $lisUsosId = new ArrayList<UsoId>();
+    $lisDecl = new HashMap<String,Declaracion>();
 }
-    :   c1 = catchClause {$lisUsosId = c1;}
-        (c2 = catchClause {if(c2!=null){$lisUsosId.addAll(c2);}}
+    :   c1 = catchClause {$lisUsosId = c1.lisUsosId; $lisDecl = c1.lisDecl;}
+        (c2 = catchClause {if(c2!=null){$lisUsosId.addAll(c2.lisUsosId);}  $lisDecl.putAll(c1.lisDecl);}
         )*
     ;
 
-catchClause returns [ArrayList<UsoId> lisUsosId]
+catchClause returns [ArrayList<UsoId> lisUsosId, Map<String,Declaracion> lisDecl]
 @init{   
     $lisUsosId = new ArrayList<UsoId>();
+    $lisDecl = new HashMap<String,Declaracion>();
 }
-    :   'catch' '(' formalParameter
+    :   'catch' '(' f1 = formalParameter {$lisDecl= f1;}
         ')' b1 = block {if(b1!=null){$lisUsosId.addAll(b1.lisUsosId);}}
     ;
 
-formalParameter 
-    :   variableModifiers type IDENTIFIER
+formalParameter returns [Map<String,Declaracion> lisDecl]
+@init{       
+    $lisDecl = new HashMap<String,Declaracion>();    
+} 
+    :   variableModifiers type Id1 = IDENTIFIER {$lisDecl.put(Id1.getText(),new Declaracion("","",new Id(Id1.getText(),Id1.getLine())));}
         ('[' ']'
         )*
     ;
@@ -805,7 +822,7 @@ forstatement returns [ArrayList<UsoId> lisUsosId]
     :   
         // enhanced for loop
         'for' '(' variableModifiers type IDENTIFIER ':' 
-        expression ')' s2 = statement {if(s2!=null){$lisUsosId.addAll(s2);}}
+        expression ')' s2 = statement {if(s2!=null){$lisUsosId.addAll(s2.lisUsosId);}}
             
         // normal for loop
     |   'for' '(' 
@@ -814,7 +831,7 @@ forstatement returns [ArrayList<UsoId> lisUsosId]
                 ( e1 = expression {$lisUsosId.addAll(e1);}
                 )? ';' 
                 ( e2 = expressionList {if(e2!=null){$lisUsosId.addAll(e2);}}
-                )? ')' s1 = statement {if(s1!=null){$lisUsosId.addAll(s1);}}
+                )? ')' s1 = statement {if(s1.lisUsosId !=null){$lisUsosId.addAll(s1.lisUsosId);}}
     ;
 
 forInit
