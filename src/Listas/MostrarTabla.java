@@ -13,6 +13,8 @@ public class MostrarTabla {
     
     private String representa;
     
+    private String idExpandido; //lo elige el usuario
+    
     //tablas extras: decl y ref
     private ArrayList<MostrarListaRef> listaRef;
     
@@ -26,6 +28,7 @@ public class MostrarTabla {
         this.numLinea = 0;
         
         this.representa = "";//parametro var local var global clase
+        this.idExpandido = "";
         this.listaRef = new ArrayList<>();
         
     }
@@ -54,6 +57,12 @@ public class MostrarTabla {
         this.representa = representa;
     } 
 
+    public void setIdExpandido(String idExpandido) {
+        this.idExpandido = idExpandido;
+    }
+    
+    
+
     public String getModificador() {
         return modificador;
     }
@@ -76,7 +85,7 @@ public class MostrarTabla {
 
     public String getRepresenta() {
         return representa;
-    }      
+    }  
 
     public ArrayList<MostrarListaRef> getListaRef() {
         return listaRef;
@@ -85,7 +94,9 @@ public class MostrarTabla {
     public void addListaRef(String l, String u){
         listaRef.add(new MostrarListaRef(l,u));
     }
- 
-    
+
+    public String getIdExpandido() {
+        return idExpandido;
+    }
     
 }

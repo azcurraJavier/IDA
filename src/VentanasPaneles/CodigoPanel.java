@@ -112,30 +112,50 @@ public class CodigoPanel extends javax.swing.JPanel {
                 + buffer.toString() + "</font></pre></html>";
     }
     
-    public void replaceIdsCode(Map<Integer,Map> idExp){
+    public void replaceIdsCode(Map<String,String> idExp){
     
         String code = archivoAnalisis.getCode();
         String[] lines = code.split(System.getProperty("line.separator"));        
         
+//        for (Map.Entry mapEntry : idExp.entrySet()) {
+//            
+//            Map<String,String> idEntry2 = (Map) mapEntry.getValue();
+//            
+//            for (Map.Entry mapEntry2 : idEntry2.entrySet()){
+//                
+//                String regex =mapEntry2.getKey().toString();
+//                String replace =mapEntry2.getValue().toString();
+//                
+//                if(regex.equals(replace)){//si es igual no tiene sentido reemplazar
+//                    continue;
+//                }
+//                
+//                replace = replace.replaceAll(" ", "_");//se coloca _ para que el código sea valido                
+//                
+//                int nroLine = (int)mapEntry.getKey() - 1;
+//            
+//                lines[nroLine] = lines[nroLine].replaceAll(regex, replace);
+//            }          
+//        
+//        }
+        
         for (Map.Entry mapEntry : idExp.entrySet()) {
             
-            Map<String,String> idEntry2 = (Map) mapEntry.getValue();
             
-            for (Map.Entry mapEntry2 : idEntry2.entrySet()){
-                
-                String regex =mapEntry2.getKey().toString();
-                String replace =mapEntry2.getValue().toString();
-                
-                if(regex.equals(replace)){//si es igual no tiene sentido reemplazar
-                    continue;
-                }
-                
-                replace = replace.replaceAll(" ", "_");//se coloca _ para que el código sea valido                
-                
-                int nroLine = (int)mapEntry.getKey() - 1;
+            String id = mapEntry.getKey().toString();
+            String replace =mapEntry.getValue().toString();
             
-                lines[nroLine] = lines[nroLine].replaceAll(regex, replace);
-            }          
+            String[] split = id.split(":");//linea - id - repr
+                        
+            if(split[1].toLowerCase().equals(replace)){
+                continue; //para no reemplazar Per por per...
+            }            
+            
+            replace = replace.replaceAll(" ", "_");//se coloca _ para que el código sea valido                
+
+            int nroLine = Integer.parseInt(split[0]);
+
+            lines[nroLine-1] = lines[nroLine-1].replaceAll(split[1], replace);
         
         }
         
