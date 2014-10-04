@@ -8,11 +8,14 @@ public class Id {
     private String strContenido;
     
     private int line;
+    
+    private int column; //sirve para ubicacion precisa del código
 
-    public Id(String nom, int l) {
+    public Id(String nom, int l, int c) {
         nomID = nom;        
         strContenido = new String();
         line = l;
+        column = c;
     }
 
     public String getNomID() {
@@ -30,5 +33,9 @@ public class Id {
     public int getLine() {
         return line;
     } 
+
+    public int getColumn() {
+        return column;
+    }   
     
 }

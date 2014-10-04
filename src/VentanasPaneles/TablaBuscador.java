@@ -10,15 +10,22 @@ import Listas.PalabraHash;
 import java.awt.Color;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableColumn;
@@ -494,6 +501,11 @@ public class TablaBuscador extends javax.swing.JPanel {
 
         jButtonCreArch.setText("Crear Archivo");
         jButtonCreArch.setEnabled(false);
+        jButtonCreArch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCreArchActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelArSalidaLayout = new javax.swing.GroupLayout(jPanelArSalida);
         jPanelArSalida.setLayout(jPanelArSalidaLayout);
@@ -700,11 +712,6 @@ public class TablaBuscador extends javax.swing.JPanel {
 
     private void jButtonExpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExpActionPerformed
 
-         
-        ////////////////////////////////////
-//        Map<Integer, Map> idExp = new HashMap<>();
-//
-//        Map<String, String> idExp2 = new HashMap<>();
         
         Map<String, String> mapExp = new HashMap<>();
 
@@ -725,7 +732,7 @@ public class TablaBuscador extends javax.swing.JPanel {
             if (m.getListaRef().size() > 0) {
                 
                 for (MostrarListaRef mr : m.getListaRef()) {
-                
+                   
                     //si es igual no se agrega...
                    if(nroLine == Integer.parseInt(mr.getLinea())) {
                        continue;                   
@@ -741,64 +748,18 @@ public class TablaBuscador extends javax.swing.JPanel {
             
 
          }
-//        
-//        for(int i=0;i<modeloTabla.getRowCount();i++){
-//        
-//            int nroLine = (int) modeloTabla.getValueAt(i, 1);
-//            String id = cleanHtml((String) modeloTabla.getValueAt(i, 2));
-//            String exp = (String) modeloTabla.getValueAt(i, modeloTabla.getColumnCount()-1);
-//            if (idExp.containsKey(nroLine)) {
-//
-//                Map<String, String> mapTemp = idExp.get(nroLine);
-//
-//                mapTemp.put(id, exp);
-//
-//                idExp.remove(nroLine);
-//
-//                idExp.put(nroLine, mapTemp);
-//
-//            } else {
-//                idExp2.put(id, exp);
-//                idExp.put(nroLine, idExp2);
-//
-//                idExp2 = new HashMap<>();
-//            }
-//
-//            //buscar en tabla de referencias
-//            if (m.getListaRef().size() > 0) {
-//
-//                for (MostrarListaRef mr : m.getListaRef()) {
-//
-//                    nroLine = Integer.parseInt(mr.getLinea());
-//
-//                    if (idExp.containsKey(nroLine)) {
-//
-//                        Map<String, String> mapTemp = idExp.get(nroLine);
-//
-//                        mapTemp.put(id, exp);
-//
-//                        idExp.remove(nroLine);
-//
-//                        idExp.put(nroLine, mapTemp);
-//
-//                    } else {
-//                        idExp2.put(id, exp);
-//                        idExp.put(nroLine, idExp2);
-//
-//                        idExp2 = new HashMap<>();
-//                    }
-//
-//                }
-//
-//            }
-//
-//        }
+
 
         codigoPanel.replaceIdsCode(mapExp);
 
         jButtonDesExp.setEnabled(true);
         jButtonExp.setEnabled(false);
         jButtonCreArch.setEnabled(true); 
+        
+        tablaElem.autoAjuste();
+        
+        modeloTabla.removeColumnEditable(modeloTabla.getColumnCount()-1);
+        
     }//GEN-LAST:event_jButtonExpActionPerformed
 
     private void jButtonDesExpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDesExpActionPerformed
@@ -808,7 +769,50 @@ public class TablaBuscador extends javax.swing.JPanel {
         jButtonExp.setEnabled(true);
         jButtonDesExp.setEnabled(false);
         jButtonCreArch.setEnabled(false); 
+        
+        modeloTabla.addColumnEditable(modeloTabla.getColumnCount()-1);
     }//GEN-LAST:event_jButtonDesExpActionPerformed
+
+    private void jButtonCreArchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCreArchActionPerformed
+        
+        FileWriter ar = null;
+        
+        if(archivoAnalisis.getCodeExpand() != null){
+            try {
+                
+                String path = archivoAnalisis.getFileNamePath();
+                
+                path = path.substring(0, path.length()-5);
+                
+                path = path + ".ida.java";
+                
+                ar = new FileWriter(new File(path));
+                
+                ar.write(archivoAnalisis.getCodeExpand());
+                
+                JOptionPane.showMessageDialog(new JFrame(),
+                            "El archivo con la ruta: " + "\""+path+"\""
+                            + "\nfue creado con éxito!", "Información", JOptionPane.INFORMATION_MESSAGE);
+                
+            } catch (IOException ex) {
+                Logger.getLogger(TablaBuscador.class.getName()).log(Level.SEVERE, null, ex);
+            }finally{
+                if(ar != null){
+                    try {
+                        ar.close();
+                    } catch (IOException ex) {
+                        Logger.getLogger(TablaBuscador.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            }
+            
+            
+            
+        }
+        
+        
+        
+    }//GEN-LAST:event_jButtonCreArchActionPerformed
 
     private void addLineaCom(String linea) {
 

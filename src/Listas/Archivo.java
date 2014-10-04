@@ -13,6 +13,9 @@ public class Archivo {
     private String fileNamePath; //ruta del archivo \home\entrada.java
     private String nomPaq;   //Paquete
     private int linPaq;   //Paquete linea      
+    private int colPaq;   //Paquete col   
+    
+    private String codeExpand; //codigo expandido
 
     //Lista de comentatios del archivo (clase)
     private ArrayList<Comentario> lisComentario;
@@ -52,6 +55,8 @@ public class Archivo {
             m.setRepresenta("Paquete");
             m.setNomId(this.nomPaq);
             m.setNumLinea(this.linPaq);
+            m.setNumColumna(this.colPaq);
+            
             lisMostrarTabla.add(m);
         }
 
@@ -71,6 +76,9 @@ public class Archivo {
                 
                     if (c.getIde().getNomID().equals(e.getId())
                                 && e.getAlcance().equals("clase")) {
+                        
+                        e.setUsadoEn("Clase " + e.getUbicacion());
+                        
                         lisUsoIdClase.add(e);
                     }                    
                 
@@ -105,6 +113,10 @@ public class Archivo {
         this.linPaq = linPaq;
     }
 
+    public void setColPaq(int colPaq) {
+        this.colPaq = colPaq;
+    }
+
     public void setLisMostrarTabla(ArrayList<MostrarTabla> lisMostrarTabla) {
         this.lisMostrarTabla = lisMostrarTabla;
     }
@@ -116,6 +128,11 @@ public class Archivo {
     public void setLisLiterales(ArrayList<Literal> LisLiterales) {
         this.lisLiterales = LisLiterales;
     }
+
+    public void setCodeExpand(String codeExpand) {
+        this.codeExpand = codeExpand;
+    }
+       
 
     public String getCode() {
         return code;
@@ -141,6 +158,10 @@ public class Archivo {
         return linPaq;
     }
 
+    public int getColPaq() {
+        return colPaq;
+    }
+
     public ArrayList<Comentario> getLisComentario() {
         return lisComentario;
     }
@@ -153,4 +174,8 @@ public class Archivo {
         return lisMostrarTabla;
     }
 
+    public String getCodeExpand() {
+        return codeExpand;
+    }
+    
 }

@@ -191,7 +191,8 @@ public class Clase {
                     Declaracion d = it.next().getValue();
                     m.setRepresenta("Variable de Clase");
                     m.setNomId(d.getIdent().getNomID());
-                    m.setNumLinea(d.getIdent().getLine());                    
+                    m.setNumLinea(d.getIdent().getLine());   
+                    m.setNumColumna(d.getIdent().getColumn());
                     m.setModificador(d.getModificador());
                     m.setTipo(d.getTipo());
                     m.setStrAsignado(d.getIdent().getStrContenido());
@@ -199,7 +200,7 @@ public class Clase {
                     for (UsoId u : this.lisUsoIdDecl) {
                         //se agregan referancias para mostrar en la tabla
                         if (d.getIdent().getNomID().equals(u.getId())) {
-                            m.addListaRef(u.getLinea(), u.getUbicacion());
+                            m.addListaRef(u.getLinea(), u.getColumna() ,u.getUbicacion());
                         }
                     }
                     
@@ -215,7 +216,8 @@ public class Clase {
             if (met != null) {
                 
                 m.setNomId(met.getIde().getNomID());
-                m.setNumLinea(met.getIde().getLine());                
+                m.setNumLinea(met.getIde().getLine());   
+                m.setNumColumna(met.getIde().getColumn());
                 m.setModificador(met.getModif());
                 m.setTipo(met.getTipo());
                 m.setRepresenta(met.getTipo().isEmpty()?"Constructor":"Método de Clase");
@@ -223,7 +225,7 @@ public class Clase {
                 for (UsoId u : this.lisUsoIdMet) {
                     //se agregan referancias para mostrar en la tabla
                     if (met.getIde().getNomID().equals(u.getId())) {
-                        m.addListaRef(u.getLinea(), u.getUbicacion());
+                        m.addListaRef(u.getLinea(), u.getColumna(), u.getUbicacion());
                     }
                 }
                 
@@ -239,12 +241,13 @@ public class Clase {
         m.setModificador(this.modClase);
         m.setNomId(this.ide.getNomID());
         m.setNumLinea(this.ide.getLine());
+        m.setNumColumna(this.ide.getColumn());
         
         
         for (UsoId u : usoIdClase) {
             //se agregan referancias para mostrar en la tabla
             if (this.ide.getNomID().equals(u.getId())) {
-                m.addListaRef(u.getLinea(), u.getUbicacion());
+                m.addListaRef(u.getLinea(), u.getColumna(), u.getUbicacion());
             }
         }
         
@@ -267,6 +270,8 @@ public class Clase {
         if(exclusion.contains(usoId.getId())){
             return true; //palabras que lo toma como identificador por ende se debe excluir
         }
+        
+        usoId.setUsadoEn("Clase " + this.getIde().getNomID());
         
         for (ClassBodyDecl c : this.lisClassBodyDecl) {
 

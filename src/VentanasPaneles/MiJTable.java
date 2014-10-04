@@ -16,16 +16,12 @@ import javax.swing.table.TableColumn;
  */
 public class MiJTable extends JTable {
 
-    private int anchoTotaltabla;
-
     public MiJTable() {
         super();
-        anchoTotaltabla = 0;
     }
 
     public MiJTable(MiModelo m) {
-        super(m);
-        anchoTotaltabla = 0;
+        super(m);        
     }
 
     public void autoAjuste() {
@@ -63,12 +59,6 @@ public class MiJTable extends JTable {
         }
 
         width += 2 * margin;            // Configura a largura
-        col.setPreferredWidth(width);
-        anchoTotaltabla += width;
+        col.setPreferredWidth(width);        
     }
-
-    public int getAnchoTotaltabla() {
-        return anchoTotaltabla;
-    }
-
 }

@@ -117,28 +117,7 @@ public class CodigoPanel extends javax.swing.JPanel {
         String code = archivoAnalisis.getCode();
         String[] lines = code.split(System.getProperty("line.separator"));        
         
-//        for (Map.Entry mapEntry : idExp.entrySet()) {
-//            
-//            Map<String,String> idEntry2 = (Map) mapEntry.getValue();
-//            
-//            for (Map.Entry mapEntry2 : idEntry2.entrySet()){
-//                
-//                String regex =mapEntry2.getKey().toString();
-//                String replace =mapEntry2.getValue().toString();
-//                
-//                if(regex.equals(replace)){//si es igual no tiene sentido reemplazar
-//                    continue;
-//                }
-//                
-//                replace = replace.replaceAll(" ", "_");//se coloca _ para que el código sea valido                
-//                
-//                int nroLine = (int)mapEntry.getKey() - 1;
-//            
-//                lines[nroLine] = lines[nroLine].replaceAll(regex, replace);
-//            }          
-//        
-//        }
-        
+       
         for (Map.Entry mapEntry : idExp.entrySet()) {
             
             
@@ -148,15 +127,15 @@ public class CodigoPanel extends javax.swing.JPanel {
             String[] split = id.split(":");//linea - id - repr
                         
             if(split[1].toLowerCase().equals(replace)){
-                continue; //para no reemplazar Per por per...
+                continue; //para no reemplazar Person por person...
             }            
             
             replace = replace.replaceAll(" ", "_");//se coloca _ para que el código sea valido                
 
             int nroLine = Integer.parseInt(split[0]);
 
-            lines[nroLine-1] = lines[nroLine-1].replaceAll(split[1], replace);
-        
+            lines[nroLine-1] = lines[nroLine-1].replaceAll("\\b"+split[1]+"\\b", replace);
+            
         }
         
         StringBuilder buffer = new StringBuilder();
@@ -167,6 +146,8 @@ public class CodigoPanel extends javax.swing.JPanel {
         }        
         
         String htmlCode = codeHtml(buffer.toString());
+        
+        archivoAnalisis.setCodeExpand(buffer.toString());
         
         //jTextAreaCod.setText(buffer.toString());
         jEditorPaneCod.setText(htmlCode);

@@ -228,6 +228,7 @@ public class Metodo {
 
                 m.setNomId(d.getIdent().getNomID());                
                 m.setNumLinea(d.getIdent().getLine());
+                m.setNumColumna(d.getIdent().getColumn());
                 m.setModificador(d.getModificador());
                 m.setTipo(d.getTipo());
                 m.setStrAsignado(d.getIdent().getStrContenido());
@@ -235,7 +236,7 @@ public class Metodo {
                 for (UsoId u : this.lisUsoIdDecl) {
                     //se agregan referancias para mostrar en la tabla
                     if (d.getIdent().getNomID().equals(u.getId())) {
-                        m.addListaRef(u.getLinea(), u.getUbicacion());
+                        m.addListaRef(u.getLinea(), u.getColumna(), u.getUbicacion());
                     }
                 }
 
@@ -252,6 +253,7 @@ public class Metodo {
 
                 m.setNomId(p.getIdent().getNomID());                
                 m.setNumLinea(p.getIdent().getLine());
+                m.setNumColumna(p.getIdent().getColumn());
                 m.setModificador(p.getModif());
                 m.setTipo(p.getTipo());
                 m.setStrAsignado(p.getIdent().getStrContenido());
@@ -259,7 +261,7 @@ public class Metodo {
                 for (UsoId u : this.lisUsoIdPara) {
                     //se agregan referancias para mostrar en la tabla
                     if (p.getIdent().getNomID().equals(u.getId())) {
-                        m.addListaRef(u.getLinea(), u.getUbicacion());
+                        m.addListaRef(u.getLinea(), u.getColumna(), u.getUbicacion());
                     }
                 }
 

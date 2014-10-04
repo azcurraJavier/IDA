@@ -9,36 +9,42 @@ package Listas;
 public class UsoId {    
     
     private String linea;
+    private String columna;
     private String id;
     private String alcance;//local, global, clase
     private String ubicacion;//en que metodo constructor usado
     
     private boolean esMetodo = false;
     
-    public UsoId(String id,Integer linea) {
-        this.linea = linea.toString();        
+    public UsoId(String id,Integer linea, Integer columna) {
+        this.linea = linea.toString();
+        this.columna = columna.toString();
         this.id=id;        
         this.alcance = "";
     }
 
-    public UsoId(String id,Integer linea, String alcance) {
-        this(id,linea);
+    public UsoId(String id,Integer linea, Integer columna, String alcance) {
+        this(id,linea,columna);
         this.alcance = alcance;
     }
     
-    public UsoId(String id,Integer linea, String alcance, boolean esMetodo) {
-        this(id,linea,alcance);
+    public UsoId(String id,Integer linea, Integer columna, String alcance, boolean esMetodo) {
+        this(id,linea,columna,alcance);
         this.esMetodo = esMetodo;
     }
     
-    public UsoId(String id,Integer linea, boolean esMetodo) {
-        this(id,linea);
+    public UsoId(String id,Integer linea, Integer columna, boolean esMetodo) {
+        this(id,linea,columna);
         this.esMetodo = esMetodo;
         this.alcance = "";
     } 
     
     public void setLinea(String linea) {
         this.linea = linea;
+    }
+
+    public void setColumna(String columna) {
+        this.columna = columna;
     }
 
     public void setAlcance(String alcance) {
@@ -76,6 +82,10 @@ public class UsoId {
 
     public String getUbicacion() {
         return ubicacion;
+    }
+
+    public String getColumna() {
+        return columna;
     }
 
     public boolean isEsMetodo() {
