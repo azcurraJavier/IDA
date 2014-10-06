@@ -204,7 +204,19 @@ public class Clase {
                         }
                     }
                     
-
+                    //referencias de clase desde otra clase
+                    //TopGun tp
+                    //
+                    //tp.shoot                    
+                    for(UsoId u : usoIdClase){
+                        //
+                        if(d.getIdent().getNomID().equals(u.getId())
+                                && u.getAsoClase()!=null && this.ide.getNomID().equals(u.getAsoClase())
+                                &&!u.isEsMetodo()){
+                            m.addListaRef(u.getLinea(), u.getColumna(),u.getUbicacion());                            
+                        }                    
+                    }
+                    
                     lisMostrarTabla.add(m);
                     
                     m = new MostrarTabla(ambiente);//seteo ambiente(nombre de la clase)                   
@@ -228,6 +240,19 @@ public class Clase {
                         m.addListaRef(u.getLinea(), u.getColumna(), u.getUbicacion());
                     }
                 }
+                
+                //referencias de clase desde otra clase
+                //TopGun tp
+                //
+                //tp.shoot                    
+                for(UsoId u : usoIdClase){
+                    //
+                    if(met.getIde().getNomID().equals(u.getId())
+                            && u.getAsoClase()!=null && this.ide.getNomID().equals(u.getAsoClase())
+                            && u.isEsMetodo()){
+                        m.addListaRef(u.getLinea(), u.getColumna(),u.getUbicacion());                            
+                    }                    
+                }                
                 
                 lisMostrarTabla.add(m);//agrego el metodo
                 lisMostrarTabla.addAll(met.cargarTablaMetodo());//luego agrego todo la info asociada            
@@ -263,15 +288,27 @@ public class Clase {
             return false;
         }
         
-        if(usoId.getAlcance().equals("clase")){
-            return false;
-        }
-        
         if(exclusion.contains(usoId.getId())){
             return true; //palabras que lo toma como identificador por ende se debe excluir
+        }        
+        
+        if(usoId.getAlcance().equals("clase") && usoId.getAsoClase() != null){
+
+            for (ClassBodyDecl c : this.lisClassBodyDecl) {
+
+                if(c.getLisDecl() != null && c.getLisDecl().containsKey(usoId.getAsoClase())){                    
+                    usoId.setAsoClase(c.getLisDecl().get(usoId.getAsoClase()).getTipo());                    
+                }
+
+            }                
         }
         
-        usoId.setUsadoEn("Clase " + this.getIde().getNomID());
+        if(usoId.getAlcance().equals("clase")){
+            return false;
+        }       
+
+        
+        usoId.setUbicacion("Clase " + this.getIde().getNomID());
         
         for (ClassBodyDecl c : this.lisClassBodyDecl) {
 

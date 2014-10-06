@@ -122,7 +122,16 @@ public class Metodo {
 
         for (UsoId e : lstId) {
 
-            e.setUsadoEn("Método " + this.getIde().getNomID());
+            e.setUbicacion("Método " + this.getIde().getNomID());
+            
+            if(e.getAlcance().equals("clase") && e.getAsoClase() != null){             
+                
+                if(this.lisDecl != null && lisDecl.containsKey(e.getAsoClase())){                    
+                    //setear clase asociada en la variable
+                    e.setAsoClase(lisDecl.get(e.getAsoClase()).getTipo());                    
+                }
+                
+            }
 
             //si no es global y esta en los var local es una referencia!
             if (this.lisDecl != null && !this.lisDecl.isEmpty()
@@ -150,17 +159,25 @@ public class Metodo {
 
         for (UsoId e : lstId) {
 
-            e.setUsadoEn("Método " + this.getIde().getNomID());
+            e.setUbicacion("Método " + this.getIde().getNomID());
+                        
+            if(e.getAlcance().equals("clase") && e.getAsoClase() != null){
+                if(this.lisParam != null && lisParam.containsKey(e.getAsoClase())){                    
+                    //setear clase asociada en la variable
+                    e.setAsoClase(lisParam.get(e.getAsoClase()).getTipo());                    
+                }
+                
+            }
 
             //si no es global y esta en los parametros es una referencia!
             if (this.lisParam != null && !this.lisParam.isEmpty()
-                    && !e.getAlcance().equals("global") && !e.getAlcance().equals("global")
+                    && !e.getAlcance().equals("global") && !e.getAlcance().equals("clase")
                     && lisParam.containsKey(e.getId())) {
 
                 this.lisUsoIdPara.add(e);
             } else {
                 filtraUso.add(e); //la idea es sacar los elementos ya analizados
-            }
+            }  
 
         }
 

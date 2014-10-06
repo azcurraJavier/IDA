@@ -29,8 +29,8 @@ public class Archivo {
     private ArrayList<MostrarTabla> lisMostrarTabla;
     
     //Para mostrar los id por la tabla
-    private ArrayList<UsoId> lisUsoIdClase;
-
+    private ArrayList<UsoId> lisUsoIdClase;  
+  
     public Archivo() {
         lisComentario = new ArrayList<>();
         lisLiterales = new ArrayList<>();
@@ -64,25 +64,14 @@ public class Archivo {
 
     public void buscarUsoId(ArrayList<UsoId> lUsoId) {
         
-        if (this.lisClases == null && this.lisClases.isEmpty()) {
-            return;
-        }
-
         if (lUsoId != null && !lUsoId.isEmpty()) {
 
             for (UsoId e : lUsoId) {
                 
-                for (Clase c : this.lisClases) {
-                
-                    if (c.getIde().getNomID().equals(e.getId())
-                                && e.getAlcance().equals("clase")) {
-                        
-                        e.setUsadoEn("Clase " + e.getUbicacion());
-                        
-                        lisUsoIdClase.add(e);
-                    }                    
-                
-                }
+                if (e.getAlcance().equals("clase")) {                    
+
+                    lisUsoIdClase.add(e);
+                }   
                 
             }
         }

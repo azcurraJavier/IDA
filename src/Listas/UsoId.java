@@ -16,6 +16,10 @@ public class UsoId {
     
     private boolean esMetodo = false;
     
+    private String asoClase;// esta var se usa cuando el uso de un id esta asociado a una clase
+                            //ejemplo: Color.var en este caso tendrá Color!
+    
+    
     public UsoId(String id,Integer linea, Integer columna) {
         this.linea = linea.toString();
         this.columna = columna.toString();
@@ -55,7 +59,7 @@ public class UsoId {
         this.id = id;
     }
 
-    public void setUsadoEn(String ubicacion) {
+    public void setUbicacion(String ubicacion) {
         this.ubicacion = ubicacion;
     }
     
@@ -66,6 +70,12 @@ public class UsoId {
         }
 
         this.esMetodo = esMetodo;
+    }
+
+    public void setAsoClase(String asoClase) {
+        
+        this.alcance = "clase";//variable de clase
+        this.asoClase = asoClase;
     }
     
     public String getLinea() {
@@ -90,6 +100,10 @@ public class UsoId {
 
     public boolean isEsMetodo() {
         return esMetodo;
+    }
+
+    public String getAsoClase() {
+        return asoClase;
     }
     
 }

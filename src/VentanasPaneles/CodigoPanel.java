@@ -151,7 +151,7 @@ public class CodigoPanel extends javax.swing.JPanel {
         
         //jTextAreaCod.setText(buffer.toString());
         jEditorPaneCod.setText(htmlCode);
-
+ 
         //jTextAreaCod.setCaretPosition(6);
         jEditorPaneCod.setCaretPosition(6);
     }

@@ -1018,29 +1018,47 @@ primary  returns [ArrayList<UsoId> lisUsosId]
 @init{
     $lisUsosId = new ArrayList<>(); //lista que se crea en nodo 'hoja'
     UsoId ui = null;    
+    ////////////
+    String antUsado = "";
 }
     :   p1 = parExpression {$lisUsosId = p1;}
-    |   'this'
-        ('.' Id1 = IDENTIFIER {if(Id1 != null){ui = new UsoId(Id1.getText(),Id1.getLine(),Id1.getCharPositionInLine(),false); $lisUsosId.add(ui);}}
+    |   'this' //al ser this el alcance es clase!
+        ('.' Id1 = IDENTIFIER {ui = new UsoId(Id1.getText(),Id1.getLine(),Id1.getCharPositionInLine(),"global",false); $lisUsosId.add(ui);}
         )* 
         //setea que son metodos si Id1 lo indica
         (ids1 = identifierSuffix 
         {//remueve el ultimo y lo reinserta como metodo = true
-        if(ids1.esMetodo && ui != null){$lisUsosId.remove($lisUsosId.size() - 1);ui.setEsMetodo(true); $lisUsosId.add(ui);}
+        if(ids1.esMetodo){$lisUsosId.remove($lisUsosId.size() - 1);ui.setEsMetodo(true); $lisUsosId.add(ui);}
 
-        if(ids1.esMetodo){$lisUsosId.addAll(ids1.lisUsosId);}}
+        //agrega indices de arreglos y parametros de funciones
+        $lisUsosId.addAll(ids1.lisUsosId);}
         )?        
 
-    |   Id2 = IDENTIFIER {if(Id2 != null){ui = new UsoId(Id2.getText(),Id2.getLine(),Id2.getCharPositionInLine(),false); $lisUsosId.add(ui);}}
-        ('.' Id3 = IDENTIFIER {if(Id3 != null){ui = new UsoId(Id3.getText(),Id3.getLine(),Id3.getCharPositionInLine(),false); $lisUsosId.add(ui);}}
+        //Id2 = clases staticas Pepe., variables de clase = Pepe p, si hay punto!!
+    |   Id2 = IDENTIFIER {
+
+        ui = new UsoId(Id2.getText(),Id2.getLine(),Id2.getCharPositionInLine(),false); 
+        antUsado = Id2.getText();
+        $lisUsosId.add(ui);}
+        
+
+        ('.' Id3 = IDENTIFIER {//si entra aca hace referencia a una var/fun de clase
+            
+            ui = new UsoId(Id3.getText(),Id3.getLine(),Id3.getCharPositionInLine(),"clase",false); ui.setAsoClase(antUsado); $lisUsosId.add(ui);
+            System.out.println(Id3.getText()+"-"+Id3.getLine()+"-"+antUsado);
+        }
         )*                      //setea que son metodos si Id2 lo indica
         (ids2 = identifierSuffix 
         {//remueve el ultimo y lo reinserta como metodo = true
-        if(ids2.esMetodo && ui != null){$lisUsosId.remove($lisUsosId.size() - 1);ui.setEsMetodo(true); $lisUsosId.add(ui);}
+        if(ids2.esMetodo){
 
-        if(ids2.esMetodo){$lisUsosId.addAll(ids2.lisUsosId);}}
-        )?
-        
+             $lisUsosId.remove($lisUsosId.size() - 1);ui.setEsMetodo(true); $lisUsosId.add(ui);
+            
+        }
+        //agrega indices de arreglos y parametros de funciones
+        $lisUsosId.addAll(ids2.lisUsosId);}        
+
+        )?        
     |   'super'
         s1 = superSuffix {$lisUsosId = s1;}
     |   literal
@@ -1075,7 +1093,7 @@ identifierSuffix returns [ArrayList<UsoId> lisUsosId, boolean esMetodo]
     :   ('[' ']'
         )+
         '.' 'class'
-    |   ('[' expression ']'
+    |   ('[' e1 = expression ']' {$lisUsosId = e1;}
         )+
     |   a1 = arguments {$lisUsosId = a1; $esMetodo=true;}
     |   '.' 'class'
@@ -1091,7 +1109,7 @@ selector returns [ArrayList<UsoId> lisUsosId]
     $lisUsosId = new ArrayList<>();
     boolean esMet = false;    
 }
-    :   '.' id1 = IDENTIFIER 
+    :   '.' id1 = IDENTIFIER {System.out.println($id1.text);}
         (a1 = arguments {$lisUsosId = a1; esMet = true;}
         )? {$lisUsosId.add(new UsoId(id1.getText(),id1.getLine(),id1.getCharPositionInLine(),"global",esMet));}
     |   '.' 'this'
