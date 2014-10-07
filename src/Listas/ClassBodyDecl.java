@@ -1,5 +1,6 @@
 package Listas;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 public class ClassBodyDecl {
@@ -8,24 +9,36 @@ public class ClassBodyDecl {
     private int lineaMetodoComentarioAmbiente;//me sirve para saber amibente de comentarios
     
     private Map<String,Declaracion> lisDecl;
+    private ArrayList<Declaracion> listaDecl;
 
     public ClassBodyDecl() {
         this.me = null;
         this.lisDecl = null;
+        this.listaDecl = null;
     }    
 
     public ClassBodyDecl(Metodo m) {
         this.me = m;
         this.lisDecl = null;        
+        this.listaDecl = null;
     }
     
     public ClassBodyDecl(Map<String,Declaracion> l) {
         this.lisDecl = l;
         this.me = null;    
     }
+    
+    public ClassBodyDecl(ArrayList<Declaracion> l) {
+        this.listaDecl = l;
+        this.me = null;    
+    }
 
     public Map<String,Declaracion> getLisDecl() {
         return lisDecl;
+    }
+
+    public ArrayList<Declaracion> getListaDecl() {
+        return listaDecl;
     }
 
     public Metodo getMetodo() {
@@ -44,6 +57,10 @@ public class ClassBodyDecl {
         this.lisDecl = lisDecl;
     }
 
+    public void setLisDecl(ArrayList<Declaracion> listaDecl) {
+        this.listaDecl = listaDecl;
+    }   
+    
     public void setMe(Metodo me) {
         this.me = me;
     }

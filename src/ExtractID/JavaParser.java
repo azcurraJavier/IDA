@@ -1,4 +1,4 @@
-// $ANTLR 3.4 Java.g 2014-10-07 15:16:09
+// $ANTLR 3.4 Java.g 2014-10-07 18:02:22
 
         /* esto es para que el parser sea visto desde el resto del proyecto y viceversa */
 	package ExtractID;
@@ -328,7 +328,7 @@ public class JavaParser extends Parser {
 
             if ( state.backtracking==0 ) {
                 archivoAnalisis.setLisClases(lisClases);
-                if(t!=null && t.lisUsosId !=null){archivoAnalisis.buscarUsoId(t.lisUsosId);}
+                /*if(t!=null && t.lisUsosId !=null){archivoAnalisis.buscarUsoId(t.lisUsosId);}*/
             }
         }
         catch (RecognitionException re) {
@@ -1864,7 +1864,7 @@ public class JavaParser extends Parser {
             state._fsp--;
             if (state.failed) return retval;
 
-            if ( state.backtracking==0 ) {c.unaClase.setIde(new Id((I1!=null?I1.getText():null),I1.getLine(),I1.getCharPositionInLine())); c.unaClase.setModClase(mo1); retval.unaClase =c.unaClase; retval.lisUsosId = retval.unaClase.buscarUsoId(c.lisUsosId);}
+            if ( state.backtracking==0 ) {c.unaClase.setIde(new Id((I1!=null?I1.getText():null),I1.getLine(),I1.getCharPositionInLine())); c.unaClase.setModClase(mo1); retval.unaClase =c.unaClase; /*retval.lisUsosId = retval.unaClase.buscarUsoId(c.lisUsosId);*/}
 
             }
 
@@ -3788,7 +3788,7 @@ public class JavaParser extends Parser {
         Token Id2=null;
         String mo2 =null;
 
-        Map<String,Parametro> f1 =null;
+        ArrayList<Parametro> f1 =null;
 
         ArrayList<UsoId> ex1 =null;
 
@@ -3796,7 +3796,7 @@ public class JavaParser extends Parser {
 
         String mo1 =null;
 
-        Map<String,Parametro> f2 =null;
+        ArrayList<Parametro> f2 =null;
 
         JavaParser.block_return b2 =null;
 
@@ -3807,7 +3807,7 @@ public class JavaParser extends Parser {
             retval.me = new Metodo();
             String mod = new String();
             String tipo = new String();
-            Map<String,Declaracion> lisDeclme = new HashMap<>(); //Para hacer el merge con la listas de decl del constructor
+            ArrayList<Declaracion> lisDeclme = new ArrayList<>(); //Para hacer el merge con la listas de decl del constructor
             retval.lisUsosId = new ArrayList<>();    
 
         try {
@@ -4392,7 +4392,7 @@ public class JavaParser extends Parser {
                     	    state._fsp--;
                     	    if (state.failed) return retval;
 
-                    	    if ( state.backtracking==0 ) {lisDeclme.putAll(b1.lisDecl);retval.lisUsosId.addAll(b1.lisUsosId);}
+                    	    if ( state.backtracking==0 ) {lisDeclme.addAll(b1.lisDecl);retval.lisUsosId.addAll(b1.lisUsosId);}
 
                     	    }
                     	    break;
@@ -4605,7 +4605,7 @@ public class JavaParser extends Parser {
 
             if ( state.backtracking==0 ) {//elimino los elementos ya analizados el resto sube para su analisis en las declaraciones globales
 
-            retval.lisUsosId = retval.me.buscarUsoIdDec(retval.lisUsosId);retval.lisUsosId = retval.me.buscarUsoIdPar(retval.lisUsosId);
+            /*retval.lisUsosId = retval.me.buscarUsoIdDec(retval.lisUsosId);retval.lisUsosId = retval.me.buscarUsoIdPar(retval.lisUsosId);*/
 
             }
         }
@@ -4625,13 +4625,13 @@ public class JavaParser extends Parser {
 
 
     public static class fieldDeclaration_return extends ParserRuleReturnScope {
-        public Map<String,Declaracion> lisDecl;
+        public ArrayList<Declaracion> lisDecl;
         public ArrayList<UsoId> lisUsosId;
     };
 
 
     // $ANTLR start "fieldDeclaration"
-    // Java.g:399:1: fieldDeclaration returns [Map<String,Declaracion> lisDecl, ArrayList<UsoId> lisUsosId] : mo1= modifiers type v1= variableDeclarator ( ',' v2= variableDeclarator )* ';' ;
+    // Java.g:399:1: fieldDeclaration returns [ArrayList<Declaracion> lisDecl, ArrayList<UsoId> lisUsosId] : mo1= modifiers type v1= variableDeclarator ( ',' v2= variableDeclarator )* ';' ;
     public final JavaParser.fieldDeclaration_return fieldDeclaration() throws RecognitionException {
         JavaParser.fieldDeclaration_return retval = new JavaParser.fieldDeclaration_return();
         retval.start = input.LT(1);
@@ -4649,7 +4649,7 @@ public class JavaParser extends Parser {
 
 
             retval.lisUsosId = new ArrayList<>();
-            retval.lisDecl = new HashMap<>();
+            retval.lisDecl = new ArrayList<>();
             String mod = new String();
             String tipo = new String();    
 
@@ -4681,7 +4681,7 @@ public class JavaParser extends Parser {
             state._fsp--;
             if (state.failed) return retval;
 
-            if ( state.backtracking==0 ) {retval.lisDecl.put(v1.id.getNomID(),new Declaracion(mod,tipo,v1.id)); retval.lisUsosId =v1.lisUsosId;}
+            if ( state.backtracking==0 ) {retval.lisDecl.add(new Declaracion(mod,tipo,v1.id)); retval.lisUsosId =v1.lisUsosId;}
 
             // Java.g:410:9: ( ',' v2= variableDeclarator )*
             loop50:
@@ -4706,7 +4706,7 @@ public class JavaParser extends Parser {
             	    state._fsp--;
             	    if (state.failed) return retval;
 
-            	    if ( state.backtracking==0 ) {retval.lisDecl.put(v2.id.getNomID(),new Declaracion(mod,tipo,v2.id)); retval.lisUsosId.addAll(v2.lisUsosId);}
+            	    if ( state.backtracking==0 ) {retval.lisDecl.add(new Declaracion(mod,tipo,v2.id)); retval.lisUsosId.addAll(v2.lisUsosId);}
 
             	    }
             	    break;
@@ -6124,13 +6124,13 @@ public class JavaParser extends Parser {
 
 
     // $ANTLR start "formalParameters"
-    // Java.g:524:1: formalParameters returns [Map<String,Parametro> lisParam] : '(' (f1= formalParameterDecls )? ')' ;
-    public final Map<String,Parametro> formalParameters() throws RecognitionException {
-        Map<String,Parametro> lisParam = null;
+    // Java.g:524:1: formalParameters returns [ArrayList<Parametro> lisParam] : '(' (f1= formalParameterDecls )? ')' ;
+    public final ArrayList<Parametro> formalParameters() throws RecognitionException {
+        ArrayList<Parametro> lisParam = null;
 
         int formalParameters_StartIndex = input.index();
 
-        Map<String,Parametro> f1 =null;
+        ArrayList<Parametro> f1 =null;
 
 
         try {
@@ -6188,9 +6188,9 @@ public class JavaParser extends Parser {
 
 
     // $ANTLR start "formalParameterDecls"
-    // Java.g:531:1: formalParameterDecls returns [Map<String,Parametro> lisParam] : ( ellipsisParameterDecl |p1= normalParameterDecl ( ',' p2= normalParameterDecl )* | ( normalParameterDecl ',' )+ ellipsisParameterDecl );
-    public final Map<String,Parametro> formalParameterDecls() throws RecognitionException {
-        Map<String,Parametro> lisParam = null;
+    // Java.g:531:1: formalParameterDecls returns [ArrayList<Parametro> lisParam] : ( ellipsisParameterDecl |p1= normalParameterDecl ( ',' p2= normalParameterDecl )* | ( normalParameterDecl ',' )+ ellipsisParameterDecl );
+    public final ArrayList<Parametro> formalParameterDecls() throws RecognitionException {
+        ArrayList<Parametro> lisParam = null;
 
         int formalParameterDecls_StartIndex = input.index();
 
@@ -6200,7 +6200,7 @@ public class JavaParser extends Parser {
 
 
 
-            lisParam = new HashMap<>();    
+            lisParam = new ArrayList<>();    
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 39) ) { return lisParam; }
@@ -6337,7 +6337,7 @@ public class JavaParser extends Parser {
                     state._fsp--;
                     if (state.failed) return lisParam;
 
-                    if ( state.backtracking==0 ) {lisParam.put(p1.getIdent().getNomID(),p1);}
+                    if ( state.backtracking==0 ) {lisParam.add(p1);}
 
                     // Java.g:538:9: ( ',' p2= normalParameterDecl )*
                     loop70:
@@ -6362,7 +6362,7 @@ public class JavaParser extends Parser {
                     	    state._fsp--;
                     	    if (state.failed) return lisParam;
 
-                    	    if ( state.backtracking==0 ) {lisParam.put(p2.getIdent().getNomID(),p2);}
+                    	    if ( state.backtracking==0 ) {lisParam.add(p2);}
 
                     	    }
                     	    break;
@@ -8174,13 +8174,13 @@ public class JavaParser extends Parser {
 
 
     public static class block_return extends ParserRuleReturnScope {
-        public Map<String,Declaracion> lisDecl;
+        public ArrayList<Declaracion> lisDecl;
         public ArrayList<UsoId> lisUsosId;
     };
 
 
     // $ANTLR start "block"
-    // Java.g:667:1: block returns [Map<String,Declaracion> lisDecl, ArrayList<UsoId> lisUsosId] : '{' (b1= blockStatement )* '}' ;
+    // Java.g:667:1: block returns [ArrayList<Declaracion> lisDecl, ArrayList<UsoId> lisUsosId] : '{' (b1= blockStatement )* '}' ;
     public final JavaParser.block_return block() throws RecognitionException {
         JavaParser.block_return retval = new JavaParser.block_return();
         retval.start = input.LT(1);
@@ -8191,7 +8191,7 @@ public class JavaParser extends Parser {
 
 
 
-            retval.lisDecl = new HashMap<>();
+            retval.lisDecl = new ArrayList<>();
             retval.lisUsosId = new ArrayList<>();
 
         try {
@@ -8223,7 +8223,7 @@ public class JavaParser extends Parser {
             	    state._fsp--;
             	    if (state.failed) return retval;
 
-            	    if ( state.backtracking==0 ) {retval.lisDecl.putAll(b1.lisDecl);retval.lisUsosId.addAll(b1.lisUsosId);}
+            	    if ( state.backtracking==0 ) {retval.lisDecl.addAll(b1.lisDecl);retval.lisUsosId.addAll(b1.lisUsosId);}
 
             	    }
             	    break;
@@ -8258,13 +8258,13 @@ public class JavaParser extends Parser {
 
 
     public static class blockStatement_return extends ParserRuleReturnScope {
-        public Map<String,Declaracion> lisDecl;
+        public ArrayList<Declaracion> lisDecl;
         public ArrayList<UsoId> lisUsosId;
     };
 
 
     // $ANTLR start "blockStatement"
-    // Java.g:702:1: blockStatement returns [Map<String,Declaracion> lisDecl, ArrayList<UsoId> lisUsosId] : (l1= localVariableDeclarationStatement | classOrInterfaceDeclaration |s1= statement );
+    // Java.g:702:1: blockStatement returns [ArrayList<Declaracion> lisDecl, ArrayList<UsoId> lisUsosId] : (l1= localVariableDeclarationStatement | classOrInterfaceDeclaration |s1= statement );
     public final JavaParser.blockStatement_return blockStatement() throws RecognitionException {
         JavaParser.blockStatement_return retval = new JavaParser.blockStatement_return();
         retval.start = input.LT(1);
@@ -8277,7 +8277,7 @@ public class JavaParser extends Parser {
 
 
 
-            retval.lisDecl = new HashMap<>();
+            retval.lisDecl = new ArrayList<>();
             retval.lisUsosId = new ArrayList<>();
 
         try {
@@ -8489,7 +8489,7 @@ public class JavaParser extends Parser {
                     state._fsp--;
                     if (state.failed) return retval;
 
-                    if ( state.backtracking==0 ) {retval.lisUsosId = s1.lisUsosId; retval.lisDecl.putAll(s1.lisDecl);}
+                    if ( state.backtracking==0 ) {retval.lisUsosId = s1.lisUsosId; retval.lisDecl.addAll(s1.lisDecl);}
 
                     }
                     break;
@@ -8515,13 +8515,13 @@ public class JavaParser extends Parser {
 
 
     public static class localVariableDeclarationStatement_return extends ParserRuleReturnScope {
-        public Map<String,Declaracion> lisDecl;
+        public ArrayList<Declaracion> lisDecl;
         public ArrayList<UsoId> lisUsosId;
     };
 
 
     // $ANTLR start "localVariableDeclarationStatement"
-    // Java.g:713:1: localVariableDeclarationStatement returns [Map<String,Declaracion> lisDecl, ArrayList<UsoId> lisUsosId] : l1= localVariableDeclaration ';' ;
+    // Java.g:713:1: localVariableDeclarationStatement returns [ArrayList<Declaracion> lisDecl, ArrayList<UsoId> lisUsosId] : l1= localVariableDeclaration ';' ;
     public final JavaParser.localVariableDeclarationStatement_return localVariableDeclarationStatement() throws RecognitionException {
         JavaParser.localVariableDeclarationStatement_return retval = new JavaParser.localVariableDeclarationStatement_return();
         retval.start = input.LT(1);
@@ -8569,13 +8569,13 @@ public class JavaParser extends Parser {
 
 
     public static class localVariableDeclaration_return extends ParserRuleReturnScope {
-        public Map<String,Declaracion> lisDecl;
+        public ArrayList<Declaracion> lisDecl;
         public ArrayList<UsoId> lisUsosId;
     };
 
 
     // $ANTLR start "localVariableDeclaration"
-    // Java.g:718:1: localVariableDeclaration returns [Map<String,Declaracion> lisDecl, ArrayList<UsoId> lisUsosId] : variableModifiers type v1= variableDeclarator ( ',' v2= variableDeclarator )* ;
+    // Java.g:718:1: localVariableDeclaration returns [ArrayList<Declaracion> lisDecl, ArrayList<UsoId> lisUsosId] : variableModifiers type v1= variableDeclarator ( ',' v2= variableDeclarator )* ;
     public final JavaParser.localVariableDeclaration_return localVariableDeclaration() throws RecognitionException {
         JavaParser.localVariableDeclaration_return retval = new JavaParser.localVariableDeclaration_return();
         retval.start = input.LT(1);
@@ -8593,7 +8593,7 @@ public class JavaParser extends Parser {
 
 
             retval.lisUsosId = new ArrayList<>();
-            retval.lisDecl = new HashMap<>();
+            retval.lisDecl = new ArrayList<>();
             String mod = new String();
             String tipo = new String();    
 
@@ -8623,7 +8623,7 @@ public class JavaParser extends Parser {
             state._fsp--;
             if (state.failed) return retval;
 
-            if ( state.backtracking==0 ) {retval.lisDecl.put(v1.id.getNomID(),new Declaracion(mod,tipo,v1.id)); retval.lisUsosId = v1.lisUsosId;}
+            if ( state.backtracking==0 ) {retval.lisDecl.add(new Declaracion(mod,tipo,v1.id)); retval.lisUsosId = v1.lisUsosId;}
 
             // Java.g:727:9: ( ',' v2= variableDeclarator )*
             loop91:
@@ -8648,7 +8648,7 @@ public class JavaParser extends Parser {
             	    state._fsp--;
             	    if (state.failed) return retval;
 
-            	    if ( state.backtracking==0 ) {retval.lisDecl.put(v2.id.getNomID(),new Declaracion(mod,tipo,v2.id)); retval.lisUsosId.addAll(v2.lisUsosId);}
+            	    if ( state.backtracking==0 ) {retval.lisDecl.add(new Declaracion(mod,tipo,v2.id)); retval.lisUsosId.addAll(v2.lisUsosId);}
 
             	    }
             	    break;
@@ -8682,12 +8682,12 @@ public class JavaParser extends Parser {
 
     public static class statement_return extends ParserRuleReturnScope {
         public ArrayList<UsoId> lisUsosId;
-        public Map<String,Declaracion> lisDecl;
+        public ArrayList<Declaracion> lisDecl;
     };
 
 
     // $ANTLR start "statement"
-    // Java.g:731:1: statement returns [ArrayList<UsoId> lisUsosId, Map<String,Declaracion> lisDecl] : (b1= block | ( 'assert' ) exp1= expression ( ':' exp2= expression )? ';' | 'assert' exp4= expression ( ':' exp5= expression )? ';' | 'if' p1= parExpression s1= statement ( 'else' s2= statement )? |f1= forstatement | 'while' p2= parExpression s3= statement | 'do' dos1= statement 'while' pa1= parExpression ';' |tr1= trystatement | 'switch' p3= parExpression '{' sw1= switchBlockStatementGroups '}' | 'synchronized' p4= parExpression b2= block | 'return' (r1= expression )? ';' | 'throw' exp3= expression ';' | 'break' ( IDENTIFIER )? ';' | 'continue' ( IDENTIFIER )? ';' |e1= expression ';' | IDENTIFIER ':' s4= statement | ';' );
+    // Java.g:731:1: statement returns [ArrayList<UsoId> lisUsosId, ArrayList<Declaracion> lisDecl] : (b1= block | ( 'assert' ) exp1= expression ( ':' exp2= expression )? ';' | 'assert' exp4= expression ( ':' exp5= expression )? ';' | 'if' p1= parExpression s1= statement ( 'else' s2= statement )? |f1= forstatement | 'while' p2= parExpression s3= statement | 'do' dos1= statement 'while' pa1= parExpression ';' |tr1= trystatement | 'switch' p3= parExpression '{' sw1= switchBlockStatementGroups '}' | 'synchronized' p4= parExpression b2= block | 'return' (r1= expression )? ';' | 'throw' exp3= expression ';' | 'break' ( IDENTIFIER )? ';' | 'continue' ( IDENTIFIER )? ';' |e1= expression ';' | IDENTIFIER ':' s4= statement | ';' );
     public final JavaParser.statement_return statement() throws RecognitionException {
         JavaParser.statement_return retval = new JavaParser.statement_return();
         retval.start = input.LT(1);
@@ -8741,7 +8741,7 @@ public class JavaParser extends Parser {
 
            
             retval.lisUsosId = new ArrayList<>();
-            retval.lisDecl = new HashMap<>();
+            retval.lisDecl = new ArrayList<>();
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 58) ) { return retval; }
@@ -9341,13 +9341,13 @@ public class JavaParser extends Parser {
 
 
     public static class switchBlockStatementGroups_return extends ParserRuleReturnScope {
-        public Map<String,Declaracion> lisDecl;
+        public ArrayList<Declaracion> lisDecl;
         public ArrayList<UsoId> lisUsosId;
     };
 
 
     // $ANTLR start "switchBlockStatementGroups"
-    // Java.g:763:1: switchBlockStatementGroups returns [Map<String,Declaracion> lisDecl, ArrayList<UsoId> lisUsosId] : (s1= switchBlockStatementGroup )* ;
+    // Java.g:763:1: switchBlockStatementGroups returns [ArrayList<Declaracion> lisDecl, ArrayList<UsoId> lisUsosId] : (s1= switchBlockStatementGroup )* ;
     public final JavaParser.switchBlockStatementGroups_return switchBlockStatementGroups() throws RecognitionException {
         JavaParser.switchBlockStatementGroups_return retval = new JavaParser.switchBlockStatementGroups_return();
         retval.start = input.LT(1);
@@ -9359,7 +9359,7 @@ public class JavaParser extends Parser {
 
            
             retval.lisUsosId = new ArrayList<>();
-            retval.lisDecl = new HashMap<>();
+            retval.lisDecl = new ArrayList<>();
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 59) ) { return retval; }
@@ -9388,7 +9388,7 @@ public class JavaParser extends Parser {
             	    state._fsp--;
             	    if (state.failed) return retval;
 
-            	    if ( state.backtracking==0 ) {retval.lisDecl.putAll(s1.lisDecl); retval.lisUsosId.addAll(s1.lisUsosId);}
+            	    if ( state.backtracking==0 ) {retval.lisDecl.addAll(s1.lisDecl); retval.lisUsosId.addAll(s1.lisUsosId);}
 
             	    }
             	    break;
@@ -9421,13 +9421,13 @@ public class JavaParser extends Parser {
 
 
     public static class switchBlockStatementGroup_return extends ParserRuleReturnScope {
-        public Map<String,Declaracion> lisDecl;
+        public ArrayList<Declaracion> lisDecl;
         public ArrayList<UsoId> lisUsosId;
     };
 
 
     // $ANTLR start "switchBlockStatementGroup"
-    // Java.g:771:1: switchBlockStatementGroup returns [Map<String,Declaracion> lisDecl, ArrayList<UsoId> lisUsosId] : s1= switchLabel (b1= blockStatement )* ;
+    // Java.g:771:1: switchBlockStatementGroup returns [ArrayList<Declaracion> lisDecl, ArrayList<UsoId> lisUsosId] : s1= switchLabel (b1= blockStatement )* ;
     public final JavaParser.switchBlockStatementGroup_return switchBlockStatementGroup() throws RecognitionException {
         JavaParser.switchBlockStatementGroup_return retval = new JavaParser.switchBlockStatementGroup_return();
         retval.start = input.LT(1);
@@ -9441,7 +9441,7 @@ public class JavaParser extends Parser {
 
            
             retval.lisUsosId = new ArrayList<>();
-            retval.lisDecl = new HashMap<>();
+            retval.lisDecl = new ArrayList<>();
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 60) ) { return retval; }
@@ -9478,7 +9478,7 @@ public class JavaParser extends Parser {
             	    state._fsp--;
             	    if (state.failed) return retval;
 
-            	    if ( state.backtracking==0 ) {retval.lisDecl.putAll(b1.lisDecl); retval.lisUsosId.addAll(b1.lisUsosId);}
+            	    if ( state.backtracking==0 ) {retval.lisDecl.addAll(b1.lisDecl); retval.lisUsosId.addAll(b1.lisUsosId);}
 
             	    }
             	    break;
@@ -9591,13 +9591,13 @@ public class JavaParser extends Parser {
 
 
     public static class trystatement_return extends ParserRuleReturnScope {
-        public Map<String,Declaracion> lisDecl;
+        public ArrayList<Declaracion> lisDecl;
         public ArrayList<UsoId> lisUsosId;
     };
 
 
     // $ANTLR start "trystatement"
-    // Java.g:791:1: trystatement returns [Map<String,Declaracion> lisDecl, ArrayList<UsoId> lisUsosId] : 'try' b1= block (ca1= catches 'finally' b2= block |ca2= catches | 'finally' b3= block ) ;
+    // Java.g:791:1: trystatement returns [ArrayList<Declaracion> lisDecl, ArrayList<UsoId> lisUsosId] : 'try' b1= block (ca1= catches 'finally' b2= block |ca2= catches | 'finally' b3= block ) ;
     public final JavaParser.trystatement_return trystatement() throws RecognitionException {
         JavaParser.trystatement_return retval = new JavaParser.trystatement_return();
         retval.start = input.LT(1);
@@ -9617,7 +9617,7 @@ public class JavaParser extends Parser {
 
            
             retval.lisUsosId = new ArrayList<>();
-            retval.lisDecl = new HashMap<>();
+            retval.lisDecl = new ArrayList<>();
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 62) ) { return retval; }
@@ -9686,7 +9686,7 @@ public class JavaParser extends Parser {
                     state._fsp--;
                     if (state.failed) return retval;
 
-                    if ( state.backtracking==0 ) {retval.lisUsosId.addAll(b2.lisUsosId); retval.lisDecl = b2.lisDecl; retval.lisUsosId.addAll(ca1.lisUsosId); retval.lisDecl.putAll(ca1.lisDecl);}
+                    if ( state.backtracking==0 ) {retval.lisUsosId.addAll(b2.lisUsosId); retval.lisDecl = b2.lisDecl; retval.lisUsosId.addAll(ca1.lisUsosId); retval.lisDecl.addAll(ca1.lisDecl);}
 
                     }
                     break;
@@ -9745,12 +9745,12 @@ public class JavaParser extends Parser {
 
     public static class catches_return extends ParserRuleReturnScope {
         public ArrayList<UsoId> lisUsosId;
-        public Map<String,Declaracion> lisDecl;
+        public ArrayList<Declaracion> lisDecl;
     };
 
 
     // $ANTLR start "catches"
-    // Java.g:803:1: catches returns [ArrayList<UsoId> lisUsosId, Map<String,Declaracion> lisDecl] : c1= catchClause (c2= catchClause )* ;
+    // Java.g:803:1: catches returns [ArrayList<UsoId> lisUsosId, ArrayList<Declaracion> lisDecl] : c1= catchClause (c2= catchClause )* ;
     public final JavaParser.catches_return catches() throws RecognitionException {
         JavaParser.catches_return retval = new JavaParser.catches_return();
         retval.start = input.LT(1);
@@ -9764,7 +9764,7 @@ public class JavaParser extends Parser {
 
            
             retval.lisUsosId = new ArrayList<>();
-            retval.lisDecl = new HashMap<>();
+            retval.lisDecl = new ArrayList<>();
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 63) ) { return retval; }
@@ -9801,7 +9801,7 @@ public class JavaParser extends Parser {
             	    state._fsp--;
             	    if (state.failed) return retval;
 
-            	    if ( state.backtracking==0 ) {if(c2!=null){retval.lisUsosId.addAll(c2.lisUsosId);}  retval.lisDecl.putAll(c1.lisDecl);}
+            	    if ( state.backtracking==0 ) {if(c2!=null){retval.lisUsosId.addAll(c2.lisUsosId);}  retval.lisDecl.addAll(c1.lisDecl);}
 
             	    }
             	    break;
@@ -9835,26 +9835,26 @@ public class JavaParser extends Parser {
 
     public static class catchClause_return extends ParserRuleReturnScope {
         public ArrayList<UsoId> lisUsosId;
-        public Map<String,Declaracion> lisDecl;
+        public ArrayList<Declaracion> lisDecl;
     };
 
 
     // $ANTLR start "catchClause"
-    // Java.g:813:1: catchClause returns [ArrayList<UsoId> lisUsosId, Map<String,Declaracion> lisDecl] : 'catch' '(' f1= formalParameter ')' b1= block ;
+    // Java.g:813:1: catchClause returns [ArrayList<UsoId> lisUsosId, ArrayList<Declaracion> lisDecl] : 'catch' '(' f1= formalParameter ')' b1= block ;
     public final JavaParser.catchClause_return catchClause() throws RecognitionException {
         JavaParser.catchClause_return retval = new JavaParser.catchClause_return();
         retval.start = input.LT(1);
 
         int catchClause_StartIndex = input.index();
 
-        Map<String,Declaracion> f1 =null;
+        ArrayList<Declaracion> f1 =null;
 
         JavaParser.block_return b1 =null;
 
 
            
             retval.lisUsosId = new ArrayList<>();
-            retval.lisDecl = new HashMap<>();
+            retval.lisDecl = new ArrayList<>();
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 64) ) { return retval; }
@@ -9882,7 +9882,7 @@ public class JavaParser extends Parser {
             state._fsp--;
             if (state.failed) return retval;
 
-            if ( state.backtracking==0 ) {retval.lisUsosId = b1.lisUsosId; retval.lisDecl.putAll(b1.lisDecl);}
+            if ( state.backtracking==0 ) {retval.lisUsosId = b1.lisUsosId; retval.lisDecl.addAll(b1.lisDecl);}
 
             }
 
@@ -9907,9 +9907,9 @@ public class JavaParser extends Parser {
 
 
     // $ANTLR start "formalParameter"
-    // Java.g:822:1: formalParameter returns [Map<String,Declaracion> lisDecl] : variableModifiers type Id1= IDENTIFIER ( '[' ']' )* ;
-    public final Map<String,Declaracion> formalParameter() throws RecognitionException {
-        Map<String,Declaracion> lisDecl = null;
+    // Java.g:822:1: formalParameter returns [ArrayList<Declaracion> lisDecl] : variableModifiers type Id1= IDENTIFIER ( '[' ']' )* ;
+    public final ArrayList<Declaracion> formalParameter() throws RecognitionException {
+        ArrayList<Declaracion> lisDecl = null;
 
         int formalParameter_StartIndex = input.index();
 
@@ -9918,7 +9918,7 @@ public class JavaParser extends Parser {
 
 
                
-            lisDecl = new HashMap<>();    
+            lisDecl = new ArrayList<>();    
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 65) ) { return lisDecl; }
@@ -9940,7 +9940,7 @@ public class JavaParser extends Parser {
 
             Id1=(Token)match(input,IDENTIFIER,FOLLOW_IDENTIFIER_in_formalParameter5902); if (state.failed) return lisDecl;
 
-            if ( state.backtracking==0 ) {lisDecl.put(Id1.getText(),new Declaracion("",(type10!=null?input.toString(type10.start,type10.stop):null),new Id(Id1.getText(),Id1.getLine(),Id1.getCharPositionInLine())));}
+            if ( state.backtracking==0 ) {lisDecl.add(new Declaracion("",(type10!=null?input.toString(type10.start,type10.stop):null),new Id(Id1.getText(),Id1.getLine(),Id1.getCharPositionInLine())));}
 
             // Java.g:827:9: ( '[' ']' )*
             loop104:
@@ -9990,12 +9990,12 @@ public class JavaParser extends Parser {
 
     public static class forstatement_return extends ParserRuleReturnScope {
         public ArrayList<UsoId> lisUsosId;
-        public Map<String,Declaracion> lisDecl;
+        public ArrayList<Declaracion> lisDecl;
     };
 
 
     // $ANTLR start "forstatement"
-    // Java.g:831:1: forstatement returns [ArrayList<UsoId> lisUsosId, Map<String,Declaracion> lisDecl] : ( 'for' '(' variableModifiers t1= type Id1= IDENTIFIER ':' e3= expression ')' s2= statement | 'for' '(' (f1= forInit )? ';' (e1= expression )? ';' (e2= expressionList )? ')' s1= statement );
+    // Java.g:831:1: forstatement returns [ArrayList<UsoId> lisUsosId, ArrayList<Declaracion> lisDecl] : ( 'for' '(' variableModifiers t1= type Id1= IDENTIFIER ':' e3= expression ')' s2= statement | 'for' '(' (f1= forInit )? ';' (e1= expression )? ';' (e2= expressionList )? ')' s1= statement );
     public final JavaParser.forstatement_return forstatement() throws RecognitionException {
         JavaParser.forstatement_return retval = new JavaParser.forstatement_return();
         retval.start = input.LT(1);
@@ -10020,7 +10020,7 @@ public class JavaParser extends Parser {
 
            
             retval.lisUsosId = new ArrayList<>();
-            retval.lisDecl = new HashMap<>();
+            retval.lisDecl = new ArrayList<>();
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 66) ) { return retval; }
@@ -10079,7 +10079,7 @@ public class JavaParser extends Parser {
 
                     match(input,COLON,FOLLOW_COLON_in_forstatement5992); if (state.failed) return retval;
 
-                    if ( state.backtracking==0 ) {retval.lisDecl.put(Id1.getText(),new Declaracion("",(t1!=null?input.toString(t1.start,t1.stop):null),new Id(Id1.getText(),Id1.getLine(),Id1.getCharPositionInLine())));}
+                    if ( state.backtracking==0 ) {retval.lisDecl.add(new Declaracion("",(t1!=null?input.toString(t1.start,t1.stop):null),new Id(Id1.getText(),Id1.getLine(),Id1.getCharPositionInLine())));}
 
                     pushFollow(FOLLOW_expression_in_forstatement6008);
                     e3=expression();
@@ -10193,7 +10193,7 @@ public class JavaParser extends Parser {
                     state._fsp--;
                     if (state.failed) return retval;
 
-                    if ( state.backtracking==0 ) {retval.lisUsosId.addAll(s1.lisUsosId); retval.lisDecl.putAll(s1.lisDecl);}
+                    if ( state.backtracking==0 ) {retval.lisUsosId.addAll(s1.lisUsosId); retval.lisDecl.addAll(s1.lisDecl);}
 
                     }
                     break;
@@ -10219,13 +10219,13 @@ public class JavaParser extends Parser {
 
 
     public static class forInit_return extends ParserRuleReturnScope {
-        public Map<String,Declaracion> lisDecl;
+        public ArrayList<Declaracion> lisDecl;
         public ArrayList<UsoId> lisUsosId;
     };
 
 
     // $ANTLR start "forInit"
-    // Java.g:851:1: forInit returns [Map<String,Declaracion> lisDecl, ArrayList<UsoId> lisUsosId] : (l1= localVariableDeclaration |e1= expressionList );
+    // Java.g:851:1: forInit returns [ArrayList<Declaracion> lisDecl, ArrayList<UsoId> lisUsosId] : (l1= localVariableDeclaration |e1= expressionList );
     public final JavaParser.forInit_return forInit() throws RecognitionException {
         JavaParser.forInit_return retval = new JavaParser.forInit_return();
         retval.start = input.LT(1);
@@ -10239,7 +10239,7 @@ public class JavaParser extends Parser {
 
            
             retval.lisUsosId = new ArrayList<>();
-            retval.lisDecl = new HashMap<>();
+            retval.lisDecl = new ArrayList<>();
 
         try {
             if ( state.backtracking>0 && alreadyParsedRule(input, 67) ) { return retval; }
@@ -15329,7 +15329,7 @@ public class JavaParser extends Parser {
         Token Id1=null;
         String mo2 =null;
 
-        Map<String,Parametro> f1 =null;
+        ArrayList<Parametro> f1 =null;
 
         ArrayList<UsoId> ex1 =null;
 

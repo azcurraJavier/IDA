@@ -186,9 +186,10 @@ public class Clase {
             m = new MostrarTabla(ambiente);//seteo ambiente(nombre de la clase)
             
 
-            if (c.getLisDecl() != null) {
-                for (Iterator<Entry<String, Declaracion>> it = c.getLisDecl().entrySet().iterator(); it.hasNext();) {
-                    Declaracion d = it.next().getValue();
+            if (c.getListaDecl() != null) {
+                //for (Iterator<Entry<String, Declaracion>> it = c.getLisDecl().entrySet().iterator(); it.hasNext();) {
+                for(Declaracion d : c.getListaDecl()){     
+                    //Declaracion d = it.next().getValue();
                     m.setRepresenta("Variable de Clase");
                     m.setNomId(d.getIdent().getNomID());
                     m.setNumLinea(d.getIdent().getLine());   
@@ -197,25 +198,25 @@ public class Clase {
                     m.setTipo(d.getTipo());
                     m.setStrAsignado(d.getIdent().getStrContenido());
                     
-                    for (UsoId u : this.lisUsoIdDecl) {
-                        //se agregan referancias para mostrar en la tabla
-                        if (d.getIdent().getNomID().equals(u.getId())) {
-                            m.addListaRef(u.getLinea(), u.getColumna() ,u.getUbicacion());
-                        }
-                    }
+//                    for (UsoId u : this.lisUsoIdDecl) {
+//                        //se agregan referancias para mostrar en la tabla
+//                        if (d.getIdent().getNomID().equals(u.getId())) {
+//                            m.addListaRef(u.getLinea(), u.getColumna() ,u.getUbicacion());
+//                        }
+//                    }
                     
                     //referencias de clase desde otra clase
                     //TopGun tp
                     //
                     //tp.shoot                    
-                    for(UsoId u : usoIdClase){
-                        //
-                        if(d.getIdent().getNomID().equals(u.getId())
-                                && u.getAsoClase()!=null && this.ide.getNomID().equals(u.getAsoClase())
-                                &&!u.isEsMetodo()){
-                            m.addListaRef(u.getLinea(), u.getColumna(),u.getUbicacion());                            
-                        }                    
-                    }
+//                    for(UsoId u : usoIdClase){
+//                        //
+//                        if(d.getIdent().getNomID().equals(u.getId())
+//                                && u.getAsoClase()!=null && this.ide.getNomID().equals(u.getAsoClase())
+//                                &&!u.isEsMetodo()){
+//                            m.addListaRef(u.getLinea(), u.getColumna(),u.getUbicacion());                            
+//                        }                    
+//                    }
                     
                     lisMostrarTabla.add(m);
                     
@@ -234,25 +235,25 @@ public class Clase {
                 m.setTipo(met.getTipo());
                 m.setRepresenta(met.getTipo().isEmpty()?"Constructor":"Método de Clase");
                 
-                for (UsoId u : this.lisUsoIdMet) {
-                    //se agregan referancias para mostrar en la tabla
-                    if (met.getIde().getNomID().equals(u.getId())) {
-                        m.addListaRef(u.getLinea(), u.getColumna(), u.getUbicacion());
-                    }
-                }
+//                for (UsoId u : this.lisUsoIdMet) {
+//                    //se agregan referancias para mostrar en la tabla
+//                    if (met.getIde().getNomID().equals(u.getId())) {
+//                        m.addListaRef(u.getLinea(), u.getColumna(), u.getUbicacion());
+//                    }
+//                }
                 
                 //referencias de clase desde otra clase
                 //TopGun tp
                 //
                 //tp.shoot                    
-                for(UsoId u : usoIdClase){
-                    //
-                    if(met.getIde().getNomID().equals(u.getId())
-                            && u.getAsoClase()!=null && this.ide.getNomID().equals(u.getAsoClase())
-                            && u.isEsMetodo()){
-                        m.addListaRef(u.getLinea(), u.getColumna(),u.getUbicacion());                            
-                    }                    
-                }                
+//                for(UsoId u : usoIdClase){
+//                    //
+//                    if(met.getIde().getNomID().equals(u.getId())
+//                            && u.getAsoClase()!=null && this.ide.getNomID().equals(u.getAsoClase())
+//                            && u.isEsMetodo()){
+//                        m.addListaRef(u.getLinea(), u.getColumna(),u.getUbicacion());                            
+//                    }                    
+//                }                
                 
                 lisMostrarTabla.add(m);//agrego el metodo
                 lisMostrarTabla.addAll(met.cargarTablaMetodo());//luego agrego todo la info asociada            
@@ -269,89 +270,89 @@ public class Clase {
         m.setNumColumna(this.ide.getColumn());
         
         
-        for (UsoId u : usoIdClase) {
-            //se agregan referancias para mostrar en la tabla
-            if (this.ide.getNomID().equals(u.getId())) {
-                m.addListaRef(u.getLinea(), u.getColumna(), u.getUbicacion());
-            }
-        }
+//        for (UsoId u : usoIdClase) {
+//            //se agregan referancias para mostrar en la tabla
+//            if (this.ide.getNomID().equals(u.getId())) {
+//                m.addListaRef(u.getLinea(), u.getColumna(), u.getUbicacion());
+//            }
+//        }
         
         
         lisMostrarTabla.add(m);
     }
     
-    private boolean globalDecl(UsoId usoId) {
-        
-        Set<String> exclusion = new HashSet<>(Arrays.asList("equals","System","resume","sleep","suspend","println","print","out","exit"));
-        
-        if (this.lisClassBodyDecl == null && this.lisClassBodyDecl.isEmpty()) {
-            return false;
-        }
-        
-        if(exclusion.contains(usoId.getId())){
-            return true; //palabras que lo toma como identificador por ende se debe excluir
-        }        
-        
-        if(usoId.getAlcance().equals("clase") && usoId.getAsoClase() != null){
-
-            for (ClassBodyDecl c : this.lisClassBodyDecl) {
-
-                if(c.getLisDecl() != null && c.getLisDecl().containsKey(usoId.getAsoClase())){                    
-                    usoId.setAsoClase(c.getLisDecl().get(usoId.getAsoClase()).getTipo());                    
-                }
-
-            }                
-        }
-        
-        if(usoId.getAlcance().equals("clase")){
-            return false;
-        }       
-
-        
-        usoId.setUbicacion("Clase " + this.getIde().getNomID());
-        
-        for (ClassBodyDecl c : this.lisClassBodyDecl) {
-
-            if(usoId.isEsMetodo() == false && c.getLisDecl() != null && !c.getLisDecl().isEmpty() &&
-
-                    c.getLisDecl().containsKey(usoId.getId())) {
-
-                this.lisUsoIdDecl.add(usoId);                
-                return true;
-
-            }
-
-            if (usoId.isEsMetodo() == true && c.getMetodo() != null && //es un metodo
-                    c.getMetodo().getIde().getNomID().equals(usoId.getId())) {
-
-                this.lisUsoIdMet.add(usoId);                
-                return true;
-            }           
-
-        }
-        
-        return false;
-
-    }
+//    private boolean globalDecl(UsoId usoId) {
+//        
+//        Set<String> exclusion = new HashSet<>(Arrays.asList("equals","System","resume","sleep","suspend","println","print","out","exit"));
+//        
+//        if (this.lisClassBodyDecl == null && this.lisClassBodyDecl.isEmpty()) {
+//            return false;
+//        }
+//        
+//        if(exclusion.contains(usoId.getId())){
+//            return true; //palabras que lo toma como identificador por ende se debe excluir
+//        }        
+//        
+//        if(usoId.getAlcance().equals("clase") && usoId.getAsoClase() != null){
+//
+//            for (ClassBodyDecl c : this.lisClassBodyDecl) {
+//
+//                if(c.getLisDecl() != null && c.getLisDecl().containsKey(usoId.getAsoClase())){                    
+//                    usoId.setAsoClase(c.getLisDecl().get(usoId.getAsoClase()).getTipo());                    
+//                }
+//
+//            }                
+//        }
+//        
+//        if(usoId.getAlcance().equals("clase")){
+//            return false;
+//        }       
+//
+//        
+//        usoId.setUbicacion("Clase " + this.getIde().getNomID());
+//        
+//        for (ClassBodyDecl c : this.lisClassBodyDecl) {
+//
+//            if(usoId.isEsMetodo() == false && c.getLisDecl() != null && !c.getLisDecl().isEmpty() &&
+//
+//                    c.getLisDecl().containsKey(usoId.getId())) {
+//
+//                this.lisUsoIdDecl.add(usoId);                
+//                return true;
+//
+//            }
+//
+//            if (usoId.isEsMetodo() == true && c.getMetodo() != null && //es un metodo
+//                    c.getMetodo().getIde().getNomID().equals(usoId.getId())) {
+//
+//                this.lisUsoIdMet.add(usoId);                
+//                return true;
+//            }           
+//
+//        }
+//        
+//        return false;
+//
+//    }
     
-    public ArrayList<UsoId> buscarUsoId(ArrayList<UsoId> lUsoId) {
-        
-        ArrayList<UsoId> filtraUso = new ArrayList<>();
-
-        if (lUsoId != null && !lUsoId.isEmpty()) {
-
-            for (UsoId e : lUsoId) {
-
-                if(!globalDecl(e)){
-                    //retorna solo los que no encontró
-                    filtraUso.add(e);
-                }
-            }
-        }
-        
-        return filtraUso;
-
-    }
+//    public ArrayList<UsoId> buscarUsoId(ArrayList<UsoId> lUsoId) {
+//        
+//        ArrayList<UsoId> filtraUso = new ArrayList<>();
+//
+//        if (lUsoId != null && !lUsoId.isEmpty()) {
+//
+//            for (UsoId e : lUsoId) {
+//
+//                if(!globalDecl(e)){
+//                    //retorna solo los que no encontró
+//                    filtraUso.add(e);
+//                }
+//            }
+//        }
+//        
+//        return filtraUso;
+//
+//    }
     
 
 //    public void buscarUso(ArrayList<String> lstStr) {

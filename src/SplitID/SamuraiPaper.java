@@ -57,11 +57,13 @@ public abstract class SamuraiPaper {
             //debe haberse separado sino el softword tendra score y no se separara
             if(softwordDiv.contains(" ")){
                 
+                fraseProces(softwordDiv);
+                
                 //referencias+declaracion=1
-                for(int i=0; i<mt.getListaRef().size()+1;i++){
-                    //se repite por cada repeticion en el codigo
-                    fraseProces(softwordDiv);
-                }               
+//                for(int i=0; i<mt.getListaRef().size()+1;i++){
+//                    //se repite por cada repeticion en el codigo
+//                    fraseProces(softwordDiv);
+//                }               
                             
             }            
             
