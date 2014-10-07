@@ -45,7 +45,7 @@ public class Principal extends javax.swing.JFrame {
         ListaArchivo.init(); 
 
         fileChooser = new JFileChooser();
-
+        
         jTabbedEsp = new ClosableTabbedPane();
 
         jTabbedEsp.setFocusable(false);
@@ -255,6 +255,12 @@ public class Principal extends javax.swing.JFrame {
             archivosAnalisisId = fileChooser.getSelectedFiles();
 
             for (File fileAnalisis : archivosAnalisisId) {
+                
+                if(!fileAnalisis.exists() ){                   
+                    JOptionPane.showMessageDialog(null, "Atención, el archivo: "+fileAnalisis.getName()
+                            +" no existe","Atención", JOptionPane.WARNING_MESSAGE);     
+                    continue;
+                }                
 
                 if (ListaArchivo.containsFileName(fileAnalisis.getAbsolutePath())) {
                     JOptionPane.showMessageDialog(new JFrame(),

@@ -122,15 +122,20 @@ public class CodigoPanel extends javax.swing.JPanel {
             
             
             String id = mapEntry.getKey().toString();
-            String replace =mapEntry.getValue().toString();
-            
+
+            String replace ="";
+            try{
+                replace =mapEntry.getValue().toString();
+            }catch(NullPointerException e){
+                System.out.println(replace);
+            }
             String[] split = id.split(":");//linea - id - repr
                         
             if(split[1].toLowerCase().equals(replace)){
                 continue; //para no reemplazar Person por person...
             }            
             
-            replace = replace.replaceAll(" ", "_");//se coloca _ para que el código sea valido                
+            //replace = replace.replaceAll(" ", "_");//se coloca _ para que el código sea valido                
 
             int nroLine = Integer.parseInt(split[0]);
 

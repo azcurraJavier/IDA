@@ -15,7 +15,7 @@ public class Metodo {
     private Map<String, Declaracion> lisDecl;
     
     //Para mostrar los id por la tabla
-    private ArrayList<MostrarTabla> lisMostrarTabla = new ArrayList<MostrarTabla>();//lo uso para mostrar los id por la tabla   
+    private ArrayList<MostrarTabla> lisMostrarTabla = new ArrayList<>();//lo uso para mostrar los id por la tabla   
 
     private ArrayList<UsoId> lisUsoIdDecl;
     private ArrayList<UsoId> lisUsoIdPara;
