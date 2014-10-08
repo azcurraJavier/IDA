@@ -1,0 +1,81 @@
+\documentclass[a4paper,12pt]{report}
+
+\usepackage{graphicx}
+\usepackage[spanish, es-tabla]{babel} % Para separar correctamente las palabras, es-tabla: para que nombre a la tabla como tal y no cuadro.
+
+\usepackage[utf8]{inputenc} % Este paquete permite poner acentos y eñes usando codificación utf-8
+\usepackage{setspace}
+\onehalfspace %para espacio y medio
+
+\usepackage{fancyhdr} %encabezado y pie de pag
+\usepackage{framed} %recuadros de texto
+\usepackage{multicol} %colocar texto en columnas
+
+\usepackage{amsmath}%formulas y funciones mat
+
+\newcommand{\at}{\makeatletter @\makeatother}%comando define la arroba porque no forma parte de latex
+
+%=====formato para escribir pseudo-algortimo.============
+%algorithm2e: para que ande 'sudo apt-get install texlive-science'
+%aqui se encuentra instalado:
+%/usr/share/texmf-texlive/tex/latex/algorithm2e/algorithm2e.sty
+\usepackage[spanish,ruled,vlined,onelanguage]{algorithm2e} 
+%ruled, vlined para formato de lineas.  
+%spanish setea idioma español
+%onelanguage español las palabras reservadas
+%===================================================
+
+%Encabezado
+\lhead[]{\leftmark}
+\chead[]{}
+\rhead[]{\thepage}
+\renewcommand{\headrulewidth}{1pt}%linea en cabecera
+
+%Pie de pag
+\lfoot[]{}
+\cfoot[]{}
+\rfoot[]{}
+\renewcommand{\footrulewidth}{0pt}
+
+%Setea configuracion enc y pie de pag
+\pagestyle{fancy}
+
+%manejo de tablas
+\usepackage{rotating} %rotacion de tabla
+
+%\usepackage{float}  %estos dos ubican mejor las tablas
+%\restylefloat{table}
+
+
+\begin{document}
+
+%CARATULA/RESUMEN/AGRADECIMIENTOS==========================================================
+\input{./init/init.tex}
+
+\tableofcontents %Genera el indice
+
+%CAPITULO1=============================================================
+\chapter{Introducción: Problema y Solución}
+\input{./cap1/cap1-intro.tex}
+
+%CAPITULO2=============================================================
+\chapter{Comprensión de Programas}
+\input{./cap2/cap2-comp.tex}
+
+%CAPITULO3=============================================================
+\chapter{Análisis de Identificadores: Estado del Arte}
+\input{./cap3/cap3-analisis.tex}
+
+%%CAPITULO4=============================================================
+\chapter{Identifier Analyzer (IDA)}
+\input{./cap4/cap4-ida.tex}
+
+%%CAPITULO5=============================================================
+\chapter{Conclusiones}
+\input{./cap5/cap5-conclu.tex}
+
+
+\bibliographystyle{plain}%{alpha}
+\bibliography{biblo.bib}
+
+\end{document}

@@ -1,0 +1,86 @@
+\begin{titlepage}
+    \centering
+    \vfill
+    {\bfseries\huge
+	Análisis de Identificadores para Abstraer conceptos del 		Dominio del Problema
+     \vskip1.3cm       
+   }  
+   
+{\bfseries\Large
+
+Trabajo Final de Licenciatura en Ciencias de la Computación
+\vskip1cm
+}
+
+ {\bfseries\large
+	Autor
+	\vskip0.1cm   
+   }
+   {\bfseries\Large
+Javier Azcurra Marilungo
+   \vskip1cm
+   }
+%=========   
+   {\bfseries\large
+	Director
+	\vskip0.1cm   
+   }
+   {\bfseries\Large
+Dr. Mario Marcelo Berón
+   \vskip1cm
+   }
+%=========   
+   {\bfseries\large
+	Co-Director
+	\vskip0.1cm   
+   }
+   {\bfseries\Large
+Dr. Germán Antonio Montejano
+   \vskip1cm
+   }
+
+{\bfseries\large
+Departamento de Informática
+\vskip0.5cm
+Facultad de Ciencias Físico Matemáticas y Naturales
+\vskip0.5cm
+Universidad Nacional de San Luis
+%\vskip0.5cm
+%\includegraphics[width=1cm]{unsl_logo.jpg} 
+}     
+  
+\end{titlepage}
+
+\renewcommand{\abstractname}{\Large Resumen}
+
+\begin{abstract}
+
+Las demandas actuales en el desarrollo de software implican una evolución y mantenimiento constante con el menor costo de tiempo y de recursos. La ingeniería del software (IS) se encarga de llevar adelante esta tarea. Dentro de la IS existe el área de Comprensión de Programas (CP). Esta área se dedica a agilizar la comprensión de los sistemas de software, en base al desarrollo de  Métodos, Técnicas, Estrategias y Herramientas. 
+
+%Una área de la CP es la extracción de información estática, la misma permite recolectar componentes relevantes del código sin necesidad de ejecutar el programa. Un componente conocido que abundan en los códigos son los identificadores (ids). 
+La extracción de la información es un área de investigación muy usada por la CP. Esta área tiene como uno de sus principales objetivos la recolección de diferentes elementos del programa, los cuales pueden ser utilizados para diferentes propósitos en el contexto de CP. Los identificadores son uno de tales elementos.
+Estudios indican \cite{BCPT99,LFBEX07,EZH08,EHPV09} que los ids esconden detrás de sus abreviaturas indicios de las funcionalidades de los sistemas. Por ende, cons\-truir herramientas automatizadas que extraigan y analicen ids es relevante para facilitar la comprensión de programas. La extracción de ids es lo más sencillo y una forma de lograrlo es con un parser construido a medida.
+Sin embargo, el análisis del significado de los ids en el código fuente es más complicado por que el nombramiento de estos depende de cada programador. Una estrategia para analizar ids es expandir las abreviatura que lo componen.%CONSULTAR
+
+La expansión de las abreviaturas del id a palabras completas es compleja, pero si se hace correctamente puede ayudar a comprender el sistema. Para lograr esta expansión, se emplean recursos propios del programa de estudio: comentarios, literales, documentación o bien, con fuentes externas al sistema basándose en diccionarios de palabras. 
+
+%En este trabajo final de licenciatura, se describen técnicas conocidas que analizan ids en base a la expansión de sus abreviaturas. También se describe una herramienta desarrollada en JAVA llamada \mbox{\textit{Identifier Analyzer}} (IDA) que implementan algunas de estas estrategias. Luego, se explica los resultados obtenidos por la herramienta de acuerdo a distintos casos de estudio. Finalmente se arriba a conclusiones.
+
+En este trabajo final de licenciatura, se describe \mbox{\textit{Identifier Analyzer}} (IDA) una herramienta útil para el análisis de identificadores de programas escritos en JAVA. IDA implementa técnicas de expansión de las abreviaturas de los identificadores con el propósito de facilitar la comprensión de los sistemas de software. 
+
+%Pensar en estrategias que faciliten las tediosas tareas que diariamente conllevan al crecimiento de los sistemas nos da incapie a iniciarnos en la investigación de herramientas automatizadas que posibiliten el reemplazo del esfuerzo manual que realizan los ingenieros de software a la hora de interpretar un programa.
+
+\end{abstract}
+
+%\renewcommand{\abstractname}{\Large Agradecimientos}
+%
+%\begin{abstract}
+%\begin{multicols}{2}
+%\begin{flushleft}
+%\end{flushleft}
+%\columnbreak
+%\begin{flushright}
+%\textit{“Hay en el mundo un lenguaje que todos comprenden: es el lenguaje del entusiasmo, de las cosas hechas con amor y con voluntad, en busca de aquello que se desea o en lo que se cree.”\linebreak Paulo Cohelo}
+%\end{flushright}
+%\end{multicols}
+%\end{abstract}
