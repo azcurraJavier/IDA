@@ -4,23 +4,16 @@ import ExtractID.Principal;
 import Listas.Archivo;
 import Listas.Comentario;
 import Listas.Literal;
-import Listas.MostrarListaRef;
 import Listas.MostrarTabla;
 import Listas.PalabraHash;
-import com.sun.jndi.toolkit.url.Uri;
 import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URI;
-import java.net.URLEncoder;
-import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -33,8 +26,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableColumn;
@@ -133,7 +124,7 @@ public class TablaBuscador extends javax.swing.JPanel {
                 modeloTabla.addColumn("Representa");
                 modeloTabla.addColumn("Tipo");
                 modeloTabla.addColumn("Modificador");
-                modeloTabla.addColumn("Nro Ref");
+                //modeloTabla.addColumn("Nro Ref");
 
                 fila = new Object[8];
 
@@ -148,8 +139,8 @@ public class TablaBuscador extends javax.swing.JPanel {
                     fila[1] = m.getNumLinea();
                     fila[2] = format(m.getNomId());
                     fila[3] = m.getRepresenta();
-                    fila[4] = m.getTipo();
-                    fila[5] = m.getModificador();
+                    fila[4] = m.getTipo().isEmpty()?"-":m.getTipo();
+                    fila[5] = m.getModificador().isEmpty()?"-":m.getModificador();
                     //fila[6] = m.getListaRef().size();
 
                     //se agrega a la tabla

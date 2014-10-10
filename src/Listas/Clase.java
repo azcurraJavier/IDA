@@ -24,13 +24,18 @@ public class Clase {
     private ArrayList<UsoId> lisUsoIdDecl;
     private ArrayList<UsoId> lisUsoIdMet;
 
-    public Clase(ArrayList<ClassBodyDecl> lcbd) {
-        this.lisClassBodyDecl = lcbd;
+    public Clase() {
         this.modClase = new String();
         lisMostrarTabla = new ArrayList<>();
         
         this.lisUsoIdDecl = new ArrayList<>();
         this.lisUsoIdMet = new ArrayList<>();
+    }   
+    
+    
+    public Clase(ArrayList<ClassBodyDecl> lcbd) {
+        this();
+        this.lisClassBodyDecl = lcbd;        
     }
 
     public ArrayList<ClassBodyDecl> getClassBodyDecl() {

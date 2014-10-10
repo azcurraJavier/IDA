@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2014.5.7)  8 OCT 2014 19:23
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2014.5.7)  9 OCT 2014 21:28
 entering extended mode
  %&-line parsing enabled.
 **tesis.tex
@@ -500,284 +500,197 @@ LaTeX Font Info:    ... okay on input line 50.
 \MPscratchDim=\dimen134
 \MPnumerator=\count121
 \everyMPtoPDFconversion=\toks25
-) (./init/init.tex [1
+)
+Cap\'{\i }tulo 1.
+[1
+
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-[1]) (./tesis.toc [1
+Cap\'{\i }tulo 2.
+[2
 
-])
-\tf@toc=\write3
-\openout3 = `tesis.toc'.
+]
+Cap\'{\i }tulo 3.
+[3
 
+]
+Cap\'{\i }tulo 4.
+(./cap4/cap4-ida.tex [4
 
+]
 
 Package Fancyhdr Warning: \headheight is too small (12.0pt): 
  Make it at least 15.71667pt.
  We now make it that large for the rest of the document.
  This may cause the page layout to be inconsistent, however.
 
-[2]
-Cap\'{\i }tulo 1.
-(./cap1/cap1-intro.tex [3
-
-] [4] [5] [6] [7] [8] [9]
-Overfull \hbox (5.25897pt too wide) in paragraph at lines 254--255
-\OT1/cmr/m/n/12 item an-te-rior en una he-rra-mien-ta de-no-mi-na-da \OT1/cmr/m
-/it/12 Iden-ti-fier Analy-zer \OT1/cmr/m/n/12 (IDA).
- []
-
-[10]) [11]
-Cap\'{\i }tulo 2.
-(./cap2/cap2-comp.tex <./cap2/dom.png, id=51, 493.0922pt x 252.945pt>
-File: ./cap2/dom.png Graphic file (type png)
-
-<use ./cap2/dom.png>
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[12
-
-] [13 <./cap2/dom.png (PNG copy)>] [14] [15] [16] [17] [18]) [19] [20]
-Cap\'{\i }tulo 3.
-(./cap3/cap3-analisis.tex [21
-
-] [22] [23]
-Overfull \hbox (6.88855pt too wide) in paragraph at lines 100--101
-\OT1/cmr/m/n/12 iden-ti-fi-ca-dor a trav^^Ses de una mar-ca es-pec^^S^^Pfi-ca; 
-al-gu-nos ejem-plos son: [][]
- []
-
-[24] <./cap3/idd_1.png, id=94, 313.17pt x 141.52875pt>
-File: ./cap3/idd_1.png Graphic file (type png)
- <use ./cap3/idd_1.png>
-[25 <./cap3/idd_1.png>] [26] [27]
-Underfull \hbox (badness 10000) in paragraph at lines 191--192
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 191--192
-
- []
-
-<./cap3/idd_2.png, id=106, 841.1425pt x 371.3875pt>
-File: ./cap3/idd_2.png Graphic file (type png)
- <use ./cap3/idd_2.png>
-[28 <./cap3/idd_2.png (PNG copy)>]
-<./cap3/idd_3.png, id=110, 921.4425pt x 532.99126pt>
-File: ./cap3/idd_3.png Graphic file (type png)
- <use ./cap3/idd_3.png>
-<./cap3/idd_7.png, id=111, 559.33969pt x 204.765pt>
-File: ./cap3/idd_7.png Graphic file (type png)
- <use ./cap3/idd_7.png>
-[29]
-Underfull \hbox (badness 10000) in paragraph at lines 264--266
-
- []
-
-[30 <./cap3/idd_3.png>] [31 <./cap3/idd_7.png>] [32]
-Overfull \hbox (2.60083pt too wide) in paragraph at lines 320--322
-[]\OT1/cmr/m/n/12 Es com-pli-
- []
-
-[33]
-Overfull \hbox (3.37302pt too wide) in paragraph at lines 322--323
-[]\OT1/cmr/m/n/12 Si la abre-
- []
-
-[34] [35]
-Underfull \hbox (badness 10000) in paragraph at lines 360--361
-
- []
-
-[36] [37]
-Overfull \hbox (1.28633pt too wide) in paragraph at lines 471--472
-[]\OT1/cmr/m/n/12 El al-go-rit-mo se-lec-cio-na la par-ti-ci^^Son m^^Sas ade-cu
-a-da en los ids multi-palabra[]
- []
-
-[38] [39] [40]
-Underfull \hbox (badness 10000) in paragraph at lines 582--583
-
- []
-
-[41] [42] [43] [44] [45] [46]
-Underfull \hbox (badness 10000) in paragraph at lines 787--788
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 789--790
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 791--792
-
- []
-
-[47]
-Overfull \hbox (24.96974pt too wide) in paragraph at lines 805--806
-[]\OT1/cmr/m/n/12 Ejemplo: El patr^^Son \OT1/cmss/m/n/12 p\OT1/cmr/m/n/12 [a-z]
-*\OT1/cmss/m/n/12 g\OT1/cmr/m/n/12 [a-z]*\OT1/cmss/m/n/12 m\OT1/cmr/m/n/12 [a-z
-]* coin-ci-de (en-tre otras) con \OT1/cmr/bx/it/12 p\OT1/cmr/m/n/12 ro\OT1/cmr/
-bx/it/12 g\OT1/cmr/m/n/12 ra\OT1/cmr/bx/it/12 m\OT1/cmr/m/n/12 . 
- []
-
-[48] [49]
-Underfull \hbox (badness 10000) in paragraph at lines 881--882
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 884--885
-
- []
-
-[50]
-Overfull \hbox (7.74895pt too wide) in paragraph at lines 900--901
-\OT1/cmr/m/n/12 des-pu^^Ses de ca-da le-tra de la pa-la-bra abre-via-da (\OT1/c
-mr/bx/it/12 pa\OT1/cmr/m/n/12 ). Si \OT1/cmr/bx/it/12 pa$\OT1/cmr/m/n/12 = \OML
-/cmm/m/it/12 c[]; c[]; c[]; ::; c[]$\OT1/cmr/m/n/12 ,
- []
-
-
-Overfull \hbox (22.38351pt too wide) in paragraph at lines 900--901
-[]\OT1/cmr/m/n/12 . Per-mi-te en-con-trar acr^^Soni-
- []
-
-[51] [52] <./cap3/exp_3.png, id=195, 615.80063pt x 466.74374pt>
-File: ./cap3/exp_3.png Graphic file (type png)
-
-<use ./cap3/exp_3.png> [53 <./cap3/exp_3.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 982--983
-
- []
-
-[54]
-Underfull \hbox (badness 10000) in paragraph at lines 999--1000
-
- []
-
-[55] [56] <./cap3/ire_1.png, id=210, 570.63188pt x 118.94438pt>
-File: ./cap3/ire_1.png Graphic file (type png)
-
-<use ./cap3/ire_1.png> [57 <./cap3/ire_1.png>]
-<./cap3/ire_2.png, id=215, 520.19344pt x 316.93407pt>
-File: ./cap3/ire_2.png Graphic file (type png)
- <use ./cap3/ire_2.png>
-[58 <./cap3/ire_2.png>] <./cap3/ire_3.png, id=220, 632.3625pt x 326.72063pt>
-File: ./cap3/ire_3.png Graphic file (type png)
-
-<use ./cap3/ire_3.png> [59 <./cap3/ire_3.png>]
-<./cap3/ire_4.png, id=226, 554.07pt x 281.55188pt>
-File: ./cap3/ire_4.png Graphic file (type png)
- <use ./cap3/ire_4.png>
-[60 <./cap3/ire_4.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 1103--1104
-
- []
-
-[61]) [62]
-Cap\'{\i }tulo 4.
-(./cap4/cap4-ida.tex [63
-
-]
-<./cap4/ida_arq.png, id=240, 1194.4625pt x 796.9775pt>
+[5] <./cap4/ida_arq.png, id=19, 1194.4625pt x 796.9775pt>
 File: ./cap4/ida_arq.png Graphic file (type png)
 
 <use ./cap4/ida_arq.png>
-Underfull \hbox (badness 10000) in paragraph at lines 43--44
+Underfull \hbox (badness 10000) in paragraph at lines 47--48
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 45--47
+Underfull \hbox (badness 10000) in paragraph at lines 49--50
 
  []
 
-[64 <./cap4/ida_arq.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 48--49
+[6 <./cap4/ida_arq.png>]
+
+! Package inputenc Error: Unicode char \u8:´ not set up for use with LaTeX.
+
+See the inputenc package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.52 ...tos embebida (esta base se explica con m´
+                                                  as detalles en la   ), y s...
+
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 52--53
 
  []
 
-[65]
-Overfull \hbox (35.49971pt too wide) in paragraph at lines 56--56
+
+LaTeX Warning: Reference `sec:algExpBas' on page 7 undefined on input line 54.
+
+[7]
+Overfull \hbox (35.49971pt too wide) in paragraph at lines 60--60
 [][]\OT1/cmr/m/n/10 Especificaciones de la gram^^Sati-ca JA-VA en http://docs.o
 racle.com/javase/specs/jls/se7/jls7.pdf| 
  []
 
-[66]
-Overfull \hbox (4.73738pt too wide) in paragraph at lines 73--74
+
+LaTeX Warning: Reference `sec:tradIdDicc' on page 8 undefined on input line 66.
+
+
+[8]
+
+LaTeX Warning: Reference `sec:algGre' on page 9 undefined on input line 75.
+
+
+LaTeX Warning: Reference `sec:algExpBas' on page 9 undefined on input line 75.
+
+
+LaTeX Warning: Reference `sec:algGre' on page 9 undefined on input line 77.
+
+
+LaTeX Warning: Reference `sec:algExpBas' on page 9 undefined on input line 77.
+
+
+Overfull \hbox (4.73738pt too wide) in paragraph at lines 77--78
 []\OT1/cmr/m/n/12 Esta com-pues-ta con pa-la-bras
  []
 
 
-Overfull \hbox (3.85023pt too wide) in paragraph at lines 75--76
+LaTeX Warning: Reference `sec:algGre' on page 9 undefined on input line 79.
+
+
+Overfull \hbox (3.85023pt too wide) in paragraph at lines 79--80
 []\OT1/cmr/m/n/12 Contiene abre-via-tu-ras
  []
 
-[67] <./cap4/ida_01.png, id=255, 862.72313pt x 253.69781pt>
+
+LaTeX Warning: Reference `sec:algSamu' on page 9 undefined on input line 81.
+
+
+LaTeX Warning: Reference `sec:algSamu' on page 9 undefined on input line 83.
+
+[9] <./cap4/ida_01.png, id=39, 862.72313pt x 253.69781pt>
 File: ./cap4/ida_01.png Graphic file (type png)
 
-<use ./cap4/ida_01.png> [68 <./cap4/ida_01.png>]
-<./cap4/ida_02.png, id=260, 414.04688pt x 252.945pt>
+<use ./cap4/ida_01.png>
+
+LaTeX Warning: Reference `sec:tradIdDicc' on page 10 undefined on input line 12
+2.
+
+[10 <./cap4/ida_01.png>] <./cap4/ida_02.png, id=44, 414.04688pt x 252.945pt>
 File: ./cap4/ida_02.png Graphic file (type png)
- <use ./cap4/ida_02.png>
-[69 <./cap4/ida_02.png>]
-<./cap4/ida_war_02.png, id=265, 484.05844pt x 110.66344pt>
+
+<use ./cap4/ida_02.png> [11 <./cap4/ida_02.png>]
+<./cap4/ida_war_02.png, id=49, 484.05844pt x 110.66344pt>
 File: ./cap4/ida_war_02.png Graphic file (type png)
 
-<use ./cap4/ida_war_02.png> <./cap4/ida_03.png, id=266, 963.6pt x 520.94624pt>
+<use ./cap4/ida_war_02.png> <./cap4/ida_03.png, id=50, 963.6pt x 520.94624pt>
 File: ./cap4/ida_03.png Graphic file (type png)
 
-<use ./cap4/ida_03.png> [70 <./cap4/ida_war_02.png>]
-<./cap4/ida_04.png, id=271, 555.57562pt x 338.76563pt>
+<use ./cap4/ida_03.png> [12 <./cap4/ida_war_02.png>]
+<./cap4/ida_04.png, id=55, 555.57562pt x 338.76563pt>
 File: ./cap4/ida_04.png Graphic file (type png)
  <use ./cap4/ida_04.png>
-[71 <./cap4/ida_03.png>] <./cap4/ida_05.png, id=277, 415.5525pt x 356.0803pt>
+[13 <./cap4/ida_03.png>] <./cap4/ida_05.png, id=61, 415.5525pt x 356.0803pt>
 File: ./cap4/ida_05.png Graphic file (type png)
 
-<use ./cap4/ida_05.png> <./cap4/ida_06.png, id=278, 764.8575pt x 371.13657pt>
+<use ./cap4/ida_05.png> <./cap4/ida_06.png, id=62, 764.8575pt x 371.13657pt>
 File: ./cap4/ida_06.png Graphic file (type png)
 
-<use ./cap4/ida_06.png> [72 <./cap4/ida_04.png>] [73 <./cap4/ida_05.png>]
-<./cap4/ida_07.png, id=287, 702.37407pt x 307.90031pt>
+<use ./cap4/ida_06.png> [14 <./cap4/ida_04.png>] [15 <./cap4/ida_05.png>]
+<./cap4/ida_07.png, id=71, 702.37407pt x 307.90031pt>
 File: ./cap4/ida_07.png Graphic file (type png)
  <use ./cap4/ida_07.png>
-<./cap4/ida_08.png, id=288, 487.06969pt x 206.27063pt>
+<./cap4/ida_08.png, id=72, 487.06969pt x 206.27063pt>
 File: ./cap4/ida_08.png Graphic file (type png)
  <use ./cap4/ida_08.png>
-[74 <./cap4/ida_06.png>] <./cap4/ida_09.png, id=293, 301.8778pt x 357.58594pt>
+
+LaTeX Warning: Reference `sec:algSamu' on page 16 undefined on input line 251.
+
+
+LaTeX Warning: Reference `sec:algSamu' on page 16 undefined on input line 251.
+
+[16 <./cap4/ida_06.png>] <./cap4/ida_09.png, id=77, 301.8778pt x 357.58594pt>
 File: ./cap4/ida_09.png Graphic file (type png)
 
-<use ./cap4/ida_09.png> [75 <./cap4/ida_07.png> <./cap4/ida_08.png>] [76 <./cap
-4/ida_09.png>] <./cap4/ida_10.png, id=303, 963.6pt x 520.94624pt>
+<use ./cap4/ida_09.png>
+
+LaTeX Warning: Reference `sec:algExpBas' on page 17 undefined on input line 261
+.
+
+[17 <./cap4/ida_07.png> <./cap4/ida_08.png>]
+
+LaTeX Warning: Reference `sec:algGre' on page 18 undefined on input line 268.
+
+
+LaTeX Warning: Reference `sec:algExpBas' on page 18 undefined on input line 268
+.
+
+[18 <./cap4/ida_09.png>] <./cap4/ida_10.png, id=87, 963.6pt x 520.94624pt>
 File: ./cap4/ida_10.png Graphic file (type png)
 
-<use ./cap4/ida_10.png> [77 <./cap4/ida_10.png>]
-<./cap4/ida_11.png, id=309, 703.87968pt x 124.21407pt>
+<use ./cap4/ida_10.png> [19 <./cap4/ida_10.png>]
+<./cap4/ida_11.png, id=93, 703.87968pt x 124.21407pt>
 File: ./cap4/ida_11.png Graphic file (type png)
  <use ./cap4/ida_11.png>
-[78 <./cap4/ida_11.png>]
-<./cap4/caso_01.png, id=314, 450.18187pt x 450.9347pt>
+[20 <./cap4/ida_11.png>] <./cap4/caso_01.png, id=98, 450.18187pt x 450.9347pt>
 File: ./cap4/caso_01.png Graphic file (type png)
 
-<use ./cap4/caso_01.png> [79] [80 <./cap4/caso_01.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 330--331
+<use ./cap4/caso_01.png>
+
+LaTeX Warning: Reference `sec:clasif' on page 21 undefined on input line 323.
+
+[21] [22 <./cap4/caso_01.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 334--335
 
  []
+
+
+LaTeX Warning: Reference `sec:algSamu' on page 23 undefined on input line 338.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
-Overfull \hbox (36.41069pt too wide) in paragraph at lines 411--411
+Overfull \hbox (36.41069pt too wide) in paragraph at lines 415--415
  [][] 
  []
 
 
-Overfull \hbox (10.60158pt too wide) in paragraph at lines 439--439
+Overfull \hbox (10.60158pt too wide) in paragraph at lines 443--443
  [][] 
  []
 
@@ -787,44 +700,40 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[81] [82] [83] [84]) [85
+[23] [24] [25] [26]) (./tesis.bbl [27
 
-]
-Cap\'{\i }tulo 5.
-(./cap5/cap5-conclu.tex [86
+] [28
 
-]) (./tesis.bbl [87] [88
+] [29] [30] [31]) [32] (./tesis.aux)
 
-] [89] [90] [91]) [92]
-(./tesis.aux) )
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+ )
 (\end occurred inside a group at level 1)
 
 ### semi simple group (level 1) entered at line 8 (\begingroup)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 4389 strings out of 494999
- 55692 string characters out of 1180817
- 174887 words of memory out of 3000000
- 7486 multiletter control sequences out of 15000+50000
- 12706 words of font info for 45 fonts, out of 3000000 for 9000
+ 4263 strings out of 494999
+ 53901 string characters out of 1180817
+ 174633 words of memory out of 3000000
+ 7399 multiletter control sequences out of 15000+50000
+ 10282 words of font info for 37 fonts, out of 3000000 for 9000
  54 hyphenation exceptions out of 8191
- 33i,21n,43p,1468b,3514s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 32i,12n,43p,1218b,3467s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx12
-.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr/s
-hare/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbxti10.pfb></usr/share/texm
-f-texlive/fonts/type1/public/amsfonts/cm/cmitt10.pfb></usr/share/texmf-texlive/
-fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texmf-texlive/fonts/type1
-/public/amsfonts/cm/cmmi8.pfb></usr/share/texmf-texlive/fonts/type1/public/amsf
-onts/cm/cmr10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr1
-2.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/s
-hare/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf-te
-xlive/fonts/type1/public/amsfonts/cm/cmss12.pfb></usr/share/texmf-texlive/fonts
-/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-texlive/fonts/type1/publ
-ic/amsfonts/cm/cmti12.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts
-/cm/cmtt12.pfb>
-Output written on tesis.pdf (94 pages, 2272564 bytes).
+.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/s
+hare/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-t
+exlive/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texmf-texlive/fonts/
+type1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf-texlive/fonts/type1/public/
+amsfonts/cm/cmss12.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm
+/cmti12.pfb>
+Output written on tesis.pdf (32 pages, 941525 bytes).
 PDF statistics:
- 407 PDF objects out of 1000 (max. 8388607)
+ 162 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 121 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 71 words of extra memory for PDF output out of 10000 (max. 10000000)
 
