@@ -8,8 +8,6 @@ import Listas.MostrarTabla;
 import Listas.PalabraHash;
 import java.awt.Color;
 import java.awt.Desktop;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -24,10 +22,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import javax.swing.DefaultCellEditor;
-import javax.swing.JComboBox;
 import javax.swing.RowFilter;
-import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
@@ -49,8 +44,7 @@ public class TablaBuscador extends javax.swing.JPanel {
 
     private Map hiddenColumns;
 
-//    private JScrollPane jScrollpane;   
-    private static final Map<Integer, String> lineaLit = new HashMap<>();
+//    private JScrollPane jScrollpane;       
 
     private boolean hasElemets = true;//controla si tiene elementos 
 
@@ -130,11 +124,6 @@ public class TablaBuscador extends javax.swing.JPanel {
 
                 for (MostrarTabla m : archivoAnalisis.getLisMostrarTabla()) {
 
-                    //se excluye constructor para mantener consistencia con la clase
-                    if (m.getRepresenta().equals("Constructor")) {
-                        continue;
-                    }
-
                     fila[0] = "-";//m.getAmbiente();
                     fila[1] = m.getNumLinea();
                     fila[2] = format(m.getNomId());
@@ -149,14 +138,6 @@ public class TablaBuscador extends javax.swing.JPanel {
                     //se guarda para ser procesado por los algoritmos de ids
                     listTableInfo.add(m.getNomId());
 
-                    //asgnacion de literales a ids  
-//                    if ("String".equals(m.getTipo())) {
-//                        lineaLit.put(m.getNumLinea(), m.getNomId());
-//                        //carga referencias
-//                        for (MostrarListaRef f : m.getListaRef()) {
-//                            lineaLit.put(Integer.parseInt(f.getLinea()), m.getNomId());
-//                        }
-//                    }
                 }
                 titleBorder = "Declaraciones";
 
@@ -165,8 +146,7 @@ public class TablaBuscador extends javax.swing.JPanel {
             case 1://Strings
 
                 modeloTabla.addColumn("Línea");
-                modeloTabla.addColumn("Literal");
-                modeloTabla.addColumn("ID Asociado");
+                modeloTabla.addColumn("Literal");                
 
                 fila = new Object[4];
 
@@ -182,17 +162,12 @@ public class TablaBuscador extends javax.swing.JPanel {
 //                }
                 for (Literal s : archivoAnalisis.getLisLiterales()) {
 
-                    String id = lineaLit.get(s.getLine());
-
                     fila[0] = "-";//"@"+unaClase.getIde().getNomID();
                     fila[1] = s.getLine();
                     fila[2] = s.getText();
-                    fila[3] = id == null ? "-" : id;
                     modeloTabla.addRow(fila);
 
-                }
-                //una vez que la variable estatica se usa hay que limpiarla
-                lineaLit.clear();
+                }                
 
                 titleBorder = "Literales";
 
@@ -325,12 +300,8 @@ public class TablaBuscador extends javax.swing.JPanel {
                         
             if (exp != null) {
                 //al ser expansion reemplazo los espacios por guion bajo
-                elem2 = elem2.replaceAll(" ", "_");
-                
-                //representa clase la 1era con mayuscula
-                if(modeloTabla.getValueAt(i, 3).toString().equals("Clase")){
-                    elem2 = firstCharUp(elem2);
-                }
+                elem2 = elem2.replaceAll(" ", "_");               
+    
             }            
 
             modeloTabla.setValueAt(elem2, i, colNum);
@@ -544,9 +515,10 @@ public class TablaBuscador extends javax.swing.JPanel {
 
         if (firstOpen && add) {
             jButtonRed.setEnabled(true);
-            //addCheckBox();
+            
             firstOpen = false;
             jButtonAbrirHtml.setEnabled(true);
+            tablaElem.autoAjuste();
         }
 
         //escribir xml de salida
@@ -556,93 +528,6 @@ public class TablaBuscador extends javax.swing.JPanel {
 
     }//GEN-LAST:event_jButtonAnId1ActionPerformed
 
-    private void addCheckBox() {
-        
-        Map<String, String> mapCon = new HashMap<>();
-
-        int colNum = modeloTabla.getColumnCount();
-
-        int colSamurai = 0;
-
-        for (int j = 0; j < colNum; j++) {//veo si la columna ya existe
-            if (modeloTabla.getColumnName(j).equals("Expansión de Samurai")) {
-                colSamurai = j;
-                break;
-            }
-        }
-
-        modeloTabla.addColumnEditable(colNum);
-
-        modeloTabla.addColumn("¿Expansión?");
-
-        String a[] = {"Ninguna", "Greedy", "Samurai"};
-
-        final JComboBox jcb = new JComboBox(a);
-        TableColumn tc = tablaElem.getColumnModel().getColumn(colNum);
-        TableCellEditor tce = new DefaultCellEditor(jcb);
-
-        tc.setCellEditor(tce);
-
-        for (int i = 0; i < modeloTabla.getRowCount(); i++) {
-            //agrega valor por defecto 
-            modeloTabla.setValueAt("Samurai", i, colNum);
-
-            //limpia resaltado de ids
-            String id = modeloTabla.getValueAt(i, 2).toString();
-            modeloTabla.setValueAt(cleanHtml(id), i, 2);
-
-            //resalta expansion samurai
-            String idSam = modeloTabla.getValueAt(i, colSamurai).toString();
-            modeloTabla.setValueAt(format(idSam), i, colSamurai);
-
-            //guarda en mostrartabla la exp samurai por defecto            
-            int lin = (int) modeloTabla.getValueAt(i, 1);
-            String repr = modeloTabla.getValueAt(i, 3).toString();
-
-            
-            for (MostrarTabla m : archivoAnalisis.getLisMostrarTabla()) {
-
-                if (m.getNomId().equals(cleanHtml(id)) && m.getNumLinea() == lin
-                        && m.getRepresenta().equals(repr)) {
-
-                    m.setIdExpandido(idSam);
-
-                    if (m.getRepresenta().equals("Clase")) {
-                        mapCon.put(m.getNomId(), idSam);
-                    }
-
-                    break;
-                }
-            }
-            //actualiza constructores con respecto a la clase
-            for (MostrarTabla m : archivoAnalisis.getLisMostrarTabla()) {
-
-                if (m.getRepresenta().equals("Constructor")) {
-
-                    m.setIdExpandido(mapCon.get(m.getNomId()));
-                }
-            }
-
-        }
-
-        jcb.addItemListener(new ItemListener() {
-            public void itemStateChanged(ItemEvent e) {
-
-                int state = e.getStateChange();
-
-                if (state == ItemEvent.SELECTED) {
-
-                    tablaElemMousePressed3(e.getItem().toString());
-                    tablaElem.autoAjuste();
-                }
-
-            }
-        });
-
-        tablaElem.autoAjuste();
-    }
-
-
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         Principal.getDicPanel().setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -651,10 +536,9 @@ public class TablaBuscador extends javax.swing.JPanel {
 
         hideColumn("Representa", tablaElem);
         hideColumn("Tipo", tablaElem);
-        hideColumn("Modificador", tablaElem);
-        hideColumn("Nro Ref", tablaElem);
-        hideColumn("Div Greedy", tablaElem);
-        hideColumn("Div Samurai", tablaElem);
+        hideColumn("Modificador", tablaElem);        
+        //hideColumn("Div Greedy", tablaElem);
+        //hideColumn("Div Samurai", tablaElem);
 
         jButtonRed.setEnabled(false);
         jButtonAmp.setEnabled(true);
@@ -664,9 +548,8 @@ public class TablaBuscador extends javax.swing.JPanel {
 
     private void jButtonAmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAmpActionPerformed
 
-        showColumn("Div Samurai", tablaElem);
-        showColumn("Div Greedy", tablaElem);
-        showColumn("Nro Ref", tablaElem);
+        //showColumn("Div Samurai", tablaElem);
+        //showColumn("Div Greedy", tablaElem);        
         showColumn("Modificador", tablaElem);
         showColumn("Tipo", tablaElem);
         showColumn("Representa", tablaElem);
@@ -719,11 +602,11 @@ public class TablaBuscador extends javax.swing.JPanel {
                 "\n" +
                 "<table border=\"1\">\n" +
                 "    <tr>      \n" +
-                "      <td><b>Nombre</td>\n" +
+                "      <td><b>Id</td>\n" +
                 "      <td><b>Divisi&oacuten<br/>Greedy</td>\n" +
                 "      <td><b>Divisi&oacuten<br/>Samurai</td>    \n" +
-                "      <td><b>Expansi&oacuten<br/>Greedy</td>\n" +
-                "      <td><b>Expansi&oacuten<br/>Samurai</td>\n" +
+                "      <td><b>Expansi&oacuten desde<br/>Greedy</td>\n" +
+                "      <td><b>Expansi&oacuten desde<br/>Samurai</td>\n" +
                 "    </tr>\n" +
                 "tablacont\n" +
                 "</table>\n" +
@@ -848,145 +731,7 @@ public class TablaBuscador extends javax.swing.JPanel {
         codigoPanel.setHighlight(text, Integer.parseInt(linea), Color.orange);
     }
 
-    private void tablaElemMousePressed3(String selIndex) {
-
-        int selColNum = modeloTabla.getColumnCount() - 1;
-
-        if (!modeloTabla.getColumnName(selColNum).equals("¿Expansión?")) {
-            return;
-        }
-
-        int row = tablaElem.getSelectedRow();
-
-        if (row < 0) {
-            return;
-        }
-
-        int selRow = tablaElem.convertRowIndexToModel(row);
-
-        String idCha1 = "";
-        String idCha2 = "";
-
-        switch (selIndex) {
-
-            case "Ninguna"://Ninguna
-                if (modeloTabla.getValueAt(selRow, selColNum - 2).toString().contains("<html>")) {
-                    idCha1 = modeloTabla.getValueAt(selRow, selColNum - 2).toString();
-                    modeloTabla.setValueAt(cleanHtml(idCha1), selRow, selColNum - 2);
-                }
-
-                if (modeloTabla.getValueAt(selRow, selColNum - 1).toString().contains("<html>")) {
-                    idCha2 = modeloTabla.getValueAt(selRow, selColNum - 1).toString();
-                    modeloTabla.setValueAt(cleanHtml(idCha2), selRow, selColNum - 1);
-                }
-
-                //resalta id original
-                if (!modeloTabla.getValueAt(selRow, 2).toString().contains("<html>")) {
-                    String id = modeloTabla.getValueAt(selRow, 2).toString();
-                    modeloTabla.setValueAt(format(id), selRow, 2);
-                }
-
-                break;
-
-            case "Greedy"://Greedy
-
-                if (modeloTabla.getValueAt(selRow, selColNum - 1).toString().contains("<html>")) {
-
-                    idCha2 = modeloTabla.getValueAt(selRow, selColNum - 1).toString();
-                    modeloTabla.setValueAt(cleanHtml(idCha2), selRow, selColNum - 1);
-                }
-
-                if (!modeloTabla.getValueAt(selRow, selColNum - 2).toString().contains("<html>")) {
-                    idCha1 = modeloTabla.getValueAt(selRow, selColNum - 2).toString();
-                    modeloTabla.setValueAt(format(idCha1), selRow, selColNum - 2);
-                }
-
-                //limpia resaltado id original
-                if (modeloTabla.getValueAt(selRow, 2).toString().contains("<html>")) {
-                    String id = modeloTabla.getValueAt(selRow, 2).toString();
-                    modeloTabla.setValueAt(cleanHtml(id), selRow, 2);
-                }
-
-                break;
-
-            case "Samurai"://Samurai
-
-                if (!modeloTabla.getValueAt(selRow, selColNum - 1).toString().contains("<html>")) {
-                    idCha1 = modeloTabla.getValueAt(selRow, selColNum - 1).toString();
-                    modeloTabla.setValueAt(format(idCha1), selRow, selColNum - 1);
-                }
-
-                if (modeloTabla.getValueAt(selRow, selColNum - 2).toString().contains("<html>")) {
-                    idCha2 = modeloTabla.getValueAt(selRow, selColNum - 2).toString();
-                    modeloTabla.setValueAt(cleanHtml(idCha2), selRow, selColNum - 2);
-                }
-
-                //limpia resaltado id original
-                if (modeloTabla.getValueAt(selRow, 2).toString().contains("<html>")) {
-                    String id = modeloTabla.getValueAt(selRow, 2).toString();
-                    modeloTabla.setValueAt(cleanHtml(id), selRow, 2);
-                }
-
-                break;
-
-        }
-
-        ///Actualiza valor de mostrar tabla en caso que cambie
-        String idExp = "";
-        String idClean = modeloTabla.getValueAt(selRow, 2).toString();
-
-        idClean = cleanHtml(idClean);
-
-        int lin = (int) modeloTabla.getValueAt(selRow, 1);
-        String repr = modeloTabla.getValueAt(selRow, 3).toString();
-
-        switch (selIndex) {
-            case "Ninguna":
-                idExp = idClean;
-                break;
-            case "Greedy":
-                idExp = modeloTabla.getValueAt(selRow, selColNum - 2).toString();
-                break;
-            case "Samurai":
-                idExp = modeloTabla.getValueAt(selRow, selColNum - 1).toString();
-                break;
-        }
-
-        idExp = cleanHtml(idExp);
-
-        MostrarTabla mConstructor = null;
-
-        for (MostrarTabla m : archivoAnalisis.getLisMostrarTabla()) {
-
-            if (m.getNomId().equals(idClean) && m.getNumLinea() == lin
-                    && m.getRepresenta().equals(repr)) {
-
-                m.setIdExpandido(idExp);
-                mConstructor = m;
-                break;
-            }
-
-        }
-
-        //actualizar los valores de los constructores que no se muestran!!!    
-        if (mConstructor != null
-                && mConstructor.getRepresenta().equals("Clase")) {
-
-            for (MostrarTabla m : archivoAnalisis.getLisMostrarTabla()) {
-
-                if (m.getNomId().equals(idClean)
-                        && m.getRepresenta().equals("Constructor")) {
-
-                    m.setIdExpandido(idExp);
-                }
-
-            }
-
-        }
-
-    }
-
-    //permite sacar el html limpiando los valores
+     //permite sacar el html limpiando los valores
     private String cleanHtml(String html) {
 
         if (html == null || html.isEmpty()) {
@@ -1016,17 +761,7 @@ public class TablaBuscador extends javax.swing.JPanel {
 
     private String format(Object s) {
         return "<html><b><span style=\"color: #1A008E;\">" + s + "</b></span></html>";
-    }
-
-    private String firstCharUp(String s){
-
-        if(s== null || s.length()<2){
-            return s;
-        }
-        
-        return Character.toUpperCase(s.charAt(0)) + s.substring(1);
-    }
-    
+    }    
     
     private void hideColumn(String columnName, MiJTable table) {
 

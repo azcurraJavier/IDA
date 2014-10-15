@@ -779,9 +779,9 @@ trystatement returns [ArrayList<Declaracion> lisDecl, ArrayList<Clase> lisClases
     $lisDecl = new ArrayList<>();
 }
     :   'try' b1 = block { $lisDecl = b1.lisDecl; $lisClases = b1.lisClases;}     //retorna variables declaradas en try!
-        (   ca1 = catches 'finally' b2 = block { $lisDecl = b2.lisDecl; $lisDecl.addAll(ca1.lisDecl); $lisClases = b2.lisClases;}
-        |   ca2 = catches {$lisClases.addAll(ca2.lisClases); $lisDecl = ca2.lisDecl;}
-        |   'finally' b3 = block {$lisDecl = b3.lisDecl; $lisClases = b3.lisClases;}
+        (   ca1 = catches 'finally' b2 = block { $lisDecl.addAll(b2.lisDecl); $lisDecl.addAll(ca1.lisDecl); $lisClases.addAll(b2.lisClases);}
+        |   ca2 = catches {$lisClases.addAll(ca2.lisClases); $lisDecl.addAll(ca2.lisDecl);}
+        |   'finally' b3 = block {$lisDecl.addAll(b3.lisDecl); $lisClases.addAll(b3.lisClases);}
         )
      ;
 

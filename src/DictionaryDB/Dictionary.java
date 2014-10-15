@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -207,6 +208,8 @@ public abstract class Dictionary {
         
         //se vuelven a crear las tablas
         initBd();    
+        
+        JOptionPane.showMessageDialog(null, "Base de Datos Regenerada con éxito","Información", JOptionPane.INFORMATION_MESSAGE); 
     }
     
     

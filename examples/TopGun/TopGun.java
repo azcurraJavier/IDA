@@ -7,35 +7,35 @@ import static java.lang.Thread.sleep;
 
 public class TopGun extends JFrame implements KeyListener, ActionListener {
 
-    //	Attributes
-    JButton start_button = new JButton("Press Space to Start");
+    //  Attributes
+    JButton strt_but = new JButton("Press Space button to Start");
 
-    JPanel status_panel = new JPanel();
+    JPanel strtPan = new JPanel();
     
-    JLabel score_label = new JLabel("Score");
-    JTextField score_textfield = new JTextField(5);
+    JLabel scoLabel = new JLabel("Score");
+    JTextField scotext = new JTextField(5);
     
-    JLabel life_label = new JLabel("Life");
+    JLabel lifelabel = new JLabel("Life");
     
-    JProgressBar life_progressBar = new JProgressBar(0, 100);
+    JProgressBar LIFEprogressBar = new JProgressBar(0, 100);
 
-    boolean initiated = false;
+    boolean init = false;
 
     //shoot number
-    public int shoot_number = 0;
+    public int sn = 0;
 
     //plane position
     public int xar = 0;
     public int yac = 0;
 
     //plane movement
-    int plane_mov = 20;
+    int pm = 20;
 
     //Classes
     Shot[] shot = new Shot[20];
     Enemy[] enemy = new Enemy[20];
     LaunchEnemies lnEne;
-    RefreshScreen rfScreen;
+    RefreshScreen rfshScreen;
     
     //Constructor
     public TopGun() {
@@ -52,11 +52,11 @@ public class TopGun extends JFrame implements KeyListener, ActionListener {
         
         
         //Status Panel
-        add(start_button);
+        add(strt_but);
         Font font = new Font("Roman", Font.BOLD, 35);
-        start_button.setFont(font);
-        start_button.setForeground(Color.RED);
-        start_button.addActionListener(this);
+        strt_but.setFont(font);
+        strt_but.setForeground(Color.RED);
+        strt_but.addActionListener(this);
 
         //Size
         setSize(600, 650);
@@ -75,19 +75,21 @@ public class TopGun extends JFrame implements KeyListener, ActionListener {
 
     public void actionPerformed(ActionEvent ae) {
         
-        if (ae.getSource() == start_button) {
+        if (ae.getSource() == strt_but) {
             
-            //hide button
-            start_button.setVisible(false);
+            strt_but.setVisible(false);
             
             //Focus in JFrame
             requestFocus();
             
             //plane position
+            
+            //x axe row
+            //y axe column
             yac = this.getWidth() - 50;
             xar = (this.getHeight() - 50) / 2;
 
-            initiated = true;
+            init = true;
 
             for (int i = 0; i < 20; i++) {
                 //start shooting
@@ -105,21 +107,21 @@ public class TopGun extends JFrame implements KeyListener, ActionListener {
             lnEne = new LaunchEnemies(this);
             lnEne.start();
 
-            rfScreen = new RefreshScreen(this);
-            rfScreen.start();
+            rfshScreen = new RefreshScreen(this);
+            rfshScreen.start();
 
             //Status panel
-            status_panel.setLayout(new FlowLayout());
-            status_panel.add(score_label);
-            status_panel.add(score_textfield);
+            strtPan.setLayout(new FlowLayout());
+            strtPan.add(scoLabel);
+            strtPan.add(scotext);
             //Score zero
-            score_textfield.setText("0");
-            status_panel.add(life_label);
-            status_panel.add(life_progressBar);
+            scotext.setText("0");
+            strtPan.add(lifelabel);
+            strtPan.add(LIFEprogressBar);
             //plane's lives
-            life_progressBar.setValue(100);
-            life_progressBar.setForeground(Color.RED);
-            add(status_panel, "South");
+            LIFEprogressBar.setValue(100);
+            LIFEprogressBar.setForeground(Color.RED);
+            add(strtPan, "South");
         }
     }
 
@@ -131,7 +133,7 @@ public class TopGun extends JFrame implements KeyListener, ActionListener {
     }
 
     public void keyPressed(KeyEvent e) {
-        if (initiated) {
+        if (init) {
             if (e.getKeyCode() == KeyEvent.VK_SPACE) {
                 shot();
             }
@@ -146,7 +148,7 @@ public class TopGun extends JFrame implements KeyListener, ActionListener {
                 }
             }
             if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-                if (xar > plane_mov) {
+                if (xar > pm) {
                     left();
                 }
             }
@@ -159,27 +161,27 @@ public class TopGun extends JFrame implements KeyListener, ActionListener {
     }
 
     void shot() {
-        shoot_number++;
-        if (shoot_number == 10) {
-            shoot_number = 0;
+        sn++;
+        if (sn == 10) {
+            sn = 0;
         }
-        shot[shoot_number].fire();
+        shot[sn].fire();
     }
 
     void down() {
-        yac = yac + plane_mov;
+        yac = yac + pm;
     }
 
     void up() {
-        yac = yac - plane_mov;
+        yac = yac - pm;
     }
 
     void left() {
-        xar = xar - plane_mov;
+        xar = xar - pm;
     }
 
     void right() {
-        xar = xar + plane_mov;
+        xar = xar + pm;
     }
 
     public int getXar() {
@@ -192,9 +194,9 @@ public class TopGun extends JFrame implements KeyListener, ActionListener {
 
     public void hitPlane() {
         //plane's energy
-        int energy = life_progressBar.getValue();
+        int energy = LIFEprogressBar.getValue();
         energy = energy - 10;
-        life_progressBar.setValue(energy);
+        LIFEprogressBar.setValue(energy);
         if (energy <= 0) {
             //Game Over
             String msgDialog = "Game Over!!!";
@@ -214,9 +216,9 @@ class RefreshScreen extends Thread {
     int xPos = 0, yPos = 0;
 
     //Images
-    Image planeImage;
-    Image planeShot;
-    Image enemyImage;
+    Image plaIma;
+    Image shoImage;
+    Image eneImage;
     Image bangImage;
 
     //Clases
@@ -226,11 +228,11 @@ class RefreshScreen extends Thread {
 
     public RefreshScreen(JFrame jf) {
         
-        //Load Imagen
-        planeImage = Toolkit.getDefaultToolkit().getImage("plane.png");
-        planeShot = Toolkit.getDefaultToolkit().getImage("shot.jpg");
-        enemyImage = Toolkit.getDefaultToolkit().getImage("enemy.png");
-        bangImage = Toolkit.getDefaultToolkit().getImage("exploit.png");
+        //Load Image
+        plaIma = Toolkit.getDefaultToolkit().getImage("plane"+".png");
+        shoImage = Toolkit.getDefaultToolkit().getImage("shot"+".jpg");
+        eneImage = Toolkit.getDefaultToolkit().getImage("enemy"+".png");
+        bangImage = Toolkit.getDefaultToolkit().getImage("exploit"+".png");
         //iniciar Clase topGun
         tg = (TopGun) jf;
     }
@@ -266,15 +268,15 @@ class RefreshScreen extends Thread {
         yPos = tg.getYac();
         
         //drawing the plane
-        drawing.drawImage(planeImage, xPos, yPos, 50, 50, null);
+        drawing.drawImage(plaIma, xPos, yPos, 50, 50, null);
     }
 
     void updateShot() {
         for (int i = 0; i < 20; i++) {
             xPos = tg.shot[i].getXar();
             yPos = tg.shot[i].getYac();
-            drawing.drawImage(planeShot, xPos + 40, yPos, 3, 9, null);
-            drawing.drawImage(planeShot, xPos + 10, yPos, 3, 9, null);
+            drawing.drawImage(shoImage, xPos + 40, yPos, 3, 9, null);
+            drawing.drawImage(shoImage, xPos + 10, yPos, 3, 9, null);
         }
     }
 
@@ -283,7 +285,7 @@ class RefreshScreen extends Thread {
             xPos = tg.enemy[i].getXar();
             yPos = tg.enemy[i].getYac();
             if (tg.enemy[i].dead() == false) {
-                drawing.drawImage(enemyImage, xPos, yPos, 50, 50, null);
+                drawing.drawImage(eneImage, xPos, yPos, 50, 50, null);
             } else {
                 drawing.drawImage(bangImage, xPos, yPos, 50, 50, null);
             }
@@ -291,6 +293,9 @@ class RefreshScreen extends Thread {
     }
 
     void hitPlaneEnemy() {
+        
+        //check width height x y position
+        
         for (int i = 0; i < 20; i++) {
             int w1, h1, w2, h2, x1, y1, x2, y2;
             w1 = 50;
@@ -449,9 +454,9 @@ class Enemy extends Thread {
     public void exploit() {
         int score;
         alive = false;
-        score = Integer.valueOf(tg.score_textfield.getText());
+        score = Integer.valueOf(tg.scotext.getText());
         score += 10;
-        tg.score_textfield.setText(String.valueOf(score));
+        tg.scotext.setText(String.valueOf(score));
     }
 
     public void fire() {
@@ -475,12 +480,12 @@ class Shot extends Thread {
 
     //shot's position
     int yac = 0;
-    int xar = 0;	
+    int xar = 0;    
     
     boolean enemy = false;
     
-    //enemyNumber returns the number of enemy plane hit 
-    int enemyNumber = 0;
+    //Enemy number returns the number of enemy plane hit 
+    int enNum = 0;
 
     TopGun tg;
 
@@ -503,8 +508,8 @@ class Shot extends Thread {
         } else {
             
             //enemy's position
-            xar = tg.enemy[enemyNumber].getXar();
-            yac = tg.enemy[enemyNumber].getYac();
+            xar = tg.enemy[enNum].getXar();
+            yac = tg.enemy[enNum].getYac();
         }
         while (yac > 0) {
             try {
@@ -548,7 +553,7 @@ class Shot extends Thread {
         //plane's position
         xar = tg.getXar();
         yac = tg.getYac();
-        enemyNumber = numero;
+        enNum = numero;
         resume();
     }
 

@@ -1,4 +1,4 @@
-// $ANTLR 3.4 Java.g 2014-10-09 16:41:30
+// $ANTLR 3.4 Java.g 2014-10-13 13:47:47
 
         /* esto es para que el parser sea visto desde el resto del proyecto y viceversa */
 	package ExtractID;
@@ -9530,7 +9530,7 @@ public class JavaParser extends Parser {
                     state._fsp--;
                     if (state.failed) return retval;
 
-                    if ( state.backtracking==0 ) { retval.lisDecl = b2.lisDecl; retval.lisDecl.addAll(ca1.lisDecl); retval.lisClases = b2.lisClases;}
+                    if ( state.backtracking==0 ) { retval.lisDecl.addAll(b2.lisDecl); retval.lisDecl.addAll(ca1.lisDecl); retval.lisClases.addAll(b2.lisClases);}
 
                     }
                     break;
@@ -9543,7 +9543,7 @@ public class JavaParser extends Parser {
                     state._fsp--;
                     if (state.failed) return retval;
 
-                    if ( state.backtracking==0 ) {retval.lisClases.addAll(ca2.lisClases); retval.lisDecl = ca2.lisDecl;}
+                    if ( state.backtracking==0 ) {retval.lisClases.addAll(ca2.lisClases); retval.lisDecl.addAll(ca2.lisDecl);}
 
                     }
                     break;
@@ -9558,7 +9558,7 @@ public class JavaParser extends Parser {
                     state._fsp--;
                     if (state.failed) return retval;
 
-                    if ( state.backtracking==0 ) {retval.lisDecl = b3.lisDecl; retval.lisClases = b3.lisClases;}
+                    if ( state.backtracking==0 ) {retval.lisDecl.addAll(b3.lisDecl); retval.lisClases.addAll(b3.lisClases);}
 
                     }
                     break;

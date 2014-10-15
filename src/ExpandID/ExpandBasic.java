@@ -124,7 +124,7 @@ public class ExpandBasic {
             //listExp.add(cand);
             return cand;
         }
-
+        
         //Busqueda en diccionario - ultimo recurso
         
         if(Dictionary.searchWordDic("words_dict", w)){
@@ -132,7 +132,7 @@ public class ExpandBasic {
         }
         
         if (w.length() == 1 || w.length() == 3) {//exige 3 sino el like trae muchos resultados
-            
+                                                 //no más de 3 porque expande casos que no los debe expandir
             listExp = OperationDB.like("words_dict", w);
 
             if (listExp == null || listExp.isEmpty()) {
