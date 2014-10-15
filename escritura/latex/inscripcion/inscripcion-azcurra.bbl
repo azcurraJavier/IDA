@@ -5,24 +5,12 @@ Alfred~V. Aho, Monica~S. Lam, Ravi Sethi, and Jeffrey~D. Ullman.
 \newblock {\em Compilers: Principles, Techniques, and Tools (2nd Edition)}.
 \newblock Addison Wesley, August 2006.
 
-\bibitem{AAJU83}
-Alfred~V. Aho, Jeffrey~D. Ullman, and John~E. Hopcroft.
-\newblock {\em Data structures and algorithms / Alfred V. Aho, John E.
-  Hopcroft, Jeffrey D. Ullman}.
-\newblock Addison-Wesley Reading, Mass, 1983.
-
 \bibitem{AMPM11}
 José~Luís Albanes, Mario Berón, Pedro Henriques, and Maria~João Pereira.
 \newblock Estrategias para relacionar el dominio del problema con el dominio
   del programa para la comprensión de programas.
 \newblock {\em XIII Workshop de Investigadores en Ciencias de la Computación},
   pages 449--453, 2011.
-
-\bibitem{ACCL02}
-G.~Antoniol, G.~Canfora, G.~Casazza, A.~De Lucia, and E.~Merlo.
-\newblock {Recovering traceability links between code and documentation}.
-\newblock {\em Software Engineering, IEEE Transactions on}, 28(10):970–983,
-  2002.
 
 \bibitem{THBE99}
 Thomas Ball.
@@ -91,19 +79,6 @@ Thomas Eisenbarth, Rainer Koschke, and Daniel Simon.
 \newblock Aiding program comprehension by static and dynamic feature analysis.
 \newblock In {\em ICSM}, pages 602--611, 2001.
 
-\bibitem{ERNS99}
-Ramez~A. Elmasri and Shankrant~B. Navathe.
-\newblock {\em Fundamentals of Database Systems}.
-\newblock Addison-Wesley Longman Publishing Co., Inc., Boston, MA, USA, 3rd
-  edition, 1999.
-
-\bibitem{DWE04}
-David~W Embley.
-\newblock Toward semantic understanding: an approach based on information
-  extraction ontologies.
-\newblock In {\em Proceedings of the 15th Australasian database
-  conference-Volume 27}, pages 3--12. Australian Computer Society, Inc., 2004.
-
 \bibitem{EHPV09}
 E.~Enslen, E.~Hill, L.~Pollock, and K.~Vijay-Shanker.
 \newblock Mining source code to automatically split identifiers for software
@@ -111,37 +86,16 @@ E.~Enslen, E.~Hill, L.~Pollock, and K.~Vijay-Shanker.
 \newblock In {\em 6th IEEE International Working Conference on Mining Software
   Repositories.}, page 71–80. IEEE, may. 2009.
 
-\bibitem{FBL06}
-Henry Feild, David Binkley, and Dawn Lawrie.
-\newblock An empirical comparison of techniques for extracting concept
-  abbreviations from identifiers.
-\newblock In {\em Proceedings of IASTED International Conference on Software
-  Engineering and Applications.}, 2006.
-
 \bibitem{HDD06}
 Henry Feild, David Binkley, and Dawn Lawrie.
 \newblock Identifier splitting: A study of two techniques.
 \newblock In {\em Proceedings of the Mid-Atlantic Student Workshop on
   Programming Languages and Systems.}, pages 154--160, 2006.
 
-\bibitem{FFCW01}
-Fangfang Feng and W.~Bruce Croft.
-\newblock Probabilistic techniques for phrase extraction.
-\newblock {\em Inf. Process. Manage.}, 37(2):199–220, 2001.
-
 \bibitem{JDPH08}
 Jos{\'e}~Lu{\'\i}s Freitas, Daniela da~Cruz, and Pedro~Rangel Henriques.
 \newblock The role of comments on program comprehension.
 \newblock In {\em INForum}, 2008.
-
-\bibitem{WHAFVR11}
-Wilhelm Hasselbring, Andreas Fuhr, and Volker Riediger.
-\newblock First international workshop on model-driven software migration (mdsm
-  2011).
-\newblock In {\em CSMR '11 Proceedings of the 2011 15th European Proceedings of
-  the 2011 15th European Conference on Software Maintenance and Reengineering
-  (CSMR 2011)}, pages 299--300, Washington, DC, USA, M{\"a}rz 2011. IEEE
-  Computer Society.
 
 \bibitem{EZH08}
 Emily Hill, Zachary~P. Fry, Haley Boyd, Giriprasad Sridhara, Yana Novikova,
@@ -151,49 +105,17 @@ Emily Hill, Zachary~P. Fry, Haley Boyd, Giriprasad Sridhara, Yana Novikova,
 \newblock In {\em Proceedings of the 5th Int'l Working Conf. on Mining Software
   Repositories.}, page 79–88. ACM, 2008.
 
-\bibitem{STD1219}
-IEEE.
-\newblock Ieee standard for software maintenance.
-\newblock {\em IEEE Std 1219-1998}, page i–, 1998.
-
 \bibitem{STD610}
 IEEE.
 \newblock {\em Standard Glossary of Software Engineering Terminology
   610.12-1990.}, volume~1.
 \newblock IEEE Press, 1999.
 
-\bibitem{LOPT00}
-Leah~S. Larkey, Paul Ogilvie, M.~Andrew Price, and Brenden Tamilio.
-\newblock {Acrophile: an automated acronym extractor and server.}
-\newblock In {\em {ACM DL}}, page 205–214, 2000.
-
 \bibitem{LFBEX07}
 D.~Lawrie, H.~Feild, and D.~Binkley.
 \newblock Extracting meaning from abbreviated identifiers.
 \newblock In {\em Source Code Analysis and Manipulation, 2007. SCAM 2007.
   Seventh IEEE International Working Conference on}, page 213–222, Sept 2007.
-
-\bibitem{DCHD06}
-D.~Lawrie, C.~Morrell, H.~Feild, and D.~Binkley.
-\newblock What's in a name? a study of identifiers.
-\newblock In {\em Program Comprehension, 2006. ICPC 2006. 14th IEEE
-  International Conference on.}, page 3–12, June 2006.
-
-\bibitem{DLHD06}
-Dawn Lawrie, Henry Feild, and David Binkley.
-\newblock Syntactic identifier conciseness and consistency.
-\newblock In {\em SCAM}, page 139–148. IEEE Computer Society, 2006.
-
-\bibitem{LDFHB07}
-Dawn Lawrie, Henry Feild, and David Binkley.
-\newblock {An empirical study of rules for well-formed identifiers}.
-\newblock {\em Journal of Software Maintenance and Evolution: Research and
-  Practice}, 19(4):205–229, 2007.
-
-\bibitem{DLFB06}
-Dawn Lawrie, Henry Feild, and David Binkley.
-\newblock Quantifying identifier quality: an analysis of trends.
-\newblock {\em Empirical Software Engineering}, 12(4):359--388, 2007.
 
 \bibitem{MPOB03}
 Michael~P O’brien.
@@ -206,11 +128,6 @@ Roger~S. Pressman.
 \newblock {\em Software Engineering - A Practitioner's Approach.}
 \newblock McGraw-Hill, 5 edition, 2001.
 
-\bibitem{TSTA80}
-T.A. Standish.
-\newblock {\em Data structure techniques}.
-\newblock Computer Sciences. Addison-Wesley, 1980.
-
 \bibitem{MAS05}
 M.~Storey.
 \newblock Theories, methods and tools in program comprehension: past, present
@@ -218,21 +135,11 @@ M.~Storey.
 \newblock In {\em Program Comprehension, 2005. IWPC 2005. Proceedings. 13th
   International Workshop on.}, page 181–191, May 2005.
 
-\bibitem{STOREY99}
-M.~A. Storey, F.~D. Fracchia, and H.~A. M{\"u}ller.
-\newblock Cognitive design elements to support the construction of a mental
-  model during software exploration.
-\newblock {\em The Journal of Systems \& Software.}, 44(3):171--185, 1999.
-
 \bibitem{PFT02}
 P.F. Tiako.
 \newblock Maintenance in joint software development.
 \newblock In {\em Computer Software and Applications Conference, 2002. COMPSAC
   2002. Proceedings. 26th Annual International.}, page 1077–1080, 2002.
-
-\bibitem{TIE89}
-Tim Tiemens.
-\newblock Cognitive models of program comprehension, 1989.
 
 \bibitem{MMFAF08}
 Marco Torchiano, Massimiliano~Di Penta, Filippo Ricca, Andrea~De Lucia, and
