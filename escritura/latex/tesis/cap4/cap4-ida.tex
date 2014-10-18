@@ -62,7 +62,7 @@ El \mbox{Algoritmo} de Expansión también necesita de un diccionario de palabra
 Como se explicó en la sección previa, cuando el usuario ingresa un archivo JAVA, IDA examina y extrae información estática presente en el archivo ingresado. Esta información está compuesta por identificadores, comentarios y literales. La manera en que IDA extrae esta información es a través de un Analizador Sintáctico (AS).
 
 La construcción de este AS se llevó a cabo, primero investigando herramientas encargadas de construir AS. Se dio preferencia a aquellas que emplean la teoría asociada a las gramáticas de atributos \cite{AHUL06}. De la investigación previamente descripta, se determinó que la herramienta \textit{ANTLR}\footnote[1]{ANother Tool for Language Recognition. http://www.antlr.org} era la que mejor se ajustaba a las necesidades antes planteadas. 
-Esta herramienta permite agregar acciones semánticas (escritas en JAVA) para el cálculo de los atributos, en una gramática de lenguaje JAVA\footnote[2]{Especificaciones de la gramática JAVA en http://docs.oracle.com/javase/specs/jls/se7/jls7.pdf}. Estas acciones semánticas deben estar correctamente insertadas en la gramática para, por ejemplo, implementar estructuras de datos y algoritmos que capturan los ids utilizados en un programa \cite{AAJU83}. Una vez insertadas estas acciones, ANTLR lee la gramática y genera el AS adicionando acciones que fueron programadas. De esta manera, se obtiene un AS que recolecta ids mientras examina el código. A su vez a estas acciones semánticas, se le agregan otras acciones que extraen comentarios y literales strings. Estos elementos son necesarios ya que sirven para los algoritmos de análisis de ids que serán explicados en próximas secciones.
+Esta herramienta permite agregar acciones semánticas (escritas en JAVA) para el cálculo de los atributos, en una gramática de lenguaje JAVA\footnote[2]{http://docs.oracle.com/javase/specs/jls/se7/jls7.pdf}. Estas acciones semánticas deben estar correctamente insertadas en la gramática para, por ejemplo, implementar estructuras de datos y algoritmos que capturan los ids utilizados en un programa \cite{AAJU83}. Una vez insertadas estas acciones, ANTLR lee la gramática y genera el AS adicionando acciones que fueron programadas. De esta manera, se obtiene un AS que recolecta ids mientras examina el código. A su vez a estas acciones semánticas, se le agregan otras acciones que extraen comentarios y literales strings. Estos elementos son necesarios ya que sirven para los algoritmos de análisis de ids que serán explicados en próximas secciones.
 
 \section{Base de Datos Embebida}
 \label{sec:bseEmb}
@@ -75,10 +75,10 @@ Otra ventaja por la cual se eligió esta tecnología, es que responde rápidamen
 
 \item[Diccionario en Inglés (ispell):] Contiene palabras en Inglés que pertenecen a la lista de Palabras Comando de Linux \textit{Ispell}\footnote[2]{ http://wordlist.aspell.net}. Se utiliza en el Algoritmo de Greedy y en el Algoritmo de Expansión (ver capítulo 3).
 
-\item[Lista de Palabras Excluyentes (stop-list):] Esta compuesta con palabras que son poco importantes o irrelevantes en el análisis de ids \footnote[3]{ http://www.lextek.com/manuals/onix/stopwords1.html}. Se utiliza en el Algoritmo de Greedy y en el Algoritmo de Expansión \mbox{(ver capítulo 3)}.
+\item[Lista de Palabras Excluyentes (stop-list):] Esta compuesta con palabras que son poco importantes o irrelevantes en el análisis de ids\footnote[3]{ http://www.lextek.com/manuals/onix/stopwords1.html}. Se utiliza en el Algoritmo de Greedy y en el Algoritmo de Expansión \mbox{(ver capítulo 3)}.
 
 \item[Lista de Abreviaturas y Acrónimos Conocidas:] Contiene abreviaturas comunes del idioma Inglés y Acrónimos conocidos de programación\footnote[4]{http://langs.eserver.org/acronym-dictionary.txt} (gif, jpg, txt). Se emplea en el Algoritmo Greedy (ver capítulo 3).
-
+\pagebreak
 \item[Lista de Prefijos y Sufijos Conocidos:] Posee Sufijos y Prefijos conocidos en Inglés\footnote[1]{http://www.eecis.udel.edu/˜enslen/Site/Samurai}, esta lista fue confeccionada por el autor del Algoritmo Samurai (ver capítulo 3). Se consulta solo en dicho algoritmo.
 
 \item[Frecuencias Globales de Palabras:] Lista de palabras, junto con su frecuencia de aparición. Esta lista fue construida por el autor del Algoritmo Samurai\footnote[2]{Esta lista no está disponible, por ende se construyó una aproximación.}. Se emplea solo en dicho algoritmo, más precisamente en la función de \textit{Scoring} (ver capítulo 3).
@@ -119,8 +119,8 @@ Cuando se pulsa en \textit{Diccionarios} de la barra de menú, se despliega otro
 \begin{description}
 \itemsep0em%reduce espacio
 
-\item[Ver Diccionarios:] Abre una ventana, que muestra un listado de palabras en Inglés que pertenece al comando de Linux \textit{ispell}. %\footnote[1]{Comando de Linux generalmente utilizado para corregir errores ortográficos (inglés) en archivos de texto. http://wordlist.aspell.net}. 
-La ventana antedicha, también muestra un listado de palabras irrelevantes o stoplist (ver capítulo 3). Esta ventana, se explica con más detalles en la sección \ref{sec:panPalDicc}.
+\item[Ver Diccionarios:] Abre una ventana, que muestra un listado de palabras en Inglés correspondiente al diccionario \textit{ispell} (explicado en la sección anterior). %\footnote[1]{Comando de Linux generalmente utilizado para corregir errores ortográficos (inglés) en archivos de texto. http://wordlist.aspell.net}. 
+La ventana antedicha, también muestra un listado de palabras irrelevantes o stoplist (explicado en la sección anterior). Esta ventana, se explica con más detalles en la sección \ref{sec:panPalDicc}.
 
 \item[Restablecer B.D.(Base de Datos):] Genera nuevamente la base de datos HSQLDB. En caso de haber problemas con la base de datos, es útil restablecerla.
 
@@ -176,9 +176,9 @@ La herramienta IDA, además realiza un control de los archivos abiertos, impidie
 
 Después que el programa JACOBE embellece el código contenido en el archivo JAVA,
 %si estos cumplen con las validaciones descriptas en la sección anterior, 
-el mismo se procesa por el AS explicado en secciones previas. Luego que el AS termina sus tareas de extracción de elementos (ids, comentarios y literales), el \textit{Panel de Elementos Capturados} aparece (ver figura \ref{ida3}). Este panel en la parte superior posee pestañas, cada pestaña esta rotulada con el nombre del archivo abierto correspondiente (ver figura \ref{ida3} - Flecha 1). En caso de querer finalizar el análisis de un archivo particular y cerrar la pestaña, se puede pulsar en la cruz ubicada al lado del rótulo de cada pestaña (ver figura \ref{ida3} - Flecha 1). Es posible elegir de a varios archivos para analizar, mediante la ventana de selección de archivos (ver figura \ref{ida2}), o también se puede ir eligiendo de a un archivo por apertura de esta ventana. 
+el mismo se procesa por el AS explicado en secciones previas. Luego que el AS termina sus tareas de extracción de elementos (ids, comentarios y literales), el \textit{Panel de Elementos Capturados} aparece (ver figura \ref{ida3}). Este panel en la parte superior posee pestañas, cada pestaña posee un rótulo con el nombre del archivo abierto correspondiente (ver figura \ref{ida3} - Flecha 1). Es posible elegir de a varios archivos para analizar, mediante la ventana de selección de archivos (ver figura \ref{ida2}), o también se puede ir eligiendo de a un archivo por apertura de esta ventana.  En caso de querer finalizar el análisis de un archivo particular y cerrar la pestaña, se puede pulsar en la cruz ubicada al lado del rótulo de cada pestaña (ver figura \ref{ida3} - Flecha 1).
 
-\begin{figure}[t] %[h] para here [b] para bottom [t] para top
+\begin{figure}[t!] %[h] para here [b] para bottom [t] para top
 \centerline{%queda centrada mejor la imagen
 \includegraphics[scale= 0.42]{./cap4/ida_03.png}
 }
@@ -186,21 +186,24 @@ el mismo se procesa por el AS explicado en secciones previas. Luego que el AS te
 \label{ida3}
 \end{figure}
 
-Cada pestaña en su interior posee el mismo subpanel que se divide en dos partes principales. La parte superior contiene el código leído y embellecido (por JACOBE) del archivo JAVA (ver figura \ref{ida3} - Flecha 2).
-%, el código aquí se presenta ya alineado en su formato por JACOBE. duda
-La parte inferior, muestra toda la información extraída por el AS elaborado con ANTLR referente a ids, literales y comentarios. Estos últimos tres poseen una pestaña que clasifican a cada uno (ver figura \ref{ida3} - Flecha 3). 
-
-Al pulsar la \textit{Pestaña de Literales} (ver figura \ref{ida3} - Flecha 3), se puede apreciar que contiene una tabla y un práctico buscador para agilizar la búsqueda de literales en la tabla (ver figura \ref{ida4} - Flecha 1). Esta tabla contiene 3 columnas, número de línea del literal, el literal propiamente dicho y la eventual asociación que pueda tener el literal con algún id (ver figura \ref{ida4} - Flecha 2). Al pulsar sobre alguna fila de la tabla antedicha, automáticamente el literal correspondiente se resalta en el código (del archivo JAVA) ubicado en la parte superior del \textit{Panel de Análisis} (ver figura \ref{ida4} - Flecha 3).
-
-Al presionar la \textit{Pestaña de Comentarios} (ver figura \ref{ida3} - Flecha 3), se visualiza una tabla listando los comentarios encontrados en el archivo y un buscador (ver figura \ref{ida5} - Flecha 1) de comentarios en la tabla. Esta tabla (ver figura \ref{ida5} - Flecha 2) contiene 2 columnas que corresponden, por un lado al comentario y por el otro al número de línea donde se encuentra el comentario dentro del código (ver figura \ref{ida5} - Flecha 2). Al igual que se describió en el párrafo anterior, al presionar en una de las filas de la tabla inmediatamente se resalta en el código mostrando la ubicación del comentario seleccionado (ver figura \ref{ida5} - Flecha 3).
-
-\begin{figure}[t] %[h] para here [b] para bottom [t] para top
+\begin{figure}[h!] %[h] para here [b] para bottom [t] para top
 \centerline{%queda centrada mejor la imagen
-\includegraphics[scale= 0.58]{./cap4/ida_04.png}
+\includegraphics[scale= 0.5]{./cap4/ida_04.png}
 }
 \caption{Literales Capturados}
 \label{ida4}
 \end{figure}
+
+Cada pestaña en su interior posee el mismo subpanel que se divide en dos partes principales. La parte superior contiene el código leído y embellecido (por JACOBE) del archivo JAVA (ver figura \ref{ida3} - Flecha 2).
+%, el código aquí se presenta ya alineado en su formato por JACOBE. duda
+La parte inferior, muestra toda la información extraída por el AS referente a ids, literales y comentarios. Estos últimos tres poseen una pestaña cada uno (ver figura \ref{ida3} - Flecha 3). Al pulsar sobre cada pestaña, se muestra la información clasificada correspondiente (a ids, literales y comentarios), a continuación se describe como se exhibe la información en cada una de estas pestañas.
+
+\noindent \textbf{\\\\Identificadores Capturados\\} 
+
+Al pulsar la \textit{Pestaña de Identificadores} (ver figura \ref{ida3} - Flecha 3), se muestra la \textit{Tabla de Declaraciones} (ver figura \ref{ida3} - Flecha 4). Esta tabla lista los ids declarados encontrados por el AS y cada columna se corresponde a: el número de línea donde esta declarado el id, el nombre del id, el tipo (int, char, etc.), el modificador (publico, privado, protegido), lo que el id representa (variable de clase, constructor, método de clase, etc.).
+También la \textit{Tabla de Declaraciones} al presionar sobre una fila, inmediatamente se resalta con color en el código del panel superior la declaración del id, según corresponda (ver figura \ref{ida3} - Flecha 2). 
+%Es el mismo comportamiento que tienen las tablas de literales y comentarios explicados anteriormente. 
+Cabe mencionar, que la \textit{Tabla de Declaraciones} además posee un buscador, que realiza búsquedas por el nombre del id; para realizar las búsquedas el usuario debe escribir en el cuadro de texto ubicado dentro del recuadro \textit{Buscar Id} (ver figura \ref{ida3} - Flecha 5), a medida que se escriba en este cuadro de texto, se irán filtrando los resultados en la \textit{Tabla de Declaraciones}.
 
 \begin{figure}[t] %[h] para here [b] para bottom [t] para top
 \centerline{%queda centrada mejor la imagen
@@ -210,19 +213,23 @@ Al presionar la \textit{Pestaña de Comentarios} (ver figura \ref{ida3} - Flecha
 \label{ida5}
 \end{figure}
 
-Al pulsar la \textit{Pestaña de Identificadores} (ver figura \ref{ida3} - Flecha 3), se muestra la \textit{Tabla de Declaraciones} (ver figura \ref{ida3} - Flecha 4), aquí no solo se detalla el nombre del id, sino que también el número de línea donde esta declarado, el tipo (int, char, etc.), el modificador (publico, privado, protegido), lo que el id representa (variable de clase, constructor, método de clase, etc.).
+\noindent \textbf{\\Literales Capturados\\} 
 
-En la \textit{Tabla de Declaraciones} al presionar sobre una fila, inmediatamente se resalta con color en el código del panel superior la declaración del id, según corresponda (ver figura \ref{ida3} - Flecha 2). Es el mismo comportamiento que tienen las tablas de literales y comentarios explicados anteriormente. Cabe mencionar, que la \textit{Tabla de Declaraciones} también posee un buscador, que realiza búsquedas por el nombre del id (ver figura \ref{ida3} - Flecha 5).
+Al pulsar la \textit{Pestaña de Literales} (ver figura \ref{ida3} - Flecha 3), se puede apreciar que contiene una tabla y un práctico buscador para agilizar la búsqueda de literales en la tabla (ver figura \ref{ida4} - Flecha 1 y 2). Esta tabla contiene 2 columnas, número de línea del literal y el literal propiamente dicho (ver figura \ref{ida4} - Flecha 2). Al pulsar sobre alguna fila de la tabla antedicha, automáticamente el literal correspondiente se resalta en el código (del archivo JAVA) ubicado en la parte superior del \textit{Panel de Análisis} (ver figura \ref{ida4} - Flecha 3).
 
-\begin{figure}[t] %[h] para here [b] para bottom [t] para top
+\noindent \textbf{\\Comentarios Capturados\\} 
+
+Al presionar la \textit{Pestaña de Comentarios} (ver figura \ref{ida3} - Flecha 3), se visualiza una tabla listando los comentarios encontrados en el archivo y un buscador de comentarios en la tabla (ver figura \ref{ida5} - Flecha 1). Esta tabla contiene 2 columnas que corresponden, por un lado al comentario y por el otro al número de línea donde se encuentra el comentario dentro del código (ver figura \ref{ida5} - Flecha 2). Al igual que se describió en el párrafo anterior, al presionar en una de las filas de la tabla inmediatamente se resalta en el código mostrando la ubicación del comentario seleccionado (ver figura \ref{ida5} - Flecha 3).\\
+
+Hasta aquí, solo se ha descripto como IDA exhibe la información capturada del código. A continuación, se explicará como se emplea IDA para analizar los ids. Para ello, se debe pulsar en la \textit{Pestaña de Identificadores} (ver figura \ref{ida3}- Flecha 3), luego pulsar en el botón \textit{Ejecutar Análisis} ubicado dentro del cuadro \textit{Análisis de Identificadores} (ver figura \ref{ida3} - Flecha 6), al hacerlo se abrirá el \textit{Panel de Análisis} que será explicado en la próxima sección.
+
+\begin{figure}[h!] %[h] para here [b] para bottom [t] para top
 \centerline{%queda centrada mejor la imagen
 \includegraphics[scale= 0.52]{./cap4/ida_06.png}
 }
 \caption{Panel de Análisis}
 \label{ida6}
 \end{figure}
-
-Hasta aquí, solo se ha descripto como IDA exhibe la información capturada del código. A continuación, se explicará como se emplea IDA para analizar los ids. Para comenzar, se debe pulsar en el botón \textit{Ejecutar Análisis} ubicado dentro del cuadro \textit{Análisis de Identificadores} (ver figura \ref{ida3} - Flecha 6), al hacerlo se abrirá el \textit{Panel de Análisis} que será explicado en la próxima sección.
 
 \subsection{Panel de Análisis}
 

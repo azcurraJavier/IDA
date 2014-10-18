@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2014.5.7)  16 OCT 2014 21:27
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2014.5.7)  18 OCT 2014 15:36
 entering extended mode
  %&-line parsing enabled.
 **tesis.tex
@@ -529,19 +529,19 @@ LaTeX Warning: Reference `sec:algSamu' on page 3 undefined on input line 50.
 
 LaTeX Warning: Reference `sec:algExpBas' on page 3 undefined on input line 52.
 
-[3]
-Overfull \hbox (35.49971pt too wide) in paragraph at lines 65--65
-[][]\OT1/cmr/m/n/10 Especificaciones de la gram^^Sati-ca JA-VA en http://docs.o
-racle.com/javase/specs/jls/se7/jls7.pdf| 
- []
-
-[4]
+[3] [4]
 Overfull \hbox (4.73738pt too wide) in paragraph at lines 78--79
 []\OT1/cmr/m/n/12 Esta com-pues-ta con pa-la-bras
  []
 
 
-Overfull \hbox (3.85023pt too wide) in paragraph at lines 80--81
+Overfull \hbox (15.34303pt too wide) in paragraph at lines 78--79
+\OT1/cmr/m/n/12 en el Al-go-rit-mo de Greedy y en el Al-go-rit-mo de Ex-pan-si^
+^Son []. 
+ []
+
+
+Overfull \hbox (3.85023pt too wide) in paragraph at lines 80--82
 []\OT1/cmr/m/n/12 Contiene abre-via-tu-ras
  []
 
@@ -559,28 +559,54 @@ File: ./cap4/ida_war_02.png Graphic file (type png)
 <./cap4/ida_03.png, id=43, 963.6pt x 520.94624pt>
 File: ./cap4/ida_03.png Graphic file (type png)
  <use ./cap4/ida_03.png>
-[9 <./cap4/ida_war_02.png>]
-<./cap4/ida_04.png, id=48, 555.57562pt x 338.76563pt>
+<./cap4/ida_04.png, id=44, 555.57562pt x 338.76563pt>
 File: ./cap4/ida_04.png Graphic file (type png)
  <use ./cap4/ida_04.png>
-<./cap4/ida_05.png, id=49, 415.5525pt x 356.0803pt>
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 201--202
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 201--202
+
+ []
+
+[9 <./cap4/ida_war_02.png>] [10 <./cap4/ida_03.png> <./cap4/ida_04.png>]
+<./cap4/ida_05.png, id=54, 415.5525pt x 356.0803pt>
 File: ./cap4/ida_05.png Graphic file (type png)
  <use ./cap4/ida_05.png>
-[10 <./cap4/ida_03.png>] <./cap4/ida_06.png, id=54, 764.8575pt x 371.13657pt>
+Underfull \hbox (badness 10000) in paragraph at lines 216--217
+
+ []
+
+[11 <./cap4/ida_05.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 220--221
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 222--223
+
+ []
+
+<./cap4/ida_06.png, id=59, 764.8575pt x 371.13657pt>
 File: ./cap4/ida_06.png Graphic file (type png)
-
-<use ./cap4/ida_06.png> [11 <./cap4/ida_04.png>]
-<./cap4/ida_07.png, id=59, 702.37407pt x 307.90031pt>
+ <use ./cap4/ida_06.png>
+[12 <./cap4/ida_06.png>] <./cap4/ida_07.png, id=64, 702.37407pt x 307.90031pt>
 File: ./cap4/ida_07.png Graphic file (type png)
- <use ./cap4/ida_07.png>
-<./cap4/ida_08.png, id=60, 487.06969pt x 206.27063pt>
-File: ./cap4/ida_08.png Graphic file (type png)
- <use ./cap4/ida_08.png>
-[12 <./cap4/ida_05.png>] <./cap4/ida_09.png, id=65, 301.8778pt x 357.58594pt>
-File: ./cap4/ida_09.png Graphic file (type png)
 
-<use ./cap4/ida_09.png> [13 <./cap4/ida_06.png>] [14 <./cap4/ida_07.png> <./cap
-4/ida_08.png>] [15 <./cap4/ida_09.png>]
+<use ./cap4/ida_07.png> <./cap4/ida_08.png, id=65, 487.06969pt x 206.27063pt>
+File: ./cap4/ida_08.png Graphic file (type png)
+
+<use ./cap4/ida_08.png> [13]
+<./cap4/ida_09.png, id=70, 301.8778pt x 357.58594pt>
+File: ./cap4/ida_09.png Graphic file (type png)
+ <use ./cap4/ida_09.png>
+[14 <./cap4/ida_07.png> <./cap4/ida_08.png>] [15 <./cap4/ida_09.png>]
 <./cap4/ida_10.png, id=80, 963.6pt x 533.74406pt>
 File: ./cap4/ida_10.png Graphic file (type png)
  <use ./cap4/ida_10.png>
@@ -591,8 +617,8 @@ File: ./cap4/ida_11.png Graphic file (type png)
 <./cap4/caso_01.png, id=90, 450.18187pt x 450.9347pt>
 File: ./cap4/caso_01.png Graphic file (type png)
  <use ./cap4/caso_01.png>
-[18] [19 <./cap4/caso_01.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 337--338
+[18] [19 <./cap4/caso_01.png>] [20]
+Underfull \hbox (badness 10000) in paragraph at lines 344--345
 
  []
 
@@ -600,12 +626,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 337--338
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
-Overfull \hbox (36.41069pt too wide) in paragraph at lines 418--418
+Overfull \hbox (36.41069pt too wide) in paragraph at lines 425--425
  [][] 
  []
 
 
-Overfull \hbox (10.60158pt too wide) in paragraph at lines 446--446
+Overfull \hbox (10.60158pt too wide) in paragraph at lines 453--453
  [][] 
  []
 
@@ -615,51 +641,51 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[20] [21] [22] [23] <./cap4/caso_02.png, id=111, 601.4972pt x 450.18187pt>
+[21] [22] [23] [24] <./cap4/caso_02.png, id=114, 601.4972pt x 450.18187pt>
 File: ./cap4/caso_02.png Graphic file (type png)
 
 <use ./cap4/caso_02.png>
-Underfull \hbox (badness 10000) in paragraph at lines 539--540
+Underfull \hbox (badness 10000) in paragraph at lines 546--547
 
  []
 
-[24
+[25
 
  <./cap4/caso_02.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 541--542
+Underfull \hbox (badness 10000) in paragraph at lines 548--549
 
  []
 
 
-Overfull \hbox (13.01659pt too wide) in paragraph at lines 554--594
+Overfull \hbox (13.01659pt too wide) in paragraph at lines 561--601
  [][] 
  []
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[25] [26] <./cap4/caso_03.png, id=123, 452.4403pt x 511.15968pt>
+[26] [27] <./cap4/caso_03.png, id=126, 452.4403pt x 511.15968pt>
 File: ./cap4/caso_03.png Graphic file (type png)
 
-<use ./cap4/caso_03.png> [27
+<use ./cap4/caso_03.png> [28
 
  <./cap4/caso_03.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 723--724
+Underfull \hbox (badness 10000) in paragraph at lines 730--731
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 725--726
+Underfull \hbox (badness 10000) in paragraph at lines 732--733
 
  []
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[28] [29]) (./tesis.bbl [30
+[29] [30]) (./tesis.bbl [31
 
 
-] [31] [32] [33]) [34] (./tesis.aux)
+] [32] [33] [34]) [35] (./tesis.aux)
 
 LaTeX Warning: There were undefined references.
 
@@ -684,9 +710,9 @@ type1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf-texlive/fonts/type1/public/
 amsfonts/cm/cmss12.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm
 /cmsy10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmti12.pfb
 >
-Output written on tesis.pdf (34 pages, 1100532 bytes).
+Output written on tesis.pdf (35 pages, 1101105 bytes).
 PDF statistics:
- 176 PDF objects out of 1000 (max. 8388607)
+ 179 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  81 words of extra memory for PDF output out of 10000 (max. 10000000)
 
