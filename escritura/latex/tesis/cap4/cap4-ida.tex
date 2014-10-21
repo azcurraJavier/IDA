@@ -12,7 +12,7 @@ En el capítulo anterior, se explicó la importancia de analizar ids ubicados en
 
 Dada la importancia que tienen las herramientas de análisis de ids, se tomó la iniciativa de desarrollar una llamada Identifier Analyzer (IDA). Esta herramienta le permite al usuario ingresar un archivo JAVA, luego IDA analiza los ids que están en el archivo.
 %, y finalmente produce como resultado una tabla del análisis realizado, esta tabla contiene los ids encontrados en el programa pero expandidos. 
-La forma en que IDA expande los ids, se efectuá en tres pasos: I) Extraer los ids del código de estudio. II) Aplicar una técnica de división, en donde se descompone al id en las distintas abreviaturas que lo componen. Por ejemplo: \textsf{inp\_fl\_sys} $\rightarrow$ \textsf{inp fl sys}. \linebreak III) Por último, emplear una técnica de expansión de abreviaturas que las expande a palabras completas. Por ejemplo: \textsf{inp fl sys} $\rightarrow$ \textsf{input file system}. Una vez realizado los tres pasos, los resultados de las expansiones de ids se exhiben en una tabla.
+La forma en que IDA analiza los ids, se efectuá en tres pasos: I) Extraer los ids del código de estudio. II) Aplicar una técnica de división, en donde se descompone al id en las distintas abreviaturas que lo componen. Por ejemplo: \textsf{inp\_fl\_sys} $\rightarrow$ \textsf{inp fl sys}. \linebreak III) Por último, emplear una técnica de expansión de abreviaturas que las expande a palabras completas. Por ejemplo: \textsf{inp fl sys} $\rightarrow$ \textsf{input file system}. Una vez realizado los tres pasos, los resultados de las expansiones de ids se exhiben en una tabla.
 El objetivo de IDA es lograr que el usuario comprenda más rápidamente el propósito de los ids en los archivos JAVA, y de esta manera mejorar la comprensión del código analizado.
 
 %Para que IDA pueda realizar su tarea, contiene implementados 2 algoritmos de división de ids (Greedy y Samurai) y 1 algoritmo de expansión de abreviaturas (Expansión Básica), los mismos fueron explicados en el capítulo precedente. 
@@ -47,15 +47,15 @@ En la figura \ref{arq1} se puede apreciar la arquitectura de IDA. Esta arquitect
 
 \textbf{Módulo de Extracción de Datos:} Este módulo recibe como entrada un archivo JAVA que ingresa el usuario (ver Figura \ref{arq1} Entrada.java), luego este archivo se procesa por un Analizador Sintáctico (AS) (\mbox{ver Figura \ref{arq1}} Analizado Sintáctico ANTLR). El AS, extrae y almacena en estructuras internas la información estática perteneciente al código del archivo ingresado. Esta información, está relacionada con ids, literales y comentarios (ver próxima sección para más detalles). El usuario a través de la interfaz de IDA, puede visualizar esta información capturada del código por medio de tablas claramente definidas (ver figura \ref{arq1} - Flecha Verde).
 
-\textbf{Módulo de División de Ids:} Una vez completada la extracción de información, el proceso continua en el módulo de división de ids. Aquí se encuentran implementados dos algoritmos de división; uno es el Algoritmo Greedy y el otro es el Algoritmo Samurai ambos explicados en la sección \ref{sec:algGre} y \ref{sec:algSamu} del capítulo anterior. Estos algoritmos reciben como entrada la información capturada en el módulo de extracción de datos (ids, comentarios, literales), y luego estos algoritmos dividen los ids del archivo JAVA (ver figura \ref{arq1} Algoritmos de División). Los resultados de las divisiones se almacenan en estructuras internas que serán utilizadas por el módulo de expansión. Cabe recordar que estos algoritmos de división necesitan datos externos para funcionar, uno es el diccionario de palabras (en caso de Greedy) y el otro es lista de frecuencias globales de aparición de palabras (en caso de Samurai). Estos datos externos se encuentran almacenados en una base de datos embebida (ver Figura \ref{arq1} HyperSQL DB).
+\textbf{Módulo de División de Ids:} Una vez completada la extracción de información, el proceso continua en el módulo de división de ids. Aquí se encuentran implementados dos algoritmos de división; uno es el Algoritmo Greedy y el otro es el Algoritmo Samurai ambos explicados en la sección \ref{sec:algGre} y \ref{sec:algSamu} del capítulo anterior. Estos algoritmos reciben como entrada la información capturada en el módulo de extracción de datos (ids, comentarios, literales), y luego estos algoritmos dividen los ids del archivo JAVA (ver figura \ref{arq1} - Algoritmos de División). Los resultados de las divisiones se almacenan en estructuras internas que serán utilizadas por el módulo de expansión. Cabe recordar que estos algoritmos de división necesitan datos externos para funcionar, uno es el diccionario de palabras (en caso de Greedy) y el otro es lista de frecuencias globales de aparición de palabras (en caso de Samurai). Estos datos externos se encuentran almacenados en una base de datos embebida (ver Figura \ref{arq1} HyperSQL DB).
 
 \textbf{Módulo de Expansión de Ids:} La tercera y última parte, tiene implementado el Algoritmo de Expansión Básico de abreviaturas que fue explicado en la sección \ref{sec:algExpBas} del capítulo anterior. 
 
-Este algoritmo, toma como entrada los ids separados en el módulo de división de ids (tanto de Greedy como de Samurai), luego el Algoritmo de Expansión expande las abreviaturas resultantes producto de la división de ids (ver Figura \ref{arq1} Algoritmo de Expansión). Los resultados de las expansiones se retornan en dos grupos: las expansiones provistas por el Algoritmo de división Greedy y las provistas por el Algoritmo de división Samurai.
+Este algoritmo, toma como entrada los ids separados en el módulo de división de ids (tanto de Greedy como de Samurai), luego el Algoritmo de Expansión expande las abreviaturas resultantes producto de la división de ids (ver Figura \ref{arq1} - Algoritmo de Expansión). Los resultados de las expansiones se retornan en dos grupos: las expansiones provistas por el Algoritmo de división Greedy y las provistas por el Algoritmo de división Samurai.
 
 %En este punto, el usuario podrá elegir que expansión es la más adecuada y reemplazar los ids originales en el archivo de entrada, generando de esta manera un nuevo archivo de salida (ver figura \ref{arq1} Salida.java). 
 
-El \mbox{Algoritmo} de Expansión también necesita de un diccionario de palabras, por eso se realizan consultas a la base de datos embebida (ver Figura \ref{arq1} HyperSQL DB). Finalmente, los resultados de las divisiones y las expansiones de los ids, se muestran en una tabla (ver Figura \ref{arq1} Tabla de análisis de identificadores).
+El \mbox{Algoritmo} de Expansión también necesita de un diccionario de palabras, por eso se realizan consultas a la base de datos embebida (ver Figura \ref{arq1} - HyperSQL DB). Finalmente, los resultados de las divisiones y las expansiones de los ids, se muestran en una tabla (ver Figura \ref{arq1} - Tabla de análisis de identificadores).
 
 \section{Analizador Sintáctico}
 
@@ -150,7 +150,7 @@ Cuando se pulsa en el botón \textit{Abrir archivo(s) JAVA}, (ver figura \ref{id
 
 %Para que IDA funcione correctamente el archivo de entrada JAVA debe cumplir con ciertas validaciones. Una de ellas es, que el código no contenga errores sintácticos (un ejemplo, entre tantos, de error sintáctico es: no colocar punto y coma al final de una sentencia).
 
-Una vez que el usuario elige el/los archivo/s, IDA utiliza un  programa externo llamado JACOBE\footnote[1]{http://www.tiobe.com/jacobe}. Este programa JACOBE, recibe como entrada un archivo JAVA y embellece el código fuente contenido en el archivo. Este embellecimiento se realiza para facilitar la lectura del código al usuario. En la próxima sección se describe el panel que IDA tiene para visualizar el código leído del archivo.
+Una vez que el usuario elige el/los archivo/s, IDA utiliza un  programa externo llamado JACOBE\footnote[1]{http://www.tiobe.com/jacobe}. Este programa JACOBE, recibe como entrada un archivo JAVA y embellece el código fuente que esta contenido en el. Este embellecimiento se realiza para facilitar la lectura del código al usuario. En la próxima sección se describe el panel que IDA tiene para visualizar el código leído del archivo.
 
 %Si algún archivo de entrada esta vacío o posee algún error sintáctico, JACOBE lo detecta y automáticamente IDA muestra un cartel informando al usuario (ver figura \ref{idaWar1}). 
 
@@ -198,10 +198,10 @@ Cada pestaña en su interior posee el mismo subpanel que se divide en dos partes
 %, el código aquí se presenta ya alineado en su formato por JACOBE. duda
 La parte inferior, muestra toda la información extraída por el AS referente a ids, literales y comentarios. Estos últimos tres poseen una pestaña cada uno (ver figura \ref{ida3} - Flecha 3). Al pulsar sobre cada pestaña, se muestra la información clasificada correspondiente (a ids, literales y comentarios), a continuación se describe como se exhibe esta información.
 
-\noindent \textbf{\\\\Identificadores Capturados\\} 
+\noindent \textbf{\\\\Pestaña de Identificadores Capturados\\} 
 
 Al pulsar la \textit{Pestaña de Identificadores} (ver figura \ref{ida3} - Flecha 3), se muestra la \textit{Tabla de Declaraciones} (ver figura \ref{ida3} - Flecha 4). Esta tabla enumera los ids capturados por el AS y cada columna se corresponde a: el número de línea donde esta declarado el id, el nombre del id, el tipo (int, char, etc.), el modificador (publico, privado, protegido), lo que el id representa (variable de clase, constructor, método de clase, etc.).
-Esta \textit{Tabla de Declaraciones} si se presiona sobre una fila, inmediatamente se resalta con color en el código del panel superior, la declaración del id correspondiente (ver figura \ref{ida3} - Flecha 2). 
+Esta \textit{Tabla de Declaraciones} si se presiona sobre una fila, inmediatamente se resalta con color en el código ubicado en la parte superior, la declaración del id correspondiente (ver figura \ref{ida3} - Flecha 2). 
 %Es el mismo comportamiento que tienen las tablas de literales y comentarios explicados anteriormente. 
 Cabe destacar que si el usuario lo desea, puede realizar búsquedas en la \textit{Tabla de Declaraciones} por nombre de id; para realizar las estas búsquedas se debe escribir en el cuadro de texto ubicado dentro del recuadro \textit{Buscar Id} (ver figura \ref{ida3} - Flecha 5), a medida que se escriba en este cuadro de texto, se irán filtrando los resultados en la \textit{Tabla de Declaraciones}.
 
@@ -213,32 +213,38 @@ Cabe destacar que si el usuario lo desea, puede realizar búsquedas en la \texti
 \label{ida5}
 \end{figure}
 
-\noindent \textbf{\\Literales Capturados\\} 
+\noindent \textbf{\\Pestaña de Literales Capturados\\} 
 
-Al pulsar la \textit{Pestaña de Literales} (ver figura \ref{ida3} - Flecha 3), se puede apreciar que aparece una \textit{Tabla de Literales} y un práctico buscador en forma de cuadro de texto (ver figura \ref{ida4} - Flecha 1 y 2). Esta tabla contiene 2 columnas, número de línea del literal y el literal propiamente dicho (ver figura \ref{ida4} - Flecha 2).
-De manera similar a la que se describió en el párrafo precedente, el buscador filtra los resultados en la \textit{Tabla de Literales} mientras se escriba en el y, al pulsar sobre alguna fila, automáticamente el literal correspondiente se resalta en el código que está ubicado en la parte superior del \textit{Panel de Análisis} (ver figura \ref{ida4} - Flecha 3).
+Al pulsar la \textit{Pestaña de Literales} (ver figura \ref{ida3} - Flecha 3), se puede apreciar que aparece una \textit{Tabla de Literales} y un práctico buscador en forma de cuadro de texto (ver figura \ref{ida4} - Flecha 1 y 2). Esta tabla contiene dos columnas, número de línea del literal y el literal propiamente dicho (ver figura \ref{ida4} - Flecha 2).
+De manera similar a la que se describió en el párrafo precedente, el buscador filtra los resultados en la \textit{Tabla de Literales} mientras se va escribiendo en el. También al pulsar sobre alguna fila, automáticamente el literal correspondiente se resalta en el código que está ubicado en la parte superior (ver figura \ref{ida4} - Flecha 3).
 
-\noindent \textbf{\\Comentarios Capturados\\} 
+\noindent \textbf{\\Pestaña de Comentarios Capturados\\} 
 
-De manera equivalente, al presionar la \textit{Pestaña de Comentarios} (ver figura \ref{ida3} - Flecha 3), se visualiza \textit{Tabla de Comentarios} y un buscador de comentarios en la tabla (ver figura \ref{ida5} - Flecha 1). Esta tabla contiene 2 columnas que corresponden, por un lado al comentario y por el otro al número de línea donde se encuentra el comentario dentro del código (ver figura \ref{ida5} - Flecha 2). Al igual que se describió en el párrafo anterior, al presionar en una de las filas de la tabla inmediatamente se resalta en el código mostrando la ubicación del comentario seleccionado (ver figura \ref{ida5} - Flecha 3).\\
+De manera equivalente, al presionar la \textit{Pestaña de Comentarios} (ver figura \ref{ida3} - Flecha 3), se visualiza la \textit{Tabla de Comentarios} y un buscador de comentarios en esta tabla (ver figura \ref{ida5} - Flecha 1). La \textit{Tabla de Comentarios} posee dos columnas que corresponden, por un lado al comentario y por el otro al número de línea donde se encuentra el comentario dentro del código (ver figura \ref{ida5} - Flecha 2). Al igual que se describió en el párrafo anterior, al presionar en una de las filas de la \textit{Tabla de Comentarios} inmediatamente se resalta en el código de la parte superior, la ubicación del comentario seleccionado (ver figura \ref{ida5} - Flecha 3).\\
 
-Hasta aquí, solo se ha descripto como IDA exhibe la información útil que fue capturada del código. A continuación, se explicará como se emplea IDA para analizar los ids. Para ello, se debe pulsar en la \textit{Pestaña de Identificadores} (ver figura \ref{ida3} - Flecha 3), luego pulsar en el botón \textit{Ejecutar Análisis} ubicado dentro del cuadro \textit{Análisis de Identificadores} (ver figura \ref{ida3} - Flecha 6), al hacerlo se abrirá el \textit{Panel de Análisis} que será explicado en la próxima sección.
+Hasta aquí, solo se ha descripto como IDA exhibe la información útil que fue capturada del código por el AS. A continuación, se explicará como se emplea IDA para analizar los ids. Para ello, se debe pulsar en la \textit{Pestaña de Identificadores} (ver figura \ref{ida3} - Flecha 3), luego pulsar en el botón \textit{Ejecutar Análisis} ubicado dentro del cuadro \textit{Análisis de Identificadores} (ver figura \ref{ida3} - Flecha 6), al hacerlo se abrirá la \textit{Ventana de Análisis} que será explicada en la próxima sección.
 
 \begin{figure}[h!] %[h] para here [b] para bottom [t] para top
 \centerline{%queda centrada mejor la imagen
 \includegraphics[scale= 0.52]{./cap4/ida_06.png}
 }
-\caption{Panel de Análisis}
+\caption{Ventana de Análisis}
 \label{ida6}
 \end{figure}
 
-\subsection{Panel de Análisis}
+\subsection{Ventana de Análisis}
 
-El \textit{Panel de Análisis} (ver figura \ref{ida6}) contiene 3 partes principales, (de izquierda a derecha) la primera consiste en los ids capturados, los mismos están listados en el cuadro inferior izquierdo (ver figura \ref{ida6} - Flecha 1), arriba de estos se encuentran dos botones \textit{Palabras Capturadas} y \textit{Diccionarios} (ver figura \ref{ida6} - Flecha 2), estos brindan información al usuario sobre los datos que se utilizan para ejecutar los algoritmos de análisis. Los mismos serán explicados en la próxima sección.
+La \textit{Ventana de Análisis} (ver figura \ref{ida6}) contiene 3 partes principales, (de izquierda a derecha):
 
-Siguiendo con el \textit{Panel de Análisis}, en el cuadro central superior (ver figura \ref{ida6} - Flecha 3) se pueden seleccionar los dos algoritmos de división de ids (Greedy y Samurai), el botón \textit{Dividir} del mismo cuadro ejecuta la técnica seleccionada mostrando en el cuadro inferior la tabla con los resultados. En la figura \ref{ida6} - Flecha 4 se muestran ambas técnicas (Greedy y Samurai) ya ejecutadas y enumerando los resultados.
+\begin{description}
 
-De la misma manera, en los 2 paneles subsiguientes de la derecha, permiten expandir las palabras y mostrar los resultados en el cuadro de abajo. Al presionar el botón \textit{Expandir}, situado en el cuadro superior derecho (ver figura \ref{ida6} - Flecha 5) ejecuta el algoritmo de expansión básico, tomando como entrada los ids divididos desde Greedy o desde Samurai, según haya seleccionado el usuario en este mismo cuadro (ver figura \ref{ida6} - Flecha 5). Los resultados obtenidos de las expansiones (desde Greedy y desde Samurai) se muestran en la tabla ubicada en el cuadro inferior derecho,  (ver figura \ref{ida6} - Flecha 6).
+\item[Parte Izquierda:] Posee un listado con los ids capturados, en el cuadro inferior izquierdo (ver figura \ref{ida6} - Flecha 1). Arriba de estos se encuentran dos botones \textit{Palabras Capturadas} y \textit{Diccionarios} (ver figura \ref{ida6} - Flecha 2), al pulsarlos le brindan información al usuario sobre los datos que se utilizan para ejecutar los algoritmos de análisis, y ambos botones serán explicados con más detalles en la próxima sección.
+
+\item[Parte Central:] Ubicado en la parte central, en el cuadro superior (ver figura \ref{ida6} - Flecha 3) se pueden seleccionar los dos algoritmos de división de ids (Greedy y Samurai), el botón \textit{Dividir} del mismo cuadro ejecuta el algoritmo seleccionado. Los resultados obtenidos se muestran en el cuadro central inferior, en una tabla con los resultados. En la figura \ref{ida6} - Flecha 4 se muestran ambas técnicas (Greedy y Samurai) ya ejecutadas y enumerando los resultados.
+
+\item[Parte Derecha:] Al presionar el botón \textit{Expandir}, situado en el cuadro superior derecho (ver figura \ref{ida6} - Flecha 5), ejecuta el algoritmo de expansión básico tomando como entrada los ids divididos desde Greedy o desde Samurai, según haya seleccionado el usuario en este mismo cuadro (ver figura \ref{ida6} - Flecha 5). Los resultados obtenidos de las expansiones (desde Greedy y desde Samurai), se muestran en la tabla situada en el cuadro inferior derecho. En la figura \ref{ida6} - Flecha 6 se pueden apreciar las expansiones realizadas.
+
+\end{description}
 
 \begin{figure}[t] %[h] para here [b] para bottom [t] para top
 \centerline{%queda centrada mejor la imagen
@@ -248,6 +254,19 @@ De la misma manera, en los 2 paneles subsiguientes de la derecha, permiten expan
 \label{ida7}
 \end{figure}
 
+\subsection{Palabras Capturadas y Diccionarios}
+\label{sec:panPalDicc}
+
+En la sección anterior, se nombraron dos botones \textit{Palabras Capturadas} y \textit{Diccionarios}, ubicados en la \textit{Ventana de Análisis} (ver figura \ref{ida6} - Flecha 2). A continuación, se describirán la función de cada uno de ellos.
+
+\noindent \textbf{\\Ventana de Palabras Capturadas\\} 
+
+Al pulsar el botón \textit{Palabras Capturadas}, se abre una ventana que posee dos cuadros (ver figura \ref{ida7}), el cuadro de la izquierda contiene una tabla que muestra las frecuencias correspondiente al Algoritmo Samurai (ver figura \ref{ida7} - Flecha 1). Esta tabla tiene tres columnas, en la primera posee tokens\footnote[1]{El concepto “token” se asocia a palabras que están contenidas en literales, comentarios e ids, este último necesita un proceso especial, para más detalles ver cap. 3 - sección \ref{sec:algSamu}}, los mismos fueron capturados por el AS ANTLR. La segunda columna, contiene la frecuencia local de cada token, cabe recordar que la frecuencia local se construye en función de la frecuencia absoluta de aparición de los tokens en el código del archivo actual. La tercera y última columna de la tabla denota la frecuencia global de cada token, la misma esta predefinida en la base de datos HSQLDB (ver sección \ref{sec:bseEmb}).
+
+El cuadro de la derecha, lista en una tabla las frases capturadas (ver figura \ref{ida7} - Flecha 2), estas frases se obtienen de los comentarios y los literales strings, el Algoritmo de Expansión es el encargado de utilizarlas (ver capítulo 3 - sección \ref{sec:algExpBas}). Este algoritmo las usa, ya que estas frases son posibles candidatas a expandir las abreviaturas en forma de acrónimo que puede contener un id (Ejemplo: \textsf{fl} $\rightarrow$ \textsf{file system}).
+
+A modo de agilizar las búsquedas en las tablas descriptas anteriormente (la de frecuencias de Samurai y la de frases), se puede llevar a cabo utilizando los cuadros de texto con rótulo \textit{Buscar Palabra} situados al lado de cada botón \textit{TagCloud de Palabras} (ver figura \ref{ida7} - Flechas 3 y 4).
+
 \begin{figure}[t] %[h] para here [b] para bottom [t] para top
 \centerline{%queda centrada mejor la imagen
 \includegraphics[scale= 0.75]{./cap4/ida_08.png}
@@ -256,35 +275,26 @@ De la misma manera, en los 2 paneles subsiguientes de la derecha, permiten expan
 \label{ida8}
 \end{figure}
 
-\subsection{Palabras Capturadas y Diccionarios}
-\label{sec:panPalDicc}
+\noindent \textbf{\\Ventana de TagCloud (Nube de Etiquetas)\\} 
 
-En la sección anterior, se describieron dos botones \textit{Palabras Capturadas} y \textit{Diccionarios}, ubicados en el \textit{Panel de Análisis} (ver figura \ref{ida6} - Flecha 2). A continuación, se describirán la función de cada uno de ellos.
+Como se puede observar en la figura \ref{ida7} - Flechas 3 y 4, existen dos botones con el nombre de \textit{TagCloud de Palabras}, cada uno abre una ventana que contiene una \textit{Nube de Etiquetas} (ver figura \ref{ida8}). Esta nube posee palabras y resalta en tamaño más grande aquellas palabras que más frecuencia de aparición tienen (En la figura \ref{ida8} las palabras \textsf{mine}, \textsf{mines}, \textsf{game} etc. son las que mayor aparición tienen). Para generar esta nube se emplea una librería de JAVA llamada OpenCloud\footnote[1]{http://opencloud.mcavallo.org}.
+Esta \textit{Nube de Etiquetas} ayuda a ver con más claridad que palabras son más frecuentes en el código. 
 
-\noindent \textbf{\\Palabras Capturadas\\} 
-
- Al pulsar el botón \textit{Palabras Capturadas}, se abre una ventana que posee dos cuadros (ver figura \ref{ida7}), el cuadro de la izquierda contiene una tabla que muestra las frecuencias correspondiente al Algoritmo Samurai (ver figura \ref{ida7} - Flecha 1). Esta tabla tiene 3 columnas, en la primera posee tokens\footnote[1]{}, los mismos fueron capturados por el AS ANTLR. La segunda columna, contiene la frecuencia local de cada token, cabe recordar que la frecuencia local se construye en función de la frecuencia absoluta de aparición de los tokens en el código del archivo actual. La tercera y última columna de la tabla denota la frecuencia global de cada token, la misma esta predefinida en la base de datos HSQLDB (ver sección \ref{sec:bseEmb}).
+Para el caso de la nube de frecuencias de Samurai (ver figura \ref{ida7} - Flecha 3), el tamaño de cada palabra depende de la Frecuencia Local de cada token (ver figura \ref{ida7} - Flecha 1). En el caso de la nube de las frases capturadas (ver figura \ref{ida7} - Flecha 4), el tamaño de las palabras esta dado por el número de apariciones dentro de esta tabla de frases (ver figura \ref{ida7} - Flecha 2).
 
 \begin{figure}[t] %[h] para here [b] para bottom [t] para top
 \centerline{%queda centrada mejor la imagen
-\includegraphics[scale= 0.6]{./cap4/ida_09.png}
+\includegraphics[scale= 0.58]{./cap4/ida_09.png}
 }
-\caption{Panel de Diccionarios}
+\caption{Ventana de Diccionarios}
 \label{ida9}
 \end{figure}
 
-El cuadro de la derecha, lista en una tabla las frases capturadas (ver figura \ref{ida7} - Flecha 2), estas frases se obtienen de los comentarios y los literales strings, el Algoritmo de Expansión es el encargado de utilizarlas (ver capítulo 3 - sección \ref{sec:algExpBas}), ya que estas frases son posibles candidatas a expandir las abreviaturas en forma de acrónimo que posee un id (Ejemplo: \textsf{ls} $\rightarrow$ \textsf{lose game}).
+\noindent \textbf{\\Ventana de Diccionarios\\} 
 
-\noindent \textbf{\\TagCloud (Nube de Etiquetas)\\} 
+Volviendo a la \textit{Ventana de Análisis} si se pulsa el botón \textit{Diccionarios} (ver figura \ref{ida6} - Flecha 2), se abre la \textit{Ventana de Diccionarios} (ver figura \ref{ida9}). Esta ventana posee dos tablas, la tabla de la izquierda lista todas las palabras en inglés que tiene el diccionario del comando de Linux \textit{ispell}, esta lista de palabras es utilizada por el Algoritmo Greedy y el Algoritmo Expansión Básica (ver sección \ref{sec:bseEmb} de este capítulo). La segunda tabla de la derecha enumera las palabras que pertenecen a la stoplist o lista de palabras irrelevantes, también utilizada por los dos algoritmos antedichos. Convenientemente, ambas tablas poseen un buscador por palabras dado que el contenido de cada una es amplio (ver figura \ref{ida9}). Esta \textit{Ventana de Diccionarios} puede ser invocada desde otros lugares de la herramienta IDA. Uno de ellos es desde la barra de menú (ver Figura \ref{ida1} - Flecha 2). Otro sitio donde puede abrirse, es desde el \textit{Panel de Elementos Capturados}, pulsando el botón que esta al lado de \textit{Ejecutar Análisis} (ver figura \ref{ida3} - Flecha 7).
 
-Como se puede observar en la figura \ref{ida7} - Flechas 3 y 4, existen dos botones con el nombre de \textit{TagCloud de Palabras}, cada uno abre una ventana que contiene una \textit{Nube de Etiquetas} (ver figura \ref{ida8}). Esta nube posee palabras y resalta en tamaño más grande aquellas palabras que más frecuencia de aparición tienen (ver figura \ref{ida8}). Para generar esta nube se emplea una librería de JAVA llamada OpenCloud\footnote[1]{http://opencloud.mcavallo.org}.
-Esta \textit{Nube de Etiquetas} ayuda a ver con mas claridad que palabras son más frecuentes en el código. Para el caso de la nube de frecuencias de Samurai (ver figura \ref{ida7} - Flecha 3), el tamaño de cada palabra depende de la Frecuencia Local de cada token (ver figura \ref{ida7} - Flecha 1). En el caso de la nube de las frases capturadas (ver figura \ref{ida7} - Flecha 4), el tamaño de las palabras esta dado por el número de apariciones dentro de esta tabla de frases (ver figura \ref{ida7} - Flecha 2).
-
-A modo de agilizar la búsqueda de alguna palabra y/o token (el concepto de token - ver capítulo 3 - sección \ref{sec:algSamu}), se puede llevar a cabo utilizando los cuadros de texto con rótulo \textit{Buscar Palabra} situados al lado de cada botón \textit{TagCloud de Palabras} (ver figura \ref{ida7} - Flechas 3 y 4).
-
-\noindent \textbf{\\Diccionarios\\} 
-
-Volviendo al \textit{Panel de Análisis} si se pulsa el botón \textit{Diccionarios} (ver figura \ref{ida6} - Flecha 2), se abre el \textit{Panel de Diccionarios} (ver figura \ref{ida9}). Este panel posee dos tablas, la tabla de la izquierda lista todas las palabras en inglés que tiene el diccionario del comando de Linux \textit{ispell}, esta lista de palabras es utilizada por el Algoritmo Greedy (ver capítulo 3 - sección \ref{sec:algGre}) y el Algoritmo Expansión Básica (ver capítulo 3 - sección \ref{sec:algExpBas}). La segunda tabla de la derecha enumera las palabras que pertenecen a la stoplist o lista de palabras irrelevantes, también utilizada por los dos algoritmos antedichos. Convenientemente, ambas tablas poseen un buscador por palabras dado que el contenido de cada una es amplio (ver figura \ref{ida9}). Este \textit{Panel de Diccionarios} puede ser invocado desde otros lugares de la herramienta IDA. Uno de ellos es desde la barra de menú (ver Figura \ref{ida1} - Flecha 2). Otro sitio donde puede abrirse, es desde el \textit{Panel de Elementos Capturados}, pulsando el botón que esta al lado de \textit{Ejecutar Análisis} (ver figura \ref{ida3} - Flecha 7).
+Todas las ventanas que fueron descriptas previamente (palabras capturadas, tagcloud, diccionarios), en caso de haber sido abiertas por el usuario, el mismo debe cerrarlas si desea continuar con el proceso de análisis de ids.
 
 \begin{figure}[t!] %[h] para here [b] para bottom [t] para top
 \centerline{%queda centrada mejor la imagen
@@ -297,7 +307,7 @@ Volviendo al \textit{Panel de Análisis} si se pulsa el botón \textit{Diccionar
 
 \begin{figure}[t] %[h] para here [b] para bottom [t] para top
 \centerline{%queda centrada mejor la imagen
-\includegraphics[scale= 0.55]{./cap4/ida_11.png}
+\includegraphics[scale= 0.63]{./cap4/ida_11.png}
 }
 \caption{Tabla del Análisis de Ids en Navegador Web.}
 \label{ida11}
@@ -305,8 +315,8 @@ Volviendo al \textit{Panel de Análisis} si se pulsa el botón \textit{Diccionar
 
 \subsection{Nuevamente al Panel de Elementos Capturados}
 
-Una vez que los ids fueron analizados (Divididos y Expandidos) mediante el \textit{Panel de Análisis}, el mismo debe ser cerrado presionando el botón \textit{Cerrar} (ver figura \ref{ida6} - Flecha 7). Esta acción, retorna al \textit{Panel de Elementos Capturados} nuevamente (ver figura \ref{ida10}).
-Como se puede observar, en la tabla \textit{Declaraciones} que detalla los ids extraídos e información asociada a estos, se le suman nuevas columnas (ver figura \ref{ida10} - Flecha 1). Estas nuevas columnas contienen los resultados obtenidos de los algoritmos de división (Greedy, Samurai) y el algoritmo de expansión ejecutados en el \textit{Panel de Análisis}.
+Una vez que los ids fueron analizados (Divididos y Expandidos) mediante la \textit{Ventana de Análisis}, la misma debe ser cerrada presionando el botón \textit{Cerrar} (ver figura \ref{ida6} - Flecha 7). Esta acción, retorna al \textit{Panel de Elementos Capturados} nuevamente (ver figura \ref{ida10}).
+Como se puede observar, en la tabla \textit{Declaraciones} que detalla los ids extraídos e información asociada a estos, se le suman nuevas columnas (ver figura \ref{ida10} - Flecha 1). Estas nuevas columnas contienen los resultados obtenidos de los algoritmos de división (Greedy, Samurai) y el algoritmo de expansión ejecutados en la \textit{Ventana de Análisis}; las columnas nuevas son: División Greedy, División Samurai, Expansión desde Greedy y Expansión desde Samurai.
 
 Al agregar las columnas nuevas se habilita el cuadro \textit{Ocultar Columnas}. En el se encuentran dos botones \textit{Reducir} y \textit{Ampliar} (ver figura \ref{ida10} - Flecha 2). El primero de ellos a modo de facilitar la visualización, oculta las columnas que hay entre los ids y las columnas que contienen el análisis de ids (las columnas que se ocultan son: tipo, modificador, Representa), de esta manera el usuario puede comparar más claramente las distintas divisiones y expansiones de ids. Mientras que el botón \textit{Ampliar} restablece las columnas originales.
 
@@ -314,8 +324,11 @@ Al agregar las columnas nuevas se habilita el cuadro \textit{Ocultar Columnas}. 
 %Una vez realizado esto, el código es más comprensivo para el usuario, en la figura \ref{ida11} se puede observar dos trozos de códigos, el de la arriba se observa el código normal, mientras que el de la abajo posee los ids expandidos.
 %En caso de querer retrotraer la acción de reemplazo de ids, se puede pulsar en el botón \textit{Deshacer} ubicado también en el cuadro \textit{Expandir Ids en Código} (ver figura \ref{ida10} - Flecha 4) y restablecer el código original.
 
-Luego si el usuario lo decide, puede presionar el botón \textit{Abrir} en el cuadro \textit{Ver Tabla en Navegador} (ver figura \ref{ida10} - Flecha 3). Esta acción abre automáticamente el navegador web del sistema operativo, y mediante una pagina web en formato html, se muestra una tabla con los resultados obtenidos producto del análisis de ids (ver figura \ref{ida11}). De esta manera, el usuario puede visualizar más claramente el análisis realizado.
+Luego si el usuario lo decide, puede presionar el botón \textit{Abrir} en el cuadro \textit{Ver Tabla en Navegador} (ver figura \ref{ida10} - Flecha 3). Esta acción abre automáticamente el navegador web por defecto del sistema operativo, y mediante una pagina web en formato html, se muestra una tabla con los resultados obtenidos producto del análisis de ids (ver figura \ref{ida11}). De esta manera, el usuario puede visualizar más claramente el análisis realizado, permitiendo también imprimir los resultados en papel (mediante el navegador web), si el usuario lo desea.
 
+Dando como finalizado el proceso necesario que debe realizar el usuario para analizar los ids con la herramienta IDA, en la próxima sección se explican los casos de estudios realizados que demuestran la utilidad de IDA.
+
+\pagebreak
 \section{Casos de Estudio}
 
 En esta sección se presentarán 3 casos de estudios realizados con la herramienta IDA. En cada uno de estos casos, se examinan los ids de un único archivo JAVA. A través de tablas, se irán mostrando los resultados parciales que se van obteniendo durante el proceso de análisis de los ids.
@@ -346,7 +359,7 @@ Tanto los literales y los comentarios se visualizan en IDA a través del \textit
 
 Es importante recordar, que los comentarios y literales de las tablas \ref{tabla3} y \ref{tabla4} son usados para construir la lista de frases que se muestra en la ventana de \textit{Palabras Capturadas} en la figura \ref{ida7} - flecha 4. Esta información es útil para el Algoritmo de Expansión.
 
-A continuación, se procede a analizar los ids, el usuario realiza esto con el \textit{Panel de Análisis} (ver figura \ref{ida6}) aplicando las técnicas de división (Greedy y Samurai) y después la técnica de expansión de abreviaturas. Los resultados más destacados se pueden apreciar en la tabla \ref{tabla5}.
+A continuación, se procede a analizar los ids, el usuario realiza esto con la \textit{Ventana de Análisis} (ver figura \ref{ida6}) aplicando las técnicas de división (Greedy y Samurai) y después la técnica de expansión de abreviaturas. Los resultados más destacados se pueden apreciar en la tabla \ref{tabla5}.
 
 \pagebreak
 
