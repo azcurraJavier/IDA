@@ -328,19 +328,7 @@ Luego si el usuario lo decide, puede presionar el botón \textit{Abrir} en el cu
 
 Dando como finalizado el proceso necesario que debe realizar el usuario para analizar los ids con la herramienta IDA, en la próxima sección se explican los casos de estudios realizados que demuestran la utilidad de IDA.
 
-\pagebreak
-\section{Casos de Estudio}
-
-En esta sección se presentarán 3 casos de estudios realizados con la herramienta IDA. En cada uno de estos casos, se examinan los ids de un único archivo JAVA. A través de tablas, se irán mostrando los resultados parciales que se van obteniendo durante el proceso de análisis de los ids.
-Con estos casos, se pretende ostentar la utilidad de la herramienta IDA en lo que respecta al análisis de ids y mostrar que es un aporte al área de la CP.
-
-\subsection{Buscaminas (Minesweeper)}
-
-El programa JAVA denominado Minesweeper.java, al ejecutarlo posee el clásico y conocido juego llamado Buscaminas (Minesweeper en Inglés - ver figura \ref{caso1}). Este programa contiene un módulo de 250 líneas aproximadamente que fueron analizadas por IDA.
-
-Al ingresarse el programa Minesweeper.java a la herramienta IDA, se da comienzo a la fase de extracción de datos y el analizador sintáctico captura información referente a los ids. Esta información la exhibe IDA al usuario en el \textit{Panel de Elementos Capturados}, en la tabla \textit{Declaraciones} (ver figura \ref{ida3} - flecha 4). En la tabla \ref{tabla2} se puede apreciar esta información: la línea donde esta declarado el id, que representa en el código analizado, el tipo, el modificador .
-
-\begin{figure}[t] %[h] para here [b] para bottom [t] para top
+\begin{figure}[h!] %[h] para here [b] para bottom [t] para top
 \centerline{%queda centrada mejor la imagen
 \includegraphics[scale= 0.6]{./cap4/caso_01.png}
 }
@@ -348,31 +336,30 @@ Al ingresarse el programa Minesweeper.java a la herramienta IDA, se da comienzo 
 \label{caso1}
 \end{figure}
 
+\pagebreak
+
+\section{Casos de Estudio}
+
+En esta sección se presentarán 3 casos de estudio realizados con la herramienta IDA. En cada uno de estos casos, se examinan los ids de un único archivo JAVA. A través de tablas, se irán mostrando los resultados parciales que se van obteniendo durante el proceso de análisis de los ids.
+Con estos casos, se pretende ostentar la utilidad de la herramienta IDA en lo que respecta al análisis de ids y mostrar que es un aporte al área de la CP.
+
+\subsection{Buscaminas (Minesweeper)}
+
+El programa JAVA denominado Minesweeper.java, al ejecutarlo posee el clásico y conocido juego llamado Buscaminas (Minesweeper en Inglés - ver figura \ref{caso1}). El juego consiste en despejar los casilleros de un tablero que posee minas ocultas, sin detonar ninguna de ellas.
+Este programa contiene un módulo de 250 líneas aproximadamente que fueron analizadas por IDA.
+
+\noindent \textbf{\\Captura de Información\\} 
+
+Al ingresarse el programa Minesweeper.java a la herramienta IDA, se da comienzo a la fase de extracción de datos y el analizador sintáctico (AS) captura información referente a los ids. Esta información la exhibe IDA al usuario en el \textit{Panel de Elementos Capturados}, en la tabla \textit{Declaraciones} (ver figura \ref{ida3} - flecha 4). En la tabla \ref{tabla2} se puede apreciar esta información: la línea donde esta declarado el id, que representa en el código analizado, el tipo y el modificador.
 
 Para hacer una descripción más detallada sobre los ids capturados, en la tabla \ref{tabla2} se puede observar que el archivo \mbox{Minesweeper.java}
-tiene ids del tipo \textit{hardwords} y \textit{softwords} (ver capítulo 3). Algunos \textit{hardwords} que se pueden observar son \textsf{min\_mtrx}, \textsf{TOTmin}, \textsf{topPanel} (entre otros), ya que estos poseen una marca de separación que destacan las palabras que lo componen. Por otro lado, algunos de los \textit{softwords} que se capturaron son \textsf{ae}, \textsf{plantmines}, \textsf{bttns} (entre otros).
-
-
-
+tiene ids del tipo \textit{hardwords} y \textit{softwords} (ver capítulo 3 - sección \ref{sec:clasif}). Algunos \textit{hardwords} que se pueden observar son \textsf{min\_mtrx}, \textsf{TOTmin}, \textsf{topPanel} (entre otros), ya que estos poseen una marca de separación que destacan las palabras que lo componen. Por otro lado, algunos de los \textit{softwords} que se capturaron son \textsf{ae}, \textsf{plantmines}, \textsf{bttns} (entre otros).
 A su vez, se capturaron los comentarios junto a la línea del código donde se ubican cada uno, los mismos se muestran en tabla \ref{tabla3}. De la misma forma, los literales Strings que se extrajeron se exhiben en la tabla \ref{tabla4}. En esta tabla, se puede observar que además del número de línea donde se ubica el literal. 
 Tanto los literales y los comentarios se visualizan en IDA a través del \textit{Panel de Elementos Capturados}, eligiendo la pestaña correspondiente (ver figura \ref{ida3} - Flecha 3).
 
-Es importante recordar, que los comentarios y literales de las tablas \ref{tabla3} y \ref{tabla4} son usados para construir la lista de frases que se muestra en la ventana de \textit{Palabras Capturadas} en la figura \ref{ida7} - flecha 4. Esta información es útil para el Algoritmo de Expansión.
+Es importante recordar, que los comentarios y literales de las tablas \ref{tabla3} y \ref{tabla4} son usados para construir la lista de frases que se muestra en la ventana de \textit{Palabras Capturadas} (ver figura \ref{ida7} - flecha 2). Esta información es útil para el Algoritmo de Expansión. De la misma manera, con los comentarios y literales se construye una parte importante del listado de frecuencias locales de aparición de tokens\footnote[1]{El concepto “token” se asocia a palabras que están contenidas en literales, comentarios e ids, este último necesita un proceso especial, para más detalles ver cap. 3 - sección \ref{sec:algSamu}}, que son destinados a ser usados por el Algoritmo de división Samurai. Esta lista se visualiza en IDA también dentro de la ventana de \textit{Palabras Capturadas} (ver figura \ref{ida7} - flecha 1).\\
 
-A continuación, se procede a analizar los ids, el usuario realiza esto con la \textit{Ventana de Análisis} (ver figura \ref{ida6}) aplicando las técnicas de división (Greedy y Samurai) y después la técnica de expansión de abreviaturas. Los resultados más destacados se pueden apreciar en la tabla \ref{tabla5}.
-
-\pagebreak
-
-\noindent \textbf{Análisis de Resultados\\}
-
-La información mostrada en la tabla \ref{tabla5}, las columnas de \textit{Greedy} y \textit{Samurai} muestran los resultados de división de dichos Algoritmos. En las columnas \textit{Expansión desde Greedy} y \textit{Expansión desde Samurai} se enumeran los resultados de haber expandido las distintas partes del id, que resultaron desde los Algoritmos Greedy y Samurai respectivamente.
-
-Los ids analizados por la herramienta IDA (ver tabla \ref{tabla5}) en lo que respecta a \textit{hardwords}, se pueden encontrar con guión bajo  \textsf{min\_imag}, \textsf{min\_mtrx}  para el tipo camel-case  \textsf{uncoverEmpty}, \mbox{\textsf{msgDialog}} y para el caso especial \textsf{TOTmin}, \textsf{MINSnum} (variante camel-case), entre otros. El algoritmo Greedy manifiesta irregularidades a la hora de dividir ya que siempre considera que la mayor cantidad de divisiones es la mejor opción, esto puede observarse en casos como \textsf{min--im--ag},  \textsf{bt--tn--s}, \textsf{min--sn--um} (ver tabla \ref{tabla5} - columna Greedy). Para el caso especial \textsf{MINSnum}, es interesante observar como Samurai se da cuenta de donde hacer la división, y no la considera un caso común de camel-case que la separa antes de la mayúscula seguido de minúscula (ver capítulo 3). No sucediendo lo mismo que Greedy ya supone que es del tipo camel-case haciendo la separación incorrecta \textsf{min--sn--um}.
-
-En lo que respecta a softwords se aprecia la presencia de acrónimos como \textsf{rm} y \textsf{ae} (entre otros). El Algoritmo de Expansión consulta la lista de frases (ver figura \ref{ida7} - flecha 4) conformada por comentarios y los literales capturados (ver tablas \ref{tabla3} y \ref{tabla2}), al encontrar coincidencia con el literal \textsf{“remaining mines”} y el comentario \textsf{“action event”}, selecciona ambos como la expansión correspondiente de \textsf{rm} y \textsf{ae} (ver tabla \ref{tabla5} - Columnas de Expansión).
-El resto de los softwords se puede considerar a \textsf{mins}, \textsf{bttns}, \textsf{dim}, aquí Greedy también acusa inconvenientes separando los ids, mientras que Samurai no los divide (ver tabla \ref{tabla5}). %falta mostrar las tablas de frecuencias
-
-Para finalizar, los ids  \textsf{i}, \textsf{j} son comunes en la mayoría de los códigos, y son difíciles de traducir. Por ende, el Algoritmo de Expansión busca en las tablas de Literales y Comentarios  (ver tablas \ref{tabla3} y \ref{tabla4}), palabras que estén dentro del \textit{Dominio del Problema} y de esta manera tratar de darle una traducción válida en este contexto.
+Habiendo explicado con este caso de estudio como se captura la información asociada a ids, literales y comentarios, en la próxima sección se procede a analizar (para este mismo caso de estudio), los resultados obtenidos producto del análisis de los ids. 
 
 \begin{sidewaystable}[h!]
 \centering
@@ -500,6 +487,26 @@ Para finalizar, los ids  \textsf{i}, \textsf{j} son comunes en la mayoría de lo
      
 \end{table} 
 
+\clearpage
+
+\noindent \textbf{Análisis de Resultados\\}
+
+Cuando el usuario ejecuta las técnicas de análisis de ids, lo lleva a cabo mediante la \textit{Ventana de Análisis} (ver figura \ref{ida6}), aquí se aplican las técnicas de división (Greedy y Samurai) y después la técnica de expansión de abreviaturas.
+Luego, esta \textit{Ventana de Análisis} muestra debajo los resultados obtenidos (ver figura \ref{ida6}). Para el caso del programa Minesweeper.java, los resultados que se obtuvieron producto del análisis de ids, se pueden apreciar en la tabla \ref{tabla5}.
+
+Con respecto a la información mostrada en la tabla \ref{tabla5}, las columnas de \textit{Greedy} y \textit{Samurai} muestran los resultados de división de dichos Algoritmos. En las columnas \textit{Expansión desde Greedy} y \textit{Expansión desde Samurai} se enumeran las expansiones realizadas de las distintas partes del id, que fueron efectuadas desde los Algoritmos Greedy y Samurai respectivamente.
+
+Los ids analizados por IDA de Minesweeper.java (ver tabla \ref{tabla5}), en lo que respecta a \textit{hardwords}, se pueden encontrar con guión bajo  \textsf{min\_imag}, \textsf{min\_mtrx}  para el tipo camel-case  \textsf{uncoverEmpty}, \mbox{\textsf{msgDialog}} y para el caso especial \textsf{TOTmin}, \textsf{MINSnum} (variante camel-case), entre otros. 
+
+El algoritmo Greedy manifiesta irregularidades a la hora de dividir ya que siempre considera que la mayor cantidad de divisiones es la mejor opción (ver capítulo 3 - \ref{sec:algGre}), esto puede observarse en casos como \textsf{min--im--ag},  \textsf{bt--tn--s}, \textsf{min--sn--um} (ver tabla \ref{tabla5} - columna Greedy). Para el caso especial \textsf{MINSnum}, es interesante observar como Samurai se da cuenta de donde hacer la división, y no la considera un caso común de camel-case que la separa antes de la mayúscula seguido de minúscula \textsf{mins--num} (ver capítulo 3 - sección \ref{sec:algSamu}). No sucediendo lo mismo que Greedy ya supone que es del tipo camel-case haciendo la separación incorrecta \textsf{min--snum}.
+
+En lo que respecta a \textit{softwords} se aprecia la presencia de acrónimos como \textsf{rm} y \textsf{ae} (entre otros); ambos algoritmos de división no los dividen, considerando que son justamente acrónimos. A la hora de expandir \textsf{rm}, \textsf{ae}, el Algoritmo de Expansión consulta la lista de frases (ver figura \ref{ida7} - flecha 4) conformada por comentarios y los literales capturados (ver tablas \ref{tabla3} y \ref{tabla2}), al encontrar coincidencia con el literal \textsf{“remaining mines”} y el comentario \textsf{action event}, selecciona ambos como la expansión correspondiente de \textsf{rm} y \textsf{ae} (ver tabla \ref{tabla5} - Columnas de Expansión).
+El resto de los softwords se puede considerar a \textsf{mins}, \textsf{bttns}, \textsf{dim}, aquí Greedy también acusa inconvenientes separando los ids, mientras que Samurai no los divide (ver tabla \ref{tabla5} - Columnas de División). %falta mostrar las tablas de frecuencias
+
+Para finalizar, los ids  \textsf{i}, \textsf{j} son comunes en la mayoría de los códigos, y generalmente se utilizan como contadores en estructuras de control iterativas (\textsf{for}, \textsf{while}, etc). En estos casos, el Algoritmo de Expansión busca palabras que estén dentro del \textit{Dominio del Problema}. Para lograrlo, recurre a las tablas de Literales y Comentarios (ver tablas \ref{tabla3} y \ref{tabla4}), luego trata de encontrar palabras que comiencen con las letras respectivas, para este caso \textsf{image}, \textsf{jpg}. De esta manera el algoritmo, trata de darle una traducción válida en este contexto.
+
+
+
 
 \begin{sidewaystable}[h!]
 
@@ -522,8 +529,8 @@ topPanel&top--panel&top--panel&top panel&top panel\\ \hline
 middlePanel&middle--panel&middle--panel&middle panel&middle panel\\ \hline
 plantmines&plant--mines&plant--mines&planting minesweeper&planting minesweeper\\ \hline
 mins&min--s&mins&mines square&mines\\ \hline
-main&main&main&main&main\\ \hline
-args&args&args&args&args\\ \hline
+%main&main&main&main&main\\ \hline
+%args&args&args&args&args\\ \hline
 actionPerformed&action--performed&action--performed&action performed&action performed\\ \hline
 ae&ae&ae&action event&action event\\ \hline
 uncoverEmpty&uncover--empty&uncover--empty&uncover empty&uncover empty\\ \hline
@@ -560,16 +567,16 @@ yac&y--ac&yac&yellow action&y axe column\\ \hline
 
 \subsection{Editor de Texto}
 
-Cabe destacar que, a modo de facilitar la lectura, de aquí en adelante, por cada caso de estudio, se mostrará únicamente la tabla con resultados obtenidos producto del análisis de los ids. Se excluyen las tablas de comentarios y literales.
-
 En el próximo caso de estudio, se seleccionó un programa escrito en JAVA que corresponde a un editor de texto (ver figura \ref{caso2}). Este editor posee las herramientas básicas para crear o modificar archivos de textos sin formato, permite cambiar la visualización de colores en las letras y en el fondo, también imprime los archivos que se abran en el.
 Este editor esta programado con alrededor de 500 líneas de código, las cuales están escritas en un único archivo llamado Editor.java. 
+
+Cabe destacar que, a modo de facilitar la lectura, de aquí en adelante, por cada caso de estudio, se mostrará únicamente la tabla con resultados obtenidos producto del análisis de los ids y se excluyen el resto de las tablas.
 
 A continuación, el editor de textos se analiza con la herramienta IDA, el análisis efectuado en los ids se exhibe en la tabla \ref{tabla6}. Dado que este programa posee muchos ids, los resultados que se presentan en la tabla \ref{tabla6} son los más destacados y no son la totalidad.\\
 
 \noindent \textbf{Análisis de Resultados\\}
 
-A simple vista, se puede observar en la tabla \ref{tabla6}, al igual que el caso de estudio de la sección anterior, que las divisiones entre Greedy y Samurai, las de este último son las que mejor se realizan. Esto ocurre por que Greedy siempre selecciona la mayor cantidad de divisiones en la palabra como la mejor opción (ver capítulo 3). Ejemplos de divisiones mal hechas por Greedy son \textsf{bckCol} $\rightarrow$ \textsf{b--c--k--col},
+A simple vista, se puede observar en la tabla \ref{tabla6}, al igual que el caso de estudio de la sección anterior, que las divisiones entre Greedy y Samurai, las de este último son las que mejor se realizan. Esto ocurre por que Greedy siempre selecciona la mayor cantidad de divisiones en la palabra como la mejor opción (ver capítulo 3 - \ref{sec:algGre}). Ejemplos de divisiones mal hechas por Greedy son \textsf{bckCol} $\rightarrow$ \textsf{b--c--k--col},
 \textsf{btAcept} $\rightarrow$ \textsf{bt--ace--pt}, \textsf{jChoColor} $\rightarrow$ \textsf{j--c--ho--color}, entre otros. 
 
 Sin embargo, en este caso de estudio a diferencia del anterior existen algunas divisiones en las que Samurai falla, los ids que se pueden observar son: \textsf{flreader}, \textsf{ptjob} los cuales no se dividieron como lo hizo Greedy en \mbox{\textsf{fl--reader}}, \textsf{pt--job}. La primer hipótesis que se maneja sobre este resultado, es que Greedy encuentra en el diccionario en Inglés las palabras \textsf{reader} y \textsf{job}. Mientras que Samurai en su función de \textit{Score}, las palabras \textsf{fl} con \textsf{reader} y \textsf{pt} con \textsf{job} no representan puntajes (score) altos para ser divididas entre ellas \mbox{(ver capítulo 3).}
