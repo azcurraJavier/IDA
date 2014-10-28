@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.8.12)  23 OCT 2014 12:52
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.8.12)  27 OCT 2014 15:39
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -562,13 +562,16 @@ e
 LaTeX Info: Redefining \. on input line 50.
 LaTeX Info: Redefining \% on input line 50.
 
-Cap\'{\i }tulo 5.
-(./cap5/cap5-conclu.tex [1
+Cap\'{\i }tulo 3.
+(./cap3/cap3-analisis.tex [1
 
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]) (./tesis.bbl
-LaTeX Info: Redefining \. on input line 1.
-LaTeX Info: Redefining \% on input line 1.
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
+
+LaTeX Warning: Citation `DFPM05' on page 2 undefined on input line 43.
+
+
+LaTeX Warning: Citation `DMDJ13' on page 2 undefined on input line 43.
 
 
 Package Fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -578,33 +581,444 @@ Package Fancyhdr Warning: \headheight is too small (12.0pt):
 
 [2]
 
+LaTeX Warning: Citation `DFPM05' on page 3 undefined on input line 60.
+
+
+LaTeX Warning: Citation `DMDJ13' on page 3 undefined on input line 60.
+
+
+LaTeX Warning: Citation `DFPM05' on page 3 undefined on input line 65.
+
+
+LaTeX Warning: Citation `DLHD06' on page 3 undefined on input line 65.
+
+
+LaTeX Warning: Citation `DCHD06' on page 3 undefined on input line 65.
+
+[3]
+
+LaTeX Warning: Citation `DCHD06' on page 4 undefined on input line 85.
+
+
+LaTeX Warning: Citation `DCHD06' on page 4 undefined on input line 96.
+
+
+LaTeX Warning: Citation `FBL06' on page 4 undefined on input line 98.
+
+
+LaTeX Warning: Citation `HDD06' on page 4 undefined on input line 98.
+
+
+LaTeX Warning: Citation `DMDJ13' on page 4 undefined on input line 98.
+
+
+Overfull \hbox (6.88855pt too wide) in paragraph at lines 100--101
+\OT1/cmr/m/n/12 iden-ti-fi-ca-dor a trav^^Ses de una mar-ca es-pec^^S^^Pfi-ca; 
+al-gu-nos ejem-plos son: [][]
+ []
+
+[4] <./cap3/idd_1.png, id=24, 313.17pt x 141.52875pt>
+File: ./cap3/idd_1.png Graphic file (type png)
+ <use ./cap3/idd_1.png>
+Package pdftex.def Info: ./cap3/idd_1.png used on input line 115.
+(pdftex.def)             Requested size: 219.21748pt x 99.06944pt.
+
+
+LaTeX Warning: Citation `DFPM05' on page 5 undefined on input line 145.
+
+[5 <./cap3/idd_1.png>]
+
+LaTeX Warning: Citation `DFPM05' on page 6 undefined on input line 158.
+
+
+LaTeX Warning: Citation `DLHD06' on page 6 undefined on input line 158.
+
+[6]
+
+LaTeX Warning: Citation `DFPM05' on page 7 undefined on input line 176.
+
+
+LaTeX Warning: Citation `DLHD06' on page 7 undefined on input line 176.
+
+
+LaTeX Warning: Citation `DMDJ13' on page 7 undefined on input line 176.
+
+
+LaTeX Warning: Citation `DFPM05' on page 7 undefined on input line 179.
+
+
+LaTeX Warning: Citation `DLHD06' on page 7 undefined on input line 179.
+
+
+LaTeX Warning: Citation `DFPM05' on page 7 undefined on input line 181.
+
+
+LaTeX Warning: Citation `DLHD06' on page 7 undefined on input line 181.
+
+
+LaTeX Warning: Citation `DFPM05' on page 7 undefined on input line 184.
+
+[7]
+Underfull \hbox (badness 10000) in paragraph at lines 191--192
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 191--192
+
+ []
+
+<./cap3/idd_2.png, id=37, 841.1425pt x 371.3875pt>
+File: ./cap3/idd_2.png Graphic file (type png)
+ <use ./cap3/idd_2.png>
+Package pdftex.def Info: ./cap3/idd_2.png used on input line 196.
+(pdftex.def)             Requested size: 462.6298pt x 204.26375pt.
+
+[8 <./cap3/idd_2.png>]
+
+LaTeX Warning: Citation `DFPM05' on page 9 undefined on input line 203.
+
+
+LaTeX Warning: Citation `DFPM05' on page 9 undefined on input line 205.
+
+
+LaTeX Warning: Citation `LFBEX07' on page 9 undefined on input line 205.
+
+<./cap3/idd_3.png, id=41, 921.4425pt x 532.99126pt>
+File: ./cap3/idd_3.png Graphic file (type png)
+ <use ./cap3/idd_3.png>
+Package pdftex.def Info: ./cap3/idd_3.png used on input line 212.
+(pdftex.def)             Requested size: 460.72012pt x 266.49498pt.
+
+<./cap3/idd_7.png, id=42, 559.33969pt x 204.765pt>
+File: ./cap3/idd_7.png Graphic file (type png)
+ <use ./cap3/idd_7.png>
+Package pdftex.def Info: ./cap3/idd_7.png used on input line 247.
+(pdftex.def)             Requested size: 391.53511pt x 143.3345pt.
+
+[9]
+Underfull \hbox (badness 10000) in paragraph at lines 264--266
+
+ []
+
+[10 <./cap3/idd_3.png>]
+
+LaTeX Warning: Citation `DFPM05' on page 11 undefined on input line 269.
+
+
+LaTeX Warning: Citation `LFBEX07' on page 11 undefined on input line 276.
+
+
+LaTeX Warning: Citation `DLHD06' on page 11 undefined on input line 276.
+
+[11 <./cap3/idd_7.png>]
+
+LaTeX Warning: Citation `EHPV09' on page 12 undefined on input line 287.
+
+
+LaTeX Warning: Citation `LFBEX07' on page 12 undefined on input line 287.
+
+
+LaTeX Warning: Citation `LFBEX07' on page 12 undefined on input line 293.
+
+[12]
+
+LaTeX Warning: Citation `FBL06' on page 13 undefined on input line 306.
+
+
+LaTeX Warning: Citation `LFBEX07' on page 13 undefined on input line 306.
+
+
+LaTeX Warning: Citation `EZH08' on page 13 undefined on input line 313.
+
+
+Overfull \hbox (2.60083pt too wide) in paragraph at lines 320--322
+[]\OT1/cmr/m/n/12 Es com-pli-
+ []
+
+[13]
+Overfull \hbox (3.37302pt too wide) in paragraph at lines 322--323
+[]\OT1/cmr/m/n/12 Si la abre-
+ []
+
+
+LaTeX Warning: Citation `DLFB06' on page 14 undefined on input line 336.
+
+
+LaTeX Warning: Citation `FBL06' on page 14 undefined on input line 336.
+
+
+LaTeX Warning: Citation `HDD06' on page 14 undefined on input line 336.
+
+
+LaTeX Warning: Citation `LFBEX07' on page 14 undefined on input line 336.
+
+
+LaTeX Warning: Citation `EHPV09' on page 14 undefined on input line 336.
+
+[14] [15]
+Underfull \hbox (badness 10000) in paragraph at lines 360--361
+
+ []
+
+[16]
+
+LaTeX Warning: Citation `EHPV09' on page 17 undefined on input line 469.
+
+[17]
+Overfull \hbox (1.28633pt too wide) in paragraph at lines 471--472
+[]\OT1/cmr/m/n/12 El al-go-rit-mo se-lec-cio-na la par-ti-ci^^Son m^^Sas ade-cu
+a-da en los ids multi-palabra[]
+ []
+
+
+LaTeX Warning: Citation `EZH08' on page 18 undefined on input line 473.
+
+
+LaTeX Warning: Citation `EHPV09' on page 18 undefined on input line 475.
+
+[18] [19] [20]
+
+LaTeX Warning: Citation `EHPV09' on page 21 undefined on input line 575.
+
+
+LaTeX Warning: Citation `EHPV09' on page 21 undefined on input line 582.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 582--583
+
+ []
+
+[21] [22]
+
+LaTeX Warning: Citation `EHPV09' on page 23 undefined on input line 655.
+
+[23]
+
+LaTeX Warning: Citation `LFBEX07' on page 24 undefined on input line 663.
+
+
+LaTeX Warning: Citation `FFCW01' on page 24 undefined on input line 675.
+
+[24] [25]
+
+LaTeX Warning: Citation `LFBEX07' on page 26 undefined on input line 752.
+
+
+LaTeX Warning: Citation `EZH08' on page 26 undefined on input line 752.
+
+
+LaTeX Warning: Citation `EZH08' on page 26 undefined on input line 759.
+
+[26]
+Underfull \hbox (badness 10000) in paragraph at lines 788--789
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 790--791
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 792--793
+
+ []
+
+[27]
+Overfull \hbox (24.96974pt too wide) in paragraph at lines 806--807
+[]\OT1/cmr/m/n/12 Ejemplo: El patr^^Son \OT1/cmss/m/n/12 p\OT1/cmr/m/n/12 [a-z]
+*\OT1/cmss/m/n/12 g\OT1/cmr/m/n/12 [a-z]*\OT1/cmss/m/n/12 m\OT1/cmr/m/n/12 [a-z
+]* coin-ci-de (en-tre otras) con \OT1/cmr/bx/it/12 p\OT1/cmr/m/n/12 ro\OT1/cmr/
+bx/it/12 g\OT1/cmr/m/n/12 ra\OT1/cmr/bx/it/12 m\OT1/cmr/m/n/12 . 
+ []
+
+
+LaTeX Warning: Citation `EZH08' on page 28 undefined on input line 821.
+
+
+LaTeX Warning: Citation `EZH08' on page 28 undefined on input line 823.
+
+[28] [29]
+
+LaTeX Warning: Citation `EZH08' on page 30 undefined on input line 882.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 882--883
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 885--886
+
+ []
+
+[30]
+Overfull \hbox (7.74895pt too wide) in paragraph at lines 901--902
+\OT1/cmr/m/n/12 des-pu^^Ses de ca-da le-tra de la pa-la-bra abre-via-da (\OT1/c
+mr/bx/it/12 pa\OT1/cmr/m/n/12 ). Si \OT1/cmr/bx/it/12 pa$\OT1/cmr/m/n/12 = \OML
+/cmm/m/it/12 c[]; c[]; c[]; ::; c[]$\OT1/cmr/m/n/12 ,
+ []
+
+
+Overfull \hbox (22.38351pt too wide) in paragraph at lines 901--902
+[]\OT1/cmr/m/n/12 . Per-mi-te en-con-trar acr^^Soni-
+ []
+
+
+LaTeX Warning: Citation `EZH08' on page 31 undefined on input line 914.
+
+[31]
+
+LaTeX Warning: Citation `EZH08' on page 32 undefined on input line 957.
+
+[32] <./cap3/exp_3.png, id=126, 615.80063pt x 466.74374pt>
+File: ./cap3/exp_3.png Graphic file (type png)
+
+<use ./cap3/exp_3.png>
+Package pdftex.def Info: ./cap3/exp_3.png used on input line 966.
+(pdftex.def)             Requested size: 431.0575pt x 326.71838pt.
+ [33 <./cap3/exp_3.png>]
+
+LaTeX Warning: Citation `EZH08' on page 34 undefined on input line 975.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 983--984
+
+ []
+
+[34]
+Underfull \hbox (badness 10000) in paragraph at lines 1000--1001
+
+ []
+
+
+LaTeX Warning: Citation `EZH08' on page 35 undefined on input line 1003.
+
+[35]
+
+LaTeX Warning: Citation `EZH08' on page 36 undefined on input line 1031.
+
+
+LaTeX Warning: Citation `DCHD06' on page 36 undefined on input line 1031.
+
+
+LaTeX Warning: Citation `DLHD06' on page 36 undefined on input line 1031.
+
+
+LaTeX Warning: Citation `LFBEX07' on page 36 undefined on input line 1031.
+
+[36] <./cap3/ire_1.png, id=140, 570.63188pt x 118.94438pt>
+File: ./cap3/ire_1.png Graphic file (type png)
+
+<use ./cap3/ire_1.png>
+Package pdftex.def Info: ./cap3/ire_1.png used on input line 1041.
+(pdftex.def)             Requested size: 456.50613pt x 95.15561pt.
+
+
+LaTeX Warning: Citation `BCPT00' on page 37 undefined on input line 1046.
+
+[37 <./cap3/ire_1.png>] <./cap3/ire_2.png, id=146, 520.19344pt x 316.93407pt>
+File: ./cap3/ire_2.png Graphic file (type png)
+
+<use ./cap3/ire_2.png>
+Package pdftex.def Info: ./cap3/ire_2.png used on input line 1064.
+(pdftex.def)             Requested size: 312.11845pt x 190.1619pt.
+
+
+LaTeX Warning: Citation `BCPT99' on page 38 undefined on input line 1073.
+
+[38 <./cap3/ire_2.png>] <./cap3/ire_3.png, id=151, 632.3625pt x 326.72063pt>
+File: ./cap3/ire_3.png Graphic file (type png)
+
+<use ./cap3/ire_3.png>
+Package pdftex.def Info: ./cap3/ire_3.png used on input line 1078.
+(pdftex.def)             Requested size: 379.42043pt x 196.03387pt.
+
+
+LaTeX Warning: Citation `BCPT99' on page 39 undefined on input line 1083.
+
+
+LaTeX Warning: Citation `BCPT00' on page 39 undefined on input line 1083.
+
+
+LaTeX Warning: Citation `BCPT99' on page 39 undefined on input line 1085.
+
+[39 <./cap3/ire_3.png>]
+
+LaTeX Warning: Citation `BCPT00' on page 40 undefined on input line 1092.
+
+<./cap3/ire_4.png, id=156, 554.07pt x 281.55188pt>
+File: ./cap3/ire_4.png Graphic file (type png)
+ <use ./cap3/ire_4.png>
+Package pdftex.def Info: ./cap3/ire_4.png used on input line 1098.
+(pdftex.def)             Requested size: 371.22498pt x 188.63876pt.
+
+[40 <./cap3/ire_4.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 1104--1105
+
+ []
+
+[41]) [42]
+Cap\'{\i }tulo 5.
+(./cap5/cap5-conclu.tex [43
+
+]
+LaTeX Info: Redefining \. on input line 34.
+LaTeX Info: Redefining \% on input line 34.
+ [44]
+LaTeX Info: Redefining \. on input line 64.
+LaTeX Info: Redefining \% on input line 64.
+ [45]) (./tesis.bbl
+LaTeX Info: Redefining \. on input line 1.
+LaTeX Info: Redefining \% on input line 1.
+ [46]
+LaTeX Info: Redefining \. on input line 1.
+LaTeX Info: Redefining \% on input line 1.
+ [47]
+
 LaTeX Warning: Empty `thebibliography' environment on input line 3.
 
-) [3
+) [48
 
 ] (./tesis.aux
 LaTeX Info: Redefining \. on input line 6.
 LaTeX Info: Redefining \% on input line 6.
-) )
+)
+
+LaTeX Warning: There were undefined references.
+
+ )
 (\end occurred inside a group at level 1)
 
 ### semi simple group (level 1) entered at line 8 (\begingroup)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 4805 strings out of 494966
- 63523 string characters out of 6179559
- 158761 words of memory out of 5000000
- 7958 multiletter control sequences out of 15000+600000
- 4544 words of font info for 17 fonts, out of 8000000 for 9000
+ 4925 strings out of 494966
+ 65284 string characters out of 6179559
+ 164880 words of memory out of 5000000
+ 8047 multiletter control sequences out of 15000+600000
+ 12706 words of font info for 45 fonts, out of 8000000 for 9000
  40 hyphenation exceptions out of 8191
- 38i,12n,43p,941b,3715s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 38i,21n,43p,1468b,3872s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
-mbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.p
-fb>
-Output written on tesis.pdf (3 pages, 32014 bytes).
+mbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.p
+fb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb><
+/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmitt10.pfb></usr/
+share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/
+texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive
+/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-
+dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fo
+nts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmss12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt1
+2.pfb>
+Output written on tesis.pdf (48 pages, 1319210 bytes).
 PDF statistics:
- 22 PDF objects out of 1000 (max. 8388607)
- 14 compressed objects within 1 object stream
+ 234 PDF objects out of 1000 (max. 8388607)
+ 151 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 46 words of extra memory for PDF output out of 10000 (max. 10000000)
 

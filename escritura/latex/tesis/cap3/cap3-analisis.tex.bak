@@ -752,6 +752,7 @@ En caso de no tener éxito, la búsqueda continúa en el diccionario predefinido
 Esta técnica de expansión descripta, solo retorna una única expansión potencial para una abreviatura determinada y en caso contrario no retorna nada (líneas 13 y 14). El motivo de esto, es porque no tiene programado como decidir una sola opción ante múltiples alternativas de expansión. A esta característica, los autores lo presentan como trabajo futuro \cite{LFBEX07,EZH08}.
 
 \subsection{Algoritmo de Expansión AMAP}
+\label{sec:algAmap}
 %noindent elimina sangria
 %\noindent \textbf{\\Algoritmo 2}
 

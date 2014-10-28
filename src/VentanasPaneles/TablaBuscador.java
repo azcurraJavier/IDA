@@ -602,7 +602,7 @@ public class TablaBuscador extends javax.swing.JPanel {
                 "\n" +
                 "<table border=\"1\">\n" +
                 "    <tr>      \n" +
-                "      <td><b>Id</td>\n" +
+                "      <td><b>Identificador</td>\n" +
                 "      <td><b>Divisi&oacuten<br/>Greedy</td>\n" +
                 "      <td><b>Divisi&oacuten<br/>Samurai</td>    \n" +
                 "      <td><b>Expansi&oacuten desde<br/>Greedy</td>\n" +
