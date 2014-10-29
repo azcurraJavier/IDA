@@ -69,13 +69,13 @@
 
 %%CAPITULO4=============================================================
 %\setcounter{chapter}{3}
-%\chapter{Identifier Analyzer (IDA)}
-%\input{./cap4/cap4-ida.tex}
+\chapter{Identifier Analyzer (IDA)}
+\input{./cap4/cap4-ida.tex}
 
 %%CAPITULO5=============================================================
-\setcounter{chapter}{4}
-\chapter{Conclusiones}
-\input{./cap5/cap5-conclu.tex}
+%\setcounter{chapter}{4}
+%\chapter{Conclusiones}
+%\input{./cap5/cap5-conclu.tex}
 
 
 \bibliographystyle{plain}%{alpha}
