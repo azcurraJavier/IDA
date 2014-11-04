@@ -1,16 +1,8 @@
 \select@language {spanish}
-\contentsline {chapter}{\numberline {1}Identifier Analyzer (IDA)}{2}
-\contentsline {section}{\numberline {1.1}Introducci\IeC {\'o}n}{2}
-\contentsline {section}{\numberline {1.2}Arquitectura}{3}
-\contentsline {section}{\numberline {1.3}Analizador Sint\IeC {\'a}ctico (Parser)}{5}
-\contentsline {section}{\numberline {1.4}Base de Datos Embebida}{5}
-\contentsline {section}{\numberline {1.5}Proceso de An\IeC {\'a}lisis de Identificadores}{7}
-\contentsline {subsection}{\numberline {1.5.1}Barra de Men\IeC {\'u}s}{7}
-\contentsline {subsection}{\numberline {1.5.2}Lectura de Archivos JAVA}{8}
-\contentsline {subsection}{\numberline {1.5.3}Panel de Elementos Capturados (Parte 1)}{9}
-\contentsline {subsection}{\numberline {1.5.4}Panel de An\IeC {\'a}lisis}{12}
-\contentsline {subsection}{\numberline {1.5.5}Palabras Capturadas y Diccionarios}{13}
-\contentsline {subsection}{\numberline {1.5.6}Panel de Elementos Capturados (Parte 2)}{16}
-\contentsline {section}{\numberline {1.6}Casos de Estudio}{18}
-\contentsline {subsection}{\numberline {1.6.1}Buscaminas (Minesweeper)}{18}
-\contentsline {subsection}{\numberline {1.6.2}Ejemplo 2}{24}
+\contentsline {chapter}{\numberline {5}Conclusiones}{4}
+\contentsline {section}{\numberline {5.1}Herramienta Identifier Analizer (IDA)}{5}
+\contentsline {section}{\numberline {5.2}Trabajos Futuros}{6}
+\contentsline {subsection}{\numberline {5.2.1}Ampliar Captura del Analizador Sint\IeC {\'a}ctico}{7}
+\contentsline {subsection}{\numberline {5.2.2}Implementar otro Algoritmo de Expansi\IeC {\'o}n}{8}
+\contentsline {subsection}{\numberline {5.2.3}Traducci\IeC {\'o}n de Identificadores en C\IeC {\'o}digo}{8}
+\contentsline {subsection}{\numberline {5.2.4}Acoplar a entornos de desarrollos}{9}
