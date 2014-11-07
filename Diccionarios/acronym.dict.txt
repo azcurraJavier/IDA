@@ -217,7 +217,6 @@ bts
 buf
 bwm
 byte
-c
 ca
 cad
 cadd
@@ -758,7 +757,6 @@ grf
 grp
 gui
 gwbasic
-h
 hacmp
 hal
 hasp
@@ -946,7 +944,6 @@ jpl
 jpo
 js
 jz
-k
 kb
 kbd
 kbps
