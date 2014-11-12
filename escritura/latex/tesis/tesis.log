@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2014.5.7)  7 NOV 2014 16:26
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2014.5.7)  12 NOV 2014 20:57
 entering extended mode
  %&-line parsing enabled.
 **tesis.tex
@@ -550,23 +550,27 @@ LaTeX Warning: Citation `LFBEX07' on page 4 undefined on input line 47.
 
 [4]
 
-LaTeX Warning: Reference `sec:algSamu' on page 5 undefined on input line 79.
+LaTeX Warning: Reference `sec:algSamu' on page 5 undefined on input line 81.
 
 [5]
 
-LaTeX Warning: Reference `sec:algSamu' on page 6 undefined on input line 86.
+LaTeX Warning: Reference `sec:algSamu' on page 6 undefined on input line 88.
 
 
-LaTeX Warning: Reference `sec:algAmap' on page 6 undefined on input line 94.
+LaTeX Warning: Reference `sec:algAmap' on page 6 undefined on input line 96.
 
+<./cap5/cod.png, id=24, 604.50844pt x 405.76593pt>
+File: ./cap5/cod.png Graphic file (type png)
+ <use ./cap5/cod.png>
 [6]
 
-LaTeX Warning: Reference `sec:algRest' on page 7 undefined on input line 104.
+LaTeX Warning: Reference `sec:algRest' on page 7 undefined on input line 118.
 
+[7 <./cap5/cod.png>]
 
-LaTeX Warning: Reference `sec:algIdDic' on page 7 undefined on input line 108.
+LaTeX Warning: Reference `sec:algIdDic' on page 8 undefined on input line 122.
 
-[7]) [8] (./tesis.aux)
+) [8] (./tesis.aux)
 
 LaTeX Warning: There were undefined references.
 
@@ -576,13 +580,13 @@ LaTeX Warning: There were undefined references.
 ### semi simple group (level 1) entered at line 8 (\begingroup)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 4116 strings out of 494999
- 51787 string characters out of 1180817
- 142225 words of memory out of 3000000
- 7271 multiletter control sequences out of 15000+50000
+ 4123 strings out of 494999
+ 51878 string characters out of 1180817
+ 142235 words of memory out of 3000000
+ 7276 multiletter control sequences out of 15000+50000
  9935 words of font info for 36 fonts, out of 3000000 for 9000
  54 hyphenation exceptions out of 8191
- 29i,12n,43p,1138b,3408s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 29i,12n,43p,1155b,3408s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx12
 .pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/s
 hare/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-t
@@ -590,9 +594,9 @@ exlive/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texmf-texlive/fonts/
 type1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf-texlive/fonts/type1/public/
 amsfonts/cm/cmss12.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm
 /cmsy10.pfb>
-Output written on tesis.pdf (8 pages, 98613 bytes).
+Output written on tesis.pdf (8 pages, 119438 bytes).
 PDF statistics:
- 57 PDF objects out of 1000 (max. 8388607)
+ 60 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 6 words of extra memory for PDF output out of 10000 (max. 10000000)
 
