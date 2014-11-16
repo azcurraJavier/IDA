@@ -1,3 +1,93 @@
-\begin{thebibliography}{}
+\begin{thebibliography}{10}
+
+\bibitem{AHUL06}
+Alfred~V. Aho, Monica~S. Lam, Ravi Sethi, and Jeffrey~D. Ullman.
+\newblock {\em Compilers: Principles, Techniques, and Tools (2nd Edition)}.
+\newblock Addison Wesley, August 2006.
+
+\bibitem{AAJU83}
+Alfred~V. Aho, Jeffrey~D. Ullman, and John~E. Hopcroft.
+\newblock {\em Data structures and algorithms / Alfred V. Aho, John E.
+  Hopcroft, Jeffrey D. Ullman}.
+\newblock Addison-Wesley Reading, Mass, 1983.
+
+\bibitem{DMDJ13}
+Dave Binkley, Marcia Davis, Dawn Lawrie, Jonathan Maletic, Christopher Morrell,
+  and Bonita Sharif.
+\newblock The impact of identifier style on effort and comprehension.
+\newblock {\em Empirical Software Engineering}, 18(2):219–276, 2013.
+\newblock (early access).
+
+\bibitem{BCPT99}
+Bruno Caprile and Paolo Tonella.
+\newblock Nomen est omen: analyzing the language of function identifiers.
+\newblock In {\em Proc. Sixth Working Conf. on Reverse Engineering}, page
+  112–122. IEEE, October 1999.
+
+\bibitem{BCPT00}
+Bruno Caprile and Paolo Tonella.
+\newblock Restructuring program identifier names.
+\newblock In {\em Proc. Int'l Conf. on Software Maintenance}, page 97–107.
+  IEEE, 2000.
+
+\bibitem{DFPM05}
+Florian DeiBenbock and Markus Pizka.
+\newblock Concise and consistent naming.
+\newblock In {\em IWPC}, page 97–106. IEEE Computer Society, 2005.
+
+\bibitem{EHPV09}
+E.~Enslen, E.~Hill, L.~Pollock, and K.~Vijay-Shanker.
+\newblock Mining source code to automatically split identifiers for software
+  analysis.
+\newblock In {\em 6th IEEE International Working Conference on Mining Software
+  Repositories.}, page 71–80. IEEE, may. 2009.
+
+\bibitem{FBL06}
+Henry Feild, David Binkley, and Dawn Lawrie.
+\newblock An empirical comparison of techniques for extracting concept
+  abbreviations from identifiers.
+\newblock In {\em Proceedings of IASTED International Conference on Software
+  Engineering and Applications.}, 2006.
+
+\bibitem{HDD06}
+Henry Feild, David Binkley, and Dawn Lawrie.
+\newblock Identifier splitting: A study of two techniques.
+\newblock In {\em Proceedings of the Mid-Atlantic Student Workshop on
+  Programming Languages and Systems.}, pages 154--160, 2006.
+
+\bibitem{FFCW01}
+Fangfang Feng and W.~Bruce Croft.
+\newblock Probabilistic techniques for phrase extraction.
+\newblock {\em Inf. Process. Manage.}, 37(2):199–220, 2001.
+
+\bibitem{EZH08}
+Emily Hill, Zachary~P. Fry, Haley Boyd, Giriprasad Sridhara, Yana Novikova,
+  Lori Pollock, and K.~Vijay-Shanker.
+\newblock Amap: Automatically mining abbreviation expansions in programs to
+  enhance software maintenance tools.
+\newblock In {\em Proceedings of the 5th Int'l Working Conf. on Mining Software
+  Repositories.}, page 79–88. ACM, 2008.
+
+\bibitem{LFBEX07}
+D.~Lawrie, H.~Feild, and D.~Binkley.
+\newblock Extracting meaning from abbreviated identifiers.
+\newblock In {\em Source Code Analysis and Manipulation, 2007. SCAM 2007.
+  Seventh IEEE International Working Conference on}, page 213–222, Sept 2007.
+
+\bibitem{DCHD06}
+D.~Lawrie, C.~Morrell, H.~Feild, and D.~Binkley.
+\newblock What's in a name? a study of identifiers.
+\newblock In {\em Program Comprehension, 2006. ICPC 2006. 14th IEEE
+  International Conference on.}, page 3–12, June 2006.
+
+\bibitem{DLHD06}
+Dawn Lawrie, Henry Feild, and David Binkley.
+\newblock Syntactic identifier conciseness and consistency.
+\newblock In {\em SCAM}, page 139–148. IEEE Computer Society, 2006.
+
+\bibitem{DLFB06}
+Dawn Lawrie, Henry Feild, and David Binkley.
+\newblock Quantifying identifier quality: an analysis of trends.
+\newblock {\em Empirical Software Engineering}, 12(4):359--388, 2007.
 
 \end{thebibliography}
