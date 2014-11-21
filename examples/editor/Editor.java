@@ -51,7 +51,7 @@ public class Editor extends JFrame implements ActionListener {
     ImageIcon imIcSearch = new ImageIcon("search"+".gif");
     ImageIcon imIcExit = new ImageIcon("exit"+".gif");
 
-    String PRGName = " "; //program name
+    String PRGname = " "; //program name
 
     //color palette
     JButton textCol = new JButton("    ");
@@ -61,9 +61,9 @@ public class Editor extends JFrame implements ActionListener {
     JColorChooser colorChooser = new JColorChooser();
 
     //text areas
-    JTextArea TEXTArea = new JTextArea();
+    JTextArea TEXTarea = new JTextArea();
 
-    JTextArea textAREAErrors = new JTextArea(6, 1);
+    JTextArea textAREAerrors = new JTextArea(6, 1);
 
     String copy = "";
 
@@ -152,7 +152,7 @@ public class Editor extends JFrame implements ActionListener {
         bckCol.setBackground(Color.WHITE);
 
         add(jTlBar, "North");
-        TEXTArea.requestFocus();
+        TEXTarea.requestFocus();
         jTlBar.setFloatable(false);
 
         //Pop Up Menu
@@ -166,15 +166,15 @@ public class Editor extends JFrame implements ActionListener {
         popUpItCut.setIcon(imIcCut);
         popUpItCopy.setIcon(imIcCopy);
         popUpItPaste.setIcon(imIcPaste);
-        TEXTArea.setComponentPopupMenu(popUpMenu);
+        TEXTarea.setComponentPopupMenu(popUpMenu);
 
         //Add scrollbar to main text area
-        JScrollPane jScrPANtxtAr = new JScrollPane(TEXTArea, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        JScrollPane jScrPANtxtAr = new JScrollPane(TEXTarea, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         add(jScrPANtxtAr);
         
         //Add scrollbar to main text area errors
-        JScrollPane jScrPANErr = new JScrollPane(textAREAErrors, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-        add(jScrPANErr, "South");
+        JScrollPane jScrPANerr = new JScrollPane(textAREAerrors, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+        add(jScrPANerr, "South");
 
         //Close window
         addWindowListener(new WindowAdapter() {
@@ -200,24 +200,24 @@ public class Editor extends JFrame implements ActionListener {
         }
 
         if (ae.getSource() == menItNew || ae.getSource() == jBtNew) {
-            TEXTArea.setText("");
+            TEXTarea.setText("");
         }
 
         if (ae.getSource() == menItCopy || ae.getSource() == popUpItCopy || ae.getSource() == jBtCopy) {
-            TEXTArea.copy();
+            TEXTarea.copy();
         }
 
         if (ae.getSource() == menItPaste || ae.getSource() == popUpItPaste || ae.getSource() == jBtPaste) {
-            TEXTArea.paste();
+            TEXTarea.paste();
         }
 
         if (ae.getSource() == menItCut || ae.getSource() == popUpItCut || ae.getSource() == jBtCut) {
-            TEXTArea.cut();
+            TEXTarea.cut();
         }
 
         if (ae.getSource() == menItSelectAll) {
-            TEXTArea.requestFocus();
-            TEXTArea.selectAll();
+            TEXTarea.requestFocus();
+            TEXTarea.selectAll();
         }
 
         if (ae.getSource() == jBtOpen) {
@@ -260,15 +260,15 @@ public class Editor extends JFrame implements ActionListener {
             File open = fc.getSelectedFile(); //return the file
 
             if (open != null) {
-                PRGName = fc.getSelectedFile().getName();
+                PRGname = fc.getSelectedFile().getName();
             }
 
             if (open != null) {
-                TEXTArea.setText("");
+                TEXTarea.setText("");
                 FileReader flreader = new FileReader(open);
                 BufferedReader read = new BufferedReader(flreader);
                 while ((text = read.readLine()) != null) {
-                    TEXTArea.append(text + "\n"); 
+                    TEXTarea.append(text + "\n"); 
                 }
 
                 read.close();
@@ -286,9 +286,9 @@ public class Editor extends JFrame implements ActionListener {
             fc.showSaveDialog(this);
             File save = fc.getSelectedFile();
             if (save != null) {
-                PRGName = fc.getSelectedFile().getName();
+                PRGname = fc.getSelectedFile().getName();
                 FileWriter fileSave = new FileWriter(save);
-                fileSave.write(TEXTArea.getText());
+                fileSave.write(TEXTarea.getText());
                 fileSave.close();
             }
 
@@ -298,7 +298,7 @@ public class Editor extends JFrame implements ActionListener {
     }
 
     void print() {
-        String printText = TEXTArea.getText();
+        String printText = TEXTarea.getText();
         PrintJob ptjob = getToolkit().getPrintJob(this, "Print sheet", null);
         //print graphics
         Graphics pg = ptjob.getGraphics();
@@ -337,10 +337,10 @@ class FindReplace extends JDialog implements ActionListener {
     Editor ed;
     int pos = 0;
 
-    FindReplace(JFrame DBusRem, String s, boolean b) {
-        super(DBusRem);
+    FindReplace(JFrame jFrFindRep, String s, boolean b) {
+        super(jFrFindRep);
 
-        ed = (Editor) DBusRem;
+        ed = (Editor) jFrFindRep;
         setLayout(new FlowLayout());
         add(jLbFind);
         add(jTxFind);
@@ -367,32 +367,32 @@ class FindReplace extends JDialog implements ActionListener {
             FindMe();
         }
         if (ae.getSource() == jBtRepAll) {
-            ed.TEXTArea.requestFocus();
+            ed.TEXTarea.requestFocus();
             String text = "";
-            text = ed.TEXTArea.getText();
+            text = ed.TEXTarea.getText();
             String s = text.replaceAll(jTxFind.getText(), jTRep.getText()); //Replace all
-            ed.TEXTArea.setText(s);
+            ed.TEXTarea.setText(s);
         }
         if (ae.getSource() == jBtRep) {
-            ed.TEXTArea.requestFocus();
+            ed.TEXTarea.requestFocus();
             String text = "";
-            text = ed.TEXTArea.getText();
+            text = ed.TEXTarea.getText();
             String s = text.replaceFirst(jTxFind.getText(), jTRep.getText()); //Replace all
-            ed.TEXTArea.setText(s);
+            ed.TEXTarea.setText(s);
         }
 
     }
 
     void FindMe() {
-        ed.TEXTArea.requestFocus();
+        ed.TEXTarea.requestFocus();
         String word = "";
         String findText = "";
         word = jTxFind.getText();
-        findText = ed.TEXTArea.getText();
+        findText = ed.TEXTarea.getText();
         //find
         pos = findText.indexOf(word, pos + 1);
         if (pos != -1) {
-            ed.TEXTArea.select(pos, pos + word.length()); //replace 
+            ed.TEXTarea.select(pos, pos + word.length()); //replace 
         } else {
             JOptionPane.showMessageDialog(this, "No results found: " + word);
         }
@@ -409,9 +409,9 @@ class Find extends JDialog implements ActionListener {
 
     Editor ed;
 
-    Find(JFrame DBuscar, String s, boolean b) {
-        super(DBuscar);
-        ed = (Editor) DBuscar;
+    Find(JFrame jFrFind, String s, boolean b) {
+        super(jFrFind);
+        ed = (Editor) jFrFind;
 
         jBtFind.addActionListener(this);
         setLayout(new GridLayout(1, 3));
@@ -429,14 +429,14 @@ class Find extends JDialog implements ActionListener {
 
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == jBtFind) {
-            ed.TEXTArea.requestFocus();
+            ed.TEXTarea.requestFocus();
             String word = "";
             String findText = "";
             word = jTxWord.getText();
-            findText = ed.TEXTArea.getText();
+            findText = ed.TEXTarea.getText();
             pos = findText.indexOf(word, pos);
             if (pos != -1) {
-                ed.TEXTArea.select(pos, pos + word.length());
+                ed.TEXTarea.select(pos, pos + word.length());
             } else {
                 JOptionPane.showMessageDialog(this, "No results for: " + word);
             }
@@ -472,13 +472,13 @@ class ChooseColor extends JDialog implements ActionListener {
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == btAcept) {
             if (type.equals("background")) {
-                ed.TEXTArea.setBackground(jChoColor.getColor());
-                ed.textAREAErrors.setBackground(jChoColor.getColor());
+                ed.TEXTarea.setBackground(jChoColor.getColor());
+                ed.textAREAerrors.setBackground(jChoColor.getColor());
                 ed.bckCol.setBackground(jChoColor.getColor());
             }
             if (type.equals("text")) {
-                ed.TEXTArea.setForeground(jChoColor.getColor());
-                ed.textAREAErrors.setForeground(jChoColor.getColor());
+                ed.TEXTarea.setForeground(jChoColor.getColor());
+                ed.textAREAerrors.setForeground(jChoColor.getColor());
                 ed.textCol.setBackground(jChoColor.getColor());
             }
         }

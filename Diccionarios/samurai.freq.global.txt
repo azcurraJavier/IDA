@@ -600,3 +600,8 @@ lossreturn;1
 group;2
 user;2
 channel;2
+index;1
+img;1
+title;1
+unused;2
+controller;1

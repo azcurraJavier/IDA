@@ -52,7 +52,7 @@ public abstract class SamuraiPaper {
             softwordDiv = SplitUtils.splitSymbol(mt.getNomId());
 
             //separa camelcase
-            softwordDiv = SplitUtils.splitCamelCase(softwordDiv);
+            softwordDiv = SplitUtils.splitLowerToUpper(softwordDiv);
             
             //debe haberse separado sino el softword tendra score y no se separara
             if(softwordDiv.contains(" ")){

@@ -232,10 +232,8 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuAbrirActionPerformed
-        if (fileChooser.getCurrentDirectory() == null) {
-            //si no esta seteado ponemos la carpeta del usuario
-            currentDir = new File(System.getProperty("user.home"));
-        }
+            
+        currentDir = new File(".");        
 
         fileChooser.setCurrentDirectory(currentDir);
         FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivo JAVA","java", "JAVA");
@@ -247,10 +245,7 @@ public class Principal extends javax.swing.JFrame {
         int seleccion = fileChooser.showOpenDialog(fileChooser);
         boolean noErrorSintactico = true;
 
-        if (seleccion == JFileChooser.APPROVE_OPTION) {
-
-            //guardamos el ultimo acceso
-            currentDir = fileChooser.getCurrentDirectory();
+        if (seleccion == JFileChooser.APPROVE_OPTION) {          
 
             archivosAnalisisId = fileChooser.getSelectedFiles();
 

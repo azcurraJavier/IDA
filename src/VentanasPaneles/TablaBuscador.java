@@ -300,7 +300,7 @@ public class TablaBuscador extends javax.swing.JPanel {
                         
             if (exp != null) {
                 //al ser expansion reemplazo los espacios por guion bajo
-                elem2 = elem2.replaceAll(" ", "_");               
+                //elem2 = elem2.replaceAll(" ", "_");               
     
             }            
 

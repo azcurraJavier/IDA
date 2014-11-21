@@ -42,7 +42,7 @@ public class SplitUtilsTest {
         System.out.println("splitCamelCase");
         String c = "testCamelCase";
         String expResult = "test Camel Case";
-        String result = SplitUtils.splitCamelCase(c);
+        String result = SplitUtils.splitLowerToUpper(c);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         //fail("The test case is a prototype.");

@@ -27,7 +27,7 @@ public class GreedyPaper {
         softwordDiv = SplitUtils.splitSymbol(idHardword);
         
         //separa camelcase
-        softwordDiv = SplitUtils.splitCamelCase(softwordDiv);
+        softwordDiv = SplitUtils.splitCamelCaseGreedy(softwordDiv);
         
         //pasamos a minusculas
         softwordDiv = softwordDiv.toLowerCase();       

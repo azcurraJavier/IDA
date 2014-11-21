@@ -23,7 +23,7 @@ public abstract class SplitUtils {
     
     }
     
-    public static String splitCamelCase(String c) {
+    public static String splitLowerToUpper(String c) {
 
         StringBuilder newStr = new StringBuilder();
 
@@ -47,5 +47,23 @@ public abstract class SplitUtils {
         return c;
 
     }    
+    
+    public static String splitCamelCaseGreedy(String c) {
+        
+        String s = "";
+        for (int i = c.length() - 1; i >= 0; i--) {
+            
+            s = c.charAt(i) + s;
+        
+            if(i != 0 && i != c.length() - 1 && Character.isUpperCase(c.charAt(i)) && 
+                        Character.isLowerCase(c.charAt(i+1))){
+                s = " " + s;
+            
+            }
+        
+        }
+
+        return s;
+    }
     
 }

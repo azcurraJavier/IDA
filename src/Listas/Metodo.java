@@ -1,20 +1,13 @@
 package Listas;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Map.Entry;
 
 public class Metodo {
 
     private String modif;
     private String tipo; // vacio si es constructor !!
     private Id ide;
-    private Map<String, Parametro> lisParam;
-    private Map<String, Declaracion> lisDecl;
-    
+        
     private ArrayList<Parametro> listaParam;
     private ArrayList<Declaracion> listaDecl;
     
@@ -28,32 +21,22 @@ public class Metodo {
         this.modif = "";
         this.tipo = "";
         this.ide = null;
-        this.lisDecl = null;
-        this.lisParam = null;
+        this.listaDecl = null;
+        this.listaParam = null;
         this.lisUsoIdDecl = null;
         this.lisUsoIdPara = null;
     }
 
     public Metodo(String modif, String tipo, Id ide) {
-        this.lisParam = new HashMap<>();
-        this.lisDecl = new HashMap<>();
         this.lisUsoIdDecl = new ArrayList<>();
         this.lisUsoIdPara = new ArrayList<>();
         this.modif = modif;
         this.tipo = tipo;
         this.ide = ide;
     }
-
-    public void addListDecl(Map<String, Declaracion> de) {
-        this.lisDecl = de;
-    }
-    
+ 
     public void addListDecl(ArrayList<Declaracion> de) {
         this.listaDecl = de;
-    }
-
-    public void addListParam(Map<String, Parametro> pa) {
-        this.lisParam = pa;
     }
     
     public void addListParam(ArrayList<Parametro> pa) {
@@ -62,14 +45,6 @@ public class Metodo {
 
     public Id getIde() {
         return ide;
-    }
-
-    public Map<String, Declaracion> getLisDecl() {
-        return lisDecl;
-    }
-
-    public Map<String, Parametro> getLisParam() {
-        return lisParam;
     }
 
     public String getModif() {
@@ -185,7 +160,7 @@ public class Metodo {
             }
         }
 
-        if (this.lisParam != null && !this.lisParam.isEmpty()) {
+        if (this.listaParam != null && !this.listaParam.isEmpty()) {
 
             //for (Iterator<Entry<String, Parametro>> it = lisParam.entrySet().iterator(); it.hasNext();) {
             for(Parametro p : this.listaParam){     
