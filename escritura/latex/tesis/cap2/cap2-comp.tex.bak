@@ -1,4 +1,8 @@
-s
+
+En la actualidad se puede clasificar a las estrategias que analizan id en 2 grandes grupos. Las primeras estrategias utilizan grandes diccionarios de palabras, basadas en la lengua inglesa, mientras que las estrategias más recientes utilizan listados de palabras más acordes a la ciencias de la computación, estos listados generalmente se construyen en base al análisis de gran cantidad de programas. Estos listados son más eficientes que los diccionarios ya que contienen palabras más precisas y no ocupan demasiado espacio.
+
+
+
 \section{Introducción}
 En el capítulo 1 se explicó una aproximación para ayudar a comprender programas. Esta solución se basa en el análisis de los identificadores encontrados en el código del sistema de estudio.
 
