@@ -39,20 +39,21 @@ Dr. Mario Marcelo Berón
    }
    {\bfseries\Large
 Dr. Germán Antonio Montejano
-   \vskip1cm
+   \vskip0.7cm
    }
    
 {\bfseries\large
-Departamento de Informática
-\vskip0.5cm
-Facultad de Ciencias Físico Matemáticas y Naturales
-\vskip0.5cm
-Universidad Nacional de San Luis
 
 \begin{figure}[h!]
 \centerline{%queda centrada mejor la imagen
 \includegraphics[scale= 0.1]{./init/unsl_logo.png}} 
 \end{figure}  
+
+Universidad Nacional de San Luis
+\vskip0.5cm
+Facultad de Ciencias Físico Matemáticas y Naturales
+\vskip0.5cm
+Departamento de Informática
 
 }
 \end{titlepage}
