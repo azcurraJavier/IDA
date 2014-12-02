@@ -463,25 +463,22 @@ resultadoSufijo $\leftarrow$ buscarSufijo(\textit{\textbf{s}},“”)
 \subsection{Algoritmo de División: Samurai}
 \label{sec:algSamu}
 
-Esta técnica pensada por Eric Enslen, Emily Hill, Lori Pollock, Vijay-Shanker \cite{EHPV09} divide a los ids en secuencias de palabras al igual que Greedy, con la diferencia que la separación es más efectiva. La estrategia utiliza información que está presente en los códigos, para llevar a cabo el objetivo. Esto permite que no sea necesario utilizar diccionarios predefinidos, además las palabras que se obtienen producto de la división no están limitadas por el contenido de estos diccionarios. De esta manera, la técnica va evolucionando con el tiempo a medida que aparezcan nuevas tecnologías, y nuevas palabras se incorporen al vocabulario de los programadores.
+Esta técnica pensada por Eric Enslen, Emily Hill, Lori Pollock, Vijay-Shanker \cite{EHPV09} divide a los ids en secuencias de palabras al igual que Greedy, con la diferencia que la separación es más efectiva. La estrategia utiliza información que está presente en los códigos, para llevar a cabo el objetivo, asume que el id esta compuesto con palabras que son utilizadas en otras partes del sistema. Esto permite que no sea necesario utilizar diccionarios predefinidos, además las palabras que se obtienen producto de la división no están limitadas por el contenido de estos diccionarios. De esta manera, la técnica va evolucionando con el tiempo a medida que aparezcan nuevas tecnologías, y nuevas palabras se incorporen al vocabulario de los programadores.
 La estrategia de separación Samurai está inspirada en un técnica de expansión de abreviaturas AMAP \cite{EZH08} que se describe en próximas secciones.
 
-Esta técnica asume que el id esta compuesto con palabras que son utilizadas en otras partes del sistema.
+El algoritmo Samurai, selecciona la partición más adecuada en los ids multi-palabra\footnote[1]{Que posee más de una palabra.} en base a una función de puntuación (scoring), que será explicada con más detalles más adelante. Esta función, utiliza información que está presente en dos tablas.
+Una es la \textit{tabla de frecuencias locales}, que posee dos entradas, una entrada tiene el listado de palabras extraídos del programa actual bajo análisis (cada palabra es única en la tabla), y la otra es el número de ocurrencia de cada palabra.
+Por otro lado se encuentra la \textit{tabla de frecuencias globales}. Esta tabla contiene las mismas dos columnas que la tabla anterior, palabras y sus frecuencias. La diferencia principal radica en que la información es recolectada de distintos programas de gran envergadura, y no del programa actual. Esto indica que la \textit{tabla de frecuencias global} está predefinida de antemano.
 
-%VER BIEN ESTOOOOO
+%Las palabras de ambas tablas, pueden estar contenidas en comentarios, literales strings, documentación y a su vez en los propios ids.
 
-El algoritmo Samurai, selecciona la partición más adecuada en los ids multi-palabra\footnote[1]{Que posee más de una palabra.} en base a una función de puntuación (scoring). Esta función, utiliza información que se recauda extrayendo las frecuencias de aparición de palabras dentro del código fuente. Estas palabras pueden estar contenidas en comentarios, literales strings y documentación.
+Los autores de la estrategia Samurai sostienen, que los ids multi-palabras también se encuentran dentro de los comentarios y literales strings del código. Es por esta razón, que el parámetro de entrada del algoritmo se nombra de una manera más genérica: \textit{token}, y no simplemente “identificador”. Por tal motivo, se menciona la expresión “dividir al token”, en lugar del “dividir al identificador”.
 
 %La técnica Samurai según los autores \cite{EHPV09} no solo divide los ids, sino que también aquellos que aparezcan en los comentarios y en los literales strings. 
 %Esto ocurre porque el objetivo de Samurai es más amplio y no solo consiste en dividir ids. 
 %Por esta razón, el parámetro de entrada del algoritmo se denomina \textit{token} en lugar de id.
 
-
-El algoritmo primero se encarga de extraer información respecto a la frecuencia de tokens en el código fuente. Luego se construyen dos tablas de frecuencia de tokens. Para la construcción de una de las tablas primero se ejecuta el algoritmo que extrae del código fuente todos los tokens del tipo hardword. Estos tokens son agregados en la \textit{tabla de frecuencias específicas}. Una entrada de esta tabla corresponde al listado de tokens extraídos del programa actual bajo análisis (cada token es único en la tabla). La otra entrada corresponde al número de ocurrencia de cada token. 
-
-Por otro lado, existe la \textit{tabla de frecuencias globales}. Esta tabla contiene las mismas dos columnas que la tabla anterior, tokens y sus frecuencias. La diferencia principal radica en que la información es recolectada de distintos programas de gran envergadura. 
-
-Durante el proceso de división del token, Samurai ejecuta la función de scoring que se basa en la información de ambas tablas antedichas.
+%Durante el proceso de división del token, Samurai ejecuta la función de scoring que se basa en la información de ambas tablas antedichas.
 
 %\begin{figure}[h] %[h] para here [b] para bottom [t] para top
 %\centering
@@ -638,7 +635,7 @@ i $\leftarrow$ i+1
 \pagebreak
 \noindent \textbf{Función de Scoring}
 
-Para que la técnica samurai pueda llevar a cabo la tarea de separación de ids, se necesita la función de scoring. Como bien se explicó anteriormente esta función participa en 2 decisiones claves durante el proceso de división:
+Para que la técnica Samurai pueda llevar a cabo la tarea de separación de ids, se necesita la función de scoring. Como bien se explicó anteriormente, esta función participa en 2 decisiones claves durante el proceso de división:
 
 \begin{itemize}
 \itemsep0em%reduce espacio
@@ -647,13 +644,15 @@ Para que la técnica samurai pueda llevar a cabo la tarea de separación de ids,
 \item En la rutina \textit{divisiónSoftWord}, para puntuar las diferentes particiones de substrings y elegir la mejor separación (líneas 4, 5, 7 y 8).
 \end{itemize}
 
-Dado un string \textbf{s}, la función \textit{score(\textbf{s})} indica i) la frecuencia de aparición de \textbf{s} en el programa bajo análisis y ii) la frecuencia en un conjunto grande de programas predefinidos. La fórmula es la siguiente:
+Dado un string \textbf{s}, la función \textit{score(\textbf{s})} retorna un valor que indica: i) la frecuencia de aparición de \textbf{s} en el programa bajo análisis, y ii) la frecuencia de aparición de \textbf{s} en un conjunto grande de programas predefinidos. A través de las tablas de frecuencias de aparición local y global respectivamente. La inclusión de esta última, está dada porque los programas pequeños tienen frecuencias bajas en la tabla local y a veces, no se realiza una correcta división.
+
+La fórmula es la siguiente:
 
 \begin{center}
 $Frec(s,p) + ( globalFrec(s) / \log_{10}(totalFrec(p) )$
 \end{center}
 
-Donde \textbf{p} es el programa de estudio, $Frec(s,p)$ es la frecuencia de ocurrencia de \textbf{s} en \textbf{p}. La función $totalFrec(p)$, es la frecuencia total de todos los strings en el programa \textbf{p}. La función $globalFrec(s)$, es la frecuencia de aparición de \textbf{s} en una gran conjunto de programas tomados como muestras\footnote[1]{Estos programas son alrededor de 9000 y están escritos en JAVA} \cite{EHPV09}.
+Donde \textbf{p} es el programa de estudio, $Frec(s,p)$ es la frecuencia de ocurrencia de \textbf{s} en \textbf{p}. La función $totalFrec(p)$, es la frecuencia total de todos los strings en el programa \textbf{p}. La función $globalFrec(s)$, es la frecuencia de aparición de \textbf{s} en una gran conjunto de programas tomados como muestras\footnote[1]{Estos programas son alrededor de 9000 y están escritos en JAVA}. Esta fórmula de score fue desarrollada por los autores, a través del análisis de datos obtenidos \cite{EHPV09}.
 
 \pagebreak
 \subsection{Algoritmo de Expansión Básico}
@@ -671,7 +670,7 @@ El algoritmo de expansión de abreviaturas ideado por Lawrie, Feild, Binkley (mi
 \item Diccionario de palabras.
 \end{itemize}
 
-La primer lista se confecciona de la siguiente manera, las palabras que se incorporan a esta lista se extraen de los comentarios presentes en el código de estudio. También se incorporan palabras hardwords (camel-case o guión bajo) encontradas en los id ubicados en el código, por ejemplo: del id \textsf{easyCase}, se agregan las palabras \textsf{easy} y \textsf{case} al listado, lo que se interpreta aquí, es que las palabras que se agreguen en esta lista, deben ser palabras válidas del lenguaje natural.
+La primer lista se confecciona de la siguiente manera, las palabras que se incorporan a esta lista se extraen de los comentarios presentes en el código de estudio. También se incorporan palabras hardwords (camel-case o guión bajo) encontradas en los id ubicados en el código, por ejemplo: del id \textsf{easyCase}, se agregan las palabras \textsf{easy} y \textsf{case} al listado. Lo que se interpreta aquí, es que las palabras que se agreguen en esta lista, deben ser palabras válidas del lenguaje natural (pertenecen a un diccionario).
 
 La lista de frases se arma utilizando una técnica que extrae frases en lenguaje natural \cite{FFCW01}, el principal recurso son los comentarios y los ids multi-palabras. Este listado de frases se utiliza para expandir acrónimos\footnote[1]{Abreviatura formada por las primeras letras de cada palabra en una frase. Ejemplo gif: Graphics Interchange Format.}, si un id en forma de acrónimo coincide con alguna frase, la misma es considerada como potencial expansión (Ejemplo: la frase \textsf{file status} es una expansión posible para el id \textsf{fs}).
 

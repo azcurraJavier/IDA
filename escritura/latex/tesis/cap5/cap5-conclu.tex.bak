@@ -83,7 +83,7 @@ Si bien existen diferentes técnicas de división de identificadores (Gent-Test,
 En lo que respecta a estrategias de expansión de ids, la técnica básica de expansión es muy sencilla y trae como consecuencias expansiones incorrectas. Esto ocurre debido a que las abreviaturas con pocas letras, generalmente se expanden por medio de diccionarios con palabras en lenguaje natural. Estos diccionarios normalmente contienen amplias variedades de palabras que no están muy relacionadas al dominio del problema y tampoco a las ciencias de la computación.
 Teniendo en cuenta estos inconvenientes, el algoritmo de expansión AMAP \cite{EZH08} contiene mejoras notables al respecto, la búsqueda de palabras candidatas para expandir las abreviaturas comienza en un alcance cercano (palabras ubicadas en sentencias cercaras a la abreviatura), luego en caso de no tener éxito, el alcance se va expandiendo a los métodos (sentencias, comentarios de métodos etc.), clases (comentarios de clase, variables de clase, etc.), programa completo o inclusive las librerías estándar de JAVA. Con esta estrategia, se expanden abreviaciones de manera más precisa y sin utilizar amplios diccionarios.
 
-La mayoría de las técnicas de análisis de identificadores usan diccionarios/listas. Las primeras herramientas como Identifier Restructurer, el algoritmo Greedy y el algoritmo de expansión básico, utilizan diccionarios/listas extensos lo que conlleva a un gasto alto en espacio y baja precisión de efectividad. A medida que se avanzó en la investigación, se pudo comprobar la existencia de técnicas como Samurai y AMAP que disminuyen el espacio utilizado por los primeros algoritmos, produciendo de esta forma aproximaciones más eficientes.
+La mayoría de las técnicas de análisis de identificadores usan diccionarios/listas. Las primeras herramientas como Identifier Restructurer, el algoritmo Greedy y el algoritmo de expansión básico, utilizan diccionarios/listas extensos lo que conlleva a un gasto alto en espacio y baja precisión de efectividad. A medida que se avanzó en la investigación, se pudo comprobar la existencia de técnicas como Samurai y AMAP que disminuyen el espacio utilizado y aumentan la efectividad. La forma en que consiguen esto es explotando más los recursos propios del sistema, en lugar de, apoyarse en recursos externos. Por ende, las técnicas Samurai y AMAP son escalables a nuevas tecnologías y nuevos vocablos en el ámbito de la ciencias de la computación.
 
 \subsection{La Herramienta IDA}
 
@@ -99,7 +99,7 @@ Luego de haber construido la herramienta Identifier Analyzer (IDA), que fue desc
 
 \item[Sistemas Operativos:] Dado que IDA emplea un programa externo para embellecer el código de entrada, se necesitó investigar como realizar las llamadas a programas por línea de comandos, según el Sistema Operativo que se utilice.
 
-\item[Ingeniería del Software:] Se implementaron técnicas de ingeniería inversa, dado un código de entrada, se retorna una tabla descriptiva con los ids analizados.
+\item[Ingeniería del Software:] Se implementaron técnicas de ingeniería inversa, IDA recibe un código de entrada, y retorna una tabla descriptiva con los ids analizados.
 
 \end{description}
 
@@ -160,7 +160,7 @@ Teniendo en cuenta que este AS se va ampliar para que capture las ocurrencias de
  
 \subsection{Implementar otro Algoritmo de Expansión}
 
-Esta propuesta consiste en implementar una nueva técnica de análisis de ids en IDA, más precisamente un nuevo algoritmo de expansión. Este algoritmo es AMAP (Automatically Mining Abbreviation Expansions in Programs) descripto en el capítulo 3 sección \ref{sec:algAmap}. Este algoritmo observa gradualmente en el código las palabras presentes partiendo desde el lugar del id que se desea expandir, si encuentra coincidencia con el id procede a expandirlo, sino sigue ampliando su rango de observación. AMAP no utiliza grandes diccionarios con palabras en Inglés como el caso del algoritmo básico de expansión. En su lugar sigue ampliando el rango de observación en el sistema, hasta llegar a encontrar una palabra candidata.
+Esta propuesta consiste en implementar una nueva técnica de análisis de ids en IDA, más precisamente un nuevo algoritmo de expansión. Un algoritmo interesante es AMAP (Automatically Mining Abbreviation Expansions in Programs) descripto en el capítulo 3 sección \ref{sec:algAmap}. El mismo, observa gradualmente en el código las palabras presentes partiendo desde el lugar del id que se desea expandir, si encuentra coincidencia con el id procede a expandirlo, sino sigue ampliando su rango de observación hasta encontrar un candidato (al método, clase, sistema completo, librería estándar JAVA). AMAP no utiliza grandes diccionarios con palabras en Inglés como el caso del algoritmo básico de expansión.
 Además, AMAP, a diferencia del algoritmo de expansión convencional, posee criterios de selección inteligentes que permiten elegir la mejor expansión para una abreviatura, ante muchas posibilidades de expansión.
 %AMAP brinda la posibilidad de entrenarse con un conjunto de programas pasado como entrada para recopilar más palabras y mejorar aún más la precisión de la expansión. 
 %Esta propuesta para la herramienta IDA mejora las expansiones y brinda al usuario nuevas opciones en lo que respecta al análisis de ids.
