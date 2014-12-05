@@ -56,9 +56,10 @@
 
 %Por otro lado, el algoritmo de expansión básico emplea los mismos diccionarios de palabras que utiliza Greedy, pero con la diferencia que consulta previamente la lista de frases capturadas del código, dando la preferencia a esta lista primero. La lista de frases se arma en función de los comentarios, literales y documentación JAVA Doc extraídos con el parser explicado al principio. Este algoritmo tiene el problema que ante múltiples alternativas de expansión, no sabe elegir una única opción.
 
-En el capítulo anterior se presentó la herramienta IDA, esta herramienta se construyó como resultado de haber estudiado e investigado previamente, distintas estrategias relacionadas al análisis de identificadores (ids). En este último capítulo del correspondiente trabajo final, se brindan algunas conclusiones y se proponen trabajos futuros a realizar.
+%En el capítulo anterior se presentó la herramienta IDA, esta herramienta se construyó como resultado de haber estudiado e investigado previamente, distintas estrategias relacionadas al análisis de identificadores (ids). 
+En este último capítulo del correspondiente trabajo final, se brindan algunas conclusiones y se proponen trabajos futuros a realizar, las cuales se describen a continuación.
 
-\section{Conclusiones Finales}
+\section{Conclusiones}
 
 En este apartado, se describen las conclusiones obtenidas luego de la realización de este trabajo final. Las conclusiones aquí presentadas están referidas a:
 
@@ -76,12 +77,12 @@ A continuación, se desarrollan cada uno de estos ítems.
 
 \subsection{La Investigación sobre el Análisis de\\ Identificadores}
 
-Luego de haber realizado un extenso estudio sobre la temática de análisis de identificadores, el cual fue descripto en el capítulo 3, se describen a continuación las conclusiones pertinentes.
+Luego de haber realizado un extenso estudio sobre la temática de análisis de identificadores, el cual fue descripto en el capítulo 3, se explican a continuación las conclusiones pertinentes.
 
-Si bien existen diferentes técnicas de división de identificadores (Gent-Test, Dynamic Time Warping,  Identifier Name Tokeniser Tool, entre otros) los algoritmos más populares son Greedy y Samurai. El primero porque es sencillo de implementar, y además es muy utilizado como medida de comparación con técnicas más avanzadas \cite{DLFB06,FBL06,HDD06}. El segundo porque es un algoritmo automatizado y supera en desempeño al resto de las técnicas conocidas que separan ids \cite{EHPV09}.
+Si bien existen diferentes técnicas de división de identificadores (Gent-Test, Dynamic Time Warping,  Identifier Name Tokeniser Tool, entre otros) los algoritmos más populares son Greedy y Samurai. El primero porque es sencillo de implementar, y además es muy utilizado como medida de comparación con técnicas más avanzadas \cite{DLFB06,FBL06,HDD06}. El segundo porque es un algoritmo bastante automatizado y tiene un mejor desempeño que las técnicas conocidas que separan ids \cite{EHPV09}.
 
 En lo que respecta a estrategias de expansión de ids, la técnica básica de expansión es muy sencilla y trae como consecuencias expansiones incorrectas. Esto ocurre debido a que las abreviaturas con pocas letras, generalmente se expanden por medio de diccionarios con palabras en lenguaje natural. Estos diccionarios normalmente contienen amplias variedades de palabras que no están muy relacionadas al dominio del problema y tampoco a las ciencias de la computación.
-Teniendo en cuenta estos inconvenientes, el algoritmo de expansión AMAP \cite{EZH08} contiene mejoras notables al respecto, la búsqueda de palabras candidatas para expandir las abreviaturas comienza en un alcance cercano (palabras ubicadas en sentencias cercaras a la abreviatura), luego en caso de no tener éxito, el alcance se va expandiendo a los métodos (sentencias, comentarios de métodos etc.), clases (comentarios de clase, variables de clase, etc.), programa completo o inclusive las librerías estándar de JAVA. Con esta estrategia, se expanden abreviaciones de manera más precisa y sin utilizar amplios diccionarios.
+Siguiendo con las técnicas investigadas, el algoritmo de expansión Automatically Mining Abbreviation Expansions in Programs (AMAP) \cite{EZH08} contiene mejoras notables con respecto al algoritmo de expansión básico, la búsqueda de palabras candidatas para expandir las abreviaturas comienza en un alcance cercano (palabras ubicadas en sentencias cercaras a la abreviatura), luego en caso de no tener éxito, el alcance se va expandiendo a los métodos (sentencias, comentarios de métodos etc.), clases (comentarios de clase, variables de clase, etc.), programa completo o inclusive las librerías estándar de JAVA. Con esta estrategia, se expanden abreviaciones de manera más precisa y sin utilizar amplios diccionarios.
 
 La mayoría de las técnicas de análisis de identificadores usan diccionarios/listas. Las primeras herramientas como Identifier Restructurer, el algoritmo Greedy y el algoritmo de expansión básico, utilizan diccionarios/listas extensos lo que conlleva a un gasto alto en espacio y baja precisión de efectividad. A medida que se avanzó en la investigación, se pudo comprobar la existencia de técnicas como Samurai y AMAP que disminuyen el espacio utilizado y aumentan la efectividad. La forma en que consiguen esto es explotando más los recursos propios del sistema, en lugar de, apoyarse en recursos externos. Por ende, las técnicas Samurai y AMAP son escalables a nuevas tecnologías y nuevos vocablos en el ámbito de la ciencias de la computación.
 
@@ -91,27 +92,28 @@ Luego de haber construido la herramienta Identifier Analyzer (IDA), que fue desc
 
 \begin{description}
 
-\item[Lenguajes de Programación:] Se utilizaron conceptos de lenguajes de programación, relacionados a la sintaxis y la semántica para determinar como se escriben los ids y como expresan su significado. Se  hizo más hincapié en el lenguaje JAVA.
+\item[Lenguajes de Programación:] Se utilizaron conceptos de lenguajes de programación, relacionados a la sintaxis y la semántica. Se hizo hincapié en el lenguaje JAVA, y de como los nombres de los ids impactan en la comprensión de los sistemas.
 
-\item[Base de Datos:] Se emplearon teorías para seleccionar un motor de base de datos adecuado. El mismo, debe mantener y gestionar los diccionarios/listados de palabras para que las técnicas que utiliza IDA, funcionen lo más eficientemente posible.
-
-\item[Compiladores:] Los conocimientos sobre técnicas de compilación, fueron requeridos para construir el Analizador Sintáctico que esta incorporado a IDA, con el objeto de capturar ids, comentarios y literales. 
+\item[Base de Datos:] Se adquirieron cocimientos para seleccionar un motor de base de datos adecuado. El mismo, debe mantener y gestionar los diccionarios/listados de palabras para que las técnicas que utiliza IDA, funcionen lo más eficientemente posible.
 
 \item[Sistemas Operativos:] Dado que IDA emplea un programa externo para embellecer el código de entrada, se necesitó investigar como realizar las llamadas a programas por línea de comandos, según el Sistema Operativo que se utilice.
 
-\item[Ingeniería del Software:] Se implementaron técnicas de ingeniería inversa, IDA recibe un código de entrada, y retorna una tabla descriptiva con los ids analizados.
+%\item[Compiladores:] Los conocimientos sobre técnicas de compilación, fueron requeridos para construir el Analizador Sintáctico que esta incorporado a IDA, con el objeto de capturar ids, comentarios y literales. 
+
+\item[Ingeniería del Software:] Se implementaron técnicas de ingeniería inversa, IDA recibe un código de entrada, y retorna una tabla descriptiva con los ids analizados, para lograrlo se adquirieron conocimientos sobre técnicas para construir un Analizador Sintáctico, con el objeto de capturar ids, comentarios y literales.
 
 \end{description}
 
-Se seleccionó el lenguaje JAVA para la implementación de la herramienta IDA, debido a que dicho lenguaje posee un conjunto amplio de librerías útiles. Algunas de las librerías escritas en JAVA, que se incorporaron en IDA son: ANTLR\footnote[1]{ANother Tool for Language Recognition. http://www.antlr.org}, OpenCloud\footnote[2]{http://opencloud.mcavallo.org}, HSQLDB\footnote[3]{Hyper SQL Data Base. http://www.hsqldb.org}.
+La selección del lenguaje Java para la implementación de la herramienta resulto apropiada porque dicho lenguaje posee un conjunto amplio de librerías útiles. Algunas de las librerías escritas en JAVA, que se incorporaron en IDA son: ANTLR\footnote[1]{ANother Tool for Language Recognition. http://www.antlr.org}, OpenCloud\footnote[2]{http://opencloud.mcavallo.org}, HSQLDB\footnote[3]{Hyper SQL Data Base. http://www.hsqldb.org}.
 
-Otro aspecto importante en IDA, fue construir una interfaz amigable con el usuario. Para lograrlo, fue necesario conocer algunas estrategias de interacción hombre-máquina, y también, aplicar técnicas de visualización tanto textuales, como gráficas. El motivo de esto, se tiene a la vista, la herramienta IDA posee un cuadro con el texto leído desde el archivo, este texto se resalta con color para destacar los distintos elementos que lo componen, en sintonía con la interacción con el usuario. Además se requirió llevar a cabo, una correcta distribución de las tablas, ventanas, botones, menús y todos los componentes visuales que la herramienta IDA tiene.
+La interfaz gráfica de IDA fue construida de manera tal de que sea simple de usar. Para lograr tal objetivo fue necesario la implementación de estrategias de interacción hombre-máquina, y también, aplicar técnicas de visualización tanto textuales, como gráficas. La aplicación de las estrategias antes mencionadas posibilitaron que la herramienta IDA posee un cuadro con el texto leído desde el archivo, este texto se resalta con color para destacar los distintos elementos que lo componen, en sintonía con la interacción con el usuario. Además se requirió llevar a cabo, una correcta distribución de las tablas, ventanas, botones, menús y todos los componentes visuales que la herramienta IDA tiene.
+
 
 \subsection{Casos de Estudio}
 
-Los casos de estudios presentados en este trabajo final, son programas que han sido implementados por otros programadores y por lo tanto son susceptibles a tareas de comprensión. En el caso que se requiera modificar estos programas para ajustarse mejor a las tareas encomendadas, se conoce el funcionamiento de cada uno y por ende los mismos no serán alterados.
+Los casos de estudios presentados en este trabajo final, son programas que han sido implementados por otros programadores y por lo tanto son susceptibles a tareas de comprensión. En el caso que se requieran hacer futuras modificaciones, se sabe como funcionan.
 
-Los resultados que arrojaron la ejecución de estos casos de estudio en IDA, indican que la técnica Samurai fue más efectiva que Greedy. Esto se debe, por que Greedy es una técnica que siempre tiende a dividir a los ids en mayor proporción que lo deseado, y esto se reflejó en los resultados de los casos de estudio. La mayoría de los resultados incorrectos de Greedy fueron causados por el exceso de separaciones. Otro aspecto, es que Greedy basa sus criterios de división, solo en la información provista por diccionarios/listados de palabras predefinidos, sin tener en cuenta la información provista en el código (comentarios y literales) que es propia del dominio del problema.
+Los resultados que arrojaron la ejecución de estos casos de estudio en IDA, indican que la técnica Samurai fue más efectiva que Greedy. Esto se debe, por que Greedy es una técnica que siempre tiende a dividir a los ids en mayor proporción que lo deseado, y esto se reflejó en los resultados de los casos de estudio. La mayoría de los resultados incorrectos de Greedy fueron causados por el exceso de separaciones. Otro aspecto que influyó en los resultados, es que Greedy basa sus criterios de división, solo en la información provista por diccionarios/listados de palabras predefinidos, sin tener en cuenta la información provista en el código (comentarios y literales) que es propia del dominio del problema.
 
 Las expansiones de las abreviaturas de los ids, si se observan los casos fallidos de expansión, los mismos fueron causados por dos motivos principales: cuando la división previa no se efectuó correctamente, y cuando no se encontraron palabras candidatas completas dentro de los comentarios y literales ubicados en el código del programa. En muy pocos casos hubo acierto en la expansión, cuando la fuente de búsqueda era el diccionario de palabras en lenguaje natural. Esto apoya la teoría de que estos diccionarios son imprecisos cuando se trata de analizar ids.
 
@@ -129,7 +131,7 @@ En esta sección se describen propuestas vinculadas a trabajos futuros de la her
 
 \item Implementar otro Algoritmo de Expansión.
 
-\item Generar un Archivo de Salida con Identificadores Expandidos.
+\item Expandir Identificadores en Código.
 
 \item Acoplar a Entornos de Desarrollos.
 
@@ -139,15 +141,16 @@ A continuación, se describen cada uno de ellos.
 
 \subsection{Ampliar la Captura del Analizador Sintáctico}
 
-El Analizador Sintáctico (AS) actual que posee la herramienta IDA no es el “ideal”, debido a que no se capturan las ocurrencias de los ids dentro del código, solo se extraen los ids en su punto de declaración. Esto quiere decir, que todos los ids que se declaran son capturados (ya sean locales dentro de una función, dentro de una estructura de control (if, while, etc.) o una variable de clase), pero no se extraen las ocurrencias, es decir, el uso del id. Desarrollar un AS que también capture las ocurrencias de los ids, implica un gran esfuerzo debido a la complejidad del mismo. Esta conclusión, se determinó mediante la experiencia obtenida producto de la construcción del actual AS de IDA. Sin embargo, para el caso de los comentarios y literales, el AS los extrae en forma completa. 
+El Analizador Sintáctico (AS) actual que posee la herramienta IDA no es el “ideal”, debido a que no se capturan todos los ids dentro del código, solo se extraen los ids en su punto de declaración.
+Esto quiere decir, que todos los ids que se declaran son capturados (ya sean locales dentro de una función, dentro de una estructura de control (if, while, etc.) o una variable de clase), pero no se extraen las ocurrencias, es decir, el uso del id. 
+Desarrollar un AS que también capture las ocurrencias de los ids, implica un gran esfuerzo debido a la complejidad del mismo. Esta conclusión, se determinó mediante la experiencia obtenida producto de la construcción del actual AS de IDA. Sin embargo, para el caso de los comentarios y literales, el AS los extrae en forma completa. 
 
-Si se amplia el AS (si se construye el ideal), para que capture también las ocurrencias de los ids presentes en el archivo JAVA, por un lado se le brindará al usuario mayor información estática asociada a los ids, y por el otro se perfeccionarán las técnicas de análisis de ids. 
-Sin duda, la técnica más beneficiada en este sentido será Samurai, este beneficio viene gracias a la 
-captura de las ocurrencias de ids, por lo tanto las tablas de frecuencias de aparición de palabras serán más precisas, a continuación se brindan más detalles al respecto.
+En función de lo antedicho, una propuesta a futuro es ampliar el AS para que capture todos los ids presentes en los archivos JAVA. Con esto, se brindará al usuario más y mejor información estática asociada a los ids. Por otro lado, se perfeccionarán las técnicas de análisis de ids. 
+Sin duda, la técnica más beneficiada en este sentido será Samurai, más precisamente en las tablas de frecuencias de aparición de palabras, a continuación se explican más detalles al respecto.
 
 Las dos tablas de frecuencias de aparición de palabras que son utilizadas por el Algoritmo Samurai en la función score, son la tabla de frecuencias local y la tabla de frecuencias global (ver capítulo 3 - sección \ref{sec:algSamu}). 
 %Ambas poseen una doble entrada, una es la palabra y la otra es la frecuencia de aparición de cada palabra. 
-En la tabla local se considera la frecuencia de aparición de palabras en el código de estudio actual, mientras que la global se asocia a un conjunto grande de programas externos. A continuación, se explican las mejoras que recibiría cada tabla, si el AS se amplia:
+En la tabla local se considera la frecuencia de aparición de palabras en el código de estudio actual, mientras que la global, se asocia a un conjunto grande de programas externos. A continuación, se explican las mejoras que recibiría cada tabla, si el AS se amplia:
 
 \begin{description}
 \item[Tabla de Frecuencia Local:] Intuitivamente, cada palabra en esta tabla que esté asociada a un id\footnote[1]{Las palabras de las tablas de frecuencias se obtienen de los ids, comentarios y literales.}, tendrá la frecuencia de aparición local mucho más precisa dado que se capturan todas las ocurrencias del id.
@@ -173,7 +176,7 @@ Además, AMAP, a diferencia del algoritmo de expansión convencional, posee crit
 \label{cod}
 \end{figure}
 
-\subsection{Generar un Archivo de Salida con Identificadores Expandidos}
+\subsection{Expandir Identificadores en Código}
 
 Para ubicarse en el contexto de esta mejora, IDA tiene un panel (Panel de Elementos Capturados) en donde se muestra el código del archivo ingresado para que el usuario lo visualice. 
 
