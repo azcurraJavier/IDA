@@ -236,7 +236,7 @@ public class Principal extends javax.swing.JFrame {
         currentDir = new File(".");        
 
         fileChooser.setCurrentDirectory(currentDir);
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivo JAVA","java", "JAVA");
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("java", "JAVA");
         fileChooser.setAcceptAllFileFilterUsed(false);
         fileChooser.setFileFilter(filter);
 

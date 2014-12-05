@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2014.5.7)  4 AUG 2014 10:11
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2014.5.7)  4 DEC 2014 13:21
 entering extended mode
  %&-line parsing enabled.
 **algoritmos.tex
@@ -429,8 +429,11 @@ LaTeX Font Info:    ... okay on input line 25.
 \everyMPtoPDFconversion=\toks24
 ) [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] [3] [4] [5]
-[6] [7] (./algoritmos.aux) )
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] [3] [4]
+
+LaTeX Warning: Text page 5 contains only floats.
+
+[5] [6] [7] (./algoritmos.aux) )
 (\end occurred inside a group at level 1)
 
 ### semi simple group (level 1) entered at line 8 (\begingroup)
@@ -453,7 +456,7 @@ onts/cm/cmr12.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmss
 12.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy10.pfb></us
 r/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/tex
 mf-texlive/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on algoritmos.pdf (7 pages, 139801 bytes).
+Output written on algoritmos.pdf (7 pages, 140195 bytes).
 PDF statistics:
  70 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

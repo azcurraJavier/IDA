@@ -155,7 +155,7 @@ public class ExpandBasic {
             unicaExp = listExp.get(i);
 
             //System.out.println("rand: "+i);
-            System.out.println("La palabra: " + w + " posee: " + listExp.size() + " expansiones, expansión aleatoria: " + unicaExp);
+//            System.out.println("La palabra: " + w + " posee: " + listExp.size() + " expansiones, expansión aleatoria: " + unicaExp);
         }
 
         listExp.clear();

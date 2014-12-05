@@ -187,7 +187,7 @@ public final class DiccionaryPanel extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Palabras Excluidas"));
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Palabras Irrelevantes"));
 
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder("Buscar Palabra"));
 
@@ -262,7 +262,7 @@ public final class DiccionaryPanel extends javax.swing.JDialog {
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton2)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         setSize(new java.awt.Dimension(402, 475));

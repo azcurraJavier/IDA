@@ -55,7 +55,8 @@ public abstract class SplitUtils {
             
             s = c.charAt(i) + s;
         
-            if(i != 0 && i != c.length() - 1 && Character.isUpperCase(c.charAt(i)) && 
+            if(i != 0 && i != c.length() - 1 && 
+                    Character.isUpperCase(c.charAt(i)) && 
                         Character.isLowerCase(c.charAt(i+1))){
                 s = " " + s;
             

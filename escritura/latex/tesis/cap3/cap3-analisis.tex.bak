@@ -3,7 +3,7 @@
 
 \section{Introducción}
 
-En el capítulo anterior se introdujo en el ámbito de comprensión de programas con las definiciones de los conceptos más importantes. Este capítulo se centra en el estado del arte de algunas técnicas y herramientas orientadas a la CP. Las mismas basan su análisis en los identificadores (ids) situados en los códigos de programas. También se explica de la importancia que tienen los comentarios y los literales al momento de examinar ids. Al final del capítulo se describe una conclusión sobre los temas tratados. Para comenzar con el capítulo, a continuación se desarrolla una introducción sobre la temática asociada a identificadores.
+En el capítulo anterior se introdujo en el ámbito de comprensión de programas con las definiciones de los conceptos más importantes. Este capítulo se centra en el estado del arte de algunas técnicas y herramientas orientadas a la CP. Las mismas basan su análisis en los identificadores (ids) situados en los códigos de programas. También se explica de la importancia que tienen los comentarios y los literales al momento de examinar ids. Al final del capítulo se brindan algunos comentarios sobre los temas tratados. Para comenzar con el capítulo, a continuación se desarrolla una introducción sobre la temática asociada a identificadores.
 
 Los equipos de desarrollos de software frecuentemente enfocan todo su esfuerzo en el análisis, diseño, implementación y mantenimiento de los sistemas, restándole importancia a la documentación. Por lo tanto, es común encontrar paquetes de software carentes de documentación, lo cual indica que la lectura de los códigos de los sistemas es la única manera de interpretarlos. Es necesaria la interpretación del sistema sobre todo en grandes equipos de desarrollo, por el simple hecho de que un integrante del equipo puede tomar código ajeno para continuar con su desarrollo o realizar algún tipo de mantenimiento.
 
@@ -463,14 +463,14 @@ resultadoSufijo $\leftarrow$ buscarSufijo(\textit{\textbf{s}},“”)
 \subsection{Algoritmo de División: Samurai}
 \label{sec:algSamu}
 
-Esta técnica pensada por Eric Enslen, Emily Hill, Lori Pollock, Vijay-Shanker \cite{EHPV09} divide a los ids en secuencias de palabras al igual que Greedy, con la diferencia que la separación es más efectiva. La estrategia utiliza información que está presente en los códigos, para llevar a cabo el objetivo, asume que el id esta compuesto con palabras que son utilizadas en otras partes del sistema. Esto permite que no sea necesario utilizar diccionarios predefinidos, además las palabras que se obtienen producto de la división no están limitadas por el contenido de estos diccionarios. De esta manera, la técnica va evolucionando con el tiempo a medida que aparezcan nuevas tecnologías, y nuevas palabras se incorporen al vocabulario de los programadores.
+Esta técnica pensada por Eric Enslen, Emily Hill, Lori Pollock, Vijay-Shanker \cite{EHPV09} divide a los ids en secuencias de palabras al igual que Greedy, con la diferencia que la separación es más efectiva. La estrategia utiliza información que está presente en los códigos, para llevar a cabo el objetivo, asume que el id esta compuesto con palabras que son utilizadas en otras partes del sistema. Esto permite que no sea necesario utilizar diccionarios predefinidos, y por lo tanto, Samurai no está limitado por el contenido de estos diccionarios. De esta manera, la técnica va evolucionando con el tiempo a medida que aparezcan nuevas tecnologías, y nuevas palabras se incorporen al vocabulario de los programadores.
 La estrategia de separación Samurai está inspirada en un técnica de expansión de abreviaturas AMAP \cite{EZH08} que se describe en próximas secciones.
 
 El algoritmo Samurai, selecciona la partición más adecuada en los ids multi-palabra\footnote[1]{Que posee más de una palabra.} en base a una función de puntuación (scoring), que será explicada con más detalles más adelante. Esta función, utiliza información que está presente en dos tablas.
-Una es la \textit{tabla de frecuencias locales}, que posee dos entradas, una entrada tiene el listado de palabras extraídos del programa actual bajo análisis (cada palabra es única en la tabla), y la otra es el número de ocurrencia de cada palabra.
-Por otro lado se encuentra la \textit{tabla de frecuencias globales}. Esta tabla contiene las mismas dos columnas que la tabla anterior, palabras y sus frecuencias. La diferencia principal radica en que la información es recolectada de distintos programas de gran envergadura, y no del programa actual. Esto indica que la \textit{tabla de frecuencias global} está predefinida de antemano.
+Una es la \textit{tabla de frecuencias locales}, que posee dos entradas, una entrada tiene el listado de palabras extraídos del programa actual bajo análisis (cada palabra es única en la tabla), y la otra es el número de ocurrencias (frecuencia de aparición) de cada palabra.
+Por otro lado, se encuentra la \textit{tabla de frecuencias globales}. Esta tabla contiene las mismas dos columnas que la tabla anterior, las palabras y sus frecuencias. La diferencia es que las palabras de la tabla global, se recolectan de distintos programas de gran envergadura, y no del programa actual. Esto indica que la \textit{tabla de frecuencias global} está predefinida de antemano.
 
-%Las palabras de ambas tablas, pueden estar contenidas en comentarios, literales strings, documentación y a su vez en los propios ids.
+Las palabras de ambas tablas, se extraen de los comentarios, literales strings, documentación y a su vez en los propios ids. Para el caso de los ids que son multi-palabras, si son hardwords se dividen y se toma a cada palabra por separado (ejemplo: \textsf{fileSystem} $\Rightarrow$ \textsf{file system} o \textsf{file\_system} $\Rightarrow$ \textsf{file system}).
 
 Los autores de la estrategia Samurai sostienen, que los ids multi-palabras también se encuentran dentro de los comentarios y literales strings del código. Es por esta razón, que el parámetro de entrada del algoritmo se nombra de una manera más genérica: \textit{token}, y no simplemente “identificador”. Por tal motivo, se menciona la expresión “dividir al token”, en lugar del “dividir al identificador”.
 
@@ -488,20 +488,23 @@ Los autores de la estrategia Samurai sostienen, que los ids multi-palabras tambi
 %\end{figure}
 
 %aclarar que puede recivir distintos tipos de ids ademas de los ya mencionados
-El algoritmo ejecuta dos rutinas primero \textit{divisiónHardWord} y después \mbox{\textit{divisiónSoftWord}}. La primera básicamente se encarga de dividir los hardwords (palabras que poseen guión bajo o son del tipo camel-case), luego cada una de las palabras obtenidas son pasadas a la segunda rutina para continuar con el análisis.
+La ejecución del algoritmo Samurai, invoca dos rutinas primero se ejecuta \mbox{\textit{divisiónHardWord}} y después \mbox{\textit{divisiónSoftWord}}. La primera básicamente se encarga de dividir los hardwords (palabras que poseen guión bajo o son del tipo camel-case), luego cada una de las palabras obtenidas (en forma de softword), son pasadas a la segunda rutina para continuar con el análisis. A continuación se explican ambas rutinas.
 
-En la rutina \textit{divisiónHardWord} (ver algoritmo \ref{AHW}) primero se ejecutan dos funciones (líneas 1 y 2). La primera \textit{dividirCaracteresEspecialesDigitos}, que reemplaza todos los posibles caracteres especiales y números que posea el token por espacio en blanco. La segunda \mbox{\textit{dividirMinusSeguidoMayus}}, de la misma forma que la anterior agrega un blanco entre dos caracteres que sea una minúscula seguido por una mayúscula. En este punto solo quedan tokens de la forma softword o que contengan una mayúscula seguido de minúscula (Ejemplos: \textsf{List, ASTVisitor, GPSstate, state, finalstate, MAX}).
+\noindent \textbf{\\División Hardword\\}
 
-Los casos de softword que se obtuvieron (\textsf{finalstate}, \textsf{MAX}) van directo a la rutina \mbox{\textit{divisiónSoftWord}}.
-El resto del tipo mayúscula seguido de minúscula (\textsf{List, ASTVisitor, GPSstate}) continúa con el proceso de división. Aquí se encontrarán casos del tipo \mbox{camel-case} donde la mayúscula indica el comienzo de la nueva palabra (ejemplo: \textsf{List}). Sin embargo, el autor a través de estudios de datos, se encontró con variantes en donde la mayúscula indica el fin de una palabra (ejemplo: \textsf{SQLlist}).
- 
-El algoritmo decide entre ambas opciones calculando el puntaje (score) de la parte derecha de las dos divisiones (líneas 7 y 8). Aquella con puntaje más alto entre las dos será por la cual se decida (línea 9). Tomando como ejemplo el id \textsf{GPSstate}, para el caso camel-case calculará \textit{score(Sstate)} y para la otra variante \textit{score(state)}. Lógicamente, la función score elegirá \textit{state} sobre \textit{sstate} ya que esta última tiene un puntaje inferior, por ende \textsf{GPSstate} se corresponde a la variante de camel-case. La división elegida se lleva a cabo en las líneas 11 y 13 (según el caso).
-Finalmente, todas las partes divididas se envían a \mbox{\textit{divisiónSoftWord} (línea 18)}.
-%Para esclarecer más ambas opciones: a) que la separación se realice entre el cambio de mayúscula y minúscula (ejemplo: \textsf{GPS state} - línea 11).
+En la rutina \textit{divisiónHardWord} (ver algoritmo \ref{AHW}) primero se ejecutan dos funciones (líneas 1 y 2). La primera \textit{dividirCaracteresEspecialesDigitos}, toma al token y reemplaza todos los posibles caracteres especiales y números por espacio en blanco. La segunda \mbox{\textit{dividirMinusSeguidoMayus}}, agrega un blanco entre dos caracteres que sea una minúscula seguido por una mayúscula. En este punto solo quedan tokens de la forma softword o que contengan una mayúscula seguido de minúscula (Ejemplos: \textsf{List, ASTVisitor, GPSstate, state, finalstate, MAX}).
 
-%b) Que se a haga antes de la primer mayúscula siguiendo con la filosofía camel-case (ejemplo: \textsf{GP Sstate} - línea 13). Para este caso, la opción correcta debe ser la a), ya que \textsf{state} debe tener mayor puntaje que \textsf{Sstate}.
+Los casos de softword que se obtuvieron (\textsf{state}, \textsf{finalstate}, \textsf{MAX}) van directo a la rutina \mbox{\textit{divisiónSoftWord}}.
+El resto del tipo, mayúscula seguido de minúscula (\textsf{List, ASTVisitor, GPSstate}) continúa con el proceso de división. Con respecto a estos tipos, el autor, hace la siguiente clasificación:
 
-\begin{algorithm}[H]
+\begin{description}
+\itemsep0em%reduce espacio
+\item[Camel-case sencillo:] La mayúscula indica el comienzo de la nueva palabra. Ejemplos: \textsf{List}, \textsf{AST Visitor}. 
+\item[Variante Camel-case:] El autor a través de estudios de datos, se encontró con variantes en donde la mayúscula indica el fin de una palabra. Ejemplos: \textsf{SQL list}, \textsf{GPS state}.
+\end{description}
+
+
+\begin{algorithm}[t!]
 \LinesNumbered%enumera las lineas
 \SetKwInOut{Input}{Entrada}\SetKwInOut{Output}{Salida}
 \Input{\textbf{\textit{token}} \tcp{\textit{token a dividir}}}
@@ -558,28 +561,24 @@ $scoreAlter \leftarrow$ score(\textbf{\textit{s}}[i+1,n])
 \caption{divisiónHardWord \label{AHW}}
 \end{algorithm}
 
+El algoritmo para determinar cual es el tipo correcto y no tomar malas decisiones (Ejemplos: \textsf{SQ Llist} o \textsf{GP Sstate}), divide a la palabra por ambas consideraciones (ejemplo: \textsf{GP Sstate} y \textsf{GPS state}), luego calcula el puntaje (score) de la parte derecha de ambas divisiones (líneas 7 y 8). Aquella con puntaje más alto entre las dos será por la cual se decida (línea 9). Tomando como ejemplo el id \textsf{GPSstate}, para el caso camel-case calculará \mbox{\textit{score(Sstate)}} y para la otra variante \textit{score(state)}. Intuitivamente, la función score (a través de las tablas de frecuencias de palabras) elegirá \textit{state} sobre \textit{sstate} ya que esta última debería tiene un puntaje inferior (frecuencia menor de aparición). Por ende \textsf{GPSstate}, Samurai se dará cuenta que es del tipo variante camel-case. La división elegida se lleva a cabo en las líneas 11 y 13 (según el caso).
+Finalmente, todas las partes que fueron divididas se envían a \mbox{\textit{divisiónSoftWord} (línea 17, 18)}.
 
-La rutina recursiva \textit{divisiónSoftWord} (ver algoritmo \ref{ASW}) recibe como entrada un substring \textbf{\textit{s}}, el cual puede tener tres tipos de variantes: a) todos los caracteres en minúsculas, b) todos con mayúsculas, c) el primer caracter con mayúscula seguido por todas minúsculas (\textsf{Visitor}). El otro parámetro de entrada es el puntaje original \textbf{\textit{score$_{sd}$}} que corresponde a  \textbf{\textit{s}}.
+%========================
+\noindent \textbf{\\División Softword\\}
 
-La rutina primero examina cada punto posible de división en \textbf{\textit{s}} dividiendo en \textbf{\textit{split$_{izq}$}} y \textbf{\textit{split$_{der}$}} respectivamente (líneas 4 y 5). La decisión de cual es la mejor división se basa en a) substrings que no tengan prefijos o sufijos conocidos, los mismos están disponibles en la página web del autor\footnote[1]{Listas de prefijos y sufijos  http://www.eecis.udel.edu/˜enslen/Site/Samurai.} (línea 6), b) el puntaje de la división elegida sobresalga del resto de los puntajes (líneas 7-9). 
+La rutina recursiva \textit{divisiónSoftWord} (ver algoritmo \ref{ASW}) recibe como entrada un substring \textbf{\textit{s}}, el cual puede tener tres tipos de variantes: a) todos los caracteres en minúsculas (\textsf{visitor}), b) todos con mayúsculas (\textsf{VISITOR}), c) el primer caracter con mayúscula seguido por todas minúsculas (\textsf{Visitor}). El otro parámetro de entrada es el puntaje original (\textbf{\textit{score$_{sd}$}}) correspondiente a \textbf{\textit{s}}.
+
+La rutina primero examina cada punto posible de división en \textbf{\textit{s}} dividiendo en \textbf{\textit{split$_{izq}$}} y \textbf{\textit{split$_{der}$}} respectivamente (líneas 4 y 5). La decisión de cual es la mejor división (línea 9), se basa en a) substrings que no tengan prefijos o sufijos conocidos, los mismos están disponibles en la página web del autor\footnote[1]{Listas de prefijos y sufijos  http://www.eecis.udel.edu/˜enslen/Site/Samurai.} (línea 6), b) el puntaje de la división elegida sobresalga del resto de los puntajes (líneas 7-8).
 
 %una sola division no se llama recursivamente (!prefix ^ toSplitl ^ toSplitr)
-Para aclarar el punto anterior, para cada partición (izquierda o derecha) obtenida se calcula el score (líneas 4 y 5). Luego este es comparado con el puntaje de la palabra original (\textbf{\textit{score$_{sd}$}} score original) y el puntaje de la palabra actual (score(\textbf{\textit{s}})) . En un principio ambas son iguales pero a medida que avanza la recursión score(\textbf{\textit{s}}) varia con respecto a \textbf{\textit{score$_{sd}$}} (líneas 7 y 8).
+Para aclarar los puntos a) y b) anteriores, para cada partición (izquierda o derecha) obtenida se calcula el score (líneas 4 y 5). Luego este se compara con el puntaje máximo (\textit{max(..)}) entre el puntaje de la palabra original (\textbf{\textit{score$_{sd}$}}, score original) y el puntaje de la palabra actual (score(\textbf{\textit{s}})) . En un principio ambos puntajes serán iguales, ya que se trata de la misma palabra, pero a medida que avance la recursión score(\textbf{\textit{s}}) puede variar con respecto a \textbf{\textit{score$_{sd}$}} (líneas 7 y 8). La raíz cuadrada se explica más adelante.
 %agregar ejemplos gráficos etc.
 
 %si se cumple solo la parte izquierda se llama recursivamente (!prefix ^ toSplitl)
-En caso de que no tenga prefijos y sufijos ordinarios, se considera que la parte izquierda es un candidato. Por otro lado, la cadena de la parte derecha se invoca recursivamente con la rutina porque podría seguir dividiéndose en más partes (línea 14).
+El \textsf{si} de la línea 9, controla que no tenga prefijos y sufijos ordinarios, y que la parte derecha e izquierda sean serios candidatos a ser divididos, a su vez, se determina con esto, que la parte derecha es una palabra que no necesita dividirse más. En las líneas 10 y 11 se comprueba que la división se realice siempre y cuando, supere al máximo puntaje obtenido hasta el momento. En la línea 12 procede a separar la palabra.
 
-Si la parte derecha finalmente se divide, luego entre la parte izquierda y la derecha también. Por ejemplo el id \textsf{countrownumber} primero se analiza \textsf{rownumber}(parte derecha - línea 14) como este finalmente se separará en \mbox{\textsf{row number}}, la palabra \textsf{count} (parte izquierda) se divide del resto (línea 16) dando como resultado \textsf{count row number}. Sin embargo, cuando la parte derecha no es dividida tampoco se debería separar entre ambas partes (el \textsf{if} de la línea 13 controla esto). Los análisis de datos hechos por el autor \cite{EHPV09} obligan a hacer este control ya que se encontraron abundantes casos erróneos de división, uno de ellos es \textsf{string ified}. 
-
-
-%que no se debe separar la actual posición, en base solo a la evidencia en la izquierda ya que puede ser erróneo, un caso conocido erróneo es \textsf{string ified}. 
-
-%La ejecución recursiva de samurai para la cadena \textsf{nonnegativedecimaltype} se ejecuta correctamente y da como resultado \textsf{nonnegative decimal type} \cite{EHPV09}.
-
-Otro problema detectado son las palabras de pocos caracteres (menor a 3). Estas palabras, tienen mucha aparición en los códigos y por lo general el puntaje es más alto que el resto. Por esta razón, el autor \cite{EHPV09} en base a un análisis sustancial decide colocar la raíz cuadrada en algunos resultados de score antes de comparar (línea 7 y 8), sino la división frecuentemente seria errónea. Un ejemplo es la palabra \mbox{\textsf{per formed}}. La presencia de la raíz cuadrada en el algoritmo \textit{divisiónHardWord} (línea 9), cuando se compara el caso camel-case y el caso alternativo también es para solucionar este problema.\\
-
-\begin{algorithm}[H]
+\begin{algorithm}[t!]
 \LinesNumbered%enumera las lineas
 \SetKwInOut{Input}{Entrada}\SetKwInOut{Output}{Salida}
 \Input{\textbf{\textit{s}} \tcp{\textit{softword string}}}
@@ -632,8 +631,20 @@ i $\leftarrow$ i+1
 \caption{divisiónSoftWord \label{ASW}}
 \end{algorithm}
 
-\pagebreak
-\noindent \textbf{Función de Scoring}
+El \textsf{si} de la línea 13, controla que no tenga prefijos y sufijos ordinarios, y que unicamente la parte izquierda es un candidato serio a ser separado, mientras que la cadena de la parte derecha se invoca recursivamente con la misma rutina \textit{divisiónSoftWord}, porque podría seguir dividiéndose en más partes (línea 14).
+
+Si la parte derecha finalmente se divide (línea 15 - el \textsf{si} es verdadero), luego entre la parte izquierda y la derecha también. Por ejemplo, el \mbox{id \textsf{countrownumber}} primero se analiza \textsf{rownumber} (parte derecha - línea 14) como este finalmente se separará en \mbox{\textsf{row number}}, la palabra \textsf{count} (parte izquierda) se divide del resto (línea 16), dando como resultado \mbox{\textsf{count row number}}. Sin embargo, cuando la parte derecha no se divide tampoco se debería separar entre ambas partes (línea 15 - el \textsf{si} es falso). Los análisis de datos hechos por el autor \cite{EHPV09} obligan a hacer este control, ya que se encontraron abundantes casos erróneos de división, uno de ellos es \textsf{string ified}. Con este nuevo control al no dividirse \textsf{ified} tampoco lo hará del resto dejando la palabra correctamente unida \textsf{stringified}. 
+
+
+%que no se debe separar la actual posición, en base solo a la evidencia en la izquierda ya que puede ser erróneo, un caso conocido erróneo es \textsf{string ified}. 
+
+%La ejecución recursiva de samurai para la cadena \textsf{nonnegativedecimaltype} se ejecuta correctamente y da como resultado \textsf{nonnegative decimal type} \cite{EHPV09}.
+
+Otro problema detectado son las palabras de pocos caracteres (menor a 3). Estas palabras, tienen mucha aparición en los códigos y por lo general el puntaje es más alto que el resto. Por esta razón, el autor \cite{EHPV09} en base a un análisis sustancial decide colocar la raíz cuadrada en algunos resultados de score antes de comparar (línea 7 y 8), sino la división frecuentemente sería errónea. Un ejemplo es la palabra \mbox{\textsf{per formed}}, esto ocurre por que \textsf{per} tiene un alto puntaje y fuerza la separación.
+
+En el algoritmo anterior \textit{divisiónHardWord}, la presencia de la raíz cuadrada (línea 9), cuando se compara el caso camel-case y el caso alternativo también es para solucionar este mismo problema.
+
+\noindent \textbf{\\Función de Scoring\\}
 
 Para que la técnica Samurai pueda llevar a cabo la tarea de separación de ids, se necesita la función de scoring. Como bien se explicó anteriormente, esta función participa en 2 decisiones claves durante el proceso de división:
 
@@ -644,7 +655,7 @@ Para que la técnica Samurai pueda llevar a cabo la tarea de separación de ids,
 \item En la rutina \textit{divisiónSoftWord}, para puntuar las diferentes particiones de substrings y elegir la mejor separación (líneas 4, 5, 7 y 8).
 \end{itemize}
 
-Dado un string \textbf{s}, la función \textit{score(\textbf{s})} retorna un valor que indica: i) la frecuencia de aparición de \textbf{s} en el programa bajo análisis, y ii) la frecuencia de aparición de \textbf{s} en un conjunto grande de programas predefinidos. A través de las tablas de frecuencias de aparición local y global respectivamente. La inclusión de esta última, está dada porque los programas pequeños tienen frecuencias bajas en la tabla local y a veces, no se realiza una correcta división.
+Dado un string \textbf{s}, la función \textit{score(\textbf{s})} retorna un valor que indica: i) la frecuencia de aparición de \textbf{s} en el programa bajo análisis, y ii) la frecuencia de aparición de \textbf{s} en un conjunto grande de programas predefinidos. Las tablas de frecuencias de aparición de palabras local y global le brindan información a la función score. La inclusión de la tabla de frecuencias global, está dada porque los programas pequeños en general tienen frecuencias bajas en la tabla local, y a veces, la función score no trabaja correctamente a causa de esto.
 
 La fórmula es la siguiente:
 
@@ -666,32 +677,34 @@ El algoritmo de expansión de abreviaturas ideado por Lawrie, Feild, Binkley (mi
 \itemsep0em%reduce espacio
 \item Una lista de palabras (en lenguaje natural) que se extraen del código.
 \item Una lista de frases (en lenguaje natural) presentes también en el código.
-\item Una lista de palabras irrelevantes (stop list).
+\item Una lista de palabras irrelevantes (stop-list).
 \item Diccionario de palabras.
 \end{itemize}
 
-La primer lista se confecciona de la siguiente manera, las palabras que se incorporan a esta lista se extraen de los comentarios presentes en el código de estudio. También se incorporan palabras hardwords (camel-case o guión bajo) encontradas en los id ubicados en el código, por ejemplo: del id \textsf{easyCase}, se agregan las palabras \textsf{easy} y \textsf{case} al listado. Lo que se interpreta aquí, es que las palabras que se agreguen en esta lista, deben ser palabras válidas del lenguaje natural (pertenecen a un diccionario).
 
-La lista de frases se arma utilizando una técnica que extrae frases en lenguaje natural \cite{FFCW01}, el principal recurso son los comentarios y los ids multi-palabras. Este listado de frases se utiliza para expandir acrónimos\footnote[1]{Abreviatura formada por las primeras letras de cada palabra en una frase. Ejemplo gif: Graphics Interchange Format.}, si un id en forma de acrónimo coincide con alguna frase, la misma es considerada como potencial expansión (Ejemplo: la frase \textsf{file status} es una expansión posible para el id \textsf{fs}).
+La primer lista se confecciona de la siguiente manera, para cada método \textit{m} dentro del código se crea una sub-lista de palabras que se extraen de los comentarios que están antes (comentarios JAVA Doc) o dentro del método \textit{m}. También se incorporan palabras hardwords (camel-case o guión bajo) encontradas en los id ubicados en el código, por ejemplo: del id \textsf{easyCase}, se agregan las palabras \textsf{easy} y \textsf{case} al listado. Las palabras que se agreguen en este listado servirán como candidatas a expandir abreviaturas, por eso antes de agregar una palabra en este listado, se filtra utilizando la lista de palabras irrelevantes (esta lista se explica más adelante), para excluir palabras que no colaboran mucho con la expansión y no brindan mucha información.
 
-Las listas de palabras irrelevantes y el diccionario, están predefinidos. La primera está compuesta con palabras relacionadas a artículos/conectores (the, an, or), palabras reservadas del lenguaje de programación que se utilicen (\textsf{while, for, if,} etc.). Además posee palabras que no aportan información importante en la comprensión del código, y que son fácilmente reconocidas por los programadores (esta lista se usa con la misma política que el algoritmo Greedy). Por otro lado, las palabras del diccionario, contiene palabras en lenguaje natural, de diccionarios públicos (similar a utilizado por Greedy).
+La lista de frases también contiene una sub-lista por cada método y se construye con una técnica que extrae frases en lenguaje natural \cite{FFCW01}, el principal recurso son los comentarios y los ids multi-palabras. Este listado de frases se utiliza para expandir acrónimos\footnote[1]{Abreviatura formada por las primeras letras de cada palabra en una frase. Ejemplo gif: Graphics Interchange Format.}, si un id en forma de acrónimo coincide con alguna frase, la misma es considerada como potencial expansión (Ejemplo: la frase \textsf{file status} es una expansión posible para el id \textsf{fs}).
 
-Una vez que las listas de palabras y frases potenciales se confeccionan, comienza la ejecución del algoritmo. Este algoritmo (ver algoritmo \ref{BEA}) recibe como entrada la abreviatura a expandir y las 4 listas antes descriptas. El primer paso, es ver si la abreviatura forma parte de la lista de palabras irrelevantes (stop-list línea 1 y 2, algoritmo \ref{BEA}), en caso afirmativo finaliza la ejecución, ya que no es importante expandir, en caso negativo continúa la ejecución. En caso de continuar, se chequean si alguna de las frases extraídas del código se correspondan con la abreviatura en forma de acrónimo (línea 5, algoritmo \ref{BEA}). %Esto ocurre cuando las primeras letras de cada palabra en la frase se corresponde con las letras de la abreviatura en el mismo orden.
+El listado de palabras irrelevantes y el diccionario, están predefinidos con antelación. El primero está compuesto con palabras relacionadas a artículos/conectores (the, an, or), palabras reservadas del lenguaje de programación que se utilicen (\textsf{while, for, if,} etc.). Además posee palabras que no aportan información importante en la comprensión del código, y que son fácilmente reconocidas por los programadores (esta lista se usa con la misma política que el algoritmo Greedy). Por otro lado, las palabras del diccionario, contiene palabras en lenguaje natural, de diccionarios públicos (similar a utilizado por Greedy).
 
-Si no hubo resultados, prosigue la búsqueda en la lista de palabras recolectadas del código, aquí las letras de la abreviatura deben coincidir en el mismo orden que las letras de una palabra en la lista (línea 8, algoritmo \ref{BEA}). Ejemplos: \mbox{\textsf{horiz}} $\Rightarrow$ HORIZ\textsf{ontal}, \textsf{trg} $\Rightarrow$ TRi\textsf{an}Gl\textsf{e}. En caso de no tener éxito, la búsqueda continúa en el diccionario predefinido como último recurso (línea 10, algoritmo \ref{BEA}), con la misma política de expansión que la búsqueda anterior.
+Una vez que las listas de palabras y frases potenciales se confeccionan, comienza la ejecución del algoritmo. La política que utiliza, es dar prioridad primero a la información extraída del código y más aun, a la cercanía de donde este ubicada la abreviatura a expandir, es decir, se busca primero en la sub-lista correspondiente al método donde se encuentra la abreviatura, luego en el resto de las listas con información extraída del código y por último en el diccionario público.
 
-Esta técnica de expansión descripta, devuelve una única expansión potencial para una abreviatura determinada y en caso contrario no retorna nada (líneas 11 - 14, algoritmo \ref{BEA}). El motivo de esto, es porque no tiene programado como decidir una única opción ante múltiples alternativas de expansión. A esta característica de mejora, los autores lo presentan como trabajo futuro \cite{LFBEX07,EZH08}.
+Este algoritmo (ver algoritmo \ref{BEA}) recibe como entrada la abreviatura a expandir y las 4 listas antes descriptas. El primer paso, es ver si la abreviatura forma parte de la lista de palabras irrelevantes (stop-list línea 1 y 2, algoritmo \ref{BEA}), en caso afirmativo finaliza la ejecución, ya que no es importante expandir, en caso negativo continúa la ejecución. En caso de continuar, se chequean si alguna de las frases extraídas del código se correspondan con la abreviatura en forma de acrónimo\footnote[1]{Las letras de la abreviatura coincidan con las primeras letras de cada palabra en la frase. Ejemplo: fs $\Rightarrow$ file system.} (línea 5, algoritmo \ref{BEA}), dando prioridad aquellas que se encuentren cercanas al método (a través de la sub-lista correspondiente).
+
+Si no hubo resultados, la búsqueda prosigue en la lista de palabras recolectadas del código, en este caso las letras de la abreviatura deben coincidir en el mismo orden que las letras de una palabra en la lista (línea 8, algoritmo \ref{BEA}), si esto se cumple, la palabra elegida se considera una seria candidata, ejemplos: \mbox{\textsf{horiz}} $\Rightarrow$ HORIZ\textsf{ontal}, \textsf{trg} $\Rightarrow$ TR\textsf{ian}G\textsf{le}. Aquí se emplea la misma política de expansión que la búsqueda anterior, dando la preferencia a las palabras que están cerca del método (a través de la sub-lista correspondiente). 
 
 
-\begin{algorithm}[H]
+\begin{algorithm}[h!]
 \LinesNumbered%enumera las lineas
 \SetKwInOut{Input}{Entrada}\SetKwInOut{Output}{Salida}
 \Input{\textit{\textbf{abrev}} \tcp{\textit{Abreviatura a expandir}}}
-\Input{\textit{\textbf{wordList}} \tcp{\textit{Palabras extraídas del código}}}
-\Input{\textit{\textbf{phraseList}} \tcp{\textit{Frases extraídas del código}}}
+\Input{\textit{\textbf{listaPalabras}} \tcp{\textit{Palabras extraídas del código}}}
+\Input{\textit{\textbf{listaFrases}} \tcp{\textit{Frases extraídas del código}}}
 \Input{\textit{\textbf{stopList}} \tcp{\textit{Palabras Excluyentes}}}
 \Input{\textit{\textbf{dicc}} \tcp{\textit{\textit{Diccionario en Inglés}}}}
 \Output{\textbf{únicaExpansión} \tcp{\textit{Abreviatura expandida, o null}}}
+\BlankLine
 \BlankLine
 
 \If{$($\textit{\textbf{abrev}} pertenece \textit{\textbf{stopList}}$)$}{
@@ -700,29 +713,33 @@ Esta técnica de expansión descripta, devuelve una única expansión potencial 
 \BlankLine
 listaExpansión $\leftarrow$ [ ]
 \BlankLine
+\BlankLine
 \tcp{\textit{Buscar coincidencia de acrónimo.}}
 
-\ForAll{$($\textit{\textbf{phrase}} $|$ \textit{\textbf{phrase}} es una frase en \textit{\textbf{phraseList}}$)$}{
+\ForAll{$($\textit{\textbf{Frase}} $|$ \textit{\textbf{Frase}} es una frase en \textit{\textbf{listaFrases}}$)$}{
 \BlankLine
 
-\If{$($\textit{\textbf{abrev}} es un acrónimo de \textit{\textbf{phrase}}$)$}{
-%listaExpansión.add(\textit{\textbf{phrase}}) 
-\Return \textit{\textbf{phrase}} 
+\If{$($\textit{\textbf{abrev}} es un acrónimo de \textit{\textbf{Frase}}$)$}{
+\tcp{\textit{Se prioriza aquella Frase que está en el mismo método que abrev}}
+
+\Return \textit{\textbf{Frase}} 
 }
 }
 
+\BlankLine
 \BlankLine
 \tcp{\textit{Buscar abreviatura común.}}
 
-\ForAll{$($\textit{\textbf{word}} $|$ \textit{\textbf{word}} es una palabra en  \textit{\textbf{wordList}} $)$}{
+\ForAll{$($\textit{\textbf{Pal}} $|$ \textit{\textbf{Pal}} es una palabra en  \textit{\textbf{listaPalabras}} $)$}{
 \BlankLine
-\If{ $($\textit{\textbf{abrev}} es una abreviatura de \textit{\textbf{word}}$)$}{
-%listaExpansión.add(\textit{\textbf{word}}) 
-\Return \textit{\textbf{word}}
+\If{ $($\textit{\textbf{abrev}} es una abreviatura de \textit{\textbf{Pal}}$)$}{
+\tcp{\textit{Se prioriza aquella Pal que está en el mismo método que abrev}} 
+\Return \textit{\textbf{Pal}}
 }
 
 }
 
+\BlankLine
 \BlankLine
 \tcp{\textit{Si no hay éxito, buscar en el diccionario.}}
 
@@ -736,6 +753,7 @@ listaExpansión.add(listaCandidatos)
 \BlankLine
 \textbf{únicaExpansión} $\leftarrow$ null
 \BlankLine
+\BlankLine
 \tcp{\textit{Debe haber un solo resultado, sino no retorna nada.}}
 
 \If{$($length$($listaExpansión$)$ $=$ 1$)$}{
@@ -748,6 +766,9 @@ listaExpansión.add(listaCandidatos)
 \caption{Expansión Básica \label{BEA}}
 \end{algorithm}
 
+Finalmente en caso no tener éxito, con las palabras extraídas del código, la búsqueda continúa en el diccionario predefinido como último recurso (línea 10, algoritmo \ref{BEA}). Al igual que la búsqueda anterior, una palabra candidata dentro del diccionario es aquella que contenga todas las letras en el mismo orden que la abreviatura a expandir, ejemplo: \mbox{\textsf{rctgl}} $\Rightarrow$ R\textsf{e}CT\textsf{an}GL\textsf{e}. Dado que el diccionario posee muchas palabras, puede retornar más de un resultado posible.
+
+Esta técnica de expansión descripta, devuelve una única expansión potencial para una abreviatura determinada y en caso contrario no retorna nada (líneas 11 - 14, algoritmo \ref{BEA}). El motivo de esto, es porque no tiene programado como decidir una única opción ante múltiples alternativas de expansión. A esta característica de mejora, los autores lo presentan como trabajo futuro \cite{LFBEX07,EZH08}.
 
 \subsection{Algoritmo de Expansión AMAP}
 \label{sec:algAmap}
@@ -820,9 +841,9 @@ La búsqueda de palabras singulares se presenta en el algoritmo \ref{BPS}. Los p
 
 En la línea 1 (del algoritmo \ref{BPS}), se impide básicamente dos cosas: 
 
-a) Que no se procesen palabras abreviadas con muchas vocales consecutivas (segundo argumento del \textsf{and} en el \textsf{if}). La autora de AMAP comprobó \cite{EZH08} que la mayoría de las palabras abreviadas con vocales consecutivas se expanden como multi-palabras (ejemplos: es el caso de los acrónimos \textsf{gui} $\Rightarrow$ \textsf{graphical user interface}, \textsf{ioe} $\Rightarrow$ \textsf{invalid object exception}). El algoritmo de la próxima sección es el encargado de expandirlos (multi-palabras).
+a) Que no se procesen palabras abreviadas con muchas vocales consecutivas (segundo argumento del $\land$ en el \textsf{si}). La autora de AMAP comprobó \cite{EZH08} que la mayoría de las palabras abreviadas con vocales consecutivas se expanden como multi-palabras (ejemplos: es el caso de los acrónimos \textsf{gui} $\Rightarrow$ \textsf{graphical user interface}, \textsf{ioe} $\Rightarrow$ \textsf{invalid object exception}). El algoritmo de la próxima sección es el encargado de expandirlos (multi-palabras).
 
-b) En caso de que el patrón sea el \textit{compuesto por letras} (no sea el prefijo), se hacen dos controles más (primer argumento del \textsf{and} en el \textsf{if}). Uno es, que la abreviatura no posea muchas vocales consecutivas (“[\^{}aeiou]+” logra eso) y la otra es que longitud sea mayor a 3. La autora a través del análisis de datos determino esta restricción \cite{EZH08}, ya que el \textit{patrón compuesto por letras} tiene el inconveniente que es muy flexible y tiende a capturar muchas palabras largas incorrectas. Por ejemplo: \textsf{lang} $\Rightarrow$ (\textsf{loading}, \textsf{language}), o \textsf{br} $\Rightarrow$ (\textsf{bar}, \textsf{barrier}, \textsf{brown}), entre otros.
+b) En caso de que el patrón sea el \textit{compuesto por letras} (no sea el prefijo), se hacen dos controles más (primer argumento del $\land$ en el \textsf{si}). Uno es, que la abreviatura no posea muchas vocales consecutivas (“[\^{}aeiou]+” logra eso) y la otra es que longitud sea mayor a 3. La autora a través del análisis de datos determino esta restricción \cite{EZH08}, ya que el \textit{patrón compuesto por letras} tiene el inconveniente que es muy flexible y tiende a capturar muchas palabras largas incorrectas. Por ejemplo: \textsf{lang} $\Rightarrow$ (\textsf{loading}, \textsf{language}), o \textsf{br} $\Rightarrow$ (\textsf{bar}, \textsf{barrier}, \textsf{brown}), entre otros.
 
 En las líneas 2-10 se describe el proceso de búsqueda. Si alguna de estas sentencias de búsqueda encuentran un sola palabra larga candidata, el algoritmo finaliza y retorna el resultado. 
 
@@ -1114,17 +1135,20 @@ Cuando se arma la asociación de los nombres ids con los nuevos nombres generado
 
 Para concluir con las etapas de esta herramienta, la última fase llamada \textbf{Identifier Replacer} toma todas las ocurrencias del id \textsf{updstd\_form} y se reemplaza por \textsf{UpdateStandarForm}, como se mencionó con anterioridad.
 
-\section{Conclusiones}
+\section{Notas y Comentarios}
 
-Las observaciones que se destacan en el estado del arte de las técnicas de análisis de ids apuntan por un lado al asignar buenos nombres a los ids. Al comienzo de este capítulo se detalló una herramienta que ayuda a lograr esta meta. Sin embargo, no trascendió ya que es costosa de utilizar sobre grandes proyectos de software y solo es efectiva cuando se emplea desde el arranque del desarrollo de un sistema.
+Las observaciones que se destacan en el estado del arte de las técnicas de análisis de ids apuntan por un lado, que asignar buenos nombres a los ids ayudan a comprender el sistema. Al comienzo de este capítulo se explicó la herramienta Identifier Dictionary (IDD) que ayuda a lograr este cometido. Sin embargo, no trascendió ya que es costosa de utilizar sobre grandes proyectos de software y solo es efectiva cuando se emplea desde el arranque del desarrollo de un sistema.
 
-Los nombres en los ids es crucial para la comprensión de los sistemas, un código con ids más descriptivos y claros se entiende mucho mejor. Además en este contexto, las herramientas/técnicas de análisis de ids mejoran sus resultados. De esta manera, es más sencillo extraer conceptos del dominio del problema desde los ids.
+La investigación realizada por los autores de IDD, dejaron en claro que los nombres en los ids es crucial para la comprensión de los sistemas, un código con ids más descriptivos y claros se entiende mucho mejor. Además en este contexto, las herramientas/técnicas de análisis de ids mejoran sus resultados. 
+%De esta manera, es más sencillo extraer conceptos del dominio del problema desde los ids.
 
-Las herramientas/técnicas de análisis de ids han ido evolucionando con el pasar del tiempo. Al principio algunas etapas necesitaban la intervención del usuario para realizar las tareas, se puede decir que usaban procesos semi-automatizados (ejemplo: \textbf{Identifier Restructurer}). A medida que se construyeron nuevas técnicas, se buscó más la automatización haciendo que el programador se involucre menos (ejemplo: AMAP).
+Con respecto a otras herramientas/técnicas de análisis de ids, las mismas han ido evolucionando con el pasar del tiempo. Al principio algunas etapas necesitaban la intervención del usuario para realizar las tareas, se puede decir que usaban procesos semi-automatizados (ejemplo: \textbf{Identifier Restructurer}). A medida que se construyeron nuevas técnicas, se buscó más la automatización haciendo que el programador se involucre menos (ejemplo: Samurai, AMAP). 
 
-Como se mencionó en este capítulo, las primeras técnicas utilizaban netamente diccionarios de palabras en lenguaje natural, lo cual requiere mucho espacio de almacenamiento (ejemplo: Greedy). Más tarde, se intentó disminuir el uso de estos diccionarios mirando más los recursos internos de información dentro los sistemas, como es el caso de los comentarios, literales strings y la documentación (ejemplo: Samurai).
+Estos son algunos comentarios hechos en base a la investigación descripta en este capítulo, en el próximo capítulo se describe una herramienta de análisis de ids que se construyó, tomando como referencia algunas de las características propias de las técnicas de analisis de ids vistas hasta ahora.
 
-Sin embargo, suele ocurrir que estos recursos internos son escasos. Es por esto, que los autores de las recientes técnicas decidieron recurrir a procesos que examinan programas de gran envergadura. Estos procesos recolectan palabras útiles que son almacenadas en forma de diccionarios. Estos diccionarios no solo ayudan a traducir el significado de los ids, también tiene bajas exigencias de almacenamiento y están constituidos con palabras más adecuadas al ámbito de las ciencias de la computación.
+%Como se mencionó en este capítulo, las primeras técnicas utilizaban netamente diccionarios de palabras en lenguaje natural, lo cual requiere mucho espacio de almacenamiento (ejemplo: Greedy). Más tarde, se intentó disminuir el uso de estos diccionarios mirando más los recursos internos de información dentro los sistemas, como es el caso de los comentarios, literales strings y la documentación (ejemplo: Samurai).
+
+%Los autores de las recientes técnicas (Samurai, AMAP) decidieron recurrir a procesos que examinan programas de gran envergadura. Estos procesos recolectan palabras útiles que son almacenadas en forma de listas de palabras. Estos listados no solo ayudan a traducir el significado de los ids, también tiene bajas exigencias de almacenamiento y están constituidos con palabras más adecuadas al ámbito de las ciencias de la computación.
 
 
 %Con este estudio se puede observar que los ids son una fuente importante de información, por eso elaborar técnicas que analicen ids es un aporte destacado para la CP.

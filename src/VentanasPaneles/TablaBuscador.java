@@ -565,9 +565,15 @@ public class TablaBuscador extends javax.swing.JPanel {
         Set<String> setCol = new HashSet<>(Arrays.asList("Nombre ID", "Div Greedy", "Div Samurai", "Expansión de Greedy", "Expansión de Samurai"));
         
         String tablaCont = "";
+        
+        Set<String> alreadyId = new HashSet<>();//excluye ids repetidos
+        
+        for(int i =0;i<modeloTabla.getRowCount();i++ ){     
+                     
+            if(alreadyId.contains(cleanHtml(modeloTabla.getValueAt(i, 2).toString()))){
+                continue;    //excluye ids repetidos        
+            }          
             
-        for(int i =0;i<modeloTabla.getRowCount();i++ ){       
-         
             tablaCont += "<tr>";
             
             for(int j =0;j<modeloTabla.getColumnCount();j++ ){
@@ -575,12 +581,15 @@ public class TablaBuscador extends javax.swing.JPanel {
                 if (!setCol.contains(modeloTabla.getColumnName(j).toString())) {
                     continue;
                 }
-            
+                
                 tablaCont += "<td>"+cleanHtml(modeloTabla.getValueAt(i, j).toString())+"</td>";
+                
             
-            
-            }
+                }
             tablaCont += "</tr>";
+            
+            alreadyId.add(cleanHtml(modeloTabla.getValueAt(i, 2).toString()));//excluye ids repetidos
+                
         }
         
         

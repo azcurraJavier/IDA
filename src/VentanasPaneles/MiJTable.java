@@ -21,7 +21,8 @@ public class MiJTable extends JTable {
     }
 
     public MiJTable(MiModelo m) {
-        super(m);        
+        super(m);
+        setFocusable(false);
     }
 
     public void autoAjuste() {
