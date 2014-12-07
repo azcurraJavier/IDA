@@ -28,34 +28,34 @@
 \contentsline {subsection}{\numberline {3.4.1}Conceptos y Desaf\IeC {\'\i }os observados}{33}
 \contentsline {subsection}{\numberline {3.4.2}Algoritmo de Divisi\IeC {\'o}n: Greedy}{35}
 \contentsline {subsection}{\numberline {3.4.3}Algoritmo de Divisi\IeC {\'o}n: Samurai}{40}
-\contentsline {subsection}{\numberline {3.4.4}Algoritmo de Expansi\IeC {\'o}n B\IeC {\'a}sico}{46}
-\contentsline {subsection}{\numberline {3.4.5}Algoritmo de Expansi\IeC {\'o}n AMAP}{49}
-\contentsline {subsection}{\numberline {3.4.6}Herramienta: Identifier Restructuring}{60}
-\contentsline {section}{\numberline {3.5}Conclusiones}{65}
-\contentsline {chapter}{\numberline {4}Identifier Analyzer (IDA)}{66}
-\contentsline {section}{\numberline {4.1}Introducci\IeC {\'o}n}{66}
-\contentsline {section}{\numberline {4.2}Arquitectura}{68}
-\contentsline {section}{\numberline {4.3}Analizador Sint\IeC {\'a}ctico}{69}
-\contentsline {section}{\numberline {4.4}Base de Datos Embebida}{70}
-\contentsline {section}{\numberline {4.5}Proceso de An\IeC {\'a}lisis de Identificadores}{71}
-\contentsline {subsection}{\numberline {4.5.1}Barra de Men\IeC {\'u}}{71}
-\contentsline {subsection}{\numberline {4.5.2}Lectura de Archivos JAVA}{73}
-\contentsline {subsection}{\numberline {4.5.3}Panel de Elementos Capturados}{74}
-\contentsline {subsection}{\numberline {4.5.4}Ventana de An\IeC {\'a}lisis}{77}
-\contentsline {subsection}{\numberline {4.5.5}Palabras Capturadas y Diccionarios}{79}
-\contentsline {subsection}{\numberline {4.5.6}Nuevamente al Panel de Elementos Capturados}{82}
-\contentsline {section}{\numberline {4.6}Casos de Estudio}{85}
-\contentsline {subsection}{\numberline {4.6.1}Buscaminas (Minesweeper)}{85}
-\contentsline {subsection}{\numberline {4.6.2}Editor de Texto}{92}
-\contentsline {subsection}{\numberline {4.6.3}Top Gun}{97}
-\contentsline {section}{\numberline {4.7}Notas y Comentarios sobre casos de\\ estudio}{100}
-\contentsline {chapter}{\numberline {5}Conclusiones y Trabajos Futuros}{102}
-\contentsline {section}{\numberline {5.1}Conclusiones Finales}{102}
+\contentsline {subsection}{\numberline {3.4.4}Algoritmo de Expansi\IeC {\'o}n B\IeC {\'a}sico}{47}
+\contentsline {subsection}{\numberline {3.4.5}Algoritmo de Expansi\IeC {\'o}n AMAP}{50}
+\contentsline {subsection}{\numberline {3.4.6}Herramienta: Identifier Restructuring}{61}
+\contentsline {section}{\numberline {3.5}Notas y Comentarios}{66}
+\contentsline {chapter}{\numberline {4}Identifier Analyzer (IDA)}{67}
+\contentsline {section}{\numberline {4.1}Introducci\IeC {\'o}n}{67}
+\contentsline {section}{\numberline {4.2}Arquitectura}{69}
+\contentsline {section}{\numberline {4.3}Analizador Sint\IeC {\'a}ctico}{70}
+\contentsline {section}{\numberline {4.4}Base de Datos Embebida}{71}
+\contentsline {section}{\numberline {4.5}Proceso de An\IeC {\'a}lisis de Identificadores}{72}
+\contentsline {subsection}{\numberline {4.5.1}Barra de Men\IeC {\'u}}{72}
+\contentsline {subsection}{\numberline {4.5.2}Lectura de Archivos JAVA}{74}
+\contentsline {subsection}{\numberline {4.5.3}Panel de Elementos Capturados}{75}
+\contentsline {subsection}{\numberline {4.5.4}Ventana de An\IeC {\'a}lisis}{78}
+\contentsline {subsection}{\numberline {4.5.5}Palabras Capturadas y Diccionarios}{80}
+\contentsline {subsection}{\numberline {4.5.6}Nuevamente al Panel de Elementos Capturados}{83}
+\contentsline {section}{\numberline {4.6}Casos de Estudio}{86}
+\contentsline {subsection}{\numberline {4.6.1}Buscaminas (Minesweeper)}{86}
+\contentsline {subsection}{\numberline {4.6.2}Editor de Texto}{93}
+\contentsline {subsection}{\numberline {4.6.3}Top Gun}{98}
+\contentsline {section}{\numberline {4.7}Notas y Comentarios sobre casos de\\ estudio}{101}
+\contentsline {chapter}{\numberline {5}Conclusiones y Trabajos Futuros}{103}
+\contentsline {section}{\numberline {5.1}Conclusiones}{103}
 \contentsline {subsection}{\numberline {5.1.1}La Investigaci\IeC {\'o}n sobre el An\IeC {\'a}lisis de\\ Identificadores}{103}
-\contentsline {subsection}{\numberline {5.1.2}La Herramienta IDA}{104}
-\contentsline {subsection}{\numberline {5.1.3}Casos de Estudio}{105}
+\contentsline {subsection}{\numberline {5.1.2}La Construcci\IeC {\'o}n de la Herramienta IDA}{105}
+\contentsline {subsection}{\numberline {5.1.3}Los Casos de Estudio probados en IDA}{106}
 \contentsline {section}{\numberline {5.2}Trabajos Futuros}{107}
 \contentsline {subsection}{\numberline {5.2.1}Ampliar la Captura del Analizador Sint\IeC {\'a}ctico}{107}
-\contentsline {subsection}{\numberline {5.2.2}Implementar otro Algoritmo de Expansi\IeC {\'o}n}{108}
-\contentsline {subsection}{\numberline {5.2.3}Generar un Archivo de Salida con Identificadores Expandidos}{109}
-\contentsline {subsection}{\numberline {5.2.4}Acoplar a entornos de desarrollos}{110}
+\contentsline {subsection}{\numberline {5.2.2}Implementar otro Algoritmo de Expansi\IeC {\'o}n}{109}
+\contentsline {subsection}{\numberline {5.2.3}Expandir Identificadores en el C\IeC {\'o}digo}{110}
+\contentsline {subsection}{\numberline {5.2.4}Acoplar a entornos de desarrollos}{111}
