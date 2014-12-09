@@ -50,9 +50,9 @@
 \begin{document}
 
 %CARATULA/RESUMEN/AGRADECIMIENTOS==========================================================
-\input{./init/init.tex}
+%\input{./init/init.tex}
 
-%\tableofcontents %Genera el indice
+\tableofcontents %Genera el indice
 
 %CAPITULO1=============================================================
 %\chapter{Introducción: Problema y Solución}
@@ -68,15 +68,20 @@
 \chapter{Análisis de Identificadores: Estado del Arte}
 \input{./cap3/cap3-analisis.tex}
 
-%%CAPITULO4=============================================================
+%CAPITULO4=============================================================
 %\setcounter{chapter}{3}
 %\chapter{Identifier Analyzer (IDA)}
 %\input{./cap4/cap4-ida.tex}
 
 %%CAPITULO5=============================================================
-\setcounter{chapter}{4}
-\chapter{Conclusiones y Trabajos Futuros}
-\input{./cap5/cap5-conclu.tex}
+%\setcounter{chapter}{4}
+%\chapter{Casos de Estudio}
+%\input{./cap5/cap5-ida-ce.tex}
+
+%%CAPITULO6=============================================================
+%\setcounter{chapter}{5}
+%\chapter{Conclusiones y Trabajos Futuros}
+%\input{./cap6/cap6-conclu.tex}
 
 %\bibliographystyle{plain}%{alpha}
 %\bibliography{biblo.bib}

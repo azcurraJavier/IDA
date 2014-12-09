@@ -50,35 +50,40 @@
 \begin{document}
 
 %CARATULA/RESUMEN/AGRADECIMIENTOS==========================================================
-%\input{./init/init.tex}
+\input{./init/init.tex}
 
-%\tableofcontents %Genera el indice
+\tableofcontents %Genera el indice
 
 %CAPITULO1=============================================================
-%\chapter{Introducción: Problema y Solución}
-%\input{./cap1/cap1-intro.tex}
+\chapter{Introducción: Problema y Solución}
+\input{./cap1/cap1-intro.tex}
 
 %CAPITULO2=============================================================
-%\setcounter{chapter}{1}
-%\chapter{Comprensión de Programas}
-%\input{./cap2/cap2-comp.tex}
+\setcounter{chapter}{1}
+\chapter{Comprensión de Programas}
+\input{./cap2/cap2-comp.tex}
 
 %CAPITULO3=============================================================
-%\setcounter{chapter}{2}
-%\chapter{Análisis de Identificadores: Estado del Arte}
-%\input{./cap3/cap3-analisis.tex}
+\setcounter{chapter}{2}
+\chapter{Análisis de Identificadores: Estado del Arte}
+\input{./cap3/cap3-analisis.tex}
 
-%%CAPITULO4=============================================================
-%\setcounter{chapter}{3}
-%\chapter{Identifier Analyzer (IDA)}
-%\input{./cap4/cap4-ida.tex}
+%CAPITULO4=============================================================
+\setcounter{chapter}{3}
+\chapter{Identifier Analyzer (IDA)}
+\input{./cap4/cap4-ida.tex}
 
 %%CAPITULO5=============================================================
 \setcounter{chapter}{4}
-\chapter{Conclusiones y Trabajos Futuros}
-\input{./cap5/cap5-conclu.tex}
+\chapter{Casos de Estudio}
+\input{./cap5/cap5-ida-ce.tex}
 
-%\bibliographystyle{plain}%{alpha}
-%\bibliography{biblo.bib}
+%%CAPITULO6=============================================================
+\setcounter{chapter}{5}
+\chapter{Conclusiones y Trabajos Futuros}
+\input{./cap6/cap6-conclu.tex}
+
+\bibliographystyle{plain}%{alpha}
+\bibliography{biblo.bib}
 
 \end{document}

@@ -34,7 +34,7 @@
 \contentsline {section}{\numberline {3.5}Notas y Comentarios}{66}
 \contentsline {chapter}{\numberline {4}Identifier Analyzer (IDA)}{67}
 \contentsline {section}{\numberline {4.1}Introducci\IeC {\'o}n}{67}
-\contentsline {section}{\numberline {4.2}Arquitectura}{69}
+\contentsline {section}{\numberline {4.2}Arquitectura}{68}
 \contentsline {section}{\numberline {4.3}Analizador Sint\IeC {\'a}ctico}{70}
 \contentsline {section}{\numberline {4.4}Base de Datos Embebida}{71}
 \contentsline {section}{\numberline {4.5}Proceso de An\IeC {\'a}lisis de Identificadores}{72}
@@ -44,18 +44,19 @@
 \contentsline {subsection}{\numberline {4.5.4}Ventana de An\IeC {\'a}lisis}{78}
 \contentsline {subsection}{\numberline {4.5.5}Palabras Capturadas y Diccionarios}{80}
 \contentsline {subsection}{\numberline {4.5.6}Nuevamente al Panel de Elementos Capturados}{83}
-\contentsline {section}{\numberline {4.6}Casos de Estudio}{86}
-\contentsline {subsection}{\numberline {4.6.1}Buscaminas (Minesweeper)}{86}
-\contentsline {subsection}{\numberline {4.6.2}Editor de Texto}{93}
-\contentsline {subsection}{\numberline {4.6.3}Top Gun}{98}
-\contentsline {section}{\numberline {4.7}Notas y Comentarios sobre casos de\\ estudio}{101}
-\contentsline {chapter}{\numberline {5}Conclusiones y Trabajos Futuros}{103}
-\contentsline {section}{\numberline {5.1}Conclusiones}{103}
-\contentsline {subsection}{\numberline {5.1.1}La Investigaci\IeC {\'o}n sobre el An\IeC {\'a}lisis de\\ Identificadores}{103}
-\contentsline {subsection}{\numberline {5.1.2}La Construcci\IeC {\'o}n de la Herramienta IDA}{105}
-\contentsline {subsection}{\numberline {5.1.3}Los Casos de Estudio probados en IDA}{106}
-\contentsline {section}{\numberline {5.2}Trabajos Futuros}{107}
-\contentsline {subsection}{\numberline {5.2.1}Ampliar la Captura del Analizador Sint\IeC {\'a}ctico}{107}
-\contentsline {subsection}{\numberline {5.2.2}Implementar otro Algoritmo de Expansi\IeC {\'o}n}{109}
-\contentsline {subsection}{\numberline {5.2.3}Expandir Identificadores en el C\IeC {\'o}digo}{110}
-\contentsline {subsection}{\numberline {5.2.4}Acoplar a entornos de desarrollos}{111}
+\contentsline {chapter}{\numberline {5}Casos de Estudio}{86}
+\contentsline {section}{\numberline {5.1}Introducci\IeC {\'o}n}{86}
+\contentsline {section}{\numberline {5.2}Juego Buscaminas}{86}
+\contentsline {section}{\numberline {5.3}Editor de Texto}{94}
+\contentsline {section}{\numberline {5.4}Juego de Aviones}{99}
+\contentsline {section}{\numberline {5.5}Notas y Comentarios sobre casos de\\ estudio}{102}
+\contentsline {chapter}{\numberline {6}Conclusiones y Trabajos Futuros}{104}
+\contentsline {section}{\numberline {6.1}Conclusiones}{104}
+\contentsline {subsection}{\numberline {6.1.1}La Investigaci\IeC {\'o}n sobre el An\IeC {\'a}lisis de\\ Identificadores}{104}
+\contentsline {subsection}{\numberline {6.1.2}La Construcci\IeC {\'o}n de la Herramienta IDA}{106}
+\contentsline {subsection}{\numberline {6.1.3}Los Casos de Estudio probados en IDA}{107}
+\contentsline {section}{\numberline {6.2}Trabajos Futuros}{108}
+\contentsline {subsection}{\numberline {6.2.1}Ampliar la Captura del Analizador Sint\IeC {\'a}ctico}{108}
+\contentsline {subsection}{\numberline {6.2.2}Implementar otro Algoritmo de Expansi\IeC {\'o}n}{110}
+\contentsline {subsection}{\numberline {6.2.3}Expandir Identificadores en el C\IeC {\'o}digo}{111}
+\contentsline {subsection}{\numberline {6.2.4}Acoplar a entornos de desarrollos}{112}

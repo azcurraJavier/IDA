@@ -1059,7 +1059,7 @@ Hasta ahora se han descripto algoritmos y técnicas que recientemente se pensaro
 \label{sec:algRest}
 
 
-\begin{figure}[h] %[h] para here [b] para bottom [t] para top
+\begin{figure}[t!] %[h] para here [b] para bottom [t] para top
 \centerline{%queda centrada mejor la imagen
 \includegraphics[scale= 0.80]{./cap3/ire_1.png}
 }
