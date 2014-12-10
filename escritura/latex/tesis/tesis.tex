@@ -15,6 +15,14 @@
 
 \newcommand{\at}{\makeatletter @\makeatother}%comando define la arroba porque no forma parte de latex
 
+\usepackage[titletoc]{appendix}%Para agregar apéndices
+
+%manejo de tablas
+\usepackage{rotating} %rotacion de tabla
+
+%\usepackage{float}  %estos dos ubican mejor las tablas
+%\restylefloat{table}
+
 %=====formato para escribir pseudo-algortimo.============
 %algorithm2e: para que ande 'sudo apt-get install texlive-science'
 %aqui se encuentra instalado:
@@ -24,6 +32,7 @@
 %spanish setea idioma español
 %onelanguage español las palabras reservadas
 %===================================================
+
 
 %Encabezado
 \lhead[]{\leftmark}
@@ -40,48 +49,61 @@
 %Setea configuracion enc y pie de pag
 \pagestyle{fancy}
 
-%manejo de tablas
-\usepackage{rotating} %rotacion de tabla
 
-%\usepackage{float}  %estos dos ubican mejor las tablas
-%\restylefloat{table}
 
 
 \begin{document}
 
-%CARATULA/RESUMEN/AGRADECIMIENTOS==========================================================
+
+%CARÁTULA/RESUMEN/AGRADECIMIENTOS======================================
 \input{./init/init.tex}
 
-\tableofcontents %Genera el indice
+%Índices===============================================================
 
-%CAPITULO1=============================================================
+\tableofcontents %Genera el índice gral.
+
+\cleardoublepage
+\addcontentsline{toc}{chapter}{Índice de figuras} % para que aparezca en el índice gral.
+\listoffigures % índice de figuras
+
+\cleardoublepage
+\addcontentsline{toc}{chapter}{Índice de tablas} % para que aparezca en el índice gral.
+\listoftables % índice de figuras
+
+%CAPÍTULO 1=============================================================
 \chapter{Introducción: Problema y Solución}
 \input{./cap1/cap1-intro.tex}
 
-%CAPITULO2=============================================================
+%CAPÍTULO 2=============================================================
 \setcounter{chapter}{1}
 \chapter{Comprensión de Programas}
 \input{./cap2/cap2-comp.tex}
 
-%CAPITULO3=============================================================
+%CAPÍTULO 3=============================================================
 \setcounter{chapter}{2}
 \chapter{Análisis de Identificadores: Estado del Arte}
 \input{./cap3/cap3-analisis.tex}
 
-%CAPITULO4=============================================================
+%CAPÍTULO 4=============================================================
 \setcounter{chapter}{3}
 \chapter{Identifier Analyzer (IDA)}
 \input{./cap4/cap4-ida.tex}
 
-%%CAPITULO5=============================================================
+%CAPÍTULO 5=============================================================
 \setcounter{chapter}{4}
 \chapter{Casos de Estudio}
 \input{./cap5/cap5-ida-ce.tex}
 
-%%CAPITULO6=============================================================
+%CAPÍTULO 6=============================================================
 \setcounter{chapter}{5}
 \chapter{Conclusiones y Trabajos Futuros}
 \input{./cap6/cap6-conclu.tex}
+
+%Apéndices=============================================================
+\newpage
+\input{./ape/ape.tex}
+
+%Bibliografía=============================================================
 
 \bibliographystyle{plain}%{alpha}
 \bibliography{biblo.bib}

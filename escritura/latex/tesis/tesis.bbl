@@ -11,6 +11,19 @@ Alfred~V. Aho, Jeffrey~D. Ullman, and John~E. Hopcroft.
   Hopcroft, Jeffrey D. Ullman}.
 \newblock Addison-Wesley Reading, Mass, 1983.
 
+\bibitem{AMPM11}
+José~Luís Albanes, Mario Berón, Pedro Henriques, and Maria~João Pereira.
+\newblock Estrategias para relacionar el dominio del problema con el dominio
+  del programa para la comprensión de programas.
+\newblock {\em XIII Workshop de Investigadores en Ciencias de la Computación},
+  pages 449--453, 2011.
+
+\bibitem{ACCL02}
+G.~Antoniol, G.~Canfora, G.~Casazza, A.~De Lucia, and E.~Merlo.
+\newblock Recovering traceability links between code and documentation.
+\newblock {\em Software Engineering, IEEE Transactions on}, 28(10):970–983,
+  2002.
+
 \bibitem{THBE99}
 Thomas Ball.
 \newblock The concept of dynamic analysis.
@@ -149,6 +162,11 @@ IEEE.
   610.12-1990.}, volume~1.
 \newblock IEEE Press, 1999.
 
+\bibitem{LOPT00}
+Leah~S. Larkey, Paul Ogilvie, M.~Andrew Price, and Brenden Tamilio.
+\newblock Acrophile: an automated acronym extractor and server.
+\newblock In {\em {ACM DL}}, page 205–214, 2000.
+
 \bibitem{LFBEX07}
 D.~Lawrie, H.~Feild, and D.~Binkley.
 \newblock Extracting meaning from abbreviated identifiers.
@@ -165,6 +183,12 @@ D.~Lawrie, C.~Morrell, H.~Feild, and D.~Binkley.
 Dawn Lawrie, Henry Feild, and David Binkley.
 \newblock Syntactic identifier conciseness and consistency.
 \newblock In {\em SCAM}, page 139–148. IEEE Computer Society, 2006.
+
+\bibitem{LDFHB07}
+Dawn Lawrie, Henry Feild, and David Binkley.
+\newblock An empirical study of rules for well-formed identifiers.
+\newblock {\em Journal of Software Maintenance and Evolution: Research and
+  Practice}, 19(4):205–229, 2007.
 
 \bibitem{DLFB06}
 Dawn Lawrie, Henry Feild, and David Binkley.

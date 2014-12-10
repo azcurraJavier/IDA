@@ -2,7 +2,7 @@
 \section{Introducción}
 En el capítulo 1 se explicó una aproximación para ayudar a comprender programas. Esta solución se basa en el análisis de los identificadores encontrados en el código del sistema de estudio.
 
-En este capítulo se definen los conceptos más importantes sobre comprensión de programas (CP). Estos conceptos fueron encontrados en textos que narran sobre CP. Al final se redacta un breve comentario de los temas tratados en el capítulo.
+En este capítulo se definen los conceptos más importantes sobre comprensión de programas (CP). Estos conceptos fueron encontrados en textos que narran sobre CP. Al final se redactan algunos comentarios sobre los temas tratados en el correspondiente capítulo.
 
 La CP es un área de la Ingeniería de Software que tiene como meta primordial desarrollar métodos, técnicas y herramientas que ayuden al programador a comprender en profundidad los sistemas de software. 
 %esto se logra abstrayendo la información contenida en el código a un nivel mas alto y de esta manera esclarecer mas su interpretación \cite{MPMR07}.
@@ -10,17 +10,17 @@ La CP es un área de la Ingeniería de Software que tiene como meta primordial d
 %BUSCAR MAS MATERIAL CON DATOS ESTADISTICOS???
 
 Diversos estudios e investigaciones demuestran que el principal desafío en la CP está enmarcado en vincular el dominio del problema y el dominio del programa \cite{BRM10,MPMR07,MBPHRU10,DWE04}. El primero se refiere al resultado de la ejecución del sistema, mientras que el segundo indica todos los componentes de software involucrados que causaron dicho resultado. 
-La figura \ref{captura1} muestra un modelo de comprensión que refleja lo mencionado previamente.
+La Figura \ref{captura1} muestra un modelo de comprensión que refleja lo mencionado previamente.
 %En la figura \ref{captura1} se muestra gráficamente el principal objetivo que es vincular ambos dominios. 
 
 \begin{figure}[h] %[h] para here [b] para bottom [t] para top
 \centerline{%queda centrada mejor la imagen
 \includegraphics[scale= 0.7]{./cap2/dom.png}
 }
-\caption{Gráfico de Comprensión de Programas}
+\caption{Modelo de Comprensión de Programas}
 \end{figure} \label{captura1}
 
-El inconveniente es que la relación real mostrada en la figura \ref{captura1}, es compleja de reconstruir, por ende se puede bosquejar una aproximación a través de los si\-guientes pasos: I) Elaborar una representación para el Dominio del Problema; II)
+El inconveniente es que la relación real mostrada en la Figura \ref{captura1}, es compleja de reconstruir, por ende se puede bosquejar una aproximación a través de los si\-guientes pasos: I) Elaborar una representación para el Dominio del Problema; II)
 Construir una representación del Dominio del Programa y III) Elaborar un procedimiento de vinculación.
  
 Para lograr con éxito los pasos antedichos se deben tener en cuenta conceptos muy importantes que son los cimientos sobre los cuales está sustentada la CP: los \textit{modelos cognitivos}, la \textit{extracción de información}, la \textit{administración de la información}, la \textit{visualización de software} y la \textit{interconexión de dominios}. Estos conceptos fueron descriptos brevemente en el capítulo anterior, a continuación se desarrolla una explicación más amplia de cada uno.
@@ -126,25 +126,25 @@ En la actualidad, existen distintos tipos de sistemas de visualización, algunos
 
 Debido a esta falencia Berón \cite{MBPHRU10} propone variantes en los sistemas de visualización orientados a la CP. Estas variantes contemplan la representación visual de los conceptos en el dominio del problema, inclusive la visualización de la relación entre los dos dominios mencionados.
 
-Para concluir, el objetivo primordial de la visualización de software orientada a la CP es generar vistas (representaciones visuales), que ayuden a reconstruir el vinculo entre el Dominio del Problema y el Dominio del Programa (figura \ref{captura1}). 
+Para concluir, el objetivo primordial de la visualización de software orientada a la CP es generar vistas (representaciones visuales), que ayuden a reconstruir el vinculo entre el Dominio del Problema y el Dominio del Programa (Ver Figura \ref{captura1}). 
 
 
 \section{Estrategias de Interconexión de \\Dominios}
 
 Los conceptos explicados en los puntos anteriores como la \textit{visualización de software} y la \textit{extracción de la información} forman la base para armar estrategias de interrelación de dominios.
 
-La \textit{Interconexión de Dominios} \cite{BRM10,MBPHRU10} en la Ingeniería del Software básicamente se atribuye a la transformación y vinculación del dominio de la aplicación de software (dominio del problema) con el dominio del programa (ver figura \ref{captura1}). Esta afirmación, como se explicó en secciones anteriores es clave en la CP.
+La \textit{Interconexión de Dominios} \cite{BRM10,MBPHRU10} en la Ingeniería del Software básicamente se atribuye a la transformación y vinculación del dominio de la aplicación de software (dominio del problema) con el dominio del programa (Ver Figura \ref{captura1}). Esta afirmación, como se explicó en secciones anteriores es clave en la CP.
 
-El objetivo es que cada componente de un dominio se vea reflejado en uno o más componentes de otro dominio y viceversa.%CONSULTAR
+El objetivo de la \textit{Interconexión de Dominios} es que cada componente de un dominio se vea reflejado en uno o más componentes de otro dominio y viceversa.%CONSULTAR
 
 %Cuando se dice que relacionar el dominio del problema con el dominio del programa es importante ya que permite al desarrollador encontrar de forma mas ágil y rápida componentes en el software para una operación específica. Esto facilidad impacta directamente en los tiempos dedicados a la evolución y al mantenimiento del software por el simple hecho de que se reduce la ardua tarea que tiene el programador de comprender el código.
 %Sin embargo, solo se podrá destacar este impacto si el software de estudio es muy amplio y complejo.
 
-Un ejemplo de interconexión de dominios es cuando el dominio del código fuente de un programa, se puede transformar en un Grafo de Llamadas a Funciones (Dominio de Grafos). Cada nodo del grafo representa una función particular y cada arco las funciones que puede invocar. En este ejemplo la relación entre ambos dominios (código y grafo) es clara y directa. 
+Un ejemplo sencillo de \textit{Interconexión de Dominios}, es cuando el dominio del código fuente de un programa, se puede transformar en un Grafo de Llamadas a Funciones (Dominio de Grafos). Cada nodo del grafo representa una función particular y cada arco las funciones que puede invocar. En este ejemplo la relación entre ambos dominios (código y grafo) es clara y directa. 
 
-Es importante aclarar que existe una amplia gama de transformaciones entre dominios. La más escasa y difícil de conseguir es aquella que relaciona el Dominio del Problema con el Dominio del Programa (ver figura \ref{captura1}).
+Es importante aclarar que existe una amplia gama de transformaciones entre dominios. La más escasa y difícil de conseguir es aquella que relaciona el Dominio del Problema con el Dominio del Programa (Ver Figura \ref{captura1}).
 
-Sin embargo, actualmente existen técnicas recientemente elaboradas, que conectan visualmente el dominio del problema y el dominio del programa mediante la información estática y dinámica que se extrajo del sistema de estudio (ver figura \ref{captura1}). Como se dijo previamente, esta relación es de mucha importancia porque diagrama la salida del sistema y que elementos vinculados intervinieron.
+Sin embargo, actualmente existen técnicas recientemente elaboradas, que conectan visualmente el dominio del problema y el dominio del programa mediante la información estática y dinámica que se extrajo del sistema de estudio (Ver Figura \ref{captura1}). Como se dijo previamente, esta relación es de mucha importancia porque diagrama la salida del sistema y que elementos vinculados intervinieron.
 
 Una de las técnicas es \textit{Simultaneous Visualization Strategy} SVS, esta se encarga de mostrar los distintos componentes de un programa en plena ejecución, mediante distintas vistas, usando un inspector de sentencias, de esta manera se obtiene una visualización cuando el sistema se está ejecutando. Esta estrategia usa un esquema de instrumentación de código, donde las acciones semánticas le van indicando a un visualizador la traza de invocaciones a funciones durante la ejecución del sistema \cite{BRM10,MPMR07,MBPHRU10}.
 
@@ -152,7 +152,7 @@ La otra estrategia se denomina \textit{Behavioral-Operational Relation Strategy}
 
 Existe también, a nivel conceptual una técnica que combina ambas estrategias mencionadas llamada \textit{Simultaneous Visualization Strategy Improved} SVSI. Esta técnica disminuye los problemas que manifiestan tanto SVS como BORS y con ello se logra un mejor desempeño en cuanto a los resultados esperados \cite{BRM10,MPMR07,MBPHRU10}.
 
-\section{Comentarios}
+\section{Notas y Comentarios}
 
 Para resumir las ideas tratadas en este capítulo, el área de la CP le da mucha importancia a la relación entre el Dominio del Problema y el Dominio del Programa. Esta relación ayuda al programador a entender con facilidad los programas, ya que encuentra las partes del sistema que produjeron una determinada salida. Como es demasiado complicado este vínculo, se necesitan estudiar las temáticas pertinentes: los \textit{modelos cognitivos}, la \textit{extracción de información}, la \textit{administración de la información}, la \textit{visualización de software} y la \textit{interconexión de dominios}.
 
@@ -162,6 +162,6 @@ Para resumir las ideas tratadas en este capítulo, el área de la CP le da mucha
 
 %Para facilitar la interconexión de dominios, se recomienda usar la \textit{Visualización del Software}. En esta área se elaboran determinadas vistas donde se puede materializar gráficamente las representaciones de los dominios y la estrategia de vinculación (ver figura \ref{captura1}). Estas vistas ayudan a armar un puente cognitivo entre los aspectos del sistema y los conocimientos del programador. Con esto el desarrollador logra una abstracción del sistema adecuada a su estructura mental.
 
-Los conceptos antedichos son claves para la CP y sirven como punto de partida para la construcción de Herramientas de Comprensión de Sistemas. Estas herramientas presentan diferentes perspectivas del sistema, facilitando su análisis y su inspección. Evitan que el programador invierta tiempo y esfuerzo en entender los módulos de los sistemas. De esta manera, se agilizan las tareas de evolución y mantenimiento del software.
+Los conceptos antedichos son claves para la CP y sirven como punto de partida para la construcción de Herramientas de Comprensión de Sistemas. Estas herramientas presentan diferentes perspectivas del sistema, facilitando su análisis y su inspección. De esta manera, evitan que el programador invierta tiempo y esfuerzo en entender los módulos de los sistemas. Por ende, se agilizan las tareas de evolución y mantenimiento del software.
 
 En el próximo capítulo se presentan distintas estrategias que se encargan de extraer información de los sistemas, y luego en analizar la información extraída. Este análisis, puntualmente es sobre los identificadores presentes en el código del sistema de estudio. Algunas de estas estrategias están implementadas en forma de Herramientas de CP.

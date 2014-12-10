@@ -57,7 +57,7 @@ La CP se define como: \textit{Una disciplina de la IS encargada de ayudar al des
 
 La CP asiste al equipo de desarrollo de software proveyendo métodos, técnicas y herramientas que faciliten el entendimiento del sistema de estudio.
 
-Las investigaciones realizadas en el área de la CP determinaron que el foco de estudio se centra en relacionar el \textit{Dominio del Problema} con el \textit{Dominio del Programa} \cite{BRM10,MPMR07,MBPHRU10,DWE04}. El primero hace referencia a los elementos que forman parte de la salida del sistema, mientras que el segundo indican las componentes del programa empleados para generar dicha salida.
+Las investigaciones realizadas en el área de la CP determinaron que el foco de estudio se centra en relacionar el \textit{Dominio del Problema} con el \textit{Dominio del Programa} \cite{BRM10,MPMR07,AMPM11,DWE04}. El primero hace referencia a los elementos que forman parte de la salida del sistema, mientras que el segundo indican las componentes del programa empleados para generar dicha salida.
 Esta relación es compleja de realizar y representa el principal desafío de la CP. 
 
 Una aproximación para relacionar ambos dominios consiste en elaborar la siguiente reconstrucción:
@@ -196,7 +196,7 @@ Como se mencionó previamente, en los códigos de software abundan componentes q
 
 \section{Análisis de Identificadores}
 
-Estudios realizados \cite{DFPM05,DMDJ13,HDD06,FBL06} indican que gran parte de los códigos están conformados por identificadores (ids), por ende abundante información estática está representada por ellos (ver capítulo 3).
+Estudios realizados \cite{DFPM05,DMDJ13,HDD06,FBL06} indican que gran parte de los códigos están conformados por identificadores (ids), por ende abundante información estática está representada por ellos (Ver Capítulo 3).
 
 Generalmente, los ids están compuestos por más de una palabra en forma de abreviaturas. Varios autores coinciden \cite{BCPT99,LFBEX07,EZH08,EHPV09} que detrás de estas abreviaturas, se encuentra oculta información que es propia del dominio del problema.
 
@@ -215,7 +215,7 @@ Una forma de afrontar esta dificultad, es recurrir a fuentes de información inf
 %Por lo tanto se necesita la ayuda de fuentes que contengan información informal presentes en el código que aporten en el proceso de la traducción de los ids. Los candidatos serios a lograr este cometido son comentarios y los literales string.
 %Dicho de otra manera, son una fuente importante de información de los conceptos del Dominio del Problema.
 
-Sin duda, los comentarios tienen como principal finalidad ayudar a comprender un segmento de código \cite{JDPH08}. Por esta razón, se puede ver a los comentarios como una herramienta natural para entender el significado de los ids en el código, como así también el funcionamiento del sistema.
+Sin duda, los comentarios tienen como principal finalidad ayudar a comprender un segmento de código \cite{JDPH08,ACCL02}. Por esta razón, se puede ver a los comentarios como una herramienta natural para entender el significado de los ids en el código, como así también el funcionamiento del sistema.
 
 Por otro lado para poder entender la semántica de los ids, se toman li\-terales o constantes strings.
 Estos representan un valor constante formado por secuencias de caracteres. Ellos son generalmente utilizados en la muestra de carteles por pantalla, y comúnmente se almacenan en variables de \mbox{tipo string.}
@@ -224,7 +224,7 @@ Los literales string como los comentarios pueden brindar indicios del significad
 
 En caso de que estas fuentes de información informal sean escasas dentro del mismo sistema, se puede acudir a alternativas externas como es el caso de los diccionarios predefinidos de palabras en lenguaje natural.
 
-Las estrategias de análisis de ids, explicadas en esta sección, se han ido mejorando a lo largo del tiempo. Al principio contaban con diccionarios extensos y ocupaban mucho espacio, luego estos diccionarios se fueron reemplazando por listados de palabras que son acordes a la ciencias de la computación. Estos listados son más eficientes que los diccionarios, ya que contienen palabras más precisas y ocupan menos espacio de almacenamiento (ver capítulo 3).
+Las estrategias de análisis de ids, explicadas en esta sección, se han ido mejorando a lo largo del tiempo. Al principio contaban con diccionarios extensos y ocupaban mucho espacio, luego estos diccionarios se fueron reemplazando por listados de palabras que son acordes a la ciencias de la computación. Estos listados son más eficientes que los diccionarios, ya que contienen palabras más precisas y ocupan menos espacio de almacenamiento (Ver Capítulo 3).
 
 \section{Problema y la Solución}
 
@@ -253,7 +253,7 @@ Para abordar las iniciativas planteadas y hacer algunos aportes a la solución d
 \pagebreak 
 \section{Contribución}
 
-El correspondiente trabajo final, es un aporte al área de CP que basa su estudio sobre como capturar conceptos del dominio del problema, a través del análisis de los ids en programas escritos en JAVA. Para lograrlo, primero se describe el estado del arte sobre las estrategias más importantes de análisis de ids. Luego, se fija atención en aquellas técnicas involucradas en la traducción de ids a palabras completas, que consideren distintas fuentes de información informal, como es el caso de los comentarios, los literales o diccionarios predefinidos de palabras. Luego, algunas técnicas antedichas se implementan en una única herramienta llamada \textit{Identifier Analyzer} (IDA). Finalmente, se demostrará la utilidad de la herramienta IDA en el ámbito de la CP, a través de distintos casos de estudio.
+El correspondiente trabajo final, es un aporte al área de CP que basa su estudio sobre como capturar conceptos del dominio del problema, a través del análisis de los ids en programas escritos en JAVA. Para lograrlo, primero se describe el estado del arte sobre las estrategias más importantes de análisis de ids. Luego, se fija atención en aquellas técnicas involucradas en la traducción de ids a palabras completas, que consideren distintas fuentes de información informal, como es el caso de los comentarios, los literales o diccionarios predefinidos de palabras. Luego, algunas técnicas antedichas se implementan en una única herramienta llamada \textit{Identifier Analyzer} (IDA). La herramienta IDA , además de analizar ids, puede ser utilizada como base para construir futuras implementaciones en este mismo contexto.
 
 %Finalmente se extraen conclusiones en base a los resultados obtenidos y se determinan posibles trabajos futuros sobre la investigación realizada.
 
@@ -283,5 +283,5 @@ El correspondiente trabajo final, es un aporte al área de CP que basa su estudi
 %En este trabajo final se presenta una línea de investigación que se centra en el estudio, creación e implementación de técnicas de extracción de la información estática desde los sistemas de software. 
 %Esta información puede ser estrictamente relacionada con el código del programa, o bien con la información informal provista por los programadores a través de comentarios, literales y documentación. 
 
-El trabajo está organizado de la siguiente manera. El capítulo 2 define conceptos teóricos relacionados a la comprensión de programas. El capítulo 3 describe el estado del arte asociado a las técnicas de análisis de identificadores conocidas. El capítulo 4 trata sobre la herramienta \textit{Identifier Analyzer} (IDA), en donde se explican los distintos módulos que la herramienta posee y que técnicas de análisis de identificadores tiene implementadas; además se describen algunos casos de estudio.
-En el capítulo 5 se explican las conclusiones elaboradas y se proponen trabajos futuros.
+El trabajo está organizado de la siguiente manera. El Capítulo 2 define conceptos teóricos relacionados a la comprensión de programas. El Capítulo 3 describe el estado del arte asociado a las técnicas de análisis de identificadores conocidas. El Capítulo 4 trata sobre la herramienta \textit{Identifier Analyzer} (IDA), en donde se explican los distintos módulos que la herramienta posee y que técnicas de análisis de identificadores tiene implementadas. En el Capítulo 5, se describen algunos casos de estudio que demuestran la utilidad de la herramienta IDA.
+Finalmente, en el Capítulo 6 se explican las conclusiones elaboradas y se proponen trabajos futuros.

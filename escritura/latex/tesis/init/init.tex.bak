@@ -57,8 +57,10 @@ Departamento de Informática
 
 }
 \end{titlepage}
+ 
+%Resumen==================================================================
 
-\renewcommand{\abstractname}{\Large Resumen}
+\renewcommand*\abstractname{\vspace{-2.0cm}\flushleft\huge\textbf{Resumen}\linebreak}
 
 \begin{abstract}
 
@@ -79,15 +81,20 @@ En este trabajo final de licenciatura, se describe \mbox{\textit{Identifier Anal
 
 \end{abstract}
 
-%\renewcommand{\abstractname}{\Large Agradecimientos}
-%
-%\begin{abstract}
-%\begin{multicols}{2}
-%\begin{flushleft}
-%\end{flushleft}
-%\columnbreak
-%\begin{flushright}
-%\textit{“Hay en el mundo un lenguaje que todos comprenden: es el lenguaje del entusiasmo, de las cosas hechas con amor y con voluntad, en busca de aquello que se desea o en lo que se cree.”\linebreak Paulo Cohelo}
-%\end{flushright}
-%\end{multicols}
-%\end{abstract}
+
+%Agradecimientos==================================================================
+
+\renewcommand*\abstractname{\vspace{-2.0cm}\flushleft\huge\textbf{Agradecimientos}\linebreak}
+
+\begin{abstract}
+\begin{multicols}{2}
+\begin{flushleft}
+\end{flushleft}
+\columnbreak
+\begin{flushright}
+\textit{“Hay en el mundo un lenguaje que todos comprenden: es el lenguaje del entusiasmo, de las cosas hechas con amor y con voluntad, en busca de aquello que se desea o en lo que se cree.”\linebreak Paulo Cohelo}
+\end{flushright}
+\end{multicols}
+
+(Completar)
+\end{abstract}
