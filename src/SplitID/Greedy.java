@@ -6,16 +6,16 @@ import DictionaryDB.Dictionary;
  *
  * @author javier
  */
-public class GreedyPaper {
+public class Greedy {
 
-    private static boolean buscarDicc(String w){
+    private boolean buscarDicc(String w){
         
         return (Dictionary.searchWordDic("words_dict", w) ||
                 Dictionary.searchWordDic("stop_dict", w) ||
                 Dictionary.searchWordDic("acro_dict", w));
     }
     
-    public static String ejecutar(String idHardword){       
+    public String ejecutar(String idHardword){       
         
         if(idHardword == null || idHardword.isEmpty()){
             return "";
@@ -57,7 +57,7 @@ public class GreedyPaper {
     
     }
    
-    private static String buscarPrefijo(String s1, String s2){        
+    private String buscarPrefijo(String s1, String s2){        
               
         if(s1.length() == 0){
             return s2;
@@ -86,7 +86,7 @@ public class GreedyPaper {
     //------------------------------------------------
     
     
-    private static String buscarSufijo(String s1, String s2){       
+    private String buscarSufijo(String s1, String s2){       
         
         if(s1.length() == 0){
             return s2;
@@ -113,7 +113,7 @@ public class GreedyPaper {
     }
     
     
-    private static String maxDivision(String s1, String s2){
+    private  String maxDivision(String s1, String s2){
        
        int count1 = s1.length() - s1.replace(" ", "").length();
        

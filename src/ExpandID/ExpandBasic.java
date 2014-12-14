@@ -18,22 +18,22 @@ import java.util.regex.Pattern;
  */
 public class ExpandBasic {
 
-    private static ArrayList<String> palabrasCap;
+    private  ArrayList<String> palabrasCap;
 
-    private static ArrayList<String> frasesCap;
+    private  ArrayList<String> frasesCap;
 
-    private static ArrayList<String[]> palabrasArrayCap;
+    private  ArrayList<String[]> palabrasArrayCap;
 
-    private static ArrayList<String[]> frasesArrayCap;
+    private  ArrayList<String[]> frasesArrayCap;
 
-    private static ArrayList<String> listExp;
+    private  ArrayList<String> listExp;
 
-    private static String unicaExp;
+    private  String unicaExp;
 
-    private static String clase;
-    private static String metodo;
+    private  String clase;
+    private  String metodo;
 
-    public static void procesarFrases(Archivo archivo) {
+    public ExpandBasic(Archivo archivo) {
 
         palabrasCap = new ArrayList();
 
@@ -128,7 +128,7 @@ public class ExpandBasic {
 
     }
 
-    private static void procesarClasMetLin(Archivo archivo, String com, int lin) {
+    private  void procesarClasMetLin(Archivo archivo, String com, int lin) {
 
         clase = "";
         metodo = "";
@@ -163,11 +163,11 @@ public class ExpandBasic {
 
     }
 
-    public static ArrayList<String[]> getFrasesCap() {
+    public  ArrayList<String[]> getFrasesCap() {
         return frasesArrayCap;
     }
 
-    public static String ejecutar(String w, String clase, String met) {
+    public  String ejecutar(String w, String clase, String met) {
 
         if (w == null || w.isEmpty()) {
             return "";
@@ -236,7 +236,7 @@ public class ExpandBasic {
         return unicaExp;
     }
 
-    private static String expandirAbrev(String w, String clase, String met) {
+    private  String expandirAbrev(String w, String clase, String met) {
 
         ArrayList<String> palCapMet = new ArrayList();
 
@@ -302,7 +302,7 @@ public class ExpandBasic {
 
     }
 
-    private static String buscarAbrev(ArrayList<String> palCap, String w) {
+    private  String buscarAbrev(ArrayList<String> palCap, String w) {
         
         if(palCap.isEmpty()){
             return null;
@@ -350,7 +350,7 @@ public class ExpandBasic {
     }
 
     //==============================================
-    private static String expandirAcro(String w, String clase, String met) {
+    private  String expandirAcro(String w, String clase, String met) {
 
         int len = w.length();
 
@@ -425,7 +425,7 @@ public class ExpandBasic {
 
     }
 
-    private static String buscarAcro(ArrayList<String> fraCap, String w) {
+    private  String buscarAcro(ArrayList<String> fraCap, String w) {
         
         if(fraCap.isEmpty()){
             return null;

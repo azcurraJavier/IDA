@@ -73,7 +73,7 @@ public class SamuraiPaperTest {
 
     private String ejec(String s) {
 
-        String r = SamuraiPaper.ejecutar(s);
+        String r = Samurai.ejecutar(s);
         return r;
     }
 
@@ -101,7 +101,7 @@ public class SamuraiPaperTest {
         //Se inician tablas de frecuencias
         ConnectionDB.AbrirConBD();        
         
-        SamuraiPaper.initTables(c);
+        Samurai.initTables(c);
 
         assertEquals(ejec("bttns"), "bttns");
         assertEquals(ejec("dim"), "dim");

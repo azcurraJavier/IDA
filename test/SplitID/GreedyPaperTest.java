@@ -31,7 +31,7 @@ public class GreedyPaperTest {
         
         System.out.println("test greedy 01");
         String idHardword = "tablehomechair";
-        GreedyPaper instance = new GreedyPaper();
+        Greedy instance = new Greedy();
         String expResult = "table home chair";
         String result = instance.ejecutar(idHardword);
         assertEquals(expResult, result);
@@ -41,7 +41,7 @@ public class GreedyPaperTest {
         System.out.println("test greedy 02");
         
         idHardword = "ttthomechair";
-        instance = new GreedyPaper();
+        instance = new Greedy();
         expResult = "ttt home chair";
         result = instance.ejecutar(idHardword);
         assertEquals(expResult, result);
@@ -51,7 +51,7 @@ public class GreedyPaperTest {
         System.out.println("test greedy 03");
         
         idHardword = "tablehomettt";
-        instance = new GreedyPaper();
+        instance = new Greedy();
         expResult = "table home ttt";
         result = instance.ejecutar(idHardword);
         assertEquals(expResult, result);

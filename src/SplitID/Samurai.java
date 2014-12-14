@@ -9,15 +9,15 @@ import Listas.MostrarTabla;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class SamuraiPaper {
+public class Samurai {
 
-    private static int frecuenciaLocal;
+    private  int frecuenciaLocal;
 
     //Tablas de frecuencia
-    private static Map<String, Integer> localFreqTable;
-    private static Map<String, Integer> globalFreqTable;
+    private  Map<String, Integer> localFreqTable;
+    private  Map<String, Integer> globalFreqTable;
 
-    public static void initTables(Archivo archivo) {
+    public Samurai(Archivo archivo) {
 
         frecuenciaLocal = 0;
 
@@ -77,7 +77,7 @@ public abstract class SamuraiPaper {
 
     }
 
-    private static void fraseProces(String linea) {
+    private  void fraseProces(String linea) {
 
         //limpieza
         linea = linea.replaceAll("\"", "").trim();
@@ -109,21 +109,21 @@ public abstract class SamuraiPaper {
         }
     }
 
-    public static Map<String, Integer> getLocalFreqTable() {
+    public  Map<String, Integer> getLocalFreqTable() {
         return localFreqTable;
     }
 
-    public static Map<String, Integer> getGlobalFreqTable() {
+    public  Map<String, Integer> getGlobalFreqTable() {
         return globalFreqTable;
     }
 
-    public static String ejecutar(String id) {
+    public  String ejecutar(String id) {
 
         return divisionHardWord(id);
     }
 
     //Manipulacion de tablas de frecuencia
-    private static void addTokenLocalFreqTable(String id, int cantOcc) {
+    private  void addTokenLocalFreqTable(String id, int cantOcc) {
 
         if (id == null || id.trim().isEmpty() || cantOcc <= 0) {
             return;
@@ -148,7 +148,7 @@ public abstract class SamuraiPaper {
 
     }
 
-    private static int frecuenciaLocal(String id) {//Freq(t; p)        
+    private  int frecuenciaLocal(String id) {//Freq(t; p)        
 
         if (id == null || id.trim().isEmpty()) {
             return 0;
@@ -162,7 +162,7 @@ public abstract class SamuraiPaper {
 
     }
 
-    private static int frecuenciaGlobal(String id) {//globalFreq(t)
+    private  int frecuenciaGlobal(String id) {//globalFreq(t)
 
         if (id == null || id.trim().isEmpty()) {
             return 0;
@@ -172,7 +172,7 @@ public abstract class SamuraiPaper {
 
     }
 
-    private static int todasFreqStr() {//AllStrsFreq(p)
+    private  int todasFreqStr() {//AllStrsFreq(p)
 
 //        return freAcum;
         if (frecuenciaLocal > 0) {
@@ -186,7 +186,7 @@ public abstract class SamuraiPaper {
 
     }
 
-    private static double score(String id) {
+    private  double score(String id) {
 
         if (id == null || id.trim().isEmpty()) {
             return 0.0;
@@ -202,7 +202,7 @@ public abstract class SamuraiPaper {
         return freqApa + (freqGlobal / logFreq);
     }
 
-    private static String splitOnLowercaseToUppercase(String token) {
+    private  String splitOnLowercaseToUppercase(String token) {
 
         StringBuilder newStr = new StringBuilder();
 
@@ -226,7 +226,7 @@ public abstract class SamuraiPaper {
         return token;
     }
 
-    private static int existUpperToLower(String s) {
+    private  int existUpperToLower(String s) {
 
 //        for (int i = 0; i < s.length() - 1; i++) {//-1 sino puede dar excepción en i+1
 //            if (Character.isUpperCase(s.charAt(i)) && Character.isLowerCase(s.charAt(i + 1))) {
@@ -249,7 +249,7 @@ public abstract class SamuraiPaper {
         return -1;
     }
 
-    private static String subStr(String s, int x, int y) {
+    private  String subStr(String s, int x, int y) {
 
         if (s == null || s.trim().isEmpty()) {
             return "";
@@ -264,7 +264,7 @@ public abstract class SamuraiPaper {
 
     }
 
-    private static String divisionHardWord(String token) {
+    private  String divisionHardWord(String token) {
 
         String sToken = "";
 
@@ -327,7 +327,7 @@ public abstract class SamuraiPaper {
         return sToken;
     }
 
-    private static String divisionSoftWord(String s, double score) {
+    private  String divisionSoftWord(String s, double score) {
 
         String splitS = s;
         int n = s.length();//se sca el -1 porque subStr es exclusivo
@@ -369,7 +369,7 @@ public abstract class SamuraiPaper {
         return splitS;
     }
 
-    private static boolean isPrefix(String s) {
+    private  boolean isPrefix(String s) {
 
         if (s == null || s.isEmpty()) {
             return false;
@@ -379,7 +379,7 @@ public abstract class SamuraiPaper {
 
     }
 
-    private static boolean isSuffix(String s) {
+    private  boolean isSuffix(String s) {
 
         if (s == null || s.isEmpty()) {
             return false;

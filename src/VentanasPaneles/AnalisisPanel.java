@@ -4,14 +4,11 @@ import DictionaryDB.ConnectionDB;
 import ExpandID.ExpandBasic;
 import ExtractID.Principal;
 import Listas.Archivo;
-import SplitID.GreedyPaper;
-import SplitID.SamuraiPaper;
+import SplitID.Greedy;
+import SplitID.Samurai;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.*;
@@ -40,34 +37,44 @@ public class AnalisisPanel extends javax.swing.JDialog {
     private MiModelo modeloTablaExp;
     private MiJTable tablaElemExp;
 
-    //private Set<String> setIds;
-    private ArrayList<String[]> listIds;
-
-    private Map<String, String> mapIdsGreedy;
-    private Map<String, String> mapIdsSamurai;
-
-    private Map<String, String> mapIdsExGreedy;
-    private Map<String, String> mapIdsExSamurai;
+    private final ArrayList<String[]> listIds;
+    
+    /////////////////////////////////////
+    
+    private final int sizeArrays;
+    
+    private final String[] arrayIdsGreedy;
+    private final String[] arrayIdsSamurai;
+    
+    private final String[] arrayIdsExGreedy;
+    private final String[] arrayIdsExSamurai;
+    
+    /////////////////////////////////////
+    private final Greedy algoritmoGreedy;
+    private final Samurai algoritmoSamurai;
+    private final ExpandBasic algoritmoExpansion;
 
     public AnalisisPanel(java.awt.Frame parent, boolean modal, ArrayList<String[]> listIds, Archivo archivo) {
         super(parent, modal);
         initComponents();
-
-        //this.setIds = setIds;
         
         if(listIds == null || listIds.isEmpty()){
             jButtonDiv.setEnabled(false);
         }
         
         this.listIds = listIds;
+        
+        sizeArrays = listIds.size();
+        
+        algoritmoGreedy = new Greedy();        
 
         //Se inician tablas de frecuencias
         ConnectionDB.AbrirConBD();        
         
         //se preparan tablas de samurai y expansion basica
-        ExpandBasic.procesarFrases(archivo);
-        
-        SamuraiPaper.initTables(archivo);
+        algoritmoExpansion  = new ExpandBasic(archivo);
+                
+        algoritmoSamurai = new Samurai(archivo);
         ConnectionDB.CerrarConBD();
         //
 
@@ -80,12 +87,16 @@ public class AnalisisPanel extends javax.swing.JDialog {
         group2.add(jRadioBdeGre);
         group2.add(jRadioBdeSam);
 
-        this.mapIdsGreedy = new HashMap<>();
-        this.mapIdsSamurai = new HashMap<>();
+        ////////////////////////////
+        
+        arrayIdsGreedy = new String[sizeArrays];
+        arrayIdsSamurai = new String[sizeArrays];
+        arrayIdsExGreedy = new String[sizeArrays];
+        arrayIdsExSamurai = new String[sizeArrays];
 
-        this.mapIdsExGreedy = new HashMap<>();
-        this.mapIdsExSamurai = new HashMap<>();
-
+        /////////////////////////////
+        
+        
         modeloTablaId = new MiModelo();
         modeloTablaDiv = new MiModelo();
         modeloTablaExp = new MiModelo();
@@ -102,20 +113,12 @@ public class AnalisisPanel extends javax.swing.JDialog {
 
         Object[] filaTabla = new Object[1];
 
-        
-
-//            for (String ide : setIds) {
-//
-//                filaTabla[0] = "<html><b>" + ide + "</b></html>";
-//                modeloTablaId.addRow(filaTabla);
-//            }
             for (String[] e : listIds) {
             
                 filaTabla[0] = "<html><b>" + e[0] + "</b></html>";
                 modeloTablaId.addRow(filaTabla);               
             
             }
-            
         
 
         for (int i = 0; i < modeloTablaId.getRowCount(); i++) {
@@ -185,18 +188,18 @@ public class AnalisisPanel extends javax.swing.JDialog {
     }
 
     //permite sacar el html limpiando los valores
-    private String cleanHtml(String html) {
-
-        Pattern pattern = Pattern.compile("<html><b>(.*?)</b></html>");
-        Matcher matcher = pattern.matcher(html);
-
-        if (matcher.find()) {
-            return matcher.group(1);
-        }
-
-        return "";
-
-    }
+//    private String cleanHtml(String html) {
+//
+//        Pattern pattern = Pattern.compile("<html><b>(.*?)</b></html>");
+//        Matcher matcher = pattern.matcher(html);
+//
+//        if (matcher.find()) {
+//            return matcher.group(1);
+//        }
+//
+//        return "";
+//
+//    }
 
     /**
      * @return the return status of this dialog - one of RET_OK or RET_CANCEL
@@ -204,22 +207,25 @@ public class AnalisisPanel extends javax.swing.JDialog {
     public int getReturnStatus() {
         return returnStatus;
     }
-
-    public Map<String, String> getMapIdsSamurai() {
-        return mapIdsSamurai;
+    
+    ///////////////
+    public String[] getArrayIdsGreedy() {
+        return arrayIdsGreedy;
     }
 
-    public Map<String, String> getMapIdsGreedy() {
-        return mapIdsGreedy;
+    public String[] getArrayIdsSamurai() {
+        return arrayIdsSamurai;
     }
 
-    public Map<String, String> getMapIdsExGreMap() {
-        return mapIdsExGreedy;
+    public String[] getArrayIdsExGreedy() {
+        return arrayIdsExGreedy;
     }
 
-    public Map<String, String> getMapIdsExSamurai() {
-        return mapIdsExSamurai;
+    public String[] getArrayIdsExSamurai() {
+        return arrayIdsExSamurai;
     }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -448,26 +454,28 @@ public class AnalisisPanel extends javax.swing.JDialog {
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void jButtonDivActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDivActionPerformed
-
+       
         boolean greedy = jRadioBGreedy.isSelected();
 
         String splitIde;
 
         ConnectionDB.AbrirConBD();
 
+        int j=0;
         for (String[] e : listIds) {
             
             String ide = e[0];            
 
-            splitIde = greedy ? GreedyPaper.ejecutar(ide) : SamuraiPaper.ejecutar(ide);
+            splitIde = greedy ? algoritmoGreedy.ejecutar(ide) : algoritmoSamurai.ejecutar(ide);
 
             splitIde = splitIde.replaceAll(" ", "-");//para que se destaque la separación
 
             if (greedy) {
-                mapIdsGreedy.put(ide, splitIde);
+                arrayIdsGreedy[j] =splitIde;
             } else {
-                mapIdsSamurai.put(ide, splitIde);
+                arrayIdsSamurai[j] = splitIde;
             }
+            j++;
         }
 
         ConnectionDB.CerrarConBD();
@@ -477,20 +485,12 @@ public class AnalisisPanel extends javax.swing.JDialog {
 
         modeloTablaDiv.addColumn(greedy ? "GREEDY" : "SAMURAI");
 
-        Object elem, elem2;
+        Object elem2;
 
-        String cleanHtml;
-
-        for (int i = 0; i < modeloTablaId.getRowCount(); i++) {
-
-            elem = modeloTablaId.getValueAt(i, 0);
-
-            cleanHtml = cleanHtml(elem.toString());
-
-            elem2 = greedy ? mapIdsGreedy.get(cleanHtml) : mapIdsSamurai.get(cleanHtml);
+        for(int i = 0; i < sizeArrays; i++){
+            elem2 = greedy ? arrayIdsGreedy[i] : arrayIdsSamurai[i];
 
             modeloTablaDiv.setValueAt(elem2, i, colNum);
-
         }
 
         jScrollDiv.getVerticalScrollBar().setModel(jScrollId.getVerticalScrollBar().getModel());
@@ -530,29 +530,19 @@ public class AnalisisPanel extends javax.swing.JDialog {
 
         boolean deGreedy = jRadioBdeGre.isSelected();
 
-        String colNam = deGreedy ? "GREEDY" : "SAMURAI";
-
-        int readCol = 0;
-
-        for (int j = 0; j < modeloTablaDiv.getColumnCount(); j++) {//busa el nro de la columna
-            if (modeloTablaDiv.getColumnName(j).equals(colNam)) {
-                readCol = j;
-            }
-        }
-
         Object elem, elem2;
         String arrayElem[];      
         int colNum = modeloTablaExp.getColumnCount();
 
         modeloTablaExp.addColumn(deGreedy ? "Desde GREEDY" : "Desde SAMURAI");
 
-        for (int i = 0; i < modeloTablaId.getRowCount(); i++) {
+        for(int i = 0; i < sizeArrays; i++){    
             
-            String clase = listIds.get(i)[1];
-            String met = listIds.get(i)[2];            
+            String clase = listIds.get(i)[1];//Alg expansion
+            String met = listIds.get(i)[2];  //Alg expansion          
 
-            elem = modeloTablaDiv.getValueAt(i, readCol);
-
+            elem = deGreedy ? arrayIdsGreedy[i] : arrayIdsSamurai[i];
+            
             arrayElem = elem.toString().split("-");
 
             String append = "";
@@ -561,7 +551,7 @@ public class AnalisisPanel extends javax.swing.JDialog {
 
             for (String s : arrayElem) {
 
-                append += ExpandBasic.ejecutar(s,clase,met) + " ";
+                append += algoritmoExpansion.ejecutar(s,clase,met) + " ";
 
             }
 
@@ -570,12 +560,12 @@ public class AnalisisPanel extends javax.swing.JDialog {
             elem2 = append.trim().isEmpty() ? "" : append.substring(0, append.length() - 1);
 
             if (deGreedy) {
-                mapIdsExGreedy.put(elem.toString(), elem2.toString());
+                arrayIdsExGreedy[i] =elem2.toString();
             } else {
-                mapIdsExSamurai.put(elem.toString(), elem2.toString());
+                arrayIdsExSamurai[i] =elem2.toString();
             }           
             
-            //setear letras rojas
+            //setear letras color
             elem2 = resaltarLetras(elem.toString(), elem2.toString());
             
             modeloTablaExp.setValueAt(elem2, i, colNum);
@@ -637,7 +627,8 @@ public class AnalisisPanel extends javax.swing.JDialog {
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-        InfoUtilizadaPane s = new InfoUtilizadaPane(new javax.swing.JFrame(), true);
+        InfoUtilizadaPane s = new InfoUtilizadaPane(new javax.swing.JFrame(), true,
+                                algoritmoSamurai.getLocalFreqTable(), algoritmoSamurai.getGlobalFreqTable(), algoritmoExpansion.getFrasesCap());
 
         s.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed

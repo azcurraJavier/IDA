@@ -7,7 +7,8 @@ package VentanasPaneles;
 
 import ExpandID.ExpandBasic;
 import Listas.PalabraHash;
-import SplitID.SamuraiPaper;
+import SplitID.Samurai;
+import java.util.ArrayList;
 import java.util.Map;
 import javax.swing.JLabel;
 import javax.swing.RowFilter;
@@ -35,12 +36,12 @@ public class InfoUtilizadaPane extends javax.swing.JDialog {
     /**
      * Creates new form SamuraiFreqTable
      */
-    public InfoUtilizadaPane(java.awt.Frame parent, boolean modal) {
+    public InfoUtilizadaPane(java.awt.Frame parent, boolean modal, Map<String,Integer> lft, Map<String,Integer> gft, ArrayList<String[]> fcp) {
         super(parent, modal);
         initComponents();
          
-        localFreqTable = SamuraiPaper.getLocalFreqTable();
-        globalFreqTable = SamuraiPaper.getGlobalFreqTable();
+        localFreqTable = lft;
+        globalFreqTable = gft;
         
         
         modeloTabla = new MiModelo();
@@ -98,7 +99,7 @@ public class InfoUtilizadaPane extends javax.swing.JDialog {
         
         filaTabla = new Object[3];
         
-        for(String[] f :ExpandBasic.getFrasesCap()){
+        for(String[] f : fcp){
             
             filaTabla[0] = f[0];
             filaTabla[1] = f[1];
