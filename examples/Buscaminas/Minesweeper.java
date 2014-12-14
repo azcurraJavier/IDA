@@ -73,10 +73,12 @@ public class Minesweeper extends JFrame implements ActionListener {
             int x, y = 0;
             double x1, y1 = 0;
 
-            /*	Legend of mines in Matrix
+            /*
+             *  Legend of mines in Matrix
              *	1 contains Mine
              *	0 Not contains Mine
              */
+            
             //Place random mine
             do {
                 //Generate random position

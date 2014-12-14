@@ -93,20 +93,21 @@ public class InfoUtilizadaPane extends javax.swing.JDialog {
         jScrollFraCap.setViewportView(tablaElem);
 
         modeloTabla.addColumn("Frases/Palabras");
+        modeloTabla.addColumn("Clase");
+        modeloTabla.addColumn("Método");
         
-        filaTabla = new Object[1];
+        filaTabla = new Object[3];
         
-        for(String f :ExpandBasic.getFrasesCap()){
+        for(String[] f :ExpandBasic.getFrasesCap()){
             
-            filaTabla[0] = f;
+            filaTabla[0] = f[0];
+            filaTabla[1] = f[1];
+            filaTabla[2] = f[2];
             modeloTabla.addRow(filaTabla);
         }        
         
+        tablaElem.autoAjuste();
         
-//        for(String s:ExpandBasic.getPalabrasCap()){
-//            palTag2.addPalabra(s);
-//        }
-        ///
         
     }
     

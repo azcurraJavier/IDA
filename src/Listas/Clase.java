@@ -23,6 +23,9 @@ public class Clase {
     //se utiliza para ver las referencias de las var de clase y metodos
     private ArrayList<UsoId> lisUsoIdDecl;
     private ArrayList<UsoId> lisUsoIdMet;
+    
+    private int lineaCom;//linea comienza el método (alg. expansión)
+    private int lineaFin;//linea fin el método (alg. expansión)
 
     public Clase() {
         this.modClase = new String();
@@ -30,6 +33,8 @@ public class Clase {
         
         this.lisUsoIdDecl = new ArrayList<>();
         this.lisUsoIdMet = new ArrayList<>();
+        this.lineaCom = -1;
+        this.lineaFin = -1;
     }   
     
     
@@ -60,6 +65,22 @@ public class Clase {
 
     public String getModClase() {
         return modClase;
+    }   
+    
+    public void setLineaCom(int lineaCom) {
+        this.lineaCom = lineaCom-1;//-1 para que quede excato en la linea
+    }
+
+    public void setLineaFin(int lineaFin) {
+        this.lineaFin = lineaFin-1;//-1 para que quede excato en la linea
+    }
+
+    public int getLineaCom() {
+        return lineaCom;
+    }
+
+    public int getLineaFin() {
+        return lineaFin;
     }   
 
 
@@ -186,9 +207,9 @@ public class Clase {
 
         for (ClassBodyDecl c : lisClassBodyDecl) {
 
-            String ambiente = "@" + this.getIde().getNomID();
+            String ambiente = this.getIde().getNomID();
 
-            m = new MostrarTabla(ambiente);//seteo ambiente(nombre de la clase)
+            m = new MostrarTabla(ambiente,"");//seteo ambiente(nombre de la clase)
             
 
             if (c.getListaDecl() != null) {
@@ -225,7 +246,7 @@ public class Clase {
                     
                     lisMostrarTabla.add(m);
                     
-                    m = new MostrarTabla(ambiente);//seteo ambiente(nombre de la clase)                   
+                    m = new MostrarTabla(ambiente,"");//seteo ambiente(nombre de la clase)                   
 
                 }
             }
@@ -261,13 +282,13 @@ public class Clase {
 //                }                
                 
                 lisMostrarTabla.add(m);//agrego el metodo
-                lisMostrarTabla.addAll(met.cargarTablaMetodo());//luego agrego todo la info asociada            
+                lisMostrarTabla.addAll(met.cargarTablaMetodo(ide.getNomID()));//luego agrego todo la info asociada            
                 //this.cantTotalId += met.getCantTotalId();//sumo la cant de id del metodo!
             }
         }
 
         //clase
-        m = new MostrarTabla("Clase Global");//clase
+        m = new MostrarTabla(this.getIde().getNomID(),"");//clase
         m.setRepresenta("Clase");
         m.setModificador(this.modClase);
         m.setNomId(this.ide.getNomID());

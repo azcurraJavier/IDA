@@ -1,7 +1,5 @@
 package Listas;
 
-import java.util.ArrayList;
-
 
 public class MostrarTabla {
     
@@ -17,10 +15,13 @@ public class MostrarTabla {
     
     private String idExpandido; //lo elige el usuario
     
+    private String ambClase;
+    private String ambMet;
+    
     //tablas extras: decl y ref
 //    private ArrayList<MostrarListaRef> listaRef;
     
-    public MostrarTabla(String ambiente){
+    public MostrarTabla(String ambienteClase, String ambienteMet){
     
         this.strAsignado = "";
         this.nomId = "";
@@ -32,7 +33,9 @@ public class MostrarTabla {
         
         this.representa = "";//parametro var local var global clase
         this.idExpandido = "";
-//        this.listaRef = new ArrayList<>();
+        
+        this.ambClase = ambienteClase;
+        this.ambMet = ambienteMet;
         
     }
 
@@ -67,6 +70,15 @@ public class MostrarTabla {
     public void setNumColumna(int numColumna) {
         this.numColumna = numColumna;
     }
+
+    public void setAmbClase(String ambClase) {
+        this.ambClase = ambClase;
+    }
+
+    public void setAmbMet(String ambMet) {
+        this.ambMet = ambMet;
+    }
+    
     
     
 
@@ -108,6 +120,14 @@ public class MostrarTabla {
 
     public int getNumColumna() {
         return numColumna;
+    }
+
+    public String getAmbClase() {
+        return ambClase;
+    }
+
+    public String getAmbMet() {
+        return ambMet;
     }
     
 }

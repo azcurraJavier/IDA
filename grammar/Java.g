@@ -306,13 +306,10 @@ classBody returns [Clase unaClase, ArrayList<Clase> lisClases]
     $lisClases = new ArrayList<>();
     $unaClase = new Clase();
 }
-@after{
-    $unaClase = new Clase(clDecl);
-}
-    :   '{' 
-        (c = classBodyDeclaration {clDecl.add(c.cBd); }
+    :   l1 = '{' {$unaClase.setLineaCom($l1.getLine());}
+        (c = classBodyDeclaration {clDecl.add(c.cBd);  $lisClases.addAll(c.lisClases);}
         )*
-        '}' 
+        l2 = '}' {$unaClase.setLineaFin($l2.getLine());  $unaClase.setLisClassBodyDecl(clDecl);}
     ;
 
 interfaceBody 
@@ -366,12 +363,12 @@ methodDeclaration returns [Metodo me, int lineaMetodo, ArrayList<Clase> lisClase
         f1 = formalParameters {$me.addListParam(f1);}
         ('throws' qualifiedNameList
         )?
-        '{' 
+        metlc ='{' {$me.setLineaCom($metlc.getLine());}  //linea comienzo metodo
         (explicitConstructorInvocation 
         )?
         (b1 = blockStatement {lisDeclme.addAll(b1.lisDecl); $lisClases.addAll(b1.lisClases); }
         )* {$me.addListDecl(lisDeclme);}//le sumo cant de apariciones a la lista de declaraciones 
-        '}'                                                                                                                    
+        metlf = '}' {$me.setLineaFin($metlf.getLine());} //linea fin metodo                                                                                                                
     |   mo1 = modifiers {mod = $mo1.text;}
         (typeParameters
         )?
@@ -385,7 +382,7 @@ methodDeclaration returns [Metodo me, int lineaMetodo, ArrayList<Clase> lisClase
         ('throws' qualifiedNameList
         )?            
         (        
-           b2 = block {$me.addListDecl(b2.lisDecl); $lisClases.addAll(b2.lisClases);}//le sumo cant de apariciones a la lista de declaraciones
+           b2 = block {$me.addListDecl(b2.lisDecl); $me.setLineaCom(b2.linCom); $me.setLineaFin(b2.linFin); $lisClases.addAll(b2.lisClases);}
         |   ';'                                                                                                                                        
         )
     ;
@@ -653,15 +650,16 @@ annotationMethodDeclaration
         ';'
         ;
 
-block returns [ArrayList<Declaracion> lisDecl, ArrayList<Clase> lisClases]
+block returns [ArrayList<Declaracion> lisDecl, ArrayList<Clase> lisClases, int linCom, int linFin]
 @init{
     $lisDecl = new ArrayList<>();
     $lisClases = new ArrayList<>();
+    $linCom = -1; $linFin = -1;
 }
-    :   '{'
+    :   l1 = '{' {$linCom = l1.getLine();}
         (b1 = blockStatement {$lisDecl.addAll(b1.lisDecl); $lisClases.addAll(b1.lisClases);}
         )*
-        '}'
+        l2 = '}' {$linFin = l2.getLine();}
     ;
 
 /*

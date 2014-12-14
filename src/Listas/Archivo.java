@@ -51,7 +51,7 @@ public class Archivo {
         }
         //informacion del paquete
         if (this.nomPaq != null && !this.nomPaq.isEmpty()) {
-            MostrarTabla m = new MostrarTabla("Global");//paquete
+            MostrarTabla m = new MostrarTabla("","");//paquete
             m.setRepresenta("Paquete");
             m.setNomId(this.nomPaq);
             m.setNumLinea(this.linPaq);

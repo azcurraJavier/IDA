@@ -8,6 +8,7 @@ import SplitID.GreedyPaper;
 import SplitID.SamuraiPaper;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -39,7 +40,8 @@ public class AnalisisPanel extends javax.swing.JDialog {
     private MiModelo modeloTablaExp;
     private MiJTable tablaElemExp;
 
-    private Set<String> setIds;
+    //private Set<String> setIds;
+    private ArrayList<String[]> listIds;
 
     private Map<String, String> mapIdsGreedy;
     private Map<String, String> mapIdsSamurai;
@@ -47,11 +49,17 @@ public class AnalisisPanel extends javax.swing.JDialog {
     private Map<String, String> mapIdsExGreedy;
     private Map<String, String> mapIdsExSamurai;
 
-    public AnalisisPanel(java.awt.Frame parent, boolean modal, Set<String> setIds, Archivo archivo) {
+    public AnalisisPanel(java.awt.Frame parent, boolean modal, ArrayList<String[]> listIds, Archivo archivo) {
         super(parent, modal);
         initComponents();
 
-        this.setIds = setIds;
+        //this.setIds = setIds;
+        
+        if(listIds == null || listIds.isEmpty()){
+            jButtonDiv.setEnabled(false);
+        }
+        
+        this.listIds = listIds;
 
         //Se inician tablas de frecuencias
         ConnectionDB.AbrirConBD();        
@@ -94,14 +102,21 @@ public class AnalisisPanel extends javax.swing.JDialog {
 
         Object[] filaTabla = new Object[1];
 
-        if (setIds != null && !setIds.isEmpty()) {
+        
 
-            for (String ide : setIds) {
-
-                filaTabla[0] = "<html><b>" + ide + "</b></html>";
-                modeloTablaId.addRow(filaTabla);
+//            for (String ide : setIds) {
+//
+//                filaTabla[0] = "<html><b>" + ide + "</b></html>";
+//                modeloTablaId.addRow(filaTabla);
+//            }
+            for (String[] e : listIds) {
+            
+                filaTabla[0] = "<html><b>" + e[0] + "</b></html>";
+                modeloTablaId.addRow(filaTabla);               
+            
             }
-        }
+            
+        
 
         for (int i = 0; i < modeloTablaId.getRowCount(); i++) {
             modeloTablaDiv.addRow(new Object[1]);
@@ -440,7 +455,9 @@ public class AnalisisPanel extends javax.swing.JDialog {
 
         ConnectionDB.AbrirConBD();
 
-        for (String ide : setIds) {
+        for (String[] e : listIds) {
+            
+            String ide = e[0];            
 
             splitIde = greedy ? GreedyPaper.ejecutar(ide) : SamuraiPaper.ejecutar(ide);
 
@@ -530,6 +547,9 @@ public class AnalisisPanel extends javax.swing.JDialog {
         modeloTablaExp.addColumn(deGreedy ? "Desde GREEDY" : "Desde SAMURAI");
 
         for (int i = 0; i < modeloTablaId.getRowCount(); i++) {
+            
+            String clase = listIds.get(i)[1];
+            String met = listIds.get(i)[2];            
 
             elem = modeloTablaDiv.getValueAt(i, readCol);
 
@@ -541,7 +561,7 @@ public class AnalisisPanel extends javax.swing.JDialog {
 
             for (String s : arrayElem) {
 
-                append += ExpandBasic.ejecutar(s) + " ";
+                append += ExpandBasic.ejecutar(s,clase,met) + " ";
 
             }
 

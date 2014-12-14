@@ -16,6 +16,9 @@ public class Metodo {
 
     private ArrayList<UsoId> lisUsoIdDecl;
     private ArrayList<UsoId> lisUsoIdPara;
+    
+    private int lineaCom;//linea comienza el método (alg. expansión)
+    private int lineaFin;//linea fin el método (alg. expansión)
 
     public Metodo() {
         this.modif = "";
@@ -25,6 +28,8 @@ public class Metodo {
         this.listaParam = null;
         this.lisUsoIdDecl = null;
         this.lisUsoIdPara = null;
+        this.lineaCom = -1;
+        this.lineaFin = -1;
     }
 
     public Metodo(String modif, String tipo, Id ide) {
@@ -54,6 +59,23 @@ public class Metodo {
     public String getTipo() {
         return tipo;
     }
+
+    public void setLineaCom(int lineaCom) {
+        this.lineaCom = lineaCom-1;//-1 para que quede excato en la linea
+    }
+
+    public void setLineaFin(int lineaFin) {
+        this.lineaFin = lineaFin-1;//-1 para que quede excato en la linea
+    }
+
+    public int getLineaCom() {
+        return lineaCom;
+    }
+
+    public int getLineaFin() {
+        return lineaFin;
+    }    
+    
 
 //    public ArrayList<UsoId> buscarUsoIdDec(ArrayList<UsoId> lstId) {
 //
@@ -129,7 +151,7 @@ public class Metodo {
 //    }
 
     //nuevo
-    public ArrayList<MostrarTabla> cargarTablaMetodo() {
+    public ArrayList<MostrarTabla> cargarTablaMetodo(String nomClase) {
 
         MostrarTabla m;
 
@@ -138,7 +160,7 @@ public class Metodo {
             //for (Iterator<Entry<String, Declaracion>> it = lisDecl.entrySet().iterator(); it.hasNext();) {
             for(Declaracion d : this.listaDecl){    
             //for(int i;i<3;i++){
-                m = new MostrarTabla(this.getIde().getNomID());//seteo ambiente(nombre del metodo)
+                m = new MostrarTabla(nomClase,this.getIde().getNomID());//seteo ambiente(nombre del metodo)
                 m.setRepresenta("Variable Local");
                 //Declaracion d = it.next().getValue();
 
@@ -165,7 +187,7 @@ public class Metodo {
             //for (Iterator<Entry<String, Parametro>> it = lisParam.entrySet().iterator(); it.hasNext();) {
             for(Parametro p : this.listaParam){     
                 
-                m = new MostrarTabla(this.getIde().getNomID());//seteo ambiente(nombre del metodo)
+                m = new MostrarTabla(nomClase,this.getIde().getNomID());//seteo ambiente(nombre del metodo)
                 m.setRepresenta("Parámetro");
                 //Parametro p = it.next().getValue();
 

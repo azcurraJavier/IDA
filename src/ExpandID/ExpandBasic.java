@@ -3,12 +3,13 @@ package ExpandID;
 import DictionaryDB.Dictionary;
 import DictionaryDB.OperationDB;
 import Listas.Archivo;
+import Listas.Clase;
+import Listas.ClassBodyDecl;
 import Listas.Comentario;
 import Listas.Literal;
+import Listas.Metodo;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Random;
-import java.util.Set;
 import java.util.regex.Pattern;
 
 /**
@@ -17,44 +18,80 @@ import java.util.regex.Pattern;
  */
 public class ExpandBasic {
 
-    private static ArrayList<String> palabrasCap = new ArrayList();
+    private static ArrayList<String> palabrasCap;
 
-    private static ArrayList<String> frasesCap = new ArrayList();
+    private static ArrayList<String> frasesCap;
 
-    //////////////
-    private static ArrayList<String> listExp = new ArrayList();
+    private static ArrayList<String[]> palabrasArrayCap;
+
+    private static ArrayList<String[]> frasesArrayCap;
+
+    private static ArrayList<String> listExp;
 
     private static String unicaExp;
 
+    private static String clase;
+    private static String metodo;
+
     public static void procesarFrases(Archivo archivo) {
 
-        Set<String> comCap = new HashSet<>();
+        palabrasCap = new ArrayList();
+
+        frasesCap = new ArrayList();
+
+        palabrasArrayCap = new ArrayList();
+
+        frasesArrayCap = new ArrayList();
+
+        listExp = new ArrayList();
+
+        unicaExp = "";
+        clase = "";
+        metodo = "";
+
+        ArrayList<String[]> comCap = new ArrayList<>();
+        String[] e;
 
         for (Comentario com : archivo.getLisComentario()) {
-            comCap.add(com.getCom());
+
+            e = new String[3];
+
+            e[0] = com.getCom();
+            procesarClasMetLin(archivo, com.getCom(), com.getLinea());
+            e[1] = clase;
+            e[2] = metodo;
+
+            comCap.add(e);
+
         }
 
         for (Literal l : archivo.getLisLiterales()) {
-            comCap.add(l.getText());
+
+            e = new String[3];
+
+            e[0] = l.getText();
+            procesarClasMetLin(archivo, l.getText(), l.getLine());
+            e[1] = clase;
+            e[2] = metodo;
+
+            comCap.add(e);
         }
 
-        //se limpia todo
-        frasesCap.clear();
-        palabrasCap.clear();
+        for (String[] elem : comCap) {
 
-        for (String linea : comCap) {
+            String fr = elem[0];
 
             //limpieza
-            linea = linea.replaceAll("\"", "").trim();
+            fr = fr.replaceAll("\"", "").trim();
             //excluir simbolos
-            linea = linea.replaceAll("[^A-Za-z ]", "");
+            fr = fr.replaceAll("[^A-Za-z ]", "");
 
-            if (linea.isEmpty()) {
+            if (fr.isEmpty()) {
                 continue;
             }
 
             //filtrar palabras irrelevantes
-            String arrayCom[] = linea.split(" ");
+            String arrayCom[] = fr.split(" ");
 
             String frase = "";
 
@@ -69,6 +106,10 @@ public class ExpandBasic {
 
                 if (!OperationDB.select("stop_dict", pal)) {
                     //si no es una palabra irrelevante la agrego
+
+                    elem[0] = pal;
+
+                    palabrasArrayCap.add(elem.clone());
                     palabrasCap.add(pal);
                     frase += pal + " ";
 
@@ -78,6 +119,8 @@ public class ExpandBasic {
 
             if (!frase.isEmpty()) {
                 frase = frase.substring(0, frase.length() - 1);
+                elem[0] = frase;
+                frasesArrayCap.add(elem.clone());
                 frasesCap.add(frase);
             }
 
@@ -85,15 +128,46 @@ public class ExpandBasic {
 
     }
 
-    public static ArrayList<String> getFrasesCap() {
-        return frasesCap;
+    private static void procesarClasMetLin(Archivo archivo, String com, int lin) {
+
+        clase = "";
+        metodo = "";
+
+        for (Clase c : archivo.getLisClases()) {
+
+            if (c.getLineaCom() <= lin && lin <= c.getLineaFin()) {//localiza la clase donde está ubicado
+
+                clase = c.getIde().getNomID();
+
+                for (ClassBodyDecl cbd : c.getClassBodyDecl()) {
+
+                    Metodo met = cbd.getMetodo();
+
+                    if (met == null) {
+                        continue;
+                    }
+
+                    //localiza el metodo donde está ubicado
+                    if (met.getLineaCom() <= lin && lin <= met.getLineaFin()) {
+
+                        metodo = met.getIde().getNomID();
+
+                        return;
+
+                    }
+
+                }
+            }
+
+        }
+
     }
 
-    public static ArrayList<String> getPalabrasCap() {
-        return palabrasCap;
-    } 
+    public static ArrayList<String[]> getFrasesCap() {
+        return frasesArrayCap;
+    }
 
-    public static String ejecutar(String w) {
+    public static String ejecutar(String w, String clase, String met) {
 
         if (w == null || w.isEmpty()) {
             return "";
@@ -110,7 +184,7 @@ public class ExpandBasic {
         }
 
         //acronimo
-        String cand = expandirAcro(w);
+        String cand = expandirAcro(w, clase, met);
 
         if (cand != null) {
             //listExp.add(cand);
@@ -118,21 +192,20 @@ public class ExpandBasic {
         }
 
         //abreviacion comun
-        cand = expandirAbrev(w);
+        cand = expandirAbrev(w, clase, met);
 
         if (cand != null) {
             //listExp.add(cand);
             return cand;
         }
-        
+
         //Busqueda en diccionario - ultimo recurso
-        
-        if(Dictionary.searchWordDic("words_dict", w)){
+        if (Dictionary.searchWordDic("words_dict", w)) {
             return w;
         }
-        
+
         if (w.length() == 1 || w.length() == 3) {//exige 3 sino el like trae muchos resultados
-                                                 //no más de 3 porque expande casos que no los debe expandir
+            //no más de 3 porque expande casos que no los debe expandir
             listExp = OperationDB.like("words_dict", w);
 
             if (listExp == null || listExp.isEmpty()) {
@@ -163,7 +236,77 @@ public class ExpandBasic {
         return unicaExp;
     }
 
-    private static String expandirAbrev(String w) {
+    private static String expandirAbrev(String w, String clase, String met) {
+
+        ArrayList<String> palCapMet = new ArrayList();
+
+        String cand = null;
+
+        if (met != null && !met.isEmpty()) {
+
+            for (String s[] : palabrasArrayCap) {
+
+                //busqueda estricta
+                if (s[2].equals(met) && !clase.isEmpty() && s[1].equals(clase)) {
+                    palCapMet.add(s[0]);
+                }
+
+            }            
+            cand = buscarAbrev(palCapMet, w);
+            //si encuentra candidato no sigue buscando
+            if (cand != null) {
+                return cand;
+            }
+
+           palCapMet.clear();            
+        }    
+       
+        //caso contrario busca por clase
+        if (clase != null && !clase.isEmpty()) {        
+        
+            for (String s[] : palabrasArrayCap) {
+
+                if (s[1].equals(clase) && s[2].isEmpty()) {
+                    palCapMet.add(s[0]);
+                }
+
+            }
+
+            cand = buscarAbrev(palCapMet, w);
+        
+        }
+        
+        if (cand != null) {
+            return cand;
+        }
+
+        palCapMet.clear();
+        
+        
+        for(String s[] : palabrasArrayCap){
+        
+            //busqueda con alcance global, aquellas que estan fuera de la clase
+            if(s[1].isEmpty()){
+                palCapMet.add(s[0]);
+            }
+        }
+        
+        cand = buscarAbrev(palCapMet, w);
+        
+        if (cand != null) {
+            return cand;
+        }
+        
+        //si no encuentra pruebo con la lista completa
+        return buscarAbrev(palabrasCap, w);
+
+    }
+
+    private static String buscarAbrev(ArrayList<String> palCap, String w) {
+        
+        if(palCap.isEmpty()){
+            return null;
+        }        
 
         String original = w;
 
@@ -190,7 +333,7 @@ public class ExpandBasic {
         //abreviatura compleja ej: tang -> triangule
         Pattern pat2 = Pattern.compile(w);
 
-        for (String cand : palabrasCap) {
+        for (String cand : palCap) {
 
             if (original.equals(cand)) {
                 continue;//puede que la abreviatura tang este en lo comentarios debo descartar
@@ -206,11 +349,8 @@ public class ExpandBasic {
 
     }
 
-    private static String expandirAcro(String w) {
-
-        if (w == null) {
-            return null;
-        }
+    //==============================================
+    private static String expandirAcro(String w, String clase, String met) {
 
         int len = w.length();
 
@@ -219,7 +359,79 @@ public class ExpandBasic {
             return null;
         }
 
-        for (String frase : frasesCap) {
+        ArrayList<String> fraCapMet = new ArrayList();
+
+        String cand = null;
+
+        if (met != null && !met.isEmpty()) {
+            
+            for (String s[] : frasesArrayCap) {
+
+                //busqueda estricta
+                if (s[2].equals(met) && !clase.isEmpty() && s[1].equals(clase)) {
+                    fraCapMet.add(s[0]);
+                }
+
+            }   
+            cand = buscarAcro(fraCapMet, w);
+            //si encuentra candidato no sigue buscando
+            if (cand != null) {
+                return cand;
+            }         
+            
+            fraCapMet.clear();
+            
+        }
+              
+        //caso contrario busca por clase
+        if (clase != null && !clase.isEmpty()) {
+
+            for (String s[] : frasesArrayCap) {
+
+                if (s[1].equals(clase) && s[2].isEmpty()) {
+                    fraCapMet.add(s[0]);
+                }
+
+            }
+            
+            cand = buscarAcro(fraCapMet, w);
+
+        }        
+
+        if (cand != null) {
+            return cand;
+        }
+        
+        fraCapMet.clear();
+        
+        for (String s[] : frasesArrayCap) {
+
+            //busqueda con alcance global, aquellas que estan fuera de la clase
+            if (s[1].isEmpty()) {
+                fraCapMet.add(s[0]);
+            }
+
+        }   
+        
+        cand = buscarAcro(fraCapMet, w);
+
+        if (cand != null) {
+            return cand;
+        }
+
+        //si no encuentra pruebo con toda la lista
+        return buscarAcro(frasesCap, w);
+
+
+    }
+
+    private static String buscarAcro(ArrayList<String> fraCap, String w) {
+        
+        if(fraCap.isEmpty()){
+            return null;
+        }
+
+        for (String frase : fraCap) {
 
             String f[] = frase.split(" ");
 
@@ -249,6 +461,7 @@ public class ExpandBasic {
         }
 
         return null;
+
     }
 
 }

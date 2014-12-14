@@ -53,6 +53,8 @@ public class TablaBuscador extends javax.swing.JPanel {
     AnalisisPanel splitPanel;
 
     Set<String> setIdExtract;
+    
+    ArrayList<String[]> listIdsExtract;
 
     public ArrayList<String> getListTableInfo() {
         return listTableInfo;
@@ -75,6 +77,8 @@ public class TablaBuscador extends javax.swing.JPanel {
         hiddenColumns = new HashMap();
 
         listTableInfo = new ArrayList<>();
+        
+        listIdsExtract = new ArrayList<>();
 
 //        jScrollPaneRef.setVisible(false);
 
@@ -488,18 +492,29 @@ public class TablaBuscador extends javax.swing.JPanel {
 
     private void jButtonAnId1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAnId1ActionPerformed
 
-        if (this.setIdExtract.isEmpty()) {
-            for (String id : codigoPanel.getTablaId().getListTableInfo()) {
-
-                //los ids encontrados los procesamos con conjunto para sacar repetidos
-                this.setIdExtract.add(id);
-
-            }
-        }
-
-        if (splitPanel == null) {
-
-            splitPanel = new AnalisisPanel(new javax.swing.JFrame(), true, setIdExtract, archivoAnalisis);
+        
+            
+            
+            
+//            for (String id : codigoPanel.getTablaId().getListTableInfo()) {
+//
+//                //los ids encontrados los procesamos con conjunto para sacar repetidos
+//                this.setIdExtract.add(id);
+//
+//            }
+      if (splitPanel == null) {
+          
+            String e[];
+            for (MostrarTabla m : archivoAnalisis.getLisMostrarTabla()) {
+            
+                e = new String[3];
+                e[0] = m.getNomId();
+                e[1] = m.getAmbClase();
+                e[2] = m.getAmbMet();
+                listIdsExtract.add(e); 
+            } 
+            
+            splitPanel = new AnalisisPanel(new javax.swing.JFrame(), true, listIdsExtract, archivoAnalisis);
 
             firstOpen = true;
         }
