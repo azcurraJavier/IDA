@@ -249,25 +249,25 @@ public class TablaBuscador extends javax.swing.JPanel {
     
     public void updateTable(){
         
-        if(cargaIdsGreedy && anPanel.getArrayIdsGreedy().length > 0){
+        if(cargaIdsGreedy && anPanel.getArrayIdsGreedy() != null){
             
             cargaColTabla("Div Greedy",anPanel.getArrayIdsGreedy());
         
             cargaIdsGreedy =false;
         }
-        if(cargaIdsSamurai &&  anPanel.getArrayIdsSamurai().length > 0){
+        if(cargaIdsSamurai &&  anPanel.getArrayIdsSamurai() != null){
             
             cargaColTabla("Div Samurai",anPanel.getArrayIdsSamurai());
 
             cargaIdsSamurai = false;
         }
-        if(cargaIdsExGreedy &&  anPanel.getArrayIdsExGreedy().length > 0){
+        if(cargaIdsExGreedy &&  anPanel.getArrayIdsExGreedy() != null){
             
             cargaColTabla("Exp desde Greedy",anPanel.getArrayIdsExGreedy());
 
             cargaIdsExGreedy = false;
         }
-        if(cargaIdsExSamurai &&  anPanel.getArrayIdsExSamurai().length > 0){
+        if(cargaIdsExSamurai &&  anPanel.getArrayIdsExSamurai() != null){
             
             cargaColTabla("Exp desde Samurai",anPanel.getArrayIdsExSamurai());
 
@@ -542,13 +542,13 @@ public class TablaBuscador extends javax.swing.JPanel {
         
         String tablaCont = "";
         
-        Set<String> alreadyId = new HashSet<>();//excluye ids repetidos
+        //Set<String> alreadyId = new HashSet<>();//excluye ids repetidos
         
         for(int i =0;i<modeloTabla.getRowCount();i++ ){     
                      
-            if(alreadyId.contains(cleanHtml(modeloTabla.getValueAt(i, 2).toString()))){
-                continue;    //excluye ids repetidos        
-            }          
+//            if(alreadyId.contains(cleanHtml(modeloTabla.getValueAt(i, 2).toString()))){
+//                continue;    //excluye ids repetidos        
+//            }          
             
             tablaCont += "<tr>";
             
@@ -564,7 +564,7 @@ public class TablaBuscador extends javax.swing.JPanel {
                 }
             tablaCont += "</tr>";
             
-            alreadyId.add(cleanHtml(modeloTabla.getValueAt(i, 2).toString()));//excluye ids repetidos
+            //alreadyId.add(cleanHtml(modeloTabla.getValueAt(i, 2).toString()));//excluye ids repetidos
                 
         }
         

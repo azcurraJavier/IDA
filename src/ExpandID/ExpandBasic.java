@@ -57,7 +57,7 @@ public class ExpandBasic {
             e = new String[3];
 
             e[0] = com.getCom();
-            procesarClasMetLin(archivo, com.getCom(), com.getLinea());
+            procesarClasMetLin(archivo, com.getLinea());
             e[1] = clase;
             e[2] = metodo;
 
@@ -70,7 +70,7 @@ public class ExpandBasic {
             e = new String[3];
 
             e[0] = l.getText();
-            procesarClasMetLin(archivo, l.getText(), l.getLine());
+            procesarClasMetLin(archivo, l.getLine());
             e[1] = clase;
             e[2] = metodo;
 
@@ -127,41 +127,57 @@ public class ExpandBasic {
         }
 
     }
-
-    private  void procesarClasMetLin(Archivo archivo, String com, int lin) {
-
+    
+    private  void procesarClasMetLin(Archivo archivo, int lin) {
+    
         clase = "";
         metodo = "";
-
-        for (Clase c : archivo.getLisClases()) {
-
-            if (c.getLineaCom() <= lin && lin <= c.getLineaFin()) {//localiza la clase donde está ubicado
-
-                clase = c.getIde().getNomID();
-
-                for (ClassBodyDecl cbd : c.getClassBodyDecl()) {
-
-                    Metodo met = cbd.getMetodo();
-
-                    if (met == null) {
-                        continue;
+        
+        Clase cand=null;
+        
+        for (Clase actual : archivo.getLisClases()) {
+            
+            if (actual.getLineaCom() <= lin && lin <= actual.getLineaFin()) {//localiza la clase donde está ubicado
+        
+                //se busca la clase interior más cercana al texto
+                if(cand == null){
+                    cand = actual;                
+                }else{
+                    if(cand.getLineaCom() <= actual.getLineaCom() && actual.getLineaFin()<= cand.getLineaFin()){
+                        cand = actual;                
                     }
-
-                    //localiza el metodo donde está ubicado
-                    if (met.getLineaCom() <= lin && lin <= met.getLineaFin()) {
-
-                        metodo = met.getIde().getNomID();
-
-                        return;
-
-                    }
-
                 }
             }
-
         }
+        
+        if(cand == null){
+            return;
+        }
+        
+        clase = cand.getIde().getNomID();
+        
+        for (ClassBodyDecl cbd : cand.getClassBodyDecl()) {
 
+            Metodo met = cbd.getMetodo();
+
+            if (met == null) {
+                continue;
+            }
+
+            //localiza el metodo donde está ubicado
+            if (met.getLineaCom() <= lin && lin <= met.getLineaFin()) {
+
+                metodo = met.getIde().getNomID();
+
+                return;
+
+            }
+
+        }        
+    
     }
+    
+    
 
     public  ArrayList<String[]> getFrasesCap() {
         return frasesArrayCap;

@@ -43,17 +43,17 @@ public class AnalisisPanel extends javax.swing.JDialog {
     
     private final int sizeArrays;
     
-    private final String[] arrayIdsGreedy;
-    private final String[] arrayIdsSamurai;
+    private String[] arrayIdsGreedy;
+    private String[] arrayIdsSamurai;
     
-    private final String[] arrayIdsExGreedy;
-    private final String[] arrayIdsExSamurai;
+    private String[] arrayIdsExGreedy;
+    private String[] arrayIdsExSamurai;
     
     /////////////////////////////////////
     private final Greedy algoritmoGreedy;
     private final Samurai algoritmoSamurai;
     private final ExpandBasic algoritmoExpansion;
-
+    
     public AnalisisPanel(java.awt.Frame parent, boolean modal, ArrayList<String[]> listIds, Archivo archivo) {
         super(parent, modal);
         initComponents();
@@ -89,11 +89,11 @@ public class AnalisisPanel extends javax.swing.JDialog {
 
         ////////////////////////////
         
-        arrayIdsGreedy = new String[sizeArrays];
-        arrayIdsSamurai = new String[sizeArrays];
-        arrayIdsExGreedy = new String[sizeArrays];
-        arrayIdsExSamurai = new String[sizeArrays];
-
+        arrayIdsGreedy = null;
+        arrayIdsSamurai = null;
+        arrayIdsExGreedy = null;
+        arrayIdsExSamurai = null;
+        
         /////////////////////////////
         
         
@@ -224,8 +224,8 @@ public class AnalisisPanel extends javax.swing.JDialog {
     public String[] getArrayIdsExSamurai() {
         return arrayIdsExSamurai;
     }
-    
-    
+
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -456,6 +456,12 @@ public class AnalisisPanel extends javax.swing.JDialog {
     private void jButtonDivActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDivActionPerformed
        
         boolean greedy = jRadioBGreedy.isSelected();
+        
+        if (greedy) {
+            arrayIdsGreedy = new String[sizeArrays];
+        } else {
+            arrayIdsSamurai = new String[sizeArrays];
+        }
 
         String splitIde;
 
@@ -529,6 +535,12 @@ public class AnalisisPanel extends javax.swing.JDialog {
     private void jButtonExpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExpActionPerformed
 
         boolean deGreedy = jRadioBdeGre.isSelected();
+
+        if (deGreedy) {
+            arrayIdsExGreedy = new String[sizeArrays];
+        } else {
+            arrayIdsExSamurai = new String[sizeArrays];
+        }   
 
         Object elem, elem2;
         String arrayElem[];      
