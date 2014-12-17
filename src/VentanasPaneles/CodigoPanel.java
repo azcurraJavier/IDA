@@ -87,7 +87,7 @@ public class CodigoPanel extends javax.swing.JPanel {
 
     private String codeHtml(String code) {
 
-        String[] lines = code.split(System.getProperty("line.separator"));
+        String[] lines = code.split("\\r?\\n");
         
         StringBuilder buffer = new StringBuilder();
         String line;       
@@ -115,7 +115,7 @@ public class CodigoPanel extends javax.swing.JPanel {
     public void replaceIdsCode(Map<String,String> idExp){
     
         String code = archivoAnalisis.getCode();
-        String[] lines = code.split(System.getProperty("line.separator"));        
+        String[] lines = code.split("\\r?\\n");        
         
        
         for (Map.Entry mapEntry : idExp.entrySet()) {

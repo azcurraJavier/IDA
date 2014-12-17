@@ -72,7 +72,7 @@ scope GlobalOne {
         }        
         
         //si posee mas se descompone....
-        String[] lines = com.split(System.getProperty("line.separator"));
+        String[] lines = com.split("\\r?\\n");
         
         int lin = linea;
         

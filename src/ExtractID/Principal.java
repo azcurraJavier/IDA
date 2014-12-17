@@ -10,6 +10,7 @@ import VentanasPaneles.DiccionaryPanel;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -21,6 +22,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import org.antlr.runtime.ANTLRStringStream;
 import org.antlr.runtime.CommonTokenStream;
 import org.jdesktop.swingx.util.OS;
+import org.jvnet.substance.SubstanceLookAndFeel;
 
 /**
  *
@@ -40,6 +42,12 @@ public class Principal extends javax.swing.JFrame {
     private static DiccionaryPanel dicPanel;
 
     public Principal() {
+        
+        JFrame.setDefaultLookAndFeelDecorated(true);
+        SubstanceLookAndFeel.setCurrentTheme("org.jvnet.substance.theme.SubstanceCremeTheme");
+        SubstanceLookAndFeel.setSkin("org.jvnet.substance.skin.ModerateSkin");
+        
+        
         initComponents();
 
         ListaArchivo.init(); 
@@ -233,7 +241,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void jMenuAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuAbrirActionPerformed
             
-        currentDir = new File(".");        
+        currentDir = new File(System.getProperty("user.home"));        
 
         fileChooser.setCurrentDirectory(currentDir);
         FileNameExtensionFilter filter = new FileNameExtensionFilter("java", "JAVA");
@@ -386,16 +394,22 @@ public class Principal extends javax.swing.JFrame {
             BufferedReader reader = null;
 
             String dir;
-
+            
             if (isLinux()) {
-                dir = "jacobe//unix//jacobe";
+                dir = "jacobe/unix/jacobe";
             } else if (isWindows()) {
-                dir = "/jacobe/win/jacobe";
+                dir = "jacobe/win/jacobe";
             } else {
                 System.out.println("jacobe: No se reconoce el SO");
                 return "";
             }
-
+//
+//          String libPath;
+//            libPath = getClass().getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
+//
+//          libPath = new File(libPath).getParentFile().getPath()+"/lib/";
+//          dir =   libPath + dir;          
+          
             Process p = Runtime.getRuntime().exec(new String[]{dir, "-cfg=sun.cfg", path, "-stdout"});
 
             reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
@@ -407,7 +421,7 @@ public class Principal extends javax.swing.JFrame {
                 output += line + "\n";
             }
 
-        } catch (IOException | InterruptedException ex) {
+        } catch (Exception ex) {
             System.out.println(getStackTrace(ex));
         }
 

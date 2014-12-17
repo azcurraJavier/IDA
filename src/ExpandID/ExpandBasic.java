@@ -8,7 +8,10 @@ import Listas.ClassBodyDecl;
 import Listas.Comentario;
 import Listas.Literal;
 import Listas.Metodo;
+import Listas.MostrarTabla;
+import SplitID.SplitUtils;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 import java.util.regex.Pattern;
 
@@ -18,20 +21,20 @@ import java.util.regex.Pattern;
  */
 public class ExpandBasic {
 
-    private  ArrayList<String> palabrasCap;
+    private ArrayList<String> palabrasCap;
 
-    private  ArrayList<String> frasesCap;
+    private ArrayList<String> frasesCap;
 
-    private  ArrayList<String[]> palabrasArrayCap;
+    private ArrayList<String[]> palabrasArrayCap;
 
-    private  ArrayList<String[]> frasesArrayCap;
+    private ArrayList<String[]> frasesArrayCap;
 
-    private  ArrayList<String> listExp;
+    private ArrayList<String> listExp;
 
-    private  String unicaExp;
+    private String unicaExp;
 
-    private  String clase;
-    private  String metodo;
+    private String clase;
+    private String metodo;
 
     public ExpandBasic(Archivo archivo) {
 
@@ -52,6 +55,7 @@ public class ExpandBasic {
         ArrayList<String[]> comCap = new ArrayList<>();
         String[] e;
 
+        //agrega comentarios a la lista de frases
         for (Comentario com : archivo.getLisComentario()) {
 
             e = new String[3];
@@ -64,7 +68,7 @@ public class ExpandBasic {
             comCap.add(e);
 
         }
-
+         //agrega literales a la lista de frases
         for (Literal l : archivo.getLisLiterales()) {
 
             e = new String[3];
@@ -75,6 +79,50 @@ public class ExpandBasic {
             e[2] = metodo;
 
             comCap.add(e);
+        }
+         //agrega hardwords a la lista de frases
+        for (MostrarTabla mt : archivo.getLisMostrarTabla()) {
+
+            String idHardword;
+            if (Arrays.asList("Variable Local", "Parámetro", "Variable de Clase").contains(mt.getRepresenta())) {
+
+                //separa simbolos especiales
+                idHardword = SplitUtils.splitSymbol(mt.getNomId());
+
+                //separa camelcase
+                idHardword = SplitUtils.splitLowerToUpper(idHardword);
+
+                //debe haberse separado
+                if (idHardword.contains(" ")) {
+                    
+                     //filtrar palabras
+                    String arrayCom[] = idHardword.split(" ");
+                    
+                    idHardword = "";
+
+                    for (String pal : arrayCom) {
+                        
+                        //para evitar problemas todo con minuscula
+                        pal = pal.toLowerCase();
+                    
+                        if(OperationDB.select("words_dict", pal)){
+                            idHardword += pal + " ";
+                        }
+                    }
+
+                    e = new String[3];
+
+                    e[0] = idHardword.trim();
+                    procesarClasMetLin(archivo, mt.getNumLinea());
+                    e[1] = clase;
+                    e[2] = metodo;
+
+                    comCap.add(e);
+
+                }
+
+            }
+
         }
 
         for (String[] elem : comCap) {
@@ -127,35 +175,35 @@ public class ExpandBasic {
         }
 
     }
-    
-    private  void procesarClasMetLin(Archivo archivo, int lin) {
-    
+
+    private void procesarClasMetLin(Archivo archivo, int lin) {
+
         clase = "";
         metodo = "";
-        
-        Clase cand=null;
-        
+
+        Clase cand = null;
+
         for (Clase actual : archivo.getLisClases()) {
-            
+
             if (actual.getLineaCom() <= lin && lin <= actual.getLineaFin()) {//localiza la clase donde está ubicado
-        
+
                 //se busca la clase interior más cercana al texto
-                if(cand == null){
-                    cand = actual;                
-                }else{
-                    if(cand.getLineaCom() <= actual.getLineaCom() && actual.getLineaFin()<= cand.getLineaFin()){
-                        cand = actual;                
+                if (cand == null) {
+                    cand = actual;
+                } else {
+                    if (cand.getLineaCom() <= actual.getLineaCom() && actual.getLineaFin() <= cand.getLineaFin()) {
+                        cand = actual;
                     }
                 }
             }
         }
-        
-        if(cand == null){
+
+        if (cand == null) {
             return;
         }
-        
+
         clase = cand.getIde().getNomID();
-        
+
         for (ClassBodyDecl cbd : cand.getClassBodyDecl()) {
 
             Metodo met = cbd.getMetodo();
@@ -173,17 +221,15 @@ public class ExpandBasic {
 
             }
 
-        }        
-    
-    }
-    
-    
+        }
 
-    public  ArrayList<String[]> getFrasesCap() {
+    }
+
+    public ArrayList<String[]> getFrasesCap() {
         return frasesArrayCap;
     }
 
-    public  String ejecutar(String w, String clase, String met) {
+    public String ejecutar(String w, String clase, String met) {
 
         if (w == null || w.isEmpty()) {
             return "";
@@ -252,7 +298,7 @@ public class ExpandBasic {
         return unicaExp;
     }
 
-    private  String expandirAbrev(String w, String clase, String met) {
+    private String expandirAbrev(String w, String clase, String met) {
 
         ArrayList<String> palCapMet = new ArrayList();
 
@@ -267,19 +313,19 @@ public class ExpandBasic {
                     palCapMet.add(s[0]);
                 }
 
-            }            
+            }
             cand = buscarAbrev(palCapMet, w);
             //si encuentra candidato no sigue buscando
             if (cand != null) {
                 return cand;
             }
 
-           palCapMet.clear();            
-        }    
-       
+            palCapMet.clear();
+        }
+
         //caso contrario busca por clase
-        if (clase != null && !clase.isEmpty()) {        
-        
+        if (clase != null && !clase.isEmpty()) {
+
             for (String s[] : palabrasArrayCap) {
 
                 if (s[1].equals(clase) && s[2].isEmpty()) {
@@ -289,40 +335,39 @@ public class ExpandBasic {
             }
 
             cand = buscarAbrev(palCapMet, w);
-        
+
         }
-        
+
         if (cand != null) {
             return cand;
         }
 
         palCapMet.clear();
-        
-        
-        for(String s[] : palabrasArrayCap){
-        
+
+        for (String s[] : palabrasArrayCap) {
+
             //busqueda con alcance global, aquellas que estan fuera de la clase
-            if(s[1].isEmpty()){
+            if (s[1].isEmpty()) {
                 palCapMet.add(s[0]);
             }
         }
-        
+
         cand = buscarAbrev(palCapMet, w);
-        
+
         if (cand != null) {
             return cand;
         }
-        
+
         //si no encuentra pruebo con la lista completa
         return buscarAbrev(palabrasCap, w);
 
     }
 
-    private  String buscarAbrev(ArrayList<String> palCap, String w) {
-        
-        if(palCap.isEmpty()){
+    private String buscarAbrev(ArrayList<String> palCap, String w) {
+
+        if (palCap.isEmpty()) {
             return null;
-        }        
+        }
 
         String original = w;
 
@@ -366,7 +411,7 @@ public class ExpandBasic {
     }
 
     //==============================================
-    private  String expandirAcro(String w, String clase, String met) {
+    private String expandirAcro(String w, String clase, String met) {
 
         int len = w.length();
 
@@ -380,7 +425,7 @@ public class ExpandBasic {
         String cand = null;
 
         if (met != null && !met.isEmpty()) {
-            
+
             for (String s[] : frasesArrayCap) {
 
                 //busqueda estricta
@@ -388,17 +433,17 @@ public class ExpandBasic {
                     fraCapMet.add(s[0]);
                 }
 
-            }   
+            }
             cand = buscarAcro(fraCapMet, w);
             //si encuentra candidato no sigue buscando
             if (cand != null) {
                 return cand;
-            }         
-            
+            }
+
             fraCapMet.clear();
-            
+
         }
-              
+
         //caso contrario busca por clase
         if (clase != null && !clase.isEmpty()) {
 
@@ -409,17 +454,17 @@ public class ExpandBasic {
                 }
 
             }
-            
+
             cand = buscarAcro(fraCapMet, w);
 
-        }        
+        }
 
         if (cand != null) {
             return cand;
         }
-        
+
         fraCapMet.clear();
-        
+
         for (String s[] : frasesArrayCap) {
 
             //busqueda con alcance global, aquellas que estan fuera de la clase
@@ -427,8 +472,8 @@ public class ExpandBasic {
                 fraCapMet.add(s[0]);
             }
 
-        }   
-        
+        }
+
         cand = buscarAcro(fraCapMet, w);
 
         if (cand != null) {
@@ -438,12 +483,11 @@ public class ExpandBasic {
         //si no encuentra pruebo con toda la lista
         return buscarAcro(frasesCap, w);
 
-
     }
 
-    private  String buscarAcro(ArrayList<String> fraCap, String w) {
-        
-        if(fraCap.isEmpty()){
+    private String buscarAcro(ArrayList<String> fraCap, String w) {
+
+        if (fraCap.isEmpty()) {
             return null;
         }
 

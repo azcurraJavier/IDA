@@ -1,4 +1,4 @@
-// $ANTLR 3.4 Java.g 2014-12-14 18:51:00
+// $ANTLR 3.4 Java.g 2014-12-16 18:15:58
  
         /* esto es para que el lexer sea visto desde el resto del proyecto y viceversa */
 	package ExtractID;
@@ -153,7 +153,7 @@ public class JavaLexer extends Lexer {
             }        
             
             //si posee mas se descompone....
-            String[] lines = com.split(System.getProperty("line.separator"));
+            String[] lines = com.split("\\r?\\n");
             
             int lin = linea;
             
