@@ -666,3 +666,20 @@
   x-fetchedfrom = {Bibsonomy}
 }
 
+@article { AMPM12,
+  author  = "Azcurra, Javier and Berón, Mario and Henriques, Pedro and Pereira, Maria João",
+ title  = "Análisis de información informal para facilitar la comprensión de programas",
+ year = "2012",
+ journal = "XIV Workshop de Investigadores en Ciencias de la Computación",
+ isbn={978-950-766-082-5},
+ pages={597-601}
+}
+
+@article { AMGPM14,
+  author  = "Azcurra, Javier and Berón, Mario and Montejano, Germán and Farnese, Augusto and Henriques, Pedro and Pereira, Maria João",
+ title  = "AId: uma Ferramenta para análise de identificadores de programas Java",
+ year = "2014",
+ journal = "Congreso Nacional de Ingeniería Informática/Sistemas de Información",
+ pages={880-892},
+ issn={2346-9927}
+}

@@ -24,6 +24,13 @@ G.~Antoniol, G.~Canfora, G.~Casazza, A.~De Lucia, and E.~Merlo.
 \newblock {\em Software Engineering, IEEE Transactions on}, 28(10):970–983,
   2002.
 
+\bibitem{AMPM12}
+Javier Azcurra, Mario Berón, Pedro Henriques, and Maria~João Pereira.
+\newblock Análisis de información informal para facilitar la comprensión de
+  programas.
+\newblock {\em XIV Workshop de Investigadores en Ciencias de la Computación},
+  pages 597--601, 2012.
+
 \bibitem{THBE99}
 Thomas Ball.
 \newblock The concept of dynamic analysis.
@@ -75,12 +82,6 @@ Bruno Caprile and Paolo Tonella.
 \newblock In {\em Proc. Sixth Working Conf. on Reverse Engineering}, page
   112–122. IEEE, October 1999.
 
-\bibitem{BCPT00}
-Bruno Caprile and Paolo Tonella.
-\newblock Restructuring program identifier names.
-\newblock In {\em Proc. Int'l Conf. on Software Maintenance}, page 97–107.
-  IEEE, 2000.
-
 \bibitem{DFPM05}
 Florian DeiBenbock and Markus Pizka.
 \newblock Concise and consistent naming.
@@ -124,11 +125,6 @@ Henry Feild, David Binkley, and Dawn Lawrie.
 \newblock In {\em Proceedings of the Mid-Atlantic Student Workshop on
   Programming Languages and Systems.}, pages 154--160, 2006.
 
-\bibitem{FFCW01}
-Fangfang Feng and W.~Bruce Croft.
-\newblock Probabilistic techniques for phrase extraction.
-\newblock {\em Inf. Process. Manage.}, 37(2):199–220, 2001.
-
 \bibitem{JDPH08}
 Jos{\'e}~Lu{\'\i}s Freitas, Daniela da~Cruz, and Pedro~Rangel Henriques.
 \newblock The role of comments on program comprehension.
@@ -162,38 +158,11 @@ IEEE.
   610.12-1990.}, volume~1.
 \newblock IEEE Press, 1999.
 
-\bibitem{LOPT00}
-Leah~S. Larkey, Paul Ogilvie, M.~Andrew Price, and Brenden Tamilio.
-\newblock Acrophile: an automated acronym extractor and server.
-\newblock In {\em {ACM DL}}, page 205–214, 2000.
-
 \bibitem{LFBEX07}
 D.~Lawrie, H.~Feild, and D.~Binkley.
 \newblock Extracting meaning from abbreviated identifiers.
 \newblock In {\em Source Code Analysis and Manipulation, 2007. SCAM 2007.
   Seventh IEEE International Working Conference on}, page 213–222, Sept 2007.
-
-\bibitem{DCHD06}
-D.~Lawrie, C.~Morrell, H.~Feild, and D.~Binkley.
-\newblock What's in a name? a study of identifiers.
-\newblock In {\em Program Comprehension, 2006. ICPC 2006. 14th IEEE
-  International Conference on.}, page 3–12, June 2006.
-
-\bibitem{DLHD06}
-Dawn Lawrie, Henry Feild, and David Binkley.
-\newblock Syntactic identifier conciseness and consistency.
-\newblock In {\em SCAM}, page 139–148. IEEE Computer Society, 2006.
-
-\bibitem{LDFHB07}
-Dawn Lawrie, Henry Feild, and David Binkley.
-\newblock An empirical study of rules for well-formed identifiers.
-\newblock {\em Journal of Software Maintenance and Evolution: Research and
-  Practice}, 19(4):205–229, 2007.
-
-\bibitem{DLFB06}
-Dawn Lawrie, Henry Feild, and David Binkley.
-\newblock Quantifying identifier quality: an analysis of trends.
-\newblock {\em Empirical Software Engineering}, 12(4):359--388, 2007.
 
 \bibitem{MPOB03}
 Michael~P O’brien.
