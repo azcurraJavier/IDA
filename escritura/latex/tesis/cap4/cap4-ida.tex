@@ -10,7 +10,7 @@
 
 En el capítulo anterior, se explicó la importancia de analizar identificadores (ids) ubicados en el código fuente de un sistema de software. Los ids de un programa normalmente están compuestos por más de una palabra en forma de abreviatura, por ejemplo: \textsf{inp\_fl\_sys}. Detrás de estas abreviaturas, los ids ocultan información es propia del Dominio del Problema \cite{BCPT99,LFBEX07,EZH08,EHPV09}. Desafortunadamente, las personas ajenas al código, no comprenden a simple vista la información que los ids poseen en sus abreviaturas e invierten tiempo en entenderlas. Es por esto, que las herramientas automáticas de análisis de ids son bienvenidas en el ámbito de la Comprensión de Programas (CP). Con estas herramientas se logra disminuir los tiempos de comprensión de ids y revelar la información que estos contienen en sus abreviaturas.
 
-Dada la importancia que tienen las herramientas de análisis de ids, se tomó la iniciativa de desarrollar una llamada Identifier Analyzer (IDA). Esta herramienta le permite al usuario ingresar un archivo JAVA, luego IDA analiza los ids que están en el archivo.
+Dada la importancia que tienen las herramientas de análisis de ids, se tomó la iniciativa de desarrollar una llamada Identifier Analyzer (IDA) \cite{AMGPM14}. Esta herramienta le permite al usuario ingresar un archivo JAVA, luego IDA analiza los ids que están en el archivo.
 %, y finalmente produce como resultado una tabla del análisis realizado, esta tabla contiene los ids encontrados en el programa pero expandidos. 
 IDA lleva a cabo el análisis de ids en tres pasos, los cuales se mencionan a continuación: I) Extraer los ids del código de estudio. II) Aplicar una técnica de división, en donde se descomponen a los ids en las distintas abreviaturas que lo componen. Por ejemplo: \textsf{inp\_fl\_sys} $\Rightarrow$ \textsf{inp fl sys}. III) Emplear una técnica de expansión de abreviaturas que las expande a palabras completas. Por ejemplo: \textsf{inp fl sys} $\Rightarrow$ \textsf{input file system}. Una vez realizado los tres pasos, los resultados de las expansiones de ids se exhiben en una tabla.
 El objetivo de IDA es lograr que el usuario comprenda más rápidamente el propósito de los ids en los archivos JAVA, y de esta manera mejorar la comprensión del código analizado.
@@ -59,14 +59,13 @@ El \mbox{Algoritmo} de Expansión también necesita de un diccionario de palabra
 \section{Analizador Sintáctico}
 
 Como se explicó en la sección previa, cuando el usuario ingresa un archivo JAVA, IDA examina y extrae información estática presente en el archivo ingresado. Esta información está compuesta por identificadores, comentarios y literales. La manera en que IDA extrae esta información es a través de un Analizador Sintáctico (AS).
-
 La construcción de este AS se llevó a cabo, primero investigando herramientas encargadas de construir AS. Se dio preferencia a aquellas que emplean la teoría asociada a las gramáticas de atributos \cite{AHUL06}. De la investigación previamente descripta, se determinó que la herramienta \textit{ANTLR}\footnote[1]{ANother Tool for Language Recognition. http://www.antlr.org} era la que mejor se ajustaba a las necesidades antes planteadas. 
 Esta herramienta permite agregar acciones semánticas (escritas en JAVA) para el cálculo de los atributos, en una gramática de lenguaje JAVA\footnote[2]{http://docs.oracle.com/javase/specs/jls/se7/jls7.pdf}. Estas acciones semánticas deben estar correctamente insertadas en la gramática para, por ejemplo, implementar estructuras de datos y algoritmos que capturan los ids utilizados en un programa \cite{AAJU83}. Una vez insertadas estas acciones, ANTLR lee la gramática y genera el AS adicionando acciones que fueron programadas. De esta manera, se obtiene un AS que recolecta ids mientras examina el código. A su vez a estas acciones semánticas, se le agregan otras acciones que extraen comentarios y literales strings. Estos elementos son necesarios ya que sirven para los algoritmos de análisis de ids que serán explicados en próximas secciones.
 
 \section{Base de Datos Embebida}
 \label{sec:bseEmb}
 
-Como se describió en secciones previas, IDA posee una base de datos embebida. Esta base de datos utiliza una tecnología llamada HSQLDB\footnote[1]{Hyper SQL Data Base. http://www.hsqldb.org}. Dado que HSQLDB esta desarrollada en JAVA, al momento de incorporarla en IDA (que está programada en JAVA) no resulto una tarea difícil.
+Como se describió en secciones previas, IDA posee una base de datos embebida. Esta base de datos utiliza una tecnología llamada HSQLDB\footnote[1]{Hyper SQL Data Base. http://www.hsqldb.org}. Dado que HSQLDB esta desarrollada en JAVA, al momento de incorporarla en IDA (que está programada en JAVA) no resultó una tarea difícil.
 Otra ventaja por la cual se eligió esta tecnología, es que responde rápidamente las consultas. Esto es importante ya que todos los algoritmos de IDA consultan a HSQLDB. Dentro de esta base de datos embebida, se encuentran almacenadas los diccionarios/listas de palabras que IDA necesita para llevar adelante sus tareas. Estos diccionarios/listas se describen a continuación, nombrando también que algoritmo de IDA consulta cada diccionarios/listas.
 
 \begin{description}
@@ -153,7 +152,7 @@ Una vez que el usuario elige el/los archivo/s, IDA utiliza un  programa externo 
 
 %Si algún archivo de entrada esta vacío o posee algún error sintáctico, JACOBE lo detecta y automáticamente IDA muestra un cartel informando al usuario (ver figura \ref{idaWar1}). 
 
-La herramienta IDA, además realiza un control de los archivos abiertos, impidiendo que se abra el mismo archivo más de una vez. En caso de que esto suceda, se muestra un cartel informando al usuario (Ver Figura \ref{idaWar2}). Este control se realiza por cuestiones de coherencia al momento de analizar los archivos.
+La herramienta IDA, además realiza un control de los archivos abiertos, impidiendo que se abra el mismo archivo más de una vez. En caso de que esto suceda la situación antes mencionada, se muestra un cartel informando al usuario (Ver Figura \ref{idaWar2}). Este control se realiza por cuestiones de coherencia al momento de analizar los archivos.
 
 %\begin{figure}[t] %[h] para here [b] para bottom [t] para top
 %\centerline{%queda centrada mejor la imagen
@@ -214,8 +213,7 @@ Cabe destacar que si el usuario lo desea, puede realizar búsquedas en la \texti
 
 \noindent \textbf{\\Pestaña de Literales Capturados\\} 
 
-Al pulsar la \textit{Pestaña de Literales} (Ver Figura \ref{ida3} - Flecha 3), se puede apreciar que aparece una \textit{Tabla de Literales} y un práctico buscador en forma de cuadro de texto (Ver Figura \ref{ida4} - Flecha 1 y 2). Esta tabla contiene dos columnas, número de línea del literal y el literal propiamente dicho (Ver Figura \ref{ida4} - Flecha 2).
-De manera similar a la que se describió en el párrafo precedente, el buscador filtra los resultados en la \textit{Tabla de Literales} mientras se va escribiendo en el. También al pulsar sobre alguna fila, automáticamente el literal correspondiente se resalta en el código que está ubicado en la parte superior (Ver Figura \ref{ida4} - Flecha 3).
+Al pulsar la \textit{Pestaña de Literales} (Ver Figura \ref{ida3} - Flecha 3), se puede apreciar que aparece una \textit{Tabla de Literales} (Ver Figura \ref{ida4} - Flecha 2) y un buscador (Ver Figura \ref{ida4} - Flecha 1). Esta tabla contiene dos columnas, número de línea del literal y el literal propiamente dicho. También al pulsar sobre alguna fila, automáticamente el literal correspondiente se resalta en el código que está ubicado en la parte superior (Ver Figura \ref{ida4} - Flecha 3). Por otro lado, el buscador en forma de cuadro de texto, a medida que se escriba en este cuadro, se irán filtrando los resultados en la \textit{Tabla de Literales}.
 
 \noindent \textbf{\\Pestaña de Comentarios Capturados\\} 
 
@@ -260,11 +258,12 @@ En la sección anterior, se describieron dos botones \textit{Palabras Capturadas
 
 \noindent \textbf{\\Ventana de Palabras Capturadas\\} 
 
-Al pulsar el botón \textit{Palabras Capturadas}, se abre una ventana que posee dos cuadros (Ver Figura \ref{ida7}), el cuadro de la izquierda contiene una tabla que muestra las frecuencias correspondiente al Algoritmo Samurai (Ver Figura \ref{ida7} - Flecha 1). Esta tabla tiene tres columnas, en la primera posee palabras\footnote[1]{En este contexto, significa las palabras que están contenidas en literales, comentarios e ids, este último necesita un proceso especial, para más detalles ver Cap. 3 - sección \ref{sec:algSamu}}, las mismas fueron capturadas y procesadas por el AS ANTLR. La segunda columna, contiene la frecuencia local de cada palabra, cabe recordar que la frecuencia local se construye en función de la frecuencia absoluta de aparición de las palabras en el código del archivo actual. La tercera y última columna de la tabla denota la frecuencia global de cada palabra, la misma esta predefinida en la base de datos HSQLDB (Ver sección \ref{sec:bseEmb}).
+Al pulsar el botón \textit{Palabras Capturadas}, se abre una ventana que posee dos cuadros (Ver Figura \ref{ida7}), el cuadro de la izquierda contiene una tabla que muestra las frecuencias correspondiente al Algoritmo Samurai (Ver Figura \ref{ida7} - Flecha 1). Esta tabla tiene tres columnas, en la primera posee palabras\footnote[1]{En este contexto, significa las palabras que están contenidas en literales, comentarios e ids, este último necesita un proceso especial, para más detalles ver Cap. 3 - sección \ref{sec:algSamu}}, las mismas fueron capturadas y procesadas por el AS ANTLR. La segunda columna, contiene la frecuencia local de cada palabra, cabe recordar que la frecuencia local se construye en función de la frecuencia absoluta de aparición de las palabras en el código del archivo actual. La tercera y última columna de la tabla denota la frecuencia global de cada palabra, la misma está predefinida en la base de datos HSQLDB (Ver sección \ref{sec:bseEmb}).
 
-El cuadro de la derecha, lista en una tabla las frases capturadas (Ver Figura \ref{ida7} - Flecha 2), estas frases se obtienen de los comentarios, los literales strings, y algunos ids multi-palabras; el Algoritmo de Expansión es el encargado de utilizarlas (Ver Capítulo 3 - sección \ref{sec:algExpBas}). Este algoritmo las usa, ya que estas frases son posibles candidatas para expandir las abreviaturas en forma de acrónimo que puede contener un id (Ejemplo: \textsf{fs} $\Rightarrow$ \textsf{file system}). También cada una de las palabras por separado, puede ser utilizada para expandir abreviaturas comunes (Ejemplos: \textsf{sys} $\Rightarrow$ \textsf{system}, \textsf{fl} $\Rightarrow$ \textsf{file}).
+El cuadro de la derecha, lista en una tabla las frases capturadas (Ver Figura \ref{ida7} - Flecha 2), estas frases se obtienen de los comentarios, los literales strings, y algunos ids multi-palabras; las otras dos columnas de la tabla muestran la clase y el método donde se encuentra ubicado cada frase (Ver Figura \ref{ida7} - Flecha 2).
+El Algoritmo de Expansión es el encargado de utilizar toda esta información (Ver Capítulo 3 - sección \ref{sec:algExpBas}). Este algoritmo usa las frases, ya que son posibles candidatas para expandir las abreviaturas en forma de acrónimo que puede contener un id (Ejemplo: \textsf{fs} $\Rightarrow$ \textsf{file system}). También cada una de las palabras por separado, puede ser utilizada para expandir abreviaturas comunes (Ejemplos: \textsf{sys} $\Rightarrow$ \textsf{system}, \textsf{fl} $\Rightarrow$ \textsf{file}). La ubicación de cada frase (en que método y/o clase se encuentra), el Algoritmo de Expansión la utiliza para dar prioridad a aquellas frases que están en el mismo método y/o clase que la palabra a expandir, sino encuentra frase candidatas observa el resto de las frases en la tabla.
 
-A modo de agilizar las búsquedas (de palabras) en las tablas descriptas anteriormente (la de frecuencias de Samurai y la de frases), se puede llevar a cabo utilizando los cuadros de texto con rótulo \textit{Buscar Palabra} situados arriba de cada tabla correspondiente (Ver Figura \ref{ida7}).
+A modo de agilizar las búsquedas (de palabras) en las tablas descriptas anteriormente (la de frecuencias de Samurai y la de frases), se pueden llevar a cabo utilizando los cuadros de texto con rótulo \textit{Buscar Palabra} situados arriba de cada tabla correspondiente (Ver Figura \ref{ida7}).
 
 \begin{figure}[t] %[h] para here [b] para bottom [t] para top
 \centerline{%queda centrada mejor la imagen
@@ -279,10 +278,6 @@ A modo de agilizar las búsquedas (de palabras) en las tablas descriptas anterio
 Como se puede observar en la Figura \ref{ida7} - Flecha 3, existe un botón con el nombre de \textit{TagCloud de Palabras}, al pulsar sobre este, abre una ventana que contiene una \textit{Nube de Etiquetas} (Ver Figura \ref{ida8}). Esta nube posee palabras y resalta en tamaño más grande aquellas palabras que más frecuencia de aparición tienen (En la Figura \ref{ida8} las palabras \textsf{mine}, \textsf{mines}, \textsf{game} etc. son las que mayor aparición tienen). Para generar esta nube se emplea una librería de JAVA llamada OpenCloud\footnote[1]{http://opencloud.mcavallo.org}.
 Esta \textit{Nube de Etiquetas} ayuda a ver con más claridad que palabras son más frecuentes, dado un conjunto de palabras pasado por entrada. 
 
-La \textit{Nube de Etiquetas} correspondiente a la tabla de frecuencias de Samurai (Ver Figura \ref{ida7} - Flecha 3), el tamaño de cada palabra depende de la Frecuencia Local de cada palabra (Ver Figura \ref{ida7} - Flecha 1), mientras mayor sea la frecuencia que tenga una palabra determinada, mayor será el tamaño de la misma en la nube. Con esta visualización, se pretende ayudar al usuario a determinar que conceptos son más abundantes en el sistema analizado.
-
-%En el caso de la nube de las frases capturadas (ver figura \ref{ida7} - Flecha 4), el tamaño de las palabras esta dado por el número de apariciones dentro de esta tabla de frases (ver figura \ref{ida7} - Flecha 2).
-
 \begin{figure}[t] %[h] para here [b] para bottom [t] para top
 \centerline{%queda centrada mejor la imagen
 \includegraphics[scale= 0.58]{./cap4/ida_09.png}
@@ -291,19 +286,26 @@ La \textit{Nube de Etiquetas} correspondiente a la tabla de frecuencias de Samur
 \label{ida9}
 \end{figure}
 
-\noindent \textbf{\\Ventana de Diccionarios\\} 
+La \textit{Nube de Etiquetas} correspondiente a la tabla de frecuencias de Samurai (Ver Figura \ref{ida7} - Flecha 3), el tamaño de cada palabra depende de la Frecuencia Local de cada palabra (Ver Figura \ref{ida7} - Flecha 1), mientras mayor sea la frecuencia que tenga una palabra determinada, mayor será el tamaño de la misma en la nube. Con esta visualización, se pretende ayudar al usuario a determinar que conceptos son más abundantes en el sistema analizado.
 
-Volviendo a la \textit{Ventana de Análisis} si se pulsa el botón \textit{Diccionarios} (Ver Figura \ref{ida6} - Flecha 2), se abre la \textit{Ventana de Diccionarios} (Ver Figura \ref{ida9}). Esta ventana posee dos tablas, la tabla de la izquierda lista todas las palabras en inglés que tiene el diccionario del comando de Linux \textit{ispell}, esta lista de palabras es utilizada por el Algoritmo Greedy y el Algoritmo Expansión Básica (Ver sección \ref{sec:bseEmb} de este capítulo). La segunda tabla de la derecha enumera las palabras que pertenecen a la stoplist o lista de palabras irrelevantes, también utilizada por los dos algoritmos antedichos. Convenientemente, ambas tablas poseen un buscador por palabras dado que el contenido de cada una es amplio (Ver Figura \ref{ida9}). Esta \textit{Ventana de Diccionarios} puede ser invocada desde otros lugares de la herramienta IDA. Uno de ellos es desde la barra de menú (Ver Figura \ref{ida1} - Flecha 2). Otro sitio donde puede abrirse, es desde el \textit{Panel de Elementos Capturados}, pulsando el botón que esta al lado de \textit{Ejecutar Análisis} (Ver Figura \ref{ida3} - Flecha 7).
+%En el caso de la nube de las frases capturadas (ver figura \ref{ida7} - Flecha 4), el tamaño de las palabras esta dado por el número de apariciones dentro de esta tabla de frases (ver figura \ref{ida7} - Flecha 2).
 
-Todas las ventanas que fueron descriptas previamente (palabras capturadas, tagcloud, diccionarios), en caso de haber sido abiertas por el usuario, el mismo debe cerrarlas si desea continuar con el proceso de análisis de ids.
+\pagebreak
 
-\begin{figure}[t!] %[h] para here [b] para bottom [t] para top
+\begin{figure}[t] %[h] para here [b] para bottom [t] para top
 \centerline{%queda centrada mejor la imagen
 \includegraphics[scale= 0.42]{./cap4/ida_10.png}
 }
 \caption{Panel de Elementos Capturados}
 \label{ida10}
 \end{figure}
+
+\noindent \textbf{Ventana de Diccionarios\\} 
+
+Volviendo a la \textit{Ventana de Análisis} si se pulsa el botón \textit{Diccionarios} (Ver Figura \ref{ida6} - Flecha 2), se abre la \textit{Ventana de Diccionarios} (Ver Figura \ref{ida9}). Esta ventana posee dos tablas, la tabla de la izquierda lista todas las palabras en inglés que tiene el diccionario del comando de Linux \textit{ispell}, esta lista de palabras es utilizada por el Algoritmo Greedy y el Algoritmo Expansión Básica (Ver sección \ref{sec:bseEmb} de este capítulo). La segunda tabla de la derecha enumera las palabras que pertenecen a la stoplist o lista de palabras irrelevantes, también utilizada por los dos algoritmos antedichos. Convenientemente, ambas tablas poseen un buscador por palabras dado que el contenido de cada una es amplio (Ver Figura \ref{ida9}). Esta \textit{Ventana de Diccionarios} puede ser invocada desde otros lugares de la herramienta IDA. Uno de ellos es desde la barra de menú (Ver Figura \ref{ida1} - Flecha 2). Otro sitio donde puede abrirse, es desde el \textit{Panel de Elementos Capturados}, pulsando el botón que esta al lado de \textit{Ejecutar Análisis} (Ver Figura \ref{ida3} - Flecha 7).
+
+Todas las ventanas que fueron descriptas previamente (palabras capturadas, tagcloud, diccionarios), en caso de haber sido abiertas por el usuario, el mismo debe cerrarlas si desea continuar con el proceso de análisis de ids.
+
 
 \begin{figure}[t!] %[h] para here [b] para bottom [t] para top
 \centerline{%queda centrada mejor la imagen

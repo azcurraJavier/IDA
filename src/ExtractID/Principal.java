@@ -43,9 +43,9 @@ public class Principal extends javax.swing.JFrame {
 
     public Principal() {
         
-        JFrame.setDefaultLookAndFeelDecorated(true);
-        SubstanceLookAndFeel.setCurrentTheme("org.jvnet.substance.theme.SubstanceCremeTheme");
-        SubstanceLookAndFeel.setSkin("org.jvnet.substance.skin.ModerateSkin");
+//        JFrame.setDefaultLookAndFeelDecorated(true);
+//        SubstanceLookAndFeel.setCurrentTheme("org.jvnet.substance.theme.SubstanceCremeTheme");
+//        SubstanceLookAndFeel.setSkin("org.jvnet.substance.skin.ModerateSkin");
         
         
         initComponents();

@@ -180,7 +180,7 @@ Cuando el usuario ejecuta las técnicas de análisis de ids, lo lleva a cabo med
 
 Con respecto a la información mostrada en la tabla mencionada previamente, las columnas de \textit{Greedy} y \textit{Samurai} muestran los resultados de división de dichos Algoritmos. En las columnas \textit{Expansión desde Greedy} y \textit{Expansión desde Samurai} se enumeran las expansiones realizadas de las distintas partes del id, que fueron efectuadas desde los Algoritmos Greedy y Samurai respectivamente.
 
-Los ids analizados por IDA de Minesweeper.java (Ver Tabla \ref{tabla5}), en lo que respecta a \textit{hardwords}, se pueden encontrar con guión bajo: \textsf{min\_imag}, \textsf{min\_mtrx} para el tipo camel-case:  \textsf{uncoverEmpty}, \mbox{\textsf{msgDialog}} y para el caso especial: \textsf{TOTmin}, \textsf{MINSnum} (variante camel-case), entre otros. 
+En lo que respecta a los ids analizados de Minesweeper.java (Ver Tabla \ref{tabla5}), se pueden observar que algunos son del tipo \textit{hardwords}. Dentro de esta clasificación, se pueden encontrar ids con guión bajo, por ejemplo: \textsf{min\_imag}, \textsf{min\_mtrx}; también algunos casos del tipo camel-case, por ejemplo:  \mbox{\textsf{uncoverEmpty}}, \textsf{msgDialog}; a su vez, también existen casos de la variante camel-case, por ejemplo: \textsf{TOTmin}, \textsf{MINSnum}.
 
 El algoritmo Greedy manifiesta irregularidades a la hora de dividir ya que siempre considera que la mayor cantidad de divisiones es la mejor opción (Ver Capítulo 3 - sección \ref{sec:algGre}), esto puede observarse en casos como \textsf{min--im--ag},  \textsf{bt--tn--s}, \textsf{min--sn--um} (Ver Tabla \ref{tabla5} - columna Greedy).
 Para los ids que son del tipo especial: \textsf{MINSnum}, \textsf{TOTmin} (variante camel-case), es interesante observar como Samurai realiza la división correctamente: \textsf{mins--num}, \textsf{tot--min} (Ver Capítulo 3 - sección \ref{sec:algSamu}), y no la considera un caso común de camel-case que la separa antes de la mayúscula seguido de minúscula. Esto sucede justamente con Greedy ya supone que es del tipo camel-case, y realiza la separación incorrecta: \mbox{\textsf{min--sn--um}} (entre min y sn), \textsf{to--tm--in} (entre to y tm).
@@ -191,7 +191,7 @@ El resto de los softwords se puede considerar a \textsf{mins}, \textsf{bttns}, \
 
 Continuado en la tabla \ref{tabla5}, los ids \textsf{i}, \textsf{j} son comunes en la mayoría de los códigos, y generalmente se utilizan como contadores en estructuras de control iterativas (\textsf{for}, \textsf{while}, etc). En estos casos, el Algoritmo de Expansión busca palabras que estén dentro del \textit{Dominio del Problema}. Para lograrlo, recurre a las tablas de Literales y Comentarios (Ver Tablas \ref{tabla3} y \ref{tabla4}), luego trata de encontrar palabras que comiencen con las letras respectivas, para este caso \textsf{image}, \textsf{jpg}. De esta manera el algoritmo, trata de darle una traducción válida en este contexto. En caso de no haber coincidencia con ninguna, el algoritmo de expansión buscará en el diccionario de palabras en Inglés.
 
-Para concluir, en las columnas de expansión de la tabla \ref{tabla5} se visualizan palabras como: ventana, vacío, plantar, minas, recuadro, botones, panel (entre otras). Estas palabras intuitivamente se consideran que forman parte del \textit{Dominio del Problema} correspondiente al programa Minesweeper.java.
+Para concluir, en las columnas de expansión de la tabla \ref{tabla5} se visualizan palabras como: explosión, vacío, plantar, minas, recuadro, eje x, eje y, dimensión (entre otras). Estas palabras intuitivamente se consideran más cercanas al \textit{Dominio del Problema} correspondiente al programa Minesweeper.java.
 
 
 \begin{sidewaystable}[h!]
@@ -271,6 +271,9 @@ Sin embargo, en este caso de estudio a diferencia del anterior existen algunas d
 En lo que respecta a la expansión de ids, la mayoría de las abreviaturas resultantes de la división de ids fueron expandidas; algunos ejemplos son \textsf{sel} $\rightarrow$ \textsf{select}, \textsf{tl} $\rightarrow$ \textsf{tool}, \textsf{cl} $\rightarrow$ \textsf{close}, \textsf{bck} $\rightarrow$ \textsf{background}, entre otras. Estas palabras son expandidas por el algoritmo de expansión, gracias a los comentarios y literales capturados por el AS.
 Por otro lado, existen algunas abreviaturas que no se expanden como es el caso de \textsf{bt} a \textsf{button}, \textsf{it} a \textsf{item}; que forman parte de los ids \textsf{bt--acept} y \textsf{men--it--new}. La hipótesis de este comportamiento en el Algoritmo de Expansión, se debe a que estas abreviaturas son tratadas como acrónimos (abreviaturas con más de una palabra) dado que tienen solo dos caracteres y no existe una frase (de comentarios o literales) capturada por el AS, que coincida. Como se consideran abreviaturas con más de una palabra, tampoco se utiliza el diccionario en Inglés para expandir.
 
+También existen casos de abreviaturas mal expandidas, uno de ellos es \textsf{bar} $\rightarrow$ \textsf{background} en el id \textsf{menBarEdit}. Si bien \textsf{bar} hace referencia a una barra de menú, aquí simplemente el algoritmo de expansión entiende que \textsf{bar} es una abreviatura y la expande con un candidato fuerte que se encuentra en el listado de frases capturadas \textsf{\textbf{ba}ckg\textbf{r}ound}.
+
+La mayoría de los ids analizados (Ver Tabla \ref{tabla6} columnas Expansión desde Greedy y Expansión desde Samurai), las palabras presentes se corresponden a distintos elementos que son propios de un editor de textos convencional. De estos elementos se pueden enumerar algunos: texto, copiar, pegar, imprimir, imagen, color, archivo, herramienta, nuevo, guardar, buscar. Estos elementos sin duda están asociados al Dominio del Problema en el programa Editor.java.
 
 \begin{sidewaystable}[h!]
 
@@ -322,17 +325,9 @@ btAcept&bt--ace--pt&bt--acept&bt ace printing&bt acept\\ \hline
 
 \clearpage %esto es necesario sino las tablas se van al final del capitulo
 
-\begin{figure}[h!] %[h] para here [b] para bottom [t] para top
-\centerline{%queda centrada mejor la imagen
-\includegraphics[scale= 0.72]{./cap5/caso_03.png}
-}
-\caption{Captura del juego Top Gun programado en JAVA}
-\label{caso3}
-\end{figure}
 
-También existen casos de abreviaturas mal expandidas, uno de ellos es \textsf{bar} $\rightarrow$ \textsf{background}. Si bien \textsf{bar} hace referencia a “barra” en el id \textsf{menBarEdit}, aquí simplemente el algoritmo de expansión entiende que \textsf{bar} es una abreviatura y la expande con un candidato fuerte que se encuentra en el listado de frases capturadas \textsf{\textbf{ba}ckg\textbf{r}ound}.
 
-La mayoría de los ids analizados (Ver Tabla \ref{tabla6} columnas Expansión desde Greedy y Expansión desde Samurai), se corresponden a distintos elementos de interacción que posee el programa con el usuario. De estos elementos se pueden enumerar: áreas de texto, barras de desplazamiento, menú, copiar, pegar, imprimir, imágenes, colores. Estos elementos sin duda forman parte del Dominio del Problema en el programa Editor.java.
+
 
 
 %\begin{table}[ht!]
@@ -437,11 +432,21 @@ La mayoría de los ids analizados (Ver Tabla \ref{tabla6} columnas Expansión de
 %\caption{Literales extraídos por el AS ANTLR}\label{tabla8}
 %\end{table}
 
+\pagebreak
+
+\begin{figure}[t!] %[h] para here [b] para bottom [t] para top
+\centerline{%queda centrada mejor la imagen
+\includegraphics[scale= 0.72]{./cap5/caso_03.png}
+}
+\caption{Captura del juego Top Gun programado en JAVA}
+\label{caso3}
+\end{figure}
+
 
 \section{Juego de Aviones}
  
-Continuando con los casos de estudio, el próximo es un programa JAVA llamado TopGun.java. Cuando este programa se ejecuta aparece un juego de aviones (Ver Figura \ref{caso3}), en este juego el usuario conduce un avión que dispara. El objetivo consiste en en derribar la mayor cantidad de aviones enemigos y un contador suma puntos por cada avión derribado. El juego finaliza cuando al avión se le agota la barra de energía por completo, esta barra disminuye debido a los disparos enemigos que recibe.
-Este programa, posee un módulo de aproximadamente de 600 líneas que van a ser analizadas por la herramienta IDA.
+Continuando con los casos de estudio, el próximo es un programa JAVA llamado TopGun.java. Cuando este programa se ejecuta aparece un juego de aviones (Ver Figura \ref{caso3}), en este juego el usuario conduce un avión que dispara proyectiles. El objetivo consiste en en derribar la mayor cantidad de aviones enemigos y un contador suma puntos por cada avión derribado. El juego finaliza cuando al avión se le agota la barra de energía por completo, esta barra disminuye debido a los disparos enemigos que recibe.
+Este programa, posee un módulo de aproximadamente de 600 líneas que fueron analizadas por la herramienta IDA.
 Al igual que el caso de estudio anterior (Editor de texto), debido a que el programa TopGun.java contiene muchos ids, en la tabla \ref{tabla7} se lista el análisis de los ids más relevantes.\\
 
 \noindent \textbf{Análisis de Resultados\\}
@@ -453,7 +458,7 @@ Las expansiones de ids en general están bastante precisas, salvo casos como \te
 
 Por otro lado, la abreviatura \textsf{but} que representa \textsf{buttons} no se expande, se estima que esto ocurre por que \textsf{buttons} no está en ninguna frase del código (comentario y literal), y no se expande con palabras del diccionario en Inglés porque \textsf{but} es una palabra válida del diccionario.
 
-De los ids analizados (Ver Tabla \ref{tabla7} en las columnas Expansión desde Greedy y Expansión desde Samurai), las palabras que más frecuentemente aparecen están asociados al juego. De estas palabras se pueden nombrar, disparos, aviones, enemigos, imágenes, actualizar pantalla, movimiento. Estas palabras definitivamente forman parte del Dominio del Problema perteneciente al programa TopGun.java.
+De los ids analizados (Ver Tabla \ref{tabla7} en las columnas Expansión desde Greedy y Expansión desde Samurai), las palabras que más frecuentemente aparecen están asociados al juego. De estas palabras se pueden nombrar, disparos, aviones, enemigos, imágenes, actualizar pantalla, movimiento. Estas palabras en gran parte están relacionadas al Dominio del Problema perteneciente al programa TopGun.java.
 
 %\begin{table}[ht!]
 %\parbox{.40\linewidth}{
@@ -607,7 +612,9 @@ Claramente, el gráfico de la Figura \ref{barras01} muestra que entre las dos t�
 \label{barras02}
 \end{figure}
 
-Por otro lado, en la Figura \ref{barras02}, se aprecia una comparativa similar a la anterior, pero esta vez es entre las expansiones realizadas con la técnica de expansión básica, que recibe como entrada los dos grupos de resultados de las técnicas de división (Expansión desde Greedy y Samurai). Como se puede observar en la Figura \ref{barras02}, la expansiones de los ids que dividió Greedy tienen más casos incorrectos que las expansiones de los ids que dividió Samurai. Esto tiene sentido dado que mientras más acertada esté la división del id, mayor acierto tendrá la expansión. Si se compara las expansiones realizadas con las divisiones (Entre la Figura \ref{barras01} y \ref{barras02}), en el caso de las expansiones existe un aumento notable de casos incorrectos. Este comportamiento ocurre por que el algoritmo de expansión es básico y posee ciertos inconvenientes que fueron descriptos en el capítulo 3. Por último, las expansiones efectuadas luego de ser procesadas por el algoritmo Greedy son las que tienen mayor fallo, tomando en cuenta las dos figuras, esto ocurre debido a que se ejecutaron las dos técnicas más básicas y que más inconvenientes tienen (Greedy y Expansión Básica).
+Por otro lado, en la Figura \ref{barras02}, se aprecia una comparativa similar a la anterior, pero esta vez es entre las expansiones realizadas con la técnica de expansión básica, que recibe como entrada los dos grupos de resultados de las técnicas de división (Expansión desde Greedy y Samurai). Como se puede observar en la Figura \ref{barras02}, la expansiones de los ids que dividió Greedy tienen más casos incorrectos que las expansiones de los ids que dividió Samurai. Esto tiene sentido dado que mientras más acertada esté la división del id, mayor acierto tendrá la expansión. Si se compara las expansiones realizadas con las divisiones (Entre la Figura \ref{barras01} y \ref{barras02}), en el caso de las expansiones existe un aumento notable de casos incorrectos. 
+Este comportamiento ocurre por que el algoritmo de expansión es básico y posee ciertos inconvenientes, por ejemplo, no expande una abreviatura ante múltiples posibilidades de expansión, en algunos casos utiliza un diccionario de palabras en lenguaje natural, el cual es extenso, ocupa mucho espacio y deriva en expansiones imprecisas (Ver Capítulo 3 - sección \ref{sec:algExpBas}).
+Por último, las expansiones efectuadas luego de ser procesadas por el algoritmo Greedy son las que tienen mayor fallo, tomando en cuenta las dos figuras, esto ocurre debido a que se ejecutaron las dos técnicas más básicas y que más inconvenientes tienen (Greedy y Expansión Básica).
 
 \enlargethispage{\baselineskip}
 \enlargethispage{\baselineskip}%agrega linea al final de la hoja

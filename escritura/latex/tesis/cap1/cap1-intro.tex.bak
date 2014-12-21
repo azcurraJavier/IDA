@@ -1,4 +1,8 @@
 
+\section{Introducción}
+
+En este capítulo se redacta un problema encontrado en el ámbito del análisis de los identificadores (ids) presentes en códigos, este problema surgió en base a las investigaciones realizadas. Luego se proponen algunos aportes a la solución de este problema y en función es esto, cuales son las contribuciones. Para comenzar con este capítulo, se explican algunas características involucradas al desarrollo de los sistemas de software.
+
 Cuando se desarrollan los sistemas de software se busca que el producto final satisfaga las necesidades de los usuarios, que el buen funcionamiento perdure en el mayor tiempo posible y en caso de hacer una modificación para mejorarlo no implique grandes costos. Estos puntos conllevan a un software de alta calidad y la disciplina encargada de conseguirlo es la \mbox{\textit{Ingeniería de Software} (IS). }% mbox obliga a mantener en la misma linea
 Para que la IS logre las metas antes mencionadas se utilizan, entre otras tantas, tres temáticas importantes que están orientadas al desarrollo de buenos sistemas: el \textit{mantenimiento del software}, la \textit{evolución del software} y la \textit{migración del software}. 
 

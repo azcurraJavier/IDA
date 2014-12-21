@@ -76,8 +76,8 @@
 %
 %%CAPÍTULO 2=============================================================
 %\setcounter{chapter}{1}
-%\chapter{Comprensión de Programas}
-%\input{./cap2/cap2-comp.tex}
+\chapter{Comprensión de Programas}
+\input{./cap2/cap2-comp.tex}
 %
 %%CAPÍTULO 3=============================================================
 %\setcounter{chapter}{2}
