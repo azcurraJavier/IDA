@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2014.5.7)  21 DEC 2014 16:22
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2014.5.7)  22 DEC 2014 18:24
 entering extended mode
  %&-line parsing enabled.
 **tesis.tex
@@ -508,239 +508,47 @@ LaTeX Font Info:    ... okay on input line 55.
 \MPnumerator=\count124
 \everyMPtoPDFconversion=\toks25
 )
-Cap\'{\i }tulo 1.
-(./cap1/cap1-intro.tex
+Cap\'{\i }tulo 2.
+(./cap2/cap2-comp.tex <./cap2/dom.png, id=1, 493.0922pt x 252.945pt>
+File: ./cap2/dom.png Graphic file (type png)
 
-LaTeX Warning: Citation `PFT02' on page 1 undefined on input line 11.
-
-[1
+<use ./cap2/dom.png> [1
 
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-
-LaTeX Warning: Citation `STD610' on page 2 undefined on input line 13.
-
-
-LaTeX Warning: Citation `RSPMGH02' on page 2 undefined on input line 15.
-
-
-LaTeX Warning: Citation `KBVR00' on page 2 undefined on input line 19.
-
-
-LaTeX Warning: Citation `KBVR00' on page 2 undefined on input line 23.
-
-
-LaTeX Warning: Citation `MAS05' on page 2 undefined on input line 23.
-
-
-LaTeX Warning: Citation `RSPMGH02' on page 2 undefined on input line 23.
-
-
-LaTeX Warning: Citation `PFT02' on page 2 undefined on input line 23.
-
 
 Package Fancyhdr Warning: \headheight is too small (12.0pt): 
  Make it at least 15.71667pt.
  We now make it that large for the rest of the document.
  This may cause the page layout to be inconsistent, however.
 
-[2]
-
-LaTeX Warning: Citation `KBVR00' on page 3 undefined on input line 30.
-
-
-LaTeX Warning: Citation `RSPMGH02' on page 3 undefined on input line 32.
-
-
-LaTeX Warning: Citation `STD1219' on page 3 undefined on input line 45.
-
-
-LaTeX Warning: Citation `MMFAF08' on page 3 undefined on input line 47.
-
-[3]
-
-LaTeX Warning: Citation `MMFAF08' on page 4 undefined on input line 49.
-
-
-LaTeX Warning: Citation `WHAFVR11' on page 4 undefined on input line 51.
-
-
-LaTeX Warning: Citation `MPMR07' on page 4 undefined on input line 60.
-
-
-LaTeX Warning: Citation `BRM10' on page 4 undefined on input line 64.
-
-
-LaTeX Warning: Citation `MPMR07' on page 4 undefined on input line 64.
-
-
-LaTeX Warning: Citation `AMPM11' on page 4 undefined on input line 64.
-
-
-LaTeX Warning: Citation `DWE04' on page 4 undefined on input line 64.
-
-[4] [5]
-
-LaTeX Warning: Citation `AHUL06' on page 6 undefined on input line 113.
-
-
-LaTeX Warning: Citation `THBE99' on page 6 undefined on input line 119.
-
-
-LaTeX Warning: Citation `DFPM05' on page 6 undefined on input line 203.
-
-
-LaTeX Warning: Citation `DMDJ13' on page 6 undefined on input line 203.
-
-
-LaTeX Warning: Citation `HDD06' on page 6 undefined on input line 203.
-
-
-LaTeX Warning: Citation `FBL06' on page 6 undefined on input line 203.
-
-
-LaTeX Warning: Citation `BCPT99' on page 6 undefined on input line 205.
-
-
-LaTeX Warning: Citation `LFBEX07' on page 6 undefined on input line 205.
-
-
-LaTeX Warning: Citation `EZH08' on page 6 undefined on input line 205.
-
-
-LaTeX Warning: Citation `EHPV09' on page 6 undefined on input line 205.
-
-[6]
-
-LaTeX Warning: Citation `LFBEX07' on page 7 undefined on input line 215.
-
-
-LaTeX Warning: Citation `EHPV09' on page 7 undefined on input line 215.
-
-
-LaTeX Warning: Citation `JDPH08' on page 7 undefined on input line 222.
-
-
-LaTeX Warning: Citation `ACCL02' on page 7 undefined on input line 222.
-
-
-LaTeX Warning: Citation `AMPM12' on page 7 undefined on input line 222.
-
-[7]
-Overfull \hbox (5.25897pt too wide) in paragraph at lines 249--250
-\OT1/cmr/m/n/12 ^^S^^Ptem an-te-rior en una he-rra-mien-ta de-no-mi-na-da \OT1/
-cmr/m/it/12 Iden-ti-fier Analy-zer \OT1/cmr/m/n/12 (IDA).
- []
-
-[8] [9]) [10]
-Cap\'{\i }tulo 2.
-(./cap2/cap2-comp.tex
-
-LaTeX Warning: Citation `BRM10' on page 11 undefined on input line 7.
-
-
-LaTeX Warning: Citation `MPMR07' on page 11 undefined on input line 7.
-
-
-LaTeX Warning: Citation `MBPHRU10' on page 11 undefined on input line 7.
-
-
-LaTeX Warning: Citation `DWE04' on page 11 undefined on input line 7.
-
-<./cap2/dom.png, id=41, 493.0922pt x 252.945pt>
-File: ./cap2/dom.png Graphic file (type png)
- <use ./cap2/dom.png> [11
-
-]
-
-LaTeX Warning: Citation `TIE89' on page 12 undefined on input line 22.
-
-
-LaTeX Warning: Citation `VMAVA95' on page 12 undefined on input line 22.
-
-
-LaTeX Warning: Citation `BROOK82' on page 12 undefined on input line 22.
-
-
-LaTeX Warning: Citation `STOREY99' on page 12 undefined on input line 22.
-
-
-LaTeX Warning: Citation `MBPHRU10' on page 12 undefined on input line 23.
-
-[12 <./cap2/dom.png (PNG copy)>]
-
-LaTeX Warning: Citation `MPOB03' on page 13 undefined on input line 34.
-
-
-LaTeX Warning: Citation `MAS05' on page 13 undefined on input line 34.
-
-
+[2 <./cap2/dom.png>]
 Overfull \hbox (0.25319pt too wide) in paragraph at lines 38--39
 []\OT1/cmr/m/n/12 El pro-ce-so de com-pren-si^^Son \OT1/cmr/m/it/12 Bottom-up\O
 T1/cmr/m/n/12 , in-di-ca que el desa-
  []
 
-[13]
+[3] [4] [5] [6] [7]) (./tesis.bbl [8] [9
 
-LaTeX Warning: Citation `AHUL06' on page 14 undefined on input line 64.
-
-
-LaTeX Warning: Citation `THBE99' on page 14 undefined on input line 74.
-
-[14]
-
-LaTeX Warning: Citation `TERD01' on page 15 undefined on input line 80.
-
-
-LaTeX Warning: Citation `AAJU83' on page 15 undefined on input line 105.
-
-
-LaTeX Warning: Citation `TSTA80' on page 15 undefined on input line 105.
-
-
-LaTeX Warning: Citation `ERNS99' on page 15 undefined on input line 106.
-
-
-LaTeX Warning: Citation `MBPHRU10' on page 15 undefined on input line 116.
-
-[15] [16]
-
-LaTeX Warning: Citation `BRM10' on page 17 undefined on input line 156.
-
-
-LaTeX Warning: Citation `MPMR07' on page 17 undefined on input line 156.
-
-
-LaTeX Warning: Citation `MBPHRU10' on page 17 undefined on input line 156.
-
-[17]) [18] (./tesis.aux)
-
-LaTeX Warning: There were undefined references.
-
- )
+] [10] [11] [12]) [13] (./tesis.aux) )
 (\end occurred inside a group at level 1)
 
 ### semi simple group (level 1) entered at line 8 (\begingroup)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 4247 strings out of 494999
- 53473 string characters out of 1180817
- 144660 words of memory out of 3000000
- 7392 multiletter control sequences out of 15000+50000
- 9677 words of font info for 35 fonts, out of 3000000 for 9000
+ 4240 strings out of 494999
+ 53458 string characters out of 1180817
+ 144825 words of memory out of 3000000
+ 7396 multiletter control sequences out of 15000+50000
+ 5804 words of font info for 21 fonts, out of 3000000 for 9000
  54 hyphenation exceptions out of 8191
- 29i,13n,43p,853b,3566s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 32i,12n,43p,853b,3558s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx12
-.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/s
-hare/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-t
-exlive/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texmf-texlive/fonts/
-type1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf-texlive/fonts/type1/public/
-amsfonts/cm/cmss12.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm
-/cmsy10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmti12.pfb
->
-Output written on tesis.pdf (18 pages, 162258 bytes).
+.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/s
+hare/texmf-texlive/fonts/type1/public/amsfonts/cm/cmti12.pfb>
+Output written on tesis.pdf (13 pages, 114203 bytes).
 PDF statistics:
- 93 PDF objects out of 1000 (max. 8388607)
+ 60 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  6 words of extra memory for PDF output out of 10000 (max. 10000000)
 
