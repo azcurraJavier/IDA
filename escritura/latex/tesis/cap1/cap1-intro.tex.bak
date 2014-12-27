@@ -1,7 +1,7 @@
 
 \section{Introducción}
 
-En este capítulo se redacta un problema encontrado en el ámbito del análisis de los identificadores (ids) presentes en códigos, este problema surgió en base a las investigaciones realizadas. Luego se proponen algunos aportes a la solución de este problema y en función es esto, cuales son las contribuciones. Para comenzar con este capítulo, se explican algunas características involucradas al desarrollo de los sistemas de software.
+Este capítulo introductorio describe un problema encontrado en el ámbito asociado al análisis de identificadores (ids) presentes en códigos, este problema surgió en base a las investigaciones realizadas. En consecuencia, se describen algunos aportes a la solución de este problema y cuales son las contribuciones al respecto. Para comenzar con la exposición de este capítulo, se explican algunas características involucradas al desarrollo de los sistemas de software.
 
 Cuando se desarrollan aplicaciones de software se busca que el producto final satisfaga las necesidades de los usuarios, que el buen funcionamiento perdure en el mayor tiempo posible y en caso de hacer una modificación para mejorarlo no implique grandes costos. Estos puntos conllevan a un software de alta calidad y la disciplina encargada de conseguirlo es la \mbox{\textit{Ingeniería de Software} (IS). }% mbox obliga a mantener en la misma linea
 Para que la IS logre las metas antes mencionadas se utilizan, entre otras tantas, tres temáticas importantes que están orientadas al desarrollo de buenos sistemas: el \textit{mantenimiento del software}, la \textit{evolución del software} y la \textit{migración del software}. 
@@ -64,14 +64,23 @@ La CP asiste al equipo de desarrollo de software proveyendo métodos, técnicas 
 Las investigaciones realizadas en el área de la CP determinaron que el foco de estudio se centra en relacionar el \textit{Dominio del Problema} con el \textit{Dominio del Programa} \cite{BRM10,MPMR07,AMPM11,DWE04}. El primero hace referencia a los elementos que forman parte de la salida del sistema, mientras que el segundo indican las componentes del programa empleados para generar dicha salida.
 Esta relación es compleja de realizar y representa el principal desafío de la CP. 
 
-Una aproximación para relacionar ambos dominios consiste en construir:
+Una aproximación para relacionar ambos dominios consiste en realizar los siguientes pasos:
 
-I) Armar una representación del \textit{Dominio del Problema}. II) Construir una representación para el \textit{Dominio del Programa}. III) Unir ambas representaciones con una \textit{Estrategia de Vinculación}.
+\begin{enumerate}[label=\Roman*)]
+\item Construir una representación del \textit{Dominio del Problema}.
+\item Elaborar una representación para el \textit{Dominio del Programa}.
+\item Unir las representaciones de I) y II) con una \textit{Estrategia de Vinculación}.
+\end{enumerate}
 
-Para llevar a cabo los 3 pasos mencionados, se necesitan diferentes temáticas las cuales se mencionan a continuación:
+%I) Construir una representación del \textit{Dominio del Problema}. II) Construir una representación para el \textit{Dominio del Programa}. III) Unir ambas representaciones con una \textit{Estrategia de Vinculación}.
+
+Para llevar a cabo los tres pasos mencionados, se necesitan diferentes temáticas las cuales se mencionan a continuación:
+
+
 
 \begin{itemize}
-\itemsep0em%reduce espacio
+%\renewcommand{\labelitemi}{$\bullet$}%icono circulo
+
 \item Los \textit{Modelos Cognitivos} son relevantes para la CP porque destacan como el programador utiliza procesos mentales para comprender el software.
 
 \item La \textit{Visualización del Software} analiza las distintas partes del sistema y genera representaciones visuales que agilizan la CP.
@@ -233,7 +242,7 @@ Las estrategias de análisis de ids, explicadas en esta sección, se han ido mej
 \section{Problema y la Solución}
 
 En síntesis, un camino para tratar de comprender los sistemas, es fijar la atención en los ids. En la actualidad entender el significado de los ids en los programas se realiza generalmente de manera manual leyendo el código, esto implica grandes esfuerzos para el lector sobre todo si el código del sistema es grande. Las herramientas automáticas que analizan ids simplifican en gran medida estas arduas tareas. 
-Normalmente estas herramientas para realizar sus tareas, efectúan la traducción de ids, e involucran los siguientes pasos: \\I) capturar los ids del código, II) dividir las palabras abreviadas que componen un id, III) expandir las abreviaturas en base a lo observado en comentarios/literales y/o diccionarios, etc. 
+Normalmente estas herramientas para realizar sus tareas, efectúan la traducción de ids, e involucran los pasos que fueron descriptos en el apartado anterior: I) capturar los ids del código, II) dividir las palabras abreviadas que componen un id, III) expandir las abreviaturas en base a lo observado en comentarios/literales y/o diccionarios de palabras. 
 Desafortunadamente, hasta el momento se pudieron encontrar pocas herramientas que lleven a cabo los tres pasos antedichos.
 
 Para abordar las iniciativas planteadas y hacer algunos aportes a la solución del problema descripto en el párrafo anterior, se pretende:
@@ -246,7 +255,7 @@ Para abordar las iniciativas planteadas y hacer algunos aportes a la solución d
 
 \item Investigar técnicas de división de ids y técnicas expansión de abreviaturas. Algunas de estas utilizan como principal recurso la información brindada en los comentarios y los literales extraídos del código. Como segunda posibilidad se recurre al diccionario.
 
-\item Implementar empleando el lenguaje JAVA algunas de las técnicas del ítem anterior en una herramienta denominada \textit{Identifier Analyzer} (IDA). Esta herramienta también permite visualizar atributos del id (ambiente, tipo de identificador, número de línea, etc) mostrando la parte del código donde se encuentra ubicados.
+\item Implementar empleando el lenguaje JAVA algunas de las técnicas del ítem anterior en una herramienta denominada \textit{Identifier Analyzer} (IDA). Esta herramienta también permite visualizar atributos del id (que representa el id, de que tipo es, número de línea, etc) mostrando el sector del código donde se encuentra ubicado.
 
 \item Probar la herramienta IDA con casos de estudios, para demostrar la utilidad de la misma.
 
