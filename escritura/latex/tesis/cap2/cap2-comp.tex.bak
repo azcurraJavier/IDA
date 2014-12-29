@@ -58,7 +58,7 @@ Para llevar a cabo estrategias involucradas en Modelos Cognitivos, es importante
 
 En la Ingeniería del Software existe un área que se encarga de la \textit{Extracción de la Información} desde los sistemas se software. 
 %Esta extracción se realiza en los sistemas de software y las técnicas utilizadas para tal fin, se clasifican según el tipo de información que extraen. 
-Existen dos tipos de informaciones: la Estática y la Dinámica. A continuación se explica cada una y se dan ejemplos conocidos de como pueden ser extraídas desde los programas.
+Existen dos tipos de informaciones: la Estática y la Dinámica. A continuación se explica cada una y se dan ejemplos conocidos de técnicas que las extraen.
 
 \begin{description}
 \item[Información Estática:] Está presente en los componentes del código fuente del sistema. Alguno de ellos son identificadores, procedimientos, comentarios, documentación.
@@ -75,7 +75,7 @@ técnicas, utilizan un analizador sintáctico similar al empleado por un compila
 \item[Información Dinámica:] Se basa en elementos del programa presentes durante una ejecución específica del sistema \cite{THBE99}. Un ejemplo conocido de una técnica que extrae información dinámica es la instrumentación de código. Esta técnica inserta sentencias nuevas en el código fuente. La finalidad de las nuevas sentencias es registrar las actividades realizadas durante la ejecución del programa. 
 %Para la extracción de este tipo de información se procede a bosquejar una técnica de instrumentación de código la cual consiste en insertar sentencias en el código sin modificar su semántica, así cuando el sistema se ejecute estas sentencias que contienen acciones se van a encargar de indicar que operaciones internas se llevaron a cabo para una determinada salida del programa.
 Estas sentencias nuevas no deben modificar la funcionalidad original del sistema, por ende la inserción debe realizarse con sumo cuidado y de forma estratégica para no alterar el flujo normal de ejecución.
-Otra técnicas conocidas en el ámbito del desarrollo de sistemas son el debugging, que sirve para identificar errores (bugs) en el código; el profiling, que ayuda a optimizar los sistemas, observando el tiempo que demora en ejecutarse las distintas partes del código; entre otras.
+Otras técnicas (de extracción dinámica de información) en el ámbito del desarrollo de sistemas son el debugging, que sirve para identificar errores (bugs) en el código; el profiling, que ayuda a optimizar los sistemas, observando el tiempo que demora en ejecutarse las distintas partes del código; entre otras.
 
 \end{description}
 
@@ -111,7 +111,7 @@ Después que se administra la información, se aconseja que la misma sea represe
 
 %Una temática importante en las técnicas explicadas SVS, BORS y SVSI es la visualización de software. En la siguiente sección se explica este punto.
 
-\enlargethispage{\baselineskip}%agrega linea al final de la hoja
+%\enlargethispage{\baselineskip}%agrega linea al final de la hoja
 
 \section{Visualización de Software}
 
@@ -140,8 +140,6 @@ Para concluir, el objetivo primordial de la visualización de software orientada
 
 %Debido a esta falencia Berón \cite{MBPHRU10} propone variantes en los sistemas de visualización orientados a la CP. Estas variantes contemplan la representación visual de los conceptos en el dominio del problema, inclusive la visualización de la relación entre los dos dominios mencionados.
 
-
-\pagebreak
 \section{Estrategias de Interconexión de \\Dominios}
 
 Los conceptos explicados en los puntos anteriores como la \textit{visualización de software} y la \textit{extracción de la información} forman la base para elaborar estrategias de interrelación de dominios.
@@ -155,7 +153,7 @@ Un ejemplo sencillo de \textit{Interconexión de Dominios}, es cuando el dominio
 
 Es importante aclarar que existe una amplia gama de transformaciones entre dominios. La más escasa y difícil de conseguir es aquella que relaciona el Dominio del Problema con el Dominio del Programa (Ver Figura \ref{captura1}).
 
-Sin embargo, actualmente existen técnicas recientemente elaboradas, que conectan visualmente el Dominio del Problema y el Dominio del Programa mediante la información estática y dinámica que se extrajo del sistema de estudio, algunos ejemplos son \textit{Simultaneous Visualization Strategy} (SVS), \textit{Behavioral-Operational Relation Strategy} (BORS) y \textit{Simultaneous Visualization Strategy Improved} (SVSI) \cite{BRM10,MPMR07,MBPHRU10}. Estas técnicas son muy útiles para la CP, ya que vinculan la salida del sistema con los componentes del programa que se utilizaron para producir en dicha salida.
+Sin embargo, actualmente existen técnicas recientemente elaboradas, que conectan visualmente el Dominio del Problema y el Dominio del Programa mediante la información estática y dinámica que se extrajo del sistema de estudio, algunos ejemplos son \textit{Simultaneous Visualization Strategy} (SVS), \textit{Behavioral-Operational Relation Strategy} (BORS) y \textit{Simultaneous Visualization Strategy Improved} (SVSI) \cite{BRM10,MPMR07,MBPHRU10}. Estas técnicas son muy útiles para la CP, ya que vinculan la salida del sistema con los componentes del programa que se utilizaron para producir dicha salida.
 
 %Una de las técnicas es \textit{Simultaneous Visualization Strategy} SVS, esta se encarga de mostrar los distintos componentes de un programa en plena ejecución, mediante distintas vistas, usando un inspector de sentencias, de esta manera se obtiene una visualización cuando el sistema se está ejecutando. Esta estrategia usa un esquema de instrumentación de código, donde las acciones semánticas le van indicando a un visualizador la traza de invocaciones a funciones durante la ejecución del sistema \cite{BRM10,MPMR07,MBPHRU10}.
 
