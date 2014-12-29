@@ -1,7 +1,7 @@
 
 \section{Introducción}
 
-Este capítulo introductorio describe un problema encontrado en el ámbito asociado al análisis de identificadores (ids) presentes en códigos, este problema surgió en base a las investigaciones realizadas. En consecuencia, se describen algunos aportes a la solución de este problema y cuales son las contribuciones al respecto. Para comenzar con la exposición de este capítulo, se explican algunas características involucradas al desarrollo de los sistemas de software.
+%Este capítulo introductorio describe un problema encontrado en el ámbito asociado al análisis de identificadores (ids) presentes en códigos, este problema surgió en base a las investigaciones realizadas. En consecuencia, se describen algunos aportes a la solución de este problema y cuales son las contribuciones al respecto. Para comenzar con la exposición de este capítulo, se explican algunas características involucradas al desarrollo de los sistemas de software.
 
 Cuando se desarrollan aplicaciones de software se busca que el producto final satisfaga las necesidades de los usuarios, que el buen funcionamiento perdure en el mayor tiempo posible y en caso de hacer una modificación para mejorarlo no implique grandes costos. Estos puntos conllevan a un software de alta calidad y la disciplina encargada de conseguirlo es la \mbox{\textit{Ingeniería de Software} (IS). }% mbox obliga a mantener en la misma linea
 Para que la IS logre las metas antes mencionadas se utilizan, entre otras tantas, tres temáticas importantes que están orientadas al desarrollo de buenos sistemas: el \textit{mantenimiento del software}, la \textit{evolución del software} y la \textit{migración del software}. 
@@ -10,7 +10,7 @@ Para que la IS logre las metas antes mencionadas se utilizan, entre otras tantas
 
 La etapa de mantenimiento es importante en el desarrollo del software, dado que los sistemas están sujetos a cambios y a una permanente \mbox{evolución \cite{PFT02}.}
 
-El mantenimiento del software según la IEEE standard \cite{STD610}, \textit{es la mo\-dificación del software que se realiza posterior a la entrega del producto al usuario con el fin de arreglar fallas, mejorar el rendimiento, o adaptar el sistema al ambiente que ha cambiado.}
+El mantenimiento del software según el estándar 610 de IEEE \cite{STD610}, \textit{es la mo\-dificación del software que se realiza posterior a la entrega del producto al usuario con el fin de arreglar fallas, mejorar el rendimiento, o adaptar el sistema al ambiente que ha cambiado.}
 
 De la definición anterior se desprenden 4 tipos de cambios que se pueden realizar en la etapa de mantenimiento. El \textit{mantenimiento correctivo} cambia el software para reparar las fallas detectadas por el usuario. El \textit{mantenimiento adaptativo} modifica el sistema para adaptarlo a cambios externos, como por ejemplo actualización del sistema operativo o el motor de base de datos. El \textit{mantenimiento perfectivo} se encarga de agregar nuevas funcionalidades al software que son descubiertas por el usuario. Por último, el \textit{mantenimiento preventivo} realiza cambios al programa para facilitar futuras correcciones o adaptaciones que puedan surgir en el futuro \cite{RSPMGH02}.
 
@@ -29,8 +29,7 @@ Los sistemas complejos evolucionan con el tiempo, los nuevos usuarios y requisit
 
 La evolución del software básicamente se atribuye al crecimiento de los sistemas a través del tiempo, es decir, tomar una versión operativa y generar una nueva versión ampliada o mejorada en su eficiencia \cite{KBVR00}.
 
-Generalmente, los ingenieros del software recurren a los modelos evolutivos. Estos modelos indican que cuando se desarrolla un producto de software es conveniente que se divida en distintas iteraciones. A medida que avanza el desarrollo, cada iteración retorna una version entregable cada vez más compleja \cite{RSPMGH02}. 
-
+Generalmente, los ingenieros del software recurren a los modelos evolutivos. Estos modelos indican que cuando se desarrolla un producto de software es conveniente que se divida en distintas iteraciones. A medida que avanza el desarrollo, cada iteración retorna una versión entregable cada vez más compleja \cite{RSPMGH02}.
 Estos modelos son muy recomendados sobre todo si se tienen fechas ajustadas donde se necesita una versión funcional lo más rápido posible. De esta manera, no se requiere esperar una versión completa al final del proceso de desarrollo.
 
 Es inevitable y fundamental comprender correctamente la iteración actual del producto antes de comenzar con una nueva. Nuevos requerimientos del usuario pueden aparecer, como así también nuevas dificultades en el desarrollo del sistema. Es por esto que la comprensión del sistema durante su evolución es crucial.
@@ -42,9 +41,9 @@ Es inevitable y fundamental comprender correctamente la iteración actual del pr
 
 Las tareas de mantenimiento de software no solo se realizan para mejorar cuestiones internas del sistema, como es el caso de arreglos de errores de programación o requisitos nuevos del usuario. También se necesitan para adaptar el software al contexto cambiante. Es aquí donde la \textit{migración del software} entra en escena.
  
-De acuerdo con la IEEE standard \cite{STD1219}, \textit{la migración del software es convertir o adaptar un viejo sistema (sistema heredado) a un nuevo contexto tecnológico sin cambiar la funcionalidad del mismo}.
+De acuerdo con el estándar 1219 de IEEE  \cite{STD1219}, \textit{la migración del software es convertir o adaptar un viejo sistema (sistema heredado) a un nuevo contexto tecnológico sin cambiar la funcionalidad del mismo}.
 
-Las migraciones de sistemas más comunes que se llevan a cabo son causadas por cambios en el hardware obsoleto, nuevos sistemas operativos, cambios en la arquitectura y nuevas base de datos. Sin duda, la que más se ha acentuado en los últimos años son la aparición de nuevas tecnologías web y las mobile (basadas en dispositivos móviles) \cite{MMFAF08}.
+Las migraciones de sistemas más comunes que se llevan a cabo son causadas por cambios en el hardware obsoleto, nuevos sistemas operativos, cambios en la arquitectura y nuevas base de datos. Sin duda, la que más se ha acentuado en los últimos años es la aparición de nuevas tecnologías web y las mobile (basadas en dispositivos móviles) \cite{MMFAF08}.
  
 La migración de grandes sistemas es fundamental, sin embargo está demostrado que es costosa y compleja \cite{MMFAF08}. Para llevarla a cabo reduciendo estos costos se recomienda hacer previamente una buena comprensión del sistema antiguo. 
 
@@ -85,7 +84,7 @@ Para llevar a cabo los tres pasos mencionados, se necesitan diferentes temática
 
 \item La \textit{Visualización del Software} analiza las distintas partes del sistema y genera representaciones visuales que agilizan la CP.
 
-\item La \textit{Interconexión de Dominios} trata de como interrelacionar los elementos de un dominio con otro. Es útil para la CP en la reconstrucción de la relación entre dominio del problema y el dominio del programa.
+\item La \textit{Interconexión de Dominios} trata de como interrelacionar los elementos de un dominio con otro. Es útil para la CP en la reconstrucción de la relación entre Dominio del Problema y el Dominio del Programa.
 
 \item La \textit{Extracción de Información} en los sistemas de software, es necesaria para las estrategias de cognición, visualización, interconexión de dominios, etc.
 
@@ -214,7 +213,7 @@ Estudios realizados \cite{DFPM05,DMDJ13,HDD06,FBL06} indican que gran parte de l
 Generalmente, los ids están compuestos por más de una palabra en forma de abreviaturas. Varios autores coinciden \cite{BCPT99,LFBEX07,EZH08,EHPV09} que detrás de estas abreviaturas, se encuentra oculta información que es propia del dominio del problema.
 
 Una vía posible para exponer la información oculta consiste en traducir las abreviaturas antes mencionadas, en sus correspondientes palabras expresadas en lenguaje natural.
-Para lograrlo: I) primero se extraen los identificadores del código, II) luego se les aplica técnicas de división en donde se descompone al identificador en las distintas palabras abreviadas que lo componen. Por ejemplo: \textsf{inp\_fl\_sys} $\rightarrow$ \textsf{inp fl sys}. Finalmente, III) se emplea estrategias de expansión a las abreviaturas para transformar las mismas en palabras completas. Siguiendo con el ejemplo anterior: \textsf{inp fl sys} $\rightarrow$ \textsf{input file system}.
+Para lograrlo: I) primero se extraen los identificadores del código; II) luego se les aplican técnicas de división, donde se descompone a cada identificador en las distintas palabras abreviadas que lo componen. Por ejemplo: \textsf{inp\_fl\_sys} $\rightarrow$ \textsf{inp fl sys}; y III) se emplean estrategias de expansión a las abreviaturas para transformar las mismas en palabras completas. Siguiendo con el ejemplo anterior: \textsf{inp fl sys} $\rightarrow$ \textsf{input file system}.
 
 %Sin embargo, a través del estudio del estado del arte, se pudo detectar que son pocas las estrategias de análisis estático que analizan la información informal que se encuentra disponible en el código fuente, por información informal se entiende aquella contenida en los comentarios de los módulos, comentarios de las funciones, literales strings y documentación del sistema.
 
@@ -242,24 +241,24 @@ Las estrategias de análisis de ids, explicadas en esta sección, se han ido mej
 \section{Problema y la Solución}
 
 En síntesis, un camino para tratar de comprender los sistemas, es fijar la atención en los ids. En la actualidad entender el significado de los ids en los programas se realiza generalmente de manera manual leyendo el código, esto implica grandes esfuerzos para el lector sobre todo si el código del sistema es grande. Las herramientas automáticas que analizan ids simplifican en gran medida estas arduas tareas. 
-Normalmente estas herramientas para realizar sus tareas, efectúan la traducción de ids, e involucran los pasos que fueron descriptos en el apartado anterior: I) capturar los ids del código, II) dividir las palabras abreviadas que componen un id, III) expandir las abreviaturas en base a lo observado en comentarios/literales y/o diccionarios de palabras. 
-Desafortunadamente, hasta el momento se pudieron encontrar pocas herramientas que lleven a cabo los tres pasos antedichos.
+Normalmente, estas herramientas para realizar sus tareas, efectúan la traducción de ids, e involucran los pasos que fueron descriptos en el apartado anterior: I) capturar los ids del código, II) dividir las palabras abreviadas que componen un id, III) expandir las abreviaturas en base a lo observado en comentarios/literales y/o diccionarios de palabras. 
+%Desafortunadamente, hasta el momento se pudieron encontrar pocas herramientas que lleven a cabo los tres pasos antedichos.
 
 Para abordar las iniciativas planteadas y hacer algunos aportes a la solución del problema descripto en el párrafo anterior, se pretende:
 
 \begin{itemize}
 \itemsep0em%reduce espacio
-\item Construir un analizador sintáctico en lenguaje Java que permite extraer los ids, comentarios y literales encontrados en el código fuente del sistema de estudio. La herramienta a seleccionar para realizar esta tarea es ANTLR\footnote[1]{ANother Tool for Language Recognition - http://www.antlr.org}.
+\item Construir un analizador sintáctico que permita extraer los ids, comentarios y literales encontrados en el código fuente del sistema de estudio. La herramienta seleccionada para realizar esta tarea es ANTLR\footnote[1]{ANother Tool for Language Recognition - http://www.antlr.org}.
 
-\item Armar un diccionario de palabras en lenguaje natural que sirva como alternativa a las fuentes de información informal.
+\item Armar una estrategia para construir un diccionario de palabras en lenguaje natural que sirva como alternativa a las fuentes de información informal.
 
 \item Investigar técnicas de división de ids y técnicas expansión de abreviaturas. Algunas de estas utilizan como principal recurso la información brindada en los comentarios y los literales extraídos del código. Como segunda posibilidad se recurre al diccionario.
 
-\item Implementar empleando el lenguaje JAVA algunas de las técnicas del ítem anterior en una herramienta denominada \textit{Identifier Analyzer} (IDA). Esta herramienta también permite visualizar atributos del id (que representa el id, de que tipo es, número de línea, etc) mostrando el sector del código donde se encuentra ubicado.
+\item Implementar algunas de las técnicas mencionadas en el ítem anterior en una herramienta denominada \textit{Identifier Analyzer} (IDA). Esta herramienta también permite visualizar atributos del id (que representa el id, de que tipo es, número de línea, etc.) mostrando el sector del código donde se encuentra ubicado.
 
 \item Probar la herramienta IDA con casos de estudios, para demostrar la utilidad de la misma.
 
-\item Mediante un gráfico de barras, comparar el desempeño de cada técnica implementada en IDA y sacar las conclusiones pertinentes.
+\item Comparar el desempeño de cada técnica implementada en IDA y sacar las conclusiones pertinentes.
 
 \end{itemize}
 
@@ -268,7 +267,7 @@ Para abordar las iniciativas planteadas y hacer algunos aportes a la solución d
 
 Como se mencionó previamente, las herramientas que ayudan a comprender los ids son importantes para la CP, dado que facilitan encontrar indicios sobre las funcionalidades del sistema.
 Teniendo en cuenta la escasez de este tipo de herramientas en el ámbito de la CP, el correspondiente trabajo final consiste en el diseño y la implementación de una nueva herramienta que analiza ids en programas escritos en JAVA. Esta herramienta llamada \textit{Identifier Analyzer} (IDA), le permite al usuario ingresar un programa escrito en \mbox{JAVA}, luego IDA captura los ids de forma automática y finalmente mediante la ejecución de técnicas específicas, ayuda al usuario a encontrar el significado de los ids en el programa ingresado. 
-La herramienta IDA, además de analizar ids, puede ser utilizada como base para construir futuras implementaciones en este mismo contexto.
+La herramienta IDA, además de analizar ids, puede ser utilizada como base para construir futuras herramientas de comprensión.
 
 %Para lograrlo, primero se investiga el estado del arte sobre las estrategias más importantes de análisis de ids. Luego, se fija atención en aquellas técnicas involucradas en la traducción de ids a palabras completas, que consideren distintas fuentes de información informal, como es el caso de los comentarios, los literales o diccionarios predefinidos de palabras. Dado que son pocas las herramientas que implementan las técnicas antedichas, se pretende construir una herramienta llamada \textit{Identifier Analyzer} (IDA) que implemente alguna de ellas. 
 
