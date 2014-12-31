@@ -7,9 +7,10 @@ En el capítulo anterior se introdujo el ámbito de comprensión de programas co
 
 Los equipos de desarrollo de software frecuentemente enfocan todo su esfuerzo en el análisis, diseño, implementación y mantenimiento de los sistemas, restándole importancia a la documentación. Por lo tanto, es común encontrar paquetes de software carentes de documentación, lo cual indica que la lectura de los códigos de los sistemas es la única manera de interpretarlos. Es necesaria la interpretación del sistema sobre todo en grandes equipos de desarrollo, por el simple hecho de que un integrante del equipo puede tomar código ajeno para continuar con su desarrollo o realizar algún tipo de mantenimiento.
 
-Teniendo en cuenta que los códigos crecen con los nuevos requerimientos y el frecuente mantenimiento, los sistemas son cada vez más complejos y difíciles de entender. Un camino para lograr un entendimiento ágil y facilitar las arduas tareas de interpretación de códigos, es a través del uso de las herramientas de comprensión.
+Teniendo en cuenta que los códigos crecen con los nuevos requerimientos y el frecuente mantenimiento, los sistemas son cada vez más complejos y difíciles de entender. Un camino para lograr un entendimiento ágil y facilitar las arduas tareas de interpretación de códigos, es a través del uso de las herramientas de comprensión. Estas herramientas presentan diferentes perspectivas del sistema, y con esto se agiliza su análisis e inspección. Para diseñar y construir este tipo de herramientas, se recurre al área de CP.
+Como se mencionó en el capítulo anterior, la CP es un área de la Ingeniería de Software que brinda métodos, técnicas y herramientas que facilitan al programador entender los programas. Un aspecto importante de la CP es la extracción de información estática (Ver Capítulo 2). El correspondiente trabajo final hará más hincapié en esta temática. Cabe destacar que el resto de las temáticas asociadas a la CP no dejan de ser importantes, sin embargo su análisis escapan a los objetivos de este trabajo.
 
-Como se mencionó en el capítulo anterior, la CP brinda métodos, técnicas y herramientas que facilitan al programador entender los programas. Un aspecto importante de la CP es la extracción de información estática. Estas técnicas de extracción no necesitan ejecutar los programas para llevar a cabo la tarea. Una forma de implementarlas es aplicar técnicas de compilación conocidas para extraer información que hay detrás de los componentes visibles en los códigos.
+Una forma de extraer información estática es aplicar técnicas de compilación conocidas, con estas técnicas se extrae información que hay detrás de los componentes visibles en los códigos.
 %whats the name - Lawrie
 Entre los distintos componentes visibles, los lectores de los códigos fijan su atención principalmente en los ids y los comentarios, ambos son una fuente de información importante para la CP. Sin embargo, cuando en el código no abundan los comentarios, el foco de atención se centra en los ids. 
 
@@ -67,7 +68,7 @@ Uno de los requisitos importantes que debe reunir un programa para facilitar su 
 
 En la siguiente sección se menciona, como los nombres asignados a los ids impacta enormemente en la interpretación del concepto que el id tiene asociado, por lo tanto afecta la lectura comprensiva del código. Todas estas características, son tenidas en cuenta en el ámbito de la CP.
 
-\pagebreak
+
 \section{Nombres de Identificadores}
 
 %Deißenbock and Pizka DFPM05
@@ -166,7 +167,7 @@ Un ejemplo de \textit{conciso} es \textsf{output\_file\_name} que representa el 
 
 %sinonimos y homonimos
 Los propiedades que violan nombrar a un id de manera \textit{consistente} son conocidas en el lenguaje natural como sinónimos y homónimos. 
-Los homónimos son palabras que pueden tener más de un significado. Por ende, si el nombre de un id esta asociado a más de un concepto, no estará claro que concepto representa. Por ejemplo, un id con el nombre \textsf{file} generalmente se asocia al concepto de `archivo', pero puede que se refiera a una estructura del tipo cola.
+Los homónimos son palabras que pueden tener más de un significado. Por ende, si el nombre de un id está asociado a más de un concepto, no estará claro que concepto representa. Por ejemplo, un id con el nombre \textsf{file} generalmente se asocia al concepto de `archivo', pero puede que se refiera a una estructura del tipo cola.
 
 Por otro lado, los sinónimos indican que para un mismo concepto pueden tener asociados diferentes nombres. Por ejemplo, un id con el nombre \mbox{\textsf{accountBankNumber}} y otro \textsf{accountBankNum} son sinónimos porque hacen referencia al mismo concepto `número de cuenta bancaria'. 
 
@@ -305,7 +306,7 @@ Para afrontar este objetivo los especialistas deciden recurrir a fuentes de pala
 
 Habiendo explicado el proceso encargado de expandir las abreviaturas de un id a palabras completas, el siguiente paso es describir las herramientas conocidas que lo implementan. 
 
-La autora Emily Hill \cite{EZH08} con alto reconocimiento por su investigación en lo que respecta a expandir ids en códigos java, explica algunas amenazas y desafíos a tener en cuenta a la hora de desarrollar herramientas que analizan ids. A continuación se explican algunas de ellas.
+La autora Emily Hill \cite{EZH08} con alto reconocimiento por su investigación en lo que respecta a expandir ids en códigos JAVA, explica algunas amenazas y desafíos a tener en cuenta a la hora de desarrollar herramientas que analizan ids. A continuación se explican algunas de ellas.
 
 \begin{description}
 \itemsep0em%reduceenglish espacio
@@ -334,7 +335,7 @@ El Algoritmo de división Greedy elaborado por Lawrie, Feild, Binkley \cite{DLFB
 \itemsep0em%reduce espacio
 \item[Palabras de diccionarios:] Contiene palabras de diccionarios públicos y del diccionario que utiliza el comando de Linux \textsf{ispell}\footnote[1]{Comando de Linux generalmente utilizado para corregir errores ortográficos, en archivos de texto. http://wordlist.aspell.net}.
 
-\item[Abreviaturas conocidas:] La lista se arma con abreviaturas extraídas de distintos programas y de autores expertos. Se incluyen abreviaturas comunes (ejemplo: \textsf{alt} $\Rightarrow$ \textsf{altitude}) y abreviaturas de programación \mbox{(ejemplo: \textsf{txt} $\Rightarrow$ \textsf{text}).}
+\item[Abreviaturas conocidas:] La lista se arma con abreviaturas extraídas de distintos programas y de autores expertos. Se incluyen abreviaturas comunes (ejemplo: \textsf{alt} $\Rightarrow$ \textsf{altitude}) y abreviaturas de programación (ejemplo: \textsf{txt} $\Rightarrow$ \textsf{text}).
 
 \item[Palabras excluyentes (stop list):] Posee palabras que son irrelevantes para realizar la división de los ids. Incluye palabras claves (ejemplo: \texttt{while}), ids predefinidos (ejemplo: \texttt{NULL}), nombres y funciones de librerías (ejemplo: \texttt{strcpy}, \texttt{errno}), y todos los ids que puedan tener un solo caracter.
 \end{description}
@@ -843,7 +844,7 @@ En la línea 1 (del algoritmo \ref{BPS}), se impide básicamente dos cosas:
 
 a) Que no se procesen palabras abreviadas con muchas vocales consecutivas (segundo argumento del $\land$ en el \textsf{si}). Este control lo determinaron los autores de AMAP \cite{EZH08}, ya que comprobaron que la mayoría de las palabras abreviadas con vocales consecutivas se expanden como multi-palabras (ejemplos: es el caso de los acrónimos \textsf{gui} $\Rightarrow$ \textsf{graphical user interface}, \textsf{ioe} $\Rightarrow$ \textsf{invalid object exception}). El algoritmo de la próxima sección es el encargado de expandirlos (multi-palabras).
 
-b) En caso de que el patrón sea el \textit{compuesto por letras} (no sea el prefijo), se hacen dos controles más (primer argumento del $\land$ en el \textsf{si}). Uno es, que la abreviatura no posea muchas vocales consecutivas (“[\^{}aeiou]+” logra eso) y la otra es que longitud sea mayor a 3. La autora a través del análisis de datos determinó esta restricción \cite{EZH08}, ya que el \textit{patrón compuesto por letras} tiene el inconveniente que es muy flexible y tiende a capturar muchas palabras largas incorrectas. Por ejemplo: \textsf{lang} $\Rightarrow$ (\textsf{loading}, \textsf{language}), o \textsf{br} $\Rightarrow$ (\textsf{bar}, \textsf{barrier}, \textsf{brown}), entre otros.
+b) En caso de que el patrón sea el \textit{compuesto por letras} (no sea el prefijo), se hacen dos controles más (primer argumento del $\land$ en el \textsf{si}). El primero verifica que la abreviatura no posea muchas vocales consecutivas (“[\^{}aeiou]+” logra eso) y el segundo controla que la longitud sea mayor que 3. Los autores a través del análisis de datos determinaron esta restricción \cite{EZH08}, ya que el \textit{patrón compuesto por letras} tiene el inconveniente que es muy flexible y tiende a capturar muchas palabras largas incorrectas. Por ejemplo: \textsf{lang} $\Rightarrow$ (\textsf{loading}, \textsf{language}), o \textsf{br} $\Rightarrow$ (\textsf{bar}, \textsf{barrier}, \textsf{brown}), entre otros.
 
 En las líneas 2-10 se describe el proceso de búsqueda. Si alguna de estas sentencias de búsqueda encuentra una única palabra larga candidata, el algoritmo finaliza y retorna el resultado. 
 
@@ -902,7 +903,7 @@ Si el algoritmo continúa sin resultados, sigue en la línea 4 donde se busca co
 
 Si la ejecución continúa sin encontrar resultados, la línea 6 se restringe una búsqueda por palabras que tengan al menos 3 caracteres ya que generalmente aquellas con 2 tienden a ser multi-palabras (Ejemplo: \textsf{fl $\Rightarrow$ file system} / Ver próxima sección). Luego en la línea 7 se busca con \textit{\textbf{patrón}} solamente en palabras del método (ejemplo: para una abreviatura \textsf{setHor} coincide con una llamada a función con el nombre de \textsf{setHorizontal()}). Después en la línea 8 se busca en palabras de comentarios dentro del método con \textit{\textbf{patrón}}.
 
-Para finalizar, en la línea 10 si la palabra abreviada tiene más de un caracter y el patrón es de tipo prefijo, se busca usando (\textit{\textbf{patrón}}) en los comentarios de la clase. En la línea 9 se restringe esta búsqueda, porque la autora sostiene \cite{EZH08}, que buscar con un solo caracter en comentarios implica tener muchos resultados y más aun si el patrón es el compuesto por letras.\\
+Para finalizar, en la línea 10 si la palabra abreviada tiene más de un caracter y el patrón es de tipo prefijo, se busca usando (\textit{\textbf{patrón}}) en los comentarios de la clase. En la línea 9 se restringe esta búsqueda, porque los autores sostienen \cite{EZH08}, que buscar con un solo caracter en comentarios implica tener muchos resultados y más aun si el patrón es el compuesto por letras.\\
 
 %\pagebreak
 \noindent \textbf{Búsqueda por Multi-Palabras\\}
@@ -994,7 +995,7 @@ En las siguientes líneas 5-7 se examinan los ids (incluyendo declaraciones), pa
 
 Luego en la línea 9 se busca en comentarios de la clase con el \textit{patrón acrónimo}. Cabe aclarar que \textit{patrón de combinación de palabras} en este caso no se usa (línea 8) ya que puede tomar palabras largas incorrectas.
 
-Finalmente después de observar cientos de casos de palabras largas, la autora \cite{EZH08} concluye que el mejor orden de ejecución de las técnicas de búsqueda es ejecutar los patrones: acrónimo (multi-palabra), prefijo (una sola palabra), compuesto por letras (una sola palabra), combinación de palabras (multi-palabra).
+Finalmente después de observar cientos de casos de palabras largas, los autores \cite{EZH08} concluyen que el mejor orden de ejecución de las técnicas de búsqueda es ejecutar los patrones: acrónimo (multi-palabra), prefijo (una sola palabra), compuesto por letras (una sola palabra), combinación de palabras (multi-palabra).
 
 Si ninguna de las estrategias de expansión funciona en el ámbito local dentro de un método, se procede a buscar la palabra abreviada en un listado de contracciones (inglés).
 
@@ -1144,7 +1145,7 @@ La investigación realizada por los autores de IDD, dejaron en claro que los nom
 
 Con respecto a otras herramientas/técnicas de análisis de ids, las mismas han ido evolucionando con el pasar del tiempo. Al principio algunas etapas necesitaban la intervención del usuario para realizar las tareas, se puede decir que usaban procesos semi-automatizados (ejemplo: \textbf{Identifier Restructurer}). A medida que se construyeron nuevas técnicas, se buscó más la automatización haciendo que el usuario se involucre menos (ejemplo: Samurai, AMAP). 
 
-Habiendo explicado en este capítulo algunas de las estrategias conocidas en cuanto al análisis de ids en códigos, en el próximo capítulo, se describe una herramienta de análisis de ids que se construyó tomando como referencia algunas de las características propias de las técnicas vistas en este capítulo.
+Habiendo explicado en este capítulo algunas de las estrategias asociadas al análisis de ids en códigos, en el próximo capítulo, se describe una herramienta de análisis de ids que se construyó tomando como referencia algunas de las características propias de las técnicas vistas en este capítulo.
 
 %Como se mencionó en este capítulo, las primeras técnicas utilizaban netamente diccionarios de palabras en lenguaje natural, lo cual requiere mucho espacio de almacenamiento (ejemplo: Greedy). Más tarde, se intentó disminuir el uso de estos diccionarios mirando más los recursos internos de información dentro los sistemas, como es el caso de los comentarios, literales strings y la documentación (ejemplo: Samurai).
 

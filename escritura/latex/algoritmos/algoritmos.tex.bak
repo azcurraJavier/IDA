@@ -29,20 +29,20 @@
 \SetKwInOut{Input}{Entrada}\SetKwInOut{Output}{Salida}
 \SetKwInOut{Global}{Var Global}
 \Global{\textit{\textbf{ispellList}} \tcp{\textit{Palabras de ispell + Diccionario}}}
-\Global{\textit{\textbf{abrevList}} \tcp{\textit{Abreviaciones conocidas}}}
+\Global{\textit{\textbf{abrevList}} \tcp{\textit{Abreviaturas conocidas}}}
 \Global{\textit{\textbf{stopList}} \tcp{\textit{Palabras Excluyentes}}}
 \Input{\textit{\textbf{idHarword}} \tcp{\textit{identificador a dividir}}}
-\Output{\texttt{softwordDiv} \tcp{\textit{id separado con espacios}}}
+\Output{\textit{\textbf{softwordDiv}} \tcp{\textit{id separado con espacios}}}
 
 \BlankLine
-\texttt{softwordDiv} $\leftarrow$ “”
+\textit{\textbf{softwordDiv}} $\leftarrow$ “”
 
-\texttt{softwordDiv} $\leftarrow$ dividirCaracteresEspecialesDigitos(\textit{\textbf{idHarword}})
+\textit{\textbf{softwordDiv}} $\leftarrow$ dividirCaracteresEspecialesDigitos(\textit{\textbf{idHarword}})
 
-\texttt{softwordDiv} $\leftarrow$ dividirCamelCase(\texttt{softwordDiv})
+\textit{\textbf{softwordDiv}} $\leftarrow$ dividirCamelCase(\textit{\textbf{softwordDiv}})
 
 \BlankLine
-\ForAll{$($\textit{\textbf{s}} $|$ \textit{\textbf{s}} es un substring separado por ` ' en \texttt{softwordDiv}$)$}{
+\ForAll{$($\textit{\textbf{s}} $|$ \textit{\textbf{s}} es un substring separado por ` ' en \textit{\textbf{softwordDiv}}$)$}{
 \BlankLine
 
 \If{$($\textbf{s} no pertenece a $($\textit{\textbf{stopList}} $\cup$ \textit{\textbf{abrevList}} $\cup$ \textbf{ispellList} $))$}{
@@ -57,72 +57,82 @@ resultadoSufijo $\leftarrow$ buscarSufijo(\textit{\textbf{s}},“”)
 }
 }
 \BlankLine
-\Return \texttt{softwordDiv} \tcp{\textit{Retorna el id dividido por ` '}}
+\Return \textit{\textbf{softwordDiv}} \tcp{\textit{Retorna el id dividido por ` '}}
 
 \caption{División Greedy\label{GSA}}
 \end{algorithm}
 
-\begin{function}[H]
+
+%\enlargethispage{\baselineskip}
+%\enlargethispage{\baselineskip}
+
+\begin{function}[h!]
 \LinesNumbered%enumera las lineas
 \SetKwInOut{Input}{Entrada}\SetKwInOut{Output}{Salida}
-\Input{\textit{\textbf{s}} \tcp{\textit{Abreviaturas a dividir}}}
-\Output{\textit{\textbf{abrevSeparada}} \tcp{\textit{Abreviaturas separadas}}}
+\Input{\textit{\textbf{s}} \tcp{\textit{identificador a dividir}}}
+\Output{\textit{\textbf{idSeparado}} \tcp{\textit{id separado con espacios}}}
 \BlankLine
-\tcp{\textit{Punto de parada de la recursión.}}
-\If{$($length$($\textit{\textbf{s}}$)$ $=$ 0$)$}{
-\BlankLine
-\Return \textit{\textbf{abrevSeparada}}
+
+
+\If{$($length$($\textit{\textbf{s}}$)$ $=$ 0$)$}{ 
+
+\tcp{\textit{Punto de parada de la recursión: idSeparado guarda el resultado parcial, si s no tiene más caracteres que analizar, se retorna idSeparado.}}
+
+\Return \textit{\textbf{idSeparado}}
 }
 \BlankLine
 \If{$($\textbf{s} pertenece a $($\textit{\textbf{stopList}} $\cup$ \textit{\textbf{abrevList}} $\cup$ \textbf{ispellList} $))$}{
 \BlankLine
-%\tcp{\textit{Se separa con espacio y se ejecuta la función con el resto.}}
+
+
 \BlankLine
-\Return (\textit{\textbf{s}} $+$ ` ' $+$ buscarPrefjjo(\textit{\textbf{abrevSeparada}},“”) )
+\Return (\textit{\textbf{s}} $+$ ` ' $+$ buscarPrefjjo(\textit{\textbf{idSeparado}},“”) )
 }
 \BlankLine
 \tcp{\textit{Se extrae y se guarda el último caracter de s.}}
 
-\textit{\textbf{abrevSeparada}} $\leftarrow$ \textit{\textbf{s}}[length(\textit{\textbf{s}}) - 1] $+$ \textit{\textbf{abrevSeparada}}
+\textit{\textbf{idSeparado}} $\leftarrow$ \textit{\textbf{s}}[length(\textit{\textbf{s}}) - 1] $+$ \textit{\textbf{idSeparado}}
 \BlankLine
 
 \tcp{\textit{Llamar nuevamente a la función sin el último caracter.}}
 \BlankLine
 \textit{\textbf{s}} $\leftarrow$  \textit{\textbf{s}}[0 , length(\textit{\textbf{s}}) - 1]
 
-\Return buscarPrefjjo(\textit{\textbf{s}},\textit{\textbf{abrevSeparada}})
+\Return buscarPrefjjo(\textit{\textbf{s}},\textit{\textbf{idSeparado}})
 
 \caption{buscarPrefjjo()}
 \end{function}
 
-\begin{function}[H]
+\begin{function}[h!]
 \LinesNumbered%enumera las lineas
 \SetKwInOut{Input}{Entrada}\SetKwInOut{Output}{Salida}
-\Input{\textit{\textbf{s}} \tcp{\textit{Abreviaturas a dividir}}}
-\Output{\textit{\textbf{abrevSeparada}} \tcp{\textit{Abreviaturas separadas}}}
+\Input{\textit{\textbf{s}} \tcp{\textit{identificador a dividir}}}
+\Output{\textit{\textbf{idSeparado}} \tcp{\textit{id separado con espacios}}}
 \BlankLine
-\tcp{\textit{Punto de parada de la recursión.}}
-\If{$($length$($\textit{\textbf{s}}$)$ $=$ 0$)$}{
-\BlankLine
-\Return \textit{\textbf{abrevSeparada}}
+
+\If{$($length$($\textit{\textbf{s}}$)$ $=$ 0$)$}{ 
+
+\tcp{\textit{Punto de parada de la recursión: idSeparado guarda el resultado parcial, si s no tiene más caracteres que analizar, se retorna idSeparado.}}
+
+\Return \textit{\textbf{idSeparado}}
 }
 \BlankLine
 \If{$($\textbf{s} pertenece a $($\textit{\textbf{stopList}} $\cup$ \textit{\textbf{abrevList}} $\cup$ \textbf{ispellList} $))$}{
 \BlankLine
 %\tcp{\textit{Se separa con espacio y se ejecuta la función con el resto.}}
 \BlankLine
-\Return (buscarSufijo(\textit{\textbf{abrevSeparada}},“”) $+$ ` ' $+$ \textit{\textbf{s}})
+\Return (buscarSufijo(\textit{\textbf{idSeparado}},“”) $+$ ` ' $+$ \textit{\textbf{s}})
 }
 \BlankLine
 \tcp{\textit{Se extrae y se guarda el primer caracter de s.}}
 
-\textit{\textbf{abrevSeparada}} $\leftarrow$ \textit{\textbf{abrevSeparada}} $+$ \textit{\textbf{s}}[0]
+\textit{\textbf{idSeparado}} $\leftarrow$ \textit{\textbf{idSeparado}} $+$ \textit{\textbf{s}}[0]
 \BlankLine
 \tcp{\textit{Llamar nuevamente a la función sin el primer caracter.}}
 \BlankLine
 \textit{\textbf{s}} $\leftarrow$ \textit{\textbf{s}}[1 , length(\textit{\textbf{s}})]
 
-\Return buscarSufijo(\textit{\textbf{s}},\textit{\textbf{abrevSeparada}})
+\Return buscarSufijo(\textit{\textbf{s}},\textit{\textbf{idSeparado}})
 
 \caption{buscarSufijo()}
 \end{function}
@@ -243,15 +253,16 @@ i $\leftarrow$ i+1
 
 %%=================
 
-\begin{algorithm}
+\begin{algorithm}[b!]
 \LinesNumbered%enumera las lineas
 \SetKwInOut{Input}{Entrada}\SetKwInOut{Output}{Salida}
 \Input{\textit{\textbf{abrev}} \tcp{\textit{Abreviatura a expandir}}}
-\Input{\textit{\textbf{wordList}} \tcp{\textit{Palabras extraídas del código}}}
-\Input{\textit{\textbf{phraseList}} \tcp{\textit{Frases extraídas del código}}}
+\Input{\textit{\textbf{listaPalabras}} \tcp{\textit{Palabras extraídas del código}}}
+\Input{\textit{\textbf{listaFrases}} \tcp{\textit{Frases extraídas del código}}}
 \Input{\textit{\textbf{stopList}} \tcp{\textit{Palabras Excluyentes}}}
 \Input{\textit{\textbf{dicc}} \tcp{\textit{\textit{Diccionario en Inglés}}}}
 \Output{\textbf{únicaExpansión} \tcp{\textit{Abreviatura expandida, o null}}}
+\BlankLine
 \BlankLine
 
 \If{$($\textit{\textbf{abrev}} pertenece \textit{\textbf{stopList}}$)$}{
@@ -260,29 +271,33 @@ i $\leftarrow$ i+1
 \BlankLine
 listaExpansión $\leftarrow$ [ ]
 \BlankLine
+\BlankLine
 \tcp{\textit{Buscar coincidencia de acrónimo.}}
 
-\ForAll{$($\textit{\textbf{phrase}} $|$ \textit{\textbf{phrase}} es una frase en \textit{\textbf{phraseList}}$)$}{
+\ForAll{$($\textit{\textbf{Frase}} $|$ \textit{\textbf{Frase}} es una frase en \textit{\textbf{listaFrases}}$)$}{
 \BlankLine
 
-\If{$($\textit{\textbf{abrev}} es un acrónimo de \textit{\textbf{phrase}}$)$}{
-%listaExpansión.add(\textit{\textbf{phrase}}) 
-\Return \textit{\textbf{phrase}} 
+\If{$($\textit{\textbf{abrev}} es un acrónimo de \textit{\textbf{Frase}}$)$}{
+\tcp{\textit{Se prioriza aquella Frase que está en el mismo método que abrev}}
+
+\Return \textit{\textbf{Frase}} 
 }
 }
 
+\BlankLine
 \BlankLine
 \tcp{\textit{Buscar abreviatura común.}}
 
-\ForAll{$($\textit{\textbf{word}} $|$ \textit{\textbf{word}} es una palabra en  \textit{\textbf{wordList}} $)$}{
+\ForAll{$($\textit{\textbf{Pal}} $|$ \textit{\textbf{Pal}} es una palabra en  \textit{\textbf{listaPalabras}} $)$}{
 \BlankLine
-\If{ $($\textit{\textbf{abrev}} es una abreviatura de \textit{\textbf{word}}$)$}{
-%listaExpansión.add(\textit{\textbf{word}}) 
-\Return \textit{\textbf{word}}
+\If{ $($\textit{\textbf{abrev}} es una abreviatura de \textit{\textbf{Pal}}$)$}{
+\tcp{\textit{Se prioriza aquella Pal que está en el mismo método que abrev}} 
+\Return \textit{\textbf{Pal}}
 }
 
 }
 
+\BlankLine
 \BlankLine
 \tcp{\textit{Si no hay éxito, buscar en el diccionario.}}
 
@@ -295,6 +310,7 @@ listaExpansión.add(listaCandidatos)
 
 \BlankLine
 \textbf{únicaExpansión} $\leftarrow$ null
+\BlankLine
 \BlankLine
 \tcp{\textit{Debe haber un solo resultado, sino no retorna nada.}}
 
@@ -319,9 +335,12 @@ listaExpansión.add(listaCandidatos)
 \SetKwInOut{Input}{Entrada}\SetKwInOut{Output}{Salida}
 \Input{\textit{\textbf{pa}} \tcp{\textit{Palabra Abreviada}}}
 \Input{\textit{\textbf{patrón}} \tcp{\textit{Expresión regular}}}
-\Input{Cuerpo y Comentarios del Método}
-\Input{Comentarios de la Clase}
-\Output{Palabras largas candidatas, o null si no hay}
+
+\Input{\textit{\textbf{cuerpoMet}} \tcp{\textit{Cuerpo del Método}}}
+\Input{\textit{\textbf{comMet}} \tcp{\textit{Comentarios del Método}}}
+\Input{\textit{\textbf{comClas}} \tcp{\textit{Comentarios de la Clase}}}
+\Output{\textit{\textbf{palCand}} \tcp{\textit{Palabras candidatas, o null si no hay}}}
+
 \BlankLine
 \tcp{\textit{Las expresiones regulares están entre comillas}}
 \BlankLine
@@ -330,9 +349,12 @@ listaExpansión.add(listaCandidatos)
 
 
 \BlankLine
-\tcp{\textit{Si alguna de las siguientes búsquedas encuentra un único resultado, el algoritmo lo retorna finalizando la ejecución}}
+
 \BlankLine
-Buscar en Comentarios JavaDoc con “\textsf{\at param} \textit{\textbf{pa patrón}}”
+\textit{\textbf{palCand}} $\leftarrow$ buscarEnComentariosJavaDoc \linebreak(“\textsf{\at param} \textit{\textbf{pa patrón}}”,\textit{\textbf{comClas}})
+\If{}{}
+
+
 \BlankLine
 Buscar en Nombres de Tipos y la correspondiente Variable declarada con “\textit{\textbf{patrón pa}}”
 \BlankLine
