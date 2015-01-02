@@ -29,7 +29,7 @@
 \SetKwInOut{Input}{Entrada}\SetKwInOut{Output}{Salida}
 \SetKwInOut{Global}{Var Global}
 \Global{\textit{\textbf{ispellList}} \tcp{\textit{Palabras de ispell + Diccionario}}}
-\Global{\textit{\textbf{abrevList}} \tcp{\textit{Abreviaturas conocidas}}}
+\Global{\textit{\textbf{abrevList}} \tcp{\textit{Abreviaciones conocidas}}}
 \Global{\textit{\textbf{stopList}} \tcp{\textit{Palabras Excluyentes}}}
 \Input{\textit{\textbf{idHarword}} \tcp{\textit{identificador a dividir}}}
 \Output{\textit{\textbf{softwordDiv}} \tcp{\textit{id separado con espacios}}}
@@ -62,77 +62,69 @@ resultadoSufijo $\leftarrow$ buscarSufijo(\textit{\textbf{s}},“”)
 \caption{División Greedy\label{GSA}}
 \end{algorithm}
 
-
-%\enlargethispage{\baselineskip}
-%\enlargethispage{\baselineskip}
-
-\begin{function}[h!]
+\begin{function}[h]
 \LinesNumbered%enumera las lineas
 \SetKwInOut{Input}{Entrada}\SetKwInOut{Output}{Salida}
-\Input{\textit{\textbf{s}} \tcp{\textit{identificador a dividir}}}
-\Output{\textit{\textbf{idSeparado}} \tcp{\textit{id separado con espacios}}}
+\Input{\textit{\textbf{s}} \tcp{\textit{cadena a dividir}}}
+\Output{\textit{\textbf{sDiv}} \tcp{\textit{Cadena dividida con espacios}}}
 \BlankLine
 
-
-\If{$($length$($\textit{\textbf{s}}$)$ $=$ 0$)$}{ 
-
-\tcp{\textit{Punto de parada de la recursión: idSeparado guarda el resultado parcial, si s no tiene más caracteres que analizar, se retorna idSeparado.}}
-
-\Return \textit{\textbf{idSeparado}}
+\If{$($length$($\textit{\textbf{s}}$)$ $=$ 0$)$}{
+\BlankLine
+\tcp{\textit{Punto de parada de la recursión, retorna el resultado de la división.}}
+\Return \textit{\textbf{sDiv}}
 }
 \BlankLine
 \If{$($\textbf{s} pertenece a $($\textit{\textbf{stopList}} $\cup$ \textit{\textbf{abrevList}} $\cup$ \textbf{ispellList} $))$}{
 \BlankLine
+\tcp{\textit{Se separa el prefijo encontrado y el resto de la cadena se sigue procesando.}}
 
-
-\BlankLine
-\Return (\textit{\textbf{s}} $+$ ` ' $+$ buscarPrefjjo(\textit{\textbf{idSeparado}},“”) )
+\Return (\textit{\textbf{s}} $+$ ` ' $+$ buscarPrefijo(\textit{\textbf{sDiv}},“”) )
 }
 \BlankLine
 \tcp{\textit{Se extrae y se guarda el último caracter de s.}}
 
-\textit{\textbf{idSeparado}} $\leftarrow$ \textit{\textbf{s}}[length(\textit{\textbf{s}}) - 1] $+$ \textit{\textbf{idSeparado}}
+\textit{\textbf{sDiv}} $\leftarrow$ \textit{\textbf{s}}[length(\textit{\textbf{s}}) - 1] $+$ \textit{\textbf{sDiv}}
 \BlankLine
 
 \tcp{\textit{Llamar nuevamente a la función sin el último caracter.}}
 \BlankLine
 \textit{\textbf{s}} $\leftarrow$  \textit{\textbf{s}}[0 , length(\textit{\textbf{s}}) - 1]
 
-\Return buscarPrefjjo(\textit{\textbf{s}},\textit{\textbf{idSeparado}})
+\Return buscarPrefijo(\textit{\textbf{s}},\textit{\textbf{sDiv}})
 
-\caption{buscarPrefjjo()}
+\caption{buscarPrefijo()}
 \end{function}
 
-\begin{function}[h!]
+\begin{function}[h]
 \LinesNumbered%enumera las lineas
 \SetKwInOut{Input}{Entrada}\SetKwInOut{Output}{Salida}
-\Input{\textit{\textbf{s}} \tcp{\textit{identificador a dividir}}}
-\Output{\textit{\textbf{idSeparado}} \tcp{\textit{id separado con espacios}}}
+\Input{\textit{\textbf{s}} \tcp{\textit{cadena a dividir}}}
+\Output{\textit{\textbf{sDiv}} \tcp{\textit{Cadena separada con espacios}}}
 \BlankLine
 
-\If{$($length$($\textit{\textbf{s}}$)$ $=$ 0$)$}{ 
-
-\tcp{\textit{Punto de parada de la recursión: idSeparado guarda el resultado parcial, si s no tiene más caracteres que analizar, se retorna idSeparado.}}
-
-\Return \textit{\textbf{idSeparado}}
+\If{$($length$($\textit{\textbf{s}}$)$ $=$ 0$)$}{
+\BlankLine
+\tcp{\textit{Punto de parada de la recursión, retorna el resultado de la división.}}
+\Return \textit{\textbf{sDiv}}
 }
 \BlankLine
 \If{$($\textbf{s} pertenece a $($\textit{\textbf{stopList}} $\cup$ \textit{\textbf{abrevList}} $\cup$ \textbf{ispellList} $))$}{
 \BlankLine
-%\tcp{\textit{Se separa con espacio y se ejecuta la función con el resto.}}
-\BlankLine
-\Return (buscarSufijo(\textit{\textbf{idSeparado}},“”) $+$ ` ' $+$ \textit{\textbf{s}})
+\tcp{\textit{Se separa el sufijo encontrado y el resto de la cadena se sigue procesando.}}
+
+\Return (buscarSufijo(\textit{\textbf{sDiv}},“”) $+$ ` ' $+$ \textit{\textbf{s}})
 }
 \BlankLine
 \tcp{\textit{Se extrae y se guarda el primer caracter de s.}}
 
-\textit{\textbf{idSeparado}} $\leftarrow$ \textit{\textbf{idSeparado}} $+$ \textit{\textbf{s}}[0]
+\textit{\textbf{sDiv}} $\leftarrow$ \textit{\textbf{sDiv}} $+$ \textit{\textbf{s}}[0]
 \BlankLine
 \tcp{\textit{Llamar nuevamente a la función sin el primer caracter.}}
 \BlankLine
 \textit{\textbf{s}} $\leftarrow$ \textit{\textbf{s}}[1 , length(\textit{\textbf{s}})]
 
-\Return buscarSufijo(\textit{\textbf{s}},\textit{\textbf{idSeparado}})
+\Return buscarSufijo(\textit{\textbf{s}},\textit{\textbf{sDiv}})
 
 \caption{buscarSufijo()}
 \end{function}
@@ -335,38 +327,31 @@ listaExpansión.add(listaCandidatos)
 \SetKwInOut{Input}{Entrada}\SetKwInOut{Output}{Salida}
 \Input{\textit{\textbf{pa}} \tcp{\textit{Palabra Abreviada}}}
 \Input{\textit{\textbf{patrón}} \tcp{\textit{Expresión regular}}}
-
-\Input{\textit{\textbf{cuerpoMet}} \tcp{\textit{Cuerpo del Método}}}
-\Input{\textit{\textbf{comMet}} \tcp{\textit{Comentarios del Método}}}
-\Input{\textit{\textbf{comClas}} \tcp{\textit{Comentarios de la Clase}}}
+%\Input{\textit{\textbf{ccMétodo}} \tcp{\textit{Cuerpo y Comentarios del Método}}}
+%\Input{\textit{\textbf{comClase}} \tcp{\textit{Comentarios de la Clase}}}
 \Output{\textit{\textbf{palCand}} \tcp{\textit{Palabras candidatas, o null si no hay}}}
-
 \BlankLine
 \tcp{\textit{Las expresiones regulares están entre comillas}}
 \BlankLine
 
 \If{ $($\textbf{patrón} prefijo $\vee$ \textit{\textbf{pa}} coincide “[a-z][\^{}aeiou]$+$” $\vee$ length(\textit{\textbf{pa}}) $>$ 3$)$ $\land$ $($\textit{\textbf{pa}} no coincide con “[a-z][aeiou][aeiou]$+$”$)$}{
 
-
 \BlankLine
-
+\tcp{\textit{Si alguna de las siguientes búsquedas encuentra un único resultado, el algoritmo lo retorna finalizando la ejecución}}
 \BlankLine
-\textit{\textbf{palCand}} $\leftarrow$ buscarEnComentariosJavaDoc \linebreak(“\textsf{\at param} \textit{\textbf{pa patrón}}”,\textit{\textbf{comClas}})
-\If{}{}
-
-
+Buscar en Comentarios JavaDoc con “\textsf{\at param} \textit{\textbf{pa patrón}}”, si el resultado es único \Return en \textit{\textbf{palCand}}
 \BlankLine
-Buscar en Nombres de Tipos y la correspondiente Variable declarada con “\textit{\textbf{patrón pa}}”
+Buscar en Nombres de Tipos y la correspondiente Variable declarada con “\textit{\textbf{patrón pa}}”, si el resultado es único \Return en \textit{\textbf{palCand}}
 \BlankLine
-Buscar en el Nombre del Método con “\textit{\textbf{patrón}}”
+Buscar en el Nombre del Método con “\textit{\textbf{patrón}}”, si el resultado es único \Return en \textit{\textbf{palCand}}
 \BlankLine
-Buscar en las Sentencias con “\textit{\textbf{patrón pa}}” y “\textit{\textbf{pa patrón}}”
+Buscar en las Sentencias con “\textit{\textbf{patrón pa}}” y “\textit{\textbf{pa patrón}}”, si el resultado es único \Return en \textit{\textbf{palCand}}
 \BlankLine
 \If{$($length(\textit{\textbf{pa}}) $\neq$ 2$)$}{
 \BlankLine
-Buscar en palabras del Método con “\textit{\textbf{patrón}}”
+Buscar en palabras del Método con “\textit{\textbf{patrón}}”, si el resultado es único \Return en \textit{\textbf{palCand}}
 \BlankLine
-Buscar en palabras que están en los Comentarios del Método con “\textit{\textbf{patrón}}”
+Buscar en palabras que están en los Comentarios del Método con “\textit{\textbf{patrón}}”, si el resultado es único \Return en \textit{\textbf{palCand}}
 
 }
 
@@ -374,7 +359,7 @@ Buscar en palabras que están en los Comentarios del Método con “\textit{\tex
 \BlankLine
 \tcp{\textit{Solo se busca con patrones prefijos}}
 
-Buscar en palabras que están en los Comentarios de la Clase con “\textit{\textbf{patrón}}”
+Buscar en palabras que están en los Comentarios de la Clase con “\textit{\textbf{patrón}}”, si el resultado es único \Return en \textit{\textbf{palCand}}
 }
 }
 
@@ -389,9 +374,9 @@ Buscar en palabras que están en los Comentarios de la Clase con “\textit{\tex
 \SetKwInOut{Input}{Entrada}\SetKwInOut{Output}{Salida}
 \Input{\textit{\textbf{pa}} \tcp{\textit{Palabra Abreviada}}}
 \Input{\textit{\textbf{patrón}} \tcp{\textit{Expresión regular}}}
-\Input{Cuerpo y Comentarios del Método}
-\Input{Comentarios de la Clase}
-\Output{Palabras largas candidatas, o null si no hay}
+%\Input{\textit{\textbf{ccMétodo}} \tcp{\textit{Cuerpo y Comentarios del Método}}}
+%\Input{\textit{\textbf{comClase}} \tcp{\textit{Comentarios de la Clase}}}
+\Output{\textit{\textbf{palCand}} \tcp{\textit{Palabras candidatas, o null si no hay}}}
 \BlankLine
 \tcp{\textit{Las expresiones regulares están entre comillas}}
 \BlankLine
@@ -401,24 +386,24 @@ Buscar en palabras que están en los Comentarios de la Clase con “\textit{\tex
 \BlankLine
 \tcp{\textit{Si alguna de las siguientes búsquedas encuentra un único resultado, el algoritmo lo retorna finalizando la ejecución}}
 \BlankLine
-Buscar en Comentarios JavaDoc con “\textsf{\at param} \textit{\textbf{pa patrón}}”
+Buscar en Comentarios JavaDoc con “\textsf{\at param} \textit{\textbf{pa patrón}}”, si el resultado es único \Return en \textit{\textbf{palCand}}
 \BlankLine
-Buscar en Nombres de Tipos y la correspondiente Variable declarada con “\textit{\textbf{patrón pa}}”
+Buscar en Nombres de Tipos y la correspondiente Variable declarada con “\textit{\textbf{patrón pa}}”, si el resultado es único \Return en \textit{\textbf{palCand}}
 \BlankLine
-Buscar en el Nombre del Método con “\textit{\textbf{patrón}}”
+Buscar en el Nombre del Método con “\textit{\textbf{patrón}}”, si el resultado es único \Return en \textit{\textbf{palCand}}
 \BlankLine
-Buscar en todos los ids (y sus tipos) dentro del Método con “\textit{\textbf{patrón}}”
+Buscar en todos los ids (y sus tipos) dentro del Método con “\textit{\textbf{patrón}}”, si el resultado es único \Return en \textit{\textbf{palCand}}
 \BlankLine
-Buscar en Literales String con “\textit{\textbf{patrón}}”
+Buscar en Literales String con “\textit{\textbf{patrón}}”, si el resultado es único \Return en \textit{\textbf{palCand}}
 \BlankLine
 \tcp{\textit{En este punto se buscó en todos los lugares posibles dentro del método}}
 \BlankLine
-Buscar en palabras que están en los Comentarios del Método con “\textit{\textbf{patrón}}”
+Buscar en palabras que están en los Comentarios del Método con “\textit{\textbf{patrón}}”, si el resultado es único \Return en \textit{\textbf{palCand}}
 \BlankLine
 \If{$($\textit{\textbf{patrón}} acrónimo$)$}{
 \BlankLine
 \tcp{\textit{Solo se busca con patrones Acrónimos}}
-Buscar en palabras que están en los Comentarios de la Clase con “\textit{\textbf{patrón}}”
+Buscar en palabras que están en los Comentarios de la Clase con “\textit{\textbf{patrón}}”, si el resultado es único \Return en \textit{\textbf{palCand}}
 }
 }
 

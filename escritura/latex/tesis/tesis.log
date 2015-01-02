@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.8.12)  31 DEC 2014 07:55
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.8.12)  2 JAN 2015 17:11
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -495,37 +495,56 @@ Package: enumitem 2011/09/28 v3.5.2 Customized lists
 \enit@toks=\toks24
 \enit@inbox=\box63
 \enitdp@description=\count121
+)
+(/usr/share/texlive/texmf-dist/tex/latex/footmisc/footmisc.sty
+Package: footmisc 2011/06/06 v5.5b a miscellany of footnote facilities
+\FN@temptoken=\toks25
+\footnotemargin=\dimen134
+
+
+LaTeX Warning: Command \@makecol  has changed.
+               Check if current package is valid.
+
+\c@pp@next@reset=\count122
+Package footmisc Info: Declaring symbol style bringhurst on input line 855.
+Package footmisc Info: Declaring symbol style chicago on input line 863.
+Package footmisc Info: Declaring symbol style wiley on input line 872.
+Package footmisc Info: Declaring symbol style lamport-robust on input line 883.
+
+Package footmisc Info: Declaring symbol style lamport* on input line 903.
+Package footmisc Info: Declaring symbol style lamport*-robust on input line 924
+.
 ) (./tesis.aux
 LaTeX Info: Redefining \. on input line 6.
 LaTeX Info: Redefining \% on input line 6.
 )
 \openout1 = `tesis.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 55.
-LaTeX Font Info:    ... okay on input line 55.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 55.
-LaTeX Font Info:    ... okay on input line 55.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 55.
-LaTeX Font Info:    ... okay on input line 55.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 55.
-LaTeX Font Info:    ... okay on input line 55.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 55.
-LaTeX Font Info:    ... okay on input line 55.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 55.
-LaTeX Font Info:    ... okay on input line 55.
-(/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 58.
+LaTeX Font Info:    ... okay on input line 58.
+ (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count122
-\scratchdimen=\dimen134
+\scratchcounter=\count123
+\scratchdimen=\dimen135
 \scratchbox=\box64
-\nofMPsegments=\count123
-\nofMParguments=\count124
-\everyMPshowfont=\toks25
-\MPscratchCnt=\count125
-\MPscratchDim=\dimen135
-\MPnumerator=\count126
-\makeMPintoPDFobject=\count127
-\everyMPtoPDFconversion=\toks26
+\nofMPsegments=\count124
+\nofMParguments=\count125
+\everyMPshowfont=\toks26
+\MPscratchCnt=\count126
+\MPscratchDim=\dimen136
+\MPnumerator=\count127
+\makeMPintoPDFobject=\count128
+\everyMPtoPDFconversion=\toks27
 ) (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
 Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
 )
@@ -574,8 +593,8 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-LaTeX Info: Redefining \. on input line 55.
-LaTeX Info: Redefining \% on input line 55.
+LaTeX Info: Redefining \. on input line 58.
+LaTeX Info: Redefining \% on input line 58.
 
 Cap\'{\i }tulo 3.
 (./cap3/cap3-analisis.tex [1
@@ -758,224 +777,217 @@ LaTeX Warning: Citation `EHPV09' on page 15 undefined on input line 332.
 
 [15] [16] [17] [18]
 
-LaTeX Warning: Citation `EHPV09' on page 19 undefined on input line 468.
+LaTeX Warning: Citation `EHPV09' on page 19 undefined on input line 482.
 
 
-LaTeX Warning: Citation `EZH08' on page 19 undefined on input line 469.
+LaTeX Warning: Citation `EZH08' on page 19 undefined on input line 483.
 
-[19] [20]
-Underfull \hbox (badness 10000) in paragraph at lines 495--496
+[19]
+Underfull \hbox (badness 10000) in paragraph at lines 509--510
 
  []
 
-
-Overfull \hbox (8.58875pt too wide) in paragraph at lines 505--506
+[20]
+Overfull \hbox (8.58875pt too wide) in paragraph at lines 519--520
 []\OT1/cmr/m/n/12 El au-tor a trav^^Ses de es-tu-dios de da-tos, se en-contr^^S
 o con
  []
 
-[21] [22]
-Underfull \hbox (badness 10000) in paragraph at lines 570--571
+
+Underfull \hbox (badness 10000) in paragraph at lines 584--585
 
  []
 
-[23]
+[21] [22]
 
-LaTeX Warning: Citation `EHPV09' on page 24 undefined on input line 638.
+LaTeX Warning: Citation `EHPV09' on page 23 undefined on input line 652.
 
 
-Overfull \hbox (6.18246pt too wide) in paragraph at lines 638--639
+Overfull \hbox (6.18246pt too wide) in paragraph at lines 652--653
 \OT1/cmr/m/n/12 quier-da) se di-vi-de del res-to (l^^S^^Pnea 16), dan-do co-mo 
 re-sul-ta-do [].
  []
 
+[23]
+
+LaTeX Warning: Citation `EHPV09' on page 24 undefined on input line 659.
+
 [24]
-
-LaTeX Warning: Citation `EHPV09' on page 25 undefined on input line 645.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 649--650
+Underfull \hbox (badness 10000) in paragraph at lines 663--664
 
  []
+
+
+LaTeX Warning: Citation `EHPV09' on page 25 undefined on input line 682.
 
 [25]
 
-LaTeX Warning: Citation `EHPV09' on page 26 undefined on input line 668.
+LaTeX Warning: Citation `LFBEX07' on page 26 undefined on input line 690.
+
+
+LaTeX Warning: Citation `FFCW01' on page 26 undefined on input line 703.
+
+
+LaTeX Warning: Citation `LOPT00' on page 26 undefined on input line 703.
 
 [26]
 
-LaTeX Warning: Citation `LFBEX07' on page 27 undefined on input line 676.
-
-
-LaTeX Warning: Citation `FFCW01' on page 27 undefined on input line 689.
-
-
-LaTeX Warning: Citation `LOPT00' on page 27 undefined on input line 689.
+LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [27]
 
-LaTeX Warning: `!h' float specifier changed to `!ht'.
+LaTeX Warning: Text page 28 contains only floats.
 
 [28]
 
-LaTeX Warning: Text page 29 contains only floats.
+LaTeX Warning: Citation `LFBEX07' on page 29 undefined on input line 786.
+
+
+LaTeX Warning: Citation `EZH08' on page 29 undefined on input line 786.
+
+
+LaTeX Warning: Citation `EZH08' on page 29 undefined on input line 791.
 
 [29]
+Underfull \hbox (badness 10000) in paragraph at lines 826--827
 
-LaTeX Warning: Citation `LFBEX07' on page 30 undefined on input line 772.
-
-
-LaTeX Warning: Citation `EZH08' on page 30 undefined on input line 772.
+ []
 
 
-LaTeX Warning: Citation `EZH08' on page 30 undefined on input line 777.
+Underfull \hbox (badness 10000) in paragraph at lines 828--829
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 830--831
+
+ []
 
 [30]
-Underfull \hbox (badness 10000) in paragraph at lines 812--813
 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 814--815
-
- []
+LaTeX Warning: Citation `EZH08' on page 31 undefined on input line 859.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 816--817
-
- []
+LaTeX Warning: Citation `EZH08' on page 31 undefined on input line 861.
 
 [31]
 
-LaTeX Warning: Citation `EZH08' on page 32 undefined on input line 845.
+LaTeX Warning: Citation `EZH08' on page 32 undefined on input line 919.
 
-
-LaTeX Warning: Citation `EZH08' on page 32 undefined on input line 847.
-
-[32]
-
-LaTeX Warning: Citation `EZH08' on page 33 undefined on input line 906.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 906--907
+[32] [33]
+Underfull \hbox (badness 10000) in paragraph at lines 922--923
 
  []
 
-[33]
-Underfull \hbox (badness 10000) in paragraph at lines 909--910
 
- []
-
-[34]
-Overfull \hbox (7.74895pt too wide) in paragraph at lines 924--925
+Overfull \hbox (7.74895pt too wide) in paragraph at lines 937--938
 \OT1/cmr/m/n/12 des-pu^^Ses de ca-da le-tra de la pa-la-bra abre-via-da (\OT1/c
 mr/bx/it/12 pa\OT1/cmr/m/n/12 ). Si \OT1/cmr/bx/it/12 pa$\OT1/cmr/m/n/12 = \OML
 /cmm/m/it/12 c[]; c[]; c[]; ::; c[]$\OT1/cmr/m/n/12 ,
  []
 
 
-Overfull \hbox (22.38351pt too wide) in paragraph at lines 924--925
+Overfull \hbox (22.38351pt too wide) in paragraph at lines 937--938
 []\OT1/cmr/m/n/12 . Per-mi-te en-con-trar acr^^Soni-
  []
 
 
-LaTeX Warning: Citation `EZH08' on page 35 undefined on input line 937.
+LaTeX Warning: Citation `EZH08' on page 34 undefined on input line 950.
 
-[35]
 
-LaTeX Warning: Citation `EZH08' on page 36 undefined on input line 980.
+LaTeX Warning: Citation `EZH08' on page 34 undefined on input line 993.
 
-[36] <./cap3/exp_3.png, id=138, 615.80063pt x 466.74374pt>
+[34] [35] <./cap3/exp_3.png, id=135, 615.80063pt x 466.74374pt>
 File: ./cap3/exp_3.png Graphic file (type png)
 
 <use ./cap3/exp_3.png>
-Package pdftex.def Info: ./cap3/exp_3.png used on input line 989.
+Package pdftex.def Info: ./cap3/exp_3.png used on input line 1002.
 (pdftex.def)             Requested size: 431.0575pt x 326.71838pt.
- [37 <./cap3/exp_3.png>]
+ [36 <./cap3/exp_3.png>]
 
-LaTeX Warning: Citation `EZH08' on page 38 undefined on input line 998.
+LaTeX Warning: Citation `EZH08' on page 37 undefined on input line 1011.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1005--1006
+Underfull \hbox (badness 10000) in paragraph at lines 1018--1019
 
  []
+
+[37]
+Underfull \hbox (badness 10000) in paragraph at lines 1035--1036
+
+ []
+
+
+LaTeX Warning: Citation `EZH08' on page 38 undefined on input line 1038.
 
 [38]
-Underfull \hbox (badness 10000) in paragraph at lines 1022--1023
 
- []
-
-
-LaTeX Warning: Citation `EZH08' on page 39 undefined on input line 1025.
-
-[39]
-
-LaTeX Warning: Citation `EZH08' on page 40 undefined on input line 1051.
+LaTeX Warning: Citation `EZH08' on page 39 undefined on input line 1064.
 
 
-LaTeX Warning: Citation `DCHD06' on page 40 undefined on input line 1051.
+LaTeX Warning: Citation `DCHD06' on page 39 undefined on input line 1064.
 
 
-LaTeX Warning: Citation `DLHD06' on page 40 undefined on input line 1051.
+LaTeX Warning: Citation `DLHD06' on page 39 undefined on input line 1064.
 
 
-LaTeX Warning: Citation `LFBEX07' on page 40 undefined on input line 1051.
+LaTeX Warning: Citation `LFBEX07' on page 39 undefined on input line 1064.
 
-[40] <./cap3/ire_1.png, id=153, 570.63188pt x 118.94438pt>
+[39] <./cap3/ire_1.png, id=150, 570.63188pt x 118.94438pt>
 File: ./cap3/ire_1.png Graphic file (type png)
 
 <use ./cap3/ire_1.png>
-Package pdftex.def Info: ./cap3/ire_1.png used on input line 1063.
+Package pdftex.def Info: ./cap3/ire_1.png used on input line 1076.
 (pdftex.def)             Requested size: 456.50613pt x 95.15561pt.
 
 
-LaTeX Warning: Citation `BCPT00' on page 41 undefined on input line 1068.
+LaTeX Warning: Citation `BCPT00' on page 40 undefined on input line 1081.
 
 
-LaTeX Warning: Citation `BCPT00' on page 41 undefined on input line 1073.
+LaTeX Warning: Citation `BCPT00' on page 40 undefined on input line 1086.
 
-[41 <./cap3/ire_1.png>] <./cap3/ire_2.png, id=159, 520.19344pt x 316.93407pt>
+[40 <./cap3/ire_1.png>] <./cap3/ire_2.png, id=156, 520.19344pt x 316.93407pt>
 File: ./cap3/ire_2.png Graphic file (type png)
 
 <use ./cap3/ire_2.png>
-Package pdftex.def Info: ./cap3/ire_2.png used on input line 1086.
+Package pdftex.def Info: ./cap3/ire_2.png used on input line 1099.
 (pdftex.def)             Requested size: 312.11845pt x 190.1619pt.
 
 
-LaTeX Warning: Citation `BCPT99' on page 42 undefined on input line 1095.
+LaTeX Warning: Citation `BCPT99' on page 41 undefined on input line 1108.
 
-<./cap3/ire_3.png, id=160, 632.3625pt x 326.72063pt>
+<./cap3/ire_3.png, id=157, 632.3625pt x 326.72063pt>
 File: ./cap3/ire_3.png Graphic file (type png)
  <use ./cap3/ire_3.png>
-Package pdftex.def Info: ./cap3/ire_3.png used on input line 1103.
+Package pdftex.def Info: ./cap3/ire_3.png used on input line 1116.
 (pdftex.def)             Requested size: 379.42043pt x 196.03387pt.
 
 
-LaTeX Warning: Citation `BCPT99' on page 42 undefined on input line 1108.
+LaTeX Warning: Citation `BCPT99' on page 41 undefined on input line 1121.
 
 
-LaTeX Warning: Citation `BCPT00' on page 42 undefined on input line 1108.
+LaTeX Warning: Citation `BCPT00' on page 41 undefined on input line 1121.
 
-[42 <./cap3/ire_2.png>]
+[41 <./cap3/ire_2.png>]
 
-LaTeX Warning: Citation `BCPT99' on page 43 undefined on input line 1110.
+LaTeX Warning: Citation `BCPT99' on page 42 undefined on input line 1123.
 
-[43 <./cap3/ire_3.png>]
+[42 <./cap3/ire_3.png>]
 
-LaTeX Warning: Citation `BCPT00' on page 44 undefined on input line 1117.
+LaTeX Warning: Citation `BCPT00' on page 43 undefined on input line 1130.
 
-<./cap3/ire_4.png, id=170, 554.07pt x 281.55188pt>
+<./cap3/ire_4.png, id=166, 554.07pt x 281.55188pt>
 File: ./cap3/ire_4.png Graphic file (type png)
  <use ./cap3/ire_4.png>
-Package pdftex.def Info: ./cap3/ire_4.png used on input line 1123.
+Package pdftex.def Info: ./cap3/ire_4.png used on input line 1136.
 (pdftex.def)             Requested size: 371.22498pt x 188.63876pt.
 
-[44 <./cap3/ire_4.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 1129--1130
+[43 <./cap3/ire_4.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 1142--1143
 
  []
 
-[45]) [46] (./tesis.aux
+[44]) [45] (./tesis.aux
 LaTeX Info: Redefining \. on input line 6.
 LaTeX Info: Redefining \% on input line 6.
 )
@@ -988,13 +1000,13 @@ LaTeX Warning: There were undefined references.
 ### semi simple group (level 1) entered at line 8 (\begingroup)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 5307 strings out of 494966
- 71471 string characters out of 6179559
- 172578 words of memory out of 5000000
- 8428 multiletter control sequences out of 15000+600000
+ 5407 strings out of 494966
+ 73049 string characters out of 6179559
+ 174406 words of memory out of 5000000
+ 8524 multiletter control sequences out of 15000+600000
  13014 words of font info for 46 fonts, out of 8000000 for 9000
  40 hyphenation exceptions out of 8191
- 38i,21n,43p,1469b,4244s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 38i,21n,43p,1610b,4346s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
 mbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.
 pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></u
@@ -1010,10 +1022,10 @@ nts/cm/cmss12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm
 /cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti1
 2.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
 
-Output written on tesis.pdf (46 pages, 1328443 bytes).
+Output written on tesis.pdf (45 pages, 1330130 bytes).
 PDF statistics:
- 232 PDF objects out of 1000 (max. 8388607)
- 150 compressed objects within 2 object streams
+ 229 PDF objects out of 1000 (max. 8388607)
+ 148 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  46 words of extra memory for PDF output out of 10000 (max. 10000000)
 

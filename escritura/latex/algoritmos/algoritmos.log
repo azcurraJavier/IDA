@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.8.12)  31 DEC 2014 12:52
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.8.12)  2 JAN 2015 12:02
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -489,13 +489,16 @@ e
 LaTeX Info: Redefining \. on input line 25.
 LaTeX Info: Redefining \% on input line 25.
 
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
 [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] [3] [4]
-
-LaTeX Warning: Text page 5 contains only floats.
-
-[5] [6] [7] (./algoritmos.aux
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] [3] [4] [5] [6]
+[7] (./algoritmos.aux
 LaTeX Info: Redefining \. on input line 6.
 LaTeX Info: Redefining \% on input line 6.
 ) )
@@ -504,10 +507,10 @@ LaTeX Info: Redefining \% on input line 6.
 ### semi simple group (level 1) entered at line 8 (\begingroup)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 4484 strings out of 494966
- 59457 string characters out of 6179559
- 174323 words of memory out of 5000000
- 7643 multiletter control sequences out of 15000+600000
+ 4481 strings out of 494966
+ 59406 string characters out of 6179559
+ 178323 words of memory out of 5000000
+ 7640 multiletter control sequences out of 15000+600000
  10435 words of font info for 37 fonts, out of 8000000 for 9000
  40 hyphenation exceptions out of 8191
  38i,20n,28p,361b,3523s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -522,7 +525,7 @@ dist/fonts/type1/public/amsfonts/cm/cmss12.pfb></usr/share/texlive/texmf-dist/f
 onts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/t
 ype1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
 ublic/amsfonts/cm/cmtt12.pfb>
-Output written on algoritmos.pdf (7 pages, 130200 bytes).
+Output written on algoritmos.pdf (7 pages, 129376 bytes).
 PDF statistics:
  72 PDF objects out of 1000 (max. 8388607)
  51 compressed objects within 1 object stream

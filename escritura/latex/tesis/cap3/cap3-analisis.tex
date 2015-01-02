@@ -160,7 +160,7 @@ En este sentido, la construcción de ids poco claros, se combate con la programa
 \begin{framed}
 \noindent \textbf{Nombre Conciso:} El nombre de un id es conciso, si la semántica del nombre coincide exactamente con la semántica del concepto que el id representa.
 
-\noindent \textbf{Nombre Consistente:} Para cada id, debe tener asociado si y solo si, un único concepto.
+\noindent \textbf{Nombre Consistente:} Cada id, debe tener asociado si y solo si, un único concepto.
 \end{framed}
 
 Un ejemplo de \textit{conciso} es \textsf{output\_file\_name} que representa el concepto de `nombre de archivo de salida', distinto sería un id nombrado como \textsf{file\_name}, el cual está incompleto y no representa de forma semánticamente concisa el concepto mencionado.
@@ -340,25 +340,8 @@ El Algoritmo de división Greedy elaborado por Lawrie, Feild, Binkley \cite{DLFB
 \item[Palabras excluyentes (stop list):] Posee palabras que son irrelevantes para realizar la división de los ids. Incluye palabras claves (ejemplo: \texttt{while}), ids predefinidos (ejemplo: \texttt{NULL}), nombres y funciones de librerías (ejemplo: \texttt{strcpy}, \texttt{errno}), y todos los ids que puedan tener un solo caracter.
 \end{description}
 
-El algoritmo de Greedy utiliza las 3 listas nombradas al comienzo de la sección en forma de variable global. Esto ocurre porque las 3 listas son usadas por subrutinas más tarde. El algoritmo procede de la siguiente manera (Ver Algoritmo \ref{GSA}), el id que recibe como entrada primero se divide (con espacios en blanco) en las hardwords que lo componen (ejemplo: \textsf{fileinput\_txt} $\Rightarrow$ \mbox{\textsf{fileinput}} y \textsf{txt} en la línea 2 - algoritmo \ref{GSA}, si es camel-case \textsf{fileinputTxt} $\Rightarrow$ \textsf{fileinput} y \textsf{txt} en la línea 3 - algoritmo \ref{GSA}). Luego, cada palabra resultante en caso que esté en alguna de las 3 listas, se distingue como un único softword (ejemplo: \textsf{txt} pertenece a la lista de abreviaturas conocidas, línea 5). Si alguna palabra no está en alguna lista se considera como múltiples softwords que necesitan subdividirse (ejemplo: \textsf{fileinput} $\Rightarrow$ \textsf{file} y \textsf{input}, línea 5).
-Para subdividir estas palabras se buscan los prefijos y los sufijos más largos posibles dentro de ellas, para hacer esta búsqueda se utilizan las mismas 3 listas antes mencionadas (líneas 6 y 7).
 
-Por un lado se buscan prefijos con un proceso recursivo (Ver Función \mbox{\textbf{buscarPrefijo}}). Este proceso comienza analizando toda la palabra por completo. Se van extrayendo caracteres del final hasta encontrar el prefijo más largo o no haya más caracteres (líneas 5 - 7, \textbf{buscarPrefijo}).
-Cuando una palabra se encuentra en alguna lista (línea 3, \textbf{buscarPrefijo}) se coloca un separador (` '). El resto que fue descartado se procesa por \textbf{buscarPrefijo} para buscar más subdivisiones (línea 4).
-
-De manera simétrica, otro proceso recursivo se hace cargo de los sufijos (Ver Función \textbf{buscarSufijo}). También extrae caracteres, pero en este caso desde la primer posición hasta encontrar el sufijo más largo presente en alguna lista o no haya más caracteres (líneas 5 - 7, \textbf{buscarSufijo}).
-De la misma forma que la función de prefijos, cuando encuentra una palabra, se inserta un separador (` ') y el resto se procesa por la función \textbf{buscarSufijo} (línea 4).
-
-Una vez que ambos procesos terminaron, los resultados son retornados al algoritmo principal (\textsf{resultadoPrefijo, resultadoSufijo} líneas 6 y 7, algoritmo \ref{GSA}). Mediante una función de comparación se elije el que obtuvo mayores particiones (línea 8). Finalmente, el algoritmo Greedy retorna el id destacando las palabras que lo componen mediante el separador espacio \mbox{(\textsf{file input txt})}.
-
-La ventaja de hacer dos búsquedas (prefijo y sufijo) radica en aumentar las chances de dividir al id. A modo de ejemplo, suponga que la palabra abreviada \textsf{fl}
-no se encuentra en ninguno de los 3 listados y las palabras \textsf{input} y \textsf{txt} si están. Dada esta situación, si el id \textsf{flinputtxt} se procesa por ambas rutinas, el resultado será que \textbf{buscarPrefijo} no divida al id. Esto sucede porque al retirar caracteres del último lugar, nunca se encontrará un prefijo conocido. Más precisamente al no dividirse entre \textsf{fl} e \textsf{input} el resto de la cadena no se procesará y tampoco se dividirá entre \textsf{input} y \textsf{txt}. 
-
-Sin embargo, este inconveniente no lo tendrá \textbf{buscarSufijo} porque al retirar los caracteres del principio de la palabra, \textsf{input txt} será separado. Como \textsf{input} es una palabra conocida se agregará un espacio entre \textsf{fl input}. De esta manera el id queda correctamente separado \textsf{fl input txt} por \textbf{buscarSufijo}.
-
-Este algoritmo de división generalmente se emplea como punto de comparación con técnicas más eficientes de separación de ids multi-palabras. En la próxima sección, se describe un algoritmo de división más avanzado.
-
-\begin{algorithm}[H]%H fuerza que se genere aqui
+\begin{algorithm}[b!]%H fuerza que se genere aqui
 \LinesNumbered%enumera las lineas
 \SetKwInOut{Input}{Entrada}\SetKwInOut{Output}{Salida}
 \SetKwInOut{Global}{Var Global}
@@ -366,17 +349,17 @@ Este algoritmo de división generalmente se emplea como punto de comparación co
 \Global{\textit{\textbf{abrevList}} \tcp{\textit{Abreviaciones conocidas}}}
 \Global{\textit{\textbf{stopList}} \tcp{\textit{Palabras Excluyentes}}}
 \Input{\textit{\textbf{idHarword}} \tcp{\textit{identificador a dividir}}}
-\Output{\texttt{softwordDiv} \tcp{\textit{id separado con espacios}}}
+\Output{\textit{\textbf{softwordDiv}} \tcp{\textit{id separado con espacios}}}
 
 \BlankLine
-\texttt{softwordDiv} $\leftarrow$ “”
+\textit{\textbf{softwordDiv}} $\leftarrow$ “”
 
-\texttt{softwordDiv} $\leftarrow$ dividirCaracteresEspecialesDigitos(\textit{\textbf{idHarword}})
+\textit{\textbf{softwordDiv}} $\leftarrow$ dividirCaracteresEspecialesDigitos(\textit{\textbf{idHarword}})
 
-\texttt{softwordDiv} $\leftarrow$ dividirCamelCase(\texttt{softwordDiv})
+\textit{\textbf{softwordDiv}} $\leftarrow$ dividirCamelCase(\textit{\textbf{softwordDiv}})
 
 \BlankLine
-\ForAll{$($\textit{\textbf{s}} $|$ \textit{\textbf{s}} es un substring separado por ` ' en \texttt{softwordDiv}$)$}{
+\ForAll{$($\textit{\textbf{s}} $|$ \textit{\textbf{s}} es un substring separado por ` ' en \textit{\textbf{softwordDiv}}$)$}{
 \BlankLine
 
 \If{$($\textbf{s} no pertenece a $($\textit{\textbf{stopList}} $\cup$ \textit{\textbf{abrevList}} $\cup$ \textbf{ispellList} $))$}{
@@ -391,75 +374,106 @@ resultadoSufijo $\leftarrow$ buscarSufijo(\textit{\textbf{s}},“”)
 }
 }
 \BlankLine
-\Return \texttt{softwordDiv} \tcp{\textit{Retorna el id dividido por ` '}}
+\Return \textit{\textbf{softwordDiv}} \tcp{\textit{Retorna el id dividido por ` '}}
 
 \caption{División Greedy\label{GSA}}
 \end{algorithm}
 
-\begin{function}[H]
+
+
+El algoritmo de Greedy utiliza las 3 listas nombradas al comienzo de la sección en forma de variable global. Esto ocurre porque las 3 listas son usadas por subrutinas más tarde. El algoritmo procede de la siguiente manera (Ver Algoritmo \ref{GSA}), el id que recibe como entrada primero se divide (con espacios en blanco) en las hardwords que lo componen (ejemplo: \textsf{fileinput\_txt} $\Rightarrow$ \mbox{\textsf{fileinput}} y \textsf{txt} en la línea 2 - algoritmo \ref{GSA}, si es camel-case \textsf{fileinputTxt} $\Rightarrow$ \textsf{fileinput} y \textsf{txt} en la línea 3 - algoritmo \ref{GSA}). Luego, cada palabra resultante en caso que esté en alguna de las 3 listas, se distingue como un único softword (ejemplo: \textsf{txt} pertenece a la lista de abreviaturas conocidas, línea 5). Si alguna palabra no está en alguna lista se considera como múltiples softwords que necesitan subdividirse (ejemplo: \textsf{fileinput} $\Rightarrow$ \textsf{file} y \textsf{input}, línea 5).
+Para subdividir estas palabras se buscan los prefijos y los sufijos más largos posibles dentro de ellas, para hacer esta búsqueda se utilizan las mismas 3 listas antes mencionadas (líneas 6 y 7).
+
+
+\begin{function}[b!]
 \LinesNumbered%enumera las lineas
 \SetKwInOut{Input}{Entrada}\SetKwInOut{Output}{Salida}
-\Input{\textit{\textbf{s}} \tcp{\textit{Abreviaturas a dividir}}}
-\Output{\textit{\textbf{abrevSeparada}} \tcp{\textit{Abreviaturas separadas}}}
+\Input{\textit{\textbf{s}} \tcp{\textit{cadena a dividir}}}
+\Output{\textit{\textbf{sDiv}} \tcp{\textit{Cadena dividida con espacios}}}
 \BlankLine
-\tcp{\textit{Punto de parada de la recursión.}}
+
 \If{$($length$($\textit{\textbf{s}}$)$ $=$ 0$)$}{
 \BlankLine
-\Return \textit{\textbf{abrevSeparada}}
+\tcp{\textit{Punto de parada de la recursión, retorna el resultado de la división.}}
+\Return \textit{\textbf{sDiv}}
 }
 \BlankLine
 \If{$($\textbf{s} pertenece a $($\textit{\textbf{stopList}} $\cup$ \textit{\textbf{abrevList}} $\cup$ \textbf{ispellList} $))$}{
 \BlankLine
-%\tcp{\textit{Se separa con espacio y se ejecuta la función con el resto.}}
-\BlankLine
-\Return (\textit{\textbf{s}} $+$ ` ' $+$ buscarPrefjjo(\textit{\textbf{abrevSeparada}},“”) )
+\tcp{\textit{Se separa el prefijo encontrado y el resto de la cadena se sigue procesando.}}
+
+\Return (\textit{\textbf{s}} $+$ ` ' $+$ buscarPrefijo(\textit{\textbf{sDiv}},“”) )
 }
 \BlankLine
 \tcp{\textit{Se extrae y se guarda el último caracter de s.}}
 
-\textit{\textbf{abrevSeparada}} $\leftarrow$ \textit{\textbf{s}}[length(\textit{\textbf{s}}) - 1] $+$ \textit{\textbf{abrevSeparada}}
+\textit{\textbf{sDiv}} $\leftarrow$ \textit{\textbf{s}}[length(\textit{\textbf{s}}) - 1] $+$ \textit{\textbf{sDiv}}
 \BlankLine
 
 \tcp{\textit{Llamar nuevamente a la función sin el último caracter.}}
-\BlankLine
+%\BlankLine
 \textit{\textbf{s}} $\leftarrow$  \textit{\textbf{s}}[0 , length(\textit{\textbf{s}}) - 1]
 
-\Return buscarPrefjjo(\textit{\textbf{s}},\textit{\textbf{abrevSeparada}})
+\Return buscarPrefijo(\textit{\textbf{s}},\textit{\textbf{sDiv}})
 
-\caption{buscarPrefjjo()}
+\caption{buscarPrefijo()}
 \end{function}
 
-\begin{function}[H]
+
+
+Por un lado se buscan prefijos con un proceso recursivo (Ver Función \mbox{\textbf{buscarPrefijo}}). Este proceso comienza analizando toda la palabra por completo. Se van extrayendo caracteres del final hasta encontrar el prefijo más largo o no haya más caracteres (líneas 5 - 7, \textbf{buscarPrefijo}). 
+
+Tomando como ejemplo \textit{\textbf{s}} = \textsf{flinptxt}, en las línea 5 y 6 se realiza lo siguiente, el caracter que se toma de la última posición de \textsf{flinptxt} se coloca en \textit{\textbf{sDiv}} en el mismo orden (ejemplo: \textit{\textbf{s}}=\textsf{flinptx} y \textit{\textbf{sDiv}}= \textsf{t}), estos nuevos parámetros son pasados en la misma función \textbf{buscarPrefijo} (línea 7). Este proceso recursivo se repetirá (\textit{\textbf{s}}=\textsf{flinpt} y \textit{\textbf{sDiv}}= \textsf{xt}; \textit{\textbf{s}}=\textsf{flinp} y \textit{\textbf{sDiv}}= \textsf{txt}; etc), hasta que sucedan dos posibilidades: a) \textit{\textbf{s}} no tenga más caracteres (línea 1), en ese caso se retorna \textit{\textbf{sDiv}} con el resultado de la ejecución; o b) \textit{\textbf{s}} tenga un prefijo válido (pertenezca a algún diccionario - línea 3), en caso de que así sea, se procede a separarlo colocando un separador (` ') y luego se invoca nuevamente a \mbox{\textbf{buscarPrefijo}} para buscar más subdivisiones (línea 4). Para aclarar más el punto b) anterior, tomando el ejemplo antedicho, si \textsf{fl} es el prefijo más largo encontrado en \textsf{flinptxt}, entonces \textsf{fl} (variable \textit{\textbf{s}}) se separa del resto con ` ' y la palabra \textsf{inptxt} (variable \textit{\textbf{sDiv}}) se procesa con \mbox{\textbf{buscarPrefijo}} (línea 4). Si el resultado de este último fuera, por ejemplo, que \textsf{inp} se divida de \textsf{txt}, el resultado final será \mbox{\textsf{fl inp txt}}.
+
+
+
+
+
+
+De manera simétrica, otro proceso recursivo se hace cargo de los sufijos (Ver Función \textbf{buscarSufijo}). También extrae caracteres, pero en este caso desde la primer posición hasta encontrar el sufijo más largo presente en alguna lista o no haya más caracteres (líneas 5 - 7, \textbf{buscarSufijo}).
+De la misma forma que la función de prefijos, cuando encuentra una palabra, se inserta un separador (` ') y el resto se procesa por la función \textbf{buscarSufijo} para buscar más subdivisiones (línea 4).
+
+\begin{function}[b!]
 \LinesNumbered%enumera las lineas
 \SetKwInOut{Input}{Entrada}\SetKwInOut{Output}{Salida}
-\Input{\textit{\textbf{s}} \tcp{\textit{Abreviaturas a dividir}}}
-\Output{\textit{\textbf{abrevSeparada}} \tcp{\textit{Abreviaturas separadas}}}
+\Input{\textit{\textbf{s}} \tcp{\textit{cadena a dividir}}}
+\Output{\textit{\textbf{sDiv}} \tcp{\textit{Cadena separada con espacios}}}
 \BlankLine
-\tcp{\textit{Punto de parada de la recursión.}}
+
 \If{$($length$($\textit{\textbf{s}}$)$ $=$ 0$)$}{
 \BlankLine
-\Return \textit{\textbf{abrevSeparada}}
+\tcp{\textit{Punto de parada de la recursión, retorna el resultado de la división.}}
+\Return \textit{\textbf{sDiv}}
 }
 \BlankLine
 \If{$($\textbf{s} pertenece a $($\textit{\textbf{stopList}} $\cup$ \textit{\textbf{abrevList}} $\cup$ \textbf{ispellList} $))$}{
 \BlankLine
-%\tcp{\textit{Se separa con espacio y se ejecuta la función con el resto.}}
-\BlankLine
-\Return (buscarSufijo(\textit{\textbf{abrevSeparada}},“”) $+$ ` ' $+$ \textit{\textbf{s}})
+\tcp{\textit{Se separa el sufijo encontrado y el resto de la cadena se sigue procesando.}}
+
+\Return (buscarSufijo(\textit{\textbf{sDiv}},“”) $+$ ` ' $+$ \textit{\textbf{s}})
 }
 \BlankLine
 \tcp{\textit{Se extrae y se guarda el primer caracter de s.}}
 
-\textit{\textbf{abrevSeparada}} $\leftarrow$ \textit{\textbf{abrevSeparada}} $+$ \textit{\textbf{s}}[0]
+\textit{\textbf{sDiv}} $\leftarrow$ \textit{\textbf{sDiv}} $+$ \textit{\textbf{s}}[0]
 \BlankLine
 \tcp{\textit{Llamar nuevamente a la función sin el primer caracter.}}
-\BlankLine
+%\BlankLine
 \textit{\textbf{s}} $\leftarrow$ \textit{\textbf{s}}[1 , length(\textit{\textbf{s}})]
 
-\Return buscarSufijo(\textit{\textbf{s}},\textit{\textbf{abrevSeparada}})
+\Return buscarSufijo(\textit{\textbf{s}},\textit{\textbf{sDiv}})
 
 \caption{buscarSufijo()}
 \end{function}
+
+Una vez que ambos procesos terminaron, los resultados son retornados al algoritmo principal (\textsf{resultadoPrefijo, resultadoSufijo} líneas 6 y 7, algoritmo \ref{GSA}). Mediante una función de comparación se elije el que obtuvo mayores particiones (línea 8). Finalmente, el algoritmo Greedy retorna el id destacando las palabras que lo componen mediante el separador espacio \mbox{(\textsf{file input txt})}.
+
+La ventaja de hacer dos búsquedas (prefijo y sufijo) radica en aumentar las chances de dividir al id. A modo de ejemplo, suponga que la palabra abreviada \textsf{fl}
+no se encuentra en ninguno de los 3 listados y las palabras \textsf{input} y \textsf{txt} si están. Dada esta situación, si el id \textsf{flinputtxt} se procesa por ambas rutinas, el resultado será que \textbf{buscarPrefijo} no divida al id. Esto sucede porque al retirar caracteres del último lugar, nunca se encontrará un prefijo conocido. Más precisamente al no dividirse entre \textsf{fl} e \textsf{input} el resto de la cadena no se procesará y tampoco se dividirá entre \textsf{input} y \textsf{txt}. 
+
+Sin embargo, este inconveniente no lo tendrá \textbf{buscarSufijo} porque al retirar los caracteres del principio de la palabra, \textsf{input txt} será separado. Como \textsf{input} es una palabra conocida se agregará un espacio entre \textsf{fl input}. De esta manera el id queda correctamente separado \textsf{fl input txt} por \textbf{buscarSufijo}.
+
+Este algoritmo de división generalmente se emplea como punto de comparación con técnicas más eficientes de separación de ids multi-palabras. En la próxima sección, se describe un algoritmo de división más avanzado.
 
 
 \subsection{Algoritmo de División Samurai}
@@ -563,13 +577,13 @@ $scoreAlter \leftarrow$ score(\textbf{\textit{s}}[i+1,n])
 \caption{divisiónHardWord \label{AHW}}
 \end{algorithm}
 
-El algoritmo para determinar cual es el tipo correcto y no tomar malas decisiones (Ejemplos: \textsf{SQ Llist} o \textsf{GP Sstate}), divide a la palabra por ambas consideraciones (ejemplo: \textsf{GP Sstate} y \textsf{GPS state}), luego calcula el puntaje (score) de la parte derecha de ambas divisiones (líneas 7 y 8). Aquella con puntaje más alto entre las dos será por la cual se decida (línea 9). Tomando como ejemplo el id \textsf{GPSstate}, para el caso camel-case calculará \mbox{\textit{score(Sstate)}} y para la otra variante \textit{score(state)}. Intuitivamente, la función score (a través de las tablas de frecuencias de palabras) elegirá \textit{state} sobre \textit{sstate} ya que esta última debería tener un puntaje inferior (frecuencia menor de aparición). Por ende Samurai detecta que \textsf{GPSstate} es del tipo Variante de Camel-Case. La división elegida se lleva a cabo en las líneas 11 y 13 (según el caso).
+El algoritmo para determinar cual es el tipo correcto y no tomar malas decisiones (Ejemplos: \textsf{SQ Llist} o \textsf{GP Sstate}), divide a la palabra por ambas consideraciones (ejemplo: \textsf{GP Sstate} y \textsf{GPS state}), luego calcula el puntaje (score) de la parte derecha de ambas divisiones (líneas 7 y 8). Aquella con puntaje más alto entre las dos será por la cual se decida (línea 9). La raíz cuadrada se explica más adelante. Tomando como ejemplo el id \textsf{GPSstate}, para el caso camel-case calculará \mbox{\textit{score(Sstate)}} y para la otra variante \textit{score(state)}. Intuitivamente, la función score (a través de las tablas de frecuencias de palabras) elegirá \textit{state} sobre \textit{sstate} ya que esta última debería tener un puntaje inferior (frecuencia menor de aparición). Por ende Samurai detecta que \textsf{GPSstate} es del tipo Variante de Camel-Case. La división elegida se lleva a cabo en las líneas 11 y 13 (según el caso).
 Finalmente, todas las partes que fueron divididas se envían a \mbox{\textit{divisiónSoftWord} (línea 17, 18)}.
 
 %========================
 \noindent \textbf{\\División Softword\\}
 
-La rutina recursiva \textit{divisiónSoftWord} (Ver Algoritmo \ref{ASW}) recibe como entrada un substring \textbf{\textit{s}}, el cual puede tener tres tipos de variantes: a) todos los caracteres en minúsculas (\textsf{visitor}), b) todos con mayúsculas (\textsf{VISITOR}), c) el primer caracter con mayúscula seguido por todas minúsculas (\textsf{Visitor}). El otro parámetro de entrada es el puntaje original (\textbf{\textit{score$_{sd}$}}) correspondiente a \textbf{\textit{s}}.
+La rutina recursiva \textit{divisiónSoftWord} (Ver Algoritmo \ref{ASW}) recibe como entrada un substring \textbf{\textit{s}}, el cual puede tener tres tipos de variantes: a) todos los caracteres en minúsculas (\textsf{visitor}), b) todos con mayúsculas (\textsf{VISITOR}), c) el primer caracter con mayúscula seguido por todas minúsculas (\textsf{Visitor}). El otro parámetro de entrada es el puntaje original (\textbf{\textit{score$_{sd}$}}) \mbox{correspondiente a \textbf{\textit{s}}}.
 
 La rutina primero examina cada punto posible de división en \textbf{\textit{s}} dividiendo en \textbf{\textit{split$_{izq}$}} y \textbf{\textit{split$_{der}$}} respectivamente (líneas 4 y 5). La decisión de cual es la mejor división (línea 9), se basa en: a) substrings que no tengan prefijos o sufijos conocidos, los mismos están disponibles en la página web del autor\footnote[1]{Listas de prefijos y sufijos  http://www.eecis.udel.edu/˜enslen/Site/Samurai.} (línea 6), b) que el puntaje de la división elegida sobresalga del resto de los puntajes (líneas 7-8).
 
@@ -838,7 +852,7 @@ Ejemplo: Dada \textit{\textbf{pa}} = \textsf{pgm}, el patrón \textsf{p}[a-z]*\t
 %\label{exp1}
 %\end{figure}
 
-La búsqueda de palabras singulares se presenta en el algoritmo \ref{BPS}. Los parámetros de entrada son: la palabra abreviada a expandir, la expresión regular formada por el patrón elegido, los distintos comentarios que existan en el código (en la clase y en el método) y el cuerpo del método.
+La búsqueda de palabras singulares se presenta en el algoritmo \ref{BPS}. Los parámetros de entrada son: la palabra abreviada a expandir y la expresión regular formada por el patrón elegido.
 
 En la línea 1 (del algoritmo \ref{BPS}), se impide básicamente dos cosas: 
 
@@ -853,32 +867,31 @@ En las líneas 2-10 se describe el proceso de búsqueda. Si alguna de estas sent
 \SetKwInOut{Input}{Entrada}\SetKwInOut{Output}{Salida}
 \Input{\textit{\textbf{pa}} \tcp{\textit{Palabra Abreviada}}}
 \Input{\textit{\textbf{patrón}} \tcp{\textit{Expresión regular}}}
-\Input{Cuerpo y Comentarios del Método}
-\Input{Comentarios de la Clase}
-\Output{Palabras largas candidatas, o null si no hay}
+%\Input{\textit{\textbf{ccMétodo}} \tcp{\textit{Cuerpo y Comentarios del Método}}}
+%\Input{\textit{\textbf{comClase}} \tcp{\textit{Comentarios de la Clase}}}
+\Output{\textit{\textbf{palCand}} \tcp{\textit{Palabras candidatas, o null si no hay}}}
 \BlankLine
 \tcp{\textit{Las expresiones regulares están entre comillas}}
 \BlankLine
 
 \If{ $($\textbf{patrón} prefijo $\vee$ \textit{\textbf{pa}} coincide “[a-z][\^{}aeiou]$+$” $\vee$ length(\textit{\textbf{pa}}) $>$ 3$)$ $\land$ $($\textit{\textbf{pa}} no coincide con “[a-z][aeiou][aeiou]$+$”$)$}{
 
-
 \BlankLine
 \tcp{\textit{Si alguna de las siguientes búsquedas encuentra un único resultado, el algoritmo lo retorna finalizando la ejecución}}
 \BlankLine
-Buscar en Comentarios JavaDoc con “\textsf{\at param} \textit{\textbf{pa patrón}}”
+Buscar en Comentarios JavaDoc con “\textsf{\at param} \textit{\textbf{pa patrón}}”, si el resultado es único \Return en \textit{\textbf{palCand}}
 \BlankLine
-Buscar en Nombres de Tipos y la correspondiente Variable declarada con “\textit{\textbf{patrón pa}}”
+Buscar en Nombres de Tipos y la correspondiente Variable declarada con “\textit{\textbf{patrón pa}}”, si el resultado es único \Return en \textit{\textbf{palCand}}
 \BlankLine
-Buscar en el Nombre del Método con “\textit{\textbf{patrón}}”
+Buscar en el Nombre del Método con “\textit{\textbf{patrón}}”, si el resultado es único \Return en \textit{\textbf{palCand}}
 \BlankLine
-Buscar en las Sentencias con “\textit{\textbf{patrón pa}}” y “\textit{\textbf{pa patrón}}”
+Buscar en las Sentencias con “\textit{\textbf{patrón pa}}” y “\textit{\textbf{pa patrón}}”, si el resultado es único \Return en \textit{\textbf{palCand}}
 \BlankLine
 \If{$($length(\textit{\textbf{pa}}) $\neq$ 2$)$}{
 \BlankLine
-Buscar en palabras del Método con “\textit{\textbf{patrón}}”
+Buscar en palabras del Método con “\textit{\textbf{patrón}}”, si el resultado es único \Return en \textit{\textbf{palCand}}
 \BlankLine
-Buscar en palabras que están en los Comentarios del Método con “\textit{\textbf{patrón}}”
+Buscar en palabras que están en los Comentarios del Método con “\textit{\textbf{patrón}}”, si el resultado es único \Return en \textit{\textbf{palCand}}
 
 }
 
@@ -886,7 +899,7 @@ Buscar en palabras que están en los Comentarios del Método con “\textit{\tex
 \BlankLine
 \tcp{\textit{Solo se busca con patrones prefijos}}
 
-Buscar en palabras que están en los Comentarios de la Clase con “\textit{\textbf{patrón}}”
+Buscar en palabras que están en los Comentarios de la Clase con “\textit{\textbf{patrón}}”, si el resultado es único \Return en \textit{\textbf{palCand}}
 }
 }
 
@@ -903,9 +916,9 @@ Si el algoritmo continúa sin resultados, sigue en la línea 4 donde se busca co
 
 Si la ejecución continúa sin encontrar resultados, la línea 6 se restringe una búsqueda por palabras que tengan al menos 3 caracteres ya que generalmente aquellas con 2 tienden a ser multi-palabras (Ejemplo: \textsf{fl $\Rightarrow$ file system} / Ver próxima sección). Luego en la línea 7 se busca con \textit{\textbf{patrón}} solamente en palabras del método (ejemplo: para una abreviatura \textsf{setHor} coincide con una llamada a función con el nombre de \textsf{setHorizontal()}). Después en la línea 8 se busca en palabras de comentarios dentro del método con \textit{\textbf{patrón}}.
 
-Para finalizar, en la línea 10 si la palabra abreviada tiene más de un caracter y el patrón es de tipo prefijo, se busca usando (\textit{\textbf{patrón}}) en los comentarios de la clase. En la línea 9 se restringe esta búsqueda, porque los autores sostienen \cite{EZH08}, que buscar con un solo caracter en comentarios implica tener muchos resultados y más aun si el patrón es el compuesto por letras.\\
+Para finalizar, en la línea 10 si la palabra abreviada tiene más de un caracter y el patrón es de tipo prefijo, se busca usando (\textit{\textbf{patrón}}) en los comentarios de la clase. En la línea 9 se restringe esta búsqueda, porque los autores sostienen \cite{EZH08}, que buscar con un solo caracter en comentarios implica tener muchos resultados y más aun si el patrón es el compuesto por letras.
 
-%\pagebreak
+\pagebreak
 \noindent \textbf{Búsqueda por Multi-Palabras\\}
 
 El algoritmo de búsqueda por multi-palabras a diferencia del explicado anteriormente, expande abreviaturas que contienen dos o más palabras. Algunos ejemplos son: \textsf{gui $\Rightarrow$ graphical user interface, fs $\Rightarrow$ file system}. Como bien se definió en secciones anteriores estas abreviaturas se las conoce con el nombre de acrónimos, que generalmente están conformadas por 2 ó 3 caracteres. El algoritmo anterior intenta detectar este tipo de abreviaturas y no analizarlas para que sea procesado por el multi-palabras.
@@ -934,16 +947,16 @@ Al igual que el algoritmo de palabras singulares, el algoritmo de multi-palabras
 %\label{exp2}
 %\end{figure}
 
-En el algoritmo \ref{BMP}, se presenta la búsqueda por multi-palabras \cite{EZH08}. Las variables de entrada son: la abreviatura multi-palabra a expandir, la expresión regular formada por el patrón elegido, los distintos comentarios que existan en el código (en la clase y en el método) y el cuerpo del método.
+En el algoritmo \ref{BMP}, se presenta la búsqueda por multi-palabras \cite{EZH08}. Las variables de entrada son: la abreviatura multi-palabra a expandir y la expresión regular formada por el patrón elegido.
 
-\begin{algorithm}[H]
+\begin{algorithm}[t!]
 \LinesNumbered%enumera las lineas
 \SetKwInOut{Input}{Entrada}\SetKwInOut{Output}{Salida}
 \Input{\textit{\textbf{pa}} \tcp{\textit{Palabra Abreviada}}}
 \Input{\textit{\textbf{patrón}} \tcp{\textit{Expresión regular}}}
-\Input{Cuerpo y Comentarios del Método}
-\Input{Comentarios de la Clase}
-\Output{Palabras largas candidatas, o null si no hay}
+%\Input{\textit{\textbf{ccMétodo}} \tcp{\textit{Cuerpo y Comentarios del Método}}}
+%\Input{\textit{\textbf{comClase}} \tcp{\textit{Comentarios de la Clase}}}
+\Output{\textit{\textbf{palCand}} \tcp{\textit{Palabras candidatas, o null si no hay}}}
 \BlankLine
 \tcp{\textit{Las expresiones regulares están entre comillas}}
 \BlankLine
@@ -953,24 +966,24 @@ En el algoritmo \ref{BMP}, se presenta la búsqueda por multi-palabras \cite{EZH
 \BlankLine
 \tcp{\textit{Si alguna de las siguientes búsquedas encuentra un único resultado, el algoritmo lo retorna finalizando la ejecución}}
 \BlankLine
-Buscar en Comentarios JavaDoc con “\textsf{\at param} \textit{\textbf{pa patrón}}”
+Buscar en Comentarios JavaDoc con “\textsf{\at param} \textit{\textbf{pa patrón}}”, si el resultado es único \Return en \textit{\textbf{palCand}}
 \BlankLine
-Buscar en Nombres de Tipos y la correspondiente Variable declarada con “\textit{\textbf{patrón pa}}”
+Buscar en Nombres de Tipos y la correspondiente Variable declarada con “\textit{\textbf{patrón pa}}”, si el resultado es único \Return en \textit{\textbf{palCand}}
 \BlankLine
-Buscar en el Nombre del Método con “\textit{\textbf{patrón}}”
+Buscar en el Nombre del Método con “\textit{\textbf{patrón}}”, si el resultado es único \Return en \textit{\textbf{palCand}}
 \BlankLine
-Buscar en todos los ids (y sus tipos) dentro del Método con “\textit{\textbf{patrón}}”
+Buscar en todos los ids (y sus tipos) dentro del Método con “\textit{\textbf{patrón}}”, si el resultado es único \Return en \textit{\textbf{palCand}}
 \BlankLine
-Buscar en Literales String con “\textit{\textbf{patrón}}”
+Buscar en Literales String con “\textit{\textbf{patrón}}”, si el resultado es único \Return en \textit{\textbf{palCand}}
 \BlankLine
 \tcp{\textit{En este punto se buscó en todos los lugares posibles dentro del método}}
 \BlankLine
-Buscar en palabras que están en los Comentarios del Método con “\textit{\textbf{patrón}}”
+Buscar en palabras que están en los Comentarios del Método con “\textit{\textbf{patrón}}”, si el resultado es único \Return en \textit{\textbf{palCand}}
 \BlankLine
 \If{$($\textit{\textbf{patrón}} acrónimo$)$}{
 \BlankLine
 \tcp{\textit{Solo se busca con patrones Acrónimos}}
-Buscar en palabras que están en los Comentarios de la Clase con “\textit{\textbf{patrón}}”
+Buscar en palabras que están en los Comentarios de la Clase con “\textit{\textbf{patrón}}”, si el resultado es único \Return en \textit{\textbf{palCand}}
 }
 }
 
