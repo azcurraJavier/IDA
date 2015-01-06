@@ -497,11 +497,6 @@ public class TablaBuscador extends javax.swing.JPanel {
             tablaElem.autoAjuste();
         }
 
-        //escribir xml de salida
-//        WriteXMLHandler wXml = new WriteXMLHandler(setIdExtract, splitPanel.getMapIdsGreedy(), splitPanel.getMapIdsSamurai(), 
-//                splitPanel.getMapIdsExGreMap(), splitPanel.getMapIdsExSamurai(), ExpandBasic.getFrasesCap());
-//        wXml.write("prueba");
-
     }//GEN-LAST:event_jButtonAnId1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

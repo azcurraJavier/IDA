@@ -548,6 +548,9 @@ public class AnalisisPanel extends javax.swing.JDialog {
 
         modeloTablaExp.addColumn(deGreedy ? "Desde GREEDY" : "Desde SAMURAI");
 
+        ConnectionDB.AbrirConBD();
+        
+        
         for(int i = 0; i < sizeArrays; i++){    
             
             String clase = listIds.get(i)[1];//Alg expansion
@@ -559,15 +562,11 @@ public class AnalisisPanel extends javax.swing.JDialog {
 
             String append = "";
 
-            ConnectionDB.AbrirConBD();
-
             for (String s : arrayElem) {
 
                 append += algoritmoExpansion.ejecutar(s,clase,met) + " ";
 
             }
-
-            ConnectionDB.CerrarConBD();
 
             elem2 = append.trim().isEmpty() ? "" : append.substring(0, append.length() - 1);
 
@@ -583,6 +582,8 @@ public class AnalisisPanel extends javax.swing.JDialog {
             modeloTablaExp.setValueAt(elem2, i, colNum);
 
         }
+        
+        ConnectionDB.CerrarConBD();
 
         jScrollExp.getVerticalScrollBar().setModel(jScrollId.getVerticalScrollBar().getModel());
 

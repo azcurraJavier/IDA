@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?><salida>
+  <lista_analisis_ids>
+    <nodo>
+      <id>nmprs</id>
+      <div_greedy>nm-prs</div_greedy>
+      <div_sam>nm-prs</div_sam>
+      <exp_greedy>name person</exp_greedy>
+      <exp_sam>name person</exp_sam>
+    </nodo>
+    <nodo>
+      <id>setag</id>
+      <div_greedy>seta-g</div_greedy>
+      <div_sam>set-ag</div_sam>
+      <exp_greedy>seta gender</exp_greedy>
+      <exp_sam>set age</exp_sam>
+    </nodo>
+    <nodo>
+      <id>getgndr</id>
+      <div_greedy>get-gnd-r</div_greedy>
+      <div_sam>get-gndr</div_sam>
+      <exp_greedy>get gender revanchism</exp_greedy>
+      <exp_sam>get gender</exp_sam>
+    </nodo>
+    <nodo>
+      <id>docgen</id>
+      <div_greedy>doc-gen</div_greedy>
+      <div_sam>doc-gen</div_sam>
+      <exp_greedy>document gender</exp_greedy>
+      <exp_sam>document gender</exp_sam>
+    </nodo>
+    <nodo>
+      <id>cc</id>
+      <div_greedy>cc</div_greedy>
+      <div_sam>cc</div_sam>
+      <exp_greedy>city code</exp_greedy>
+      <exp_sam>city code</exp_sam>
+    </nodo>
+  </lista_analisis_ids>
+</salida>

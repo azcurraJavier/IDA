@@ -4,6 +4,9 @@
  */
 package DictionaryDB;
 
+import ExtractID.LibPath;
+import ExtractID.Principal;
+import static ExtractID.Principal.getStackTrace;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,7 +24,7 @@ public abstract class ConnectionDB {
             //obtenemos el driver
             Class.forName("org.hsqldb.jdbcDriver");
             //obtenemos la conexión
-            conn = DriverManager.getConnection("jdbc:hsqldb:file:.hsqldb/datadb", "sa", "");
+            conn = DriverManager.getConnection("jdbc:hsqldb:file:"+LibPath.getLibPath()+".hsqldb/datadb", "sa", "");
             
             if (conn != null) {                
                 
@@ -35,11 +38,13 @@ public abstract class ConnectionDB {
                     System.out.println("BD Creada correctamente");
                     
                 } catch (SQLException ex) {
-                    Logger.getLogger( ex.getLocalizedMessage());
+                    System.out.println(getStackTrace(ex));
+                    //Logger.getLogger( ex.getLocalizedMessage());
                 }
             }
         }catch (SQLException | ClassNotFoundException e) {
-            Logger.getLogger(e.getMessage());
+            System.out.println(getStackTrace(e));
+            //Logger.getLogger(e.getMessage());
         }        
     }
 
@@ -48,14 +53,15 @@ public abstract class ConnectionDB {
             //obtenemos el driver
             Class.forName("org.hsqldb.jdbcDriver");
             //obtenemos la conexión
-            conn = DriverManager.getConnection("jdbc:hsqldb:file:.hsqldb/datadb", "sa", "");
+            conn = DriverManager.getConnection("jdbc:hsqldb:file:"+LibPath.getLibPath()+".hsqldb/datadb", "sa", "");
             
             if (conn == null) {
                 //JOptionPane.showMessageDialog(null,"OK base de datos listo");
                 System.out.println("Ocurrio un problema al abrir la conexion");
             }
         } catch (SQLException | ClassNotFoundException e) {
-            Logger.getLogger(e.getMessage());
+            System.out.println(getStackTrace(e));
+            //Logger.getLogger(e.getMessage());
         }        
     }
 

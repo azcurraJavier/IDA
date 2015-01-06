@@ -119,7 +119,7 @@ public abstract class OperationDB {
             res.close();
         } catch (SQLException e) {
             System.out.println(e.getLocalizedMessage());
-            System.out.println("Query: "+q);
+            System.out.println("Query: "+q2);
         }
 
         return true;

@@ -1,5 +1,7 @@
 package DictionaryDB;
 
+import ExtractID.LibPath;
+import ExtractID.Principal;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -129,7 +131,7 @@ public abstract class Dictionary {
         //Se crean tablas y se insertan datos:
         
         //Tabla de palabras de dicc en ingles
-   	String csvFile = "Diccionarios/words.dict.txt";
+   	String csvFile = LibPath.getLibPath()+"Diccionarios/words.dict.txt";
 	
         String table = "words_dict";
                 
@@ -137,7 +139,7 @@ public abstract class Dictionary {
 
         
         //Tabla de stop list:
-        csvFile = "Diccionarios/my.stop.txt";
+        csvFile = LibPath.getLibPath()+"Diccionarios/my.stop.txt";
 	
         table = "stop_dict";       
         
@@ -145,7 +147,7 @@ public abstract class Dictionary {
         
         
         //Tabla de acronimos:
-        csvFile = "Diccionarios/acronym.dict.txt";
+        csvFile = LibPath.getLibPath()+"Diccionarios/acronym.dict.txt";
 	
         table = "acro_dict";
         
@@ -162,20 +164,20 @@ public abstract class Dictionary {
         
         
         //Tablas para samurai - prefijos y sufijos
-        csvFile = "Diccionarios/samurai.pref.txt";
+        csvFile = LibPath.getLibPath()+"Diccionarios/samurai.pref.txt";
 	
         table = "sam_pref";
         
         createTableInsertValuesBD(csvFile, table);       
         
-        csvFile = "Diccionarios/samurai.suf.txt";
+        csvFile = LibPath.getLibPath()+"Diccionarios/samurai.suf.txt";
 	
         table = "sam_suf";
         
         createTableInsertValuesBD(csvFile, table);   
         
         
-        csvFile = "Diccionarios/samurai.freq.global.txt";
+        csvFile = LibPath.getLibPath()+"Diccionarios/samurai.freq.global.txt";
 	
         table = "sam_freq_table";
         

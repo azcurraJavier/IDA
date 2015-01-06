@@ -14,8 +14,6 @@ public class Metodo {
     //Para mostrar los id por la tabla
     private ArrayList<MostrarTabla> lisMostrarTabla = new ArrayList<>();//lo uso para mostrar los id por la tabla   
 
-    private ArrayList<UsoId> lisUsoIdDecl;
-    private ArrayList<UsoId> lisUsoIdPara;
     
     private int lineaCom;//linea comienza el método (alg. expansión)
     private int lineaFin;//linea fin el método (alg. expansión)
@@ -26,15 +24,13 @@ public class Metodo {
         this.ide = null;
         this.listaDecl = null;
         this.listaParam = null;
-        this.lisUsoIdDecl = null;
-        this.lisUsoIdPara = null;
+
         this.lineaCom = -1;
         this.lineaFin = -1;
     }
 
     public Metodo(String modif, String tipo, Id ide) {
-        this.lisUsoIdDecl = new ArrayList<>();
-        this.lisUsoIdPara = new ArrayList<>();
+
         this.modif = modif;
         this.tipo = tipo;
         this.ide = ide;
@@ -77,78 +73,6 @@ public class Metodo {
     }    
     
 
-//    public ArrayList<UsoId> buscarUsoIdDec(ArrayList<UsoId> lstId) {
-//
-//        if (lstId == null || lstId.isEmpty()) {
-//            return lstId;
-//        }
-//
-//        ArrayList<UsoId> filtraUso = new ArrayList<>();
-//
-//        for (UsoId e : lstId) {
-//
-//            e.setUbicacion("Método " + this.getIde().getNomID());
-//            
-//            if(e.getAlcance().equals("clase") && e.getAsoClase() != null){             
-//                
-//                if(this.lisDecl != null && lisDecl.containsKey(e.getAsoClase())){                    
-//                    //setear clase asociada en la variable
-//                    e.setAsoClase(lisDecl.get(e.getAsoClase()).getTipo());                    
-//                }
-//                
-//            }
-//
-//            //si no es global y esta en los var local es una referencia!
-//            if (this.lisDecl != null && !this.lisDecl.isEmpty()
-//                    && !e.getAlcance().equals("global") && !e.getAlcance().equals("clase")
-//                    && lisDecl.containsKey(e.getId())) {
-//
-//                this.lisUsoIdDecl.add(e);
-//            } else {
-//                filtraUso.add(e); //la idea es sacar los elementos ya analizados
-//            }
-//
-//        }
-//
-//        return filtraUso;
-//
-//    }
-//
-//    public ArrayList<UsoId> buscarUsoIdPar(ArrayList<UsoId> lstId) {
-//
-//        if (lstId == null || lstId.isEmpty()) {
-//            return lstId;
-//        }
-//
-//        ArrayList<UsoId> filtraUso = new ArrayList<>();
-//
-//        for (UsoId e : lstId) {
-//
-//            e.setUbicacion("Método " + this.getIde().getNomID());
-//                        
-//            if(e.getAlcance().equals("clase") && e.getAsoClase() != null){
-//                if(this.lisParam != null && lisParam.containsKey(e.getAsoClase())){                    
-//                    //setear clase asociada en la variable
-//                    e.setAsoClase(lisParam.get(e.getAsoClase()).getTipo());                    
-//                }
-//                
-//            }
-//
-//            //si no es global y esta en los parametros es una referencia!
-//            if (this.lisParam != null && !this.lisParam.isEmpty()
-//                    && !e.getAlcance().equals("global") && !e.getAlcance().equals("clase")
-//                    && lisParam.containsKey(e.getId())) {
-//
-//                this.lisUsoIdPara.add(e);
-//            } else {
-//                filtraUso.add(e); //la idea es sacar los elementos ya analizados
-//            }  
-//
-//        }
-//
-//        return filtraUso;
-//
-//    }
 
     //nuevo
     public ArrayList<MostrarTabla> cargarTablaMetodo(String nomClase) {
@@ -171,12 +95,6 @@ public class Metodo {
                 m.setTipo(d.getTipo());
                 m.setStrAsignado(d.getIdent().getStrContenido());
 
-//                for (UsoId u : this.lisUsoIdDecl) {
-//                    //se agregan referancias para mostrar en la tabla
-//                    if (d.getIdent().getNomID().equals(u.getId())) {
-//                        m.addListaRef(u.getLinea(), u.getColumna(), u.getUbicacion());
-//                    }
-//                }
 
                 lisMostrarTabla.add(m);
             }
@@ -197,13 +115,6 @@ public class Metodo {
                 m.setModificador(p.getModif());
                 m.setTipo(p.getTipo());
                 m.setStrAsignado(p.getIdent().getStrContenido());
-
-//                for (UsoId u : this.lisUsoIdPara) {
-//                    //se agregan referancias para mostrar en la tabla
-//                    if (p.getIdent().getNomID().equals(u.getId())) {
-//                        m.addListaRef(u.getLinea(), u.getColumna(), u.getUbicacion());
-//                    }
-//                }
 
                 lisMostrarTabla.add(m);
 

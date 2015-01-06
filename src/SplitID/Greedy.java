@@ -53,7 +53,7 @@ public class Greedy {
         
         softwordDiv = softwordDiv.substring(0, softwordDiv.length()-1);
         
-        return softwordDiv;
+        return softwordDiv.trim();
     
     }
    

@@ -1,19 +1,25 @@
 package ExtractID;
 
+import DictionaryDB.ConnectionDB;
+import ExpandID.ExpandBasic;
 import Listas.Archivo;
 import Listas.Comentario;
 import Listas.ListaArchivo;
+import Listas.MostrarTabla;
+import Listas.ProcesarXML;
+import SplitID.Greedy;
+import SplitID.Samurai;
 import VentanasPaneles.AcercaDe;
 import VentanasPaneles.ClosableTabbedPane;
 import VentanasPaneles.CodigoPanel;
 import VentanasPaneles.DiccionaryPanel;
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -22,7 +28,6 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import org.antlr.runtime.ANTLRStringStream;
 import org.antlr.runtime.CommonTokenStream;
 import org.jdesktop.swingx.util.OS;
-import org.jvnet.substance.SubstanceLookAndFeel;
 
 /**
  *
@@ -42,18 +47,17 @@ public class Principal extends javax.swing.JFrame {
     private static DiccionaryPanel dicPanel;
 
     public Principal() {
-        
+
 //        JFrame.setDefaultLookAndFeelDecorated(true);
 //        SubstanceLookAndFeel.setCurrentTheme("org.jvnet.substance.theme.SubstanceCremeTheme");
 //        SubstanceLookAndFeel.setSkin("org.jvnet.substance.skin.ModerateSkin");
-        
-        
+
         initComponents();
 
-        ListaArchivo.init(); 
+        ListaArchivo.init();
 
         fileChooser = new JFileChooser();
-        
+
         jTabbedEsp = new ClosableTabbedPane();
 
         jTabbedEsp.setFocusable(false);
@@ -77,25 +81,23 @@ public class Principal extends javax.swing.JFrame {
         desktopPane.setLayout(layout);
 
         if (jTabbedEsp.getTabCount() == 0) {
- 
+
             jMenuItemCerrTodo.setEnabled(false);
-            jTabbedEsp.setVisible(false);  
+            jTabbedEsp.setVisible(false);
             jMenuRestBD.setEnabled(true);
- 
-            
+
             if (dicPanel != null) {
                 dicPanel.removeAll();
                 dicPanel = null;
             }
 
             //remueve el tab panne del desktop pane
-            layout.removeLayoutComponent(jTabbedEsp);            
-
+            layout.removeLayoutComponent(jTabbedEsp);
 
         } else {//>0
-            
-            jTabbedEsp.setVisible(true);                        
-            jMenuItemCerrTodo.setEnabled(true); 
+
+            jTabbedEsp.setVisible(true);
+            jMenuItemCerrTodo.setEnabled(true);
             jMenuRestBD.setEnabled(false);
 
             ///Agrega tab pane al desktoppane
@@ -240,8 +242,8 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuAbrirActionPerformed
-            
-        currentDir = new File(System.getProperty("user.home"));        
+
+        currentDir = new File(System.getProperty("user.home"));
 
         fileChooser.setCurrentDirectory(currentDir);
         FileNameExtensionFilter filter = new FileNameExtensionFilter("java", "JAVA");
@@ -253,21 +255,21 @@ public class Principal extends javax.swing.JFrame {
         int seleccion = fileChooser.showOpenDialog(fileChooser);
         boolean noErrorSintactico = true;
 
-        if (seleccion == JFileChooser.APPROVE_OPTION) {          
+        if (seleccion == JFileChooser.APPROVE_OPTION) {
 
             archivosAnalisisId = fileChooser.getSelectedFiles();
 
             for (File fileAnalisis : archivosAnalisisId) {
-                
-                if(!fileAnalisis.exists() ){                   
-                    JOptionPane.showMessageDialog(null, "Atención, el archivo: "+fileAnalisis.getName()
-                            +" no existe","Atención", JOptionPane.WARNING_MESSAGE);     
+
+                if (!fileAnalisis.exists()) {
+                    JOptionPane.showMessageDialog(null, "Atención, el archivo: " + fileAnalisis.getName()
+                            + " no existe", "Atención", JOptionPane.WARNING_MESSAGE);
                     continue;
-                }                
+                }
 
                 if (ListaArchivo.containsFileName(fileAnalisis.getAbsolutePath())) {
                     JOptionPane.showMessageDialog(new JFrame(),
-                            "El archivo con la ruta: " + "\""+fileAnalisis.getAbsolutePath()+"\""
+                            "El archivo con la ruta: " + "\"" + fileAnalisis.getAbsolutePath() + "\""
                             + "\nya se encuentra abierto!", "Atención", JOptionPane.WARNING_MESSAGE);
                     continue;
                 }
@@ -277,7 +279,7 @@ public class Principal extends javax.swing.JFrame {
 
                 if (prettyCode.isEmpty()) {
                     JOptionPane.showMessageDialog(new JFrame(),
-                            "El archivo con la ruta: " + "\""+fileAnalisis.getAbsolutePath()+"\""
+                            "El archivo con la ruta: " + "\"" + fileAnalisis.getAbsolutePath() + "\""
                             + "\nesta vacío o posee errores sintácticos,"
                             + "\nrevíselo e intente de nuevo.", "Atención", JOptionPane.WARNING_MESSAGE);
                     continue;
@@ -303,7 +305,7 @@ public class Principal extends javax.swing.JFrame {
                 //control de carga de datos del parser
                 if (!noErrorSintactico || unArchivo == null) {
                     JOptionPane.showMessageDialog(new JFrame(),
-                            "Error fatal al analizar archivo: " + "\""+fileAnalisis.getAbsolutePath()+"\"", "ERROR", JOptionPane.ERROR_MESSAGE);
+                            "Error fatal al analizar archivo: " + "\"" + fileAnalisis.getAbsolutePath() + "\"", "ERROR", JOptionPane.ERROR_MESSAGE);
                     continue;
                 }
 
@@ -315,32 +317,27 @@ public class Principal extends javax.swing.JFrame {
 //                    continue;
 //                }
                 ////////
-
                 unArchivo.setFileName(fileAnalisis.getName());//nombre archivo java
                 unArchivo.setFileNamePath(fileAnalisis.getAbsolutePath());//ruta del archivo java                
                 unArchivo.setCode(prettyCode);//codigo leido de archivo
-                
+
                 /////comentarios/////
                 ArrayList<Comentario> lisCom = lex.getLisCom(); //comentarios del lexer 
                 unArchivo.setLisComentario(lisCom);
-                
+
                 //unaClase.setearAmbienteCometario();//seteo ambientes de comentarios
-                
                 ////Literales/////
                 unArchivo.setLisLiterales(g.getLisLiterales());
-                
 
                 /////////////////////
-                
                 unArchivo.cargarInfoTabla();
-                
+
                 ListaArchivo.addElemLisArchivos(unArchivo);
 
                 //Interfaz
                 codigoPanel = new CodigoPanel(unArchivo);
-                
-                
-                jTabbedEsp.addTab(unArchivo.getFileName(), fileAnalisis.getAbsolutePath(),codigoPanel);
+
+                jTabbedEsp.addTab(unArchivo.getFileName(), fileAnalisis.getAbsolutePath(), codigoPanel);
 
             }
         }
@@ -353,9 +350,9 @@ public class Principal extends javax.swing.JFrame {
     private void jMenu4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu4ActionPerformed
 
         AcercaDe a = new AcercaDe(new JFrame(), true);
-        
+
         a.setVisible(true);
-        
+
     }//GEN-LAST:event_jMenu4ActionPerformed
 
     private void jMenuItemCerrTodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCerrTodoActionPerformed
@@ -364,18 +361,18 @@ public class Principal extends javax.swing.JFrame {
         jTabbedEsp.removeAll();
         jMenuItemCerrTodo.setEnabled(false);
         jMenuRestBD.setEnabled(true);
-        
+
     }//GEN-LAST:event_jMenuItemCerrTodoActionPerformed
 
     private void jMenuRestBDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuRestBDActionPerformed
-       
-        if(dicPanel != null){
+
+        if (dicPanel != null) {
             //para actualizar la ventana ante posibles cambios
             dicPanel.removeAll();
             dicPanel = null;
         }
-        
-        DictionaryDB.Dictionary.restartBd();        
+
+        DictionaryDB.Dictionary.restartBd();
     }//GEN-LAST:event_jMenuRestBDActionPerformed
 
     public static String getStackTrace(final Throwable throwable) {
@@ -393,24 +390,20 @@ public class Principal extends javax.swing.JFrame {
 
             BufferedReader reader = null;
 
-            String dir;
-            
+            String dirJacobe = "";
+
             if (isLinux()) {
-                dir = "jacobe/unix/jacobe";
+                dirJacobe = "jacobe/unix/jacobe";
             } else if (isWindows()) {
-                dir = "jacobe/win/jacobe";
+                dirJacobe = "jacobe/win/jacobe";
             } else {
-                System.out.println("jacobe: No se reconoce el SO");
-                return "";
+                System.out.println("jacobe: No se reconoce el SO - Linux/Win");
+                System.exit(0);
             }
-//
-//          String libPath;
-//            libPath = getClass().getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
-//
-//          libPath = new File(libPath).getParentFile().getPath()+"/lib/";
-//          dir =   libPath + dir;          
-          
-            Process p = Runtime.getRuntime().exec(new String[]{dir, "-cfg=sun.cfg", path, "-stdout"});
+
+            dirJacobe = LibPath.getLibPath() + dirJacobe;
+
+            Process p = Runtime.getRuntime().exec(new String[]{dirJacobe, "-cfg=sun.cfg", path, "-stdout"});
 
             reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
 
@@ -439,7 +432,7 @@ public class Principal extends javax.swing.JFrame {
         return (OS.isLinux());
 
     }
-
+    
     /**
      * @param args the command line arguments
      */
@@ -466,13 +459,147 @@ public class Principal extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+                
+        LibPath p = new LibPath();
+        
+        p.setLibPath();
+        
+        String msgErr ="Ocurrió un error al procesar el archivo:\n\n";
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Principal().setVisible(true);
-            }
-        });
+        switch (args.length) {
+            
+            case 1://si posee 1 arg se interpreta que es el xml
+                
+                Path path = Paths.get(args[0]);
+
+                if (!path.toString().toLowerCase().endsWith(".xml")){
+                    System.out.println("El argumento debe ser un archivo xml: "+args[0]);
+                    System.exit(0);
+                }
+                
+                File f = new File(args[0]);
+                if(!f.exists()){
+                    System.out.println(msgErr+"El archivo: " +args[0]+" no existe");
+                    System.exit(0);
+                }
+                
+                
+                try {
+                    
+                    ProcesarXML.leer(new File(args[0]));
+                    
+                    Archivo archivo = new Archivo();
+                    
+                    ArrayList<Comentario> lisComentario = new ArrayList<>();
+                    
+                    for(String s: ProcesarXML.getFraseList()){
+                        lisComentario.add(new Comentario(0, s.trim()));
+                    }
+                    
+                    
+                    archivo.setLisComentario(lisComentario);
+                    
+                    //===================================
+                    ArrayList<MostrarTabla> lisMostrarTabla = new ArrayList<>();
+                    
+                    MostrarTabla m;
+                    
+                    for(String s: ProcesarXML.getIdList()){                        
+                        
+                        m = new MostrarTabla("", "");
+                        
+                        m.setNomId(s.trim());
+                        
+                        lisMostrarTabla.add(m);
+                    }
+                    
+                    archivo.setLisMostrarTabla(lisMostrarTabla);
+                    
+                    //===================================
+                    
+                    String arrayResult[];
+                    
+                    ArrayList<String[]> lisResult = new ArrayList<>();
+                    
+                    //procesar algoritmos
+                    
+                    Greedy gre = new Greedy();
+                    
+                    ConnectionDB.AbrirConBD();
+                    
+                    ExpandBasic exp = new ExpandBasic(archivo);
+                    
+                    Samurai sam = new Samurai(archivo);
+                    
+                    String divResult[]; 
+                    
+                    for(String id: ProcesarXML.getIdList()){
+                        
+                        arrayResult = new String[5];
+                        
+                        arrayResult[0]= id.trim();
+                        
+                        arrayResult[1]= gre.ejecutar(arrayResult[0]).replaceAll(" ", "-");
+                        
+                        arrayResult[2]= sam.ejecutar(arrayResult[0]).replaceAll(" ", "-");
+                        
+                        divResult = arrayResult[1].split("-");
+
+                        String append = "";
+
+                        for (String s : divResult) {
+
+                            append += exp.ejecutar(s,"","") + " ";
+
+                        }
+
+                        arrayResult[3] = append.trim().isEmpty() ? "" : append.trim();
+                        
+                        divResult = arrayResult[2].split("-");
+                        
+                        append = "";
+
+                        for (String s : divResult) {
+
+                            append += exp.ejecutar(s,"","") + " ";
+
+                        }
+                        
+                        arrayResult[4] = append.trim().isEmpty() ? "" : append.trim();
+                        
+                        lisResult.add(arrayResult);
+                    }
+                    
+                    ConnectionDB.CerrarConBD();
+                    
+                    String parent = new File(args[0]).getParent() == null ?"":new File(args[0]).getParent()+"/";
+                    
+                    ProcesarXML.escribir(lisResult,parent+"salida.xml");
+                    
+                    System.out.println("El archivo: " +args[0]+" se procesó con éxito");
+                    System.out.println("Archivo: " +parent+"salida.xml"+" generado correctamente");
+                    
+                } catch (Exception ex) {
+                    System.out.println(msgErr+getStackTrace(ex));
+                } finally {
+                    System.exit(0);
+                }
+
+            case 0:// si no tiene args se interpreta analisis desde interfaz
+
+                java.awt.EventQueue.invokeLater(new Runnable() {
+                    public void run() {
+                        new Principal().setVisible(true);
+                    }
+                });
+                
+                break;
+
+            default:
+                System.out.println("Cantidad de argumentos inválidos");
+
+        }
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
