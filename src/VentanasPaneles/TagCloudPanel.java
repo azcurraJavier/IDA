@@ -4,16 +4,13 @@ import Listas.Palabra;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 import javax.swing.*;
 import org.mcavallo.opencloud.Cloud;
 import org.mcavallo.opencloud.Tag;
 
 /**
  *
- * @author javier
+ * @author Javier Azcurra
  */
 public class TagCloudPanel extends javax.swing.JDialog {
 

@@ -9,6 +9,10 @@ import Listas.MostrarTabla;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ *
+ * @author Javier Azcurra
+ */
 public class Samurai {
 
     private  int frecuenciaLocal;
@@ -20,17 +24,11 @@ public class Samurai {
     public Samurai(Archivo archivo) {
 
         frecuenciaLocal = 0;
-
-        //this.cantTotalIde = claseAc.getCantTotalId();
+        
         localFreqTable = new HashMap();
         globalFreqTable = new HashMap();
 
-        //cargar tablas
-//        if(ExpandBasic.getPalabrasCap() != null){
-//            for(String pal:ExpandBasic.getPalabrasCap()){
-//                addTokenLocalFreqTable(pal, 1);
-//            }
-//        }
+
         for (Comentario com : archivo.getLisComentario()) {
             fraseProces(com.getCom());
         }
@@ -39,10 +37,6 @@ public class Samurai {
             fraseProces(l.getText());
         }
 
-//        for(MostrarTabla mt : claseAc.getIdTablaClase()){            
-//                                                  //referencias+declaracion=1 
-//            addTokenLocalFreqTable(mt.getNomId(), mt.getListaRef().size()+1);
-//        }
         //conserv
         String softwordDiv;
 
@@ -58,12 +52,6 @@ public class Samurai {
             if(softwordDiv.contains(" ")){
                 
                 fraseProces(softwordDiv);
-                
-                //referencias+declaracion=1
-//                for(int i=0; i<mt.getListaRef().size()+1;i++){
-//                    //se repite por cada repeticion en el codigo
-//                    fraseProces(softwordDiv);
-//                }               
                             
             }            
             
@@ -228,11 +216,6 @@ public class Samurai {
 
     private  int existUpperToLower(String s) {
 
-//        for (int i = 0; i < s.length() - 1; i++) {//-1 sino puede dar excepción en i+1
-//            if (Character.isUpperCase(s.charAt(i)) && Character.isLowerCase(s.charAt(i + 1))) {
-//                return i;
-//            }
-//        }
         if (s == null || s.trim().isEmpty()) {
             return -1;
         }

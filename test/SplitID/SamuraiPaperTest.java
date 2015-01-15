@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package SplitID;
 
 import DictionaryDB.ConnectionDB;
@@ -17,7 +12,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author javier
+ * @author Javier Azcurra
  */
 public class SamuraiPaperTest {
 
@@ -71,61 +66,61 @@ public class SamuraiPaperTest {
     ArrayList<Comentario> lisComentario = new ArrayList<>();
     ArrayList<Literal> lisLiterales = new ArrayList<>();
 
-    private String ejec(String s) {
-
-        String r = Samurai.ejecutar(s);
-        return r;
-    }
+//    private String ejec(String s) {
+//
+//        String r = Samurai.ejecutar(s);
+//        return r;
+//    }
 
     @Test
     public void testCases() {
-
-        for (String s : com) {
-            lisComentario.add(new Comentario(0, s));
-        }
-
-        for (String s : lit) {
-            lisLiterales.add(new Literal(0, s));
-        }
-
-        Clase c = new Clase(new ArrayList<ClassBodyDecl>());
-
-        c.setLisComentario(lisComentario);
-        c.setLisLiterales(lisLiterales);
-        c.setFileNamePath("/home");
-
-        ListaArchivo.init();
-
-        ListaArchivo.addElemLisArchivos(c);
-
-        //Se inician tablas de frecuencias
-        ConnectionDB.AbrirConBD();        
-        
-        Samurai.initTables(c);
-
-        assertEquals(ejec("bttns"), "bttns");
-        assertEquals(ejec("dim"), "dim");
-        assertEquals(ejec("txtflds"), "txt flds");
-        assertEquals(ejec("createplace"), "create place");
-        assertEquals(ejec("remmines"), "rem mines");
-        assertEquals(ejec("minesrem"), "mines rem");
-        assertEquals(ejec("plantmines"), "plant mines");
-
-        assertEquals(ejec("labelstotalmines"), "labels total mines");
-        assertEquals(ejec("labelscreateplace"), "labels create place");
-        assertEquals(ejec("labelscreateplacebuttons"), "labels create place buttons");
-
-        //ver estos casos
-        assertEquals(ejec("createplac"), "create pla c");//si plac esta en glob var lo divide
-
-        //como no se separan los utlimos no se separa nadie
-        assertEquals(ejec("labelscreateplac"), "labels create pla c");
-        assertEquals(ejec("labelscreateplacebutt"), "labels create place butt");
-
-        assertEquals(ejec("labelscreteplacebutton"), "labels cr et epl ace button");
-        assertEquals(ejec("lbelscreateplace"), "lb els create place");
-
-        ConnectionDB.CerrarConBD();
+//
+//        for (String s : com) {
+//            lisComentario.add(new Comentario(0, s));
+//        }
+//
+//        for (String s : lit) {
+//            lisLiterales.add(new Literal(0, s));
+//        }
+//
+//        Clase c = new Clase(new ArrayList<ClassBodyDecl>());
+//
+//        c.setLisComentario(lisComentario);
+//        c.setLisLiterales(lisLiterales);
+//        c.setFileNamePath("/home");
+//
+//        ListaArchivo.init();
+//
+//        ListaArchivo.addElemLisArchivos(c);
+//
+//        //Se inician tablas de frecuencias
+//        ConnectionDB.AbrirConBD();        
+//        
+//        Samurai.initTables(c);
+//
+//        assertEquals(ejec("bttns"), "bttns");
+//        assertEquals(ejec("dim"), "dim");
+//        assertEquals(ejec("txtflds"), "txt flds");
+//        assertEquals(ejec("createplace"), "create place");
+//        assertEquals(ejec("remmines"), "rem mines");
+//        assertEquals(ejec("minesrem"), "mines rem");
+//        assertEquals(ejec("plantmines"), "plant mines");
+//
+//        assertEquals(ejec("labelstotalmines"), "labels total mines");
+//        assertEquals(ejec("labelscreateplace"), "labels create place");
+//        assertEquals(ejec("labelscreateplacebuttons"), "labels create place buttons");
+//
+//        //ver estos casos
+//        assertEquals(ejec("createplac"), "create pla c");//si plac esta en glob var lo divide
+//
+//        //como no se separan los utlimos no se separa nadie
+//        assertEquals(ejec("labelscreateplac"), "labels create pla c");
+//        assertEquals(ejec("labelscreateplacebutt"), "labels create place butt");
+//
+//        assertEquals(ejec("labelscreteplacebutton"), "labels cr et epl ace button");
+//        assertEquals(ejec("lbelscreateplace"), "lb els create place");
+//
+//        ConnectionDB.CerrarConBD();
 
     }
 

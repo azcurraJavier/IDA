@@ -55,8 +55,47 @@
 %fuerza las footnote a ubicarse siempre bien abajo de las pags
 \usepackage[bottom]{footmisc}
 
-\begin{document}
+%formato para linea de comandos
+\usepackage{xcolor}
+\usepackage{listings}
+\lstdefinestyle{BashInputStyle}{
+  language=bash,
+  basicstyle=\small\sffamily,
+  %numbers=left,
+  numberstyle=\tiny,
+  numbersep=3pt,
+  frame=tb,
+  columns=fullflexible,
+  backgroundcolor=\color{yellow!20},
+  linewidth=0.9\linewidth,
+  xleftmargin=0.1\linewidth
+}
 
+%formato xml
+\usepackage{color}
+\definecolor{gray}{rgb}{0.4,0.4,0.4}
+\definecolor{darkblue}{rgb}{0.0,0.0,0.6}
+\definecolor{cyan}{rgb}{0.0,0.6,0.6}
+
+\lstset{
+  basicstyle=\ttfamily,
+  columns=fullflexible,
+  showstringspaces=false,
+  commentstyle=\color{gray}\upshape
+}
+
+\lstdefinelanguage{XML}
+{
+  morestring=[b]",
+  morestring=[s]{>}{<},
+  morecomment=[s]{<?}{?>},
+  stringstyle=\color{black},
+  identifierstyle=\color{darkblue},
+  keywordstyle=\color{cyan},
+  morekeywords={xmlns,version,type}% list your attributes here
+}
+
+\begin{document}
 
 %%CARÁTULA/RESUMEN/AGRADECIMIENTOS======================================
 %\input{./init/init.tex}
@@ -103,8 +142,8 @@
 %\input{./cap6/cap6-conclu.tex}
 %
 %%Apéndices=============================================================
-%\newpage
-%\input{./ape/ape.tex}
+\newpage
+\input{./ape/ape.tex}
 %
 %%Bibliografía=============================================================
 %

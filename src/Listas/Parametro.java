@@ -1,7 +1,9 @@
-
 package Listas;
 
-
+/**
+ *
+ * @author Javier Azcurra
+ */
 public class Parametro {    
     
     private String modif;// final o vacio

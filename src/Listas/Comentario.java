@@ -1,5 +1,9 @@
 package Listas;
 
+/**
+ *
+ * @author Javier Azcurra
+ */
 public class Comentario {
     
     private int linea;
@@ -16,6 +20,18 @@ public class Comentario {
 
     public int getLinea() {
         return linea;
+    }
+
+    public void setCom(String com) {
+        this.com = com;
+    }
+
+    public void setLinea(int linea) {
+        this.linea = linea;
+    }
+    
+    public void setLinea(String linea) {
+        this.linea = Integer.parseInt(linea);
     }
 
 }   

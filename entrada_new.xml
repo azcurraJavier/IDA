@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<entrada>
+
+	<lista_clases>
+		<clase>
+			<nombre>Person</nombre>
+			<linea_inicio>2</linea_inicio>
+			<linea_fin>30</linea_fin>
+		</clase>
+	</lista_clases>
+	<lista_metodos>
+		<metodo>
+			<nombre>setData</nombre>
+			<linea_inicio>5</linea_inicio>
+			<linea_fin>27</linea_fin>
+		</metodo>		
+	</lista_metodo>
+	<lista_ids>
+	    <id>
+	    	<nombre>nmprs</nombre>
+			<linea>5</linea>
+	    </id>    
+	    <id>	    	
+	    	<nombre>setag</nombre>
+			<linea>8</linea>
+	    </id>
+	    <id>	    	
+	    	<nombre>getgndr</nombre>
+			<linea>10</linea>
+	    </id>
+	    <id>	    	
+	    	<nombre>docgen</nombre>
+			<linea>11</linea>
+	    </id>
+	    <id>	    	
+	    	<nombre>cc</nombre>
+			<linea>12</linea>
+	    </id>	    	    	    
+	</lista_ids>
+
+	<lista_frases>
+		<frase>
+			<texto>name person inside</texto>
+			<linea>5</linea>
+		</frase>
+		<frase>
+			<texto>age a person should not exceed 99</texto>
+			<linea>10</linea>
+		</frase>
+		<frase>
+			<texto>gender must be male or female</texto>
+			<linea>15</linea>
+		</frase>
+		<frase>
+			<texto>invalid document!</texto>
+			<linea>20</linea>
+		</frase>	
+		<frase>
+			<texto>city code</texto>
+			<linea>25</linea>
+		</frase>
+	</lista_frases>
+
+</entrada>

@@ -1,10 +1,8 @@
-
-
 package Listas;
 
 /**
  *
- * @author javier
+ * @author Javier Azcurra
  */
 public class Literal {
     

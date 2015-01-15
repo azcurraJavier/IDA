@@ -3,6 +3,11 @@ package Listas;
 import java.util.ArrayList;
 import java.util.Map;
 
+
+/**
+ *
+ * @author Javier Azcurra
+ */
 public class ClassBodyDecl {
     
     private Metodo me;

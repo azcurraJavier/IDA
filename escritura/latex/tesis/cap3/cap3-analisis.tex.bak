@@ -55,16 +55,15 @@ Cada lenguaje tiene sus propias reglas que definen como pueden estar construidos
 
 %whats the name - Lawrie
 %Para mejorar la CP se requiere que los nombres de los ids comuniquen de manera clara los conceptos que representan. Sin embargo, en la práctica no se tiene muy en cuenta. 
-Generalmente, la buena practica de programación recomienda que un id dentro del código este asociado a un concepto del programa \cite{DFPM05,DMDJ13,LDFHB07}. 
+Generalmente, la buena práctica de programación recomienda que al momento de construir un id dentro del código, el mismo debe estar asociado a un concepto \cite{DFPM05,DMDJ13,LDFHB07}.
 
 \begin{center}
 \textsf{Identificador $\Leftrightarrow$ Concepto}
 \end{center}
 
 %Dicho de otra manera un id es un representante de un concepto ubicado en el dominio del problema.
-Por ejemplo, el id \textsf{openWindow} está asociado al concepto `abrir una ventana'.
-
-Uno de los requisitos importantes que debe reunir un programa para facilitar su comprensión es que sus ids sean claros. Sin embargo, dicho requerimiento no es tenido en muy en cuenta por los programadores \cite{DFPM05,DLHD06,DCHD06,LDFHB07}.
+%Por ejemplo, el id \textsf{openWindow} está asociado al concepto `abrir una ventana'.
+Por ejemplo, el id \textsf{userAccount} está asociado al concepto `cuenta de usuario', en este caso si el sistema que se analiza es bancario, el concepto antedicho pertenece al Dominio del Problema. Por lo tanto, uno de los requisitos importantes que debe reunir un programa para facilitar su comprensión es que sus ids sean claros, de esta manera se podrán ver más fácilmente los conceptos que cada id representa. Sin embargo, dicho requerimiento no es tenido muy en cuenta por los programadores \cite{DFPM05,DLHD06,DCHD06,LDFHB07}.
 
 En la siguiente sección se menciona, como los nombres asignados a los ids impacta enormemente en la interpretación del concepto que el id tiene asociado, por lo tanto afecta la lectura comprensiva del código. Todas estas características, son tenidas en cuenta en el ámbito de la CP.
 
@@ -160,7 +159,7 @@ En este sentido, la construcción de ids poco claros, se combate con la programa
 \begin{framed}
 \noindent \textbf{Nombre Conciso:} El nombre de un id es conciso, si la semántica del nombre coincide exactamente con la semántica del concepto que el id representa.
 
-\noindent \textbf{Nombre Consistente:} Cada id, debe tener asociado si y solo si, un único concepto.
+\noindent \textbf{Nombre Consistente:} Cada id, debe tener asociado si y solo si, un único concepto (relación biyectiva entre los ids y los conceptos).
 \end{framed}
 
 Un ejemplo de \textit{conciso} es \textsf{output\_file\_name} que representa el concepto de `nombre de archivo de salida', distinto sería un id nombrado como \textsf{file\_name}, el cual está incompleto y no representa de forma semánticamente concisa el concepto mencionado.

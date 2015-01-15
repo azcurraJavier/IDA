@@ -1,6 +1,9 @@
-
 package Listas;
 
+/**
+ *
+ * @author Javier Azcurra
+ */
 public class Palabra {
     
     private String pal;

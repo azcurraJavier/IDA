@@ -28,6 +28,10 @@ import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
+/**
+ *
+ * @author Javier Azcurra
+ */
 public class TablaBuscador extends javax.swing.JPanel {
 
     private String getBuscar;

@@ -1,7 +1,9 @@
-
 package Listas;
 
-
+/**
+ *
+ * @author Javier Azcurra
+ */
 public class Declaracion {    
     
     private String modificador;

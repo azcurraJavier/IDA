@@ -8,7 +8,10 @@ import javax.swing.JComponent;
 import javax.swing.JTable;
 import javax.swing.table.TableCellRenderer;
 
-
+/**
+ *
+ * @author Javier Azcurra
+ */
 public class MyCellEditor extends DefaultCellEditor implements TableCellRenderer{
     private final JComponent component = new JCheckBox();    
     private boolean value = false; // valor de la celda

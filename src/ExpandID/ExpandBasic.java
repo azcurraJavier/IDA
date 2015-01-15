@@ -17,7 +17,7 @@ import java.util.regex.Pattern;
 
 /**
  *
- * @author javier
+ * @author Javier Azcurra
  */
 public class ExpandBasic {
 

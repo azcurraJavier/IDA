@@ -4,6 +4,10 @@ import java.util.HashSet;
 import java.util.Set;
 import javax.swing.table.DefaultTableModel;
 
+/**
+ *
+ * @author Javier Azcurra
+ */
 public class MiModelo extends DefaultTableModel {
 
     private Set<Integer> colEditable;

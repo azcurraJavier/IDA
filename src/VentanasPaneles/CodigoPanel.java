@@ -16,6 +16,10 @@ import javax.swing.text.Document;
 import javax.swing.text.Highlighter;
 import javax.swing.text.JTextComponent;
 
+/**
+ *
+ * @author Javier Azcurra
+ */
 public class CodigoPanel extends javax.swing.JPanel {
 
     private TablaBuscador tablaId, tablaLit, tablaCom;

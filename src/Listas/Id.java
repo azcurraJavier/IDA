@@ -1,6 +1,9 @@
-
 package Listas;
 
+/**
+ *
+ * @author Javier Azcurra
+ */
 public class Id {
     
     private String nomID;    

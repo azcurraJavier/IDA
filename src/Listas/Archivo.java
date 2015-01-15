@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author javier
+ * @author Javier Azcurra
  */
 public class Archivo {
 

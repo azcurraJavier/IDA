@@ -1,6 +1,9 @@
 package Listas;
 
-
+/**
+ *
+ * @author Javier Azcurra
+ */
 public class MostrarTabla {
     
     private String nomId;
@@ -58,6 +61,10 @@ public class MostrarTabla {
     public void setNumLinea(int numLinea) {
         this.numLinea = numLinea;
     }    
+    
+    public void setNumLinea(String numLinea) {
+        this.numLinea = Integer.parseInt(numLinea);
+    }
 
     public void setRepresenta(String representa) {
         this.representa = representa;

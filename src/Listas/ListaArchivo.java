@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ *
+ * @author Javier Azcurra
+ */
 public abstract class ListaArchivo {    
     
     private static ArrayList<Archivo> lisArchivo;  

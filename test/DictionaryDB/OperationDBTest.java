@@ -13,7 +13,7 @@
 //
 ///**
 // *
-// * @author javier
+// * @author Javier Azcurra
 // */
 //public class OperationDBTest {
 //    

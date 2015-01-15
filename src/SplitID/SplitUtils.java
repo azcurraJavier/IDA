@@ -1,5 +1,9 @@
 package SplitID;
 
+/**
+ *
+ * @author Javier Azcurra
+ */
 public abstract class SplitUtils {
 
     final static char PESO = '$';

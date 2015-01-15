@@ -1,11 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package DictionaryDB;
 
 import ExtractID.LibPath;
-import ExtractID.Principal;
 import static ExtractID.Principal.getStackTrace;
 import java.sql.*;
 import java.util.logging.Level;
@@ -13,7 +8,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author javier
+ * @author Javier Azcurra
  */
 public abstract class ConnectionDB {
 

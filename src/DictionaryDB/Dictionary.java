@@ -1,7 +1,6 @@
 package DictionaryDB;
 
 import ExtractID.LibPath;
-import ExtractID.Principal;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -12,7 +11,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author javier
+ * @author Javier Azcurra
  */
 public abstract class Dictionary {
     

@@ -2,6 +2,10 @@ package Listas;
 
 import java.util.ArrayList;
 
+/**
+ *
+ * @author Javier Azcurra
+ */
 public class Metodo {
 
     private String modif;
@@ -63,6 +67,14 @@ public class Metodo {
     public void setLineaFin(int lineaFin) {
         this.lineaFin = lineaFin-1;//-1 para que quede excato en la linea
     }
+    
+    public void setLineaCom(String lineaCom) {
+        this.lineaCom = Integer.parseInt(lineaCom);
+    }
+
+    public void setLineaFin(String lineaFin) {
+        this.lineaFin = Integer.parseInt(lineaFin);
+    }    
 
     public int getLineaCom() {
         return lineaCom;
@@ -71,7 +83,10 @@ public class Metodo {
     public int getLineaFin() {
         return lineaFin;
     }    
-    
+
+    public void setIde(Id ide) {
+        this.ide = ide;
+    }
 
 
     //nuevo

@@ -4,7 +4,7 @@ import DictionaryDB.Dictionary;
 
 /**
  *
- * @author javier
+ * @author Javier Azcurra
  */
 public class Greedy {
 

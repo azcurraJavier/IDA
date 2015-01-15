@@ -5,6 +5,11 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+
+/**
+ *
+ * @author Javier Azcurra
+ */
 public class PalabraHash {
     
     private HashMap pal;

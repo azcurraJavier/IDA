@@ -2,6 +2,10 @@ package Listas;
 
 import java.util.ArrayList;
 
+/**
+ *
+ * @author Javier Azcurra
+ */
 public class Clase {
     
     private String modClase; //Modificador de la Clase  
@@ -63,6 +67,14 @@ public class Clase {
     public void setLineaFin(int lineaFin) {
         this.lineaFin = lineaFin-1;//-1 para que quede excato en la linea
     }
+    
+    public void setLineaCom(String lineaCom) {
+        this.lineaCom = Integer.parseInt(lineaCom);
+    }
+    
+    public void setLineaFin(String lineaFin) {
+        this.lineaFin = Integer.parseInt(lineaFin);
+    }   
 
     public int getLineaCom() {
         return lineaCom;

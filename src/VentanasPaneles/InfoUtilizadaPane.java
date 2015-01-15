@@ -1,13 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package VentanasPaneles;
 
-import ExpandID.ExpandBasic;
 import Listas.PalabraHash;
-import SplitID.Samurai;
 import java.util.ArrayList;
 import java.util.Map;
 import javax.swing.JLabel;
@@ -18,7 +11,7 @@ import javax.swing.table.TableRowSorter;
 
 /**
  *
- * @author javier
+ * @author Javier Azcurra
  */
 public class InfoUtilizadaPane extends javax.swing.JDialog {
 

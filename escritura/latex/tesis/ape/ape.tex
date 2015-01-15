@@ -1,7 +1,156 @@
 \begin{appendices}
+
 \chapter{}
-\section{Extensiones de la Herramienta IDA}
-(Completar)
+
+\enlargethispage{\baselineskip}
+\section{Extensión de la Herramienta IDA}
+
+La herramienta Identifyer Analizer (IDA) tiene una característica extra, puede recibir como parámetro de entrada la ruta de un archivo XML\footnote[1]{Extensible Markup Language} existente en el disco. Este archivo debe contener información asociada a ids, literales y comentarios; similar a la que es provista por el Analizador Sintáctico que IDA posee (Módulo de Extracción de Datos - Ver Capítulo 4).
+Luego si los datos están correctamente leídos, IDA ejecuta directamente los algoritmos de análisis de ids en base a la información provista por el archivo XML. Por último, los resultados de la ejecución se escriben en otro archivo XML que será creado en la misma ruta que el archivo leído como entrada \mbox{(Ver Figura \ref{arq1}).}
+
+La ventaja de que IDA soporte interacción con archivos XML, permite un intercambio de datos estándar con otras aplicaciones, lo que conlleva a la compatibilidad entre aplicaciones para compartir información. De esta forma, IDA puede formar parte de un proceso de análisis más extenso que involucre otras herramientas asociadas a la comprensión de sistemas.
+
+\begin{figure}[b] %[h] para here [b] para bottom [t] para top
+\centerline{%queda centrada mejor la imagen
+\includegraphics[scale= 0.57]{./ape/ape_01.png}
+}
+\caption{Arquitectura de la Extensión de IDA}
+\label{arq1}
+\end{figure}
+
+
+\newpage
+
+Para que IDA procese un archivo XML como entrada, simplemente se realiza a través del archivo JAR\footnote[1]{JAVA Archive.} correspondiente a la herramienta por medio de la siguiente orden en la línea de comandos del sistema operativo\footnote[2]{Se recomienda utilizar los sistemas operativos Windows o UNIX}:
+
+
+\begin{lstlisting}[style=BashInputStyle]
+  java -jar IDA.java <argumento>
+\end{lstlisting}
+
+
+En $<$\textsf{argumento}$>$ se coloca la ruta donde se encuentra ubicado el archivo XML a procesar (un ejemplo en linux es \textsf{/home/entrada.xml}\footnote[3]{No es necesario que se llame entrada, pero si que tenga extensión xml.}). Este argumento no es obligatorio, y en caso de no pasarlo, se ejecuta la interfaz normal de IDA que fue descripta en el capítulo 4.
+La herramienta IDA procesa el archivo XML ingresado ejecutando los algoritmos de análisis de ids que tiene implementados (Greedy, Samurai y Expansión Básica).
+A continuación, se describe como debe estar estructurado el archivo XML de entrada.
+
+\noindent \textbf{\\Archivo XML de Entrada\\} 
+
+El archivo xml que se ingresa, el comienzo debe marcarse con \mbox{$<$\textsf{entrada}$>$} y el fin con \mbox{$</$\textsf{entrada}$>$}, en su interior puede contener las siguientes listas de elementos propios de una aplicación JAVA:
+
+\begin{description}
+\itemsep0em%reduce espacio
+\item[Lista de Identificadores:] Lista de ids que van a ser analizados esta enmarcada por \mbox{$<$\textsf{lista\_ids}$>$} y \mbox{$</$\textsf{lista\_ids}$>$}; cada elemento de esta lista se indica con $<$\textsf{id}$>$ y $</$\textsf{id}$>$; dentro de cada uno de estos elementos se aprecia el nombre del id \mbox{$<$\textsf{nombre}$>$\textbf{nmId}$</$\textsf{nombre}$>$}, y el número de línea \mbox{$<$\textsf{linea}$>$\textbf{45}$</$\textsf{linea}$>$}.
+
+\item[Lista de Frases:] Listado de frases (asociadas a comentarios y literales) el inicio y fin de esta lista se indica con \mbox{$<$\textsf{lista\_frases}$>$} y \mbox{$</$\textsf{lista\_frases}$>$};
+cada elemento de esta lista se indica con $<$\textsf{frase}$>$ y $</$\textsf{frase}$>$; dentro de cada uno de estos elementos de la lista se aprecia la frase correspondiente \mbox{$<$\textsf{texto}$>$\textbf{Hello World!}$</$\textsf{texto}$>$}, y el número de línea \mbox{$<$\textsf{linea}$>$\textbf{25}$</$\textsf{linea}$>$}.
+
+\item[Lista de Clases:] Este listado se corresponde a las clases que posee el programa, esta enmarcado con \mbox{$<$\textsf{lista\_clases}$>$} y \mbox{$</$\textsf{lista\_clases}$>$}; cada elemento de este listado se indica con $<$\textsf{clase}$>$ y $</$\textsf{clase}$>$; dentro de cada elemento se halla el nombre de la clase con \mbox{$<$\textsf{nombre}$>$\textbf{Person}$</$\textsf{nombre}$>$}, el numero de línea donde comienza la clase \mbox{$<$\textsf{linea\_inicio}$>$\textbf{12}$</$\textsf{linea\_inicio}$>$}, y la línea donde finaliza la clase \mbox{$<$\textsf{linea\_fin}$>$\textbf{38}$</$\textsf{linea\_fin}$>$}.
+
+\item[Lista de Métodos:] Similar al listado anterior pero para métodos, esta enmarcado con \mbox{$<$\textsf{lista\_metodos}$>$} y \mbox{$</$\textsf{lista\_metodos}$>$}; cada elemento de este listado se indica con $<$\textsf{metodo}$>$ y $</$\textsf{metodo}$>$; dentro de cada elemento se halla el nombre del método con \mbox{$<$\textsf{metodo}$>$\textbf{getPerson}$</$\textsf{metodo}$>$}, el numero de línea donde comienza el método \mbox{$<$\textsf{linea\_inicio}$>$\textbf{20}$</$\textsf{linea\_inicio}$>$}, y la línea donde finaliza la clase \mbox{$<$\textsf{linea\_fin}$>$\textbf{25}$</$\textsf{linea\_fin}$>$}.
+
+\end{description}
+
+Es importante tener en cuenta, que para que IDA realice sus tareas debe pasarse por el archivo xml al menos un id a través del listado de ids, es decir que esta es una condición obligatoria. Por otro lado el resto de los datos: Métodos, Clases, Frases, números de líneas (de cualquier elemento), también son importantes pero solo colaboran con el análisis de los ids y no son indispensables para que IDA funcione.
+
+Un ejemplo del archivo XML de entrada se puede apreciar en la figura \ref{xml1}. 
+Luego de que IDA analiza los ids, el próximo paso es escribir los resultados de cada ejecución en un nuevo archivo XML de salida que se describe en la próxima sección.
+
+
+%\begin{description}
+%\itemsep0em%reduce espacio
+%\item[Lista de ids analizados:] Cada elemento de la lista posee, el nombre del id analizado, la correspondiente división Greedy, Samurai y las expansiones desde Greedy y Samurai.
+%\end{description}
+
+
+\newpage
+\begin{figure}[h!] %[h] para here [b] para bottom [t] para top
+\begin{lstlisting}[language=xml, frame=single]
+<entrada>
+	<lista_clases>
+		<clase>
+			<nombre>Minesweeper</nombre>
+			<linea_inicio>7</linea_inicio>
+			<linea_fin>202</linea_fin>
+		</clase>
+	</lista_clases>
+	<lista_metodos>
+		<metodo>
+			<nombre>win</nombre>
+			<linea_inicio>152</linea_inicio>
+			<linea_fin>159</linea_fin>
+		</metodo>				
+	</lista_metodos>
+	<lista_ids>
+	    <id>
+	    	<nombre>bttns</nombre>
+	    	<linea>10</linea>
+	    </id>    
+	    <id>	    	
+	    	<nombre>min_mtrx</nombre>
+	    	<linea>12</linea>
+	    </id>    	    	    
+	</lista_ids>
+	<lista_frases>
+		<frase>
+			<texto>buttons</texto>
+			<linea>9</linea>
+		</frase>
+		<frase>
+			<texto>mines matrix</texto>
+			<linea>79</linea>
+		</frase>
+	</lista_frases>
+</entrada>
+
+\end{lstlisting}
+\caption{Ejemplo de Archivo XML de entrada.}
+\label{xml1}
+\end{figure}
+
+\newpage
+
+\noindent \textbf{Archivo XML de Salida\\}
+
+El archivo de salida se crea en la misma ubicación que el archivo XML pasado por entrada (siguiendo con el ejemplo de la sección anterior se creará en \textsf{/home/salida.xml}\footnote[1]{Si ya existe un archivo con el nombre salida.xml, el mismo se sobrescribirá.}). Este archivo de salida indica el inicio con \mbox{$<$\textsf{salida}$>$} y el fin con \mbox{$</$\textsf{salida}$>$}, en su interior posee la siguiente lista:
+
+\begin{description}
+\itemsep0em%reduce espacio
+\item[Lista de Identificadores Analizados:] Es el listado de los ids incluyendo el análisis realizado en cada uno, $<$\textsf{lista\_analisis\_ids}$>$ señala el comienzo a la lista y $</$\textsf{lista\_analisis\_ids}$>$ indica el fin; cada elemento de la lista se indica con $<$\textsf{id}$>$ y $</$\textsf{id}$>$; dentro de cada elemento de la lista se encuentra el nombre del id analizado indicado con \mbox{$<$\textsf{nombre}$>$\textbf{nmId}$</$\textsf{nombre}$>$}, la división greedy del id se ubica entre \mbox{$<$\textsf{div\_greedy}$>$\textbf{nm-id}$</$\textsf{div\_greedy}$>$}, la división samurai del id entre \mbox{$<$\textsf{div\_samurai}$>$\textbf{nm-id}$</$\textsf{div\_samurai}$>$}, la expansión desde greedy entre \mbox{$<$\textsf{exp\_greedy}$>$\textbf{name identifier}$</$\textsf{exp\_greedy}$>$}, y la expansión desde samurai entre $<$\textsf{exp\_samurai}$>$\textbf{name identifier}$</$\textsf{exp\_samurai}$>$.
+\end{description}
+
+\enlargethispage{\baselineskip}%agrega linea al final de la hoja.
+\enlargethispage{\baselineskip}
+\enlargethispage{\baselineskip}
+\enlargethispage{\baselineskip}
+\enlargethispage{\baselineskip}
+
+Un ejemplo del archivo XML de salida con los ids analizados por las distintas técnicas, es el mostrado en la figura \ref{xml2}.
+
+\begin{figure}[h!]
+\begin{lstlisting}[language=xml, frame=single]
+<salida>
+  <lista_analisis_ids>
+    <id>
+      <nombre>nmId</nombre>
+      <div_greedy>nm-id</div_greedy>
+      <div_samurai>nm-id</div_samurai>
+      <exp_greedy>name identifier</exp_greedy>
+      <exp_samurai>name identifier</exp_samurai>
+    </id> 
+    <id>
+      <nombre>fs</nombre>
+      <div_greedy>fs</div_greedy>
+      <div_samurai>fs</div_samurai>
+      <exp_greedy>file system</exp_greedy>
+      <exp_samurai>file system</exp_samurai>
+    </id>         
+  </lista_analisis_ids>
+</salida>
+\end{lstlisting}
+\caption{Ejemplo de Archivo XML de salida.}
+\label{xml2}
+\end{figure}
+
 \end{appendices}
 
 

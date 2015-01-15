@@ -1,3 +1,8 @@
+/**
+ *
+ * @author Javier Azcurra
+ */
+
 grammar Java;
 
 

@@ -1,4 +1,3 @@
-
 package ExtractID;
 
 import static ExtractID.Principal.getStackTrace;
@@ -7,7 +6,7 @@ import java.net.URISyntaxException;
 
 /**
  *
- * @author javier
+ * @author Javier Azcurra
  */
 public class LibPath {
     
@@ -58,9 +57,9 @@ public class LibPath {
             System.exit(0);
         }         
         
-        if(!libPath.isEmpty()){
-            System.out.println("librerias y programas ubicados en: "+libPath);
-        }
+//        if(!libPath.isEmpty()){
+//            System.out.println("librerias y programas ubicados en: "+libPath);
+//        }
     }
 
     public static String getLibPath() {

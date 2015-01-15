@@ -8,7 +8,10 @@ import javax.swing.JTable;
 import javax.swing.table.TableCellRenderer;
 
 
-
+/**
+ *
+ * @author Javier Azcurra
+ */
 public class MyCellRender extends JCheckBox implements TableCellRenderer{
     private final JComponent component = new JCheckBox();
 

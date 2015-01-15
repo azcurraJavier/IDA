@@ -13,20 +13,33 @@ import org.xml.sax.SAXException;
 
 /**
  *
- * @author javier
+ * @author Javier Azcurra
  */
 public class ProcesarXML {
     
-    private static ArrayList<String> idList;
-    private static ArrayList<String> fraseList;
+    private static ArrayList<String> lisIds;
+    private static ArrayList<Clase> clases; //linea comienzo y fin de cada clase y metodo    
+    private static ArrayList<Comentario> lisFrase;//frase + linea
+    private static ArrayList<MostrarTabla> lisMostrarTabla;//ids con clase y metodo
+    
 
-    public static ArrayList<String> getFraseList() {
-        return fraseList;
+    public static ArrayList<Clase> getClases() {
+        return clases;
     }
 
-    public static ArrayList<String> getIdList() {
-        return idList;
+    public static ArrayList<Comentario> getLisFrase() {
+        return lisFrase;
     }
+
+    public static ArrayList<MostrarTabla> getLisMostrarTabla() {
+        return lisMostrarTabla;
+    }
+
+    public static ArrayList<String> getLisIds() {
+        return lisIds;
+    }
+    
+    
     
     
     public static void leer(File fl) throws ParserConfigurationException, SAXException, IOException{
@@ -40,10 +53,41 @@ public class ProcesarXML {
 
         saxParser.parse(fl, m);
         
-        idList = m.getIdList();
-
-        fraseList = m.getFraseList();
-
+        
+        lisFrase = m.getLisFrase();
+        lisMostrarTabla = m.getLisMostrarTabla();
+        
+        
+        //carga metodos en clase segun nro de linea
+        ArrayList<ClassBodyDecl> lisClassBodyDecl = new ArrayList<>();
+        
+        for(Clase c : m.getClases()){
+        
+            for(Metodo met : m.getMetodos()){
+                
+                if (c.getLineaCom() <= met.getLineaCom() && met.getLineaCom() <= c.getLineaFin()) {
+                
+                    
+                    ClassBodyDecl cbd = new ClassBodyDecl(met);
+                    lisClassBodyDecl.add(cbd);
+                    
+                    c.setLisClassBodyDecl(lisClassBodyDecl);
+                }
+                
+            }
+            
+        }
+        
+        clases = m.getClases(); 
+        
+        //lista de ids
+        lisIds = new ArrayList<>();
+                
+        for(MostrarTabla mt : lisMostrarTabla){
+        
+            lisIds.add(mt.getNomId());
+        
+        }
     }
     
     public static void escribir(ArrayList<String[]> lisResult, String filePath) throws FileNotFoundException, XMLStreamException, TransformerException{

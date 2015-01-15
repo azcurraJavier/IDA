@@ -5,7 +5,6 @@ import ExpandID.ExpandBasic;
 import Listas.Archivo;
 import Listas.Comentario;
 import Listas.ListaArchivo;
-import Listas.MostrarTabla;
 import Listas.ProcesarXML;
 import SplitID.Greedy;
 import SplitID.Samurai;
@@ -31,7 +30,7 @@ import org.jdesktop.swingx.util.OS;
 
 /**
  *
- * @author javier
+ * @author Javier Azcurra
  */
 public class Principal extends javax.swing.JFrame {
 
@@ -51,7 +50,6 @@ public class Principal extends javax.swing.JFrame {
 //        JFrame.setDefaultLookAndFeelDecorated(true);
 //        SubstanceLookAndFeel.setCurrentTheme("org.jvnet.substance.theme.SubstanceCremeTheme");
 //        SubstanceLookAndFeel.setSkin("org.jvnet.substance.skin.ModerateSkin");
-
         initComponents();
 
         ListaArchivo.init();
@@ -309,13 +307,6 @@ public class Principal extends javax.swing.JFrame {
                     continue;
                 }
 
-                //control de referencias sin declarar
-//                if (unaClase.getVarSinDeclB()) {
-//                    JOptionPane.showMessageDialog(new JFrame(),
-//                            "Error al analizar archivo: " + fileAnalisis.getName()
-//                            + "\n" + unaClase.getVarSinDecl(), "ERROR", JOptionPane.ERROR_MESSAGE);
-//                    continue;
-//                }
                 ////////
                 unArchivo.setFileName(fileAnalisis.getName());//nombre archivo java
                 unArchivo.setFileNamePath(fileAnalisis.getAbsolutePath());//ruta del archivo java                
@@ -325,7 +316,6 @@ public class Principal extends javax.swing.JFrame {
                 ArrayList<Comentario> lisCom = lex.getLisCom(); //comentarios del lexer 
                 unArchivo.setLisComentario(lisCom);
 
-                //unaClase.setearAmbienteCometario();//seteo ambientes de comentarios
                 ////Literales/////
                 unArchivo.setLisLiterales(g.getLisLiterales());
 
@@ -432,7 +422,7 @@ public class Principal extends javax.swing.JFrame {
         return (OS.isLinux());
 
     }
-    
+
     /**
      * @param args the command line arguments
      */
@@ -459,128 +449,127 @@ public class Principal extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-                
+
         LibPath p = new LibPath();
-        
+
         p.setLibPath();
-        
-        String msgErr ="Ocurrió un error al procesar el archivo:\n\n";
+
+        String msgErr = "Ocurrió un error al procesar el archivo:\n\n";
         /* Create and display the form */
         switch (args.length) {
-            
-            case 1://si posee 1 arg se interpreta que es el xml
-                
-                Path path = Paths.get(args[0]);
 
-                if (!path.toString().toLowerCase().endsWith(".xml")){
-                    System.out.println("El argumento debe ser un archivo xml: "+args[0]);
-                    System.exit(0);
-                }
-                
-                File f = new File(args[0]);
-                if(!f.exists()){
-                    System.out.println(msgErr+"El archivo: " +args[0]+" no existe");
-                    System.exit(0);
-                }
-                
+            case 1://si posee 1 arg se interpreta que es el xml
+
+                String parent = new File(args[0]).getParent() == null ? "" : new File(args[0]).getParent() + "/";
                 
                 try {
+
+                    Path path = Paths.get(args[0]);
                     
+                    if(path.toString().toLowerCase().equals("checklib")){
+                        System.out.println("Ruta de Librerias y programas: "+LibPath.getLibPath());
+                        System.exit(0);                    
+                    }
+
+                    if (!path.toString().toLowerCase().endsWith(".xml")) {
+                        System.out.println("El argumento debe ser un archivo xml: " + args[0]);
+                        System.exit(0);
+                    }
+
+                    File f = new File(args[0]);
+                    if (!f.exists()) {
+                        System.out.println(msgErr + "El archivo: " + args[0] + " no existe");
+                        System.exit(0);
+                    }
+                    
+                    //se limpia archivo de salida xml
+                    PrintWriter writer = new PrintWriter(new File(parent + "salida.xml"));
+                    writer.print("");
+                    writer.close();
+
                     ProcesarXML.leer(new File(args[0]));
-                    
+
                     Archivo archivo = new Archivo();
+
+                    archivo.setLisComentario(ProcesarXML.getLisFrase());
+
+                    archivo.setLisMostrarTabla(ProcesarXML.getLisMostrarTabla());
                     
-                    ArrayList<Comentario> lisComentario = new ArrayList<>();
+//                    if(ProcesarXML.getClases().isEmpty()){
+//                        System.out.println("El archivo xml debe tener especificado al menos una clase, revíselo e intente de nuevo");
+//                        System.exit(0);
+//                    }
                     
-                    for(String s: ProcesarXML.getFraseList()){
-                        lisComentario.add(new Comentario(0, s.trim()));
-                    }
+                    if(ProcesarXML.getLisIds().isEmpty()){
+                        System.out.println("El archivo xml debe tener especificado al menos un identificador, revíselo e intente de nuevo");
+                        System.exit(0);
+                    }                    
                     
-                    
-                    archivo.setLisComentario(lisComentario);
-                    
+                    archivo.setLisClases(ProcesarXML.getClases());
+
                     //===================================
-                    ArrayList<MostrarTabla> lisMostrarTabla = new ArrayList<>();
-                    
-                    MostrarTabla m;
-                    
-                    for(String s: ProcesarXML.getIdList()){                        
-                        
-                        m = new MostrarTabla("", "");
-                        
-                        m.setNomId(s.trim());
-                        
-                        lisMostrarTabla.add(m);
-                    }
-                    
-                    archivo.setLisMostrarTabla(lisMostrarTabla);
-                    
-                    //===================================
-                    
                     String arrayResult[];
-                    
+
                     ArrayList<String[]> lisResult = new ArrayList<>();
-                    
+
                     //procesar algoritmos
-                    
                     Greedy gre = new Greedy();
-                    
+
                     ConnectionDB.AbrirConBD();
-                    
+
                     ExpandBasic exp = new ExpandBasic(archivo);
-                    
+
                     Samurai sam = new Samurai(archivo);
-                    
-                    String divResult[]; 
-                    
-                    for(String id: ProcesarXML.getIdList()){
-                        
+
+                    String divResult[];
+
+                    for (String id : ProcesarXML.getLisIds()) {
+
                         arrayResult = new String[5];
-                        
-                        arrayResult[0]= id.trim();
-                        
-                        arrayResult[1]= gre.ejecutar(arrayResult[0]).replaceAll(" ", "-");
-                        
-                        arrayResult[2]= sam.ejecutar(arrayResult[0]).replaceAll(" ", "-");
-                        
+
+                        arrayResult[0] = id.trim();
+
+                        arrayResult[1] = gre.ejecutar(arrayResult[0]).replaceAll(" ", "-");
+
+                        arrayResult[2] = sam.ejecutar(arrayResult[0]).replaceAll(" ", "-");
+
                         divResult = arrayResult[1].split("-");
 
                         String append = "";
 
                         for (String s : divResult) {
 
-                            append += exp.ejecutar(s,"","") + " ";
+                            append += exp.ejecutar(s, "", "") + " ";
 
                         }
 
                         arrayResult[3] = append.trim().isEmpty() ? "" : append.trim();
-                        
+
                         divResult = arrayResult[2].split("-");
-                        
+
                         append = "";
 
                         for (String s : divResult) {
 
-                            append += exp.ejecutar(s,"","") + " ";
+                            append += exp.ejecutar(s, "", "") + " ";
 
                         }
-                        
+
                         arrayResult[4] = append.trim().isEmpty() ? "" : append.trim();
-                        
+
                         lisResult.add(arrayResult);
                     }
-                    
+
                     ConnectionDB.CerrarConBD();
-                    
-                    String parent = new File(args[0]).getParent() == null ?"":new File(args[0]).getParent()+"/";
-                    
-                    ProcesarXML.escribir(lisResult,parent+"salida.xml");
-                    
-                    System.out.println("El archivo: " +args[0]+" se procesó con éxito");
-                    System.out.println("Archivo: " +parent+"salida.xml"+" generado correctamente");
-                    
+
+                    //String parent = new File(args[0]).getParent() == null ?"":new File(args[0]).getParent()+"/";
+                    ProcesarXML.escribir(lisResult, parent + "salida.xml");
+
+                    System.out.println("El Archivo: " + args[0] + " se procesó con éxito");
+                    System.out.println("El Archivo: " + parent + "salida.xml" + " se generó correctamente");
+
                 } catch (Exception ex) {
-                    System.out.println(msgErr+getStackTrace(ex));
+                    System.out.println(msgErr + getStackTrace(ex));
                 } finally {
                     System.exit(0);
                 }
@@ -592,7 +581,7 @@ public class Principal extends javax.swing.JFrame {
                         new Principal().setVisible(true);
                     }
                 });
-                
+
                 break;
 
             default:

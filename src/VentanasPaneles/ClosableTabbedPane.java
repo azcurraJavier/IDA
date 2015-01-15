@@ -13,7 +13,10 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import javax.swing.*;
 
-
+/**
+ *
+ * @author Javier Azcurra
+ */
 public class ClosableTabbedPane extends JTabbedPane{
 	private TabCloseUI closeUI = new TabCloseUI(this);
         

@@ -9,13 +9,11 @@ import SplitID.Samurai;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import javax.swing.*;
 
 /**
  *
- * @author javier
+ * @author Javier Azcurra
  */
 public class AnalisisPanel extends javax.swing.JDialog {
 
