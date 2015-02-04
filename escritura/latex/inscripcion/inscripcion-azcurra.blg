@@ -3,46 +3,47 @@ The top-level auxiliary file: inscripcion-azcurra.aux
 The style file: plain.bst
 Database file #1: biblo.bib
 Warning--empty booktitle in MPMR07
+Warning--can't use both author and editor fields in ERNS99
 Warning--empty chapter and pages in STD610
-You've used 25 entries,
+You've used 41 entries,
             2118 wiz_defined-function locations,
-            674 strings with 8947 characters,
-and the built_in function-call counts, 10312 in all, are:
-= -- 1041
-> -- 431
-< -- 17
-+ -- 173
-- -- 144
-* -- 558
-:= -- 1503
-add.period$ -- 83
-call.type$ -- 25
-change.case$ -- 143
+            780 strings with 11573 characters,
+and the built_in function-call counts, 16132 in all, are:
+= -- 1617
+> -- 685
+< -- 23
++ -- 274
+- -- 228
+* -- 921
+:= -- 2406
+add.period$ -- 134
+call.type$ -- 41
+change.case$ -- 231
 chr.to.int$ -- 0
-cite$ -- 27
-duplicate$ -- 553
-empty$ -- 797
-format.name$ -- 144
-if$ -- 2378
+cite$ -- 44
+duplicate$ -- 820
+empty$ -- 1264
+format.name$ -- 228
+if$ -- 3668
 int.to.chr$ -- 0
-int.to.str$ -- 25
-missing$ -- 27
-newline$ -- 129
-num.names$ -- 52
-pop$ -- 205
+int.to.str$ -- 41
+missing$ -- 45
+newline$ -- 208
+num.names$ -- 84
+pop$ -- 318
 preamble$ -- 1
-purify$ -- 121
+purify$ -- 195
 quote$ -- 0
-skip$ -- 492
+skip$ -- 702
 stack$ -- 0
-substring$ -- 475
-swap$ -- 272
-text.length$ -- 17
+substring$ -- 786
+swap$ -- 368
+text.length$ -- 23
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 94
-warning$ -- 2
-while$ -- 73
-width$ -- 27
-write$ -- 283
-(There were 2 warnings)
+type$ -- 152
+warning$ -- 3
+while$ -- 120
+width$ -- 43
+write$ -- 459
+(There were 3 warnings)

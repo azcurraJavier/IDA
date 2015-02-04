@@ -16,7 +16,7 @@ De la definición anterior se desprenden 4 tipos de cambios que se pueden realiz
 
 %Es común también que por la constate actualización de los sistemas operativos, los motores de base de datos y demás sistemas externos que interactúan con el software desarrollado entren en conflicto, por eso en la fase de mantenimiento también se debe ir actualizando los distintos componentes del producto para una mejor compatibilidad\cite{RSPMGH02}. 
 
-Por lo antedicho, entre otras diversas razones \cite{KBVR00} indican que el man\-tenimiento del software consume mucho esfuerzo y dinero. En algunos casos, los costos de mantenimiento pueden duplicar a los que se emplearon en el desarro\-llo del producto. Las causas que pueden aumentar estos costos son, el mal diseño de la arquitectura del programa, la mala codificación, la ausencia de documentación.
+Por lo antedicho, entre otras diversas razones \cite{KBVR00,SMMH98,ALGS01,BEKH97} indican que el man\-tenimiento del software consume mucho esfuerzo y dinero. En algunos casos, los costos de mantenimiento pueden duplicar a los que se emplearon en el desarro\-llo del producto. Las causas que pueden aumentar estos costos son, el mal diseño de la arquitectura del programa, la mala codificación, la ausencia de documentación.
 
 No es descabellado pensar estrategias de automatización que puedan ser aplicadas en fases del mantenimiento del software que ayuden a reducir estos costos, lo cual requiere una comprensión del objeto que se va a modificar antes de realizar algún cambio que sea de utilidad.
  
@@ -27,7 +27,7 @@ Algunos autores \cite{KBVR00,MAS05,RSPMGH02,PFT02} concluyen que el mantenimient
 
 Los sistemas complejos evolucionan con el tiempo, los nuevos usuarios y requisitos durante el desarrollo del mismo causan que el producto final posiblemente no sea el que se planteó en un comienzo. 
 
-La evolución del software básicamente se atribuye al crecimiento de los sistemas a través del tiempo, es decir, tomar una versión operativa y generar una nueva versión ampliada o mejorada en su eficiencia \cite{KBVR00}.
+La evolución del software básicamente se atribuye al crecimiento de los sistemas a través del tiempo, es decir, tomar una versión operativa y generar una nueva versión ampliada o mejorada en su eficiencia \cite{SCJH01,KBVR00,ZHGL09,WYHW10}.
 
 Generalmente, los ingenieros del software recurren a los modelos evolutivos. Estos modelos indican que cuando se desarrolla un producto de software es conveniente que se divida en distintas iteraciones. A medida que avanza el desarrollo, cada iteración retorna una versión entregable cada vez más compleja \cite{RSPMGH02}.
 Estos modelos son muy recomendados sobre todo si se tienen fechas ajustadas donde se necesita una versión funcional lo más rápido posible. De esta manera, no se requiere esperar una versión completa al final del proceso de desarrollo.
@@ -45,7 +45,7 @@ De acuerdo con el estándar 1219 de IEEE  \cite{STD1219}, \textit{la migración 
 
 Las migraciones de sistemas más comunes que se llevan a cabo son causadas por cambios en el hardware obsoleto, nuevos sistemas operativos, cambios en la arquitectura y nuevas base de datos. Sin duda, la que más se ha acentuado en los últimos años es la aparición de nuevas tecnologías web y las mobile (basadas en dispositivos móviles) \cite{MMFAF08}.
  
-La migración de grandes sistemas es fundamental, sin embargo está demostrado que es costosa y compleja \cite{MMFAF08}. Para llevarla a cabo reduciendo estos costos se recomienda hacer previamente una buena comprensión del sistema antiguo. 
+La migración de grandes sistemas es fundamental, sin embargo está demostrado que es costosa y compleja \cite{MMFAF08,ZOYI03,LGCCA01,ZYKK02}. Para llevarla a cabo reduciendo estos costos se recomienda hacer previamente una buena comprensión del sistema antiguo. 
 
 Una técnica de comprensión de sistemas ideada recientemente para la migración de software, consiste en un mode\-lado de datos \cite{WHAFVR11}. Este modelado tiene como finalidad representar el sistema en distintos niveles de abstracción. De esta forma, el grupo encargado de la migración solo debe preocuparse por convertir el antiguo código a la nueva tecnología.
 
@@ -227,7 +227,7 @@ Una forma de afrontar esta dificultad, es recurrir a fuentes de información inf
 %Por lo tanto se necesita la ayuda de fuentes que contengan información informal presentes en el código que aporten en el proceso de la traducción de los ids. Los candidatos serios a lograr este cometido son comentarios y los literales string.
 %Dicho de otra manera, son una fuente importante de información de los conceptos del Dominio del Problema.
 
-Sin duda, los comentarios tienen como principal finalidad ayudar a comprender un segmento de código \cite{JDPH08,ACCL02,AMPM12}. Por esta razón, se puede ver a los comentarios como una herramienta natural para entender el significado de los ids en el código, como así también el funcionamiento del sistema.
+Sin duda, los comentarios tienen como principal finalidad ayudar a comprender un segmento de código \cite{JDPH08,ACCL02,AMPM12,FDPM08}. Por esta razón, se puede ver a los comentarios como una herramienta natural para entender el significado de los ids en el código, como así también el funcionamiento del sistema.
 
 Por otro lado para poder entender la semántica de los ids, se toman li\-terales o constantes strings.
 Estos representan un valor constante formado por secuencias de caracteres. Ellos son generalmente utilizados en la muestra de carteles por pantalla, y comúnmente se almacenan en variables de \mbox{tipo string.}
@@ -303,3 +303,5 @@ La herramienta IDA, además de analizar ids, puede ser utilizada como base para 
 
 El trabajo está organizado de la siguiente manera. El Capítulo 2 define conceptos teóricos relacionados a la comprensión de programas. El Capítulo 3 describe el estado del arte asociado a las técnicas de análisis de identificadores conocidas. El Capítulo 4 trata sobre la herramienta \textit{Identifier Analyzer} (IDA), en donde se explican los distintos módulos que la herramienta posee y que técnicas de análisis de identificadores tiene implementadas. En el Capítulo 5, se describen algunos casos de estudio que demuestran la utilidad de la herramienta IDA.
 Finalmente, en el Capítulo 6 se explican las conclusiones elaboradas y se proponen trabajos futuros.
+
+\newpage %ajuste de hoja impar

@@ -81,7 +81,7 @@ Antes de proseguir sobre la importancia que tienen los nombres de los ids en la 
 \subsection{Clasificación}
 \label{sec:clasif}%para hacer referencia en el cap 4
 
-Estudios realizados con 100 programadores \cite{DCHD06} sobre comprensión de ids indican que existen tres formas principales de construir ids multi-palabras (tomando como ejemplo el concepto \textsf{File System Input}): 
+Estudios realizados con 100 programadores \cite{DCHD06,LDMCFH07} sobre comprensión de ids indican que existen tres formas principales de construir ids multi-palabras (tomando como ejemplo el concepto \textsf{File System Input}): 
 
 \begin{itemize}
 \itemsep0em%reduce espacio
@@ -92,9 +92,9 @@ Estudios realizados con 100 programadores \cite{DCHD06} sobre comprensión de id
 
 También pueden existir la combinación entre dos tipos de clasificaciones: \textsf{flSystemIpt}.
 
-Los estudios antes mencionados le posibilitaron a los investigadores concluir que las palabras completas son las más comprendidas, sin embargo las estadísticas marcan en algunos casos que las abreviaturas que se ubican en segundo lugar, no demuestran una diferencia notoria con respecto a las palabras completas \cite{DCHD06}.
+Los estudios antes mencionados le posibilitaron a los investigadores concluir que las palabras completas son las más comprendidas, sin embargo las estadísticas marcan en algunos casos que las abreviaturas que se ubican en segundo lugar, no demuestran una diferencia notoria con respecto a las palabras completas \cite{DCHD06,SBMJ10}.
 
-Los investigadores Feild, Binkley, Lawrie \cite{FBL06,HDD06,DMDJ13}, clasifican los nombres de los ids con dos términos conocidos en la jerga del análisis de ids: \textit{hardwords} y \textit{softwords}.
+Los investigadores Feild, Binkley, Lawrie \cite{FBL06,HDD06,BMDDL09,DMDJ13}, clasifican los nombres de los ids con dos términos conocidos en la jerga del análisis de ids: \textit{hardwords} y \textit{softwords}.
 
 Los \textit{hardwords} destacan la separación de cada palabra que compone al id multi-palabra a través de una marca específica; algunos ejemplos son: \mbox{\textsf{fileSystem}} en donde se marca bien la separación de cada palabra con el uso de mayúscula entre las minúsculas\footnote[1]{Este caso es conocido como camel-case ya que las letras en mayúsculas se asemejan a las jorobas de un camello.}, o todas mayúsculas seguidas de todas minúsculas \mbox{\textsf{FILEsystem}}. También se utilizan para dividir las palabras, un símbolo especial, como es el caso del guión bajo: \textsf{file\_system}. 
 
@@ -170,12 +170,12 @@ Los homónimos son palabras que pueden tener más de un significado. Por ende, s
 
 Por otro lado, los sinónimos indican que para un mismo concepto pueden tener asociados diferentes nombres. Por ejemplo, un id con el nombre \mbox{\textsf{accountBankNumber}} y otro \textsf{accountBankNum} son sinónimos porque hacen referencia al mismo concepto `número de cuenta bancaria'. 
 
-Esta demostrado \cite{DFPM05,DLHD06,DMDJ13} que la ausencia de nombres consistentes tales como se mencionó anteriormente, hacen que se dificulte identificar con claridad los conceptos en el dominio del problema, lo que hace aumentar los esfuerzos de comprensión del programa. 
+Esta demostrado \cite{DFPM05,DLHD06,NIATL98,DMDJ13} que la ausencia de nombres consistentes tales como se mencionó anteriormente, hacen que se dificulte identificar con claridad los conceptos en el dominio del problema, lo que hace aumentar los esfuerzos de comprensión del programa. 
 
 
 Por lo tanto, si los ids están construidos de forma \textit{concisa} (identificando bien al concepto) y la \textit{consistencia} está presente, se pueden descubrir los conceptos que representan en el dominio del problema más fácilmente. De esta manera, se agiliza la comprensión, aumenta la productividad, mejora la calidad durante la etapa de mantenimiento \cite{DFPM05,DLHD06}.%agregar mas bibliografia
 
-Intuitivamente, se necesita que los ids representen bien al concepto, ya que mayor será el impacto que tendrá en la interpretación del sistema \cite{DFPM05,DLHD06}. Sin embargo, durante las etapas de desarrollo y mantenimiento de software, es muy difícil mantener una consistencia global de nombres en los ids, sobre todo si el sistema es grande. En este sentido, cada vez que un concepto se modifica el nombre del id asociado debe cambiar y adaptarse a la modificación.
+Intuitivamente, se necesita que los ids representen bien al concepto, ya que mayor será el impacto que tendrá en la interpretación del sistema \cite{DFPM05,DLHD06,SBWYY10}. Sin embargo, durante las etapas de desarrollo y mantenimiento de software, es muy difícil mantener una consistencia global de nombres en los ids, sobre todo si el sistema es grande. En este sentido, cada vez que un concepto se modifica el nombre del id asociado debe cambiar y adaptarse a la modificación.
 
 %solucion propuesta
 Los autores Deissenboeck y Pizka \cite{DFPM05} elaboraron una herramienta que ayuda a la construcción y mantenimiento de ids con nombres concisos y consistentes. Dada la dificultad que conlleva construir una herramienta totalmente automática que se encargue de nombrar y mantener correctamente los ids, ellos elaboraron una herramienta que necesita la intervención del programador. Esta herramienta, a medida que el sistema se va desarrollando, construye y mantiene un diccionario de datos compuesto con información de ids. En el ámbito de la Ingeniería de Software el concepto de diccionarios de datos es importante.
@@ -1082,7 +1082,7 @@ Cabe destacar que esta herramienta es semi-automática, en algunas situaciones n
 
 Los ids se cambian por nombres más explicativos, los cuales incluyen un verbo que indica la función del id en el código. Más precisamente después de renombrar los ids, se visualiza claramente el rol que cumple el id en el programa.
 
-El código fuente se convierte de esta manera en un código más claro y mejora la comprensión. El proceso consta de tres etapas (Ver Figura \ref{ire1} \footnote[1]{Todas las figuras de esta sección se obtuvieron del articulo correspondiente a la herramienta que se describe \cite{BCPT00}.}): 
+El código fuente se convierte de esta manera en un código más claro y mejora la comprensión. El proceso consta de tres etapas (Ver Figura \ref{ire1} \footnote[1]{Todas las figuras de esta sección se obtuvieron del artículo que describe la herramienta Identifier Restructuring \cite{BCPT00}.}): 
 
 \begin{enumerate}
 \itemsep0em%reduce espacio

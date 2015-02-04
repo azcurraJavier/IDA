@@ -6,7 +6,7 @@ La CP es un área de la Ingeniería de Software que tiene como meta primordial d
 
 Diversos estudios e investigaciones demuestran que el principal desafío en la CP es vincular el \textit{Dominio del Problema} y el \textit{Dominio del Programa} \cite{BRM10,MPMR07,MBPHRU10,DWE04}. El primero se refiere al resultado de la ejecución del sistema, mientras que el segundo indica todos los componentes de software que causaron dicho resultado. 
 
-La comunidad de CP sostiene, basado en estudios de los modelos cognitivos, que un programador entiende un programa cuando puede relacionar el comportamiento del mismo con su operación. En otras palabras cuando puede vincular el \textit{Dominio del Problema} y el \textit{Dominio del Programa}. Una posibilidad para lograr la reconstrucción del vínculo antes mencionado es a través de los siguientes pasos: I) Elaborar una representación para el Dominio del Problema; II) Construir una representación del Dominio del Programa y III) Elaborar un procedimiento de vinculación. La Figura \ref{captura1} muestra un modelo de comprensión que refleja lo mencionado previamente.
+La comunidad de CP sostiene, basado en estudios de los modelos cognitivos, que un programador entiende un programa cuando puede relacionar el comportamiento del mismo con su operación \cite{VRNW02,BPVU06,MMDNP12}. En otras palabras cuando puede vincular el \textit{Dominio del Problema} y el \textit{Dominio del Programa}. Una posibilidad para lograr la reconstrucción del vínculo antes mencionado es a través de los siguientes pasos: I) Elaborar una representación para el Dominio del Problema; II) Construir una representación del Dominio del Programa y III) Elaborar un procedimiento de vinculación. La Figura \ref{captura1} muestra un modelo de comprensión que refleja lo mencionado previamente.
 
 \begin{figure}[t] %[h] para here [b] para bottom [t] para top
 \centerline{%queda centrada mejor la imagen
@@ -56,7 +56,7 @@ Para llevar a cabo estrategias involucradas en Modelos Cognitivos, es importante
 
 \section{Extracción de Información}
 
-En la Ingeniería del Software existe un área que se encarga de la \textit{Extracción de la Información} desde los sistemas se software. 
+En la Ingeniería del Software existe un área que se encarga de la \textit{Extracción de la Información} desde los sistemas se software \cite{HCLZ08,LHFC95,IACM08}. 
 %Esta extracción se realiza en los sistemas de software y las técnicas utilizadas para tal fin, se clasifican según el tipo de información que extraen. 
 Existen dos tipos de informaciones: la Estática y la Dinámica. A continuación se explica cada una y se dan ejemplos conocidos de técnicas que las extraen.
 
@@ -115,7 +115,7 @@ Después que se administra la información, se aconseja que la misma sea represe
 
 \section{Visualización de Software}
 
-La \textit{Visualización de Software} es una disciplina de la Ingeniería del Software. Esta disciplina, se encarga de visualizar la información presente en los programas, con el propósito de facilitar el análisis y la comprensión de los mismos. Esta cualidad es interesante ya que en la actualidad los sistemas son cada vez más amplios y complicados de entender. Esta disciplina además brinda apoyo en lo que respecta a la comprensión de las distintas etapas involucradas en el desarrollo de los sistemas, como es el caso del análisis, diseño, implementación y mantenimiento \cite{MBPHRU10}. Por ende, la Visualización de Software colabora en la CP.
+La \textit{Visualización de Software} es una disciplina de la Ingeniería del Software. Esta disciplina, se encarga de visualizar la información presente en los programas, con el propósito de facilitar el análisis y la comprensión de los mismos \cite{TBSE96,TARCM09,LWELP02,PMQUE06}. Esta cualidad es interesante ya que en la actualidad los sistemas son cada vez más amplios y complicados de entender. Esta disciplina además brinda apoyo en lo que respecta a la comprensión de las distintas etapas involucradas en el desarrollo de los sistemas, como es el caso del análisis, diseño, implementación y mantenimiento. Por ende, la Visualización de Software colabora en la CP.
 
 Para lograr lo descripto en el párrafo anterior, la Visualización de Software provee distintos sistemas de visualización. Estos sistemas son herramientas útiles que se encargan de analizar los distintos módulos de un programa y generar vistas. Las vistas son una representación visual de la información contenida en el software. Generalmente, una herramienta de comprensión de programas posee varias vistas que ayudan a comprender un programa, dependiendo de la información que se requiera visualizar existe una vista adecuada a cada caso. Las vistas en el contexto de la CP, representan puentes cognitivos que disminuyen la brecha entre los conocimientos del programador y los conceptos usados en el software de estudio.
 

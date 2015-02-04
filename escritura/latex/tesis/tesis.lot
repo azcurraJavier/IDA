@@ -2,15 +2,15 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {3.1}{\ignorespaces An\IeC {\'a}lisis L\IeC {\'e}xico de c\IeC {\'o}digos JAVA}}{26}
-\contentsline {table}{\numberline {3.2}{\ignorespaces Algunas Frecuencias Relativas de Ids en JAVA 5}}{63}
+\contentsline {table}{\numberline {3.1}{\ignorespaces An\IeC {\'a}lisis L\IeC {\'e}xico de c\IeC {\'o}digos JAVA}}{25}
+\contentsline {table}{\numberline {3.2}{\ignorespaces Algunas Frecuencias Relativas de Ids en JAVA 5}}{61}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {5.1}{\ignorespaces Identificadores extra\IeC {\'\i }dos por el AS ANTLR}}{93}
-\contentsline {table}{\numberline {5.2}{\ignorespaces Comentarios extra\IeC {\'\i }dos por el AS ANTLR}}{94}
-\contentsline {table}{\numberline {5.3}{\ignorespaces Literales extra\IeC {\'\i }dos por el AS ANTLR}}{94}
-\contentsline {table}{\numberline {5.4}{\ignorespaces An\IeC {\'a}lisis Realizado a los Ids extra\IeC {\'\i }dos de Minesweeper.java}}{97}
-\contentsline {table}{\numberline {5.5}{\ignorespaces Parte del An\IeC {\'a}lisis Realizado a los Ids de Editor.java}}{101}
-\contentsline {table}{\numberline {5.6}{\ignorespaces Parte del An\IeC {\'a}lisis Realizado a los Ids de TopGun.java}}{105}
+\contentsline {table}{\numberline {5.1}{\ignorespaces Identificadores extra\IeC {\'\i }dos por el AS ANTLR}}{91}
+\contentsline {table}{\numberline {5.2}{\ignorespaces Comentarios extra\IeC {\'\i }dos por el AS ANTLR}}{92}
+\contentsline {table}{\numberline {5.3}{\ignorespaces Literales extra\IeC {\'\i }dos por el AS ANTLR}}{92}
+\contentsline {table}{\numberline {5.4}{\ignorespaces An\IeC {\'a}lisis Realizado a los Ids extra\IeC {\'\i }dos de Minesweeper.java}}{95}
+\contentsline {table}{\numberline {5.5}{\ignorespaces Parte del An\IeC {\'a}lisis Realizado a los Ids de Editor.java}}{99}
+\contentsline {table}{\numberline {5.6}{\ignorespaces Parte del An\IeC {\'a}lisis Realizado a los Ids de TopGun.java}}{102}
 \addvspace {10\p@ }
 \addvspace {10\p@ }

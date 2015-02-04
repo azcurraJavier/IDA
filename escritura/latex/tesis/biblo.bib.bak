@@ -1,6 +1,25 @@
 % This file was created with JabRef 2.7b.
 % Encoding: UTF-8
 
+@INPROCEEDINGS{SCJH01,
+  author = {0002, Stephen Cook and Ji, He and Harrison, Rachel},
+  title = {Dynamic and Static Views of Software Evolution.},
+  booktitle = {{ICSM}},
+  year = {2001},
+  pages = {592–601},
+  abstract = {dblp},
+  added-at = {2007-04-15T00:00:00.000+0200},
+  biburl = {http://www.bibsonomy.org/bibtex/204e61c3f2495e6a87ff3e3bdf8f021c8/dblp},
+  date = {2007-04-15},
+  ee = {http://computer.org/proceedings/icsm/1189/11890592abs.htm},
+  file = {SCJH01.pdf:SCJH01.pdf:PDF},
+  interhash = {d0d003ab15a4fbab7b0cc45beb3dd71e},
+  intrahash = {04e61c3f2495e6a87ff3e3bdf8f021c8},
+  keywords = {dblp},
+  url = {http://dblp.uni-trier.de/db/conf/icsm/icsm2001.html#CookJH01},
+  x-fetchedfrom = {Bibsonomy}
+}
+
 @BOOK{AHUL06,
   title = {Compilers: Principles, Techniques, and Tools (2nd Edition)},
   publisher = {Addison Wesley},
@@ -51,6 +70,24 @@
   isbn = {978-950-673-892-1}
 }
 
+@INPROCEEDINGS{NIATL98,
+  author = {Anquetil, Nicolas and Lethbridge, Timothy},
+  title = {Assessing the relevance of identifier names in a legacy software
+	system},
+  booktitle = {{CASCON '98: Proc. 1998 conference of the Centre for Advanced Studies
+	on Collaborative research}},
+  year = {1998},
+  pages = {4},
+  publisher = {IBM Press},
+  added-at = {2009-05-22T15:49:10.000+0200},
+  biburl = {http://www.bibsonomy.org/bibtex/2ad2f3d42a7cea889650add65391ff9f2/sjbutler},
+  interhash = {293218bf1d00be2f1b586ea44c004ef2},
+  intrahash = {ad2f3d42a7cea889650add65391ff9f2},
+  keywords = {identifiers to\_read},
+  location = {Toronto, Ontario, Canada},
+  x-fetchedfrom = {Bibsonomy}
+}
+
 @ARTICLE{ACCL02,
   author = {Antoniol, G. and Canfora, G. and Casazza, G. and Lucia, A. De and
 	Merlo, E.},
@@ -68,6 +105,46 @@
   keywords = {traceability},
   priority = {4},
   url = {http://ieeexplore.ieee.org/xpls/abs_all.jsp?arnumber=1041053},
+  x-fetchedfrom = {Bibsonomy}
+}
+
+@INPROCEEDINGS{LGCCA01,
+  author = {Aversano, Lerina and Canfora, Gerardo and Cimitile, Aniello and Lucia,
+	Andrea De},
+  title = {Migrating Legacy Systems to the Web: An Experience Report.},
+  booktitle = {{CSMR}},
+  year = {2001},
+  pages = {148–157},
+  abstract = {dblp},
+  added-at = {2002-01-03T00:00:00.000+0100},
+  biburl = {http://www.bibsonomy.org/bibtex/22c4ce51dfbcceeaae88325137dfbb180/dblp},
+  date = {2002-01-03},
+  interhash = {c92e92b9b87cfe4a347e1faddd379879},
+  intrahash = {2c4ce51dfbcceeaae88325137dfbb180},
+  keywords = {dblp},
+  url = {http://dblp.uni-trier.de/db/conf/csmr/csmr2001.html#AversanoCCL01},
+  x-fetchedfrom = {Bibsonomy}
+}
+
+@INPROCEEDINGS{ALGS01,
+  author = {Aversano, Lerina and Canfora, Gerardo and Stefanucci, Silvio},
+  title = {Understanding and Improving the Maintenance Process: A Method and
+	Two Case Studies.},
+  booktitle = {{IWPC}},
+  year = {2001},
+  pages = {199–208},
+  publisher = {IEEE Computer Society},
+  abstract = {dblp},
+  added-at = {2003-03-24T00:00:00.000+0100},
+  biburl = {http://www.bibsonomy.org/bibtex/21297d95e53cb9826f1136917af100a98/dblp},
+  date = {2003-03-24},
+  ee = {http://computer.org/proceedings/iwpc/1131/11310199abs.htm},
+  file = {ALGS01.pdf:ALGS01.pdf:PDF},
+  interhash = {45cc4e33ba6d91dbe8d328fd251b2943},
+  intrahash = {1297d95e53cb9826f1136917af100a98},
+  isbn = {0-7695-1131-7},
+  keywords = {dblp},
+  url = {http://dblp.uni-trier.de/db/conf/iwpc/iwpc2001.html#AversanoCS01},
   x-fetchedfrom = {Bibsonomy}
 }
 
@@ -117,6 +194,25 @@
   x-fetchedfrom = {Bibsonomy}
 }
 
+@ARTICLE{TBSE96,
+  author = {Ball, Thomas and Eick, Stephen G.},
+  title = {Software Visualization in the Large.},
+  journal = {IEEE Computer},
+  year = {1996},
+  volume = {29},
+  pages = {33–43},
+  number = {4},
+  month = {April},
+  abstract = {software evolution bibliography},
+  added-at = {2007-09-25T21:44:52.000+0200},
+  biburl = {http://www.bibsonomy.org/bibtex/22fbd46f10bf6483043ef4499a5c74c51/tommens},
+  interhash = {22d1dbb94b1cbc194d9b834749288856},
+  intrahash = {2fbd46f10bf6483043ef4499a5c74c51},
+  keywords = {imported},
+  publisher = {IEEE Computer Society},
+  x-fetchedfrom = {Bibsonomy}
+}
+
 @INPROCEEDINGS{KBVR00,
   author = {Bennett, K. and Rajlich, V.},
   title = {Software maintenance and evolution: a roadmap.},
@@ -149,10 +245,19 @@
 	and Uzal, Roberto},
   title = {Program inspection to interconnect behavioral and operational view
 	for program comprehension},
+  booktitle = {1st York Doctoral Symposium on Computing. York},
   year = {2007},
   publisher = {University of York},
   file = {MPMR07.pdf:MPMR07.pdf:PDF},
   institution = {National University of San Luis \& University of Minho}
+}
+
+@INPROCEEDINGS{BPVU06,
+  author = {Ber{\'o}n, Mario and Henriques, Pedro Rangel and Varanda Pereira,
+	Maria Jo{\~a}o and Uzal, Roberto},
+  title = {Herramientas para la comprensi{\'o}n de programas},
+  booktitle = {VIII Workshop de Investigadores en Ciencias de la Computaci{\'o}n},
+  year = {2006}
 }
 
 @INPROCEEDINGS{BRM10,
@@ -178,11 +283,27 @@
   affiliation = {Department of Computer Science, Loyola University Maryland, Baltimore,
 	MD 21210-2699, USA},
   biburl = {http://www.bibsonomy.org/bibtex/2ece47dd6d53289fdfb3e96a376994153/sjbutler},
-  file = {:Binkley 2012 Impact of identifier style on effort.pdf:PDF;DMDJ13.pdf:DMDJ13.pdf:PDF},
+  file = {DMDJ13.pdf:DMDJ13.pdf:PDF},
   interhash = {4a0814e05c49d09f4346455bc4b9ee4c},
   intrahash = {ece47dd6d53289fdfb3e96a376994153},
   keywords = {identifier},
   publisher = {Springer Netherlands},
+  x-fetchedfrom = {Bibsonomy}
+}
+
+@INPROCEEDINGS{BMDDL09,
+  author = {Binkley, Dave and Davis, Marcia and Lawrie, Dawn and Morrell, Christopher},
+  title = {To Camel{C}ase or {U}nder{\_}score},
+  booktitle = {{Proc. of Int'l Conf. on Program Comprehension}},
+  year = {2009},
+  pages = {158–167},
+  month = may,
+  publisher = {IEEE},
+  added-at = {2009-12-15T20:35:01.000+0100},
+  biburl = {http://www.bibsonomy.org/bibtex/27bca7e81d97b90b9ee763d3c2a548050/sjbutler},
+  interhash = {1de9b43aea42d56d7d0f87afa1e36c04},
+  intrahash = {7bca7e81d97b90b9ee763d3c2a548050},
+  keywords = {identifiers},
   x-fetchedfrom = {Bibsonomy}
 }
 
@@ -195,6 +316,32 @@
   pages = {125--129},
   file = {BROOK82.pdf:BROOK82.pdf:PDF},
   publisher = {ACM Press New York, NY, USA}
+}
+
+@INPROCEEDINGS{BEKH97,
+  author = {Burch, Evangeline and Kungs, Hsiang-Jui},
+  title = {Modeling software maintenance requests: a case study},
+  booktitle = {Software Maintenance, 1997. Proceedings., International Conference
+	on},
+  year = {1997},
+  pages = {40--47},
+  organization = {IEEE}
+}
+
+@INPROCEEDINGS{SBWYY10,
+  author = {Butler, Simon and Wermelinger, Michel and Yu, Yijun and Sharp, Helen},
+  title = {Exploring the Influence of Identifier Names on Code Quality: an empirical
+	study.},
+  booktitle = {{Proc. of the 14th European Conf. on Software Maintenance and Reengineering}},
+  year = {2010},
+  pages = {159–168},
+  publisher = {IEEE Computer Society},
+  added-at = {2010-03-29T11:50:39.000+0200},
+  biburl = {http://www.bibsonomy.org/bibtex/22c0191c4a3246b5449fc506904b0cd97/sjbutler},
+  interhash = {fc4093dc0ee7149653b14ffff122636f},
+  intrahash = {2c0191c4a3246b5449fc506904b0cd97},
+  keywords = {identifiers my\_work},
+  x-fetchedfrom = {Bibsonomy}
 }
 
 @INPROCEEDINGS{BCPT00,
@@ -276,7 +423,6 @@
   title = {Fundamentals of Database Systems},
   publisher = {Addison-Wesley Longman Publishing Co., Inc.},
   year = {1999},
-  editor = {Shanklin, Carter},
   author = {Elmasri, Ramez A. and Navathe, Shankrant B.},
   address = {Boston, MA, USA},
   edition = {3rd},
@@ -354,6 +500,17 @@
   x-fetchedfrom = {Bibsonomy}
 }
 
+@INPROCEEDINGS{FDPM08,
+  author = {Fonseca, Ruben and Da Cruz, Daniela and Henriques, Pedro Rangel and
+	Varanda Pereira, MJ},
+  title = {How to interconnect operational and behavioral views of web applications},
+  booktitle = {Program Comprehension, 2008. ICPC 2008. The 16th IEEE International
+	Conference on},
+  year = {2008},
+  pages = {263--267},
+  organization = {IEEE}
+}
+
 @INPROCEEDINGS{JDPH08,
   author = {Freitas, Jos{\'e} Lu{\'\i}s and da Cruz, Daniela and Henriques, Pedro
 	Rangel},
@@ -367,8 +524,7 @@
   author = {Wilhelm Hasselbring and Andreas Fuhr and Volker Riediger},
   title = {First International Workshop on Model-Driven Software Migration (MDSM
 	2011)},
-  booktitle = {CSMR '11 Proceedings of the 2011 15th European Proceedings of the
-	2011 15th European Conference on Software Maintenance and Reengineering
+  booktitle = {15th European Conference on Software Maintenance and Reengineering
 	(CSMR 2011)},
   year = {2011},
   pages = {299--300},
@@ -378,6 +534,43 @@
   file = {WHAFVR11.pdf:WHAFVR11.pdf:PDF},
   keywords = {Model-Driven Software Migration},
   url = {http://oceanrep.geomar.de/24406/}
+}
+
+@INPROCEEDINGS{HCLZ08,
+  author = {He, Chengwan and Li, Zheng and He, Keqing},
+  title = {Identification and Extraction of Design Pattern Information in Java
+	Program.},
+  booktitle = {{SNPD}},
+  year = {2008},
+  pages = {828–834},
+  publisher = {IEEE Computer Society},
+  abstract = {dblp},
+  added-at = {2008-08-20T00:00:00.000+0200},
+  biburl = {http://www.bibsonomy.org/bibtex/24f5c3bb2f81ec40fd1e0a4c3e9c26a57/dblp},
+  date = {2008-08-20},
+  ee = {http://doi.ieeecomputersociety.org/10.1109/SNPD.2008.29},
+  file = {HCLZ08.pdf:HCLZ08.pdf:PDF},
+  interhash = {c72a3de5d07819c13ce2ce4ceb688216},
+  intrahash = {4f5c3bb2f81ec40fd1e0a4c3e9c26a57},
+  isbn = {978-0-7695-3263-9},
+  keywords = {dblp},
+  url = {http://dblp.uni-trier.de/db/conf/snpd/snpd2008.html#HeLH08},
+  x-fetchedfrom = {Bibsonomy}
+}
+
+@ARTICLE{EDDLS13,
+  author = {Hill, Emily and Binkley, David and Lawrie, Dawn and Pollock, Lori
+	and Vijay-Shanker, K.},
+  title = {An empirical study of identifier splitting techniques},
+  journal = {Empirical Software Engineering},
+  year = {2013},
+  added-at = {2013-09-17T16:09:41.000+0200},
+  biburl = {http://www.bibsonomy.org/bibtex/2ad83258b1de88424e9a8f8a8931b1fb9/sjbutler},
+  file = {:Hill 2013 Identifier splitting techniques.pdf:PDF},
+  interhash = {bf1b548b14e274f0e1fc71d81c40ef4a},
+  intrahash = {ad83258b1de88424e9a8f8a8931b1fb9},
+  keywords = {identifier\_splitting},
+  x-fetchedfrom = {Bibsonomy}
 }
 
 @INPROCEEDINGS{EZH08,
@@ -398,11 +591,33 @@
   x-fetchedfrom = {Bibsonomy}
 }
 
-@INBOOK{STD610,
-  title = {Standard Glossary of Software Engineering Terminology 610.12-1990.},
-  publisher = {IEEE Press},
-  year = {1999},
+@INPROCEEDINGS{IACM08,
+  author = {Iasinschi, Adrian and Cosulschi, Mirel},
+  title = {Semi-Automated Wrappers Using Rule Trees.},
+  booktitle = {{SYNASC}},
+  year = {2008},
+  editor = {Negru, Viorel and Jebelean, Tudor and Petcu, Dana and Zaharie, Daniela},
+  pages = {209–215},
+  publisher = {IEEE Computer Society},
+  abstract = {dblp},
+  added-at = {2010-01-05T00:00:00.000+0100},
+  biburl = {http://www.bibsonomy.org/bibtex/2c612f0b8669a1b0100514143ba61953a/dblp},
+  date = {2010-01-05},
+  ee = {http://doi.ieeecomputersociety.org/10.1109/SYNASC.2008.67},
+  file = {IACM08.pdf:IACM08.pdf:PDF},
+  interhash = {d329648c31b61ff8548da441eb8603ac},
+  intrahash = {c612f0b8669a1b0100514143ba61953a},
+  isbn = {978-0-7695-3523-4},
+  keywords = {dblp},
+  url = {http://dblp.uni-trier.de/db/conf/synasc/synasc2008.html#IasinschiC08},
+  x-fetchedfrom = {Bibsonomy}
+}
+
+@ARTICLE{STD610,
   author = {IEEE},
+  title = {Standard Glossary of Software Engineering Terminology 610.12-1990.},
+  journal = {IEEE Std 610.12-1990},
+  year = {1999},
   volume = {1},
   abstract = {AOEvolutionchapter short paper},
   added-at = {2007-09-26T12:09:12.000+0200},
@@ -412,6 +627,7 @@
   interhash = {dbf74fa25ca1534eff13bd0c74627bda},
   intrahash = {d59e941fd54f53376acd17fa54d9dbe3},
   keywords = {engineering software},
+  publisher = {IEEE Press},
   x-fetchedfrom = {Bibsonomy}
 }
 
@@ -448,6 +664,24 @@
   intrahash = {bf63b604284404761f91da7ec13f2ae2},
   keywords = {dblp},
   url = {http://dblp.uni-trier.de/db/conf/dl/dl2000.html#LarkeyOPT00},
+  x-fetchedfrom = {Bibsonomy}
+}
+
+@INPROCEEDINGS{DLBD11,
+  author = {Lawrie, Dawn and Binkley, David},
+  title = {Expanding identifiers to normalize source code vocabulary.},
+  booktitle = {{ICSM}},
+  year = {2011},
+  pages = {113–122},
+  publisher = {IEEE},
+  added-at = {2011-11-23T00:00:00.000+0100},
+  biburl = {http://www.bibsonomy.org/bibtex/24b724d0510f3787ed2238f3354b3b1a8/dblp},
+  ee = {http://dx.doi.org/10.1109/ICSM.2011.6080778},
+  interhash = {270c63a7df3f19c8caaa99bce6ef934d},
+  intrahash = {4b724d0510f3787ed2238f3354b3b1a8},
+  isbn = {978-1-4577-0663-9},
+  keywords = {dblp},
+  url = {http://dblp.uni-trier.de/db/conf/icsm/icsm2011.html#LawrieB11},
   x-fetchedfrom = {Bibsonomy}
 }
 
@@ -527,6 +761,27 @@
   x-fetchedfrom = {Bibsonomy}
 }
 
+@ARTICLE{LDMCFH07,
+  author = {Lawrie, Dawn and Morrell, Christopher and Feild, Henry and Binkley,
+	David},
+  title = {Effective identifier names for comprehension and memory.},
+  journal = {ISSE},
+  year = {2007},
+  volume = {3},
+  pages = {303–318},
+  number = {4},
+  abstract = {dblp},
+  added-at = {2007-12-08T00:00:00.000+0100},
+  biburl = {http://www.bibsonomy.org/bibtex/256941a1096f246b097179be6d232cd50/dblp},
+  date = {2007-12-08},
+  ee = {http://dx.doi.org/10.1007/s11334-007-0031-2},
+  interhash = {ec5c3e12588307f876cd87b1b0c923eb},
+  intrahash = {56941a1096f246b097179be6d232cd50},
+  keywords = {dblp},
+  url = {http://dblp.uni-trier.de/db/journals/isse/isse3.html#LawrieMFB07},
+  x-fetchedfrom = {Bibsonomy}
+}
+
 @INPROCEEDINGS{DCHD06,
   author = {Lawrie, D. and Morrell, C. and Feild, H. and Binkley, D.},
   title = {What's in a Name? A Study of Identifiers.},
@@ -544,6 +799,36 @@
 	Educational institutions; Natural languages; Production; Programming
 	profession; Quality assessment; Software quality; Software systems},
   x-fetchedfrom = {IEEEXplore}
+}
+
+@INPROCEEDINGS{LHFC95,
+  author = {Lieberman, Henry and Fry, Christopher},
+  title = {Bridging the Gulf Between Code and Behavior in Programming.},
+  booktitle = {{CHI}},
+  year = {1995},
+  editor = {Katz, Irvin R. and Mack, Robert L. and Marks, Linn and Rosson, Mary
+	Beth and Nielsen, Jakob},
+  pages = {480–486},
+  publisher = {ACM/Addison-Wesley},
+  added-at = {2011-12-21T00:00:00.000+0100},
+  biburl = {http://www.bibsonomy.org/bibtex/2e5e8ea03dd87ce6801ed4d3b7d8a0125/dblp},
+  ee = {http://doi.acm.org/10.1145/223904.223969},
+  file = {LHFC95.pdf:LHFC95.pdf:PDF},
+  interhash = {ea2ed2e8b748143eae537fc1bf874e65},
+  intrahash = {e5e8ea03dd87ce6801ed4d3b7d8a0125},
+  isbn = {0-201-84705-1},
+  keywords = {dblp},
+  url = {http://dblp.uni-trier.de/db/conf/chi/chi95.html#LiebermanF95},
+  x-fetchedfrom = {Bibsonomy}
+}
+
+@ARTICLE{LWELP02,
+  author = {L{\"o}we, Welf and Ericsson, Morgan and Lundberg, Jonas and Panas,
+	Thomas},
+  title = {Software comprehension-integrating program analysis and software
+	visualization},
+  journal = {Software Engineering Research and Practice (SERPS)},
+  year = {2002}
 }
 
 @ARTICLE{VMAVA95,
@@ -579,6 +864,37 @@
   file = {MPOB03.pdf:MPOB03.pdf:PDF}
 }
 
+@INPROCEEDINGS{MMDNP12,
+  author = {Pereira, Maria João Varanda and Beron, Mario Marcelo and da Cruz,
+	Daniela Carneiro and Oliveira, Nuno and Henriques, Pedro Rangel},
+  title = {Problem Domain Oriented Approach for Program Comprehension.},
+  booktitle = {{SLATE}},
+  year = {2012},
+  editor = {Simões, Alberto and Queirós, Ricardo and da Cruz, Daniela Carneiro},
+  volume = {21},
+  series = {{OASICS}},
+  pages = {91–105},
+  publisher = {Schloss Dagstuhl - Leibniz-Zentrum fuer Informatik},
+  added-at = {2012-06-22T00:00:00.000+0200},
+  biburl = {http://www.bibsonomy.org/bibtex/26c875a113065cad783450351215fdeb2/dblp},
+  ee = {http://dx.doi.org/10.4230/OASIcs.SLATE.2012.91},
+  file = {MMDNP12.pdf:MMDNP12.pdf:PDF},
+  interhash = {6a73e0b532000486ed8834c97b00c28b},
+  intrahash = {6c875a113065cad783450351215fdeb2},
+  isbn = {978-3-939897-40-8},
+  keywords = {dblp},
+  url = {http://dblp.uni-trier.de/db/conf/slate/slate2012.html#PereiraBCOH12},
+  x-fetchedfrom = {Bibsonomy}
+}
+
+@ARTICLE{PMQUE06,
+  author = {Petre, Marian and de Quincey, Ed and others},
+  title = {A gentle overview of software visualisation},
+  journal = {PPIG News Letter},
+  year = {2006},
+  pages = {1--10}
+}
+
 @BOOK{RSPMGH02,
   title = {Software Engineering - A Practitioner's Approach.},
   publisher = {McGraw-Hill},
@@ -593,6 +909,60 @@
   keywords = {imported},
   owner = {magsilva},
   timestamp = {2008.07.31},
+  x-fetchedfrom = {Bibsonomy}
+}
+
+@INPROCEEDINGS{VRNW02,
+  author = {Rajlich, V. and Wilde, N.},
+  title = {The role of concepts in program comprehension.},
+  booktitle = {{Proc. 10th Int'l Workshop on Program Comprehension}},
+  year = {2002},
+  pages = {271–278},
+  publisher = {IEEE},
+  added-at = {2010-01-10T12:26:07.000+0100},
+  biburl = {http://www.bibsonomy.org/bibtex/2a272ac4a943eba243642359c3770a051/sjbutler},
+  file = {VRNW02.pdf:VRNW02.pdf:PDF},
+  interhash = {1cd530ca743193b43989bd95a59b0431},
+  intrahash = {a272ac4a943eba243642359c3770a051},
+  issn = {1092-8138},
+  keywords = {software program\_comprehension to\_read},
+  x-fetchedfrom = {Bibsonomy}
+}
+
+@INPROCEEDINGS{SBMJ10,
+  author = {Sharif, Bonita and Maletic, Jonathan I.},
+  title = {An Eye Tracking Study on camelCase and under\_score Identifier Styles.},
+  booktitle = {{ICPC}},
+  year = {2010},
+  pages = {196–205},
+  publisher = {IEEE Computer Society},
+  added-at = {2010-08-16T00:00:00.000+0200},
+  biburl = {http://www.bibsonomy.org/bibtex/28afe98f4904692955178af99bb4fce95/dblp},
+  ee = {http://doi.ieeecomputersociety.org/10.1109/ICPC.2010.41},
+  interhash = {aa067d2c8ccf920d0a3eca43d1c28a51},
+  intrahash = {8afe98f4904692955178af99bb4fce95},
+  isbn = {978-0-7695-4113-6},
+  keywords = {dblp},
+  url = {http://dblp.uni-trier.de/db/conf/iwpc/icpc2010.html#SharifM10},
+  x-fetchedfrom = {Bibsonomy}
+}
+
+@INPROCEEDINGS{SMMH98,
+  author = {Sousa, Maria Joao C. and Moreira, H. M.},
+  title = {A Survey on the Software Maintenance Process.},
+  booktitle = {{ICSM}},
+  year = {1998},
+  pages = {265–274},
+  abstract = {dblp},
+  added-at = {2002-03-12T00:00:00.000+0100},
+  biburl = {http://www.bibsonomy.org/bibtex/282c653029456bbf5fa6eec0ce803e9a1/dblp},
+  date = {2002-03-12},
+  ee = {http://computer.org/proceedings/icsm/8779/87790265abs.htm},
+  file = {SMMH98.pdf:SMMH98.pdf:PDF},
+  interhash = {0a5b72758cd08fe65b2b694acfe3af22},
+  intrahash = {82c653029456bbf5fa6eec0ce803e9a1},
+  keywords = {dblp},
+  url = {http://dblp.uni-trier.de/db/conf/icsm/icsm1998.html#SousaM98},
   x-fetchedfrom = {Bibsonomy}
 }
 
@@ -639,6 +1009,25 @@
   publisher = {Elsevier}
 }
 
+@ARTICLE{TARCM09,
+  author = {Teyseyre, Alfredo Raúl and Campo, Marcelo R.},
+  title = {An Overview of 3D Software Visualization.},
+  journal = {IEEE Trans. Vis. Comput. Graph.},
+  year = {2009},
+  volume = {15},
+  pages = {87–105},
+  number = {1},
+  added-at = {2011-11-07T00:00:00.000+0100},
+  biburl = {http://www.bibsonomy.org/bibtex/2b64e22301db7bcd78d69b7fc6cc9bde6/dblp},
+  ee = {http://doi.ieeecomputersociety.org/10.1109/TVCG.2008.86},
+  file = {TARCM09.pdf:TARCM09.pdf:PDF},
+  interhash = {468854cbeaeca1bca986fe35160dd747},
+  intrahash = {b64e22301db7bcd78d69b7fc6cc9bde6},
+  keywords = {dblp},
+  url = {http://dblp.uni-trier.de/db/journals/tvcg/tvcg15.html#TeyseyreC09},
+  x-fetchedfrom = {Bibsonomy}
+}
+
 @INPROCEEDINGS{PFT02,
   author = {Tiako, P.F.},
   title = {Maintenance in joint software development.},
@@ -663,6 +1052,7 @@
 @MISC{TIE89,
   author = {Tim Tiemens},
   title = {Cognitive Models of Program Comprehension},
+  journal = {Software Engineering Research Center},
   year = {1989},
   file = {TIE89.ps:TIE89.ps:PostScript}
 }
@@ -688,5 +1078,67 @@
   keywords = {dblp},
   url = {http://dblp.uni-trier.de/db/conf/kbse/asew2008.html#TorchianoPRLL08},
   x-fetchedfrom = {Bibsonomy}
+}
+
+@ARTICLE{WYHW10,
+  author = {Wang, YingHui and He, XiuQing and Wang, QiongFang},
+  title = {Lifecycle based Study Framework of Software Evolution},
+  journal = {environment},
+  year = {2010},
+  volume = {4},
+  pages = {7}
+}
+
+@INPROCEEDINGS{ZHGL09,
+  author = {Zhao, Qian and Wang, Huiqiang and Feng, Guangsheng and Lu, Xu},
+  title = {Software Evolution Method Considering Software Historical Behavior},
+  booktitle = {{Internet Computing for Science and Engineering (ICICSE), 2009 Fourth
+	International Conference on}},
+  year = {2009},
+  pages = {36–41},
+  month = {Dec},
+  arnumber = {5521637},
+  doi = {10.1109/ICICSE.2009.21},
+  file = {ZHGL09.pdf:ZHGL09.pdf:PDF},
+  keywords = {software maintenance; software management; autonomic software attribute;
+	management software; normal software; software dependability; software
+	evolution mechanism; software evolution method; software evolution
+	research; software historical behavior; software system; Application
+	software; Computer science; Concrete; Costs; Educational institutions;
+	History; Internet; Software maintenance; Software systems; Software
+	tools; autonomic computing; component; software behavior; software
+	dependibility; software evolution},
+  x-fetchedfrom = {IEEEXplore}
+}
+
+@INPROCEEDINGS{ZOYI03,
+  author = {Zou, Ying},
+  title = {Incorporating Quality Requirements in Software Migration Process.},
+  booktitle = {{STEP}},
+  year = {2003},
+  pages = {175–185},
+  publisher = {IEEE Computer Society},
+  abstract = {dblp},
+  added-at = {2007-01-10T00:00:00.000+0100},
+  biburl = {http://www.bibsonomy.org/bibtex/27e96499a6f44c4350425519130ee5053/dblp},
+  date = {2007-01-10},
+  ee = {http://doi.ieeecomputersociety.org/10.1109/STEP.2003.15},
+  file = {ZOYI03.pdf:ZOYI03.pdf:PDF},
+  interhash = {85c64a3d5d65cc2c5c9baa0bfbae3866},
+  intrahash = {7e96499a6f44c4350425519130ee5053},
+  isbn = {0-7695-2218-1},
+  keywords = {dblp},
+  url = {http://dblp.uni-trier.de/db/conf/step/step2003.html#Zou03},
+  x-fetchedfrom = {Bibsonomy}
+}
+
+@INPROCEEDINGS{ZYKK02,
+  author = {Zou, Ying and Kontogiannis, Kostas},
+  title = {Migration to object oriented platforms: A state transformation approach},
+  booktitle = {Software Maintenance, 2002. Proceedings. International Conference
+	on},
+  year = {2002},
+  pages = {530--539},
+  organization = {IEEE}
 }
 

@@ -328,5 +328,7 @@ Al agregar las columnas nuevas se habilita el cuadro \textit{Ocultar Columnas}. 
 
 Luego si el usuario lo decide, puede presionar el botón \textit{Abrir} en el cuadro \textit{Ver Tabla en Navegador} (Ver Figura \ref{ida10} - Flecha 3). Esta acción abre automáticamente el navegador web por defecto del sistema operativo, y mediante una página web en formato html, se muestra una tabla con los resultados obtenidos producto del análisis de ids (Ver Figura \ref{ida11}). De esta manera, el usuario puede visualizar más claramente el análisis realizado, permitiendo también imprimir los resultados en papel (mediante el navegador web), si el usuario lo desea.
 
-Dando como finalizado el proceso necesario que debe realizar el usuario para analizar los ids con la herramienta IDA, en el próximo capítulo se describen algunos casos de estudio que demuestran la importancia de haber construido IDA.
+Dando como finalizado el proceso necesario que debe realizar el usuario para analizar los ids con la herramienta IDA, resta destacar que IDA a su vez posee una extensión. Esta extensión permite que IDA pueda interactuar con otras aplicaciones y de esta manera forme parte de un proceso de análisis más extenso, la extensión antedicha se describe en el Apéndice A. 
+
+Para continuar con el desarrollo de este trabajo final, el próximo capítulo se explican algunos casos de estudio que demuestran la importancia de haber construido IDA.
 
