@@ -207,10 +207,11 @@ Ruben Fonseca, Daniela Da~Cruz, Pedro~Rangel Henriques, and MJ~Varanda~Pereira.
 \newblock How to interconnect operational and behavioral views of web
   applications.
 \newblock In {\em Program Comprehension, 2008. ICPC 2008. The 16th IEEE
-  International Conference on}, pages 263--267. IEEE, 2008.
+  International Conference on}, pages 263--267. IEEE, 2008. 
 \enlargethispage{\baselineskip}
 \enlargethispage{\baselineskip}
-\enlargethispage{\baselineskip}
+\enlargethispage{\baselineskip}  
+
 \bibitem{JDPH08}
 Jos{\'e}~Lu{\'\i}s Freitas, Daniela da~Cruz, and Pedro~Rangel Henriques.
 \newblock The role of comments on program comprehension.

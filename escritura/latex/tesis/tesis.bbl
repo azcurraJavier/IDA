@@ -1,7 +1,7 @@
 \begin{thebibliography}{10}
 
 \bibitem{AHUL06}
-Alfred~V. Aho, Monica~S. Lam, Ravi Sethi, and Jeffrey~D. Ullman.
+Alfred~V. Aho, Monica~S. Lam, Ravi Sethi, and JeffreyD. Ullman.
 \newblock {\em Compilers: Principles, Techniques, and Tools (2nd Edition)}.
 \newblock Addison Wesley, August 2006.
 \newblock ISBN: 978-0321486813.
@@ -31,19 +31,21 @@ Nicolas Anquetil and Timothy Lethbridge.
 Giuliano Antoniol, Gerardo Canfora, Gerardo Casazza, Andrea~De Lucia, and
   Ettore Merlo.
 \newblock Recovering traceability links between code and documentation.
-\newblock {\em Software Engineering, IEEE Transactions on}, 28(10):970–983,
+\newblock {\em IEEE Transactions on Software Engineering}, 28(10):970–983,
   2002.
 
 \bibitem{LGCCA01}
 Lerina Aversano, Gerardo Canfora, Aniello Cimitile, and Andrea~De Lucia.
 \newblock Migrating legacy systems to the web: An experience report.
-\newblock In {\em {CSMR}}, page 148–157, 2001.
+\newblock In {\em Fifth European Conference on Software Maintenance and
+  Reengineering}, page 148–157, 2001.
 
 \bibitem{ALGS01}
 Lerina Aversano, Gerardo Canfora, and Silvio Stefanucci.
 \newblock Understanding and improving the maintenance process: A method and two
   case studies.
-\newblock In {\em {IWPC}}, page 199–208. IEEE Computer Society, 2001.
+\newblock In {\em International Workshop on Program Comprehension}, page
+  199–208. IEEE Computer Society, 2001.
 
 \bibitem{AMPM12}
 Javier Azcurra, Mario Berón, Pedro Henriques, and Maria~João Pereira.
@@ -63,19 +65,21 @@ Javier Azcurra, Mario Berón, Germán Montejano, Augusto Farnese, Pedro
 \bibitem{THBE99}
 Thomas Ball.
 \newblock The concept of dynamic analysis.
-\newblock In Oscar Nierstrasz and Michel Lemoine, editors, {\em ESEC / SIGSOFT
-  FSE}, volume 1687 of {\em {Lecture Notes in Computer Science}}, page
-  216–234. Springer, 1999.
+\newblock In Oscar Nierstrasz and Michel Lemoine, editors, {\em Software
+  Engineering — ESEC/FSE ’99}, volume 1687 of {\em {Lecture Notes in
+  Computer Science}}, page 216–234. Springer, 1999.
 
 \bibitem{TBSE96}
 Thomas Ball and Stephen~G. Eick.
 \newblock Software visualization in the large.
-\newblock {\em IEEE Computer}, 29(4):33–43, April 1996.
+\newblock {\em IEEE Computer, Bell Labs., 1000 East Warrenville Road,
+  Naperville IL 60566}, 29(4):33–43, April 1996.
 
 \bibitem{KBVR00}
-Keith Bennett and Vaclav Rajlich.
+Keith~H. Bennett and Vaclav~T. Rajlich.
 \newblock Software maintenance and evolution: a roadmap.
-\newblock In {\em {ICSE} - Future of {SE} Track}, page 73–87, 2000.
+\newblock In {\em {Conference on The Future of Software Engineering}}, page
+  73–87, Limerick, Ireland, June 2000. ACM Press.
 
 \bibitem{MPMR07}
 Mario Ber{\'o}n, Pedro Henriques, Maria~Jo{\~a}o Pereira, and Roberto Uzal.
@@ -98,8 +102,8 @@ Mario Ber{\'o}n, Pedro~Rangel Henriques, Maria~Jo{\~a}o Varanda~Pereira, and
   Computaci{\'o}n}, 2006.
 
 \bibitem{BRM10}
-Mario Ber{\'o}n, Daniel~Eduardo Riesco, Germ{\'a}n~Antonio Montejano,
-  Pedro~Rangel Henriques, and Maria~J Pereira.
+Mario Ber{\'o}n, Daniel Riesco, Germ{\'a}n Montejano, Pedro~Rangel Henriques,
+  and Maria~J Pereira.
 \newblock Estrategias para facilitar la comprensi{\'o}n de programas.
 \newblock In {\em XII Workshop de Investigadores en Ciencias de la
   Computaci{\'o}n}, 2010.
@@ -113,28 +117,28 @@ Dave Binkley, Marcia Davis, Dawn Lawrie, Jonathan Maletic, Christopher Morrell,
 \bibitem{BMDDL09}
 Dave Binkley, Marcia Davis, Dawn Lawrie, and Christopher Morrell.
 \newblock To camel{C}ase or {U}nder{\_}score.
-\newblock In {\em {Proc. of Int'l Conf. on Program Comprehension}}, page
+\newblock In {\em International Conference on Program Comprehension}, page
   158–167. IEEE, May 2009.
 
 \bibitem{BROOK82}
 Ruven Brook.
 \newblock A theoretical analysis of the role of documentation in the
-  comprehensionof computer programs.
-\newblock {\em Proceedings of the 1982 conference on Human factors in
-  computingsystems.}, pages 125--129, 1982.
+  comprehension of computer programs.
+\newblock {\em Proceedings of the 1982 conference on Human factors in computing
+  systems.}, pages 125--129, 1982.
 
 \bibitem{BEKH97}
 Evangeline Burch and Hsiang-Jui Kungs.
 \newblock Modeling software maintenance requests: a case study.
-\newblock In {\em Software Maintenance, 1997. Proceedings., International
-  Conference on}, pages 40--47. IEEE, 1997.
+\newblock In {\em International Conference on Software Maintenance.}, pages
+  40--47. IEEE, IEEE Computer Society, 1997.
 
 \bibitem{SBWYY10}
 Simon Butler, Michel Wermelinger, Yijun Yu, and Helen Sharp.
 \newblock Exploring the influence of identifier names on code quality: an
   empirical study.
-\newblock In {\em {Proc. of the 14th European Conf. on Software Maintenance and
-  Reengineering}}, page 159–168. IEEE Computer Society, 2010.
+\newblock In {\em 14th European Conf. on Software Maintenance and
+  Reengineering}, page 159–168. IEEE Computer Society, 2010.
 
 \bibitem{BCPT99}
 Bruno Caprile and Paolo Tonella.
@@ -145,23 +149,25 @@ Bruno Caprile and Paolo Tonella.
 \bibitem{BCPT00}
 Bruno Caprile and Paolo Tonella.
 \newblock Restructuring program identifier names.
-\newblock In {\em Proc. Int'l Conf. on Software Maintenance}, page 97–107.
-  IEEE, 2000.
+\newblock In {\em International Conference on Software Maintenance}, page
+  97–107. IEEE, 2000.
 
 \bibitem{SCJH01}
 Stephen Cook, He~Ji, and Rachel Harrison.
 \newblock Dynamic and static views of software evolution.
-\newblock In {\em {ICSM}}, page 592–601, 2001.
+\newblock In {\em International Conference on Software Maintenance}, page
+  592–601, 2001.
 
 \bibitem{DFPM05}
-Florian DeiBenbock and Markus Pizka.
+Florian Deissenboeck and Markus Pizka.
 \newblock Concise and consistent naming.
-\newblock In {\em IWPC}, page 97–106. IEEE Computer Society, 2005.
+\newblock {\em Software Quality Journal}, 14(3):261--282, 2006.
 
 \bibitem{TERD01}
 Thomas Eisenbarth, Rainer Koschke, and Daniel Simon.
 \newblock Aiding program comprehension by static and dynamic feature analysis.
-\newblock In {\em ICSM}, pages 602--611, 2001.
+\newblock In {\em International Conference on Software Maintenance}, pages
+  602--611, 2001.
 
 \bibitem{ERNS99}
 Ramez~A. Elmasri and Shankrant~B. Navathe.
@@ -200,21 +206,20 @@ Henry Feild, David Binkley, and Dawn Lawrie.
 \bibitem{FFCW01}
 Fangfang Feng and W.~Bruce Croft.
 \newblock Probabilistic techniques for phrase extraction.
-\newblock {\em Inf. Process. Manage.}, 37(2):199–220, 2001.
+\newblock {\em Information processing \& management}, 37(2):199–220, 2001.
 
 \bibitem{FDPM08}
 Ruben Fonseca, Daniela Da~Cruz, Pedro~Rangel Henriques, and MJ~Varanda~Pereira.
 \newblock How to interconnect operational and behavioral views of web
   applications.
-\newblock In {\em Program Comprehension, 2008. ICPC 2008. The 16th IEEE
-  International Conference on}, pages 263--267. IEEE, 2008.
-\enlargethispage{\baselineskip}
-\enlargethispage{\baselineskip}
-\enlargethispage{\baselineskip}
+\newblock In {\em The 16th IEEE International Conference on Program
+  Comprehension}, pages 263--267. IEEE, 2008.
+
 \bibitem{JDPH08}
 Jos{\'e}~Lu{\'\i}s Freitas, Daniela da~Cruz, and Pedro~Rangel Henriques.
 \newblock The role of comments on program comprehension.
-\newblock In {\em INForum}, 2008.
+\newblock In {\em Informatics Department, Universidade do Minho, Braga,
+  Portugal}, 2008.
 
 \bibitem{WHAFVR11}
 Wilhelm Hasselbring, Andreas Fuhr, and Volker Riediger.
@@ -228,7 +233,9 @@ Wilhelm Hasselbring, Andreas Fuhr, and Volker Riediger.
 Chengwan He, Zheng Li, and Keqing He.
 \newblock Identification and extraction of design pattern information in java
   program.
-\newblock In {\em {SNPD}}, page 828–834. IEEE Computer Society, 2008.
+\newblock In {\em Ninth ACIS International Conference on Software Engineering,
+  Artificial Intelligence, Networking, and Parallel/Distributed Computing},
+  pages 828--834. IEEE, 2008.
 
 \bibitem{EDDLS13}
 Emily Hill, David Binkley, Dawn Lawrie, Lori Pollock, and K.~Vijay-Shanker.
@@ -247,14 +254,15 @@ Emily Hill, Zachary~P. Fry, Haley Boyd, Giriprasad Sridhara, Yana Novikova,
 Adrian Iasinschi and Mirel Cosulschi.
 \newblock Semi-automated wrappers using rule trees.
 \newblock In Viorel Negru, Tudor Jebelean, Dana Petcu, and Daniela Zaharie,
-  editors, {\em {SYNASC}}, page 209–215. IEEE Computer Society, 2008.
+  editors, {\em 10th International Symposium on Symbolic and Numeric Algorithms
+  for Scientific Computing.}, page 209–215. IEEE Computer Society, 2008.
 
 \bibitem{STD610}
 IEEE.
 \newblock Standard glossary of software engineering terminology, ieee std
   610.12-1990.
-\newblock {\em New York: Institute of Electrical and Electronics Engineers}, 1,
-  1990.
+\newblock {\em New York: Institute of Electrical and Electronics Engineers},
+  volume 1, 1990.
 
 \bibitem{STD1219}
 IEEE.
@@ -265,17 +273,20 @@ IEEE.
 \bibitem{LOPT00}
 Leah~S. Larkey, Paul Ogilvie, M.~Andrew Price, and Brenden Tamilio.
 \newblock Acrophile: an automated acronym extractor and server.
-\newblock In {\em {ACM DL}}, page 205–214, 2000.
+\newblock In {\em Proceedings of the fifth ACM conference on Digital
+  libraries}, page 205–214, 2000.
 
 \bibitem{DLBD11}
 Dawn Lawrie and David Binkley.
 \newblock Expanding identifiers to normalize source code vocabulary.
-\newblock In {\em {ICSM}}, page 113–122. IEEE, 2011.
+\newblock In {\em International Conference on Software Maintenance}, page
+  113–122. IEEE, 2011.
 
 \bibitem{DLHD06}
 Dawn Lawrie, Henry Feild, and David Binkley.
 \newblock Syntactic identifier conciseness and consistency.
-\newblock In {\em SCAM}, page 139–148. IEEE Computer Society, 2006.
+\newblock In {\em Sixth IEEE International Workshop on Source Code Analysis and
+  Manipulation}, page 139–148. IEEE Computer Society, 2006.
 
 \bibitem{LDFHB07}
 Dawn Lawrie, Henry Feild, and David Binkley.
@@ -286,8 +297,8 @@ Dawn Lawrie, Henry Feild, and David Binkley.
 \bibitem{LFBEX07}
 Dawn Lawrie, Henry Feild, and David Binkley.
 \newblock Extracting meaning from abbreviated identifiers.
-\newblock In {\em Source Code Analysis and Manipulation, 2007. SCAM 2007.
-  Seventh IEEE International Working Conference on}, page 213–222, Sept 2007.
+\newblock In {\em Seventh IEEEInternational Working Conference on Source Code
+  Analysis and Manipulation}, page 213–222, Sept 2007.
 
 \bibitem{DLFB06}
 Dawn Lawrie, Henry Feild, and David Binkley.
@@ -297,8 +308,8 @@ Dawn Lawrie, Henry Feild, and David Binkley.
 \bibitem{DCHD06}
 Dawn Lawrie, Christopher Morrell, Henry Feild, and David Binkley.
 \newblock What's in a name? a study of identifiers.
-\newblock In {\em Program Comprehension, 2006. ICPC 2006. 14th IEEE
-  International Conference on.}, page 3–12, June 2006.
+\newblock In {\em 14th IEEE International Conferenceon Program Comprehension},
+  page 3–12, June 2006.
 
 \bibitem{LDMCFH07}
 Dawn Lawrie, Christopher Morrell, Henry Feild, and David Binkley.
@@ -322,16 +333,17 @@ Welf L{\"o}we, Morgan Ericsson, Jonas Lundberg, and Thomas Panas.
 \bibitem{MPOB03}
 Michael~P O’brien.
 \newblock Software comprehension--a review \& research direction.
-\newblock {\em Department of Computer Science \& Information Systems University
-  of Limerick, Ireland, Technical Report.}, 2003.
+\newblock {\em Department of Computer Science \& Information Systems
+  Universityof Limerick, Ireland, Technical Report.}, 2003.
 
 \bibitem{MMDNP12}
 Maria João~Varanda Pereira, Mario~Marcelo Beron, Daniela~Carneiro da~Cruz,
   Nuno Oliveira, and Pedro~Rangel Henriques.
 \newblock Problem domain oriented approach for program comprehension.
 \newblock In Alberto Simões, Ricardo Queirós, and Daniela~Carneiro da~Cruz,
-  editors, {\em {SLATE}}, volume~21 of {\em {OASICS}}, page 91–105. Schloss
-  Dagstuhl - Leibniz-Zentrum fuer Informatik, 2012.
+  editors, {\em Symposium on Languages, Applications. Universidade do Minho,
+  Portugal}, volume~21 of {\em OASICS}, page 91–105. Schloss Dagstuhl -
+  Leibniz-Zentrum fuer Informatik, 2012.
 
 \bibitem{PMQUE06}
 Marian Petre, Ed~de~Quincey, et~al.
@@ -347,19 +359,21 @@ Roger~S. Pressman.
 \bibitem{VRNW02}
 Vaclav Rajlich and Norman Wilde.
 \newblock The role of concepts in program comprehension.
-\newblock In {\em {Proc. 10th Int'l Workshop on Program Comprehension}}, page
+\newblock In {\em Proc. 10th Int'l Workshop on Program Comprehension}, page
   271–278. IEEE, 2002.
 
 \bibitem{SBMJ10}
 Bonita Sharif and Jonathan~I. Maletic.
 \newblock An eye tracking study on camelcase and under\_score identifier
   styles.
-\newblock In {\em {ICPC}}, page 196–205. IEEE Computer Society, 2010.
+\newblock In {\em International Conference on Program Comprehension}, page
+  196–205. IEEE Computer Society, 2010.
 
 \bibitem{SMMH98}
 Maria Joao~C. Sousa and H.~M. Moreira.
 \newblock A survey on the software maintenance process.
-\newblock In {\em {ICSM}}, page 265–274, 1998.
+\newblock In {\em International Conference on Software Maintenance}, page
+  265–274, 1998.
 
 \bibitem{TSTA80}
 Thomas~A. Standish.
@@ -377,30 +391,33 @@ M-AD Storey, F~David Fracchia, and Hausi~A M{\"u}ller.
 Margaret-Anne Storey.
 \newblock Theories, methods and tools in program comprehension: past, present
   and future.
-\newblock In {\em Program Comprehension, 2005. IWPC 2005. Proceedings. 13th
-  International Workshop on.}, page 181–191, May 2005.
+\newblock In {\em 13th International Workshop on Program Comprehension}, page
+  181–191, May 2005.
 
 \bibitem{TARCM09}
 Alfredo~Raúl Teyseyre and Marcelo~R. Campo.
 \newblock An overview of 3d software visualization.
-\newblock {\em IEEE Trans. Vis. Comput. Graph.}, 15(1):87–105, 2009.
+\newblock {\em IEEE Transactions on Visualization and Computer Graphics},
+  15(1):87–105, 2009.
 
 \bibitem{PFT02}
 Pierre~F. Tiako.
 \newblock Maintenance in joint software development.
-\newblock In {\em Computer Software and Applications Conference, 2002. COMPSAC
-  2002. Proceedings. 26th Annual International.}, page 1077–1080, 2002.
+\newblock In {\em Proceedings. 26th Annual International Computer Software and
+  Applications Conference}, page 1077–1080, 2002.
 
 \bibitem{TIE89}
 Tim Tiemens.
-\newblock Cognitive models of program comprehension, 1989.
+\newblock Cognitive models of program comprehension.
+\newblock {\em Software Engineering Research Center Technical Report}, 1989.
 
 \bibitem{MMFAF08}
 Marco Torchiano, Massimiliano~Di Penta, Filippo Ricca, Andrea~De Lucia, and
   Filippo Lanubile.
 \newblock Software migration projects in italian industry: Preliminary results
   from a state of the practice survey.
-\newblock In {\em ASE Workshops.}, page 35–42. IEEE, 2008.
+\newblock In {\em 23rd IEEE/ACM International Conference on Automated Software
+  Engineering-Workshops. ASE Workshops.}, page 35–42. IEEE, 2008.
 
 \bibitem{VMAVA95}
 Anneliese von Mayrhauser and A.~Marie Vans.
@@ -410,24 +427,26 @@ Anneliese von Mayrhauser and A.~Marie Vans.
 \bibitem{WYHW10}
 YingHui Wang, XiuQing He, and QiongFang Wang.
 \newblock Lifecycle based study framework of software evolution.
-\newblock {\em environment}, 4:7, 2010.
+\newblock {\em International Conference on Computer Application and System
+  Modeling (ICCASM)}, 4:7, 2010.
 
 \bibitem{ZHGL09}
 Qian Zhao, Huiqiang Wang, Guangsheng Feng, and Xu~Lu.
 \newblock Software evolution method considering software historical behavior.
-\newblock In {\em {Internet Computing for Science and Engineering (ICICSE),
-  2009 Fourth International Conference on}}, page 36–41, Dec 2009.
+\newblock In {\em Fourth International Conference on Internet Computing for
+  Science and Engineering (ICICSE)}, page 36–41, Dec 2009.
 
 \bibitem{ZOYI03}
 Ying Zou.
 \newblock Incorporating quality requirements in software migration process.
-\newblock In {\em {STEP}}, page 175–185. IEEE Computer Society, 2003.
+\newblock In {\em Eleventh Annual International Workshop on Software Technology
+  and Engineering Practice}, page 175–185. IEEE Computer Society, 2003.
 
 \bibitem{ZYKK02}
 Ying Zou and Kostas Kontogiannis.
 \newblock Migration to object oriented platforms: A state transformation
   approach.
-\newblock In {\em Software Maintenance, 2002. Proceedings. International
-  Conference on}, pages 530--539. IEEE, 2002.
+\newblock In {\em International Conference on Software Maintenance}, pages
+  530--539. IEEE, 2002.
 
 \end{thebibliography}

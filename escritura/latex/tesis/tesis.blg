@@ -4,42 +4,42 @@ The style file: plain.bst
 Database file #1: biblo.bib.bib
 You've used 70 entries,
             2118 wiz_defined-function locations,
-            965 strings with 17074 characters,
-and the built_in function-call counts, 29310 in all, are:
-= -- 2994
+            965 strings with 17786 characters,
+and the built_in function-call counts, 29182 in all, are:
+= -- 2982
 > -- 1263
-< -- 44
+< -- 43
 + -- 502
 - -- 420
-* -- 1634
-:= -- 4301
-add.period$ -- 241
+* -- 1658
+:= -- 4313
+add.period$ -- 242
 call.type$ -- 70
 change.case$ -- 408
 chr.to.int$ -- 0
 cite$ -- 70
-duplicate$ -- 1516
-empty$ -- 2229
+duplicate$ -- 1489
+empty$ -- 2215
 format.name$ -- 420
-if$ -- 6741
+if$ -- 6681
 int.to.chr$ -- 0
 int.to.str$ -- 70
-missing$ -- 73
-newline$ -- 357
+missing$ -- 74
+newline$ -- 358
 num.names$ -- 148
-pop$ -- 538
+pop$ -- 526
 preamble$ -- 1
 purify$ -- 342
 quote$ -- 0
-skip$ -- 1354
+skip$ -- 1313
 stack$ -- 0
-substring$ -- 1434
-swap$ -- 739
-text.length$ -- 44
+substring$ -- 1457
+swap$ -- 710
+text.length$ -- 43
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 270
 warning$ -- 0
-while$ -- 216
+while$ -- 219
 width$ -- 72
-write$ -- 799
+write$ -- 803

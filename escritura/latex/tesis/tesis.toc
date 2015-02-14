@@ -52,7 +52,7 @@
 \contentsline {section}{\numberline {5.2}Juego Buscaminas}{88}
 \contentsline {section}{\numberline {5.3}Editor de Texto}{96}
 \contentsline {section}{\numberline {5.4}Juego de Aviones}{100}
-\contentsline {section}{\numberline {5.5}Notas y Comentarios sobre casos de\\ estudio}{103}
+\contentsline {section}{\numberline {5.5}Notas y Comentarios sobre los casos de\\ estudio}{103}
 \contentsline {chapter}{\numberline {6}Conclusiones y Trabajos Futuros}{106}
 \contentsline {section}{\numberline {6.1}Conclusiones}{106}
 \contentsline {subsection}{\numberline {6.1.1}La Investigaci\IeC {\'o}n sobre el An\IeC {\'a}lisis de\\ Identificadores}{106}

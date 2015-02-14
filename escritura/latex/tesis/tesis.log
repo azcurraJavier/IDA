@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2014.5.7)  4 FEB 2015 12:31
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2014.5.7)  13 FEB 2015 16:58
 entering extended mode
  %&-line parsing enabled.
 **tesis.tex
@@ -1030,7 +1030,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 117--118
 
 ) (./tesis.bbl [119] [120
 
-] [121] [122] [123] [124] [125] [126]) [127]
+] [121] [122] [123] [124] [125] [126] [127]) [128]
 (./tesis.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
@@ -1044,10 +1044,10 @@ LaTeX Warning: There were multiply-defined labels.
 ### semi simple group (level 1) entered at line 8 (\begingroup)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 7093 strings out of 494999
- 91028 string characters out of 1180817
+ 7095 strings out of 494999
+ 91058 string characters out of 1180817
  224874 words of memory out of 3000000
- 10127 multiletter control sequences out of 15000+50000
+ 10129 multiletter control sequences out of 15000+50000
  15096 words of font info for 53 fonts, out of 3000000 for 9000
  54 hyphenation exceptions out of 8191
  39i,21n,58p,1610b,6003s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1067,9 +1067,9 @@ ic/amsfonts/cm/cmss12.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts
 0.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr
 /share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texm
 f-texlive/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on tesis.pdf (130 pages, 2721298 bytes).
+Output written on tesis.pdf (131 pages, 2724365 bytes).
 PDF statistics:
- 553 PDF objects out of 1000 (max. 8388607)
+ 556 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  156 words of extra memory for PDF output out of 10000 (max. 10000000)
 
