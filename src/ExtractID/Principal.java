@@ -14,6 +14,7 @@ import VentanasPaneles.CodigoPanel;
 import VentanasPaneles.DiccionaryPanel;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -393,18 +394,22 @@ public class Principal extends javax.swing.JFrame {
 
             dirJacobe = LibPath.getLibPath() + dirJacobe;
 
-            Process p = Runtime.getRuntime().exec(new String[]{dirJacobe, "-cfg=sun.cfg", path, "-stdout"});
+            Runtime rt = Runtime.getRuntime();
+            Process p;
+            
+            p = rt.exec(new String[]{dirJacobe, "-cfg=sun.cfg", path, "-stdout"});
 
             reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
 
-            p.waitFor();
+            //p.waitFor();
+
             String line = "";
 
             while ((line = reader.readLine()) != null) {
                 output += line + "\n";
             }
 
-        } catch (Exception ex) {
+        } catch (IOException ex) {
             System.out.println(getStackTrace(ex));
         }
 

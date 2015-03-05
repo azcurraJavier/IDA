@@ -165,12 +165,15 @@ classOrInterfaceDeclaration returns [ArrayList<Clase> lisClases]
     ;
     
   
-modifiers
+modifiers returns [String s]
+@init{    
+    $s = "";
+}
     :
     (    annotation
-    |   'public' 
-    |   'protected'
-    |   'private' 
+    |   'public' {s="public";}
+    |   'protected' {s="protected";}
+    |   'private' {s="private";}
     |   'static'
     |   'abstract'
     |   'final'
@@ -210,7 +213,7 @@ normalClassDeclaration returns [ArrayList<Clase> lisClases]
         )?
         ('implements' typeList
         )?            
-        c = classBody {c.unaClase.setIde(new Id($I1.text,$I1.getLine(),$I1.getCharPositionInLine())); c.unaClase.setModClase($mo1.text); $lisClases.add(c.unaClase); $lisClases.addAll(c.lisClases);}
+        c = classBody {c.unaClase.setIde(new Id($I1.text,$I1.getLine(),$I1.getCharPositionInLine())); c.unaClase.setModClase(mo1); $lisClases.add(c.unaClase); $lisClases.addAll(c.lisClases);}
     ;
 
 
@@ -361,7 +364,7 @@ methodDeclaration returns [Metodo me, int lineaMetodo, ArrayList<Clase> lisClase
 
     :
         /* For constructor, return type is null, name is 'init' */
-         mo2 = modifiers {mod = $mo2.text;tipo="";}
+         mo2 = modifiers {mod = mo2;tipo="";}
         (typeParameters
         )?
         Id1 = IDENTIFIER {$me = new Metodo(mod,tipo,new Id($Id1.text,$Id1.getLine(),$Id1.getCharPositionInLine()));$lineaMetodo=Id1.getLine();}
@@ -374,7 +377,7 @@ methodDeclaration returns [Metodo me, int lineaMetodo, ArrayList<Clase> lisClase
         (b1 = blockStatement {lisDeclme.addAll(b1.lisDecl); $lisClases.addAll(b1.lisClases); }
         )* {$me.addListDecl(lisDeclme);}//le sumo cant de apariciones a la lista de declaraciones 
         metlf = '}' {$me.setLineaFin($metlf.getLine());} //linea fin metodo                                                                                                                
-    |   mo1 = modifiers {mod = $mo1.text;}
+    |   mo1 = modifiers {mod = mo1;}
         (typeParameters
         )?
         (type {tipo = $type.text;}
@@ -400,7 +403,7 @@ fieldDeclaration returns [ArrayList<Declaracion> lisDecl]
     String tipo = new String();    
 }
     :   
-        mo1 = modifiers {mod = $mo1.text;}
+        mo1 = modifiers {mod = mo1;}
         type      {tipo = $type.text;}  
         v1 = variableDeclarator {$lisDecl.add(new Declaracion(mod,tipo,v1)); }
         (',' v2 = variableDeclarator {$lisDecl.add(new Declaracion(mod,tipo,v2));}
