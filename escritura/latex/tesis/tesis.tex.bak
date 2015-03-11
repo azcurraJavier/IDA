@@ -99,9 +99,9 @@
 
 %%CARÁTULA/RESUMEN/AGRADECIMIENTOS======================================
 \input{./init/init.tex}
-%
-%%Índices===============================================================
-%
+
+%Índices===============================================================
+
 \tableofcontents %Genera el índice gral.
 
 \cleardoublepage

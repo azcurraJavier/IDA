@@ -1,61 +1,61 @@
 \enlargethispage{\baselineskip}%agrega linea al final de la hoja (logo)
 \enlargethispage{\baselineskip}
+\enlargethispage{\baselineskip}
 
 \begin{titlepage}
-    \centering
-    \vfill
-    {\bfseries\huge         
-	Análisis de Identificadores para Abstraer conceptos del	Dominio del Problema
-     \vskip1.3cm       
-   }  
-   
-{\bfseries\Large
 
-Trabajo Final de Licenciatura en Ciencias de la Computación
-\vskip0.7cm
+{\bfseries\LARGE\centering
+
+\begin{figure}[h!]
+\centerline{%queda centrada mejor la imagen
+\includegraphics[scale= 0.15]{./init/unsl_logo.png}} 
+\end{figure}  
+
+Universidad Nacional de San Luis
+\vskip0.5cm
+Facultad de Ciencias Físico Matemáticas y Naturales
+
 }
+\vskip1cm  
+{\bfseries\normalsize\centering
+
+Trabajo Final para optar al título de Licenciado en Ciencias de la Computación
+\vskip0.5cm
+}
+
+    \centering
+    %\vfill
+    {\bfseries\LARGE         
+	Análisis de Identificadores para Abstraer conceptos del	Dominio del Problema
+     \vskip0.8cm       
+   }
 
  {\bfseries\large
 	Autor
 	\vskip0.1cm   
    }
    {\bfseries\Large
-Javier Azcurra Marilungo
-   \vskip1cm
+A.P.U. Javier Azcurra Marilungo
+   \vskip0.8cm
    }
 %=========   
    {\bfseries\large
-	Director
+	Directores
 	\vskip0.1cm   
    }
    {\bfseries\Large
 Dr. Mario Marcelo Berón
-   \vskip1cm
+\vskip0.5cm
+Dr. Germán Antonio Montejano
+   \vskip1.4cm
+}
+{\bfseries\normalsize   
+   San Luis - Argentina\\
+   2015
    }
 %=========   
-   {\bfseries\large
-	Co-Director
-	\vskip0.1cm   
-   }
-   {\bfseries\Large
-Dr. Germán Antonio Montejano
-   \vskip0.7cm
-   }
-   
-{\bfseries\large
+  
 
-\begin{figure}[h!]
-\centerline{%queda centrada mejor la imagen
-\includegraphics[scale= 0.1]{./init/unsl_logo.png}} 
-\end{figure}  
-
-Universidad Nacional de San Luis
-\vskip0.5cm
-Facultad de Ciencias Físico Matemáticas y Naturales
-\vskip0.5cm
-Departamento de Informática
-
-}
 \end{titlepage}
  
 %Resumen==================================================================
@@ -103,7 +103,7 @@ que me brindó el
 sustento afectivo y económico, que fueron indispensables para conseguir los objetivos académicos.
 A mi mamá Gladys por el apoyo incondicional, a mi papá Carlos por la confianza permanente, a mi hermana Soledad por haberme acompañado en mi trayecto universitario.
 
-Quiero dar un reconocimiento notable a mi director Prof. Mario Berón y co-director Prof. Germán Montejano, sin su ayuda y dedicación nunca hubiera podido terminar este trabajo final de licenciatura. También quiero dar gracias a los demás profesores que estuvieron involucrados en mi proceso de formación profesional.  
+Quiero dar un reconocimiento notable a mis directores Prof. Mario Berón y co-director Prof. Germán Montejano, sin su ayuda y dedicación nunca hubiera podido terminar este trabajo final de licenciatura. También quiero dar gracias a los demás profesores que estuvieron involucrados en mi proceso de formación profesional.  
 
 Envío un especial agradecimiento a mi amigo Dario que siempre estuvo en todo momento cuando lo necesité y también a todas las demás amistades que brindaron aportes a mi crecimiento personal y profesional. No puedo dejar de destacar a mis ex compañeros de facultad que actualmente son colegas, por compartir horas de estudio y ayudarme a asimilar los conocimientos adquiridos durante mi carrera.
  
