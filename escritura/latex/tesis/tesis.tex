@@ -15,8 +15,6 @@
 
 \newcommand{\at}{\makeatletter @\makeatother}%comando define la arroba porque no forma parte de latex
 
-\usepackage[titletoc]{appendix}%Para agregar apéndices
-
 %manejo de tablas
 \usepackage{rotating} %rotacion de tabla
 
@@ -94,6 +92,18 @@
   morekeywords={xmlns,version,type}% list your attributes here
 }
 
+\usepackage{hyperref}
+\usepackage{bookmark}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    citecolor=black,
+    filecolor=black,
+    urlcolor=black
+}
+\usepackage[titletoc]{appendix}%Para agregar apéndices
+
+
 \begin{document}
 
 %%CARÁTULA/RESUMEN/AGRADECIMIENTOS======================================
@@ -101,15 +111,15 @@
 
 %Índices===============================================================
 
+\addcontentsline{toc}{chapter}{Índice general}
 \tableofcontents %Genera el índice gral.
 
-\cleardoublepage
-\addcontentsline{toc}{chapter}{Índice de figuras} % para que aparezca en el índice gral.
+\addtocontents{lof}{\protect\addcontentsline{toc}{chapter}{Índice de figuras}}
 \listoffigures % índice de figuras
 
-\cleardoublepage
-\addcontentsline{toc}{chapter}{Índice de tablas} % para que aparezca en el índice gral.
+\addtocontents{lot}{\protect\addcontentsline{toc}{chapter}{Índice de tablas}}
 \listoftables % índice de figuras
+
 
 %CAPÍTULO 1=============================================================
 \chapter{Introducción: Problema y Solución}

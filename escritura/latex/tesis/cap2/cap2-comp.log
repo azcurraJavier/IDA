@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2014.5.7)  4 FEB 2015 01:07
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2014.5.7)  12 MAR 2015 11:41
 entering extended mode
  %&-line parsing enabled.
 **cap2-comp.tex
@@ -2215,7 +2215,8 @@ Missing character: There is no a in font nullfont!
 Missing character: There is no s in font nullfont!
 Missing character: There is no y in font nullfont!
 Missing character: There is no c in font nullfont!
-Missing character: There is no o in font nullfont!
+Missing character: There is no √ in font nullfont!
+Missing character: There is no ≥ in font nullfont!
 Missing character: There is no m in font nullfont!
 Missing character: There is no o in font nullfont!
 Missing character: There is no i in font nullfont!
@@ -7834,7 +7835,7 @@ Type  H <return>  for immediate help.
  ...                                              
                                                   
 l.103 T
-       eniendo cuenta que lo sistemas son cada vez m√°s amplios y complejos....
+       eniendo cuenta que los sistemas son cada vez m√°s amplios y complejos...
 
 You're in trouble here.  Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -7858,6 +7859,7 @@ Missing character: There is no u in font nullfont!
 Missing character: There is no e in font nullfont!
 Missing character: There is no l in font nullfont!
 Missing character: There is no o in font nullfont!
+Missing character: There is no s in font nullfont!
 Missing character: There is no s in font nullfont!
 Missing character: There is no i in font nullfont!
 Missing character: There is no s in font nullfont!
