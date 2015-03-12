@@ -27,41 +27,41 @@
 \contentsline {subsection}{\numberline {3.3.1}Clasificaci\IeC {\'o}n}{27}
 \contentsline {subsection}{\numberline {3.3.2}Importancia en los Nombres}{28}
 \contentsline {subsection}{\numberline {3.3.3}Herramienta: Identifier Dictionary}{32}
-\contentsline {section}{\numberline {3.4}Traducci\IeC {\'o}n de Identificadores}{36}
-\contentsline {subsection}{\numberline {3.4.1}Conceptos y Desaf\IeC {\'\i }os observados}{36}
-\contentsline {subsection}{\numberline {3.4.2}Algoritmo de Divisi\IeC {\'o}n Greedy}{38}
+\contentsline {section}{\numberline {3.4}Traducci\IeC {\'o}n de Identificadores}{35}
+\contentsline {subsection}{\numberline {3.4.1}Conceptos y Desaf\IeC {\'\i }os observados}{35}
+\contentsline {subsection}{\numberline {3.4.2}Algoritmo de Divisi\IeC {\'o}n Greedy}{37}
 \contentsline {subsection}{\numberline {3.4.3}Algoritmo de Divisi\IeC {\'o}n Samurai}{42}
-\contentsline {subsection}{\numberline {3.4.4}Algoritmo de Expansi\IeC {\'o}n B\IeC {\'a}sico}{49}
-\contentsline {subsection}{\numberline {3.4.5}Algoritmo de Expansi\IeC {\'o}n AMAP}{52}
-\contentsline {subsection}{\numberline {3.4.6}Herramienta: Identifier Restructuring}{63}
-\contentsline {section}{\numberline {3.5}Notas y Comentarios}{68}
-\contentsline {chapter}{\numberline {4}Identifier Analyzer (IDA)}{69}
-\contentsline {section}{\numberline {4.1}Introducci\IeC {\'o}n}{69}
-\contentsline {section}{\numberline {4.2}Arquitectura}{70}
-\contentsline {section}{\numberline {4.3}Analizador Sint\IeC {\'a}ctico}{72}
-\contentsline {section}{\numberline {4.4}Base de Datos Embebida}{73}
-\contentsline {section}{\numberline {4.5}Proceso de An\IeC {\'a}lisis de Identificadores}{74}
-\contentsline {subsection}{\numberline {4.5.1}Barra de Men\IeC {\'u}}{74}
-\contentsline {subsection}{\numberline {4.5.2}Lectura de Archivos JAVA}{76}
-\contentsline {subsection}{\numberline {4.5.3}Panel de Elementos Capturados}{77}
-\contentsline {subsection}{\numberline {4.5.4}Ventana de An\IeC {\'a}lisis}{80}
-\contentsline {subsection}{\numberline {4.5.5}Palabras Capturadas y Diccionarios}{82}
-\contentsline {subsection}{\numberline {4.5.6}Nuevamente al Panel de Elementos Capturados}{86}
-\contentsline {chapter}{\numberline {5}Casos de Estudio}{88}
-\contentsline {section}{\numberline {5.1}Introducci\IeC {\'o}n}{88}
-\contentsline {section}{\numberline {5.2}Juego Buscaminas}{88}
-\contentsline {section}{\numberline {5.3}Editor de Texto}{96}
-\contentsline {section}{\numberline {5.4}Juego de Aviones}{100}
-\contentsline {section}{\numberline {5.5}Notas y Comentarios sobre los casos de\\ estudio}{103}
-\contentsline {chapter}{\numberline {6}Conclusiones y Trabajos Futuros}{106}
-\contentsline {section}{\numberline {6.1}Conclusiones}{106}
-\contentsline {subsection}{\numberline {6.1.1}La Investigaci\IeC {\'o}n sobre el An\IeC {\'a}lisis de\\ Identificadores}{106}
-\contentsline {subsection}{\numberline {6.1.2}La Construcci\IeC {\'o}n de la Herramienta IDA}{108}
-\contentsline {subsection}{\numberline {6.1.3}Los Casos de Estudio probados en IDA}{109}
-\contentsline {section}{\numberline {6.2}Trabajos Futuros}{110}
-\contentsline {subsection}{\numberline {6.2.1}Ampliar la Captura del Analizador Sint\IeC {\'a}ctico}{110}
-\contentsline {subsection}{\numberline {6.2.2}Implementar otro Algoritmo de Expansi\IeC {\'o}n}{112}
-\contentsline {subsection}{\numberline {6.2.3}Expandir Identificadores en el C\IeC {\'o}digo}{113}
-\contentsline {subsection}{\numberline {6.2.4}Acoplar a Entornos de Desarrollo}{114}
-\contentsline {chapter}{Ap\'{e}ndice \numberline {A}}{115}
-\contentsline {section}{\numberline {A.1}Extensi\IeC {\'o}n de la Herramienta IDA}{115}
+\contentsline {subsection}{\numberline {3.4.4}Algoritmo de Expansi\IeC {\'o}n B\IeC {\'a}sico}{48}
+\contentsline {subsection}{\numberline {3.4.5}Algoritmo de Expansi\IeC {\'o}n AMAP}{50}
+\contentsline {subsection}{\numberline {3.4.6}Herramienta: Identifier Restructuring}{62}
+\contentsline {section}{\numberline {3.5}Notas y Comentarios}{67}
+\contentsline {chapter}{\numberline {4}Identifier Analyzer (IDA)}{68}
+\contentsline {section}{\numberline {4.1}Introducci\IeC {\'o}n}{68}
+\contentsline {section}{\numberline {4.2}Arquitectura}{69}
+\contentsline {section}{\numberline {4.3}Analizador Sint\IeC {\'a}ctico}{71}
+\contentsline {section}{\numberline {4.4}Base de Datos Embebida}{72}
+\contentsline {section}{\numberline {4.5}Proceso de An\IeC {\'a}lisis de Identificadores}{73}
+\contentsline {subsection}{\numberline {4.5.1}Barra de Men\IeC {\'u}}{73}
+\contentsline {subsection}{\numberline {4.5.2}Lectura de Archivos JAVA}{75}
+\contentsline {subsection}{\numberline {4.5.3}Panel de Elementos Capturados}{76}
+\contentsline {subsection}{\numberline {4.5.4}Ventana de An\IeC {\'a}lisis}{79}
+\contentsline {subsection}{\numberline {4.5.5}Palabras Capturadas y Diccionarios}{81}
+\contentsline {subsection}{\numberline {4.5.6}Nuevamente al Panel de Elementos Capturados}{85}
+\contentsline {chapter}{\numberline {5}Casos de Estudio}{87}
+\contentsline {section}{\numberline {5.1}Introducci\IeC {\'o}n}{87}
+\contentsline {section}{\numberline {5.2}Juego Buscaminas}{87}
+\contentsline {section}{\numberline {5.3}Editor de Texto}{95}
+\contentsline {section}{\numberline {5.4}Juego de Aviones}{97}
+\contentsline {section}{\numberline {5.5}Notas y Comentarios sobre los casos de\\ estudio}{100}
+\contentsline {chapter}{\numberline {6}Conclusiones y Trabajos Futuros}{104}
+\contentsline {section}{\numberline {6.1}Conclusiones}{104}
+\contentsline {subsection}{\numberline {6.1.1}La Investigaci\IeC {\'o}n sobre el An\IeC {\'a}lisis de\\ Identificadores}{104}
+\contentsline {subsection}{\numberline {6.1.2}La Construcci\IeC {\'o}n de la Herramienta IDA}{106}
+\contentsline {subsection}{\numberline {6.1.3}Los Casos de Estudio probados en IDA}{107}
+\contentsline {section}{\numberline {6.2}Trabajos Futuros}{108}
+\contentsline {subsection}{\numberline {6.2.1}Ampliar la Captura del Analizador Sint\IeC {\'a}ctico}{108}
+\contentsline {subsection}{\numberline {6.2.2}Implementar otro Algoritmo de Expansi\IeC {\'o}n}{110}
+\contentsline {subsection}{\numberline {6.2.3}Expandir Identificadores en el C\IeC {\'o}digo}{111}
+\contentsline {subsection}{\numberline {6.2.4}Acoplar a Entornos de Desarrollo}{112}
+\contentsline {chapter}{Ap\'{e}ndice \numberline {A}}{113}
+\contentsline {section}{\numberline {A.1}Extensi\IeC {\'o}n de la Herramienta IDA}{113}

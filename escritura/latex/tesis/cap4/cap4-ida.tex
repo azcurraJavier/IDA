@@ -38,7 +38,6 @@ Para comenzar con la descripción de IDA, en la siguiente sección se explica la
 \label{arq1}
 \end{figure}
 
-
 \section{Arquitectura}
 
 %La herramienta IDA se implementó empleando lenguaje JAVA y se programó usando el entorno de desarrollo NetBeans\footnote[1]{https://www.netbeans.org}. 
@@ -76,10 +75,10 @@ Otra ventaja por la cual se eligió esta tecnología, es que responde rápidamen
 \item[Lista de Palabras Excluyentes (stop-list):] Esta compuesta con palabras que son poco importantes o irrelevantes en el análisis de ids\footnote[3]{ http://www.lextek.com/manuals/onix/stopwords1.html}. Se utiliza en el Algoritmo de Greedy y en el Algoritmo de Expansión \mbox{(Ver Capítulo 3)}.
 
 \item[Lista de Abreviaturas y Acrónimos Conocidas:] Contiene abreviaturas comunes del idioma Inglés y Acrónimos conocidos de programación\footnote[4]{http://langs.eserver.org/acronym-dictionary.txt} (gif, jpg, txt). Se emplea en el Algoritmo Greedy (Ver Capítulo 3).
-\pagebreak
-\item[Lista de Prefijos y Sufijos Conocidos:] Posee Sufijos y Prefijos conocidos en Inglés\footnote[1]{http://www.eecis.udel.edu/˜enslen/Site/Samurai}, esta lista fue confeccionada por el autor del Algoritmo Samurai (Ver Capítulo 3). Se consulta solo en dicho algoritmo.
 
-\item[Frecuencias Globales de Palabras:] Lista de palabras, junto con su frecuencia de aparición. Esta lista fue construida por el autor del Algoritmo Samurai\footnote[2]{Esta lista no está disponible en la web, por ende se construyó una aproximación.}. Se emplea solo en dicho algoritmo, más precisamente en la función de \textit{Scoring} (Ver Capítulo 3).
+\item[Lista de Prefijos y Sufijos Conocidos:] Posee Sufijos y Prefijos conocidos en Inglés\footnote[5]{http://www.eecis.udel.edu/˜enslen/Site/Samurai}, esta lista fue confeccionada por el autor del Algoritmo Samurai (Ver Capítulo 3). Se consulta solo en dicho algoritmo.
+\pagebreak
+\item[Frecuencias Globales de Palabras:] Lista de palabras, junto con su frecuencia de aparición. Esta lista fue construida por el autor del Algoritmo Samurai\footnote[1]{Esta lista no está disponible en la web, por ende se construyó una aproximación.}. Se emplea solo en dicho algoritmo, más precisamente en la función de \textit{Scoring} (Ver Capítulo 3).
 
 \end{description}
 
@@ -89,7 +88,7 @@ Habiendo descripto los principales módulos de la herramienta, en la próxima se
  
 \section{Proceso de Análisis de Identificadores}
 
-En esta sección, se describe el proceso que debe seguir el usuario con la herramienta IDA para llevar a cabo el análisis de los ids, en los archivos JAVA. Se explicará que función cumple cada elemento de IDA (ventanas, botones, paneles, etc.), y de como estos elementos ayudan al usuario a analizar los ids.
+En esta sección, se describe el proceso que debe seguir el usuario con la herramienta IDA para llevar a cabo el análisis de los ids, en los archivos JAVA. Se explicará que función cumple cada elemento de IDA (ventanas, botones, paneles, etc.), y de cómo estos elementos ayudan al usuario a analizar los ids.
 
 \subsection{Barra de Menú}
 
@@ -103,7 +102,7 @@ Al ejecutar la herramienta IDA, el primer componente de interacción es una simp
 \label{ida1}
 \end{figure}
 
-Al pulsar\footnote[1]{El término `pulsar' o `presionar' se utilizará a lo largo del capítulo, significa hacer click con el puntero del ratón.} en \textit{Archivo} de la barra antedicha, se despliega un menú con las opciones que se describen a continuación (Ver Figura \ref{ida1} - Flecha 1):
+Al pulsar\footnote[2]{El término `pulsar' o `presionar' se utilizará a lo largo del capítulo, significa hacer click con el puntero del ratón.} en \textit{Archivo} de la barra antedicha, se despliega un menú con las opciones que se describen a continuación (Ver Figura \ref{ida1} - Flecha 1):
 
 \begin{description}
 \itemsep0em%reduce espacio
@@ -132,6 +131,8 @@ Finalmente al presionar \textit{Ayuda} de la barra de menú, se despliega un sol
 \item[Acerca de:] Brinda información sobre el autor y directores involucrados en la construcción de la herramienta IDA.
 \end{description}
 
+\pagebreak
+
 \begin{figure}[t] %[h] para here [b] para bottom [t] para top
 \centerline{%queda centrada mejor la imagen
 \includegraphics[scale= 0.7]{./cap4/ida_02.png}
@@ -154,6 +155,8 @@ Una vez que el usuario elige el/los archivo/s, IDA utiliza un  programa externo 
 
 La herramienta IDA, además realiza un control de los archivos abiertos, impidiendo que se abra el mismo archivo más de una vez. En caso de que esto suceda la situación antes mencionada, se muestra un cartel informando al usuario (Ver Figura \ref{idaWar2}). Este control se realiza por cuestiones de coherencia al momento de analizar los archivos.
 
+
+
 %\begin{figure}[t] %[h] para here [b] para bottom [t] para top
 %\centerline{%queda centrada mejor la imagen
 %\includegraphics[scale= 0.8]{./cap4/ida_war_01.png}
@@ -170,19 +173,27 @@ La herramienta IDA, además realiza un control de los archivos abiertos, impidie
 \label{idaWar2}
 \end{figure}
 
+
+
 \subsection{Panel de Elementos Capturados}
 
 Después que el programa JACOBE embellece el código contenido en el archivo JAVA,
 %si estos cumplen con las validaciones descriptas en la sección anterior, 
 el mismo se procesa por el AS explicado en secciones previas. Luego que el AS termina sus tareas de extracción de elementos (ids, comentarios y literales), el \textit{Panel de Elementos Capturados} aparece (Ver Figura \ref{ida3}). Este panel en la parte superior posee pestañas, cada pestaña posee un rótulo con el nombre del archivo que está siendo analizado (Ver Figura \ref{ida3} - Flecha 1). Es posible elegir de a varios archivos para analizar, mediante la ventana de selección de archivos (Ver Figura \ref{ida2}), o también se puede ir eligiendo de a un archivo por apertura de esta ventana.  En caso de querer finalizar el análisis de un archivo particular y cerrar la pestaña, se puede pulsar en la cruz ubicada al lado del rótulo de cada pestaña (Ver Figura \ref{ida3} - Flecha 1).
 
-\begin{figure}[t!] %[h] para here [b] para bottom [t] para top
+Cada pestaña en su interior posee el mismo subpanel que se divide en dos partes principales. La parte superior contiene el código leído y embellecido (por JACOBE) del archivo JAVA (Ver Figura \ref{ida3} - Flecha 2).
+%, el código aquí se presenta ya alineado en su formato por JACOBE. duda
+La parte inferior, muestra toda la información extraída por el AS referente a ids, literales y comentarios. Estos últimos tres poseen una pestaña cada uno (Ver Figura \ref{ida3} - Flecha 3). Al pulsar sobre cada pestaña, se muestra la información clasificada correspondiente (a ids, literales y comentarios), a continuación se describe cómo se exhibe esta información.
+
+\begin{figure}[t] %[h] para here [b] para bottom [t] para top
 \centerline{%queda centrada mejor la imagen
 \includegraphics[scale= 0.42]{./cap4/ida_03.png}
 }
 \caption{Panel de Elementos Capturados}
 \label{ida3}
 \end{figure}
+
+
 
 \begin{figure}[h!] %[h] para here [b] para bottom [t] para top
 \centerline{%queda centrada mejor la imagen
@@ -192,11 +203,8 @@ el mismo se procesa por el AS explicado en secciones previas. Luego que el AS te
 \label{ida4}
 \end{figure}
 
-Cada pestaña en su interior posee el mismo subpanel que se divide en dos partes principales. La parte superior contiene el código leído y embellecido (por JACOBE) del archivo JAVA (Ver Figura \ref{ida3} - Flecha 2).
-%, el código aquí se presenta ya alineado en su formato por JACOBE. duda
-La parte inferior, muestra toda la información extraída por el AS referente a ids, literales y comentarios. Estos últimos tres poseen una pestaña cada uno (Ver Figura \ref{ida3} - Flecha 3). Al pulsar sobre cada pestaña, se muestra la información clasificada correspondiente (a ids, literales y comentarios), a continuación se describe como se exhibe esta información.
 
-\noindent \textbf{\\\\Pestaña de Identificadores Capturados\\} 
+\noindent \textbf{\\\\\\\\\\Pestaña de Identificadores Capturados\\} 
 
 Al pulsar la \textit{Pestaña de Identificadores} (Ver Figura \ref{ida3} - Flecha 3), se muestra la \textit{Tabla de Declaraciones} (Ver Figura \ref{ida3} - Flecha 4). Esta tabla enumera los ids capturados por el AS y cada columna se corresponde a: el número de línea donde esta declarado el id, el nombre del id, el tipo (int, char, etc.), el modificador (público, privado, protegido), lo que el id representa (variable de clase, constructor, método de clase, etc.).
 Esta \textit{Tabla de Declaraciones} si se presiona sobre una fila, inmediatamente se resalta con color en el código ubicado en la parte superior, la declaración del id correspondiente (Ver Figura \ref{ida3} - Flecha 2). 
@@ -219,7 +227,7 @@ Al pulsar la \textit{Pestaña de Literales} (Ver Figura \ref{ida3} - Flecha 3), 
 
 Al presionar la \textit{Pestaña de Comentarios} (Ver Figura \ref{ida3} - Flecha 3), se visualiza la \textit{Tabla de Comentarios} y un buscador de comentarios en esta tabla (Ver Figura \ref{ida5} - Flecha 1). La \textit{Tabla de Comentarios} posee dos columnas que corresponden, por un lado al comentario y por el otro al número de línea donde se encuentra el comentario dentro del código (Ver Figura \ref{ida5} - Flecha 2). Al igual que se describió en el párrafo anterior, al presionar en una de las filas de la \textit{Tabla de Comentarios} inmediatamente se resalta en el código de la parte superior, la ubicación del comentario seleccionado (Ver Figura \ref{ida5} - Flecha 3).\\
 
-Hasta aquí, solo se ha descripto como IDA exhibe la información útil que fue capturada del código por el AS. A continuación, se explicará como se emplea IDA para analizar los ids. Para ello, se debe pulsar en la \textit{Pestaña de Identificadores} (Ver Figura \ref{ida3} - Flecha 3), luego pulsar en el botón \textit{Ejecutar Análisis} ubicado dentro del cuadro \textit{Análisis de Identificadores} (Ver Figura \ref{ida3} - Flecha 6), al hacerlo se abrirá la \textit{Ventana de Análisis} que será explicada en la próxima sección.
+Hasta aquí, solo se ha descripto como IDA exhibe la información útil que fue capturada del código por el AS. A continuación, se explicará cómo se emplea IDA para analizar los ids. Para ello, se debe pulsar en la \textit{Pestaña de Identificadores} (Ver Figura \ref{ida3} - Flecha 3), luego pulsar en el botón \textit{Ejecutar Análisis} ubicado dentro del cuadro \textit{Análisis de Identificadores} (Ver Figura \ref{ida3} - Flecha 6), al hacerlo se abrirá la \textit{Ventana de Análisis} que será explicada en la próxima sección.
 
 \begin{figure}[h!] %[h] para here [b] para bottom [t] para top
 \centerline{%queda centrada mejor la imagen

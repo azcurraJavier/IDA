@@ -8,33 +8,33 @@
 \contentsline {figure}{\numberline {3.3}{\ignorespaces Visualizaci\IeC {\'o}n de Identifier Dictionary}}{33}
 \contentsline {figure}{\numberline {3.4}{\ignorespaces Visualizaci\IeC {\'o}n de Identifier Dictionary}}{34}
 \contentsline {figure}{\numberline {3.5}{\ignorespaces Ejemplos de distintas B\IeC {\'u}squedas dentro del C\IeC {\'o}digo}}{59}
-\contentsline {figure}{\numberline {3.6}{\ignorespaces Arquitectura de Identifier Restructuring}}{63}
-\contentsline {figure}{\numberline {3.7}{\ignorespaces Etapas de Identifier Restructurer}}{64}
-\contentsline {figure}{\numberline {3.8}{\ignorespaces Gram\IeC {\'a}tica que determina la Funci\IeC {\'o}n de los Ids}}{65}
-\contentsline {figure}{\numberline {3.9}{\ignorespaces Visualizaci\IeC {\'o}n de Identifier Restructuring}}{66}
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Arquitectura de Identifier Restructuring}}{62}
+\contentsline {figure}{\numberline {3.7}{\ignorespaces Etapas de Identifier Restructurer}}{63}
+\contentsline {figure}{\numberline {3.8}{\ignorespaces Gram\IeC {\'a}tica que determina la Funci\IeC {\'o}n de los Ids}}{64}
+\contentsline {figure}{\numberline {3.9}{\ignorespaces Visualizaci\IeC {\'o}n de Identifier Restructuring}}{65}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Arquitectura de IDA}}{70}
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Barra de Men\IeC {\'u} de IDA}}{75}
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Ventana para seleccionar Archivos JAVA}}{76}
-\contentsline {figure}{\numberline {4.4}{\ignorespaces Aviso sobre Archivo JAVA ya abierto en IDA}}{77}
-\contentsline {figure}{\numberline {4.5}{\ignorespaces Panel de Elementos Capturados}}{78}
-\contentsline {figure}{\numberline {4.6}{\ignorespaces Pesta\IeC {\~n}a de Literales Capturados}}{78}
-\contentsline {figure}{\numberline {4.7}{\ignorespaces Pesta\IeC {\~n}a de Comentarios Capturados}}{79}
-\contentsline {figure}{\numberline {4.8}{\ignorespaces Ventana de An\IeC {\'a}lisis}}{81}
-\contentsline {figure}{\numberline {4.9}{\ignorespaces Ventana de Palabras Capturadas}}{82}
-\contentsline {figure}{\numberline {4.10}{\ignorespaces Ventana TagCloud (Nube de Etiquetas)}}{83}
-\contentsline {figure}{\numberline {4.11}{\ignorespaces Ventana de Diccionarios}}{84}
-\contentsline {figure}{\numberline {4.12}{\ignorespaces Panel de Elementos Capturados}}{85}
-\contentsline {figure}{\numberline {4.13}{\ignorespaces Captura del Navegador Web con el An\IeC {\'a}lisis de Ids realizado}}{86}
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Arquitectura de IDA}}{69}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Barra de Men\IeC {\'u} de IDA}}{74}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Ventana para seleccionar Archivos JAVA}}{75}
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Aviso sobre Archivo JAVA ya abierto en IDA}}{76}
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Panel de Elementos Capturados}}{77}
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Pesta\IeC {\~n}a de Literales Capturados}}{77}
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Pesta\IeC {\~n}a de Comentarios Capturados}}{78}
+\contentsline {figure}{\numberline {4.8}{\ignorespaces Ventana de An\IeC {\'a}lisis}}{80}
+\contentsline {figure}{\numberline {4.9}{\ignorespaces Ventana de Palabras Capturadas}}{81}
+\contentsline {figure}{\numberline {4.10}{\ignorespaces Ventana TagCloud (Nube de Etiquetas)}}{82}
+\contentsline {figure}{\numberline {4.11}{\ignorespaces Ventana de Diccionarios}}{83}
+\contentsline {figure}{\numberline {4.12}{\ignorespaces Panel de Elementos Capturados}}{84}
+\contentsline {figure}{\numberline {4.13}{\ignorespaces Captura del Navegador Web con el An\IeC {\'a}lisis de Ids realizado}}{85}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Captura del Juego Buscaminas programado en JAVA}}{89}
-\contentsline {figure}{\numberline {5.2}{\ignorespaces Captura del Editor de Texto programado en JAVA}}{96}
-\contentsline {figure}{\numberline {5.3}{\ignorespaces Captura del juego Top Gun programado en JAVA}}{100}
-\contentsline {figure}{\numberline {5.4}{\ignorespaces Porcentajes de Ids divididos correctamente e incorrectamente}}{103}
-\contentsline {figure}{\numberline {5.5}{\ignorespaces Porcentajes de Ids expandidos correctamente e incorrectamente}}{104}
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Captura del Juego Buscaminas programado en JAVA}}{88}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Captura del Editor de Texto programado en JAVA}}{95}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Captura del juego Top Gun programado en JAVA}}{99}
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Porcentajes de Ids divididos correctamente e incorrectamente}}{102}
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Porcentajes de Ids expandidos correctamente e incorrectamente}}{103}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {6.1}{\ignorespaces Comparaci\IeC {\'o}n de un c\IeC {\'o}digo, antes y despu\IeC {\'e}s de expandir los Ids}}{113}
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Comparaci\IeC {\'o}n de un c\IeC {\'o}digo, antes y despu\IeC {\'e}s de expandir los Ids}}{111}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {A.1}{\ignorespaces Extensi\IeC {\'o}n de IDA}}{115}
-\contentsline {figure}{\numberline {A.2}{\ignorespaces Ejemplo de Archivo XML de entrada.}}{118}
-\contentsline {figure}{\numberline {A.3}{\ignorespaces Ejemplo de Archivo XML de salida.}}{119}
+\contentsline {figure}{\numberline {A.1}{\ignorespaces Extensi\IeC {\'o}n de IDA}}{113}
+\contentsline {figure}{\numberline {A.2}{\ignorespaces Ejemplo de Archivo XML de entrada.}}{116}
+\contentsline {figure}{\numberline {A.3}{\ignorespaces Ejemplo de Archivo XML de salida.}}{117}

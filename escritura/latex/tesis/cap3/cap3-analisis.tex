@@ -51,7 +51,7 @@ Por lo antedicho, construir herramientas de CP que analicen ids en los códigos 
 
 \textit{“Un \textbf{Identificador (id)} básicamente se define como una secuencia de letras, dígitos o caracteres especiales de cualquier longitud que sirve para identificar las entidades del programa”}
  
-Cada lenguaje tiene sus propias reglas que definen como pueden estar construidos los nombres de sus ids. Por ejemplo, en JAVA no está permitido declarar ids que coincidan con palabras reservadas o que contengan operadores relacionales o matemáticos ($+$ $-$ $\&$ $!$ $\%$), a excepción del guión bajo (\_ ) o signo peso (\$). Ejemplo: \textsf{var\_char, var\$char}.
+Cada lenguaje tiene sus propias reglas que definen cómo pueden estar construidos los nombres de sus ids. Por ejemplo, en JAVA no está permitido declarar ids que coincidan con palabras reservadas o que contengan operadores relacionales o matemáticos ($+$ $-$ $\&$ $!$ $\%$), a excepción del guión bajo (\_ ) o signo peso (\$). Ejemplo: \textsf{var\_char, var\$char}.
 
 %whats the name - Lawrie
 %Para mejorar la CP se requiere que los nombres de los ids comuniquen de manera clara los conceptos que representan. Sin embargo, en la práctica no se tiene muy en cuenta. 
@@ -65,7 +65,7 @@ Generalmente, la buena práctica de programación recomienda que al momento de c
 %Por ejemplo, el id \textsf{openWindow} está asociado al concepto `abrir una ventana'.
 Por ejemplo, el id \textsf{userAccount} está asociado al concepto `cuenta de usuario', en este caso si el sistema que se analiza es bancario, el concepto antedicho pertenece al Dominio del Problema. Por lo tanto, uno de los requisitos importantes que debe reunir un programa para facilitar su comprensión es que sus ids sean claros, de esta manera se podrán ver más fácilmente los conceptos que cada id representa. Sin embargo, dicho requerimiento no es tenido muy en cuenta por los programadores \cite{DFPM05,DLHD06,DCHD06,LDFHB07}.
 
-En la siguiente sección se menciona, como los nombres asignados a los ids impacta enormemente en la interpretación del concepto que el id tiene asociado, por lo tanto afecta la lectura comprensiva del código. Todas estas características, son tenidas en cuenta en el ámbito de la CP.
+En la siguiente sección se menciona, cómo los nombres asignados a los ids impacta enormemente en la interpretación del concepto que el id tiene asociado, por lo tanto afecta la lectura comprensiva del código. Todas estas características, son tenidas en cuenta en el ámbito de la CP.
 
 
 \section{Nombres de Identificadores}
@@ -273,7 +273,7 @@ Sin embargo, los investigadores Feild, Binkley, Lawrie \cite{LFBEX07,DLHD06} det
 Para concluir con esta sección, la buena calidad en los nombres de los ids mejora el entendimiento del código. Además, muchos expertos sostienen que las técnicas de Ingeniería Inversa se emplean con mayor precisión si el código está bien escrito. Algunas de estas técnicas tienen como objetivo mejorar la CP, y una forma conocida de lograrlo es traduciendo los nombres abreviados de los ids a palabras más completas en lenguaje natural. En la siguiente sección se describen este tipo de técnicas de regresión.
 
 %%=====================================
-\pagebreak
+
 \section{Traducción de Identificadores}
 \label{sec:tradIdDicc}%para hacer referencia en el cap 4
 
@@ -418,21 +418,14 @@ Para subdividir estas palabras se buscan los prefijos y los sufijos más largos 
 \caption{buscarPrefijo()}
 \end{function}
 
+\clearpage
 
 
 Por un lado se buscan prefijos con un proceso recursivo (Ver Función \mbox{\textbf{buscarPrefijo}}). Este proceso comienza analizando toda la palabra por completo. Se van extrayendo caracteres del final hasta encontrar el prefijo más largo o no haya más caracteres (líneas 5 - 7, \textbf{buscarPrefijo}). 
 
 Tomando como ejemplo \textit{\textbf{s}} = \textsf{flinptxt}, en las línea 5 y 6 se realiza lo siguiente, el caracter que se toma de la última posición de \textsf{flinptxt} se coloca en \textit{\textbf{sDiv}} en el mismo orden (ejemplo: \textit{\textbf{s}}=\textsf{flinptx} y \textit{\textbf{sDiv}}= \textsf{t}), estos nuevos parámetros son pasados en la misma función \textbf{buscarPrefijo} (línea 7). Este proceso recursivo se repetirá (\textit{\textbf{s}}=\textsf{flinpt} y \textit{\textbf{sDiv}}= \textsf{xt}; \textit{\textbf{s}}=\textsf{flinp} y \textit{\textbf{sDiv}}= \textsf{txt}; etc), hasta que sucedan dos posibilidades: a) \textit{\textbf{s}} no tenga más caracteres (línea 1), en ese caso se retorna \textit{\textbf{sDiv}} con el resultado de la ejecución; o b) \textit{\textbf{s}} tenga un prefijo válido (pertenezca a algún diccionario - línea 3), en caso de que así sea, se procede a separarlo colocando un separador (` ') y luego se invoca nuevamente a \mbox{\textbf{buscarPrefijo}} para buscar más subdivisiones (línea 4). Para aclarar más el punto b) anterior, tomando el ejemplo antedicho, si \textsf{fl} es el prefijo más largo encontrado en \textsf{flinptxt}, entonces \textsf{fl} (variable \textit{\textbf{s}}) se separa del resto con ` ' y la palabra \textsf{inptxt} (variable \textit{\textbf{sDiv}}) se procesa con \mbox{\textbf{buscarPrefijo}} (línea 4). Si el resultado de este último fuera, por ejemplo, que \textsf{inp} se divida de \textsf{txt}, el resultado final será \mbox{\textsf{fl inp txt}}.
 
-
-
-
-
-
-De manera simétrica, otro proceso recursivo se hace cargo de los sufijos (Ver Función \textbf{buscarSufijo}). También extrae caracteres, pero en este caso desde la primer posición hasta encontrar el sufijo más largo presente en alguna lista o no haya más caracteres (líneas 5 - 7, \textbf{buscarSufijo}).
-De la misma forma que la función de prefijos, cuando encuentra una palabra, se inserta un separador (` ') y el resto se procesa por la función \textbf{buscarSufijo} para buscar más subdivisiones (línea 4).
-
-\begin{function}[b!]
+\begin{function}[hb!]
 \LinesNumbered%enumera las lineas
 \SetKwInOut{Input}{Entrada}\SetKwInOut{Output}{Salida}
 \Input{\textit{\textbf{s}} \tcp{\textit{cadena a dividir}}}
@@ -464,6 +457,13 @@ De la misma forma que la función de prefijos, cuando encuentra una palabra, se 
 
 \caption{buscarSufijo()}
 \end{function}
+
+
+
+De manera simétrica, otro proceso recursivo se hace cargo de los sufijos (Ver Función \textbf{buscarSufijo}). También extrae caracteres, pero en este caso desde la primer posición hasta encontrar el sufijo más largo presente en alguna lista o no haya más caracteres (líneas 5 - 7, \textbf{buscarSufijo}).
+De la misma forma que la función de prefijos, cuando encuentra una palabra, se inserta un separador (` ') y el resto se procesa por la función \textbf{buscarSufijo} para buscar más subdivisiones (línea 4).
+
+
 
 Una vez que ambos procesos terminaron, los resultados son retornados al algoritmo principal (\textsf{resultadoPrefijo, resultadoSufijo} líneas 6 y 7, algoritmo \ref{GSA}). Mediante una función de comparación se elije el que obtuvo mayores particiones (línea 8). Finalmente, el algoritmo Greedy retorna el id destacando las palabras que lo componen mediante el separador espacio \mbox{(\textsf{file input txt})}.
 
@@ -680,7 +680,7 @@ $Frec(s,p) + ( globalFrec(s) / \log_{10}(totalFrec(p) )$
 
 Donde \textbf{p} es el programa de estudio, $Frec(s,p)$ es la frecuencia de ocurrencia de \textbf{s} en \textbf{p}. La función $totalFrec(p)$, es la frecuencia total de todos los strings en el programa \textbf{p}. La función $globalFrec(s)$, es la frecuencia de aparición de \textbf{s} en una gran conjunto de programas tomados como muestras\footnote[1]{Estos programas son alrededor de 9000 y están escritos en JAVA}. Esta fórmula de score fue desarrollada por los autores, a través del análisis de datos obtenidos \cite{EHPV09}.
 
-\pagebreak
+
 \subsection{Algoritmo de Expansión Básico}
 \label{sec:algExpBas}
 %noindent elimina sangria
@@ -782,7 +782,7 @@ listaExpansión.add(listaCandidatos)
 
 Finalmente, en caso no tener éxito, con las palabras extraídas del código, la búsqueda continúa en el diccionario predefinido como último recurso (línea 10, algoritmo \ref{BEA}). Al igual que la búsqueda anterior, una palabra candidata dentro del diccionario es aquella que contenga todas las letras en el mismo orden que la abreviatura a expandir, ejemplo: \mbox{\textsf{rctgl}} $\Rightarrow$ R\textsf{e}CT\textsf{an}GL\textsf{e}. Dado que el diccionario posee muchas palabras, puede retornar más de un resultado posible.
 
-La técnica de expansión descripta en esta sección, devuelve una única expansión potencial para una abreviatura determinada y en caso contrario no retorna un resultado (líneas 11 - 14, algoritmo \ref{BEA}). El motivo de esto, es porque no tiene programado como decidir una única opción ante múltiples alternativas de expansión. A esta característica de mejora, los autores lo presentan como trabajo futuro \cite{LFBEX07,EZH08}.
+La técnica de expansión descripta en esta sección, devuelve una única expansión potencial para una abreviatura determinada y en caso contrario no retorna un resultado (líneas 11 - 14, algoritmo \ref{BEA}). El motivo de esto, es porque no tiene programado cómo decidir una única opción ante múltiples alternativas de expansión. A esta característica de mejora, los autores lo presentan como trabajo futuro \cite{LFBEX07,EZH08}.
 
 \subsection{Algoritmo de Expansión AMAP}
 \label{sec:algAmap}
@@ -830,7 +830,7 @@ Comenzando por el paso 1, la búsqueda de las palabras largas contiene dos algor
 
 El primer paso para buscar palabras largas consiste en construir una expresión regular con un patrón de búsqueda.  Este patrón se encarga de seleccionar las palabras largas que coincidan con las letras de la palabra abreviada.
 
-Los patrones se construyen a partir de la palabra abreviada, a continuación se detalla como se arman estos patrones: 
+Los patrones se construyen a partir de la palabra abreviada, a continuación se detalla cómo se arman estos patrones: 
 
 \begin{description}
 \itemsep0em%reduce espacio
@@ -838,7 +838,7 @@ Los patrones se construyen a partir de la palabra abreviada, a continuación se 
 
 Ejemplo: Dada \textit{\textbf{pa}} = \textsf{arg}, el patrón \textsf{arg}[a-z]+ coincide con la palabra \textit{\textbf{arg}}ument (entre otras).
 
-\item[Patrón compuesto por letras:]  La expresión regular se construye insertando [a-z]* \footnote[1]{La expresión [a-z]* significa, cero o más letras entre la a y la z.} después de cada letra de la palabra abreviada (\textit{\textbf{pa}}). Si \textit{\textbf{pa}}$=c_{1},c_{2},c_{3},..,c_{n}$, donde $n$ es la longitud de la palabra abreviada. El patrón queda: $c_{1}$[a-z]*$c_{2}$[a-z]*$c_{3}$[a-z]*..$c_{n}$.
+\item[Patrón compuesto por letras:]  La expresión regular se construye insertando [a-z]* \footnote[2]{La expresión [a-z]* significa, cero o más letras entre la a y la z.} después de cada letra de la palabra abreviada (\textit{\textbf{pa}}). Si \textit{\textbf{pa}}$=c_{1},c_{2},c_{3},..,c_{n}$, donde $n$ es la longitud de la palabra abreviada. El patrón queda: $c_{1}$[a-z]*$c_{2}$[a-z]*$c_{3}$[a-z]*..$c_{n}$.
 
 Ejemplo: Dada \textit{\textbf{pa}} = \textsf{pgm}, el patrón \textsf{p}[a-z]*\textsf{g}[a-z]*\textsf{m}[a-z]* coincide (entre otras) con  \textit{\textbf{p}}ro\textit{\textbf{g}}ra\textit{\textbf{m}} (entre otras).
 \end{description}
@@ -917,8 +917,7 @@ Si la ejecución continúa sin encontrar resultados, la línea 6 se restringe un
 
 Para finalizar, en la línea 10 si la palabra abreviada tiene más de un caracter y el patrón es de tipo prefijo, se busca usando (\textit{\textbf{patrón}}) en los comentarios de la clase. En la línea 9 se restringe esta búsqueda, porque los autores sostienen \cite{EZH08}, que buscar con un solo caracter en comentarios implica tener muchos resultados y más aun si el patrón es el compuesto por letras.
 
-\pagebreak
-\noindent \textbf{Búsqueda por Multi-Palabras\\}
+\noindent \textbf{\\\\Búsqueda por Multi-Palabras\\}
 
 El algoritmo de búsqueda por multi-palabras a diferencia del explicado anteriormente, expande abreviaturas que contienen dos o más palabras. Algunos ejemplos son: \textsf{gui $\Rightarrow$ graphical user interface, fs $\Rightarrow$ file system}. Como bien se definió en secciones anteriores estas abreviaturas se las conoce con el nombre de acrónimos, que generalmente están conformadas por 2 ó 3 caracteres. El algoritmo anterior intenta detectar este tipo de abreviaturas y no analizarlas para que sea procesado por el multi-palabras.
 
@@ -1060,7 +1059,7 @@ La técnica EMF tiene dos niveles de análisis, el primero es a nivel de program
 El algoritmo de expansión de abreviaturas AMAP es totalmente automático y se implementó como una extensión de Eclipse. %Actualmente solo soporta procesamiento por lotes. Como trabajo futuro se piensa que corra en segundo plano brindando apoyo a herramientas de mantenimiento de software \cite{EZH08}.\\
 
 %Extracting meaning - lawrie
-Hasta ahora se han descripto algoritmos y técnicas que recientemente se pensaron y elaboraron. En la próxima sección se presenta una herramienta que fue construida en los comienzos de los estudios basados en ids. Esta herramienta es tomada como objeto de estudio por varios autores de las técnicas antes mencionadas \cite{EZH08,DCHD06,DLHD06,LFBEX07}.
+Hasta ahora se han descripto algoritmos y técnicas que recientemente se pensaron y elaboraron. En la próxima sección se presenta una herramienta que fue construida en los comienzos de los estudios basados en ids. Esta herramienta es tomada como objeto de estudio por varios autores de las técnicas antes mencionadas \cite{EZH08,DCHD06,DLHD06,LFBEX07}.\\
 
 
 %tonella-caprile
@@ -1093,7 +1092,7 @@ El código fuente se convierte de esta manera en un código más claro y mejora 
 
 Los pasos 1 y 3 están totalmente automatizados. Sin embargo, para lograr que la expansión de nombres sea efectiva, se necesita que en algunos casos del paso 2 intervenga el usuario.
 
-\begin{figure}[h] %[h] para here [b] para bottom [t] para top
+\begin{figure}[t!] %[h] para here [b] para bottom [t] para top
 \centering
 \includegraphics[scale= 0.60]{./cap3/ire_2.png}
 \caption{Etapas de Identifier Restructurer}

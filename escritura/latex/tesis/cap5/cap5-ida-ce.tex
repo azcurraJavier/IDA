@@ -275,60 +275,6 @@ También existen casos de abreviaturas mal expandidas, uno de ellos es \textsf{b
 
 La mayoría de los ids analizados (Ver Tabla \ref{tabla6} columnas Expansión desde Greedy y Expansión desde Samurai), las palabras presentes se corresponden a distintos elementos que son propios de un editor de textos convencional. De estos elementos se pueden enumerar algunos: texto, copiar, pegar, imprimir, imagen, color, archivo, herramienta, nuevo, guardar, buscar. Estos elementos sin duda están asociados al Dominio del Problema en el programa Editor.java.
 
-\begin{sidewaystable}[h!]
-
-		\centering
-   		\begin{tabular}{| c | c | c | c | c |}     
-   		
-       \hline
-  	   \textbf{Id} & \textbf{Greedy} & \textbf{Samurai} & \textbf{Exp. desde Greedy} & \textbf{Exp. desde Samurai} \\ \hline
-
-%jMenBar&j--men--bar&j--men--bar&java menu background&java menu background\\ \hline
-menBarFile&men--bar--file&men--bar--file&menu background file&menu background file\\ \hline
-menItNew&men--it--new&men--it--new&menu it new&menu it new\\ \hline
-menBarEdit&men--bar--edit&men--bar--edit&menu background editor&menu background editor\\ \hline
-menItCopy&men--it--copy&men--it--copy&menu it copy&menu it copy\\ \hline
-jTlBar&j--tl--bar&j--tl--bar&java tool background&java tool background\\ \hline
-jBtSave&j--bt--save&j--bt--save&java bt save&java bt save\\ \hline
-popUpMenu&pop--up--menu&pop--up--menu&pop up menu&pop up menu\\ \hline
-imIcPrint&im--ic--print&im--ic--print&images icon printing&images icon printing\\ \hline
-PRGname&pr--g--name&prg--name&program gif name&program name\\ \hline
-jLabelColTex&j--label--col--t--ex&j--label--col--tex&java label color text exit&java label color text\\ \hline
-bckCol&b--c--k--col&bck--col&bar copy kilo color&background color\\ \hline
-TEXTarea&t--ex--tare--a&text--area&text exit tare areas&text areas\\ \hline
-textAREAerrors&t--ex--tare--ae--rrors&text--area--errors&text exit tare areas rrors&text areas errors\\ \hline
-jScrPANtxtAr&j--scr--pa--nt--xt--ar&j--scr--pan--txt--ar&\shortstack{java scrollbar program\\north xt areas}&\shortstack{java scrollbar\\pan text areas} \\ \hline
-selCl&sel--c--l&sel--cl&select copy literalizes&select close\\ \hline
-fc&f--c&fc&finish copy&fc\\ \hline
-flreader&fl--reader&flreader&file reader&flreader\\ \hline
-ioe&io--e&ioe&icon editor&invoiced\\ \hline
-printText&print--text&print--text&printing text&printing text\\ \hline
-ptjob&pt--job&ptjob&printing job&ptjob\\ \hline
-pg&pg&pg&print graphics&print graphics\\ \hline
-%init&init&init&init&init\\ \hline
-linNum&l--in--nu--m&lin--num&lab in nu menu&linearised numerically\\ \hline
-i&i&i&images&images\\ \hline
-jLbFind&j--lb--find&j--lb--find&java lb find&java lb find\\ \hline
-jTxFind&j--tx--find&j--tx--find&java text find&java text find\\ \hline
-%ed&ed&ed&editor&editor\\ \hline
-jPanBut&j--pan--but&j--pan--but&java pan but&java pan but\\ \hline
-%jTxWord&j--tx--word&j--tx--word&java text word&java text word\\ \hline
-jChoColor&j--c--ho--color&j--cho--color&java copy ho color&java choose color\\ \hline
-btAcept&bt--ace--pt&bt--acept&bt ace printing&bt acept\\ \hline
-
-  \end{tabular}
-	 
-   \caption{Parte del Análisis Realizado a los Ids de Editor.java}
-   \label{tabla6}
-     
-\end{sidewaystable}
-
-\clearpage %esto es necesario sino las tablas se van al final del capitulo
-
-
-
-
-
 
 %\begin{table}[ht!]
 %\parbox{.40\linewidth}{
@@ -432,7 +378,64 @@ btAcept&bt--ace--pt&bt--acept&bt ace printing&bt acept\\ \hline
 %\caption{Literales extraídos por el AS ANTLR}\label{tabla8}
 %\end{table}
 
-\pagebreak
+%\pagebreak
+
+\section{Juego de Aviones}
+ 
+Continuando con los casos de estudio, el próximo es un programa JAVA llamado TopGun.java. Cuando este programa se ejecuta aparece un juego de aviones (Ver Figura \ref{caso3}), en este juego el usuario conduce un avión que dispara proyectiles. El objetivo consiste en en derribar la mayor cantidad de aviones enemigos y un contador suma puntos por cada avión derribado. El juego finaliza cuando al avión se le agota la barra de energía por completo, esta barra disminuye debido a los disparos enemigos que recibe.
+Este programa, posee un módulo de aproximadamente de 600 líneas que fueron analizadas por la herramienta IDA.
+Al igual que el caso de estudio anterior (Editor de texto), debido a que el programa TopGun.java contiene muchos ids, en la tabla \ref{tabla7} se lista el análisis de los ids más relevantes.
+
+\begin{sidewaystable}[h!]
+
+		\centering
+   		\begin{tabular}{| c | c | c | c | c |}     
+   		
+       \hline
+  	   \textbf{Id} & \textbf{Greedy} & \textbf{Samurai} & \textbf{Exp. desde Greedy} & \textbf{Exp. desde Samurai} \\ \hline
+
+%jMenBar&j--men--bar&j--men--bar&java menu background&java menu background\\ \hline
+menBarFile&men--bar--file&men--bar--file&menu background file&menu background file\\ \hline
+menItNew&men--it--new&men--it--new&menu it new&menu it new\\ \hline
+menBarEdit&men--bar--edit&men--bar--edit&menu background editor&menu background editor\\ \hline
+menItCopy&men--it--copy&men--it--copy&menu it copy&menu it copy\\ \hline
+jTlBar&j--tl--bar&j--tl--bar&java tool background&java tool background\\ \hline
+jBtSave&j--bt--save&j--bt--save&java bt save&java bt save\\ \hline
+popUpMenu&pop--up--menu&pop--up--menu&pop up menu&pop up menu\\ \hline
+imIcPrint&im--ic--print&im--ic--print&images icon printing&images icon printing\\ \hline
+PRGname&pr--g--name&prg--name&program gif name&program name\\ \hline
+jLabelColTex&j--label--col--t--ex&j--label--col--tex&java label color text exit&java label color text\\ \hline
+bckCol&b--c--k--col&bck--col&bar copy kilo color&background color\\ \hline
+TEXTarea&t--ex--tare--a&text--area&text exit tare areas&text areas\\ \hline
+textAREAerrors&t--ex--tare--ae--rrors&text--area--errors&text exit tare areas rrors&text areas errors\\ \hline
+jScrPANtxtAr&j--scr--pa--nt--xt--ar&j--scr--pan--txt--ar&\shortstack{java scrollbar program\\north xt areas}&\shortstack{java scrollbar\\pan text areas} \\ \hline
+selCl&sel--c--l&sel--cl&select copy literalizes&select close\\ \hline
+fc&f--c&fc&finish copy&fc\\ \hline
+flreader&fl--reader&flreader&file reader&flreader\\ \hline
+ioe&io--e&ioe&icon editor&invoiced\\ \hline
+printText&print--text&print--text&printing text&printing text\\ \hline
+ptjob&pt--job&ptjob&printing job&ptjob\\ \hline
+pg&pg&pg&print graphics&print graphics\\ \hline
+%init&init&init&init&init\\ \hline
+linNum&l--in--nu--m&lin--num&lab in nu menu&linearised numerically\\ \hline
+i&i&i&images&images\\ \hline
+jLbFind&j--lb--find&j--lb--find&java lb find&java lb find\\ \hline
+jTxFind&j--tx--find&j--tx--find&java text find&java text find\\ \hline
+%ed&ed&ed&editor&editor\\ \hline
+jPanBut&j--pan--but&j--pan--but&java pan but&java pan but\\ \hline
+%jTxWord&j--tx--word&j--tx--word&java text word&java text word\\ \hline
+jChoColor&j--c--ho--color&j--cho--color&java copy ho color&java choose color\\ \hline
+btAcept&bt--ace--pt&bt--acept&bt ace printing&bt acept\\ \hline
+
+  \end{tabular}
+	 
+   \caption{Parte del Análisis Realizado a los Ids de Editor.java}
+   \label{tabla6}
+     
+\end{sidewaystable}
+
+\clearpage %esto es necesario sino las tablas se van al final del capitulo
+
 
 \begin{figure}[t!] %[h] para here [b] para bottom [t] para top
 \centerline{%queda centrada mejor la imagen
@@ -441,13 +444,6 @@ btAcept&bt--ace--pt&bt--acept&bt ace printing&bt acept\\ \hline
 \caption{Captura del juego Top Gun programado en JAVA}
 \label{caso3}
 \end{figure}
-
-
-\section{Juego de Aviones}
- 
-Continuando con los casos de estudio, el próximo es un programa JAVA llamado TopGun.java. Cuando este programa se ejecuta aparece un juego de aviones (Ver Figura \ref{caso3}), en este juego el usuario conduce un avión que dispara proyectiles. El objetivo consiste en en derribar la mayor cantidad de aviones enemigos y un contador suma puntos por cada avión derribado. El juego finaliza cuando al avión se le agota la barra de energía por completo, esta barra disminuye debido a los disparos enemigos que recibe.
-Este programa, posee un módulo de aproximadamente de 600 líneas que fueron analizadas por la herramienta IDA.
-Al igual que el caso de estudio anterior (Editor de texto), debido a que el programa TopGun.java contiene muchos ids, en la tabla \ref{tabla7} se lista el análisis de los ids más relevantes.\\
 
 \noindent \textbf{Análisis de Resultados\\}
 
@@ -459,6 +455,11 @@ Las expansiones de ids en general están bastante precisas, salvo casos como \te
 Por otro lado, la abreviatura \textsf{but} que representa \textsf{buttons} no se expande, se estima que esto ocurre por que \textsf{buttons} no está en ninguna frase del código (comentario y literal), y no se expande con palabras del diccionario en Inglés porque \textsf{but} es una palabra válida del diccionario.
 
 De los ids analizados (Ver Tabla \ref{tabla7} en las columnas Expansión desde Greedy y Expansión desde Samurai), las palabras que más frecuentemente aparecen están asociados al juego. De estas palabras se pueden nombrar, disparos, aviones, enemigos, imágenes, actualizar pantalla, movimiento. Estas palabras en gran parte están relacionadas al Dominio del Problema perteneciente al programa TopGun.java.
+
+\section{Notas y Comentarios sobre los casos de\\ estudio}
+
+Una vez que IDA analizó alrededor de 400 ids en los tres casos de estudio presentados previamente, los resultados obtenidos de las divisiones se resumen en el gráfico de barras de la Figura \ref{barras01}. Como se puede observar en este gráfico, el eje vertical representa el porcentaje de ids analizados sobre la cantidad total. El color azul de cada barra indica que porcentaje sobre total de ids se separó correctamente, mientras que el rojo señala lo contrario. Por otro lado, el eje horizontal corresponde a cada una de las técnicas empleadas para dividir ids (Greedy, Samurai).
+Claramente, el gráfico de la Figura \ref{barras01} muestra que entre las dos técnicas de división, Samurai contiene una tasa de fallo mucho menor que Greedy. Esto era previsible por que el algoritmo Greedy es bastante simple y divide sin tener en cuenta el contexto en el que esta situado el id, no ocurriendo lo mismo con Samurai, ya que emplea un análisis más complejo a la hora de realizar su tarea.
 
 %\begin{table}[ht!]
 %\parbox{.40\linewidth}{
@@ -543,7 +544,13 @@ De los ids analizados (Ver Tabla \ref{tabla7} en las columnas Expansión desde G
 %   \caption{Literales extraídos por el AS ANTLR}
 %   \label{tabla10}
 %     
-%\end{table} 
+%\end{table}
+
+
+
+
+
+ 
 
 \begin{sidewaystable}[h!]
 		\centering
@@ -591,20 +598,26 @@ plaIma&pla--im--a&pla--ima&plane\_images\_attributes&plane\_images \\ \hline
 
 \clearpage %esto es necesario sino las tablas se van al final del capitulo
 
-\section{Notas y Comentarios sobre los casos de\\ estudio}
 
-\begin{figure}[t!] %[h] para here [b] para bottom [t] para top
+
+Por otro lado, en la Figura \ref{barras02}, se aprecia una comparativa similar a la anterior, pero esta vez es entre las expansiones realizadas con la técnica de expansión básica, que recibe como entrada los dos grupos de resultados de las técnicas de división (Expansión desde Greedy y Samurai). Como se puede observar en la Figura \ref{barras02}, la expansiones de los ids que dividió Greedy tienen más casos incorrectos que las expansiones de los ids que dividió Samurai. Esto tiene sentido dado que mientras más acertada esté la división del id, mayor acierto tendrá la expansión. Si se compara las expansiones realizadas con las divisiones (Entre la Figura \ref{barras01} y \ref{barras02}), en el caso de las expansiones existe un aumento notable de casos incorrectos. 
+Este comportamiento ocurre por que el algoritmo de expansión es básico y posee ciertos inconvenientes, por ejemplo, no expande una abreviatura ante múltiples posibilidades de expansión, en algunos casos utiliza un diccionario de palabras en lenguaje natural, el cual es extenso, ocupa mucho espacio y deriva en expansiones imprecisas (Ver Capítulo 3 - sección \ref{sec:algExpBas}).
+Por último, las expansiones efectuadas luego de ser procesadas por el algoritmo Greedy son las que tienen mayor fallo, tomando en cuenta las dos figuras, esto ocurre debido a que se ejecutaron las dos técnicas más básicas y que más inconvenientes tienen (Greedy y Expansión Básica).
+
+\enlargethispage{\baselineskip}
+\enlargethispage{\baselineskip}
+
+\begin{figure}[h!] %[h] para here [b] para bottom [t] para top
 \centerline{%queda centrada mejor la imagen
-\includegraphics[scale= 0.66]{./cap5/barras_01.png}
+\includegraphics[scale= 0.64]{./cap5/barras_01.png}
 }
 \caption{Porcentajes de Ids divididos correctamente e incorrectamente}
 \label{barras01}
 \end{figure}
+\clearpage
 
-Una vez que IDA analizó alrededor de 400 ids en los tres casos de estudio presentados previamente, los resultados obtenidos de las divisiones se resumen en el gráfico de barras de la Figura \ref{barras01}. Como se puede observar en este gráfico, el eje vertical representa el porcentaje de ids analizados sobre la cantidad total. El color azul de cada barra indica que porcentaje sobre total de ids se separó correctamente, mientras que el rojo señala lo contrario. Por otro lado, el eje horizontal corresponde a cada una de las técnicas empleadas para dividir ids (Greedy, Samurai).
-Claramente, el gráfico de la Figura \ref{barras01} muestra que entre las dos técnicas de división, Samurai contiene una tasa de fallo mucho menor que Greedy. Esto era previsible por que el algoritmo Greedy es bastante simple y divide sin tener en cuenta el contexto en el que esta situado el id, no ocurriendo lo mismo con Samurai, ya que emplea un análisis más complejo a la hora de realizar su tarea.
 
-\begin{figure}[t!] %[h] para here [b] para bottom [t] para top
+\begin{figure}[h!] %[h] para here [b] para bottom [t] para top
 \centerline{%queda centrada mejor la imagen
 \includegraphics[scale= 0.64]{./cap5/barras_02.png}
 }
@@ -612,11 +625,5 @@ Claramente, el gráfico de la Figura \ref{barras01} muestra que entre las dos t�
 \label{barras02}
 \end{figure}
 
-Por otro lado, en la Figura \ref{barras02}, se aprecia una comparativa similar a la anterior, pero esta vez es entre las expansiones realizadas con la técnica de expansión básica, que recibe como entrada los dos grupos de resultados de las técnicas de división (Expansión desde Greedy y Samurai). Como se puede observar en la Figura \ref{barras02}, la expansiones de los ids que dividió Greedy tienen más casos incorrectos que las expansiones de los ids que dividió Samurai. Esto tiene sentido dado que mientras más acertada esté la división del id, mayor acierto tendrá la expansión. Si se compara las expansiones realizadas con las divisiones (Entre la Figura \ref{barras01} y \ref{barras02}), en el caso de las expansiones existe un aumento notable de casos incorrectos. 
-Este comportamiento ocurre por que el algoritmo de expansión es básico y posee ciertos inconvenientes, por ejemplo, no expande una abreviatura ante múltiples posibilidades de expansión, en algunos casos utiliza un diccionario de palabras en lenguaje natural, el cual es extenso, ocupa mucho espacio y deriva en expansiones imprecisas (Ver Capítulo 3 - sección \ref{sec:algExpBas}).
-Por último, las expansiones efectuadas luego de ser procesadas por el algoritmo Greedy son las que tienen mayor fallo, tomando en cuenta las dos figuras, esto ocurre debido a que se ejecutaron las dos técnicas más básicas y que más inconvenientes tienen (Greedy y Expansión Básica).
-
-\enlargethispage{\baselineskip}
-\enlargethispage{\baselineskip}%agrega linea al final de la hoja
-
 Habiendo explicado los casos de estudio que muestran la utilidad de la herramienta IDA, en el próximo y último capítulo de este trabajo final, se describen las conclusiones obtenidas.
+
