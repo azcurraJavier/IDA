@@ -1,4 +1,3 @@
-
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
@@ -20,12 +19,15 @@ public class Minesweeper extends JFrame implements ActionListener {
     //Dimension
     private int dim = 10;
     //total mines
-    private int TOTmin = 20;
-    private int sq = dim * dim - TOTmin;
+    private int TOTmin = 20;//min min
+    private int squares = dim * dim - TOTmin;
 
 
     //Time tp;
     public Minesweeper() {
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        
         bttns = new JButton[dim][dim];
         min_mtrx = new int[dim][dim];
         //load Images
@@ -41,7 +43,7 @@ public class Minesweeper extends JFrame implements ActionListener {
         add(topPanel, "North");
         txtMin.setEditable(false);
         
-        txtMin.setText(Integer.toString(sq));
+        txtMin.setText(Integer.toString(squares));
 
         //Button panel
         JPanel middlePanel = new JPanel(new GridLayout(dim, dim));
@@ -57,7 +59,7 @@ public class Minesweeper extends JFrame implements ActionListener {
             }
         }
         this.add(middlePanel, "Center");
-        plantmines(TOTmin);
+        plantMines(TOTmin);
         //Window properties
    
         setTitle("Minesweeper v 1.0                                            ");
@@ -65,20 +67,19 @@ public class Minesweeper extends JFrame implements ActionListener {
         setSize(600, 600);
         setVisible(true);
     }
-    
-    private void plantmines(int mins) {
+
+    private void plantMines(int mins) {
         System.out.println("Planting Mines... \n");
         for (int i = 0; i < mins; i++) {
             
             int x, y = 0;
             double x1, y1 = 0;
 
-            /*
+            /*  
              *  Legend of mines in Matrix
-             *	1 contains Mine
-             *	0 Not contains Mine
+             *  1 contains Mine
+             *  0 Not contains Mine
              */
-            
             //Place random mine
             do {
                 //Generate random position
@@ -122,10 +123,10 @@ public class Minesweeper extends JFrame implements ActionListener {
 
     private void uncoverEmpty(int i, int j) {
         //Uncover an empty square
-        sq--;
-        txtMin.setText(Integer.toString(sq));
+        squares--;
+        txtMin.setText(Integer.toString(squares));
         bttns[i][j].setText(Integer.toString(nearbyMines(i, j))); //Nearby Mines
-        if (sq == 0) {
+        if (squares == 0) {
             win();
         }
     }
@@ -140,21 +141,21 @@ public class Minesweeper extends JFrame implements ActionListener {
                 bttns[i][j].setIcon(null);
             }
         }
-        plantmines(TOTmin);
-        sq = dim * dim - TOTmin;
-        txtMin.setText(Integer.toString(sq));	
+        plantMines(TOTmin);
+        squares = dim * dim - TOTmin;
+        txtMin.setText(Integer.toString(squares));  
         
     }
 
     private void win() {
-	//Win the game
+    //Win the game
         String msgDialog = "You Win!!!  Game Over!!!";
         JOptionPane.showMessageDialog(this, msgDialog, "Message", JOptionPane.INFORMATION_MESSAGE);
         restart();
     }
 
     private void boom() {
-	//lose the game        
+    //lose the game        
         for (int i = 0; i < dim; i++) {
             for (int j = 0; j < dim; j++) {
                 if (min_mtrx[i][j] == 1) {                    
@@ -170,60 +171,58 @@ public class Minesweeper extends JFrame implements ActionListener {
         restart();
     }
 
-    private int nearbyMines(int xar, int yac) {
-        /*	
-         *	x axe row
-         *	y axe column
+    private int nearbyMines(int xar, int yar) {
+        /*  
+         *  x axe row
+         *  y axe column
          *
-         *	return the number of mines
+         *  return the number of mines
          */
 
-        int MINSnum = 0;
-        for (int i = yac - 1; i <= yac + 1; i++) {
+        int minsNum = 0;
+        for (int i = yar - 1; i <= yar + 1; i++) {
             //horizontal
             if (i > -1 && i < dim) {
                 if (min_mtrx[xar][i] == 1) {
-                    MINSnum++;
+                    minsNum++;
                 }
             }
         }
         //vertical
         for (int j = xar - 1; j <= xar + 1; j++) {
             if (j > -1 && j < dim) {
-                if (min_mtrx[j][yac] == 1) {
-                    MINSnum++;
+                if (min_mtrx[j][yar] == 1) {
+                    minsNum++;
                 }
             }
         }
-	//diagonal
+    //diagonal
         //Top left corner
-        //copy of axes
-        
-        int xar_cp = xar;
-        int yac_cp = yac;
-        xar_cp--;
-        yac_cp--;
-        for (int i = xar_cp; i < xar_cp + 3; i++) {
-            if (i > -1 && i < dim && yac_cp > -1 && yac_cp < dim) {
-                if (min_mtrx[i][yac_cp] == 1) {
-                    MINSnum++;
+        int xar2 = xar;
+        int yar2 = yar;
+        xar2--;
+        yar2--;
+        for (int i = xar2; i < xar2 + 3; i++) {
+            if (i > -1 && i < dim && yar2 > -1 && yar2 < dim) {
+                if (min_mtrx[i][yar2] == 1) {
+                    minsNum++;
                 }
             }
-            yac_cp++;
+            yar2++;
         }
         //top right corner
-        xar_cp = xar;
-        yac_cp = yac;
-        xar_cp--;
-        yac_cp++;
-        for (int i = xar_cp; i < xar_cp + 3; i++) {
-            if (i > -1 && i < dim && yac_cp > -1 && yac_cp < dim) {
-                if (min_mtrx[i][yac_cp] == 1) {
-                    MINSnum++;
+        xar2 = xar;
+        yar2 = yar;
+        xar2--;
+        yar2++;
+        for (int i = xar2; i < xar2 + 3; i++) {
+            if (i > -1 && i < dim && yar2 > -1 && yar2 < dim) {
+                if (min_mtrx[i][yar2] == 1) {
+                    minsNum++;
                 }
             }
-            yac_cp--;
+            yar2--;
         }
-        return MINSnum;
+        return minsNum;
     }
 }

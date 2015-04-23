@@ -1,4 +1,3 @@
-
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -7,7 +6,7 @@ import static java.lang.Thread.sleep;
 
 public class TopGun extends JFrame implements KeyListener, ActionListener {
 
-    //  Attributes
+    //	Attributes
     JButton strt_but = new JButton("Press Space button to Start");
 
     JPanel strtPan = new JPanel();
@@ -221,7 +220,7 @@ class RefreshScreen extends Thread {
     Image eneImage;
     Image bangImage;
 
-    //Clases
+    //Classes
     TopGun tg;
 
     Graphics2D drawing;
@@ -233,7 +232,7 @@ class RefreshScreen extends Thread {
         shoImage = Toolkit.getDefaultToolkit().getImage("shot"+".jpg");
         eneImage = Toolkit.getDefaultToolkit().getImage("enemy"+".png");
         bangImage = Toolkit.getDefaultToolkit().getImage("exploit"+".png");
-        //iniciar Clase topGun
+        //init topGun Classes
         tg = (TopGun) jf;
     }
 
@@ -480,7 +479,7 @@ class Shot extends Thread {
 
     //shot's position
     int yac = 0;
-    int xar = 0;    
+    int xar = 0;	
     
     boolean enemy = false;
     

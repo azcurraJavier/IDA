@@ -23,7 +23,6 @@ public class InfoUtilizadaPane extends javax.swing.JDialog {
     private Map<String,Integer> localFreqTable;
     private Map<String,Integer> globalFreqTable;
     private static TagCloudPanel tcp1;
-    private static TagCloudPanel tcp2;
     private PalabraHash palTag1;
 
     /**
@@ -132,6 +131,7 @@ public class InfoUtilizadaPane extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Palabras Capturadas");
+        setResizable(false);
 
         jButton1.setText("Cerrar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -285,9 +285,12 @@ public class InfoUtilizadaPane extends javax.swing.JDialog {
         
         String msg = "Nota: El tamaño de cada palabra depende de la Frecuencia Local";
         
-        if (tcp1 == null) {
-            tcp1 = new TagCloudPanel(new javax.swing.JFrame(), true, palTag1.getArray(),msg);
+        if (tcp1 != null) {
+            tcp1.dispose();
         }
+        
+        tcp1 = new TagCloudPanel(new javax.swing.JFrame(), true, palTag1.getArray(),msg);
+        
         tcp1.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
