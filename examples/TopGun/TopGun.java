@@ -549,11 +549,11 @@ class Shot extends Thread {
         resume();
     }
 
-    public void fire(int numero) {
+    public void fire(int number) {
         //plane's position
         xar = tg.getXar();
         yac = tg.getYac();
-        enNum = numero;
+        enNum = number;
         resume();
     }
 

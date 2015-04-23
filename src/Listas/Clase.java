@@ -106,7 +106,7 @@ public class Clase {
                 //for (Iterator<Entry<String, Declaracion>> it = c.getLisDecl().entrySet().iterator(); it.hasNext();) {
                 for(Declaracion d : c.getListaDecl()){     
                     //Declaracion d = it.next().getValue();
-                    m.setRepresenta("Variable de Clase");
+                    m.setRepresenta("Variable");
                     m.setNomId(d.getIdent().getNomID());
                     m.setNumLinea(d.getIdent().getLine());   
                     m.setNumColumna(d.getIdent().getColumn());
@@ -130,7 +130,7 @@ public class Clase {
                 m.setNumColumna(met.getIde().getColumn());
                 m.setModificador(met.getModif());
                 m.setTipo(met.getTipo());
-                m.setRepresenta(met.getTipo().isEmpty()?"Constructor":"Método de Clase");
+                m.setRepresenta(met.getTipo().isEmpty()?"Constructor":"Método");
                 
            
                 

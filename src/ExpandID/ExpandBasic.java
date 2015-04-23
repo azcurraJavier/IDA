@@ -84,7 +84,7 @@ public class ExpandBasic {
         for (MostrarTabla mt : archivo.getLisMostrarTabla()) {
 
             String idHardword;
-            if (Arrays.asList("Variable Local", "Parámetro", "Variable de Clase").contains(mt.getRepresenta())) {
+            if (Arrays.asList("Variable Local", "Parámetro", "Variable").contains(mt.getRepresenta())) {
 
                 //separa simbolos especiales
                 idHardword = SplitUtils.splitSymbol(mt.getNomId());
