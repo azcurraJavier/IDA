@@ -273,7 +273,7 @@ Por otro lado, existen algunas abreviaturas que no se expanden como es el caso d
 
 También existen casos de abreviaturas mal expandidas, uno de ellos es \textsf{bar} $\rightarrow$ \textsf{background} en el id \textsf{menBarEdit}. Si bien \textsf{bar} hace referencia a una barra de menú, aquí simplemente el algoritmo de expansión entiende que \textsf{bar} es una abreviatura y la expande con un candidato fuerte que se encuentra en el listado de frases capturadas \textsf{\textbf{ba}ckg\textbf{r}ound}.
 
-La mayoría de los ids analizados (Ver Tabla \ref{tabla6} columnas Expansión desde Greedy y Expansión desde Samurai), las palabras presentes se corresponden a distintos elementos que son propios de un editor de textos convencional. De estos elementos se pueden enumerar algunos: texto, copiar, pegar, imprimir, imagen, color, archivo, herramienta, nuevo, guardar, buscar. Estos elementos sin duda están asociados al Dominio del Problema en el programa Editor.java.
+La mayoría de los ids analizados (Ver Tabla \ref{tabla6} columnas Expansión desde Greedy y Expansión desde Samurai), las palabras presentes se corresponden a distintos elementos que son propios de un editor de textos convencional. De estos elementos se pueden enumerar algunos: texto, copiar, pegar, imprimir, imagen, color, archivo, herramienta, nuevo, guardar, buscar. Estos elementos sin duda están asociados al \textit{Dominio del Problema} en el programa Editor.java.
 
 
 %\begin{table}[ht!]
@@ -454,11 +454,11 @@ Las expansiones de ids en general están bastante precisas, salvo casos como \te
 
 Por otro lado, la abreviatura \textsf{but} que representa \textsf{buttons} no se expande, se estima que esto ocurre por que \textsf{buttons} no está en ninguna frase del código (comentario y literal), y no se expande con palabras del diccionario en Inglés porque \textsf{but} es una palabra válida del diccionario.
 
-De los ids analizados (Ver Tabla \ref{tabla7} en las columnas Expansión desde Greedy y Expansión desde Samurai), las palabras que más frecuentemente aparecen están asociados al juego. De estas palabras se pueden nombrar, disparos, aviones, enemigos, imágenes, actualizar pantalla, movimiento. Estas palabras en gran parte están relacionadas al Dominio del Problema perteneciente al programa TopGun.java.
+De los ids analizados (Ver Tabla \ref{tabla7} en las columnas Expansión desde Greedy y Expansión desde Samurai), las palabras que más frecuentemente aparecen están asociados al juego. De estas palabras se pueden nombrar, disparos, aviones, enemigos, imágenes, actualizar pantalla, movimiento. Estas palabras en gran parte están relacionadas al \textit{Dominio del Problema} perteneciente al programa TopGun.java.
 
 \section{Notas y Comentarios sobre los casos de\\ estudio}
 
-Una vez que IDA analizó alrededor de 400 ids en los tres casos de estudio presentados previamente, los resultados obtenidos de las divisiones se resumen en el gráfico de barras de la Figura \ref{barras01}. Como se puede observar en este gráfico, el eje vertical representa el porcentaje de ids analizados sobre la cantidad total. El color azul de cada barra indica que porcentaje sobre total de ids se separó correctamente, mientras que el rojo señala lo contrario. Por otro lado, el eje horizontal corresponde a cada una de las técnicas empleadas para dividir ids (Greedy, Samurai).
+Una vez que IDA analizó alrededor de 400 ids en los tres casos de estudio presentados previamente, los resultados obtenidos de las divisiones se resumen en el gráfico de barras de la Figura \ref{barras01}. Como se puede observar en este gráfico, el eje vertical representa el porcentaje de ids analizados sobre la cantidad total. El color gris oscuro de cada barra indica que porcentaje sobre total de ids se separó correctamente, mientras que la trama con puntos señala lo contrario. Por otro lado, el eje horizontal corresponde a cada una de las técnicas empleadas para dividir ids (Greedy, Samurai).
 Claramente, el gráfico de la Figura \ref{barras01} muestra que entre las dos técnicas de división, Samurai contiene una tasa de fallo mucho menor que Greedy. Esto era previsible por que el algoritmo Greedy es bastante simple y divide sin tener en cuenta el contexto en el que esta situado el id, no ocurriendo lo mismo con Samurai, ya que emplea un análisis más complejo a la hora de realizar su tarea.
 
 %\begin{table}[ht!]
@@ -601,7 +601,7 @@ plaIma&pla--im--a&pla--ima&plane\_images\_attributes&plane\_images \\ \hline
 
 
 Por otro lado, en la Figura \ref{barras02}, se aprecia una comparativa similar a la anterior, pero esta vez es entre las expansiones realizadas con la técnica de expansión básica, que recibe como entrada los dos grupos de resultados de las técnicas de división (Expansión desde Greedy y Samurai). Como se puede observar en la Figura \ref{barras02}, la expansiones de los ids que dividió Greedy tienen más casos incorrectos que las expansiones de los ids que dividió Samurai. Esto tiene sentido dado que mientras más acertada esté la división del id, mayor acierto tendrá la expansión. Si se compara las expansiones realizadas con las divisiones (Entre la Figura \ref{barras01} y \ref{barras02}), en el caso de las expansiones existe un aumento notable de casos incorrectos. 
-Este comportamiento ocurre por que el algoritmo de expansión es básico y posee ciertos inconvenientes, por ejemplo, no expande una abreviatura ante múltiples posibilidades de expansión, en algunos casos utiliza un diccionario de palabras en lenguaje natural, el cual es extenso, ocupa mucho espacio y deriva en expansiones imprecisas (Ver Capítulo 3 - sección \ref{sec:algExpBas}).
+Este comportamiento ocurre por que el algoritmo de expansión es básico y posee ciertos inconvenientes. Un de estos inconvenientes es que en algunos casos utiliza un diccionario de palabras en lenguaje natural, el cual es extenso, ocupa mucho espacio y deriva en expansiones imprecisas (Ver Capítulo 3 - sección \ref{sec:algExpBas}).
 Por último, las expansiones efectuadas luego de ser procesadas por el algoritmo Greedy son las que tienen mayor fallo, tomando en cuenta las dos figuras, esto ocurre debido a que se ejecutaron las dos técnicas más básicas y que más inconvenientes tienen (Greedy y Expansión Básica).
 
 \enlargethispage{\baselineskip}

@@ -5,9 +5,9 @@
 \contentsline {figure}{\numberline {2.1}{\ignorespaces Modelo de Comprensi\IeC {\'o}n de Programas}}{17}{figure.2.1}
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {3.1}{\ignorespaces Trozo de C\IeC {\'o}digo de un Sistema Comercial}}{29}{figure.3.1}
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Visualizaci\IeC {\'o}n de Identifier Dictionary}}{32}{figure.3.2}
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Visualizaci\IeC {\'o}n de Identifier Dictionary}}{33}{figure.3.3}
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Visualizaci\IeC {\'o}n de Identifier Dictionary}}{34}{figure.3.4}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Caracter\IeC {\'\i }sticas de Identifier Dictionary}}{32}{figure.3.2}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Visualizaci\IeC {\'o}n de Identifier Dictionary en Eclipse}}{33}{figure.3.3}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Mensajes pop-up de Identifier Dictionary}}{34}{figure.3.4}
 \contentsline {figure}{\numberline {3.5}{\ignorespaces Ejemplos de distintas B\IeC {\'u}squedas dentro del C\IeC {\'o}digo}}{59}{figure.3.5}
 \contentsline {figure}{\numberline {3.6}{\ignorespaces Arquitectura de Identifier Restructuring}}{62}{figure.3.6}
 \contentsline {figure}{\numberline {3.7}{\ignorespaces Etapas de Identifier Restructurer}}{63}{figure.3.7}
@@ -25,7 +25,7 @@
 \contentsline {figure}{\numberline {4.9}{\ignorespaces Ventana de Palabras Capturadas}}{81}{figure.4.9}
 \contentsline {figure}{\numberline {4.10}{\ignorespaces Ventana TagCloud (Nube de Etiquetas)}}{82}{figure.4.10}
 \contentsline {figure}{\numberline {4.11}{\ignorespaces Ventana de Diccionarios}}{83}{figure.4.11}
-\contentsline {figure}{\numberline {4.12}{\ignorespaces Panel de Elementos Capturados}}{84}{figure.4.12}
+\contentsline {figure}{\numberline {4.12}{\ignorespaces Panel de Elementos Capturados luego de Analizar ids}}{84}{figure.4.12}
 \contentsline {figure}{\numberline {4.13}{\ignorespaces Captura del Navegador Web con el An\IeC {\'a}lisis de Ids realizado}}{85}{figure.4.13}
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {5.1}{\ignorespaces Captura del Juego Buscaminas programado en JAVA}}{88}{figure.5.1}

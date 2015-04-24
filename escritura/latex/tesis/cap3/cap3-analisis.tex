@@ -191,7 +191,7 @@ Este concepto sirvió de inspiración a los autores para construir la herramient
 \centerline{%queda centrada mejor la imagen
 \includegraphics[scale= 0.55]{./cap3/idd_2.png}
 }
-\caption{Visualización de Identifier Dictionary}
+\caption{Características de Identifier Dictionary}
 \label{captura3}
 \end{figure}
 
@@ -208,7 +208,7 @@ Se implementó como extensión de la IDE Eclipse 3.1\footnote[2]{http://www.ecli
 \centerline{%queda centrada mejor la imagen
 \includegraphics[scale= 0.50]{./cap3/idd_3.png}
 }
-\caption{Visualización de Identifier Dictionary}
+\caption{Visualización de Identifier Dictionary en Eclipse}
 \label{captura4}
 \end{figure} 
 
@@ -242,7 +242,7 @@ Mientras se realiza el desarrollo del código la herramienta asiste al programad
 \centerline{%queda centrada mejor la imagen
 \includegraphics[scale= 0.70]{./cap3/idd_7.png}
 }
-\caption{Visualización de Identifier Dictionary}
+\caption{Mensajes pop-up de Identifier Dictionary}
 \label{captura8}
 \end{figure}
 
@@ -465,14 +465,14 @@ De la misma forma que la función de prefijos, cuando encuentra una palabra, se 
 
 
 
-Una vez que ambos procesos terminaron, los resultados son retornados al algoritmo principal (\textsf{resultadoPrefijo, resultadoSufijo} líneas 6 y 7, algoritmo \ref{GSA}). Mediante una función de comparación se elije el que obtuvo mayores particiones (línea 8). Finalmente, el algoritmo Greedy retorna el id destacando las palabras que lo componen mediante el separador espacio \mbox{(\textsf{file input txt})}.
+Una vez que ambos procesos terminaron, los resultados son retornados al algoritmo principal (\textsf{resultadoPrefijo, resultadoSufijo} líneas 6 y 7, algoritmo \ref{GSA}). Mediante una función de comparación se elije el que obtuvo mayores particiones (línea 8). Finalmente, el algoritmo Greedy retorna el id destacando las palabras que lo componen mediante el separador espacio \mbox{(\textsf{fl inp txt})}.
 
 La ventaja de hacer dos búsquedas (prefijo y sufijo) radica en aumentar las chances de dividir al id. A modo de ejemplo, suponga que la palabra abreviada \textsf{fl}
-no se encuentra en ninguno de los 3 listados y las palabras \textsf{input} y \textsf{txt} si están. Dada esta situación, si el id \textsf{flinputtxt} se procesa por ambas rutinas, el resultado será que \textbf{buscarPrefijo} no divida al id. Esto sucede porque al retirar caracteres del último lugar, nunca se encontrará un prefijo conocido. Más precisamente al no dividirse entre \textsf{fl} e \textsf{input} el resto de la cadena no se procesará y tampoco se dividirá entre \textsf{input} y \textsf{txt}. 
+no se encuentra en ninguno de los 3 listados y las palabras \textsf{inp} y \textsf{txt} si están. Dada esta situación, si el id \textsf{flinptxt} se procesa por ambas rutinas, el resultado será que \textbf{buscarPrefijo} no divida al id. Esto sucede porque al retirar caracteres del último lugar, nunca se encontrará un prefijo conocido. Más precisamente al no dividirse entre \textsf{fl} e \textsf{inp} el resto de la cadena no se procesará y tampoco se dividirá entre \textsf{inp} y \textsf{txt}. 
 
-Sin embargo, este inconveniente no lo tendrá \textbf{buscarSufijo} porque al retirar los caracteres del principio de la palabra, \textsf{input txt} será separado. Como \textsf{input} es una palabra conocida se agregará un espacio entre \textsf{fl input}. De esta manera el id queda correctamente separado \textsf{fl input txt} por \textbf{buscarSufijo}.
+Sin embargo, este inconveniente no lo tendrá \textbf{buscarSufijo} porque al retirar los caracteres del principio de la palabra, \textsf{inp txt} será separado. Como \textsf{inp} es una palabra conocida se agregará un espacio entre \textsf{fl inp}. De esta manera el id queda correctamente separado \textsf{fl inp txt} por \textbf{buscarSufijo}.
 
-Este algoritmo de división generalmente se emplea como punto de comparación con técnicas más eficientes de separación de ids multi-palabras. En la próxima sección, se describe un algoritmo de división más avanzado.
+El algoritmo Greedy generalmente se emplea como punto de comparación con técnicas más eficientes de separación de ids multi-palabras. En la próxima sección, se describe un algoritmo de división más avanzado.
 
 
 \subsection{Algoritmo de División Samurai}
@@ -576,7 +576,7 @@ $scoreAlter \leftarrow$ score(\textbf{\textit{s}}[i+1,n])
 \caption{divisiónHardWord \label{AHW}}
 \end{algorithm}
 
-El algoritmo para determinar cual es el tipo correcto y no tomar malas decisiones (Ejemplos: \textsf{SQ Llist} o \textsf{GP Sstate}), divide a la palabra por ambas consideraciones (ejemplo: \textsf{GP Sstate} y \textsf{GPS state}), luego calcula el puntaje (score) de la parte derecha de ambas divisiones (líneas 7 y 8). Aquella con puntaje más alto entre las dos será por la cual se decida (línea 9). La raíz cuadrada se explica más adelante. Tomando como ejemplo el id \textsf{GPSstate}, para el caso camel-case calculará \mbox{\textit{score(Sstate)}} y para la otra variante \textit{score(state)}. Intuitivamente, la función score (a través de las tablas de frecuencias de palabras) elegirá \textit{state} sobre \textit{sstate} ya que esta última debería tener un puntaje inferior (frecuencia menor de aparición). Por ende Samurai detecta que \textsf{GPSstate} es del tipo Variante de Camel-Case. La división elegida se lleva a cabo en las líneas 11 y 13 (según el caso).
+El algoritmo para determinar cual es el tipo correcto y no tomar malas decisiones (Ejemplos: \textsf{SQ Llist} o \textsf{GP Sstate}), divide a la palabra por ambas consideraciones (ejemplo: \textsf{GP Sstate} y \textsf{GPS state}), luego calcula el puntaje (score) de la parte derecha de ambas divisiones (líneas 7 y 8). Aquella con puntaje más alto entre las dos será por la cual se decida (línea 9). La raíz cuadrada se explica más adelante. Tomando como ejemplo el id \mbox{\textsf{GPSstate}}, para el caso camel-case calculará \mbox{\textit{score(Sstate)}} y para la otra variante \textit{score(state)}. Intuitivamente, la función score (a través de las tablas de frecuencias de palabras) elegirá \textit{state} sobre \textit{sstate} ya que esta última debería tener un puntaje inferior (frecuencia menor de aparición). Por ende Samurai detecta que \mbox{\textsf{GPSstate}} es del tipo Variante de Camel-Case. La división elegida se lleva a cabo en las líneas 11 y 13 (según el caso).
 Finalmente, todas las partes que fueron divididas se envían a \mbox{\textit{divisiónSoftWord} (línea 17, 18)}.
 
 %========================
@@ -665,7 +665,7 @@ Para que la técnica Samurai pueda llevar a cabo la tarea de separación de ids,
 
 \begin{itemize}
 \itemsep0em%reduce espacio
-\item En la rutina \textit{divisiónHardWord}, para determinar si el la división del id es un caso de camel-case o no (líneas 7 y 8).
+\item En la rutina \textit{divisiónHardWord}, para determinar si la división del id es un caso de camel-case o la variante camel-case (líneas 7 y 8).
 
 \item En la rutina \textit{divisiónSoftWord}, para puntuar las diferentes particiones de substrings y elegir la mejor separación (líneas 4, 5, 7 y 8).
 \end{itemize}
@@ -701,7 +701,7 @@ La primer lista se confecciona de la siguiente manera, para cada método \textit
 
 La lista de frases también contiene una sub-lista por cada método y se construye con una técnica que extrae frases en lenguaje natural \cite{FFCW01}, el principal recurso son los comentarios y los ids multi-palabras. Este listado de frases se utiliza para expandir acrónimos\footnote[1]{Abreviatura formada por las primeras letras de cada palabra en una frase. Ejemplo gif: Graphics Interchange Format.}, si un id en forma de acrónimo coincide con alguna frase, la misma es considerada como potencial expansión \cite{LOPT00} (Ejemplo: la frase \textsf{file status} es una expansión posible para el id \textsf{fs}).
 
-El listado de palabras irrelevantes y el diccionario, están predefinidos con antelación. El primero está compuesto con palabras relacionadas a artículos/conectores (the, an, or), palabras reservadas del lenguaje de programación que se utilicen (\textsf{while, for, if,} etc.). Además posee palabras que no aportan información importante en la comprensión del código, y que son fácilmente reconocidas por los programadores (esta lista se usa con la misma política que el algoritmo Greedy). Por otro lado, las palabras del diccionario, contiene palabras en lenguaje natural, de diccionarios públicos (similar a utilizado por Greedy).
+El listado de palabras irrelevantes y el diccionario, están predefinidos con antelación. El primero está compuesto con palabras relacionadas a artículos y/o conectores (the, an, or), palabras reservadas del lenguaje de programación que se utilicen (\textsf{while, for, if,} etc.). Además posee palabras que no aportan información importante en la comprensión del código, y que son fácilmente reconocidas por los programadores (esta lista se usa con la misma política que el algoritmo Greedy). Por otro lado, las palabras del diccionario, contiene palabras en lenguaje natural, de diccionarios públicos (similar a utilizado por Greedy).
 
 Una vez que las listas de palabras y frases potenciales se confeccionan, comienza la ejecución del algoritmo. La política que utiliza, es dar prioridad primero a la información extraída del código y más aún, a la cercanía de donde este ubicada la abreviatura a expandir, es decir, se busca primero en la sub-lista correspondiente al método donde se encuentra la abreviatura, luego en el resto de las listas con información extraída del código y por último en el diccionario público.
 
@@ -818,7 +818,7 @@ El algoritmo AMAP ejecuta los siguientes pasos:
 \begin{enumerate}
 \itemsep0em%reduce espacio
 \item Buscar palabras largas candidatas dentro de un método.
-\item Elegir la mejor alternativa de expansión.
+\item Elegir la mejor alternativa de expansión, en caso que haya muchas.
 \item Buscar nuevas palabras si en el alcance local no es suficiente, utilizando el método EMF (Expansión más Frecuente).
 \end{enumerate}
 
@@ -909,7 +909,7 @@ En la línea 2 la búsqueda se realiza en los comentarios Java Doc, donde la exp
 
 Si el algoritmo no encuentra resultados, sigue la búsqueda en la línea 3 con los nombres de los tipos ubicados en las variables declaradas, donde la expresión regular es “\textit{\textbf{patrón}} \textit{\textbf{pa}}”. Por ejemplo, si se tiene una declaración “\textbf{component comp}” donde \textit{\textbf{pa}} = \textbf{comp}, \textit{\textbf{patrón}} = “comp[a-z]+”  la expresión regular \mbox{“comp[a-z]+ comp”} coincidirá y devolverá el resultado  “component” como expansión de \textbf{comp}.
 
-Si el algoritmo continúa sin resultados, sigue en la línea 4 donde se busca coincidir con “\textit{\textbf{patrón}}” en el nombre del método. En caso de seguir sin resultados, prosigue en la línea 5 con distintas variantes “\textit{\textbf{patrón}} \textit{\textbf{pa}}” o “\textit{\textbf{pa}} \textit{\textbf{patrón}}” en las sentencias comunes del método. 
+Si el algoritmo continúa sin resultados, sigue en la línea 4 donde se busca coincidir con “\textit{\textbf{patrón}}” en el nombre del método. En caso de seguir sin resultados, prosigue en la línea 5 con distintas variantes “\textit{\textbf{patrón}} \textit{\textbf{pa}}” o \mbox{“\textit{\textbf{pa}} \textit{\textbf{patrón}}”} en las sentencias comunes del método. 
 
 %En la figura \ref{exp3} se pueden observar los distintos casos que se describieron.
 
@@ -934,7 +934,7 @@ Al igual que el algoritmo de palabras singulares, el algoritmo de multi-palabras
 \itemsep0em%reduce espacio
 \item[Patrón acrónimo:] Se elabora colocando la expresión regular [a-z]+[ ]+ \footnote[1]{La expresión [a-z]+[ ]+ significa, una o más letras entre la a y la z, seguido de espacio.}, después de cada letra de la palabra abreviada (\textit{\textbf{pa}}). Si \textit{\textbf{pa}}$=c_{1},c_{2},c_{3},..,c_{n}$, donde $n$ es la longitud de la palabra abreviada. El patrón queda: \mbox{$c_{1}$[a-z]+[ ]+$c_{2}$[a-z]+[ ]+$c_{3}$[a-z]+[ ]+..[a-z]+[ ]+$c_{n}$}. Permite encontrar acrónimos tales como \textsf{pdf} $\Rightarrow$ \textbf{\textit{p}}ortable \textbf{\textit{d}}ocument \textbf{\textit{f}}ormat.
 
-\item[Patrón de Combinación de Palabras:] En este caso el patrón se construye de manera similar al anterior pero se usa la expresión regular [a-z]*?[ ]*? \footnote[2]{La expresión [a-z]*?[ ]*? significa, cero o más letras entre la a y la z, seguido de espacio o no.} después de cada caracter de la palabra abreviada (\textit{\textbf{pa}}). Si \textit{\textbf{pa}}$=c_{1},c_{2},c_{3},..,c_{n}$, donde $n$ es la longitud de la palabra abreviada. El patrón queda: $c_{1}$[a-z]*?[ ]*?$c_{2}$[a-z]*?[ ]*?$c_{3}$[a-z]*?[ ]*?...[a-z]*?[ ]*?$c_{n}$. De esta manera se pueden capturar palabras del tipo \textsf{arg} $\Rightarrow$ \textbf{\textit{a}}ccess \textbf{\textit{r}}i\textbf{\textit{g}}hts, permitiendo más capturas que el patrón anterior.
+\item[Patrón de Combinación de Palabras:] En este caso el patrón se construye de manera similar al anterior pero se usa la expresión regular [a-z]*?[ ]*? \footnote[1]{La expresión [a-z]*?[ ]*? significa, cero o más letras entre la a y la z, seguido de espacio o no.} después de cada caracter de la palabra abreviada (\textit{\textbf{pa}}). Si \textit{\textbf{pa}}$=c_{1},c_{2},c_{3},..,c_{n}$, donde $n$ es la longitud de la palabra abreviada. El patrón queda: $c_{1}$[a-z]*?[ ]*?$c_{2}$[a-z]*?[ ]*?$c_{3}$[a-z]*?[ ]*?...[a-z]*?[ ]*?$c_{n}$. De esta manera se pueden capturar palabras del tipo \textsf{arg} $\Rightarrow$ \textbf{\textit{a}}ccess \textbf{\textit{r}}i\textbf{\textit{g}}hts, permitiendo más capturas que el patrón anterior.
 \end{description}
 
 
@@ -1118,7 +1118,7 @@ A continuación, se detalla el paso 2 que es el más importante de esta herramie
 
 \item[Standard Lexicon:] Lograda la separación de las palabras estas son mapeadas a una forma estándar (expandidas) con la ayuda de un diccionario léxico \cite{BCPT99} (Ejemplo: \textsf{upd} $\Rightarrow$ \textsf{Update}). Una idea que mejora esta propuesta, es incorporar al diccionario términos extraídos del código fuente. También aquí, el usuario puede intervenir para realizar la expansión manualmente. Los autores de la herramienta construyeron los diccionarios de manera genérica tomando como muestra 10 programas \cite{BCPT00}. Sin embargo, se aconseja que con el tiempo los diccionarios deben crecer con la inclusión de nuevos términos.
 
-\item[Tokenization:] Una vez obtenidas las palabras a una forma estándar (expandidas) en el paso anterior, se procede a asignar cada palabra a un \textit{tipo léxico} (verbo, sustantivo, adjetivo). Por ejemplo, la palabra \textsf{Update} se transforma en $<$Update,verb$>$, \textsf{Standard} a $<$Standard,adjective$>$. Esta tuplas se denominan tokens y se utiliza un `diccionario de tipos' para generarlos de manera automática, este diccionario al igual que los otros se arma previamente a gusto del programador \cite{BCPT99}. Sin embargo, existen casos que se necesita la intervención humana para determinar el tipo correcto. Por ejemplo, \textsf{free} en inglés es un verbo, un adjetivo y a la vez un adverbio.% En este caso la herramienta va a elegir lo que el diccionario le indique (si free esta presente).
+\item[Tokenization:] Una vez obtenidas las palabras a una forma estándar (expandidas) en el paso anterior, se procede a asignar cada palabra a un \textit{tipo léxico} (verbo, sustantivo, adjetivo). Por ejemplo, la palabra \mbox{\textsf{Update}} se transforma en $<$Update,verb$>$, \textsf{Standard} a $<$Standard,adjective$>$. Esta tuplas se denominan tokens y se utiliza un `diccionario de tipos' para generarlos de manera automática, este diccionario al igual que los otros se arma previamente a gusto del programador \cite{BCPT99}. Sin embargo, existen casos que se necesita la intervención humana para determinar el tipo correcto. Por ejemplo, \textsf{free} en inglés es un verbo, un adjetivo y a la vez un adverbio.% En este caso la herramienta va a elegir lo que el diccionario le indique (si free esta presente).
 
 \item[Parsing:] Finalmente, la secuencia de tokens obtenidos en la etapa anterior se analiza usando una gramática predefinida. Este análisis permite determinar cuál es el rol/acción del id en el código fuente y de esta manera, se determina la “acción semántica” del id. 
 En la Figura 3.8 se muestra un ejemplo de gramática construida por los autores. Cabe aclarar que cada usuario puede elaborar su propia gramática. 

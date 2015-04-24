@@ -12,7 +12,7 @@ En el capítulo anterior, se explicó la importancia de analizar identificadores
 
 Dada la importancia que tienen las herramientas de análisis de ids, se tomó la iniciativa de desarrollar una llamada Identifier Analyzer (IDA) \cite{AMGPM14}. Esta herramienta le permite al usuario ingresar un archivo JAVA, luego IDA analiza los ids que están en el archivo.
 %, y finalmente produce como resultado una tabla del análisis realizado, esta tabla contiene los ids encontrados en el programa pero expandidos. 
-IDA lleva a cabo el análisis de ids en tres pasos, los cuales se mencionan a continuación: I) Extraer los ids del código de estudio. II) Aplicar una técnica de división, en donde se descomponen a los ids en las distintas abreviaturas que lo componen. Por ejemplo: \textsf{inp\_fl\_sys} $\Rightarrow$ \textsf{inp fl sys}. III) Emplear una técnica de expansión de abreviaturas que las expande a palabras completas. Por ejemplo: \textsf{inp fl sys} $\Rightarrow$ \textsf{input file system}. Una vez realizado los tres pasos, los resultados de las expansiones de ids se exhiben en una tabla.
+IDA lleva a cabo el análisis de ids en tres pasos, los cuales se mencionan a continuación: I) Extraer los ids del código de estudio. II) Aplicar una técnica de división, en donde se descomponen a los ids en las distintas abreviaturas que lo componen. Por ejemplo: \textsf{inp\_fl\_sys} $\Rightarrow$ \textsf{inp fl sys}. III) Emplear una técnica de expansión de abreviaturas que las expande a palabras completas. Por ejemplo: \textsf{inp fl sys} $\Rightarrow$ \mbox{\textsf{input file system}}. Una vez realizado los tres pasos, los resultados de las expansiones de ids se exhiben en una tabla.
 El objetivo de IDA es lograr que el usuario comprenda más rápidamente el propósito de los ids en los archivos JAVA, y de esta manera mejorar la comprensión del código analizado.
 
 %Para que IDA pueda realizar su tarea, contiene implementados 2 algoritmos de división de ids (Greedy y Samurai) y 1 algoritmo de expansión de abreviaturas (Expansión Básica), los mismos fueron explicados en el capítulo precedente. 
@@ -59,7 +59,7 @@ El \mbox{Algoritmo} de Expansión también necesita de un diccionario de palabra
 
 Como se explicó en la sección previa, cuando el usuario ingresa un archivo JAVA, IDA examina y extrae información estática presente en el archivo ingresado. Esta información está compuesta por identificadores, comentarios y literales. La manera en que IDA extrae esta información es a través de un Analizador Sintáctico (AS).
 La construcción de este AS se llevó a cabo, primero investigando herramientas encargadas de construir AS. Se dio preferencia a aquellas que emplean la teoría asociada a las gramáticas de atributos \cite{AHUL06}. De la investigación previamente descripta, se determinó que la herramienta \textit{ANTLR}\footnote[1]{ANother Tool for Language Recognition. http://www.antlr.org} era la que mejor se ajustaba a las necesidades antes planteadas. 
-Esta herramienta permite agregar acciones semánticas (escritas en JAVA) para el cálculo de los atributos, en una gramática de lenguaje JAVA\footnote[2]{http://docs.oracle.com/javase/specs/jls/se7/jls7.pdf}. Estas acciones semánticas deben estar correctamente insertadas en la gramática para, por ejemplo, implementar estructuras de datos y algoritmos que capturan los ids utilizados en un programa \cite{AAJU83}. Una vez insertadas estas acciones, ANTLR lee la gramática y genera el AS adicionando acciones que fueron programadas. De esta manera, se obtiene un AS que recolecta ids mientras examina el código. A su vez a estas acciones semánticas, se le agregan otras acciones que extraen comentarios y literales strings. Estos elementos son necesarios ya que sirven para los algoritmos de análisis de ids que serán explicados en próximas secciones.
+Esta herramienta permite agregar acciones semánticas (escritas en JAVA) para el cálculo de los atributos, en una gramática de lenguaje JAVA\footnote[2]{http://docs.oracle.com/javase/specs/jls/se7/jls7.pdf}. Estas acciones semánticas deben estar correctamente insertadas en la gramática, por ejemplo, para implementar estructuras de datos y algoritmos que capturan los ids utilizados en un programa \cite{AAJU83}. Una vez insertadas estas acciones, ANTLR lee la gramática y genera el AS adicionando acciones que fueron programadas. De esta manera, se obtiene un AS que recolecta ids mientras examina el código. A su vez a estas acciones semánticas, se le agregan otras acciones que extraen comentarios y literales strings. Estos elementos son necesarios ya que sirven para los algoritmos de análisis de ids que serán explicados en próximas secciones.
 
 \section{Base de Datos Embebida}
 \label{sec:bseEmb}
@@ -70,7 +70,7 @@ Otra ventaja por la cual se eligió esta tecnología, es que responde rápidamen
 \begin{description}
 \itemsep0em%reduce espacio
 
-\item[Diccionario en Inglés (ispell):] Contiene palabras en Inglés que pertenecen a la lista de Palabras Comando de Linux \textit{Ispell}\footnote[2]{ http://wordlist.aspell.net}. Se utiliza en el Algoritmo de Greedy y en el Algoritmo de Expansión (Ver Capítulo 3).
+\item[Diccionario en Inglés (ispell):] Contiene palabras en Inglés que pertenecen al comando de Linux \textit{Ispell}\footnote[2]{ http://wordlist.aspell.net}. Se utiliza en el Algoritmo de Greedy y en el Algoritmo de Expansión (Ver Capítulo 3).
 
 \item[Lista de Palabras Excluyentes (stop-list):] Esta compuesta con palabras que son poco importantes o irrelevantes en el análisis de ids\footnote[3]{ http://www.lextek.com/manuals/onix/stopwords1.html}. Se utiliza en el Algoritmo de Greedy y en el Algoritmo de Expansión \mbox{(Ver Capítulo 3)}.
 
@@ -149,7 +149,7 @@ Cuando se pulsa en el botón \textit{Abrir archivo(s) JAVA}, (Ver Figura \ref{id
 
 %Para que IDA funcione correctamente el archivo de entrada JAVA debe cumplir con ciertas validaciones. Una de ellas es, que el código no contenga errores sintácticos (un ejemplo, entre tantos, de error sintáctico es: no colocar punto y coma al final de una sentencia).
 
-Una vez que el usuario elige el/los archivo/s, IDA utiliza un  programa externo llamado JACOBE\footnote[1]{http://www.tiobe.com/jacobe}. Este programa JACOBE, recibe como entrada un archivo JAVA y embellece el código fuente que esta contenido en el. Este embellecimiento se realiza para facilitar la lectura del código al usuario. En la próxima sección se describe el panel que IDA tiene para visualizar el código leído del archivo.
+Una vez que el usuario elige el/los archivo/s, IDA utiliza un  programa externo llamado JACOBE\footnote[1]{http://www.tiobe.com/jacobe}. Este programa JACOBE, recibe como entrada un archivo JAVA y embellece el código fuente que está contenido en el. Este embellecimiento se realiza para facilitar la lectura del código al usuario. En la próxima sección se describe el panel que IDA tiene para visualizar el código leído del archivo.
 
 %Si algún archivo de entrada esta vacío o posee algún error sintáctico, JACOBE lo detecta y automáticamente IDA muestra un cartel informando al usuario (ver figura \ref{idaWar1}). 
 
@@ -304,7 +304,7 @@ La \textit{Nube de Etiquetas} correspondiente a la tabla de frecuencias de Samur
 \centerline{%queda centrada mejor la imagen
 \includegraphics[scale= 0.42]{./cap4/ida_10.png}
 }
-\caption{Panel de Elementos Capturados}
+\caption{Panel de Elementos Capturados luego de Analizar ids}
 \label{ida10}
 \end{figure}
 
@@ -334,7 +334,7 @@ Al agregar las columnas nuevas se habilita el cuadro \textit{Ocultar Columnas}. 
 %Una vez realizado esto, el código es más comprensivo para el usuario, en la figura \ref{ida11} se puede observar dos trozos de códigos, el de la arriba se observa el código normal, mientras que el de la abajo posee los ids expandidos.
 %En caso de querer retrotraer la acción de reemplazo de ids, se puede pulsar en el botón \textit{Deshacer} ubicado también en el cuadro \textit{Expandir Ids en Código} (ver figura \ref{ida10} - Flecha 4) y restablecer el código original.
 
-Luego si el usuario lo decide, puede presionar el botón \textit{Abrir} en el cuadro \textit{Ver Tabla en Navegador} (Ver Figura \ref{ida10} - Flecha 3). Esta acción abre automáticamente el navegador web por defecto del sistema operativo, y mediante una página web en formato html, se muestra una tabla con los resultados obtenidos producto del análisis de ids (Ver Figura \ref{ida11}). De esta manera, el usuario puede visualizar más claramente el análisis realizado, permitiendo también imprimir los resultados en papel (mediante el navegador web), si el usuario lo desea.
+Luego si el usuario lo decide, puede presionar el botón \textit{Abrir} en el cuadro \textit{Ver Tabla en Navegador} (Ver Figura \ref{ida10} - Flecha 3). Esta acción abre automáticamente el navegador web por defecto del sistema operativo, y mediante una página web en HTML, se muestra una tabla con los resultados obtenidos producto del análisis de ids (Ver Figura \ref{ida11}). De esta manera, el usuario puede visualizar más claramente el análisis realizado, permitiendo también imprimir los resultados en papel (mediante el navegador web), si el usuario lo desea.
 
 Dando por finalizado el proceso necesario que debe realizar el usuario para analizar los ids con la herramienta IDA, resta destacar que la misma a su vez posee una extensión. Esta extensión permite que IDA pueda interactuar con otras aplicaciones y de esta manera forme parte de un proceso de análisis más extenso, la extensión antedicha se describe en el Apéndice A. 
 
