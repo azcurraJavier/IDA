@@ -587,7 +587,7 @@ La rutina recursiva \textit{divisiónSoftWord} (Ver Algoritmo \ref{ASW}) recibe 
 La rutina primero examina cada punto posible de división en \textbf{\textit{s}} dividiendo en \textbf{\textit{split$_{izq}$}} y \textbf{\textit{split$_{der}$}} respectivamente (líneas 4 y 5). La decisión de cual es la mejor división (línea 9), se basa en: a) substrings que no tengan prefijos o sufijos conocidos, los mismos están disponibles en la página web del autor\footnote[1]{Listas de prefijos y sufijos  http://www.eecis.udel.edu/˜enslen/Site/Samurai.} (línea 6), b) que el puntaje de la división elegida sobresalga del resto de los puntajes (líneas 7-8).
 
 %una sola division no se llama recursivamente (!prefix ^ toSplitl ^ toSplitr)
-Para aclarar los puntos a) y b) mencionados en el párrafo precedente, para cada partición (izquierda o derecha) obtenida se calcula el score (líneas 4 y 5). Luego este se compara con el puntaje máximo (\textit{max(..)}) entre el puntaje de la palabra original (\textbf{\textit{score$_{sd}$}}, score original) y el puntaje de la palabra actual (score(\textbf{\textit{s}})) . En un principio ambos puntajes serán iguales, ya que se trata de la misma palabra, pero a medida que avance la recursión score(\textbf{\textit{s}}) puede variar con respecto a \textbf{\textit{score$_{sd}$}} (líneas 7 y 8). La raíz cuadrada se explica más adelante.
+Para aclarar los puntos a) y b) mencionados en el párrafo precedente, para cada partición (izquierda o derecha) obtenida se calcula el score (líneas 4 y 5). Luego este se compara con el puntaje máximo (\textit{max(..)}) entre el puntaje de la palabra original (\textbf{\textit{score$_{sd}$}}, score original) y el puntaje de la palabra actual (score(\textbf{\textit{s}})). En un principio ambos puntajes serán iguales, ya que se trata de la misma palabra, pero a medida que avance la recursión score(\textbf{\textit{s}}) puede variar con respecto a \textbf{\textit{score$_{sd}$}} (líneas 7 y 8). La raíz cuadrada se explica más adelante.
 %agregar ejemplos gráficos etc.
 
 %si se cumple solo la parte izquierda se llama recursivamente (!prefix ^ toSplitl)
@@ -678,7 +678,7 @@ La fórmula es la siguiente:
 $Frec(s,p) + ( globalFrec(s) / \log_{10}(totalFrec(p) )$
 \end{center}
 
-Donde \textbf{p} es el programa de estudio, $Frec(s,p)$ es la frecuencia de ocurrencia de \textbf{s} en \textbf{p}. La función $totalFrec(p)$, es la frecuencia total de todos los strings en el programa \textbf{p}. La función $globalFrec(s)$, es la frecuencia de aparición de \textbf{s} en una gran conjunto de programas tomados como muestras\footnote[1]{Estos programas son alrededor de 9000 y están escritos en JAVA}. Esta fórmula de score fue desarrollada por los autores, a través del análisis de datos obtenidos \cite{EHPV09}.
+Donde \textbf{p} es el programa de estudio, $Frec(s,p)$ es la frecuencia de ocurrencia de \textbf{s} en \textbf{p}. La función $totalFrec(p)$, es la frecuencia total de todos los strings en el programa \textbf{p}. La función $globalFrec(s)$, es la frecuencia de aparición de \textbf{s} en una gran conjunto de programas tomados como muestras\footnote[1]{Estos programas son alrededor de 9000 y están escritos en JAVA}. Esta fórmula de score fue desarrollada por los autores de la técnica Samurai \cite{EHPV09}, a través de distintos análisis de datos que se realizaron.
 
 
 \subsection{Algoritmo de Expansión Básico}

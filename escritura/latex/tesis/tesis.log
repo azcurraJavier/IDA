@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2014.5.7)  12 MAR 2015 12:29
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2014.5.7)  24 APR 2015 14:52
 entering extended mode
  %&-line parsing enabled.
 **tesis.tex
@@ -676,11 +676,7 @@ Package: appendix 2009/09/02 v1.2b extra appendix facilities
 \c@@pps=\count135
 \c@@ppsavesec=\count136
 \c@@ppsaveapp=\count137
-) (./tesis.aux
-
-LaTeX Warning: Label `arq1' multiply defined.
-
-)
+) (./tesis.aux)
 \openout1 = `tesis.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 107.
@@ -697,7 +693,8 @@ LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 107.
 LaTeX Font Info:    ... okay on input line 107.
 LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 107.
 LaTeX Font Info:    ... okay on input line 107.
- (/usr/share/texmf-texlive/tex/context/base/supp-pdf.mkii
+
+(/usr/share/texmf-texlive/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count138
 \scratchdimen=\dimen142
@@ -1242,19 +1239,16 @@ Underfull \hbox (badness 10000) in paragraph at lines 117--118
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-
-LaTeX Warning: There were multiply-defined labels.
-
  )
 (\end occurred inside a group at level 1)
 
 ### semi simple group (level 1) entered at line 8 (\begingroup)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 11060 strings out of 494999
- 149489 string characters out of 1180817
- 305905 words of memory out of 3000000
- 13476 multiletter control sequences out of 15000+50000
+ 11061 strings out of 494999
+ 149498 string characters out of 1180817
+ 305914 words of memory out of 3000000
+ 13477 multiletter control sequences out of 15000+50000
  15702 words of font info for 55 fonts, out of 3000000 for 9000
  54 hyphenation exceptions out of 8191
  39i,21n,58p,1610b,9044s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1274,7 +1268,7 @@ ic/amsfonts/cm/cmss12.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts
 0.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr
 /share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texm
 f-texlive/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on tesis.pdf (129 pages, 2902861 bytes).
+Output written on tesis.pdf (129 pages, 2902214 bytes).
 PDF statistics:
  1890 PDF objects out of 2073 (max. 8388607)
  536 named destinations out of 1000 (max. 500000)

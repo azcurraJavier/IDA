@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2014.5.7)  3 FEB 2015 16:34
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2014.5.7)  24 APR 2015 14:14
 entering extended mode
  %&-line parsing enabled.
 **cap1-intro.tex
@@ -1810,7 +1810,7 @@ Type  H <return>  for immediate help.
  ...                                              
                                                   
 l.19 P
-      or lo antedicho, entre otras diversas razones \cite{KBVR00} indican qu...
+      or lo antedicho, entre otras diversas razones \cite{KBVR00,SMMH98,ALGS...
 
 You're in trouble here.  Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -1860,7 +1860,7 @@ Missing character: There is no [ in font nullfont!
 ! Undefined control sequence.
 <write> ...: Citation `\@citeb ' on page \thepage 
                                                   \space undefined\on@line .
-l.19 ...entre otras diversas razones \cite{KBVR00}
+l.19 ...razones \cite{KBVR00,SMMH98,ALGS01,BEKH97}
                                                    indican que el man\-tenim...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1870,6 +1870,54 @@ and I'll forget about whatever was undefined.
 
 
 LaTeX Warning: Citation `KBVR00' on page  undefined on input line 19.
+
+Missing character: There is no , in font nullfont!
+\citation{SMMH98}
+! Undefined control sequence.
+<write> ...: Citation `\@citeb ' on page \thepage 
+                                                  \space undefined\on@line .
+l.19 ...razones \cite{KBVR00,SMMH98,ALGS01,BEKH97}
+                                                   indican que el man\-tenim...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+LaTeX Warning: Citation `SMMH98' on page  undefined on input line 19.
+
+Missing character: There is no , in font nullfont!
+\citation{ALGS01}
+! Undefined control sequence.
+<write> ...: Citation `\@citeb ' on page \thepage 
+                                                  \space undefined\on@line .
+l.19 ...razones \cite{KBVR00,SMMH98,ALGS01,BEKH97}
+                                                   indican que el man\-tenim...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+LaTeX Warning: Citation `ALGS01' on page  undefined on input line 19.
+
+Missing character: There is no , in font nullfont!
+\citation{BEKH97}
+! Undefined control sequence.
+<write> ...: Citation `\@citeb ' on page \thepage 
+                                                  \space undefined\on@line .
+l.19 ...razones \cite{KBVR00,SMMH98,ALGS01,BEKH97}
+                                                   indican que el man\-tenim...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+LaTeX Warning: Citation `BEKH97' on page  undefined on input line 19.
 
 Missing character: There is no ] in font nullfont!
 Missing character: There is no i in font nullfont!
@@ -2165,6 +2213,21 @@ Missing character: There is no n in font nullfont!
 Missing character: There is no . in font nullfont!
 
 Overfull \hbox (20.0pt too wide) in paragraph at lines 19--20
+[]
+ []
+
+
+Overfull \hbox (5.43053pt too wide) in paragraph at lines 19--20
+[]
+ []
+
+
+Overfull \hbox (5.43053pt too wide) in paragraph at lines 19--20
+[]
+ []
+
+
+Overfull \hbox (5.43053pt too wide) in paragraph at lines 19--20
 []
  []
 
@@ -3217,11 +3280,27 @@ Missing character: There is no c in font nullfont!
 Missing character: There is no i in font nullfont!
 Missing character: There is no a in font nullfont!
 Missing character: There is no [ in font nullfont!
+\citation{SCJH01}
+! Undefined control sequence.
+<write> ...: Citation `\@citeb ' on page \thepage 
+                                                  \space undefined\on@line .
+l.30 ...ciencia \cite{SCJH01,KBVR00,ZHGL09,WYHW10}
+                                                  .
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+LaTeX Warning: Citation `SCJH01' on page  undefined on input line 30.
+
+Missing character: There is no , in font nullfont!
 \citation{KBVR00}
 ! Undefined control sequence.
 <write> ...: Citation `\@citeb ' on page \thepage 
                                                   \space undefined\on@line .
-l.30 ... o mejorada en su eficiencia \cite{KBVR00}
+l.30 ...ciencia \cite{SCJH01,KBVR00,ZHGL09,WYHW10}
                                                   .
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -3232,10 +3311,57 @@ and I'll forget about whatever was undefined.
 
 LaTeX Warning: Citation `KBVR00' on page  undefined on input line 30.
 
+Missing character: There is no , in font nullfont!
+\citation{ZHGL09}
+! Undefined control sequence.
+<write> ...: Citation `\@citeb ' on page \thepage 
+                                                  \space undefined\on@line .
+l.30 ...ciencia \cite{SCJH01,KBVR00,ZHGL09,WYHW10}
+                                                  .
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+LaTeX Warning: Citation `ZHGL09' on page  undefined on input line 30.
+
+Missing character: There is no , in font nullfont!
+\citation{WYHW10}
+! Undefined control sequence.
+<write> ...: Citation `\@citeb ' on page \thepage 
+                                                  \space undefined\on@line .
+l.30 ...ciencia \cite{SCJH01,KBVR00,ZHGL09,WYHW10}
+                                                  .
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+LaTeX Warning: Citation `WYHW10' on page  undefined on input line 30.
+
 Missing character: There is no ] in font nullfont!
 Missing character: There is no . in font nullfont!
 
 Overfull \hbox (20.0pt too wide) in paragraph at lines 30--31
+[]
+ []
+
+
+Overfull \hbox (5.43053pt too wide) in paragraph at lines 30--31
+[]
+ []
+
+
+Overfull \hbox (5.43053pt too wide) in paragraph at lines 30--31
+[]
+ []
+
+
+Overfull \hbox (5.43053pt too wide) in paragraph at lines 30--31
 []
  []
 
@@ -3594,12 +3720,15 @@ Missing character: There is no c in font nullfont!
 Missing character: There is no h in font nullfont!
 Missing character: There is no a in font nullfont!
 Missing character: There is no s in font nullfont!
-Missing character: There is no a in font nullfont!
-Missing character: There is no j in font nullfont!
-Missing character: There is no u in font nullfont!
-Missing character: There is no s in font nullfont!
-Missing character: There is no t in font nullfont!
-Missing character: There is no a in font nullfont!
+Missing character: There is no p in font nullfont!
+Missing character: There is no r in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no d in font nullfont!
+Missing character: There is no e in font nullfont!
+Missing character: There is no f in font nullfont!
+Missing character: There is no i in font nullfont!
+Missing character: There is no n in font nullfont!
+Missing character: There is no i in font nullfont!
 Missing character: There is no d in font nullfont!
 Missing character: There is no a in font nullfont!
 Missing character: There is no s in font nullfont!
@@ -5102,7 +5231,7 @@ Missing character: There is no [ in font nullfont!
 ! Undefined control sequence.
 <write> ...: Citation `\@citeb ' on page \thepage 
                                                   \space undefined\on@line .
-l.48 ...o que es costosa y compleja \cite{MMFAF08}
+l.48 ...pleja \cite{MMFAF08,ZOYI03,LGCCA01,ZYKK02}
                                                   . Para llevarla a cabo red...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -5112,6 +5241,54 @@ and I'll forget about whatever was undefined.
 
 
 LaTeX Warning: Citation `MMFAF08' on page  undefined on input line 48.
+
+Missing character: There is no , in font nullfont!
+\citation{ZOYI03}
+! Undefined control sequence.
+<write> ...: Citation `\@citeb ' on page \thepage 
+                                                  \space undefined\on@line .
+l.48 ...pleja \cite{MMFAF08,ZOYI03,LGCCA01,ZYKK02}
+                                                  . Para llevarla a cabo red...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+LaTeX Warning: Citation `ZOYI03' on page  undefined on input line 48.
+
+Missing character: There is no , in font nullfont!
+\citation{LGCCA01}
+! Undefined control sequence.
+<write> ...: Citation `\@citeb ' on page \thepage 
+                                                  \space undefined\on@line .
+l.48 ...pleja \cite{MMFAF08,ZOYI03,LGCCA01,ZYKK02}
+                                                  . Para llevarla a cabo red...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+LaTeX Warning: Citation `LGCCA01' on page  undefined on input line 48.
+
+Missing character: There is no , in font nullfont!
+\citation{ZYKK02}
+! Undefined control sequence.
+<write> ...: Citation `\@citeb ' on page \thepage 
+                                                  \space undefined\on@line .
+l.48 ...pleja \cite{MMFAF08,ZOYI03,LGCCA01,ZYKK02}
+                                                  . Para llevarla a cabo red...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+LaTeX Warning: Citation `ZYKK02' on page  undefined on input line 48.
 
 Missing character: There is no ] in font nullfont!
 Missing character: There is no . in font nullfont!
@@ -5221,6 +5398,21 @@ Missing character: There is no o in font nullfont!
 Missing character: There is no . in font nullfont!
 
 Overfull \hbox (20.0pt too wide) in paragraph at lines 48--49
+[]
+ []
+
+
+Overfull \hbox (5.43053pt too wide) in paragraph at lines 48--49
+[]
+ []
+
+
+Overfull \hbox (5.43053pt too wide) in paragraph at lines 48--49
+[]
+ []
+
+
+Overfull \hbox (5.43053pt too wide) in paragraph at lines 48--49
 []
  []
 
@@ -7592,7 +7784,8 @@ Missing character: There is no c in font nullfont!
 Missing character: There is no a in font nullfont!
 Missing character: There is no n in font nullfont!
 Missing character: There is no c in font nullfont!
-Missing character: There is no o in font nullfont!
+Missing character: There is no Ã in font nullfont!
+Missing character: There is no ³ in font nullfont!
 Missing character: There is no m in font nullfont!
 Missing character: There is no o in font nullfont!
 Missing character: There is no e in font nullfont!
@@ -7819,7 +8012,8 @@ Missing character: There is no a in font nullfont!
 Missing character: There is no d in font nullfont!
 Missing character: There is no e in font nullfont!
 Missing character: There is no c in font nullfont!
-Missing character: There is no o in font nullfont!
+Missing character: There is no Ã in font nullfont!
+Missing character: There is no ³ in font nullfont!
 Missing character: There is no m in font nullfont!
 Missing character: There is no o in font nullfont!
 Missing character: There is no i in font nullfont!
@@ -8419,7 +8613,8 @@ Missing character: There is no a in font nullfont!
 Missing character: There is no m in font nullfont!
 Missing character: There is no p in font nullfont!
 Missing character: There is no l in font nullfont!
-Missing character: There is no i in font nullfont!
+Missing character: There is no Ã in font nullfont!
+Missing character: There is no ­ in font nullfont!
 Missing character: There is no a in font nullfont!
 Missing character: There is no l in font nullfont!
 Missing character: There is no a in font nullfont!
@@ -14351,6 +14546,8 @@ Missing character: There is no i in font nullfont!
 Missing character: There is no c in font nullfont!
 Missing character: There is no a in font nullfont!
 Missing character: There is no s in font nullfont!
+Missing character: There is no d in font nullfont!
+Missing character: There is no e in font nullfont!
 Missing character: There is no e in font nullfont!
 Missing character: There is no x in font nullfont!
 Missing character: There is no p in font nullfont!
@@ -16345,7 +16542,56 @@ Missing character: There is no r in font nullfont!
 Missing character: There is no o in font nullfont!
 Missing character: There is no s in font nullfont!
 Missing character: There is no . in font nullfont!
-)
+
+Overfull \hbox (20.0pt too wide) in paragraph at lines 304--306
+[]
+ []
+
+
+Overfull \hbox (22.76651pt too wide) in paragraph at lines 304--306
+\OT1/cmr/m/it/10 Iden-
+ []
+
+
+Overfull \hbox (9.96658pt too wide) in paragraph at lines 304--306
+\OT1/cmr/m/it/10 ti-
+ []
+
+
+Overfull \hbox (14.43878pt too wide) in paragraph at lines 304--306
+\OT1/cmr/m/it/10 fier
+ []
+
+
+Overfull \hbox (16.37766pt too wide) in paragraph at lines 304--306
+\OT1/cmr/m/it/10 An-
+ []
+
+
+Overfull \hbox (8.68883pt too wide) in paragraph at lines 304--306
+\OT1/cmr/m/it/10 a-
+ []
+
+
+Overfull \hbox (20.31651pt too wide) in paragraph at lines 304--306
+\OT1/cmr/m/it/10 lyzer
+ []
+
+
+! LaTeX Error: The font size command \normalsize is not defined:
+               there is probably something wrong with the class file.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.307 \newpage
+               %ajuste de hoja impar
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+[3])
 ! Emergency stop.
 <*> cap1-intro.tex
                   
@@ -16353,10 +16599,10 @@ Missing character: There is no . in font nullfont!
 
  
 Here is how much of TeX's memory you used:
- 48 strings out of 494999
- 526 string characters out of 1180817
+ 57 strings out of 494999
+ 599 string characters out of 1180817
  55184 words of memory out of 3000000
- 3328 multiletter control sequences out of 15000+50000
+ 3337 multiletter control sequences out of 15000+50000
  4599 words of font info for 17 fonts, out of 3000000 for 9000
  54 hyphenation exceptions out of 8191
  22i,5n,27p,735b,143s stack positions out of 5000i,500n,10000p,200000b,50000s
