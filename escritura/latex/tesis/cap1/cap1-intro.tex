@@ -198,7 +198,7 @@ La principal diferencia que radica entre ambas técnicas,  es que las estáticas
 %Los párrafos precedentes permiten percibir la importancia de las técnicas de extracción de la información. 
 %Sin ellas no sería posible la construcción de visualizaciones y técnicas de interconexión de dominios\cite{BRM10,MPMR07}.
 
-En este trabajo final se hace énfasis en la extracción de información estática. Es importante aclarar que la información dinámica es tan importante como la información estática, sin embargo su extracción requiere del estudio de otro tipo de aproximaciones y escapan al alcance de este trabajo.
+En este trabajo final se hace énfasis en la extracción de información estática. Es importante aclarar que la información dinámica es tan importante como la información estática, sin embargo su extracción requiere del estudio de otro tipo de aproximaciones\footnote[1]{La instrumentación de código, el profiling y la depuración son algunas de las aproximaciones que hace referencia el párrafo.} y escapan al alcance de este trabajo.
 
 Como se mencionó previamente, en los códigos de software abundan componentes que conforman la información estática. Alguno de ellos son, nombres de variables, tipos de las variables, los métodos de un programa, las variables locales a un método, constantes. Todos estos componentes se representan mediante los identificadores (ids). Los ids abarcan gran parte de los elementos de un código por lo tanto su análisis no debe pasarse por alto. 
 
@@ -211,6 +211,10 @@ Como se mencionó previamente, en los códigos de software abundan componentes q
 Estudios realizados \cite{DFPM05,DMDJ13,HDD06,FBL06} indican que gran parte de los códigos están conformados por identificadores (ids), por ende abundante información estática está representada por ellos (Ver Capítulo 3).
 
 Generalmente, los ids están compuestos por más de una palabra en forma de abreviaturas. Varios autores coinciden \cite{BCPT99,LFBEX07,EZH08,EHPV09} que detrás de estas abreviaturas, se encuentra oculta información que es propia del dominio del problema.
+
+\enlargethispage{\baselineskip}
+\enlargethispage{\baselineskip}
+
 
 Una vía posible para exponer la información oculta consiste en traducir las abreviaturas antes mencionadas, en sus correspondientes palabras expresadas en lenguaje natural.
 Para lograrlo: I) primero se extraen los identificadores del código; II) luego se les aplican técnicas de división, donde se descompone a cada identificador en las distintas palabras abreviadas que lo componen. Por ejemplo: \textsf{inp\_fl\_sys} $\rightarrow$ \textsf{inp fl sys}; y III) se emplean estrategias de expansión a las abreviaturas para transformar las mismas en palabras completas. Siguiendo con el ejemplo anterior: \textsf{inp fl sys} $\rightarrow$ \textsf{input file system}.

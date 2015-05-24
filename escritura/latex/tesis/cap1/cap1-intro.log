@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2014.5.7)  24 APR 2015 14:14
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2014.5.7)  24 MAY 2015 18:29
 entering extended mode
  %&-line parsing enabled.
 **cap1-intro.tex
@@ -9894,6 +9894,200 @@ Missing character: There is no o in font nullfont!
 Missing character: There is no n in font nullfont!
 Missing character: There is no e in font nullfont!
 Missing character: There is no s in font nullfont!
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 201.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 201.
+! Undefined control sequence.
+\@footnotetext ...tins {\reset@font \footnotesize 
+                                                  \interlinepenalty \interfo...
+l.201 ...maciones que hace referencia el p√°rrafo}
+                                                   y escapan al alcance de e...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+\@footnotetext ...}\color@begingroup \@makefntext 
+                                                  {\rule \z@ \footnotesep \i...
+l.201 ...maciones que hace referencia el p√°rrafo}
+                                                   y escapan al alcance de e...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+Missing character: There is no √ in font cmr10!
+Missing character: There is no ≥ in font cmr10!
+Missing character: There is no √ in font cmr10!
+Missing character: There is no ≥ in font cmr10!
+Missing character: There is no √ in font cmr10!
+Missing character: There is no ≥ in font cmr10!
+Missing character: There is no √ in font cmr10!
+Missing character: There is no ° in font cmr10!
+
+Overfull \hbox (7.7778pt too wide) in paragraph at lines 201--201
+[][]\OT1/cmr/m/n/10 la
+ []
+
+
+Overfull \hbox (11.66669pt too wide) in paragraph at lines 201--201
+\OT1/cmr/m/n/10 in-
+ []
+
+
+Overfull \hbox (20.63892pt too wide) in paragraph at lines 201--201
+\OT1/cmr/m/n/10 stru-
+ []
+
+
+Overfull \hbox (39.7223pt too wide) in paragraph at lines 201--201
+\OT1/cmr/m/n/10 mentacin
+ []
+
+
+Overfull \hbox (10.00002pt too wide) in paragraph at lines 201--201
+\OT1/cmr/m/n/10 de
+ []
+
+
+Overfull \hbox (25.55562pt too wide) in paragraph at lines 201--201
+\OT1/cmr/m/n/10 cdigo,
+ []
+
+
+Overfull \hbox (7.22223pt too wide) in paragraph at lines 201--201
+\OT1/cmr/m/n/10 el
+ []
+
+
+Overfull \hbox (17.80559pt too wide) in paragraph at lines 201--201
+\OT1/cmr/m/n/10 pro-
+ []
+
+
+Overfull \hbox (11.66669pt too wide) in paragraph at lines 201--201
+\OT1/cmr/m/n/10 fil-
+ []
+
+
+Overfull \hbox (13.33337pt too wide) in paragraph at lines 201--201
+\OT1/cmr/m/n/10 ing
+ []
+
+
+Overfull \hbox (5.2778pt too wide) in paragraph at lines 201--201
+\OT1/cmr/m/n/10 y
+ []
+
+
+Overfull \hbox (7.7778pt too wide) in paragraph at lines 201--201
+\OT1/cmr/m/n/10 la
+ []
+
+
+Overfull \hbox (24.44449pt too wide) in paragraph at lines 201--201
+\OT1/cmr/m/n/10 depu-
+ []
+
+
+Overfull \hbox (21.69449pt too wide) in paragraph at lines 201--201
+\OT1/cmr/m/n/10 racin
+ []
+
+
+Overfull \hbox (14.50003pt too wide) in paragraph at lines 201--201
+\OT1/cmr/m/n/10 son
+ []
+
+
+Overfull \hbox (11.11113pt too wide) in paragraph at lines 201--201
+\OT1/cmr/m/n/10 al-
+ []
+
+
+Overfull \hbox (13.88892pt too wide) in paragraph at lines 201--201
+\OT1/cmr/m/n/10 gu-
+ []
+
+
+Overfull \hbox (14.50003pt too wide) in paragraph at lines 201--201
+\OT1/cmr/m/n/10 nas
+ []
+
+
+Overfull \hbox (10.00002pt too wide) in paragraph at lines 201--201
+\OT1/cmr/m/n/10 de
+ []
+
+
+Overfull \hbox (11.72224pt too wide) in paragraph at lines 201--201
+\OT1/cmr/m/n/10 las
+ []
+
+
+Overfull \hbox (27.80562pt too wide) in paragraph at lines 201--201
+\OT1/cmr/m/n/10 aprox-
+ []
+
+
+Overfull \hbox (6.11111pt too wide) in paragraph at lines 201--201
+\OT1/cmr/m/n/10 i-
+ []
+
+
+Overfull \hbox (16.6667pt too wide) in paragraph at lines 201--201
+\OT1/cmr/m/n/10 ma-
+ []
+
+
+Overfull \hbox (26.1667pt too wide) in paragraph at lines 201--201
+\OT1/cmr/m/n/10 ciones
+ []
+
+
+Overfull \hbox (15.2778pt too wide) in paragraph at lines 201--201
+\OT1/cmr/m/n/10 que
+ []
+
+
+Overfull \hbox (19.44447pt too wide) in paragraph at lines 201--201
+\OT1/cmr/m/n/10 hace
+ []
+
+
+Overfull \hbox (14.75002pt too wide) in paragraph at lines 201--201
+\OT1/cmr/m/n/10 ref-
+ []
+
+
+Overfull \hbox (11.69444pt too wide) in paragraph at lines 201--201
+\OT1/cmr/m/n/10 er-
+ []
+
+
+Overfull \hbox (13.33334pt too wide) in paragraph at lines 201--201
+\OT1/cmr/m/n/10 en-
+ []
+
+
+Overfull \hbox (12.22224pt too wide) in paragraph at lines 201--201
+\OT1/cmr/m/n/10 cia
+ []
+
+
+Overfull \hbox (7.22223pt too wide) in paragraph at lines 201--201
+\OT1/cmr/m/n/10 el
+ []
+
+
+Overfull \hbox (26.44452pt too wide) in paragraph at lines 201--201
+\OT1/cmr/m/n/10 prrafo| 
+ []
+
 Missing character: There is no y in font nullfont!
 Missing character: There is no e in font nullfont!
 Missing character: There is no s in font nullfont!
@@ -9927,6 +10121,11 @@ Missing character: There is no o in font nullfont!
 Missing character: There is no . in font nullfont!
 
 Overfull \hbox (20.0pt too wide) in paragraph at lines 201--202
+[]
+ []
+
+
+Overfull \hbox (4.48613pt too wide) in paragraph at lines 201--202
 []
  []
 
@@ -11239,10 +11438,6 @@ Missing character: There is no p in font nullfont!
 Missing character: There is no l in font nullfont!
 Missing character: There is no o in font nullfont!
 Missing character: There is no : in font nullfont!
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 216.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 216.
 Missing character: There is no ; in font nullfont!
 Missing character: There is no y in font nullfont!
 Missing character: There is no I in font nullfont!
@@ -16601,9 +16796,9 @@ or  <return>  to continue without it.
 Here is how much of TeX's memory you used:
  57 strings out of 494999
  599 string characters out of 1180817
- 55184 words of memory out of 3000000
+ 56184 words of memory out of 3000000
  3337 multiletter control sequences out of 15000+50000
  4599 words of font info for 17 fonts, out of 3000000 for 9000
  54 hyphenation exceptions out of 8191
- 22i,5n,27p,735b,143s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 23i,5n,27p,735b,144s stack positions out of 5000i,500n,10000p,200000b,50000s
 !  ==> Fatal error occurred, no output PDF file produced!

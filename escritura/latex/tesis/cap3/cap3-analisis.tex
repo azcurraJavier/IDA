@@ -347,13 +347,13 @@ El Algoritmo de división Greedy elaborado por Lawrie, Feild, Binkley \cite{DLFB
 \Global{\textit{\textbf{ispellList}} \tcp{\textit{Palabras de ispell + Diccionario}}}
 \Global{\textit{\textbf{abrevList}} \tcp{\textit{Abreviaciones conocidas}}}
 \Global{\textit{\textbf{stopList}} \tcp{\textit{Palabras Excluyentes}}}
-\Input{\textit{\textbf{idHarword}} \tcp{\textit{identificador a dividir}}}
+\Input{\textit{\textbf{idHardword}} \tcp{\textit{identificador a dividir}}}
 \Output{\textit{\textbf{softwordDiv}} \tcp{\textit{id separado con espacios}}}
 
 \BlankLine
 \textit{\textbf{softwordDiv}} $\leftarrow$ “”
 
-\textit{\textbf{softwordDiv}} $\leftarrow$ dividirCaracteresEspecialesDigitos(\textit{\textbf{idHarword}})
+\textit{\textbf{softwordDiv}} $\leftarrow$ dividirCaracteresEspecialesDigitos(\textit{\textbf{idHardword}})
 
 \textit{\textbf{softwordDiv}} $\leftarrow$ dividirCamelCase(\textit{\textbf{softwordDiv}})
 
@@ -367,7 +367,7 @@ resultadoPrefijo $\leftarrow$ buscarPrefijo(\textit{\textbf{s}},“”)
 
 resultadoSufijo $\leftarrow$ buscarSufijo(\textit{\textbf{s}},“”)
 \BlankLine
-\tcp{\textit{Se elije la división que mayor particiones hizo.}}
+\tcp{\textit{Se elige la división que mayor particiones hizo.}}
 \textit{\textbf{s}} $\leftarrow$ maxDivisión(resultadoPrefijo,resultadoSufijo)
 
 }
@@ -465,7 +465,7 @@ De la misma forma que la función de prefijos, cuando encuentra una palabra, se 
 
 
 
-Una vez que ambos procesos terminaron, los resultados son retornados al algoritmo principal (\textsf{resultadoPrefijo, resultadoSufijo} líneas 6 y 7, algoritmo \ref{GSA}). Mediante una función de comparación se elije el que obtuvo mayores particiones (línea 8). Finalmente, el algoritmo Greedy retorna el id destacando las palabras que lo componen mediante el separador espacio \mbox{(\textsf{fl inp txt})}.
+Una vez que ambos procesos terminaron, los resultados son retornados al algoritmo principal (\textsf{resultadoPrefijo, resultadoSufijo} líneas 6 y 7, algoritmo \ref{GSA}). Mediante una función de comparación se elige el que obtuvo mayores particiones (línea 8). Finalmente, el algoritmo Greedy retorna el id destacando las palabras que lo componen mediante el separador espacio \mbox{(\textsf{fl inp txt})}.
 
 La ventaja de hacer dos búsquedas (prefijo y sufijo) radica en aumentar las chances de dividir al id. A modo de ejemplo, suponga que la palabra abreviada \textsf{fl}
 no se encuentra en ninguno de los 3 listados y las palabras \textsf{inp} y \textsf{txt} si están. Dada esta situación, si el id \textsf{flinptxt} se procesa por ambas rutinas, el resultado será que \textbf{buscarPrefijo} no divida al id. Esto sucede porque al retirar caracteres del último lugar, nunca se encontrará un prefijo conocido. Más precisamente al no dividirse entre \textsf{fl} e \textsf{inp} el resto de la cadena no se procesará y tampoco se dividirá entre \textsf{inp} y \textsf{txt}. 
@@ -1019,7 +1019,7 @@ Existe la posibilidad de que una abreviatura posea múltiples alternativas poten
 
 \begin{enumerate}
 \itemsep0em%reduce espacio
-\item Se elije la palabra larga dentro del alcance estático con mayor frecuencia de aparición. Tomando el ejemplo anterior para \textsf{val} si \textsf{value} aparece 3 veces y \textsf{valid} una sola vez, se elije la primera.
+\item Se elige la palabra larga dentro del alcance estático con mayor frecuencia de aparición. Tomando el ejemplo anterior para \textsf{val} si \textsf{value} aparece 3 veces y \textsf{valid} una sola vez, se elige la primera.
 
 \item En caso de haber paridad en el ítem 1, se agrupan las palabras largas con similares características. Por ejemplo, si \textsf{def} coincide con \textsf{defaults}, \textsf{default} y \textsf{define} donde todas aparecen 2 veces, en este caso se agrupa las dos primeras en solo \textsf{default}, sumando la cantidad total a 4 predominando sobre \textsf{define} con 2.
 

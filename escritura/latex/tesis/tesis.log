@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2014.5.7)  24 APR 2015 18:20
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2014.5.7)  24 MAY 2015 19:51
 entering extended mode
  %&-line parsing enabled.
 **tesis.tex
@@ -720,14 +720,15 @@ Package: refcount 2008/08/11 v3.1 Data extraction from references (HO)
 LaTeX Info: Redefining \ref on input line 107.
 LaTeX Info: Redefining \pageref on input line 107.
 \AtBeginShipoutBox=\box66
- (./init/init.tex
+
+(./init-libro/init-libro.tex
 <./init/unsl_logo.png, id=3, 473.77pt x 593.21625pt>
 File: ./init/unsl_logo.png Graphic file (type png)
 
 <use ./init/unsl_logo.png> [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./init/unsl_logo.png>]
-Overfull \hbox (2.24785pt too wide) in paragraph at lines 78--79
+Overfull \hbox (2.24785pt too wide) in paragraph at lines 103--104
 []\OT1/cmr/m/n/12 En es-te tra-ba-jo fi-nal de li-cen-cia-tu-ra, se des-cri-be 
 [] (IDA),
  []
@@ -736,12 +737,12 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.82 \end{abstract}
-                    [1]pdfTeX warning (ext4): destination with the same identif
-ier (name{page.1}) has been already used, duplicate ignored
+l.107 \end{abstract}
+                     [1]pdfTeX warning (ext4): destination with the same identi
+fier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.110 \end{abstract}
+l.135 \end{abstract}
                      [1])
 
 Package hyperref Warning: No destination for bookmark of \addcontentsline,
@@ -789,7 +790,7 @@ Overfull \hbox (0.87927pt too wide) in paragraph at lines 11--12
 
 ] [8] [9] [10] [11] [12] [13] [14] [15])
 Cap\'{\i }tulo 2.
-(./cap2/cap2-comp.tex <./cap2/dom.png, id=400, 493.0922pt x 252.945pt>
+(./cap2/cap2-comp.tex <./cap2/dom.png, id=402, 493.0922pt x 252.945pt>
 File: ./cap2/dom.png Graphic file (type png)
 
 <use ./cap2/dom.png> [16
@@ -814,18 +815,18 @@ Overfull \hbox (25.44165pt too wide) in paragraph at lines 23--35
  [][] 
  []
 
-[25] [26] [27] [28] <./cap3/idd_1.png, id=537, 313.17pt x 141.52875pt>
+[25] [26] [27] [28] <./cap3/idd_1.png, id=539, 313.17pt x 141.52875pt>
 File: ./cap3/idd_1.png Graphic file (type png)
 
 <use ./cap3/idd_1.png> [29 <./cap3/idd_1.png>] [30]
-<./cap3/idd_2.png, id=566, 841.1425pt x 371.3875pt>
+<./cap3/idd_2.png, id=568, 841.1425pt x 371.3875pt>
 File: ./cap3/idd_2.png Graphic file (type png)
  <use ./cap3/idd_2.png>
-[31] <./cap3/idd_3.png, id=578, 921.4425pt x 532.99126pt>
+[31] <./cap3/idd_3.png, id=580, 921.4425pt x 532.99126pt>
 File: ./cap3/idd_3.png Graphic file (type png)
 
 <use ./cap3/idd_3.png> [32 <./cap3/idd_2.png (PNG copy)>]
-<./cap3/idd_7.png, id=586, 559.33969pt x 204.765pt>
+<./cap3/idd_7.png, id=588, 559.33969pt x 204.765pt>
 File: ./cap3/idd_7.png Graphic file (type png)
  <use ./cap3/idd_7.png>
 [33 <./cap3/idd_3.png>] [34 <./cap3/idd_7.png>] [35] [36] [37] [38] [39]
@@ -903,7 +904,7 @@ Overfull \hbox (22.38351pt too wide) in paragraph at lines 935--936
 []\OT1/cmr/m/n/12 . Per-mi-te en-con-trar acr^^Soni-
  []
 
-[56] <./cap3/exp_3.png, id=877, 615.80063pt x 466.74374pt>
+[56] <./cap3/exp_3.png, id=879, 615.80063pt x 466.74374pt>
 File: ./cap3/exp_3.png Graphic file (type png)
 
 <use ./cap3/exp_3.png> [57] [58]
@@ -921,18 +922,18 @@ Underfull \hbox (badness 10000) in paragraph at lines 1062--1063
 
  []
 
-[61] <./cap3/ire_1.png, id=925, 570.63188pt x 118.94438pt>
+[61] <./cap3/ire_1.png, id=927, 570.63188pt x 118.94438pt>
 File: ./cap3/ire_1.png Graphic file (type png)
 
 <use ./cap3/ire_1.png> [62 <./cap3/ire_1.png>]
-<./cap3/ire_2.png, id=939, 520.19344pt x 316.93407pt>
+<./cap3/ire_2.png, id=941, 520.19344pt x 316.93407pt>
 File: ./cap3/ire_2.png Graphic file (type png)
  <use ./cap3/ire_2.png>
-<./cap3/ire_3.png, id=942, 632.3625pt x 326.72063pt>
+<./cap3/ire_3.png, id=944, 632.3625pt x 326.72063pt>
 File: ./cap3/ire_3.png Graphic file (type png)
  <use ./cap3/ire_3.png>
 [63 <./cap3/ire_2.png>] [64 <./cap3/ire_3.png>]
-<./cap3/ire_4.png, id=960, 554.07pt x 281.55188pt>
+<./cap3/ire_4.png, id=962, 554.07pt x 281.55188pt>
 File: ./cap3/ire_4.png Graphic file (type png)
  <use ./cap3/ire_4.png>
 [65 <./cap3/ire_4.png>]
@@ -945,7 +946,7 @@ Cap\'{\i }tulo 4.
 (./cap4/cap4-ida.tex [68
 
 ]
-<./cap4/ida_arq.png, id=988, 1194.4625pt x 796.9775pt>
+<./cap4/ida_arq.png, id=990, 1194.4625pt x 796.9775pt>
 File: ./cap4/ida_arq.png Graphic file (type png)
 
 <use ./cap4/ida_arq.png>
@@ -974,21 +975,21 @@ Underfull \hbox (badness 10000) in paragraph at lines 85--86
 
  []
 
-<./cap4/ida_01.png, id=1037, 862.72313pt x 253.69781pt>
+<./cap4/ida_01.png, id=1039, 862.72313pt x 253.69781pt>
 File: ./cap4/ida_01.png Graphic file (type png)
 
 <use ./cap4/ida_01.png> [73] [74 <./cap4/ida_01.png>]
-<./cap4/ida_02.png, id=1055, 414.04688pt x 252.945pt>
+<./cap4/ida_02.png, id=1057, 414.04688pt x 252.945pt>
 File: ./cap4/ida_02.png Graphic file (type png)
  <use ./cap4/ida_02.png>
-<./cap4/ida_war_02.png, id=1060, 484.05844pt x 110.66344pt>
+<./cap4/ida_war_02.png, id=1062, 484.05844pt x 110.66344pt>
 File: ./cap4/ida_war_02.png Graphic file (type png)
 
 <use ./cap4/ida_war_02.png> [75 <./cap4/ida_02.png>]
-<./cap4/ida_03.png, id=1073, 963.6pt x 520.94624pt>
+<./cap4/ida_03.png, id=1075, 963.6pt x 520.94624pt>
 File: ./cap4/ida_03.png Graphic file (type png)
  <use ./cap4/ida_03.png>
-<./cap4/ida_04.png, id=1074, 555.57562pt x 338.76563pt>
+<./cap4/ida_04.png, id=1076, 555.57562pt x 338.76563pt>
 File: ./cap4/ida_04.png Graphic file (type png)
 
 <use ./cap4/ida_04.png>
@@ -1021,7 +1022,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 207--208
  []
 
 [76 <./cap4/ida_war_02.png>] [77 <./cap4/ida_03.png> <./cap4/ida_04.png>]
-<./cap4/ida_05.png, id=1091, 415.5525pt x 356.0803pt>
+<./cap4/ida_05.png, id=1093, 415.5525pt x 356.0803pt>
 File: ./cap4/ida_05.png Graphic file (type png)
  <use ./cap4/ida_05.png>
 Underfull \hbox (badness 10000) in paragraph at lines 222--223
@@ -1038,13 +1039,13 @@ Underfull \hbox (badness 10000) in paragraph at lines 228--229
 
  []
 
-<./cap4/ida_06.png, id=1107, 764.8575pt x 371.13657pt>
+<./cap4/ida_06.png, id=1109, 764.8575pt x 371.13657pt>
 File: ./cap4/ida_06.png Graphic file (type png)
  <use ./cap4/ida_06.png>
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[79] <./cap4/ida_07.png, id=1120, 693.34032pt x 311.66437pt>
+[79] <./cap4/ida_07.png, id=1122, 693.34032pt x 311.66437pt>
 File: ./cap4/ida_07.png Graphic file (type png)
 
 <use ./cap4/ida_07.png> [80 <./cap4/ida_06.png>]
@@ -1053,7 +1054,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 267--268
  []
 
 [81 <./cap4/ida_07.png>]
-<./cap4/ida_08.png, id=1142, 487.06969pt x 206.27063pt>
+<./cap4/ida_08.png, id=1144, 487.06969pt x 206.27063pt>
 File: ./cap4/ida_08.png Graphic file (type png)
 
 <use ./cap4/ida_08.png>
@@ -1062,10 +1063,10 @@ Underfull \hbox (badness 10000) in paragraph at lines 284--285
  []
 
 [82 <./cap4/ida_08.png>]
-<./cap4/ida_09.png, id=1153, 301.8778pt x 357.58594pt>
+<./cap4/ida_09.png, id=1155, 301.8778pt x 357.58594pt>
 File: ./cap4/ida_09.png Graphic file (type png)
  <use ./cap4/ida_09.png>
-[83 <./cap4/ida_09.png>] <./cap4/ida_10.png, id=1162, 963.6pt x 533.74406pt>
+[83 <./cap4/ida_09.png>] <./cap4/ida_10.png, id=1164, 963.6pt x 533.74406pt>
 File: ./cap4/ida_10.png Graphic file (type png)
 
 <use ./cap4/ida_10.png>
@@ -1073,14 +1074,14 @@ Underfull \hbox (badness 10000) in paragraph at lines 311--312
 
  []
 
-<./cap4/ida_11.png, id=1169, 634.62094pt x 503.63156pt>
+<./cap4/ida_11.png, id=1171, 634.62094pt x 503.63156pt>
 File: ./cap4/ida_11.png Graphic file (type png)
 
 <use ./cap4/ida_11.png> [84 <./cap4/ida_10.png>] [85 <./cap4/ida_11.png>])
 [86]
 Cap\'{\i }tulo 5.
 (./cap5/cap5-ida-ce.tex
-<./cap5/caso_01.png, id=1190, 450.18187pt x 450.9347pt>
+<./cap5/caso_01.png, id=1192, 450.18187pt x 450.9347pt>
 File: ./cap5/caso_01.png Graphic file (type png)
 
 <use ./cap5/caso_01.png>
@@ -1126,7 +1127,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 177--178
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[93] [94] <./cap5/caso_02.png, id=1252, 601.4972pt x 450.18187pt>
+[93] [94] <./cap5/caso_02.png, id=1254, 601.4972pt x 450.18187pt>
 File: ./cap5/caso_02.png Graphic file (type png)
 
 <use ./cap5/caso_02.png>
@@ -1145,7 +1146,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 263--264
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[97] [98] <./cap5/caso_03.png, id=1281, 452.4403pt x 511.15968pt>
+[97] [98] <./cap5/caso_03.png, id=1283, 452.4403pt x 511.15968pt>
 File: ./cap5/caso_03.png Graphic file (type png)
 
 <use ./cap5/caso_03.png>
@@ -1168,13 +1169,13 @@ Overfull \hbox (1.1056pt too wide) in paragraph at lines 557--593
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[100] [101] <./cap5/barras_01.png, id=1305, 606.01407pt x 367.3725pt>
+[100] [101] <./cap5/barras_01.png, id=1307, 606.01407pt x 367.3725pt>
 File: ./cap5/barras_01.png Graphic file (type png)
 
 <use ./cap5/barras_01.png> [102
 
  <./cap5/barras_01.png>]
-<./cap5/barras_02.png, id=1311, 600.74437pt x 380.17032pt>
+<./cap5/barras_02.png, id=1313, 600.74437pt x 380.17032pt>
 File: ./cap5/barras_02.png Graphic file (type png)
 
 <use ./cap5/barras_02.png>) [103
@@ -1193,12 +1194,12 @@ Overfull \hbox (1.18242pt too wide) in paragraph at lines 96--97
 []\OT1/cmr/m/n/12 Se uti-li-za-ron con-cep-tos de len-gua-jes de pro-
  []
 
-[106] [107] [108] [109] <./cap6/cod.png, id=1362, 604.50844pt x 405.76593pt>
+[106] [107] [108] [109] <./cap6/cod.png, id=1364, 604.50844pt x 405.76593pt>
 File: ./cap6/cod.png Graphic file (type png)
 
 <use ./cap6/cod.png> [110] [111 <./cap6/cod.png>]) [112] (./ape/ape.tex
 Ap\'{e}ndice A.
-<./ape/ape_01.png, id=1381, 711.4078pt x 116.68594pt>
+<./ape/ape_01.png, id=1383, 711.4078pt x 116.68594pt>
 File: ./ape/ape_01.png Graphic file (type png)
  <use ./ape/ape_01.png>
 [113
@@ -1245,13 +1246,13 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 ### semi simple group (level 1) entered at line 8 (\begingroup)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 11061 strings out of 494999
- 149498 string characters out of 1180817
+ 11063 strings out of 494999
+ 149556 string characters out of 1180817
  305953 words of memory out of 3000000
  13477 multiletter control sequences out of 15000+50000
- 15702 words of font info for 55 fonts, out of 3000000 for 9000
+ 15403 words of font info for 54 fonts, out of 3000000 for 9000
  54 hyphenation exceptions out of 8191
- 39i,21n,58p,1610b,9044s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 39i,21n,58p,1610b,9043s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx12
 .pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr/s
 hare/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbxti10.pfb></usr/share/texm
@@ -1268,9 +1269,9 @@ ic/amsfonts/cm/cmss12.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts
 0.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr
 /share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texm
 f-texlive/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on tesis.pdf (129 pages, 2902397 bytes).
+Output written on tesis.pdf (129 pages, 2904630 bytes).
 PDF statistics:
- 1890 PDF objects out of 2073 (max. 8388607)
- 536 named destinations out of 1000 (max. 500000)
+ 1892 PDF objects out of 2073 (max. 8388607)
+ 537 named destinations out of 1000 (max. 500000)
  692 words of extra memory for PDF output out of 10000 (max. 10000000)
 

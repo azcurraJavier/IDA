@@ -1,0 +1,135 @@
+\enlargethispage{\baselineskip}%agrega linea al final de la hoja (logo)
+\enlargethispage{\baselineskip}
+\enlargethispage{\baselineskip}
+
+\begin{titlepage}
+
+{\small\centering
+
+\begin{figure}[h!]
+\centerline{%queda centrada mejor la imagen
+\includegraphics[scale= 0.15]{./init/unsl_logo.png}} 
+\end{figure}  
+
+UNIVERSIDAD NACIONAL DE SAN LUIS\\
+FACULTAD DE CIENCIAS FÍSICO MATEMÁTICAS Y NATURALES\\
+CARRERA: LICENCIATURA EN CIENCIAS DE LA COMPUTACIÓN
+}
+\vskip1cm  
+\vskip1cm  
+
+{\bfseries\centering
+
+TRABAJO FINAL PARA OPTAR AL GRADO DE LICENCIADO EN CIENCIAS DE LA COMPUTACIÓN
+\vskip0.5cm
+}
+
+    \centering
+    %\vfill
+    {\bfseries\LARGE    
+    \vskip1cm  
+      
+  ANÁLISIS DE IDENTIFICADORES PARA ABSTRAER CONCEPTOS DEL DOMINIO DEL PROBLEMA
+     \vskip0.8cm       
+   }
+
+\vskip1cm 
+\vskip1cm    
+\vskip1cm 
+
+\begin{flushleft}
+{\small
+AUTOR: JAVIER AZCURRA MARILUNGO
+
+Nº DE REGISTRO: 3012704
+
+DIRECTORES: 
+DR. MARIO MARCELO BERÓN
+
+\hspace{2.75cm} DR. GERMÁN ANTONIO MONTEJANO
+
+
+
+
+}
+\vskip1cm
+\end{flushleft}
+
+% {\bfseries\large
+%	Autor
+%	\vskip0.1cm   
+%   }
+%   {\bfseries\Large
+%A.P.U. Javier Azcurra Marilungo
+%   \vskip0.8cm
+%   }
+%%=========   
+%   {\bfseries\large
+%	Directores
+%	\vskip0.1cm   
+%   }
+%   {\bfseries\Large
+%Dr. Mario Marcelo Berón
+%\vskip0.5cm
+%Dr. Germán Antonio Montejano
+%   \vskip1.4cm
+%}
+{\bfseries\normalsize   
+   San Luis - Argentina\\
+   2015
+   }
+%=========   
+  
+
+\end{titlepage}
+ 
+%Resumen==================================================================
+
+\renewcommand*\abstractname{\vspace{-2.0cm}\flushleft\huge\textbf{Resumen}\linebreak}
+
+\begin{abstract}
+
+Las demandas actuales en el desarrollo de software implican una evolución y mantenimiento constantes con el menor costo de tiempo y de recursos. La Ingeniería de Software (IS) se encarga de llevar adelante esta tarea. Dentro de la IS existe el área de Comprensión de Programas (CP). Esta área se dedica a agilizar la comprensión de los sistemas de software, en base al desarrollo de  Métodos, Técnicas, Estrategias y Herramientas. 
+
+%Una área de la CP es la extracción de información estática, la misma permite recolectar componentes relevantes del código sin necesidad de ejecutar el programa. Un componente conocido que abundan en los códigos son los identificadores (ids). 
+La extracción de la información es un área de investigación muy usada por la CP. Esta área tiene como uno de sus principales objetivos la recolección de diferentes elementos del programa, los cuales pueden ser utilizados para diferentes propósitos en el contexto de CP. Los identificadores (ids) son uno de tales elementos.
+Estudios indican \cite{BCPT99,LFBEX07,EZH08,EHPV09} que los ids esconden detrás de sus abreviaturas indicios de las funcionalidades de los sistemas. Por ende, cons\-truir herramientas automatizadas que extraigan y analicen ids es relevante para facilitar la comprensión de programas. La extracción de ids es lo más sencillo, y una forma de lograrlo es a través de un Analizador Sintáctico construido para que pueda extraer ids.
+Sin embargo, el análisis del significado de los ids en el código fuente es más complicado, una razón de esto es que el nombre de cada identificador (id) depende de cada programador. Una estrategia para analizar ids es expandir las abreviaturas que lo componen.%CONSULTAR
+
+La expansión de las abreviaturas del id a palabras completas es compleja, pero si se hace correctamente puede ayudar a comprender el sistema. Para lograr esta expansión, se emplean recursos propios del programa de estudio: comentarios, literales, documentación o bien, con fuentes externas al sistema basándose en diccionarios de palabras. 
+
+%En este trabajo final de licenciatura, se describen técnicas conocidas que analizan ids en base a la expansión de sus abreviaturas. También se describe una herramienta desarrollada en JAVA llamada \mbox{\textit{Identifier Analyzer}} (IDA) que implementan algunas de estas estrategias. Luego, se explica los resultados obtenidos por la herramienta de acuerdo a distintos casos de estudio. Finalmente se arriba a conclusiones.
+
+En este trabajo final de licenciatura, se describe \mbox{\textit{Identifier Analyzer}} (IDA), una herramienta útil para el análisis de ids de programas escritos en JAVA. IDA implementa técnicas de análisis de ids que involucran la expansión de abreviaturas presentes en los ids, con el propósito de facilitar la comprensión de los sistemas de software. 
+
+%Pensar en estrategias que faciliten las tediosas tareas que diariamente conllevan al crecimiento de los sistemas nos da incapie a iniciarnos en la investigación de herramientas automatizadas que posibiliten el reemplazo del esfuerzo manual que realizan los ingenieros de software a la hora de interpretar un programa.
+
+\end{abstract}
+
+
+%Agradecimientos==================================================================
+
+\renewcommand*\abstractname{\vspace{-2.0cm}\flushleft\huge\textbf{Agradecimientos}\linebreak}
+
+\begin{abstract}
+\begin{multicols}{2}
+\begin{flushleft}
+\end{flushleft}
+\columnbreak
+\begin{flushright}
+\textit{“Hay en el mundo un lenguaje que todos comprenden: es el lenguaje del entusiasmo, de las cosas hechas con amor y con voluntad, en busca de aquello que se desea o en lo que se cree.”}\linebreak Paulo Coelho\linebreak
+\end{flushright}
+\end{multicols}
+
+Quiero agradecer en primer lugar a Dios, Amo y Señor de todas las cosas por brindarme salud y las fuerzas que fueron necesarias para finalizar mi carrera universitaria.
+
+Agradezco a mi familia, 
+que me brindó el
+sustento afectivo y económico, que fueron indispensables para conseguir los objetivos académicos.
+A mi mamá Gladys por el apoyo incondicional, a mi papá Carlos por la confianza permanente, a mi hermana Soledad por haberme acompañado en mi trayecto universitario.
+
+Quiero dar un reconocimiento notable a mis directores Prof. Mario Berón y Prof. Germán Montejano, sin su ayuda y dedicación nunca hubiera podido terminar este trabajo final de licenciatura. También quiero dar gracias a los demás profesores que estuvieron involucrados en mi proceso de formación profesional.  
+
+Para finalizar, agradezco a mi amigo Dario que siempre estuvo en todo momento cuando lo necesité y también a todas las demás amistades que brindaron aportes a mi crecimiento personal y profesional. No puedo dejar de destacar a mis ex compañeros de facultad que actualmente son colegas, por compartir horas de estudio y ayudarme a asimilar los conocimientos adquiridos durante mi carrera.
+ 
+\end{abstract}
